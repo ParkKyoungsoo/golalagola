@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
 
 import { ViewContext } from '../../../context/ViewContext';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, Redirect } from 'react-router-dom';
 
 const SearchComponent = () => {
   const { searchValue, setSearchValue } = useContext(ViewContext);
@@ -16,15 +16,19 @@ const SearchComponent = () => {
       return;
     }
   };
-  const onClick = () => {
-    return <Link to={`VoteItemDetail/${searchValue}`}></Link>;
-  };
-  const onKeyPress = e => {
-    if (e.key == 'Enter') {
-      onClick();
+  // const onClick = () => {
+  //   return <Link to={`SearchResult/${searchValue}`}></Link>;
+  // };
+
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      console.log(e.target.value)
+      window.location.href=`SearchResult/${e.target.value}`;
+      // return <Redirect to={`SearchResult/${e.target.value}`}/>;
+      // return <Link to={`SearchResult/${e.target.value}`}/>;
     }
-    setSearchValue(e.target.value);
-    console.log(searchValue);
+    // setSearchValue(e.target.value);
+    // console.log(searchValue);
   };
 
   return (
@@ -45,9 +49,8 @@ const SearchComponent = () => {
                 fontSize="large"
               />
             </Grid> */}
-            <Grid item xs={9}>
+            <Grid item xs={10}>
               <TextField
-                value={searchValue}
                 placeholder="Search..."
                 autoFocus={true}
                 onKeyPress={onKeyPress}

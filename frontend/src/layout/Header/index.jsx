@@ -58,15 +58,17 @@ const Header = props => {
 
   const onClickRedirectPathHandler = name => e => {
     window.scrollTo(0, 0);
-    if (name === '/SearchVote') {
-      if (history.location.pathname === name) {
-        history.goBack();
-        store.remove('search');
-      } else {
-        history.push(name);
-      }
+    // if (name === '/SearchVote') {
+    //   if (history.location.pathname === name) {
+    //     history.goBack();
+    //     store.remove('search');
+    //   } else {
+    //     history.push(name);
+    //   }
+    if(name === '/') {
+      window.location.href=`http://localhost:3000/`;
     } else {
-      history.push(name);
+      window.location.href=`http://localhost:3000/${name}`;
     }
   };
 
@@ -113,7 +115,7 @@ const Header = props => {
               <Typography
                 variant="h6"
                 className="logo"
-                onClick={onClickRedirectPathHandler('/MainVote')}
+                onClick={onClickRedirectPathHandler('/')}
               >
                 Gola la Gola
               </Typography>
