@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       user_name: {
-        DallowNull: false,
+        allowNull: false,
         type: DataTypes.STRING,
       },
       user_phone: {
@@ -34,6 +34,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+      },
+      key_verify: {
+        type: DataTypes.STRING,
+      },
+      email_verify: {
+        type: DataTypes.BOOLEAN,
       },
     },
     {
