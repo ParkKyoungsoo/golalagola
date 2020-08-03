@@ -60,36 +60,36 @@ export default function VoteGridItem(props) {
 
   return (
     <Wrapper className="root">
-    <Grid container className="info-open-handler-grid">
-      <Grid item xs={12}>
-        <Grid className="img-box">
-          {/* 이미지 */}
-          <Link to={`VoteItemDetail/${itemData.prod_name}/${itemData.id}`}>
-            <Avatar
-              variant="square"
-              src={itemData.prod_image}
-              className={'large'}
-              imgProps={{
-                className: sw ? 'img' : 'img deactivated',
-              }}
-            />
-          </Link>
+      <Grid container className="info-open-handler-grid">
+        <Grid item xs={12}>
+          <Grid className="img-box">
+            {/* 이미지 */}
+            <Link to={`VoteItemDetail/${itemData.prod_name}/${itemData.id}`}>
+              <Avatar
+                variant="square"
+                src={itemData.prod_image}
+                className={'large'}
+                imgProps={{
+                  className: sw ? 'img' : 'img deactivated',
+                }}
+              />
+            </Link>
             <h3>{itemData.prod_name}</h3>
 
-          <span className="date on">{displayEndTime(itemData.end_dt)}</span>
-          {itemType === 'my' && isVoteEditable && (
-            <button
-              type="button"
-              onClick={handleVoteState}
-              className={sw ? 'btn-check on' : 'btn-check'}
-            >
-              <CheckIcon className="check" />
-            </button>
-          )}
+            <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+            {itemType === 'my' && isVoteEditable && (
+              <button
+                type="button"
+                onClick={handleVoteState}
+                className={sw ? 'btn-check on' : 'btn-check'}
+              >
+                <CheckIcon className="check" />
+              </button>
+            )}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
-  </Wrapper>
+    </Wrapper>
 
     // <Wrapper className="root">
     //   {/* <Grid container>

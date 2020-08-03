@@ -8,15 +8,22 @@ const EventModal = modalNum => {
 
   const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
   const { eventNum, setEventNum } = useContext(CommonContext);
-  const [seletedItem, setSelectedItem] = useState();
+  const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
+  const [tmpData, setTmpData] = useState();
   const RadioTest = (e) => {
-    setSelectedItem(e.target.value)
-    console.log(seletedItem);
+    setSelectedEventItem(e.target.value);
+    console.log(selectedEventItem);
+  }
+
+  // 다음 모달창을 띄워주고 selectedEventItem에 선택한 제품을 넣어주기 위한 함수
+  const EventTrigger = () => {
+    modalNum.setModalNum(2)
   }
 
   return (
     <>
       <Wrapper>
+        {console.log('mainValue', selectedEventItem)}
         <Grid className="EM">
           <Grid container>
             <Grid className="eventM" item xs={5}>
@@ -29,7 +36,12 @@ const EventModal = modalNum => {
                   height: 'auto',
                 }}
               />
-              <input type="radio" name="event" value="A" onChange={RadioTest}></input>
+              <input
+                type="radio"
+                name="event"
+                value={carouselDatas[eventNum].event_item["1"].prod_id}
+                onChange={RadioTest}>
+              </input>
               <p>
                 <h3> 이곳은 설명 글 입니다.</h3>
               </p>
@@ -50,7 +62,12 @@ const EventModal = modalNum => {
                   height: 'auto',
                 }}
               />
-              <input type="radio" name="event" value="B" onChange={RadioTest}></input>
+              <input
+                type="radio"
+                name="event"
+                value={carouselDatas[eventNum].event_item["2"].prod_id}
+                onChange={RadioTest}>
+              </input>
               <p>
                 <h3>이곳은 설명 글 입니다.</h3>
               </p>
@@ -65,8 +82,8 @@ const EventModal = modalNum => {
               color="primary"
               disableElevation
               // style={{ alignItems: 'center' }}
-              onClick={() => modalNum.setModalNum(2)}
-              disabled={seletedItem === undefined}
+              onClick={EventTrigger}
+              disabled={selectedEventItem === undefined}
             >
               Disable elevation
             </Button>

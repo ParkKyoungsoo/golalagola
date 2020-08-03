@@ -6,6 +6,8 @@ import { CommonContext } from '../../context/CommonContext';
 import SignResponsiveDialog from '../../components/Auth/SignResponsiveDialog/';
 import UserResponsiveDialog from '../../components/User/UserResponsiveDialog/';
 import VoteDetailResponsiveDialog from '../../components/Main/VoteDetailResponsiveDialog/';
+import SearchVote from '../../pages/SearchVote/';
+import SearchComponent from '../../components/Search/SearchComponent';
 
 import {
   Grid,
@@ -24,12 +26,18 @@ import { GiPresent } from 'react-icons/gi';
 import { FiGift } from 'react-icons/fi';
 import { BsSearch } from 'react-icons/bs';
 
-
-const User = () => { return <FiUser /> }
-const Coupon = () => { return <RiCoupon3Line /> }
-const Event = () => { return <FiGift /> }
-const Search = () => { return <BsSearch /> }
-
+const User = () => {
+  return <FiUser />;
+};
+const Coupon = () => {
+  return <RiCoupon3Line />;
+};
+const Event = () => {
+  return <FiGift />;
+};
+const Search = () => {
+  return <BsSearch />;
+};
 
 const Header = props => {
   let history = useHistory();
@@ -71,7 +79,7 @@ const Header = props => {
       setSuccessSearchbarTrigger(successSearchbarTrigger => false);
     }
   };
-  
+
 
   useEffect(() => {
     setSignDialogOpen(false);
@@ -79,7 +87,7 @@ const Header = props => {
     setInfoDetailDialogOpen(false);
     setUserDetailDialogOpen(false);
   }, []);
-  
+
   return (
     <Container
       // className="p-0 "
@@ -117,12 +125,11 @@ const Header = props => {
                   height: '10vh',
                 }}
               >
-                <Grid 
-                  item xs={7}
-                  className="navbarCentering"
-                >
-                  {successSearchbarTrigger ? <h5>__________________</h5> : null }
-                  <h3 className="searchIcon" onClick={openSearchbar}><Search /></h3>
+                <Grid item xs={7} className="navbarCentering">
+                  {successSearchbarTrigger ? <SearchComponent /> : null}
+                  <h3 className="searchIcon" onClick={openSearchbar}>
+                    <Search />
+                  </h3>
                 </Grid>
                 <Grid item xs={5}>
                   <Grid
@@ -137,13 +144,14 @@ const Header = props => {
                         <Event />
                       </h5>
                     </Button>
-                    <Link to={`MyCoupon`}>
-                      <Button color="primary" variant="contained">
-                        <h5>
-                          <Coupon />
-                        </h5>
-                      </Button>
-                    </Link>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={onClickRedirectPathHandler('MyCoupon')}>
+                      <h5>
+                        <Coupon />
+                      </h5>
+                    </Button>
                     <Button
                       color="primary"
                       variant="contained"
@@ -154,8 +162,8 @@ const Header = props => {
                           <User />
                         </h5>
                       ) : (
-                        <h5>Sign in</h5>
-                      )}
+                          <h5>Sign in</h5>
+                        )}
                     </Button>
                   </Grid>
                   {/* <Grid container style={{ flexDirection:"column", height:"10vh"}} className="navbarCentering">

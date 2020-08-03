@@ -186,7 +186,7 @@ const MainVote = props => {
             >
               <VoteGridList
                 categoryData={categoryData}
-                value={appbarIndex - 1}
+                value={appbarIndex - 2}
                 index={index}
                 itemType={'vote'}
               />

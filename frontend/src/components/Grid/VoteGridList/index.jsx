@@ -95,7 +95,7 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
-  if (value === -1) {
+  if (value === -2) {
     return(
       <Wrapper className="root">
         <GridList

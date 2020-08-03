@@ -499,6 +499,16 @@
       "prod_image": "images/셀렉스.jpg",
       "prod_desc": "매일 밀크 프로틴바 3가지 견과 3가지 베리",
       "prod_weight": "240g"
+    },
+    {
+      "id": 51,
+      "prod_title": "[셀렉스] 밀크 프로틴바 베리 30g 8개입 1박스",
+      "prod_name": "비비고",
+      "prod_category": 0,
+      "prod_price": 13900,
+      "prod_image": "images/비비고.jpg",
+      "prod_desc": "매일 밀크 프로틴바 3가지 견과 3가지 베리",
+      "prod_weight": "240g"
     }
   ],
   "nextToken": "\"{\\\"limit\\\":5,\\\"offset\\\":5}\""
