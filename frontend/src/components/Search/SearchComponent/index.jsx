@@ -9,7 +9,7 @@ import { ViewContext } from '../../../context/ViewContext';
 import { CommonContext } from '../../../context/CommonContext';
 
 const SearchComponent = () => {
-  const { searchValue, setSearchValue } = useContext(ViewContext);
+  // const { searchValue, setSearchValue } = useContext(ViewContext);
   let history = useHistory();
   const {
     mainUrl,
@@ -23,11 +23,13 @@ const SearchComponent = () => {
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log(e.target.value)
-      if (window.location.href === mainUrl) {
-        history.push(`/SearchResult/${e.target.value}`)
-      } else {
+
+        // while
+        // e.preventDefault()
+        // window.location.href = `${mainUrl}/SearchResult/${e.target.value}`
+        // if
         history.replace(`SearchResult/${e.target.value}`)
-      }
+      
     }
   };
 
