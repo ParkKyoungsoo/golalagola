@@ -18,7 +18,6 @@ import { usePrevious } from '../../../common/CommonHooks';
 import { useInfiniteScroll } from '../../../common/InfiniteScroll';
 import VoteGridItem from './../VoteGridItem/';
 
-
 const useGetdata = (value, index, categoryData, itemType, itemValue) => {
   const { serverUrl, user, setUser } = useContext(CommonContext);
 
@@ -94,8 +93,13 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
+<<<<<<< HEAD
+  if (value === -2) {
+    return (
+=======
   if (value === -1) {
     return(
+>>>>>>> 42488f393be7f84feadcee08fd81db091b37a623
       <Wrapper className="root">
         {console.log('data from server : ', productDatas)}
         <GridList
@@ -118,7 +122,6 @@ const VoteGridList = props => {
       </Wrapper>
     );
   } else {
-
     return (
       <Wrapper className="root">
         {/* Filter

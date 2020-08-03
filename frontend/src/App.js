@@ -115,7 +115,7 @@ const App = () => {
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   const choichohanbun = () => {
     console.log('안들어옴?');
-    Axios.get('https://i3b309.p.ssafy.io/api/product').then(function (res) {
+    Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       console.log('App.js res:', res.data);
       setProductDatas(res.data);
     });
@@ -127,7 +127,7 @@ const App = () => {
 
   // 현재 작동 안하고 있습니다. 다른 시도를 해봐야 될듯 합니다.
   useEffect(() => {
-    choichohanbun()
+    choichohanbun();
   }, []);
 
   return (
@@ -172,7 +172,7 @@ const App = () => {
         eventNum,
         setEventNum,
         selectedEventItem,
-        setSelectedEventItem
+        setSelectedEventItem,
       }}
     >
       {console.log('This is App.js carouselDatas', carouselDatas)}
