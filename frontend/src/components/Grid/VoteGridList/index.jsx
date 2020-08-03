@@ -94,8 +94,13 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
+<<<<<<< HEAD
   if (value === -2) {
     return (
+=======
+  if (value === -1) {
+    return(
+>>>>>>> 7a02e1ceb3144bf4a6ed3bd4536ad3fe51e2aad7
       <Wrapper className="root">
         {console.log('data from server : ', productDatas)}
         <GridList
