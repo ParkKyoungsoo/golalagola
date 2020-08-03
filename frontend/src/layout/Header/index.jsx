@@ -1,0 +1,211 @@
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import store from 'store';
+
+import { CommonContext } from '../../context/CommonContext';
+import SignResponsiveDialog from '../../components/Auth/SignResponsiveDialog/';
+import UserResponsiveDialog from '../../components/User/UserResponsiveDialog/';
+import VoteDetailResponsiveDialog from '../../components/Main/VoteDetailResponsiveDialog/';
+
+import {
+  Grid,
+  Typography,
+  AppBar,
+  Button,
+  IconButton,
+  useMediaQuery,
+  Container,
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import Wrapper from './styles';
+import { FiUser } from 'react-icons/fi';
+import { RiCoupon3Line } from 'react-icons/ri';
+import { GiPresent } from 'react-icons/gi';
+import { FiGift } from 'react-icons/fi';
+import { BsSearch } from 'react-icons/bs';
+
+
+const User = () => { return <FiUser /> }
+const Coupon = () => { return <RiCoupon3Line /> }
+const Event = () => { return <FiGift /> }
+const Search = () => { return <BsSearch /> }
+
+
+const Header = props => {
+  let history = useHistory();
+  const isTablet = useMediaQuery('(max-width:960px)');
+
+  const {
+    user,
+    drawerOpen,
+    setDrawerOpen,
+    setSignDialogOpen,
+    setUserDetailDialogOpen,
+    setInfoDetailDialogOpen,
+  } = useContext(CommonContext);
+
+  const handleSignInDialogOpen = () => {
+    history.push('/Auth');
+  };
+
+  const onClickRedirectPathHandler = name => e => {
+    window.scrollTo(0, 0);
+    if (name === '/SearchVote') {
+      if (history.location.pathname === name) {
+        history.goBack();
+        store.remove('search');
+      } else {
+        history.push(name);
+      }
+    } else {
+      history.push(name);
+    }
+  };
+
+  const [successSearchbarTrigger, setSuccessSearchbarTrigger] = useState(false);
+
+  const openSearchbar = () => {
+    if (successSearchbarTrigger === false) {
+      setSuccessSearchbarTrigger(successSearchbarTrigger => true);
+    } else {
+      setSuccessSearchbarTrigger(successSearchbarTrigger => false);
+    }
+  };
+  
+
+  useEffect(() => {
+    setSignDialogOpen(false);
+    setDrawerOpen(false);
+    setInfoDetailDialogOpen(false);
+    setUserDetailDialogOpen(false);
+  }, []);
+  
+  return (
+    <Container
+      // className="p-0 "
+      maxWidth="lg"
+    >
+      <Wrapper>
+        <AppBar
+          // position="relative"
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Grid
+            container
+            style={{
+              height: '10vh',
+              justifyContent: 'center',
+            }}
+            className="appbar"
+          >
+            <Grid xs={3} className="navbarCentering">
+              <Typography
+                variant="h6"
+                className="logo"
+                onClick={onClickRedirectPathHandler('/MainVote')}
+              >
+                Gola la Gola
+              </Typography>
+            </Grid>
+            <Grid xs={9}>
+              <Grid
+                container
+                style={{
+                  height: '10vh',
+                }}
+              >
+                <Grid 
+                  item xs={7}
+                  className="navbarCentering"
+                >
+                  {successSearchbarTrigger ? <h5>__________________</h5> : null }
+                  <h3 className="searchIcon" onClick={openSearchbar}><Search /></h3>
+                </Grid>
+                <Grid item xs={5}>
+                  <Grid
+                    style={{
+                      height: '10vh',
+                    }}
+                    container
+                    className="navbarRight"
+                  >
+                    <Button color="primary" variant="contained">
+                      <h5>
+                        <Event />
+                      </h5>
+                    </Button>
+                    <Link to={`MyCoupon`}>
+                      <Button color="primary" variant="contained">
+                        <h5>
+                          <Coupon />
+                        </h5>
+                      </Button>
+                    </Link>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={handleSignInDialogOpen}
+                    >
+                      {user.status === 'login' ? (
+                        <h5>
+                          <User />
+                        </h5>
+                      ) : (
+                        <h5>Sign in</h5>
+                      )}
+                    </Button>
+                  </Grid>
+                  {/* <Grid container style={{ flexDirection:"column", height:"10vh"}} className="navbarCentering">
+                    <Grid ite style={{height:"5vh"}}>
+                      <Grid>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          onClick={handleSignInDialogOpen}
+                          // className="display-none header-button"
+                        >
+                          {user.status === 'login' ? 'My' : 'Sign In'}
+                        </Button>
+                      </Grid>
+                    </Grid>
+                    <Grid item style={{height:"5vh"}}>
+                      <Grid container justify="" spacing={2}>
+                        <Grid item>
+                          <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={onClickRedirectPathHandler('/MainVote')}
+                            // className="display-none header-button"
+                          >
+                            Event
+                          </Button>
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={onClickRedirectPathHandler('/MainVote')}
+                            // className="display-none header-button"
+                          >
+                            My Coupon
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid> */}
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </AppBar>
+      </Wrapper>
+      <SignResponsiveDialog />
+      <UserResponsiveDialog />
+      <VoteDetailResponsiveDialog />
+    </Container>
+  );
+};
+
+export default Header;

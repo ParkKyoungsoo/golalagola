@@ -1,0 +1,29 @@
+[
+  {
+    "cat_no": 3,
+    "cat_type": "Food",
+    "cat_title_1": "안심",
+    "cat_desc": "Any substance consumed to provide nutritional support for the body.",
+    "cat_img_url_1": "/images/1.jpg",
+    "cat_title_2": "등심",
+    "cat_img_url_2": "/images/2.jpg"
+  },
+  {
+    "cat_no": 2,
+    "cat_type": "Game",
+    "cat_title_1": "새우깡",
+    "cat_desc": "Played in various genres, including computer, mobile, console, etc.",
+    "cat_img_url_1": "/images/A.jpg",
+    "cat_title_2": "매운새우깡",
+    "cat_img_url_2": "/images/B.jpg"
+  },
+  {
+    "cat_no": 3,
+    "cat_type": "Game",
+    "cat_title_1": "새우깡",
+    "cat_desc": "Played in various genres, including computer, mobile, console, etc.",
+    "cat_img_url_1": "/images/A.jpg",
+    "cat_title_2": "매운새우깡",
+    "cat_img_url_2": "/images/B.jpg"
+  }
+]

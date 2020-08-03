@@ -1,0 +1,28 @@
+{
+  "name": "project1",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-handlebars": "^5.1.0",
+    "express-session": "^1.17.1",
+    "helmet": "^3.23.3",
+    "mariadb": "^2.4.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3",
+    "session-file-store": "^1.4.0",
+    "sqlite3": "^5.0.0"
+  },
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server \" \"yarn client \""
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}
