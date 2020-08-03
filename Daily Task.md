@@ -153,3 +153,7 @@
    Back-end	Aws에 Api 요청 보내 Local 에서 사용할 수 있도록
    
    ​					Aws DataBase 사용
+
+#### 2020.08.03(월)
+
+1. Back-end	http -> https
