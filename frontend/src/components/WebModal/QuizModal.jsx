@@ -7,23 +7,24 @@ import { Dialog, Grid } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
+import MultiCarousel from './MultiCarousel';
+
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
 
-const QuizModal = () => {
+const SuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log('timeout!!');
-      setMoveToNext(true);
-    }, 1500);
-  });
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     console.log('timeout!!');
+  //     setMoveToNext(true);
+  //   }, 1500);
+  // });
 
   return (
     <>
       <h2> 정답입니다 ^^ </h2>
-      {moveToNext ? <Redirect to="/KioskCoupons" /> : null}
     </>
   );
 };
@@ -35,6 +36,7 @@ const Quiz = () => {
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
+
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
       setUserAns(userAns => true);
@@ -46,6 +48,7 @@ const Quiz = () => {
   };
 
   const modalHandler = () => {
+    setSuccessModalTrigger(false)
     setFailModalTrigger(failModalTrigger => false);
   };
 
@@ -62,21 +65,7 @@ const Quiz = () => {
   return (
     <>
       <Wrapper>
-        <Carousel container activeIndex={index} onSelect={handleSelect}>
-          <Grid style={{ display: 'flex' }}>
-            {productDatas.items.map((product, index) => (
-              <Grid>
-                <img
-                  className="tmp"
-                  src={`../../${product.prod_image}`}
-                  alt="image1"
-                  style={{ width: '150px', height: '150px' }}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Carousel>
-
+        <MultiCarousel />
         <Grid className="quizCentering">
           <h3
             style={{
@@ -115,14 +104,14 @@ const Quiz = () => {
         </Grid>
       </Wrapper>
       {userAns ? (
-        <Dialog open={successModalTrigger}>
-          <QuizModal />
+        <Dialog open={successModalTrigger} onClose={modalHandler}>
+          <SuccessModal />
         </Dialog>
       ) : (
-        <Dialog open={failModalTrigger} onClose={modalHandler}>
-          <Fail />
-        </Dialog>
-      )}
+          <Dialog open={failModalTrigger} onClose={modalHandler}>
+            <Fail />
+          </Dialog>
+        )}
     </>
   );
 };

@@ -13,9 +13,59 @@ import {
 // import testImg from '../MainVote/dump.json'
 import Wrapper from './styles';
 import WebDeatilModal from '../../components/WebModal/ModalMain';
+import QuizModal from '../../components/WebModal/QuizModal';
 import ClearIcon from '@material-ui/icons/Clear';
 import testimg from '../../components/Grid/VoteGridList/dump.json';
 import { CommonContext } from '../../context/CommonContext';
+
+const QuizDialog = () => {
+
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+
+  const handleClose = () => {
+    setWebQuizDialogOpen(false)
+  }
+
+  return (
+    <Dialog
+      open={webQuizDialogOpen}
+      onClose={handleClose}
+      fullScreen={fullScreen}
+      aria-labelledby="max-width-dialog-title"
+      PaperProps={{
+        style: {
+          height: '90vh',
+          padding: '10px',
+          width: '1280px',
+          maxWidth: 'none',
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          position: 'inherit',
+        },
+      }}
+      BackdropProps={{
+        style: {
+          backgroundColor: 'rgba(0,0,0,0.85)',
+        },
+      }}
+    >
+      <DialogActions style={{ padding: 0 }}>
+        {/* <Date>
+              <span className="date on">{displayEndTime()}</span>
+            </Date> */}
+        <Grid className="go-back-btn" onClick={handleClose}>
+          <ClearIcon
+            size="medium"
+            style={{ color: '#fff', cursor: 'pointer' }}
+          />
+        </Grid>
+      </DialogActions>
+      <QuizModal />
+    </Dialog>
+  );
+}
+
 
 const ItemDetail = ({ match }) => {
 
@@ -25,6 +75,9 @@ const ItemDetail = ({ match }) => {
   const { eventNum, setEventNum } = useContext(CommonContext);
 
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+
+  // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
 
   // console.log(testimg.items[0].prod_image);
 
@@ -37,6 +90,10 @@ const ItemDetail = ({ match }) => {
     console.log('bb');
     setItemDialogOpen(itemDialogOpen => false);
   };
+
+  const QuizDialogOpen = () => {
+    setWebQuizDialogOpen(true);
+  }
 
 
   // vs이벤트가 진행중인지 판단하는 함수 입니다.
@@ -102,12 +159,10 @@ const ItemDetail = ({ match }) => {
             variant="contained"
             color="primary"
             disableElevation
-            onClick={() => { console.log('QuizModal Open Button') }}
+            onClick={QuizDialogOpen}
           >
             퀴즈 풀기
           </Button>
-
-
         </Grid>
       </Grid >
       <Dialog
@@ -145,6 +200,7 @@ const ItemDetail = ({ match }) => {
         </DialogActions>
         <WebDeatilModal />
       </Dialog>
+      <QuizDialog />
     </Wrapper >
   );
 };

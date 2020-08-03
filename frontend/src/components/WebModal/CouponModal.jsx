@@ -1,20 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid, Divider } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 
 const CouponModal = (modalNum) => {
 
+    const { productDatas, setProductDatas } = useContext(CommonContext);
     const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+    const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
+
+    const [couponPageItem, setCouponPageItem] = useState(productDatas.items[selectedEventItem - 1]);
 
     return (
         <>
+            {console.log(couponPageItem)}
             <Grid style={{ display: "flex" }}>
                 <Grid>
-                    이곳은 이미지가 들어갈 곳입니다.
+                    <img
+                        src={`../../${couponPageItem.prod_image}`}
+                        alt="ItemImage"
+                        style={{ height: "250px", width: "250px" }}
+                    />
                 </Grid>
                 <Grid>
                     <Grid>
-                        쿠폰이 발행되었습니다!
+                        {couponPageItem.prod_name}에 대한 쿠폰이 발행되었습니다!
                     </Grid>
 
                     <Divider />

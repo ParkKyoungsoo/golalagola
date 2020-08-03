@@ -24,12 +24,12 @@ const SearchVote = () => {
           alignItems="center"
           spacing={2}
           // !!
-          style={{ paddingTop: '64px' }}
+          // style={{ paddingTop: '64px' }}
         >
           <Grid item xs={12}>
             <SearchComponent />
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <VoteGridList
               categoryData={[]}
               value={0}
@@ -37,7 +37,7 @@ const SearchVote = () => {
               itemType={'search'}
               itemValue={searchValue}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Layout>
     </ViewContext.Provider>
