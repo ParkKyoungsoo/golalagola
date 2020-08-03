@@ -2,33 +2,26 @@ const express = require("express");
 const app = express.Router();
 const db = require("../models");
 
-const bodyParser = require("body-parser");
-const Product = require("../models/Product");
-app.use(bodyParser.urlencoded({ extended: false }));
-
-console.log("product routes");
-/*
-get 조회
-post 생성
-put 갱신
-delete 삭제
-*/
-// 카테고리의 구분 없이 모든 상품 조회 요청
+// 상품 전체 조회
 app.get("/", async function (req, res) {
-  // console.log("req", req);
-
   db.Product.findAll()
     .then((data) => res.json(data))
     .catch((err) => res.status(404).send(err));
 });
 
+// 상품 한개 조회
 app.get("/selectOne/:input", async function (req, res) {
-  console.log("req.params.input", req.params.input);
   db.Product.findOne({
-    attributes: {
-      exclude: ["id", "createdAt", "updatedAt"],
-    },
     where: { prod_id: req.params.input },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// 상품 카테고리 조회
+app.get("/selectCategory/:input", async function (req, res) {
+  db.Product.findAll({
+    where: { prod_category: req.params.input },
   })
     .then((data) => res.json(data))
     .catch((err) => res.status(404).send(err));
@@ -36,33 +29,34 @@ app.get("/selectOne/:input", async function (req, res) {
 
 // 상품 등록하기
 app.post("/insert", async (req, res) => {
-  console.log("req.body:", req.body);
-  try {
-    // let product = await Product.findOne({
-    //   attributes: {
-    //     exclude: ["id", "createdAt", "updatedAt"],
-    //   },
-    //   where: { prod_name: req.params.name },
-    // });
-    // console.log("product:", product);
+  // ** 관리자인지 확인하기
 
-    const req_body = {
-      prod_title: req.body.title,
-      prod_name: req.body.name,
-      prod_category: req.body.category,
-      prod_expiration: req.body.expiration,
-    };
-    console.log("req_body", req_body);
-    db.Product.create(req_body)
-      .then((data) => res.json(data))
-      .catch((err) => res.status(404).send(err));
+  // ** 중복된 데이터 있는지 검사
 
-    res.json({ msg: "상품등록 성공" });
-  } catch (err) {
-    res.json({ msg: "상품등록 실패" });
-  }
+  await db.Product.create(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
 });
 
-app.delete("/delete");
+// 상품 수정
+app.put("/update/", async function (req, res) {
+  // const course = update.find((c) => c.id === parseInt(req.params.id));
+  // if (!course) res.status(404).send(`ID was not found`);
+
+  await db.Product.update(req.body, {
+    where: { prod_id: req.body.prod_id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// 상품 삭제
+app.delete("/delete", async function (req, res) {
+  await db.Product.destroy({
+    where: { prod_id: req.body.id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.json(err));
+});
 
 module.exports = app;

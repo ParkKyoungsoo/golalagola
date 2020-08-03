@@ -1,50 +1,73 @@
 const express = require("express");
 const app = express.Router();
+const db = require("../models");
 
-// 카테고리의 구분 없이 모든 이벤트 조회 요청
+// Event 전체 조회
 app.get("/", async function (req, res) {
-  res.json([
-    {
-      event_no: 1,
-      event_category: 3,
-      event_item: {
-        "1": {
-          prod_no: 3,
-          prod_name: "안심",
-          prod_image: "/images/1.jpg",
-        },
-        "2": {
-          prod_no: 4,
-          prod_name: "등심",
-          prod_image: "/images/2.jpg",
-        },
-      },
-    },
-    {
-      event_no: 2,
-      event_category: 5,
-      event_item: {
-        "1": {
-          prod_no: 1,
-          prod_name: "새우깡",
-          prod_image: "/images/1.jpg",
-        },
-        "2": {
-          prod_no: 2,
-          prod_name: "매운새우깡",
-          prod_image: "/images/2.jpg",
-        },
-      },
-    },
-  ]);
+  var resList = new Array();
+
+  // json 가공
+  db.Event.findAll()
+    .then((data) => {
+      for (var i = 0; i < data.length; i++) {
+        var obj = new Object();
+        obj.event_id = data[i].dataValues.event_id;
+        obj.event_category = data[i].dataValues.event_category;
+
+        obj.event_item = {
+          1: { prod_id: data[0].dataValues.event_prod_A },
+          2: { prod_id: data[0].dataValues.event_prod_B },
+        };
+
+        resList.push(obj);
+      }
+
+      res.json(resList);
+    })
+    .catch((err) => res.status(404).send(err));
+});
+
+// Event 한개 조회
+app.get("/selectOne/:input_id", async function (req, res) {
+  db.Event.findOne({
+    where: { event_id: req.params.input_id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// Event 등록하기
+app.post("/insert", async (req, res) => {
+  // ** 중복된 데이터 있는지 검사
+  await db.Event.create(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// Event 수정
+app.put("/update", async function (req, res) {
+  await db.Event.update(req.body, {
+    where: { event_id: req.body.event_id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// Event 삭제
+app.delete("/delete", async function (req, res) {
+  await db.Event.destroy({
+    where: { event_id: req.body.event_id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.json(err));
 });
 
 // 사용자의 특정 이벤트 참여 요청
-app.post("/", function (req, res) {
-  console.log(req.body);
-  res.json({
-    message: `${req.headers.token} user ${req.body.event_no} event ${req.body.prod_no} prod pick`,
-  });
-});
+// app.post("/", function (req, res) {
+//   console.log(req.body);
+//   res.json({
+//     message: `${req.headers.token} user ${req.body.event_no} event ${req.body.prod_no} prod pick`,
+//   });
+// });
 
 module.exports = app;

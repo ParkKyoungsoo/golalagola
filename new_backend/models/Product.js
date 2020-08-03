@@ -5,7 +5,7 @@ module.exports = function (sequelize, DataTypes) {
     {
       prod_id: {
         allowNull: false,
-        // autoIncrement: true,
+        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
