@@ -4,31 +4,31 @@ import Axios from 'axios';
 import { Grid, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
-
+import { useHistory } from 'react-router-dom';
 import { ViewContext } from '../../../context/ViewContext';
-import { useHistory, Link, Redirect } from 'react-router-dom';
+import { CommonContext } from '../../../context/CommonContext';
 
 const SearchComponent = () => {
   const { searchValue, setSearchValue } = useContext(ViewContext);
-
+  let history = useHistory();
+  const {
+    mainUrl,
+  } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
       return;
     }
   };
-  // const onClick = () => {
-  //   return <Link to={`SearchResult/${searchValue}`}></Link>;
-  // };
 
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log(e.target.value)
-      window.location.href=`SearchResult/${e.target.value}`;
-      // return <Redirect to={`SearchResult/${e.target.value}`}/>;
-      // return <Link to={`SearchResult/${e.target.value}`}/>;
+      if (window.location.href === mainUrl) {
+        history.push(`/SearchResult/${e.target.value}`)
+      } else {
+        history.replace(`SearchResult/${e.target.value}`)
+      }
     }
-    // setSearchValue(e.target.value);
-    // console.log(searchValue);
   };
 
   return (

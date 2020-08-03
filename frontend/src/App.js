@@ -111,6 +111,8 @@ const App = () => {
 
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
+  // 메인 주소로 사용할 URL 입니다.
+  const [mainUrl, setMainUrl] = useState('http://localhost:3000');
 
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   const choichohanbun = () => {
@@ -173,6 +175,8 @@ const App = () => {
         setEventNum,
         selectedEventItem,
         setSelectedEventItem,
+        mainUrl,
+        setMainUrl,
       }}
     >
       {console.log('This is App.js carouselDatas', carouselDatas)}
