@@ -50,6 +50,7 @@ const Header = props => {
     setSignDialogOpen,
     setUserDetailDialogOpen,
     setInfoDetailDialogOpen,
+    mainUrl,
   } = useContext(CommonContext);
 
   const handleSignInDialogOpen = () => {
@@ -65,10 +66,11 @@ const Header = props => {
     //   } else {
     //     history.push(name);
     //   }
-    if(name === '/') {
-      window.location.href=`http://localhost:3000/`;
+    if(name === '/MainVote') {
+      history.replace('/')
+      console.log(mainUrl)
     } else {
-      window.location.href=`http://localhost:3000/${name}`;
+      history.replace(`/${name}`)
     }
   };
 
@@ -115,7 +117,7 @@ const Header = props => {
               <Typography
                 variant="h6"
                 className="logo"
-                onClick={onClickRedirectPathHandler('/')}
+                onClick={onClickRedirectPathHandler('/MainVote')}
               >
                 Gola la Gola
               </Typography>
