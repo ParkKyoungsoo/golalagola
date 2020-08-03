@@ -31,7 +31,7 @@ const MultiCarousel = () => {
             <Carousel
                 swipeable={false}
                 draggable={false}
-                showDots={true}
+                showDots={false}
                 responsive={responsive}
                 ssr={true} // means to render carousel on server-side.
                 infinite={true}
@@ -44,7 +44,7 @@ const MultiCarousel = () => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {productDatas.items.map((TmpData, index) => (
+                {productDatas.map((TmpData, index) => (
                     <img src={`../../${TmpData.prod_image}`} alt="Prod_image" style={{ width: "150px", height: "150px" }} />
                 ))}
 

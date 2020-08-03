@@ -8,7 +8,7 @@ const CouponModal = (modalNum) => {
     const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
     const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
 
-    const [couponPageItem, setCouponPageItem] = useState(productDatas.items[selectedEventItem - 1]);
+    const [couponPageItem, setCouponPageItem] = useState(productDatas[selectedEventItem - 1]);
 
     return (
         <>

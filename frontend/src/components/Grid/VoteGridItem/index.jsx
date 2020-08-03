@@ -13,15 +13,13 @@ import Wrapper from './styles';
 import { CommonContext } from '../../../context/CommonContext';
 import { ViewContext } from '../../../context/ViewContext';
 
-import voteDetailData from './dump.json';
-
-// import testImg from '../../../pages/MainVote/dump.json';
-
 
 export default function VoteGridItem(props) {
   const { itemData, itemType } = props;
   const { isVoteEditable } = useContext(ViewContext);
   const { test } = createContext();
+
+  const { productDatas, setProductDatas } = useContext(CommonContext);
 
   // `${serverUrl}/voting/my/vote/${itemData.vote_no}`,
 
@@ -42,7 +40,7 @@ export default function VoteGridItem(props) {
     // console.log('aaa');
     let respone = [];
 
-    setInfoData(voteDetailData);
+    setInfoData(productDatas);
     // setInfoDetailDialogOpen(false);
   };
 
@@ -60,11 +58,12 @@ export default function VoteGridItem(props) {
 
   return (
     <Wrapper className="root">
+      {console.log(itemData)}
       <Grid container className="info-open-handler-grid">
         <Grid item xs={12}>
           <Grid className="img-box">
             {/* 이미지 */}
-            <Link to={`VoteItemDetail/${itemData.prod_name}/${itemData.id}`}>
+            <Link to={`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`}>
               <Avatar
                 variant="square"
                 src={itemData.prod_image}

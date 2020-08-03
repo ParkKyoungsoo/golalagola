@@ -97,10 +97,6 @@ const MainVote = props => {
 
   const categoryDatas = useGetCategoryDatas('/category');
 
-  Axios.get('http://i3b309.p.ssafy.io/api/product').then(function(res) {
-    console.log('res:', res);
-  });
-
   const [flag, setFlag] = useState(false);
 
   const flagToggle = () => {
