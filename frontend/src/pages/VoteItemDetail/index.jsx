@@ -10,12 +10,10 @@ import {
   useMediaQuery,
   DialogActions,
 } from '@material-ui/core';
-// import testImg from '../MainVote/dump.json'
 import Wrapper from './styles';
 import WebDeatilModal from '../../components/WebModal/ModalMain';
 import QuizModal from '../../components/WebModal/QuizModal';
 import ClearIcon from '@material-ui/icons/Clear';
-import testimg from '../../components/Grid/VoteGridList/dump.json';
 import { CommonContext } from '../../context/CommonContext';
 
 const QuizDialog = () => {
@@ -74,6 +72,8 @@ const ItemDetail = ({ match }) => {
   const [eventActivated, setEventActivated] = useState(false);
   const { eventNum, setEventNum } = useContext(CommonContext);
 
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
@@ -113,6 +113,7 @@ const ItemDetail = ({ match }) => {
 
   return (
     < Wrapper >
+      {console.log('productDatas', productDatas[match.params.id - 1])}
       {/* <h2>{match.params.name}</h2> */}
       < h2 > {match.params.id}</h2 >
       {/* console.log(match.params.id) */}
@@ -127,7 +128,7 @@ const ItemDetail = ({ match }) => {
         <Grid item xs={4}>
           <Card>
             <img
-              src={`../../${testimg.items[match.params.id - 1].prod_image}`}
+              src={`../../${productDatas[match.params.id - 1].prod_image}`}
               alt="test"
               style={{ width: '100%', height: 'auto', mr: '10px' }}
             />
@@ -139,7 +140,7 @@ const ItemDetail = ({ match }) => {
           <hr />
           <div>
             <p>여기는 간단한 설명 작성을 하면 됩니다.</p>
-            <p>{testimg.items[match.params.id - 1].prod_desc}</p>
+            <p>{productDatas[match.params.id - 1].prod_desc}</p>
           </div>
           <hr />
 

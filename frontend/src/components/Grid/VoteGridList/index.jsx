@@ -18,9 +18,6 @@ import { usePrevious } from '../../../common/CommonHooks';
 import { useInfiniteScroll } from '../../../common/InfiniteScroll';
 import VoteGridItem from './../VoteGridItem/';
 
-// import voteDatas from './dump.json';
-
-
 
 const useGetdata = (value, index, categoryData, itemType, itemValue) => {
   const { serverUrl, user, setUser } = useContext(CommonContext);
@@ -36,7 +33,7 @@ const useGetdata = (value, index, categoryData, itemType, itemValue) => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
 
   const getDatas = async () => {
-    setGridItemDatas(productDatas.items);
+    setGridItemDatas(productDatas);
   };
 
   const getNextPage = async () => {
@@ -88,6 +85,8 @@ const VoteGridList = props => {
 
   const { categoryData, value, index, itemType, itemValue } = props;
 
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+
   const [gridItemDatas, filterItem, onChangeFilterItem] = useGetdata(
     value,
     index,
@@ -96,14 +95,15 @@ const VoteGridList = props => {
     itemValue,
   );
   if (value === -2) {
-    return(
+    return (
       <Wrapper className="root">
+        {console.log('data from server : ', productDatas)}
         <GridList
           className="grid-list"
           cols={Number.isInteger(nowCols) ? nowCols : 1}
           cellHeight={'auto'}
         >
-          {gridItemDatas.map((itemData, index) => {
+          {productDatas.map((itemData, index) => {
             return (
               <Grid key={index}>
                 <VoteGridItem
@@ -118,7 +118,7 @@ const VoteGridList = props => {
       </Wrapper>
     );
   } else {
-    
+
     return (
       <Wrapper className="root">
         {/* Filter
@@ -138,7 +138,7 @@ const VoteGridList = props => {
           cols={Number.isInteger(nowCols) ? nowCols : 1}
           cellHeight={'auto'}
         >
-          {gridItemDatas.map((itemData, index) => {
+          {/* {gridItemDatas.map((itemData, index) => {
             if (itemData.prod_category === value + 1) {
               return (
                 <Grid key={index}>
@@ -152,7 +152,7 @@ const VoteGridList = props => {
             } else {
               return;
             }
-          })}
+          })} */}
         </GridList>
       </Wrapper>
     );

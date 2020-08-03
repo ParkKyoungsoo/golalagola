@@ -32,7 +32,7 @@ import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
-import ProductData from './components/Grid/VoteGridList/dump.json';
+// import ProductData from './components/Grid/VoteGridList/dump.json';
 import CarouselData from './pages/Kiosk/KioskMain/dump.json';
 import CategoryData from './pages/MainVote/dump.json';
 
@@ -99,7 +99,7 @@ const App = () => {
 
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
-  const [productDatas, setProductDatas] = useState(ProductData);
+  const [productDatas, setProductDatas] = useState([]);
 
   const [carouselDatas, setCarouselDatas] = useState(CarouselData);
   const [categoryDatas, setCategoryDatas] = useState(CategoryData);
@@ -112,16 +112,12 @@ const App = () => {
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
 
-
-
-
-
-
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   const choichohanbun = () => {
     console.log('안들어옴?');
-    Axios.get('http://i3b309.p.ssafy.io/api/product').then(function(res) {
-      console.log('res:', res);
+    Axios.get('https://i3b309.p.ssafy.io/api/product').then(function (res) {
+      console.log('App.js res:', res.data);
+      setProductDatas(res.data);
     });
   };
 
@@ -130,7 +126,9 @@ const App = () => {
   // 참고 자료 : https://react.vlpt.us/basic/16-useEffect.html
 
   // 현재 작동 안하고 있습니다. 다른 시도를 해봐야 될듯 합니다.
-  useEffect(choichohanbun, []);
+  useEffect(() => {
+    choichohanbun()
+  }, []);
 
   return (
     <CommonContext.Provider
