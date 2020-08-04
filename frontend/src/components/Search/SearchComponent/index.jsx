@@ -4,60 +4,77 @@ import Axios from 'axios';
 import { Grid, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
-
+import { useHistory, useParams } from 'react-router-dom';
 import { ViewContext } from '../../../context/ViewContext';
-import { useHistory, Link, Redirect } from 'react-router-dom';
-
+import { CommonContext } from '../../../context/CommonContext';
+import { ContinuousColorLegend } from 'react-vis';
+import { BsSearch } from 'react-icons/bs';
+const Search = () => {
+  return <BsSearch />;
+};
 const SearchComponent = () => {
-  const { searchValue, setSearchValue } = useContext(ViewContext);
-
+  let history = useHistory();
+  let location = useParams();
+  const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
       return;
     }
   };
-  // const onClick = () => {
-  //   return <Link to={`SearchResult/${searchValue}`}></Link>;
-  // };
-
-  const onKeyPress = (e) => {
+  const click = () => {
+    console.log(123);
+  };
+  const onKeyPress = currentPathname => e => {
     if (e.key === 'Enter') {
-      console.log(e.target.value)
-      window.location.href=`SearchResult/${e.target.value}`;
-      // return <Redirect to={`SearchResult/${e.target.value}`}/>;
-      // return <Link to={`SearchResult/${e.target.value}`}/>;
+      // 만약에 서치에서 또 서치를 하면
+      if (currentPathname.pathname.includes('SearchResult')) {
+        history.replace(`${e.target.value}`);
+      }
+      // 만약에 디테일에서 서치를 하면
+      else if (currentPathname.pathname.includes('VoteItemDetail')) {
+        history.replace('');
+        history.replace('');
+        history.replace(`SearchResult/${e.target.value}`);
+      }
+      // 아니라면
+      else {
+        history.replace(`SearchResult/${e.target.value}`);
+        console.log(currentPathname);
+        console.log(currentPathname.pathname);
+      }
     }
-    // setSearchValue(e.target.value);
-    // console.log(searchValue);
   };
 
   return (
     <Wrapper>
       <Grid
         container
-        alignItems="center"
-        justify="center"
-        direction="column"
+        // direction="row"
         className="search-component-grid"
         onClick={TopSearchCloseHandler}
       >
-        <Grid item>
-          <Grid container spacing={1} alignItems="flex-end">
-            {/* <Grid item xs={3}>
+        {/* <Grid item>
+          <Grid container spacing={1} alignItems="flex-end"> */}
+        {/* <Grid item xs={3}>
               <SearchIcon
                 className="search-component-grid-item-se-icon"
                 fontSize="large"
               />
             </Grid> */}
-            <Grid item xs={10}>
-              <TextField
-                placeholder="Search..."
-                autoFocus={true}
-                onKeyPress={onKeyPress}
-                className="input2"
-              />
-            </Grid>
-          </Grid>
+        <Grid item xs={9}>
+          <TextField
+            placeholder="Search..."
+            autoFocus={true}
+            onKeyPress={onKeyPress(history.location)}
+            className="input2"
+          />
+        </Grid>
+        {/* </Grid> */}
+        {/* </Grid> */}
+        <Grid item xs={2}>
+          <h3 className="searchIcon" onClick={click}>
+            <Search />
+          </h3>
         </Grid>
       </Grid>
     </Wrapper>

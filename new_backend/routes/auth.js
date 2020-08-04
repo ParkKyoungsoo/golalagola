@@ -1,176 +1,298 @@
 const express = require("express");
 const app = express.Router();
-const { User } = require("../models");
+const db = require("../models");
 const crypto = require("crypto");
 const { response } = require("express");
+const config = require("../config/config.json");
+const nodemailer = require("nodemailer");
+const smtpTransporter = require("nodemailer-smtp-transport");
 
-app.get("/", async (req, res) => {
-  res.json({ msg: "success" });
-});
+// jwt
+const jwt = require("jsonwebtoken");
+const secretObj = require("../config/jwt");
+const { rejects } = require("assert");
 
-app.get("/users/:id", async (req, res) => {
-  if (!req.params || !req.params.id) {
-    res.status(403).send({ msg: "잘못된 파라미터입니다." });
-    return;
-  }
-
-  const selectParams = {
-    id: req.params.id,
-  };
-
-  const selectQuery = req.mybatisMapper.getStatement(
-    "BASE",
-    "AUTH.SELECT.TB_VU.001",
-    selectParams,
-    { language: "sql", indent: "  " }
-  );
-
-  let data = [];
-  try {
-    data = await req.sequelize.query(selectQuery, {
-      type: req.sequelize.QueryTypes.SELECT,
-    });
-    console.log("TCL: data", data);
-  } catch (error) {
-    res.status(403).send({ msg: "rdb select에 실패하였습니다.", error: error });
-    return;
-  }
-
-  if (data.length == 0) {
-    res.status(403).send({ msg: "정보가 없습니다." });
-    return;
-  }
-
-  res.json({
-    msg: "RDB에서 정보 꺼내오기",
-    user: data.map((x) => {
-      x.vu_password = "";
-      return x;
-    })[0],
-  });
-});
-
-app.post("/login_process", async (req, res) => {
-  try {
-    // console.log("login_process try:", req.body.useremail);
+// 로그인
+app.post("/signin", async (req, res) => {
+  // 이미 로그인이 되어있다면 이미 되어있다고 알리기
+  if (req.headers.token) {
+    res.status(403).json({ message: "이미 로그인 되어있습니다." });
+  } else {
+    const reqeustData = req.body;
     //이메일 값으로 아이디가 존재하는지 확인
-    let user = await User.findOne({ where: { useremail: req.body.useremail } });
-    console.log("여긴가?");
-    if (user) {
-      const obj = {
-        useremail: req.body.useremail,
-        password: req.body.password,
-      };
-      console.log(obj);
+    await db.User.findOne({
+      where: {
+        user_email: reqeustData.user_email,
+      },
+    })
+      .then((user) => {
+        const userData = user.dataValues;
 
-      const user2 = await User.findOne({ where: { useremail: obj.useremail } });
-      if (user2) {
-        // 있으면 로그인 처리
-        console.log("로그인 처리", user2.useremail);
-        console.log("로그인 처리", user2.name);
+        const encrypted = crypto
+          .createHmac("sha1", config.secret)
+          .update(reqeustData.user_pwd)
+          .digest("base64");
 
-        res.json({
-          message: "로그인 되었습니다!",
-          name: user2.name,
-          useremail: user2.useremail,
-        });
+        // 비밀번호 일치 여부 확인
+        if (userData.user_pwd !== encrypted) {
+          res.status(403).send({ message: "비밀번호가 일치하지 않습니다." });
+        } else {
+          // 아아디, 비밀번호 일치
+          const token = jwt.sign(
+            {
+              // 첫번째 인자: 로그인을 위한 정보
+              user_email: userData.user_email,
+              user_pwd: encrypted,
+            },
+            // 두번째 인자: 비밀 키
+            secretObj.secret,
+            // 세번째 인자:  유효 시간
+            { expiresIn: "1h" },
 
-        // 세션에 저장
-        // req.session.save(function () {
-        //   response.redirect("/");
-        // });
-        // req.session.useremail = user2.useremail;
-
-        console.log("res.json", res.json.name);
-      } else {
-        alert("이메일/패스워드 틀림");
-      }
-    } else {
-      console.log("에러");
-    }
-  } catch (err) {
-    console.log(err);
-    res.json({ message: "로그인 실패" });
+            // 네번째 인자: 콜백함수
+            function (err, token) {
+              if (err) {
+                res.send(err);
+              } else {
+                res.json({
+                  message: "로그인에 성공하여 토큰이 발급되었습니다.",
+                  token: token,
+                });
+                console.log("로그인에 성공하여 토큰이 발급되었습니다.");
+              }
+            }
+          );
+        }
+      })
+      .catch((err) => {
+        res.status(403).send({ message: "존재하지 않는 아이디 입니다." });
+      });
   }
 });
+
+// 이메일 보내는 주체
+var smtpTransport = nodemailer.createTransport(
+  smtpTransporter({
+    service: "Gmail",
+    host: "smtp.gmail.com",
+    auth: {
+      user: "jugiaro95@gmail.com",
+      pass: "sh95923517ahn!",
+    },
+  })
+);
 
 //회원가입
-app.post("/join", async (req, res) => {
-  console.log("routes/ ... /auth: join");
-  try {
-    let obj = { useremail: req.body.id };
-    console.log("obj:", obj);
-    // console.log("req:", req);
+app.post("/signup", async (req, res) => {
+  // 이미 로그인이 되어있다면 이미 되어있다고 알리기
+  if (req.headers.token) {
+    res.status(403).json({ message: "이미 로그인 되어있습니다." });
+  } else {
+    const reqeustData = req.body;
 
-    let user = await User.findOne({ where: { useremail: obj.useremail } });
-    console.log("user::", user);
+    // email 중복 확인
+    await db.User.findOne({
+      where: { user_email: reqeustData.user_email },
+    }).then((user) => {
+      // 중복이면 중복 메세지 보내기
+      if (user) {
+        res.status(403).send({ message: "이미 존재하는 아이디입니다." });
+      } else {
+        // 비밀번호 확인하기
+        if (reqeustData.password_1 !== reqeustData.password_2) {
+          res.status(403).send({ message: "비밀번호 확인이 잘못되었습니다." });
+        } else {
+          // 인증코드 생성하기
+          var key_one = crypto.randomBytes(256).toString("hex").substr(100, 5);
+          var key_two = crypto
+            .randomBytes(256)
+            .toString("base64")
+            .substr(50, 5);
+          var key_for_verify = key_one + key_two;
 
-    if (user) {
-      res.json({
-        message: "이메일이 중복되었습니다. 새로운 이메일을 입력해주세요.",
-        dupYn: "1",
-      });
-    } else {
-      console.log("in");
+          // 비밀번호 암호화
+          const encrypted = crypto
+            .createHmac("sha1", config.secret)
+            .update(reqeustData.password_1)
+            .digest("base64");
 
-      obj = {
-        useremail: req.body.id,
-        password: req.body.pwd,
-        name: req.body.name,
-        // salt: buf.toString("base64"),
-      };
-      user = new User(obj);
-      console.log(user);
-      await user.save();
-      console.log("회원가입 성공");
-      res.json({ message: "회원가입 되었습니다!", dupYn: "0" });
-    }
-  } catch (err) {
-    console.log(err);
-    res.json({ message: false });
-  }
-});
+          console.log("req", reqeustData);
 
-// 로그아웃
-app.get("/logout_process", (req, res) => {
-  console.log("/logout" + req.sessionID);
-  req.session.destroy(() => {
-    res.json({ message: true });
-  });
-});
+          db.User.create({
+            user_email: reqeustData.user_email,
+            user_pwd: encrypted,
+            user_name: reqeustData.user_name,
+            user_phone: reqeustData.user_phone,
+            key_verify: key_for_verify,
+          }).then(() => {
+            //옵션
+            var mailOpt = {
+              from: "Gola la Gola",
+              to: reqeustData.user_email,
+              subject: "Gola la Gola [회원가입] 인증 메일입니다.",
+              html:
+                "<div align='center' style='border:1px solid black; font-family:verdana'>" +
+                "<h3 style='color: blue;'>" +
+                reqeustData.user_email +
+                "님 회원가입을 환영합니다.</h3>" +
+                "<h1>이메일 인증을 위해 인증버튼을 클릭해주세요.</h1><br>" +
+                "<form method='post' action='http://localhost:5000/api/auth/approval'>" +
+                "<input type='hidden' name='user_email' value='" +
+                reqeustData.user_email +
+                "'>" +
+                "<input type='hidden' name='key_verify' value='" +
+                key_for_verify +
+                "'>" +
+                "<input type='submit' value='인증'></form><br/></div>",
+            };
+            //전송
+            smtpTransport.sendMail(mailOpt, function (err, res) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("email has been sent.");
+              }
+              smtpTransport.close();
+            });
+            res.send(
+              '<script type="text/javascript">alert("이메일을 확인하세요."); window.location="/"; </script>'
+            );
+          });
 
-app.post("/update", async (req, res) => {
-  try {
-    await User.update({
-      _id: req.body._id,
-      name: req.body.name,
+          res.status(200).send({
+            message: "이메일 인증 후 사용해주세요.",
+            user_email: reqeustData.user_email,
+          });
+        }
+      }
     });
-    res.json({ message: true });
-  } catch (err) {
-    console.log(err);
-    res.json({ message: false });
   }
 });
 
-app.post("/add", async (req, res) => {
-  try {
-    const user = new User(req.body);
-    await user.save();
-    res.json({ message: true });
-  } catch (err) {
-    console.log(err);
-    res.json({ message: false });
+// 회원가입 후 이메일 인증
+app.post("/approval", async (req, res) => {
+  // console.log("req", req);
+  console.log("***********", req.body);
+  await db.User.update(
+    { email_verify: true },
+    {
+      where: { key_verify: req.body.key_verify },
+    }
+  )
+    .then(() =>
+      res.send(
+        '<script type="text/javascript">alert("인증이 완료되었습니다. 로그인 후 이용하세요."); window.location="https://i3b309.p.ssafy.io/"; </script>'
+      )
+    )
+    .catch((err) =>
+      res.send(
+        '<script type="text/javascript">alert("Not ??"); window.location="/"; </script>'
+      )
+    );
+});
+
+// 비밀번호 찾기
+app.post("/find_pwd", async (req, res) => {
+  if (req.headers.token) {
+    res.status(403).json({ message: "이미 로그인 되어있습니다." });
+  } else {
+    const reqeustData = req.body;
+    //이메일 값으로 아이디가 존재하는지 확인
+    await db.User.findOne({
+      where: {
+        user_email: reqeustData.user_email,
+      },
+    })
+      .then((user) => {
+        // 인증코드 생성하기
+        var key_one = crypto.randomBytes(256).toString("hex").substr(100, 5);
+        var key_two = crypto.randomBytes(256).toString("base64").substr(50, 5);
+        var key_for_verify = key_one + key_two;
+
+        db.User.update(
+          {
+            user_pwd: key_for_verify, // 현재 비밀번호를 임시비밀번호로 바꾸기
+          },
+          {
+            where: { user_email: user.user_email },
+          }
+        )
+          .then((data) => {
+            //옵션
+            var mailOpt = {
+              from: "Gola la Gola",
+              to: reqeustData.user_email,
+              subject: "Gola la Gola [비밀번호 찾기] 인증 메일입니다.",
+              html:
+                "<div align='center' style='border:1px solid black; font-family:verdana'>" +
+                "<h3 style='color: blue;'>" +
+                reqeustData.user_email +
+                "님 임시 비밀번호를 발급해드립니다.</h3>" +
+                "<h1>홈페이지로 이동하셔서 비밀번호를 변경하시길 바랍니다</h1><br>" +
+                "임시 비밀번호는 " +
+                key_for_verify +
+                "입니다." +
+                "</div>",
+            };
+            //전송
+            smtpTransport.sendMail(mailOpt, function (err, res) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("email has been sent.");
+              }
+              smtpTransport.close();
+            });
+
+            res.json({ message: "임시 비밀번호가 메일로 발급되었습니다." });
+          })
+          .catch((err) => res.json(err));
+      })
+      .catch((err) => {
+        res.json({ message: "존재하지 않는 이메일입니다." });
+      });
+  }
+}); // post
+
+// const token = req.headers["token"] || req.query.token;
+// jwt.verify(token, secretObj.secret, function (err, decoded) {
+//   console(err);
+//   console(docoded);
+// });
+
+// 회원정보 수정
+app.put("/update", async (req, res) => {
+  const token = req.headers.token;
+  if (!token) {
+    res.status(403).send({ message: "로그인 되어있지 않습니다." });
+  } else {
+    // 사용자 검증
+    jwt.verify(token, secretObj.secret, function (err, decoded) {
+      if (err) {
+        res.status(403).send({ message: "로그인이 만료되었습니다." });
+      } else {
+        // 수정을 요청하는 사용자와 로그인 되어있는 사용자의 정보가 같아야함
+        if (decoded.user_email !== req.headers.user_email) {
+          res.status(403).send({ message: "인증된 사용자가 아닙니다." });
+        } else {
+          db.User.update(
+            {
+              user_pwd: req.body.user_pwd,
+              user_name: req.body.user_name,
+              user_phone: req.body.user_phone,
+              user_image: req.body.user_image,
+            },
+            {
+              where: { user_email: decoded.user_email },
+            }
+          );
+          res.status(200).send({ message: "회원정보가 수정되었습니다." });
+        }
+      }
+    });
   }
 });
 
-app.post("/getAllMember", async (req, res) => {
-  try {
-    const user = await User.find({});
-    res.json({ message: user });
-  } catch (err) {
-    console.log(err);
-    res.json({ message: false });
-  }
-});
+// 회원 탈퇴
 
 module.exports = app;
