@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.0",
     "bootstrap": "^4.5.0",
+    "cross-env": "^7.0.2",
     "date-fns": "^2.14.0",
     "eslint-config-prettier": "^6.10.1",
     "material-auto-rotating-carousel": "^3.0.2",

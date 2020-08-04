@@ -157,3 +157,19 @@
 #### 2020.08.03(월)
 
 1. Back-end	http -> https
+
+   ​					데이터 가공
+
+#### 2020.08.04(화)
+
+1. Front-end  Web Navbar 수정
+
+   ​					Web Detail 페이지 수정
+
+   ​					관리자 Event (VS) 모아보기 페이지 제작 (CRUD)
+
+   ​					Web 실시간 순위
+
+   Back-end	이메일 인증
+
+2. JIRA 정리

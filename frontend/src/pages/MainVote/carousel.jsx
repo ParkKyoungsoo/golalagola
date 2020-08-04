@@ -14,23 +14,6 @@ const ControlledCarousel = props => {
     setIndex(selectedIndex);
   };
 
-  // const RepresentativeItems = props
-  // const selected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-  // // const CarouselDatas = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  // const CarouselDatas = [[],[],[],[],[],[],[],[],[],[],[],[],[]]
-  // console.log(RepresentativeItems.RepresentativeItems)
-  // const N = RepresentativeItems.RepresentativeItems.length
-
-  // for(let i=0; i<N; i++) {
-  //   if (selected[RepresentativeItems.RepresentativeItems[i].prod_category-1] < 2) {
-  //     CarouselDatas[RepresentativeItems.RepresentativeItems[i].prod_category-1].push(RepresentativeItems.RepresentativeItems[i])
-  //     selected[RepresentativeItems.RepresentativeItems[i].prod_category-1] = selected[RepresentativeItems.RepresentativeItems[i].prod_category-1] + 1
-  //   }
-  // }
-  // console.log('CarouselDatas', CarouselDatas, CarouselDatas.length)
-  // // console.log(CarouselDatas[0][0])
-
   return (
     <Carousel container activeIndex={index} onSelect={handleSelect}>
       {carouselDatas.map((TmpData, index) => (

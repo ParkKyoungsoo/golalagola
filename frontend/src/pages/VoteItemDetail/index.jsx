@@ -126,31 +126,24 @@ const ItemDetail = ({ match }) => {
         justify="space-around"
         alignItems="center"
       >
-        {productDatas.map((product, index) => {
-          if (productDatas[match.params.id - 1].prod_id === product.prod_id)
-            return (
-              <Grid item xs={4}>
-                <Card>
-                  <img
-                    src={`../../${
-                      productDatas[match.params.id - 1].prod_image
-                    }`}
-                    alt="test"
-                    style={{ width: '100%', height: 'auto', mr: '10px' }}
-                  />
-                </Card>
-              </Grid>
-            );
-        })}
+        <Grid item xs={4}>
+          <Card>
+            <p>{`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_id}`}</p>
+            <img
+              src={`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_image}`}
+              // src={`../../${productDatas[match.params.id - 1].prod_image}`}
+              alt="test"
+              style={{ width: '100%', height: 'auto', mr: '10px' }}
+            />
+          </Card>
+        </Grid>
+
         <Grid item>
           <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
           <hr />
           <div>
             <p>여기는 간단한 설명 작성을 하면 됩니다.</p>
-            {productDatas.map((product, index) => {
-              if (productDatas[match.params.id - 1].prod_id === product.prod_id)
-                return <p>{productDatas[match.params.id - 1].prod_desc}</p>;
-            })}
+            {/* <p>{productDatas[match.params.id - 1].prod_desc}</p> */}
           </div>
           <hr />
 
