@@ -1,28 +1,40 @@
 import React, { Component, useState, useContext, useEffect } from 'react';
+import {
+  GridList,
+  Grid,
+  MenuItem,
+  FormControl,
+  Select,
+  Typography,
+} from '@material-ui/core';
+import { useNowCols } from '../../common/MediaQueryHooks';
 import Header from '../../layout/Header';
 import Wrapper from './styles';
-import { Grid } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
+import VoteGridItem from '../../components/Grid/VoteGridItem';
+
 const Result = ({ match }) => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
+  const nowCols = useNowCols();
 
   return (
-    <Wrapper>
+    <Wrapper className="root">
       <Header />
-      <Grid>
+      <GridList
+        className="grid-list"
+        cols={Number.isInteger(nowCols) ? nowCols : 1}
+        cellHeight={'auto'}
+      >
         {productDatas.map((TmpData, index) => {
-          if (match.params.searchValue === TmpData.prod_name) {
+          if (TmpData.prod_name.includes(match.params.searchValue)) {
             return (
-              <Grid>
-                <img
-                  src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
-                  alt="123"
-                />
+              <Grid key={index}>
+                <VoteGridItem itemData={TmpData} index={index} />
               </Grid>
             );
           }
         })}
-      </Grid>
+      </GridList>
     </Wrapper>
   );
 };
