@@ -118,6 +118,20 @@ const App = () => {
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
 
+  //
+  const [newEventData, setNewEventData] = useState({
+    event_id: '',
+    event_category: '',
+    event_item: {
+      '1': {
+        prod_id: '',
+      },
+      '2': {
+        prod_id: '',
+      },
+    },
+  });
+
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   const choichohanbun = () => {
     console.log('안들어옴?');
@@ -190,6 +204,9 @@ const App = () => {
         setMainUrl,
         currentEventDatas,
         setCurrentEventDatas,
+
+        newEventData,
+        setNewEventData,
       }}
     >
       {console.log('This is App.js carouselDatas', carouselDatas)}
