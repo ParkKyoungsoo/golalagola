@@ -15,8 +15,8 @@ app.get("/", async function (req, res) {
         obj.event_category = data[i].dataValues.event_category;
 
         obj.event_item = {
-          1: { prod_id: data[0].dataValues.event_prod_A },
-          2: { prod_id: data[0].dataValues.event_prod_B },
+          1: { prod_id: data[i].dataValues.event_prod_A },
+          2: { prod_id: data[i].dataValues.event_prod_B },
         };
 
         resList.push(obj);

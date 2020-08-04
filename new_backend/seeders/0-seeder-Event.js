@@ -26,10 +26,10 @@ module.exports = {
       },
     ];
 
-    return queryInterface.bulkInsert("Events", datas, {});
+    return queryInterface.bulkInsert("events", datas, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Events", null, {});
+    await queryInterface.bulkDelete("events", null, {});
   },
 };
