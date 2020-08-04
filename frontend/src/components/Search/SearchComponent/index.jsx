@@ -8,7 +8,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ViewContext } from '../../../context/ViewContext';
 import { CommonContext } from '../../../context/CommonContext';
 import { ContinuousColorLegend } from 'react-vis';
-
+import { BsSearch } from 'react-icons/bs';
+const Search = () => {
+  return <BsSearch />;
+};
 const SearchComponent = () => {
   let history = useHistory();
   let location = useParams();
@@ -18,7 +21,9 @@ const SearchComponent = () => {
       return;
     }
   };
-
+  const click = () => {
+    console.log(123);
+  };
   const onKeyPress = currentPathname => e => {
     if (e.key === 'Enter') {
       // 만약에 서치에서 또 서치를 하면
@@ -44,29 +49,32 @@ const SearchComponent = () => {
     <Wrapper>
       <Grid
         container
-        alignItems="center"
-        justify="center"
-        direction="column"
+        // direction="row"
         className="search-component-grid"
         onClick={TopSearchCloseHandler}
       >
-        <Grid item>
-          <Grid container spacing={1} alignItems="flex-end">
-            {/* <Grid item xs={3}>
+        {/* <Grid item>
+          <Grid container spacing={1} alignItems="flex-end"> */}
+        {/* <Grid item xs={3}>
               <SearchIcon
                 className="search-component-grid-item-se-icon"
                 fontSize="large"
               />
             </Grid> */}
-            <Grid item xs={10}>
-              <TextField
-                placeholder="Search..."
-                autoFocus={true}
-                onKeyPress={onKeyPress(history.location)}
-                className="input2"
-              />
-            </Grid>
-          </Grid>
+        <Grid item xs={9}>
+          <TextField
+            placeholder="Search..."
+            autoFocus={true}
+            onKeyPress={onKeyPress(history.location)}
+            className="input2"
+          />
+        </Grid>
+        {/* </Grid> */}
+        {/* </Grid> */}
+        <Grid item xs={2}>
+          <h3 className="searchIcon" onClick={click}>
+            <Search />
+          </h3>
         </Grid>
       </Grid>
     </Wrapper>

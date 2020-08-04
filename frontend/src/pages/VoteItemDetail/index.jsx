@@ -128,9 +128,8 @@ const ItemDetail = ({ match }) => {
       >
         <Grid item xs={4}>
           <Card>
-            <p>{`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_id}`}</p>
             <img
-              src={`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_image}`}
+              // src={`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_image}`}
               // src={`../../${productDatas[match.params.id - 1].prod_image}`}
               alt="test"
               style={{ width: '100%', height: 'auto', mr: '10px' }}
