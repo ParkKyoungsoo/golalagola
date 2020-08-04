@@ -2,10 +2,28 @@ import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../layout/';
 import Wrapper from './styles';
 
+<<<<<<< HEAD
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Typography,
+  Box,
+  Divider,
+  Grid,
+  Paper,
+  useMediaQuery,
+  Dialog,
+} from '@material-ui/core';
+
+import Carousel from 'react-bootstrap/Carousel';
+
+=======
 import { AppBar, Tabs, Tab, Typography, Box, Divider, Grid, Paper, useMediaQuery, Dialog } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel'
 import { useHistory } from 'react-router-dom';
+>>>>>>> 6b7679c7c4e11b994e9250488cffac6a7a733890
 import Axios from 'axios';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -15,8 +33,7 @@ import ButtonBases from '../../components/Main/ButtonBases';
 import VoteGridList from '../../components/Grid/VoteGridList';
 import VoteGridTitle from '../../components/Grid/VoteGridTitle';
 
-
-import ControlledCarousel from './carousel'
+import ControlledCarousel from './carousel';
 ///////////////////////////////////////////////
 
 const TabPanel = props => {
@@ -101,7 +118,7 @@ const MainVote = props => {
 
   const flagToggle = () => {
     setFlag(flag => !flag);
-  }
+  };
   const [
     onChangeIndexHandler,
     appbarIndex,
@@ -131,18 +148,22 @@ const MainVote = props => {
                 <ControlledCarousel />
               </Grid>
               <Grid
-                item md={2} xs={12}
+                item
+                md={2}
+                xs={12}
                 className="tiemPopularity"
-                position="absolute">
+                position="absolute"
+              >
                 <Box
                   height="80%"
-                // border={1}
-                // borderColor="secondary.main"
-
+                  // border={1}
+                  // borderColor="secondary.main"
                 >
                   <h2>실시간</h2>
                   {carouselDatas.map((TmpData, index) => (
-                    <h6>{index + 1}. {TmpData.event_item["1"].prod_name}</h6>
+                    <h6>
+                      {index + 1}. {TmpData.event_item['1'].prod_name}
+                    </h6>
                   ))}
                 </Box>
               </Grid>
@@ -193,7 +214,7 @@ const MainVote = props => {
           ))}
         </Wrapper>
       </Layout>
-    </ViewContext.Provider >
+    </ViewContext.Provider>
   );
 };
 

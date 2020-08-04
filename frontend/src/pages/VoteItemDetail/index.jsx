@@ -114,18 +114,45 @@ const ItemDetail = ({ match }) => {
 
   return (
     <Wrapper>
+<<<<<<< HEAD
+      {/* {console.log('productDatas', productDatas[match.params.id - 1])} */}
+      {/* <h2>{match.params.name}</h2> */}
+      <h2> {match.params.id}</h2>
+      {/* console.log(match.params.id) */}
+      <Header />
+      {/* {testImg.map((testI, index) => ( */}
+=======
       {/* <h2>{match.params.name}</h2> */}
       {/* console.log(match.params.id) */}
       <Header />
       {/* {testImg.map((testI, index) => ( */}
 
       <br />
+>>>>>>> 6b7679c7c4e11b994e9250488cffac6a7a733890
       <Grid
         container
         direction="row"
         justify="space-around"
         alignItems="center"
       >
+<<<<<<< HEAD
+        {productDatas.map((product, index) => {
+          if (productDatas[match.params.id - 1].prod_id === product.prod_id)
+            return (
+              <Grid item xs={4}>
+                <Card>
+                  <img
+                    src={`../../${
+                      productDatas[match.params.id - 1].prod_image
+                    }`}
+                    alt="test"
+                    style={{ width: '100%', height: 'auto', mr: '10px' }}
+                  />
+                </Card>
+              </Grid>
+            );
+        })}
+=======
         <Grid item xs={4}>
           <Card>
             <img
@@ -137,12 +164,20 @@ const ItemDetail = ({ match }) => {
           </Card>
         </Grid>
 
+>>>>>>> 6b7679c7c4e11b994e9250488cffac6a7a733890
         <Grid item>
           <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
           <hr />
           <div>
             <p>여기는 간단한 설명 작성을 하면 됩니다.</p>
+<<<<<<< HEAD
+            {productDatas.map((product, index) => {
+              if (productDatas[match.params.id - 1].prod_id === product.prod_id)
+                return <p>{productDatas[match.params.id - 1].prod_desc}</p>;
+            })}
+=======
             {/* <p>{productDatas[match.params.id - 1].prod_desc}</p> */}
+>>>>>>> 6b7679c7c4e11b994e9250488cffac6a7a733890
           </div>
           <hr />
 
