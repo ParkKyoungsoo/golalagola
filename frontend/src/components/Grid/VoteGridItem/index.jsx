@@ -23,8 +23,6 @@ export default function VoteGridItem(props) {
 
   const [sw, setSw] = useState(itemData.vote_state === 'Y' ? true : false);
 
-  let history = useHistory();
-
   const {
     user,
     serverUrl,
@@ -54,25 +52,34 @@ export default function VoteGridItem(props) {
     return '16:00:00';
   };
 
+  let history = useHistory();
+  const click = () => {
+    if (history.location.pathname.includes('SearchResult')) {
+      history.replace('');
+      history.replace(
+        `VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`,
+      );
+    } else {
+      history.push(`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`);
+    }
+  };
+
   return (
     <Wrapper className="root">
       {/* {console.log(itemData)} */}
       <Grid container className="info-open-handler-grid">
         <Grid item xs={12}>
-          <Grid className="img-box">
+          <Grid className="img-box" onClick={click}>
             {/* 이미지 */}
-            <Link
-              to={`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`}
-            >
-              <Avatar
-                variant="square"
-                src={itemData.prod_image}
-                className={'large'}
-                imgProps={{
-                  className: sw ? 'img' : 'img deactivated',
-                }}
-              />
-            </Link>
+
+            <Avatar
+              variant="square"
+              src={itemData.prod_image}
+              className={'large'}
+              imgProps={{
+                className: sw ? 'img' : 'img deactivated',
+              }}
+            />
             <h3>{itemData.prod_name}</h3>
 
             <span className="date on">{displayEndTime(itemData.end_dt)}</span>
