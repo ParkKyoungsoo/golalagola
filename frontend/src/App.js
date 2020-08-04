@@ -30,6 +30,7 @@ import MyCoupon from './pages/MyCoupon/';
 import VoteItemDetail from './pages/VoteItemDetail';
 import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
+import ManageEvent from './pages/AdminPage/ManageEvent';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
 // import ProductData from './components/Grid/VoteGridList/dump.json';
@@ -114,12 +115,21 @@ const App = () => {
   // 메인 주소로 사용할 URL 입니다.
   const [mainUrl, setMainUrl] = useState('http://localhost:3000');
 
+  // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
+  const [currentEventDatas, setCurrentEventDatas] = useState([]);
+
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   const choichohanbun = () => {
     console.log('안들어옴?');
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
-      console.log('App.js res:', res.data);
       setProductDatas(res.data);
+    });
+  };
+
+  const getEventDatas = () => {
+    Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
+      console.log('getEventDatas res:', res.data);
+      setCurrentEventDatas(res.data);
     });
   };
 
@@ -130,6 +140,7 @@ const App = () => {
   // 현재 작동 안하고 있습니다. 다른 시도를 해봐야 될듯 합니다.
   useEffect(() => {
     choichohanbun();
+    getEventDatas();
   }, []);
 
   return (
@@ -177,6 +188,8 @@ const App = () => {
         setSelectedEventItem,
         mainUrl,
         setMainUrl,
+        currentEventDatas,
+        setCurrentEventDatas,
       }}
     >
       {console.log('This is App.js carouselDatas', carouselDatas)}
@@ -203,6 +216,8 @@ const App = () => {
               component={VoteItemDetail}
             />
             <Route path="/SearchResult/:searchValue" component={SearchResult} />
+
+            <Route exact path="/Admin/ManageEvent" component={ManageEvent} />
 
             <Redirect to="/not-found" />
           </Switch>
