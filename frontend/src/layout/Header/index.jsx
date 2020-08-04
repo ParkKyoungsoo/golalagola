@@ -24,7 +24,6 @@ import { FiUser } from 'react-icons/fi';
 import { RiCoupon3Line } from 'react-icons/ri';
 import { GiPresent } from 'react-icons/gi';
 import { FiGift } from 'react-icons/fi';
-import { BsSearch } from 'react-icons/bs';
 
 const User = () => {
   return <FiUser />;
@@ -34,9 +33,6 @@ const Coupon = () => {
 };
 const Event = () => {
   return <FiGift />;
-};
-const Search = () => {
-  return <BsSearch />;
 };
 
 const Header = props => {
@@ -66,24 +62,15 @@ const Header = props => {
     //   } else {
     //     history.push(name);
     //   }
-    if(name === '/MainVote') {
-      history.replace('/')
-      console.log(mainUrl)
+    if (name === '/MainVote') {
+      history.replace('/');
+      console.log(mainUrl);
     } else {
-      history.replace(`/${name}`)
+      history.replace(`/${name}`);
     }
   };
 
   const [successSearchbarTrigger, setSuccessSearchbarTrigger] = useState(false);
-
-  const openSearchbar = () => {
-    if (successSearchbarTrigger === false) {
-      setSuccessSearchbarTrigger(successSearchbarTrigger => true);
-    } else {
-      setSuccessSearchbarTrigger(successSearchbarTrigger => false);
-    }
-  };
-
 
   useEffect(() => {
     setSignDialogOpen(false);
@@ -130,10 +117,7 @@ const Header = props => {
                 }}
               >
                 <Grid item xs={7} className="navbarCentering">
-                  {successSearchbarTrigger ? <SearchComponent /> : null}
-                  <h3 className="searchIcon" onClick={openSearchbar}>
-                    <Search />
-                  </h3>
+                  <SearchComponent />
                 </Grid>
                 <Grid item xs={5}>
                   <Grid
@@ -151,7 +135,8 @@ const Header = props => {
                     <Button
                       color="primary"
                       variant="contained"
-                      onClick={onClickRedirectPathHandler('MyCoupon')}>
+                      onClick={onClickRedirectPathHandler('MyCoupon')}
+                    >
                       <h5>
                         <Coupon />
                       </h5>
@@ -166,8 +151,8 @@ const Header = props => {
                           <User />
                         </h5>
                       ) : (
-                          <h5>Sign in</h5>
-                        )}
+                        <h5>Sign in</h5>
+                      )}
                     </Button>
                   </Grid>
                   {/* <Grid container style={{ flexDirection:"column", height:"10vh"}} className="navbarCentering">

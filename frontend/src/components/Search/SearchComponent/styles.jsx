@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  .searchIcon {
+    cursor: pointer;
+  }
   .root {
     display: flex;
     flex-wrap: wrap;
@@ -35,6 +38,9 @@ const Wrapper = styled.div`
   }
   .search-component-grid {
     padding: 32px 0 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .search-component-grid-item-se-icon {
     color: #ccc;

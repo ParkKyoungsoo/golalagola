@@ -198,10 +198,7 @@ const App = () => {
             <Route exact path="/KioskQuiz" component={KioskQuiz} />
             <Route exact path="/MyCoupon" component={MyCoupon} />
             <Route exact path="/EventAll" component={EventAll} />
-            <Route
-              path="/VoteItemDetail/:name/:id"
-              component={VoteItemDetail}
-            />
+            <Route path="/VoteItemDetail/:id" component={VoteItemDetail} />
             <Route path="/SearchResult/:searchValue" component={SearchResult} />
 
             <Redirect to="/not-found" />
