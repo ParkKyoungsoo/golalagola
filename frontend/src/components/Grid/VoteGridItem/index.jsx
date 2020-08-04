@@ -74,7 +74,7 @@ export default function VoteGridItem(props) {
 
             <Avatar
               variant="square"
-              src={itemData.prod_image}
+              src={`../../${itemData.prod_image}`}
               className={'large'}
               imgProps={{
                 className: sw ? 'img' : 'img deactivated',
