@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../layout/';
 import Wrapper from './styles';
 
-<<<<<<< HEAD
 import {
   AppBar,
   Tabs,
@@ -17,13 +16,7 @@ import {
 } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel';
-
-=======
-import { AppBar, Tabs, Tab, Typography, Box, Divider, Grid, Paper, useMediaQuery, Dialog } from '@material-ui/core';
-
-import Carousel from 'react-bootstrap/Carousel'
 import { useHistory } from 'react-router-dom';
->>>>>>> 6b7679c7c4e11b994e9250488cffac6a7a733890
 import Axios from 'axios';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -134,7 +127,6 @@ const MainVote = props => {
         categoryDatas,
       }}
     >
-      
       <Layout>
         <Wrapper>
           {/* carousel, 실시간 순위 */}
