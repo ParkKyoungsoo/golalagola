@@ -17,13 +17,12 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { CommonContext } from '../../context/CommonContext';
 
 const QuizDialog = () => {
-
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const handleClose = () => {
-    setWebQuizDialogOpen(false)
-  }
+    setWebQuizDialogOpen(false);
+  };
 
   return (
     <Dialog
@@ -62,11 +61,9 @@ const QuizDialog = () => {
       <QuizModal />
     </Dialog>
   );
-}
-
+};
 
 const ItemDetail = ({ match }) => {
-
   const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
   const [eventActivated, setEventActivated] = useState(false);
@@ -93,54 +90,64 @@ const ItemDetail = ({ match }) => {
 
   const QuizDialogOpen = () => {
     setWebQuizDialogOpen(true);
-  }
-
+  };
 
   // vs이벤트가 진행중인지 판단하는 함수 입니다.
   // match.params.id 를 통해 해당 상품의 id를 조회 할 수 있습니다.
   // carouselDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
   const CheckEvent = () => {
     for (var i = 0; i < carouselDatas.length; i++) {
-      if ((Number(match.params.id)) === carouselDatas[i].event_item["1"].prod_id ||
-        (Number(match.params.id)) === carouselDatas[i].event_item["2"].prod_id) {
+      if (
+        Number(match.params.id) === carouselDatas[i].event_item['1'].prod_id ||
+        Number(match.params.id) === carouselDatas[i].event_item['2'].prod_id
+      ) {
         setEventActivated(eventActivated => true);
         setEventNum(carouselDatas[i].event_no - 1);
       }
       console.log('eventActivated', eventActivated);
     }
-  }
+  };
   useEffect(CheckEvent, []);
 
   return (
-    < Wrapper >
-      {console.log('productDatas', productDatas[match.params.id - 1])}
+    <Wrapper>
+      {/* {console.log('productDatas', productDatas[match.params.id - 1])} */}
       {/* <h2>{match.params.name}</h2> */}
-      < h2 > {match.params.id}</h2 >
+      <h2> {match.params.id}</h2>
       {/* console.log(match.params.id) */}
-      < Header />
+      <Header />
       {/* {testImg.map((testI, index) => ( */}
-      < Grid
+      <Grid
         container
         direction="row"
         justify="space-around"
         alignItems="center"
       >
-        <Grid item xs={4}>
-          <Card>
-            <img
-              src={`../../${productDatas[match.params.id - 1].prod_image}`}
-              alt="test"
-              style={{ width: '100%', height: 'auto', mr: '10px' }}
-            />
-          </Card>
-        </Grid>
-
+        {productDatas.map((product, index) => {
+          if (productDatas[match.params.id - 1].prod_id === product.prod_id)
+            return (
+              <Grid item xs={4}>
+                <Card>
+                  <img
+                    src={`../../${
+                      productDatas[match.params.id - 1].prod_image
+                    }`}
+                    alt="test"
+                    style={{ width: '100%', height: 'auto', mr: '10px' }}
+                  />
+                </Card>
+              </Grid>
+            );
+        })}
         <Grid item>
           <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
           <hr />
           <div>
             <p>여기는 간단한 설명 작성을 하면 됩니다.</p>
-            <p>{productDatas[match.params.id - 1].prod_desc}</p>
+            {productDatas.map((product, index) => {
+              if (productDatas[match.params.id - 1].prod_id === product.prod_id)
+                return <p>{productDatas[match.params.id - 1].prod_desc}</p>;
+            })}
           </div>
           <hr />
 
@@ -165,7 +172,7 @@ const ItemDetail = ({ match }) => {
             퀴즈 풀기
           </Button>
         </Grid>
-      </Grid >
+      </Grid>
       <Dialog
         open={itemDialogOpen}
         onClose={handleClose}
@@ -202,7 +209,7 @@ const ItemDetail = ({ match }) => {
         <WebDeatilModal />
       </Dialog>
       <QuizDialog />
-    </Wrapper >
+    </Wrapper>
   );
 };
 
