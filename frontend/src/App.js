@@ -31,6 +31,11 @@ import VoteItemDetail from './pages/VoteItemDetail';
 import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
 import ManageEvent from './pages/AdminPage/ManageEvent';
+import Admin from './pages/Admin/index';
+import AdminVS from './pages/Admin/VS/index';
+import AdminQuiz from './pages/Admin/Quiz/';
+import AdminUser from './pages/Admin/User/';
+import AdminProduct from './pages/Admin/Product/';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
 // import ProductData from './components/Grid/VoteGridList/dump.json';
@@ -241,6 +246,12 @@ const App = () => {
             <Route path="/SearchResult/:searchValue" component={SearchResult} />
 
             <Route exact path="/Admin/ManageEvent" component={ManageEvent} />
+			
+			<Route exact path="/Admin" component={Admin} />
+            <Route path="/Admin/VS" component={AdminVS} />
+            <Route path="/Admin/Quiz" component={AdminQuiz} />
+            <Route path="/Admin/User" component={AdminUser} />
+            <Route path="/Admin/Product" component={AdminProduct} />
 
             <Redirect to="/not-found" />
           </Switch>

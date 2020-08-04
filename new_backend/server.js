@@ -57,6 +57,7 @@ app.use("/api/event", require(`${__dirname}/routes/event`));
 app.use("/api/coupon", require(`${__dirname}/routes/coupon`));
 app.use("/api/product", require(`${__dirname}/routes/product`));
 app.use("/api/category", require(`${__dirname}/routes/category`));
+// app.use("/api/admin/product", require(`${__dirname}/routes/admin/product`));
 
 //----------------------------------
 // port

@@ -26,10 +26,10 @@ module.exports = {
       },
     ];
 
-    return queryInterface.bulkInsert("Coupons", datas, {});
+    return queryInterface.bulkInsert("coupons", datas, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Coupons", null, {});
+    await queryInterface.bulkDelete("coupons", null, {});
   },
 };

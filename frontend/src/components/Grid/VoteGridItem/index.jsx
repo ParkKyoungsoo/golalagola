@@ -71,7 +71,6 @@ export default function VoteGridItem(props) {
         <Grid item xs={12}>
           <Grid className="img-box" onClick={click}>
             {/* 이미지 */}
-
             <Avatar
               variant="square"
               src={`../../${itemData.prod_image}`}
