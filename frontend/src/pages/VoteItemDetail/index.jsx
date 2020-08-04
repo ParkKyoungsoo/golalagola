@@ -157,7 +157,6 @@ const ItemDetail = ({ match }) => {
           >
             쿠폰 받기
           </Button>
-
           {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
           <Button
             variant="contained"

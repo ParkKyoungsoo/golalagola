@@ -23,8 +23,6 @@ export default function VoteGridItem(props) {
 
   const [sw, setSw] = useState(itemData.vote_state === 'Y' ? true : false);
 
-  let history = useHistory();
-
   const {
     user,
     serverUrl,
@@ -54,158 +52,166 @@ export default function VoteGridItem(props) {
     return '16:00:00';
   };
 
+  let history = useHistory();
+  const click = () => {
+    if (history.location.pathname.includes('SearchResult')) {
+      history.replace('');
+      history.replace(
+        `VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`,
+      );
+    } else {
+      history.push(`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`);
+    }
+  };
+
   return (
     <Wrapper className="root">
       {/* {console.log(itemData)} */}
       <Grid container className="info-open-handler-grid">
         <Grid item xs={12}>
-          <Grid className="img-box">
+          <Grid className="img-box" onClick={click}>
             {/* 이미지 */}
-            <Link
-              to={`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`}
-            >
-              <Avatar
-                variant="square"
-                src={`../../${itemData.prod_image}`}
-                className={'large'}
-                imgProps={{
-                  className: sw ? 'img' : 'img deactivated',
-                }}
-              />
-            </Link>
-            <h3>{itemData.prod_name}</h3>
 
+            <Avatar
+              variant="square"
+              src={`../../${itemData.prod_image}`}
+              className={'large'}
+              imgProps={{
+                className: sw ? 'img' : 'img deactivated',
+              }}
+            />
+            <h3>{itemData.prod_name}</h3>
             <span className="date on">{displayEndTime(itemData.end_dt)}</span>
           </Grid>
         </Grid>
       </Grid>
     </Wrapper>
-
-    // <Wrapper className="root">
-    //   {/* <Grid container>
-    //     <Grid item xs={6}>
-    //       <Grid container>
-    //         <Grid className="KisokCentering" item xs={6}>
-    //           <img className="tmp" src={voteDatas.items[0].prod_image} alt="image1" />
-    //         </Grid>
-    //         <Grid className="KisokCentering" item xs={6}>
-    //           <img className="tmp" src={voteDatas.items[1].prod_image} alt="image2"/>
-    //         </Grid>
-    //       </Grid>
-    //     </Grid>
-    //     <Grid item xs={6}>
-    //       <Grid container>
-    //         <Grid className="KisokCentering" item xs={6}>
-    //           <img className="tmp" src={voteDatas.items[2].prod_image} alt="image1" />
-    //         </Grid>
-    //         <Grid className="KisokCentering" item xs={6}>
-    //           <img className="tmp" src={voteDatas.items[3].prod_image} alt="image2"/>
-    //         </Grid>
-    //       </Grid>
-    //     </Grid>
-    //   </Grid> */}
-    //   {/* <p>{itemData}</p> */}
-    //   <Grid container className="info-open-handler-grid">
-    //     <Grid item xs={12}>
-    //       {itemType === 'my' ? (
-    //         <Grid className="img-box">
-    //           <Avatar
-    //             onClick={infoOpenHandler}
-    //             variant="square"
-    //             src={`${serverImgUrl}${itemData.vote_img_url}`}
-    //             className={'large'}
-    //             imgProps={{
-    //               className: sw ? 'img' : 'img deactivated',
-    //             }}
-    //           />
-    //           <span className="date on">{displayEndTime(itemData.end_dt)}</span>
-    //           {itemType === 'my' && isVoteEditable && (
-    //             <button
-    //               type="button"
-    //               onClick={handleVoteState}
-    //               className={sw ? 'btn-check on' : 'btn-check'}
-    //             >
-    //               <CheckIcon className="check" />
-    //             </button>
-    //           )}
-    //         </Grid>
-    //       ) : (
-    //           <Grid className="img-box">
-    //             {/* 이미지 */}
-    //             <Link to={`VoteItemDetail/${itemData.prod_name}/${itemData.id}`}>
-    //               <Avatar
-    //                 variant="square"
-    //                 src={itemData.prod_image}
-    //                 className={'large'}
-    //                 imgProps={{
-    //                   className: sw ? 'img' : 'img deactivated',
-    //                 }}
-    //               />
-    //             </Link>
-    //               <h3>{itemData.prod_name}</h3>
-
-    //             <span className="date on">{displayEndTime(itemData.end_dt)}</span>
-    //             {itemType === 'my' && isVoteEditable && (
-    //               <button
-    //                 type="button"
-    //                 onClick={handleVoteState}
-    //                 className={sw ? 'btn-check on' : 'btn-check'}
-    //               >
-    //                 <CheckIcon className="check" />
-    //               </button>
-    //             )}
-    //           </Grid>
-    //         )}
-    //     </Grid>
-    //     {/* <Grid item xs={12} container>
-    //       <Grid
-    //         container
-    //         direction="row"
-    //         justify="space-between"
-    //         alignItems="center"
-    //         className={
-    //           sw
-    //             ? 'info-open-handler-grid-item-bottom'
-    //             : ' info-open-handler-grid-item-bottom deactivated'
-    //         }
-    //       >
-    //         <Grid item xs={7}>
-    //           <Typography
-    //             className="info-open-handler-grid-item-typography1"
-    //             variant="subtitle1"
-    //           >
-    //             {itemData.vote_title}
-    //           </Typography>
-    //         </Grid>
-    //         <Grid item>
-    //           <Grid
-    //             container
-    //             direction="row"
-    //             alignItems="center"
-    //             justify="center"
-    //             className="info-open-handler-grid-item-grid"
-    //           >
-    //             <HowToVoteIcon className="info-open-handler-grid-item-fa-icon" />
-    //             <Typography
-    //               variant="subtitle1"
-    //               component="span"
-    //               className="info-open-handler-grid-item-typography2"
-    //             >
-    //               {itemData.voting_count}
-    //             </Typography>
-    //             <MessageIcon className="info-open-handler-grid-item-vi-icon" />
-    //             <Typography
-    //               variant="subtitle1"
-    //               component="span"
-    //               className="info-open-handler-grid-item-typography3"
-    //             >
-    //               {itemData.feed_count}
-    //             </Typography>
-    //           </Grid>
-    //         </Grid>
-    //       </Grid>
-    //     </Grid> */}
-    //   </Grid>
-    // </Wrapper>
   );
 }
+
+// <Wrapper className="root">
+//   {/* <Grid container>
+//     <Grid item xs={6}>
+//       <Grid container>
+//         <Grid className="KisokCentering" item xs={6}>
+//           <img className="tmp" src={voteDatas.items[0].prod_image} alt="image1" />
+//         </Grid>
+//         <Grid className="KisokCentering" item xs={6}>
+//           <img className="tmp" src={voteDatas.items[1].prod_image} alt="image2"/>
+//         </Grid>
+//       </Grid>
+//     </Grid>
+//     <Grid item xs={6}>
+//       <Grid container>
+//         <Grid className="KisokCentering" item xs={6}>
+//           <img className="tmp" src={voteDatas.items[2].prod_image} alt="image1" />
+//         </Grid>
+//         <Grid className="KisokCentering" item xs={6}>
+//           <img className="tmp" src={voteDatas.items[3].prod_image} alt="image2"/>
+//         </Grid>
+//       </Grid>
+//     </Grid>
+//   </Grid> */}
+//   {/* <p>{itemData}</p> */}
+//   <Grid container className="info-open-handler-grid">
+//     <Grid item xs={12}>
+//       {itemType === 'my' ? (
+//         <Grid className="img-box">
+//           <Avatar
+//             onClick={infoOpenHandler}
+//             variant="square"
+//             src={`${serverImgUrl}${itemData.vote_img_url}`}
+//             className={'large'}
+//             imgProps={{
+//               className: sw ? 'img' : 'img deactivated',
+//             }}
+//           />
+//           <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+//           {itemType === 'my' && isVoteEditable && (
+//             <button
+//               type="button"
+//               onClick={handleVoteState}
+//               className={sw ? 'btn-check on' : 'btn-check'}
+//             >
+//               <CheckIcon className="check" />
+//             </button>
+//           )}
+//         </Grid>
+//       ) : (
+//           <Grid className="img-box">
+//             {/* 이미지 */}
+//             <Link to={`VoteItemDetail/${itemData.prod_name}/${itemData.id}`}>
+//               <Avatar
+//                 variant="square"
+//                 src={itemData.prod_image}
+//                 className={'large'}
+//                 imgProps={{
+//                   className: sw ? 'img' : 'img deactivated',
+//                 }}
+//               />
+//             </Link>
+//               <h3>{itemData.prod_name}</h3>
+
+//             <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+//             {itemType === 'my' && isVoteEditable && (
+//               <button
+//                 type="button"
+//                 onClick={handleVoteState}
+//                 className={sw ? 'btn-check on' : 'btn-check'}
+//               >
+//                 <CheckIcon className="check" />
+//               </button>
+//             )}
+//           </Grid>
+//         )}
+//     </Grid>
+//     {/* <Grid item xs={12} container>
+//       <Grid
+//         container
+//         direction="row"
+//         justify="space-between"
+//         alignItems="center"
+//         className={
+//           sw
+//             ? 'info-open-handler-grid-item-bottom'
+//             : ' info-open-handler-grid-item-bottom deactivated'
+//         }
+//       >
+//         <Grid item xs={7}>
+//           <Typography
+//             className="info-open-handler-grid-item-typography1"
+//             variant="subtitle1"
+//           >
+//             {itemData.vote_title}
+//           </Typography>
+//         </Grid>
+//         <Grid item>
+//           <Grid
+//             container
+//             direction="row"
+//             alignItems="center"
+//             justify="center"
+//             className="info-open-handler-grid-item-grid"
+//           >
+//             <HowToVoteIcon className="info-open-handler-grid-item-fa-icon" />
+//             <Typography
+//               variant="subtitle1"
+//               component="span"
+//               className="info-open-handler-grid-item-typography2"
+//             >
+//               {itemData.voting_count}
+//             </Typography>
+//             <MessageIcon className="info-open-handler-grid-item-vi-icon" />
+//             <Typography
+//               variant="subtitle1"
+//               component="span"
+//               className="info-open-handler-grid-item-typography3"
+//             >
+//               {itemData.feed_count}
+//             </Typography>
+//           </Grid>
+//         </Grid>
+//       </Grid>
+//     </Grid> */}
+//   </Grid>
+// </Wrapper>
