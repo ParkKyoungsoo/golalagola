@@ -5,7 +5,7 @@ import Wrapper from './styles';
 import { AppBar, Tabs, Tab, Typography, Box, Divider, Grid, Paper, useMediaQuery, Dialog } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel'
-
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -108,6 +108,8 @@ const MainVote = props => {
     appbarIndexDelta,
   ] = useOnChangeIndex(categoryDatas);
 
+  let history = useHistory();
+  // console.log(history.length)
   // const RepresentativeItems = SelectItem()
   return (
     <ViewContext.Provider
@@ -115,6 +117,7 @@ const MainVote = props => {
         categoryDatas,
       }}
     >
+      
       <Layout>
         <Wrapper>
           {/* carousel, 실시간 순위 */}
