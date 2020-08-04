@@ -15,7 +15,6 @@ import { ViewContext } from '../../../context/ViewContext';
 
 export default function VoteGridItem(props) {
   const { itemData, itemType } = props;
-  const { isVoteEditable } = useContext(ViewContext);
   const { test } = createContext();
 
   const { productDatas, setProductDatas } = useContext(CommonContext);
@@ -62,7 +61,9 @@ export default function VoteGridItem(props) {
         <Grid item xs={12}>
           <Grid className="img-box">
             {/* 이미지 */}
-            <Link to={`VoteItemDetail/${itemData.prod_id}`}>
+            <Link
+              to={`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`}
+            >
               <Avatar
                 variant="square"
                 src={itemData.prod_image}
@@ -75,15 +76,6 @@ export default function VoteGridItem(props) {
             <h3>{itemData.prod_name}</h3>
 
             <span className="date on">{displayEndTime(itemData.end_dt)}</span>
-            {itemType === 'my' && isVoteEditable && (
-              <button
-                type="button"
-                onClick={handleVoteState}
-                className={sw ? 'btn-check on' : 'btn-check'}
-              >
-                <CheckIcon className="check" />
-              </button>
-            )}
           </Grid>
         </Grid>
       </Grid>
