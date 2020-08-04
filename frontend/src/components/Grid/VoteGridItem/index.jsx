@@ -62,7 +62,9 @@ export default function VoteGridItem(props) {
         <Grid item xs={12}>
           <Grid className="img-box">
             {/* 이미지 */}
-            <Link to={`VoteItemDetail/${itemData.prod_id}`}>
+            <Link
+              to={`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`}
+            >
               <Avatar
                 variant="square"
                 src={itemData.prod_image}
