@@ -17,10 +17,10 @@ module.exports = {
       datas.items[i].prod_sale = Math.random() * (70 - 50) + 50;
     }
 
-    return queryInterface.bulkInsert("Products", datas.items, {});
+    return queryInterface.bulkInsert("products", datas.items, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Products", null, {});
+    await queryInterface.bulkDelete("products", null, {});
   },
 };

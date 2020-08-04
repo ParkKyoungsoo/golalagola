@@ -15,10 +15,10 @@ module.exports = {
       datas.push(obj);
     }
 
-    return queryInterface.bulkInsert("Users", datas, {});
+    return queryInterface.bulkInsert("users", datas, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Users", null, {});
+    await queryInterface.bulkDelete("users", null, {});
   },
 };

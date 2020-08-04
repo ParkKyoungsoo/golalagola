@@ -7,6 +7,9 @@ const config = require("../config/config.json");
 const nodemailer = require("nodemailer");
 const smtpTransporter = require("nodemailer-smtp-transport");
 
+// jwt middleware
+const authMiddleware = require("../middleware/auth");
+
 // jwt
 const jwt = require("jsonwebtoken");
 const secretObj = require("../config/jwt");
@@ -71,16 +74,16 @@ app.post("/signin", async (req, res) => {
 });
 
 // 이메일 보내는 주체
-var smtpTransport = nodemailer.createTransport(
-  smtpTransporter({
-    service: "Gmail",
-    host: "smtp.gmail.com",
-    auth: {
-      user: "jugiaro95@gmail.com",
-      pass: "sh95923517ahn!",
-    },
-  })
-);
+// var smtpTransport = nodemailer.createTransport(
+//   smtpTransporter({
+//     service: "Gmail",
+//     host: "smtp.gmail.com",
+//     auth: {
+//       user: "jugiaro95@gmail.com",
+//       pass: "sh95923517ahn!",
+//     },
+//   })
+// );
 
 //회원가입
 app.post("/signup", async (req, res) => {
@@ -261,6 +264,7 @@ app.post("/find_pwd", async (req, res) => {
 // });
 
 // 회원정보 수정
+app.use("/update", authMiddleware);
 app.put("/update", async (req, res) => {
   const token = req.headers.token;
   if (!token) {
