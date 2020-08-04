@@ -114,12 +114,12 @@ const ItemDetail = ({ match }) => {
 
   return (
     <Wrapper>
-      {/* {console.log('productDatas', productDatas[match.params.id - 1])} */}
       {/* <h2>{match.params.name}</h2> */}
-      <h2> {match.params.id}</h2>
       {/* console.log(match.params.id) */}
       <Header />
       {/* {testImg.map((testI, index) => ( */}
+
+      <br />
       <Grid
         container
         direction="row"
