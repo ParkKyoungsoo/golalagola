@@ -24,6 +24,7 @@ import { FiUser } from 'react-icons/fi';
 import { RiCoupon3Line } from 'react-icons/ri';
 import { GiPresent } from 'react-icons/gi';
 import { FiGift } from 'react-icons/fi';
+import { BsSearch } from 'react-icons/bs';
 
 const User = () => {
   return <FiUser />;
@@ -33,6 +34,9 @@ const Coupon = () => {
 };
 const Event = () => {
   return <FiGift />;
+};
+const Search = () => {
+  return <BsSearch />;
 };
 
 const Header = props => {
@@ -71,6 +75,14 @@ const Header = props => {
   };
 
   const [successSearchbarTrigger, setSuccessSearchbarTrigger] = useState(false);
+
+  const openSearchbar = () => {
+    if (successSearchbarTrigger === false) {
+      setSuccessSearchbarTrigger(successSearchbarTrigger => true);
+    } else {
+      setSuccessSearchbarTrigger(successSearchbarTrigger => false);
+    }
+  };
 
   useEffect(() => {
     setSignDialogOpen(false);
@@ -117,7 +129,10 @@ const Header = props => {
                 }}
               >
                 <Grid item xs={7} className="navbarCentering">
-                  <SearchComponent />
+                  {successSearchbarTrigger ? <SearchComponent /> : null}
+                  <h3 className="searchIcon" onClick={openSearchbar}>
+                    <Search />
+                  </h3>
                 </Grid>
                 <Grid item xs={5}>
                   <Grid
