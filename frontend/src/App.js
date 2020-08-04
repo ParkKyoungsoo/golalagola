@@ -21,7 +21,7 @@ import AboutMe from './pages/AboutMe/';
 import NotFound from './pages/NotFound/';
 import MainVote from './pages/MainVote/';
 import ContactUs from './pages/ContactUs/';
-import CreateVote from './pages/CreateVote/';
+import CreateEvent from './pages/CreateEvent/';
 import SearchVote from './pages/SearchVote/';
 import KioskMains from './pages/Kiosk/KioskMain';
 import KioskQuiz from './pages/Kiosk/KioskQuiz';
@@ -108,7 +108,6 @@ const App = () => {
   const [MyCouponDatas, setMyCouponDatas] = useState(MyCouponData);
 
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
-  const [eventNum, setEventNum] = useState();
 
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
@@ -121,15 +120,21 @@ const App = () => {
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
+    event_prod_A: '',
+    event_prod_B: '',
+    event_date: '',
+    event_expire: '',
     event_category: '',
-    event_item: {
-      '1': {
-        prod_id: '',
-      },
-      '2': {
-        prod_id: '',
-      },
-    },
+
+    // event_category: '',
+    // event_item: {
+    //   '1': {
+    //     prod_id: '',
+    //   },
+    //   '2': {
+    //     prod_id: '',
+    //   },
+    // },
   });
 
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
@@ -154,8 +159,11 @@ const App = () => {
   // 현재 작동 안하고 있습니다. 다른 시도를 해봐야 될듯 합니다.
   useEffect(() => {
     choichohanbun();
-    getEventDatas();
   }, []);
+
+  useEffect(() => {
+    getEventDatas();
+  }, currentEventDatas);
 
   return (
     <CommonContext.Provider
@@ -196,8 +204,6 @@ const App = () => {
         setCategoryDatas,
         MyCouponDatas,
         setMyCouponDatas,
-        eventNum,
-        setEventNum,
         selectedEventItem,
         setSelectedEventItem,
         mainUrl,
@@ -222,7 +228,7 @@ const App = () => {
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/SearchVote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
-            <Route exact path="/CreateVote" component={CreateVote} />
+            <Route exact path="/CreateEvent" component={CreateEvent} />
             <Route exact path="/KioskMains" component={KioskMains} />
             <Route exact path="/KioskCoupons" component={KioskCoupons} />
             <Route exact path="/KioskQuiz" component={KioskQuiz} />

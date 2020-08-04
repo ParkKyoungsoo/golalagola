@@ -93,6 +93,21 @@ const SubTitleGroupComponent = () => {
     setIsPowerVoteChoice(e.target.checked);
   };
 
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const [filterDatas, setFilterDatas] = useState([]);
+  const test = () => {
+    setFilterDatas(
+      productDatas.filter(
+        product => product.prod_category === newEventData.event_category,
+      ),
+    );
+  };
+
+  useEffect(() => {
+    test();
+  }, [newEventData.event_category]);
+
   return (
     <Wrapper>
       <ThemeProvider theme={themeSubTitleGroupComponent}>
@@ -103,31 +118,31 @@ const SubTitleGroupComponent = () => {
           alignItems="center"
           spacing={2}
         >
-          <Grid item xs={12}>
-            <h2>
-              Question
-              <Divider
-                variant="fullWidth"
-                orientation="horizontal"
-                className="sub-title-group-component-divider"
-              />
-            </h2>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Grid item>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isMultipleChoice}
-                    onChange={onChangeIsMultipleChoiceHandler('checkedBt')}
-                    value="checkedBt"
-                    color="primary"
-                  />
-                }
-                label="Multiple choice"
-              />
+          <Grid item xs={6}>
+            <h2>Question</h2>
+            <Divider
+              variant="fullWidth"
+              orientation="horizontal"
+              className="sub-title-group-component-divider"
+            />
+            <Grid>
+              {filterDatas.map(product => (
+                <Grid>
+                  {/* <button onClick={ChoiceItemA(product.prod_id)}> */}
+                  {product.prod_name}
+                  {/* </button> */}
+                </Grid>
+              ))}
             </Grid>
+          </Grid>
+          <Grid item xs={6}>
+            <h2>Question</h2>
+            <Divider
+              variant="fullWidth"
+              orientation="horizontal"
+              className="sub-title-group-component-divider"
+            />
+            <Grid></Grid>
           </Grid>
         </Grid>
       </ThemeProvider>
@@ -151,17 +166,23 @@ const useGetCategoryDatas = url => {
 };
 
 const SelectCategoryComponent = () => {
-  const { category, setCategory } = useContext(ViewContext);
-  const categoryDatas = useGetCategoryDatas('/category');
+  const { categoryDatas, setCategoryDatas } = useContext(CommonContext);
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+
+  const [category, setCategory] = useState(newEventData.event_category);
+
   const handleChange = e => {
-    setCategory(e.target.value);
+    setNewEventData({
+      ...newEventData,
+      event_category: e.target.value,
+    });
   };
 
   return (
     <Wrapper>
       <FormControl className="form-control">
         <Select
-          value={category}
+          value={newEventData.event_category}
           onChange={handleChange}
           displayEmpty
           className="select-empty"
@@ -173,7 +194,7 @@ const SelectCategoryComponent = () => {
 
           {categoryDatas.map((data, index) => (
             <MenuItem key={index} value={data.cat_no}>
-              {data.cat_type}
+              {data.cat_title}
             </MenuItem>
           ))}
         </Select>
@@ -208,7 +229,6 @@ const CreateVoteMainComponent = () => {
         </Grid>
         <Grid item xs={12} className="create-vote-main-component-grid-item">
           <SubTitleGroupComponent />
-          <RadioButtonsGroup />
         </Grid>
       </Grid>
     </Wrapper>

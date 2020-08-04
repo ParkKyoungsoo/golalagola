@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import Layout from '../../layout/';
+import Layout from '../../layout';
 import { ViewContext } from '../../context/ViewContext';
 import DialogActionsComponet from '../../components/Create/DialogActionsComponet/index';
-import CreateVoteComponent from '../../components/Create/CreateVoteComponent/index';
+import CreateEventComponent from '../../components/Create/CreateEventComponent/index';
 
-const CreateVote = (props) => {
+const CreateVote = props => {
   const [nowSelectedIndex, setNowSelectedIndex] = useState(0);
   const [isMultipleChoice, setIsMultipleChoice] = useState(false);
   const [isPowerVoteChoice, setIsPowerVoteChoice] = useState(false);
@@ -62,7 +62,7 @@ const CreateVote = (props) => {
       >
         <DialogActionsComponet props={props} />
         <h2>Create New Vote</h2>
-        <CreateVoteComponent />
+        <CreateEventComponent />
       </ViewContext.Provider>
     </Layout>
   );

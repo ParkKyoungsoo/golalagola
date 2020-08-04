@@ -7,26 +7,10 @@ const SelectItemA = modalNum => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const [filterDatas, setFilterDatas] = useState([]);
 
-  /*
-    event_id: '',
-    event_category: '',
-    event_item: {
-      '1': {
-        prod_id: '',
-      },
-      '2': {
-        prod_id: '',
-      },
-    },
-  
-  */
   const ChoiceItemA = prod_id => e => {
     setNewEventData({
       ...newEventData,
-      event_item: {
-        '1': { prod_id },
-        '2': '',
-      },
+      event_prod_A: prod_id,
     });
     modalNum.setModalNum(3);
   };
