@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Axios from 'axios';
 
 import { Grid, TextField } from '@material-ui/core';
@@ -39,8 +39,6 @@ const SearchComponent = () => {
       // 아니라면
       else {
         history.replace(`SearchResult/${e.target.value}`);
-        console.log(currentPathname);
-        console.log(currentPathname.pathname);
       }
     }
   };
@@ -61,6 +59,7 @@ const SearchComponent = () => {
                 fontSize="large"
               />
             </Grid> */}
+
         <Grid item xs={9}>
           <TextField
             placeholder="Search..."
@@ -68,13 +67,6 @@ const SearchComponent = () => {
             onKeyPress={onKeyPress(history.location)}
             className="input2"
           />
-        </Grid>
-        {/* </Grid> */}
-        {/* </Grid> */}
-        <Grid item xs={2}>
-          <h3 className="searchIcon" onClick={click}>
-            <Search />
-          </h3>
         </Grid>
       </Grid>
     </Wrapper>
