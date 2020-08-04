@@ -4,32 +4,39 @@ import Axios from 'axios';
 import { Grid, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { ViewContext } from '../../../context/ViewContext';
 import { CommonContext } from '../../../context/CommonContext';
+import { ContinuousColorLegend } from 'react-vis';
 
 const SearchComponent = () => {
-  // const { searchValue, setSearchValue } = useContext(ViewContext);
   let history = useHistory();
-  const {
-    mainUrl,
-  } = useContext(CommonContext);
+  let location = useParams();
+  const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
       return;
     }
   };
 
-  const onKeyPress = (e) => {
+  const onKeyPress = currentPathname => e => {
     if (e.key === 'Enter') {
-      console.log(e.target.value)
-
-        // while
-        // e.preventDefault()
-        // window.location.href = `${mainUrl}/SearchResult/${e.target.value}`
-        // if
-        history.replace(`SearchResult/${e.target.value}`)
-      
+      // 만약에 서치에서 또 서치를 하면
+      if (currentPathname.pathname.includes('SearchResult')) {
+        history.replace(`${e.target.value}`);
+      }
+      // 만약에 디테일에서 서치를 하면
+      else if (currentPathname.pathname.includes('VoteItemDetail')) {
+        history.replace('');
+        history.replace('');
+        history.replace(`SearchResult/${e.target.value}`);
+      }
+      // 아니라면
+      else {
+        history.replace(`SearchResult/${e.target.value}`);
+        console.log(currentPathname);
+        console.log(currentPathname.pathname);
+      }
     }
   };
 
@@ -55,7 +62,7 @@ const SearchComponent = () => {
               <TextField
                 placeholder="Search..."
                 autoFocus={true}
-                onKeyPress={onKeyPress}
+                onKeyPress={onKeyPress(history.location)}
                 className="input2"
               />
             </Grid>
