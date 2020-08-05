@@ -1,48 +1,41 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import AdminNav from './Nav/index.jsx';
+import AdminNav from './Layout/nav.jsx';
+import NestedList from './Layout/sidebar.jsx';
 
-import CanvasJSReact from './canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+// Grid Styles
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const MainAdmin = props => {
-  const options = {
-    exportEnabled: true,
-    animationEnabled: true,
-    title: {
-      text: 'Website Traffic Sources',
-    },
-    data: [
-      {
-        type: 'pie',
-        startAngle: 75,
-        toolTipContent: '<b>{label}</b>: {y}%',
-        showInLegend: 'true',
-        legendText: '{label}',
-        indexLabelFontSize: 16,
-        indexLabel: '{label} - {y}%',
-        dataPoints: [
-          { y: 18, label: 'Direct' },
-          { y: 49, label: 'Organic Search' },
-          { y: 9, label: 'Paid Search' },
-          { y: 5, label: 'Referral' },
-          { y: 19, label: 'Social' },
-        ],
-      },
-    ],
-  };
+  const classes = useStyles(); // Grid
   return (
     <div>
       <AdminNav></AdminNav>
       <h1>관리자 페이지</h1>
-      <div>
-        <h1>React Pie Chart</h1>
-        <CanvasJSChart
-          options={options}
-          /* onRef={ref => this.chart = ref} */
-        />
-        {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+      <div classes={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              <NestedList></NestedList>
+            </Paper>
+          </Grid>
+          <Grid item xs={10}>
+            <Paper className={classes.paper}>오늘의 날씨는~</Paper>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
