@@ -156,13 +156,17 @@
 
 #### 2020.08.03(월)
 
-1. Back-end	http -> https
+1. Scrum 미팅
+
+2. Back-end	http -> https
 
    ​					데이터 가공
 
 #### 2020.08.04(화)
 
-1. Front-end  Web Navbar 수정
+1. Scrum 미팅
+
+2. Front-end  Web Navbar 수정
 
    ​					Web Detail 페이지 수정
 
@@ -172,4 +176,24 @@
 
    Back-end	이메일 인증
 
-2. JIRA 정리
+3. JIRA 정리
+
+
+
+#### 2020.08.05(수)
+
+1. Scrum 미팅
+
+2. Fron-end   Kiosk 페이지 CSS
+
+   ​					Kiosk Timeout 에러 잡기
+
+   ​					데이터 추가 (Product, Quiz)
+
+   ​					데이터 서버에서 받아오기 (캐로젤, ~~카테고리~~, MyCoupon, Quiz)
+
+   ​					관리자 이벤트 페이지
+
+   Back-end	서버 오류 잡기
+
+3. JIRA 정리

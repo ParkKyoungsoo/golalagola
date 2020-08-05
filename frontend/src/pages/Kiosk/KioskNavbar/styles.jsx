@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
- .Nav_bar {
+  .Nav_bar {
     // background-color: blue;
-    display:flex;
+    display: flex;
     // justify-content: flex-start;
-	// justify-content: flex-end;
+    // justify-content: flex-end;
     // justify-content: center;
-	// justify-content: space-between;
-	justify-content: space-around;
-  // justify-content: space-evenly;
-  padding: 20px 0px 20px 0px;
+    // justify-content: space-between;
+    justify-content: space-around;
+    // justify-content: space-evenly;
+    padding: 20px 0px 20px 0px;
+  }
+  & .icon_pointer {
+    cursor: pointer;
   }
 `;
 

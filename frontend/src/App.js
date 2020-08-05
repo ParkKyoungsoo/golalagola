@@ -38,11 +38,7 @@ import AdminUser from './pages/Admin/User/';
 import AdminProduct from './pages/Admin/Product/';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
-// import ProductData from './components/Grid/VoteGridList/dump.json';
-import CarouselData from './pages/Kiosk/KioskMain/dump.json';
-import CategoryData from './pages/MainVote/dump.json';
-
-import MyCouponData from './pages/Kiosk/KioskMain/dump.json';
+import CarouselData from './pages/Kiosk/KioskMain/dump.json'; // 이벤트 데이터, 로컬
 
 // css
 // import './index.css';
@@ -105,12 +101,10 @@ const App = () => {
 
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
-  const [productDatas, setProductDatas] = useState([]);
-
-  const [carouselDatas, setCarouselDatas] = useState(CarouselData);
-  const [categoryDatas, setCategoryDatas] = useState(CategoryData);
-
-  const [MyCouponDatas, setMyCouponDatas] = useState(MyCouponData);
+  const [productDatas, setProductDatas] = useState([]); // 전체 데이터
+  const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 이벤트(VS) 데이터
+  const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
+  const [MyCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
 
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
   const [eventNum, setEventNum] = useState();
@@ -118,6 +112,7 @@ const App = () => {
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
   // 메인 주소로 사용할 URL 입니다.
+  // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const [mainUrl, setMainUrl] = useState('http://localhost:3000');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
@@ -138,28 +133,44 @@ const App = () => {
   });
 
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
-  const choichohanbun = () => {
-    console.log('안들어옴?');
+  // 전체 데이터
+  const getProductDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
     });
   };
-
+  // 이벤트(VS) 데이터
+  // 사용되는 곳: Web (캐로젤, 이벤트 페이지), 관리자 (이벤트 CRUD 페이지),Kiosk (캐로젤, 전체 보여주기)
   const getEventDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
-      console.log('getEventDatas res:', res.data);
       setCurrentEventDatas(res.data);
     });
   };
+  // 카테고리 데이터
+  const getCategoryDatas = () => {
+    Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
+      setCategoryDatas(res.data);
+    });
+  };
+  // 쿠폰 데이터
+  const getMyCouponDatas = () => {
+    Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
+      setMyCouponDatas(res.data);
+    });
+  };
+
+  // import CarouselData from './pages/Kiosk/KioskMain/dump.json';
+  // const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 캐로젤에 들어가는 데이터
 
   // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
   // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.
   // 참고 자료 : https://react.vlpt.us/basic/16-useEffect.html
 
-  // 현재 작동 안하고 있습니다. 다른 시도를 해봐야 될듯 합니다.
   useEffect(() => {
-    choichohanbun();
+    getProductDatas();
     getEventDatas();
+    getCategoryDatas();
+    getMyCouponDatas();
   }, []);
 
   return (
@@ -240,8 +251,8 @@ const App = () => {
             <Route path="/SearchResult/:searchValue" component={SearchResult} />
 
             <Route exact path="/Admin/ManageEvent" component={ManageEvent} />
-			
-			<Route exact path="/Admin" component={Admin} />
+
+            <Route exact path="/Admin" component={Admin} />
             <Route path="/Admin/VS" component={AdminVS} />
             <Route path="/Admin/Quiz" component={AdminQuiz} />
             <Route path="/Admin/User" component={AdminUser} />
