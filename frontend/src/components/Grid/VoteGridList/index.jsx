@@ -39,7 +39,7 @@ const useGetdata = (value, index, categoryData, itemType, itemValue) => {
     await getDatas();
   };
 
-  const onChangeFilterItem = event => {
+  const onChangeFilterItem = (event) => {
     setFilterItem(event.target.value);
   };
 
@@ -50,7 +50,7 @@ const useGetdata = (value, index, categoryData, itemType, itemValue) => {
   return [gridItemDatas, filterItem, onChangeFilterItem];
 };
 
-const ImageGridFilter = props => {
+const ImageGridFilter = (props) => {
   const { filterItem, onChangeFilterItem } = props;
 
   const items = [
@@ -79,7 +79,7 @@ const ImageGridFilter = props => {
   );
 };
 
-const VoteGridList = props => {
+const VoteGridList = (props) => {
   const nowCols = useNowCols();
 
   const { categoryData, value, index, itemType, itemValue } = props;
@@ -110,6 +110,15 @@ const VoteGridList = props => {
                   index={index}
                   itemType={itemType}
                 />
+                <p>
+                  <h3 style={{ marginLeft: '20px' }}>
+                    {itemData.prod_price}원
+                  </h3>
+                </p>
+                {/* <img
+                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  alt="TEST"
+                /> */}
               </Grid>
             );
           })}
