@@ -6,6 +6,10 @@ import { CommonContext } from '../../context/CommonContext';
 
 const EventModal = modalNum => {
   const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
+
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+
   const { eventNum, setEventNum } = useContext(CommonContext);
   const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
   const [tmpData, setTmpData] = useState();
@@ -28,7 +32,13 @@ const EventModal = modalNum => {
             <Grid className="eventM" item xs={5}>
               <img
                 className="tmp"
-                src={`../../${carouselDatas[eventNum].event_item['1'].prod_image}`}
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(
+                    productDatas[
+                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                    ],
+                  ).prod_image
+                }`}
                 alt="nature"
                 style={{
                   width: '100%',
@@ -38,7 +48,7 @@ const EventModal = modalNum => {
               <input
                 type="radio"
                 name="event"
-                value={carouselDatas[eventNum].event_item['1'].prod_id}
+                value={currentEventDatas[eventNum].event_item['1'].prod_id}
                 onChange={RadioTest}
               ></input>
               <p>
@@ -54,7 +64,13 @@ const EventModal = modalNum => {
             <Grid className="eventM" item xs={5}>
               <img
                 className="tmp"
-                src={`../../${carouselDatas[eventNum].event_item['2'].prod_image}`}
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(
+                    productDatas[
+                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                    ],
+                  ).prod_image
+                }`}
                 alt="people"
                 style={{
                   width: '100%',
@@ -64,7 +80,7 @@ const EventModal = modalNum => {
               <input
                 type="radio"
                 name="event"
-                value={carouselDatas[eventNum].event_item['2'].prod_id}
+                value={currentEventDatas[eventNum].event_item['2'].prod_id}
                 onChange={RadioTest}
               ></input>
               <p>

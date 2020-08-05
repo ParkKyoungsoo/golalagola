@@ -67,10 +67,10 @@ const Header = props => {
     //     history.push(name);
     //   }
     if (name === '/MainVote') {
-      history.replace('/');
-      console.log(mainUrl);
+      history.push('/');
+      // console.log(mainUrl);
     } else {
-      history.replace(`/${name}`);
+      history.push(`/${name}`);
     }
   };
 
@@ -142,11 +142,17 @@ const Header = props => {
                     container
                     className="navbarRight"
                   >
-                    <Button color="primary" variant="contained">
-                      <h5>
-                        <Event />
-                      </h5>
-                    </Button>
+                    {user.status === 'login' ? (
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={onClickRedirectPathHandler('EventAll')}
+                      >
+                        <h5>
+                          <Event />
+                        </h5>
+                      </Button>
+                    ) : null}
                     <Button
                       color="primary"
                       variant="contained"

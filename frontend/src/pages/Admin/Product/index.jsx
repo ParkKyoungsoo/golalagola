@@ -46,31 +46,29 @@ const tableIcons = {
 
 const AdminProduct = () => {
   const [categories, setCategories] = useState({});
-  useEffect(() => {
-    Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
-      console.log('aaa', data);
-      products.data = data;
-      setProducts(products);
-    });
+  Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
+    console.log('aaa', data);
+    products.data = data;
+    setProducts(products);
+  });
 
-    var obj = categories;
-    let index = 1;
-    Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
-      console.log('category:', req.data);
-      //   const obj = req.data.map(function(tmpData, index) {
-      //     index = index + 1;
-      //     index = this.tmpData.cat_title;
-      //     console.log('tmpData', this.tmpData);
-      //   });
-      //   setCategories(obj);
-      //   console.log('pbkaaaa', obj);
-      for (var i = 0; i < req.data.length; i++) {
-        obj[index] = req.data[i].cat_title;
-        index += 1;
-      }
-      setCategories(obj);
-    });
-  }, []);
+  var obj = categories;
+  let index = 1;
+  Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
+    console.log('category:', req.data);
+    //   const obj = req.data.map(function(tmpData, index) {
+    //     index = index + 1;
+    //     index = this.tmpData.cat_title;
+    //     console.log('tmpData', this.tmpData);
+    //   });
+    //   setCategories(obj);
+    //   console.log('pbkaaaa', obj);
+    for (var i = 0; i < req.data.length; i++) {
+      obj[index] = req.data[i].cat_title;
+      index += 1;
+    }
+    setCategories(obj);
+  });
   console.log('sssssssssssss', categories);
 
   const [products, setProducts] = useState({

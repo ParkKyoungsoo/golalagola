@@ -13,6 +13,8 @@ import { ViewContext } from '../../../context/ViewContext';
 
 import Wrapper from './styles';
 
+import axios from 'axios';
+
 const DialogActionsComponet = () => {
   const { serverUrl, user, setSignDialogOpen, setUser, setEndDt } = useContext(
     CommonContext,
@@ -31,6 +33,19 @@ const DialogActionsComponet = () => {
     category,
     endDt,
   } = useContext(ViewContext);
+
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+
+  const createEvent = () => {
+    axios
+      .post('https://i3b309.p.ssafy.io/api/event/insert', newEventData)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log('error : ', error.response);
+      });
+  };
 
   const createVoteHandler = async () => {
     if (user.user_id === '') {
@@ -131,7 +146,8 @@ const DialogActionsComponet = () => {
           variant="extended"
           aria-label="like"
           color="inherit"
-          onClick={readyToUpload && createVoteHandler}
+          // onClick={readyToUpload && createVoteHandler}
+          onClick={createEvent}
           className="up-cancel-fab"
           style={{
             backgroundColor: readyToUpload ? '#1FA212' : '#E0E0E0',

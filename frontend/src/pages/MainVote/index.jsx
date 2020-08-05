@@ -122,11 +122,12 @@ const MainVote = props => {
   // 실시간 순위
   const [realtime, setRealTime] = useState([]);
 
-  useEffect(() => {
-    Axios.get(
-      'https://i3b309.p.ssafy.io/api/coupon/realtime',
-    ).then(({ data }) => setRealTime(data));
-  }, []);
+  // useEffect(() => {
+  //   Axios.get(
+  //     'https://i3b309.p.ssafy.io/api/coupon/realtime',
+  //   ).then(({ data }) => setRealTime(data));
+  // }, []);
+
   // console.log(history.length)
   // const RepresentativeItems = SelectItem()
   return (

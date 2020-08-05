@@ -1,6 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
-import { Grid, Box, Dialog, DialogActions, useMediaQuery } from '@material-ui/core';
+import {
+  Grid,
+  Box,
+  Dialog,
+  DialogActions,
+  useMediaQuery,
+} from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Wrapper, Close, Date } from './styles';
 import { Link, Route } from 'react-router-dom';
@@ -13,9 +19,16 @@ import { GoPlus } from 'react-icons/go';
 
 // 아이콘
 
-const Home = () => { return <h1><FaHome /></h1> }
-const Plus = () => { return <GoPlus /> }
-
+const Home = () => {
+  return (
+    <h1>
+      <FaHome />
+    </h1>
+  );
+};
+const Plus = () => {
+  return <GoPlus />;
+};
 
 const Navbar = () => {
   const [userAns, setUserAns] = useState();
@@ -25,11 +38,11 @@ const Navbar = () => {
   const openDialog = () => {
     setUserAns(userAns => true);
     setSuccessModalTrigger(successModalTrigger => true);
-    movePage()
+    movePage();
   };
 
   const handleClose = () => {
-    console.log('close')
+    console.log('close');
     setSuccessModalTrigger(false);
   };
 
@@ -39,18 +52,18 @@ const Navbar = () => {
   };
 
   const movePage = () => {
-    console.log('movepage')
+    console.log('movepage');
 
     const timer = setTimeout(() => {
-      if (window.location.href === "http://localhost:3000/KioskMains") {
-        console.log(123)
-        handleClose()
+      if (window.location.href === 'http://localhost:3000/KioskMains') {
+        console.log(123);
+        handleClose();
       } else {
-        console.log("timeout!!")
-        window.location.href = "http://localhost:3000/KioskMains"
+        console.log('timeout!!');
+        window.location.href = 'http://localhost:3000/KioskMains';
       }
     }, 30000);
-  }
+  };
 
   return (
     <>
@@ -58,10 +71,12 @@ const Navbar = () => {
       <Wrapper>
         <Grid>
           <Box className="Nav_bar">
-            <Link to={"/KioskMains/"} >
+            <Link to={'/KioskMains/'}>
               <Home />
             </Link>
-            <h1 onClick={openDialog}><Plus /></h1>
+            <h1 className="icon_pointer" onClick={openDialog}>
+              <Plus />
+            </h1>
           </Box>
         </Grid>
       </Wrapper>
@@ -104,9 +119,8 @@ const Navbar = () => {
         </Close>
         <KioskItemModal />
       </Dialog>
-
     </>
-  )
-}
+  );
+};
 
 export default Navbar;

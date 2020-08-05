@@ -70,6 +70,7 @@ const ItemDetail = ({ match }) => {
   const { eventNum, setEventNum } = useContext(CommonContext);
 
   const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
 
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
@@ -79,12 +80,10 @@ const ItemDetail = ({ match }) => {
   // console.log(testimg.items[0].prod_image);
 
   const click1 = () => {
-    console.log('aaa');
     setItemDialogOpen(itemDialogOpen => true);
   };
 
   const handleClose = () => {
-    console.log('bb');
     setItemDialogOpen(itemDialogOpen => false);
   };
 
@@ -96,26 +95,23 @@ const ItemDetail = ({ match }) => {
   // match.params.id 를 통해 해당 상품의 id를 조회 할 수 있습니다.
   // carouselDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
   const CheckEvent = () => {
-    for (var i = 0; i < carouselDatas.length; i++) {
+    for (var i = 0; i < currentEventDatas.length; i++) {
       if (
-        Number(match.params.id) === carouselDatas[i].event_item['1'].prod_id ||
-        Number(match.params.id) === carouselDatas[i].event_item['2'].prod_id
+        Number(match.params.id) ===
+          currentEventDatas[i].event_item['1'].prod_id ||
+        Number(match.params.id) === currentEventDatas[i].event_item['2'].prod_id
       ) {
         setEventActivated(eventActivated => true);
-        setEventNum(carouselDatas[i].event_no - 1);
+        setEventNum(currentEventDatas[i].event_id - 1);
       }
-      console.log('eventActivated', eventActivated);
     }
   };
   useEffect(CheckEvent, []);
-  console.log(match.params.id - 1);
   const product_id = match.params.id - 1;
-  console.log(productDatas[product_id]);
 
   return (
     <Wrapper>
       {/* <h2>{match.params.name}</h2> */}
-      {/* console.log(match.params.id) */}
       <Header />
       {/* {testImg.map((testI, index) => ( */}
 
@@ -128,7 +124,7 @@ const ItemDetail = ({ match }) => {
       >
         <Grid item xs={4}>
           <Card>
-            <p>{`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_id}`}</p>
+            <p>{`${productDatas[product_id].prod_id}`}</p>
             <img
               src={`https://i3b309.p.ssafy.io/${productDatas[product_id].prod_image}`}
               // src={`../../${productDatas[match.params.id - 1].prod_image}`}

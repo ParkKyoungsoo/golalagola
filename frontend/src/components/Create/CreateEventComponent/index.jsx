@@ -42,6 +42,10 @@ const InputTitleComponent = () => {
     ViewContext,
   );
 
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const [productImage, setProductImage] = useState();
+
   const onChangeDescriptionTitleHandler = e => {
     setDescription(e.target.value);
   };
@@ -52,27 +56,25 @@ const InputTitleComponent = () => {
 
   return (
     <Wrapper>
-      <Input
-        placeholder="Vote Title"
-        defaultValue={title}
-        inputProps={{
-          'aria-label': 'description',
-        }}
-        fullWidth={true}
-        onChange={onChangeTitleHandler}
-        className="input-title-component-input1"
-      />
-      <Input
-        placeholder="Description of this vote."
-        defaultValue={description}
-        multiline={true}
-        inputProps={{
-          'aria-label': 'description',
-        }}
-        fullWidth={true}
-        onChange={onChangeDescriptionTitleHandler}
-        className="input-title-component-input2"
-      />
+      <Grid Stlye={{ display: 'flex' }}>
+        <Grid>
+          <img
+            src={Object(productDatas[newEventData.event_prod_A]).prod_image}
+            alt="productA.jpg"
+            style={{ height: '200px', width: '200px' }}
+          />
+        </Grid>
+        <Grid>
+          <h1>VS</h1>
+        </Grid>
+        <Grid>
+          <img
+            src={Object(productDatas[newEventData.event_prod_B]).prod_image}
+            alt="productA.jpg"
+            style={{ height: '200px', width: '200px' }}
+          />
+        </Grid>
+      </Grid>
     </Wrapper>
   );
 };
@@ -96,6 +98,21 @@ const SubTitleGroupComponent = () => {
   const { newEventData, setNewEventData } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const [filterDatas, setFilterDatas] = useState([]);
+  const [filterDatas2, setFilterDatas2] = useState([]);
+
+  const handleChangeA = e => {
+    setNewEventData({
+      ...newEventData,
+      event_prod_A: e.target.value,
+    });
+  };
+  const handleChangeB = e => {
+    setNewEventData({
+      ...newEventData,
+      event_prod_B: e.target.value,
+    });
+  };
+
   const test = () => {
     setFilterDatas(
       productDatas.filter(
@@ -104,8 +121,20 @@ const SubTitleGroupComponent = () => {
     );
   };
 
+  const test2 = () => {
+    setFilterDatas(
+      productDatas.filter(
+        product => product.prod_category === newEventData.event_category,
+        // && product.prod_id !== newEventData.event_prod_B,
+      ),
+    );
+  };
   useEffect(() => {
     test();
+  }, [newEventData.event_category]);
+
+  useEffect(() => {
+    test2();
   }, [newEventData.event_category]);
 
   return (
@@ -119,30 +148,54 @@ const SubTitleGroupComponent = () => {
           spacing={2}
         >
           <Grid item xs={6}>
-            <h2>Question</h2>
+            <h2>Select Item A</h2>
             <Divider
               variant="fullWidth"
               orientation="horizontal"
               className="sub-title-group-component-divider"
             />
-            <Grid>
-              {filterDatas.map(product => (
-                <Grid>
-                  {/* <button onClick={ChoiceItemA(product.prod_id)}> */}
-                  {product.prod_name}
-                  {/* </button> */}
-                </Grid>
+            <Select
+              value={productDatas.prod_id}
+              onChange={handleChangeA}
+              displayEmpty
+              className="select-empty"
+              required
+            >
+              <MenuItem value={0} disabled>
+                Select category
+              </MenuItem>
+
+              {filterDatas.map((data, index) => (
+                <MenuItem key={index} value={data.prod_id}>
+                  {data.prod_name}
+                </MenuItem>
               ))}
-            </Grid>
+            </Select>
           </Grid>
           <Grid item xs={6}>
-            <h2>Question</h2>
+            <h2>Select Item B</h2>
             <Divider
               variant="fullWidth"
               orientation="horizontal"
               className="sub-title-group-component-divider"
             />
-            <Grid></Grid>
+            <Select
+              value={productDatas.prod_id}
+              onChange={handleChangeB}
+              displayEmpty
+              className="select-empty"
+              required
+            >
+              <MenuItem value={0} disabled>
+                Select category
+              </MenuItem>
+
+              {filterDatas.map((data, index) => (
+                <MenuItem key={index} value={data.prod_id}>
+                  {data.prod_name}
+                </MenuItem>
+              ))}
+            </Select>
           </Grid>
         </Grid>
       </ThemeProvider>
