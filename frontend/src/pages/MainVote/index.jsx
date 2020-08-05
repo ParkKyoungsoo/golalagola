@@ -103,7 +103,6 @@ const useOnChangeIndex = categoryDatas => {
 const MainVote = props => {
   const { drawerOpen, serverUrlBase, serverImgUrl } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
 
   const categoryDatas = useGetCategoryDatas('/category');
 

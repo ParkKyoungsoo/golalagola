@@ -7,8 +7,6 @@ import { CommonContext } from '../../context/CommonContext';
 
 const ControlledCarousel = props => {
   const [index, setIndex] = useState(0);
-
-  const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
 

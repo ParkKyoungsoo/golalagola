@@ -5,7 +5,8 @@ import { CommonContext } from '../../../context/CommonContext';
 
 const ControlledCarousel = () => {
   const [index, setIndex] = useState(0);
-  const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -13,20 +14,26 @@ const ControlledCarousel = () => {
 
   return (
     <Carousel container activeIndex={index} onSelect={handleSelect}>
-      {carouselDatas.map((TmpData, index) => (
+      {currentEventDatas.map((Data, index) => (
         <Carousel.Item>
           <Grid container>
             <Grid className="KisokCentering" item xs={6}>
               <img
                 className="tmp"
-                src={TmpData.event_item['1'].prod_image}
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(productDatas[Data.event_item['1'].prod_id - 1])
+                    .prod_image
+                }`}
                 alt="image1"
               />
             </Grid>
             <Grid className="KisokCentering" item xs={6}>
               <img
                 className="tmp"
-                src={TmpData.event_item['2'].prod_image}
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(productDatas[Data.event_item['2'].prod_id - 1])
+                    .prod_image
+                }`}
                 alt="image2"
               />
             </Grid>

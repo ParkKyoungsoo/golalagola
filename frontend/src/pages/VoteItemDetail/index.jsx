@@ -18,7 +18,7 @@ import { CommonContext } from '../../context/CommonContext';
 
 const QuizDialog = () => {
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const handleClose = () => {
     setWebQuizDialogOpen(false);
@@ -64,14 +64,13 @@ const QuizDialog = () => {
 };
 
 const ItemDetail = ({ match }) => {
-  const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
   const [eventActivated, setEventActivated] = useState(false);
   const { eventNum, setEventNum } = useContext(CommonContext);
 
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-
-  const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
@@ -79,11 +78,11 @@ const ItemDetail = ({ match }) => {
   // console.log(testimg.items[0].prod_image);
 
   const click1 = () => {
-    setItemDialogOpen((itemDialogOpen) => true);
+    setItemDialogOpen(itemDialogOpen => true);
   };
 
   const handleClose = () => {
-    setItemDialogOpen((itemDialogOpen) => false);
+    setItemDialogOpen(itemDialogOpen => false);
   };
 
   const QuizDialogOpen = () => {
@@ -92,15 +91,16 @@ const ItemDetail = ({ match }) => {
 
   // vs이벤트가 진행중인지 판단하는 함수 입니다.
   // match.params.id 를 통해 해당 상품의 id를 조회 할 수 있습니다.
-  // carouselDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
+  // currentEventDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
   const CheckEvent = () => {
-    for (var i = 0; i < carouselDatas.length; i++) {
+    for (var i = 0; i < currentEventDatas.length; i++) {
       if (
-        Number(match.params.id) === carouselDatas[i].event_item['1'].prod_id ||
-        Number(match.params.id) === carouselDatas[i].event_item['2'].prod_id
+        Number(match.params.id) ===
+          currentEventDatas[i].event_item['1'].prod_id ||
+        Number(match.params.id) === currentEventDatas[i].event_item['2'].prod_id
       ) {
-        setEventActivated((eventActivated) => true);
-        setEventNum(carouselDatas[i].event_no - 1);
+        setEventActivated(eventActivated => true);
+        setEventNum(currentEventDatas[i].event_no - 1);
       }
     }
   };
