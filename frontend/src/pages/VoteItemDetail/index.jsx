@@ -79,12 +79,10 @@ const ItemDetail = ({ match }) => {
   // console.log(testimg.items[0].prod_image);
 
   const click1 = () => {
-    console.log('aaa');
     setItemDialogOpen(itemDialogOpen => true);
   };
 
   const handleClose = () => {
-    console.log('bb');
     setItemDialogOpen(itemDialogOpen => false);
   };
 
@@ -104,18 +102,14 @@ const ItemDetail = ({ match }) => {
         setEventActivated(eventActivated => true);
         setEventNum(carouselDatas[i].event_no - 1);
       }
-      console.log('eventActivated', eventActivated);
     }
   };
   useEffect(CheckEvent, []);
-  console.log(match.params.id - 1);
   const product_id = match.params.id - 1;
-  console.log(productDatas[product_id]);
 
   return (
     <Wrapper>
       {/* <h2>{match.params.name}</h2> */}
-      {/* console.log(match.params.id) */}
       <Header />
       {/* {testImg.map((testI, index) => ( */}
 
