@@ -120,14 +120,13 @@ const MainVote = props => {
 
   let history = useHistory();
   // 실시간 순위
-  const [realtime, setRealTime] = useState([]);
+  // const [realtime, setRealTime] = useState([]);
 
   // useEffect(() => {
   //   Axios.get(
   //     'https://i3b309.p.ssafy.io/api/coupon/realtime',
   //   ).then(({ data }) => setRealTime(data));
   // }, []);
-
   // console.log(history.length)
   // const RepresentativeItems = SelectItem()
   return (
@@ -161,9 +160,9 @@ const MainVote = props => {
                   // borderColor="secondary.main"
                 >
                   <h2>실시간</h2>
-                  {realtime.map((data, index) => (
+                  {/* {realtime.map((data, index) => (
                     <p key={index}>{data.prod_name}</p>
-                  ))}
+                  ))} */}
                 </Box>
               </Grid>
             </Grid>

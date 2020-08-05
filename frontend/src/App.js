@@ -168,6 +168,7 @@ const App = () => {
 
   useEffect(() => {
     getProductDatas();
+    getEventDatas();
     // getCategoryDatas();
     getMyCouponDatas();
   }, []);

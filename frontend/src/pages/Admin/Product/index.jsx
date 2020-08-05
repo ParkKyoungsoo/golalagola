@@ -1,7 +1,8 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import Axios from 'axios';
 
-import AdminNav from '../Nav/index.jsx';
+import AdminNav from '../Layout/nav.jsx';
+import NestedList from '../Layout/sidebar.jsx';
 
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
@@ -19,6 +20,21 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -46,31 +62,6 @@ const tableIcons = {
 
 const AdminProduct = () => {
   const [categories, setCategories] = useState({});
-  Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
-    console.log('aaa', data);
-    products.data = data;
-    setProducts(products);
-  });
-
-  var obj = categories;
-  let index = 1;
-  Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
-    console.log('category:', req.data);
-    //   const obj = req.data.map(function(tmpData, index) {
-    //     index = index + 1;
-    //     index = this.tmpData.cat_title;
-    //     console.log('tmpData', this.tmpData);
-    //   });
-    //   setCategories(obj);
-    //   console.log('pbkaaaa', obj);
-    for (var i = 0; i < req.data.length; i++) {
-      obj[index] = req.data[i].cat_title;
-      index += 1;
-    }
-    setCategories(obj);
-  });
-  console.log('sssssssssssss', categories);
-
   const [products, setProducts] = useState({
     columns: [
       { title: 'prod_title', field: 'prod_title' },
@@ -90,54 +81,82 @@ const AdminProduct = () => {
     ],
     data: [],
   });
+  Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
+    products.data = data;
+    setProducts(products);
+  });
 
+  var obj = categories;
+  let index = 1;
+  Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
+    for (var i = 0; i < req.data.length; i++) {
+      obj[index] = req.data[i].cat_title;
+      index += 1;
+    }
+    setCategories(obj);
+  });
+
+  const classes = useStyles();
   return (
     <div>
       <AdminNav></AdminNav>
       <h1>재고 페이지</h1>
-      <MaterialTable
-        icons={tableIcons}
-        title="재고 목록"
-        columns={products.columns}
-        data={products.data}
-        editable={{
-          onRowAdd: newData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                setProducts(prevState => {
-                  const data = [...prevState.data];
-                  data.push(newData);
-                  return { ...prevState, data };
-                });
-              }, 600);
-            }),
-          onRowUpdate: (newData, oldData) =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                if (oldData) {
-                  setProducts(prevState => {
-                    const data = [...prevState.data];
-                    data[data.indexOf(oldData)] = newData;
-                    return { ...prevState, data };
-                  });
-                }
-              }, 600);
-            }),
-          onRowDelete: oldData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                setProducts(prevState => {
-                  const data = [...prevState.data];
-                  data.splice(data.indexOf(oldData), 1);
-                  return { ...prevState, data };
-                });
-              }, 600);
-            }),
-        }}
-      />
+      <div classes={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              <NestedList></NestedList>
+            </Paper>
+          </Grid>
+          <Grid item xs={10}>
+            <Paper className={classes.paper}>
+              <MaterialTable
+                icons={tableIcons}
+                title="재고 목록"
+                columns={products.columns}
+                data={products.data}
+                editable={{
+                  onRowAdd: newData =>
+                    new Promise(resolve => {
+                      setTimeout(() => {
+                        resolve();
+                        setProducts(prevState => {
+                          const data = [...prevState.data];
+                          data.push(newData);
+                          return { ...prevState, data };
+                        });
+                      }, 600);
+                    }),
+                  onRowUpdate: (newData, oldData) =>
+                    new Promise(resolve => {
+                      setTimeout(() => {
+                        resolve();
+                        if (oldData) {
+                          setProducts(prevState => {
+                            const data = [...prevState.data];
+                            data[data.indexOf(oldData)] = newData;
+                            return { ...prevState, data };
+                          });
+                        }
+                      }, 600);
+                    }),
+                  onRowDelete: oldData =>
+                    new Promise(resolve => {
+                      setTimeout(() => {
+                        resolve();
+                        setProducts(prevState => {
+                          const data = [...prevState.data];
+                          data.splice(data.indexOf(oldData), 1);
+                          return { ...prevState, data };
+                        });
+                      }, 600);
+                    }),
+                }}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
     </div>
   );
 };
