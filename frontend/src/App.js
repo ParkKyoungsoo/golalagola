@@ -21,7 +21,7 @@ import AboutMe from './pages/AboutMe/';
 import NotFound from './pages/NotFound/';
 import MainVote from './pages/MainVote/';
 import ContactUs from './pages/ContactUs/';
-import CreateVote from './pages/CreateVote/';
+import CreateEvent from './pages/CreateEvent/';
 import SearchVote from './pages/SearchVote/';
 import KioskMains from './pages/Kiosk/KioskMain';
 import KioskQuiz from './pages/Kiosk/KioskQuiz';
@@ -36,6 +36,9 @@ import AdminVS from './pages/Admin/VS/index';
 import AdminQuiz from './pages/Admin/Quiz/';
 import AdminUser from './pages/Admin/User/';
 import AdminProduct from './pages/Admin/Product/';
+
+//
+import CategoryData from './pages/MainVote/dump.json';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
 import CarouselData from './pages/Kiosk/KioskMain/dump.json'; // 이벤트 데이터, 로컬
@@ -103,11 +106,11 @@ const App = () => {
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
   const [productDatas, setProductDatas] = useState([]); // 전체 데이터
   const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 이벤트(VS) 데이터
-  const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
-  const [MyCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
+  const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
+  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
 
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
-  const [eventNum, setEventNum] = useState();
+  const [eventNum, setEventNum] = useState(null);
 
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
@@ -121,15 +124,11 @@ const App = () => {
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
+    event_prod_A: '',
+    event_prod_B: '',
+    event_date: '',
+    event_expire: '',
     event_category: '',
-    event_item: {
-      '1': {
-        prod_id: '',
-      },
-      '2': {
-        prod_id: '',
-      },
-    },
   });
 
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
@@ -147,11 +146,12 @@ const App = () => {
     });
   };
   // 카테고리 데이터
-  const getCategoryDatas = () => {
-    Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
-      setCategoryDatas(res.data);
-    });
-  };
+  // const getCategoryDatas = () => {
+  //   Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
+  //     setCategoryDatas(res.data);
+  //   });
+  // };
+
   // 쿠폰 데이터
   const getMyCouponDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
@@ -169,9 +169,14 @@ const App = () => {
   useEffect(() => {
     getProductDatas();
     getEventDatas();
-    getCategoryDatas();
+    // getCategoryDatas();
     getMyCouponDatas();
   }, []);
+
+  useEffect(() => {
+    getEventDatas();
+    console.log('App.js currentEventDatas', currentEventDatas);
+  }, currentEventDatas);
 
   return (
     <CommonContext.Provider
@@ -210,10 +215,8 @@ const App = () => {
         setCarouselDatas,
         categoryDatas,
         setCategoryDatas,
-        MyCouponDatas,
+        myCouponDatas,
         setMyCouponDatas,
-        eventNum,
-        setEventNum,
         selectedEventItem,
         setSelectedEventItem,
         mainUrl,
@@ -223,9 +226,10 @@ const App = () => {
 
         newEventData,
         setNewEventData,
+        eventNum,
+        setEventNum,
       }}
     >
-      {console.log('This is App.js carouselDatas', carouselDatas)}
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
@@ -238,7 +242,7 @@ const App = () => {
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/SearchVote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
-            <Route exact path="/CreateVote" component={CreateVote} />
+            <Route exact path="/CreateEvent" component={CreateEvent} />
             <Route exact path="/KioskMains" component={KioskMains} />
             <Route exact path="/KioskCoupons" component={KioskCoupons} />
             <Route exact path="/KioskQuiz" component={KioskQuiz} />

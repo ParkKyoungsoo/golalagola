@@ -12,7 +12,7 @@ const ButtonBases = props => {
     index,
   } = props;
 
-  const imgUrl = `${categoryData.cat_image}`;
+  const imgUrl = `${categoryData.cat_img_url}`;
 
   return (
     <Wrapper>

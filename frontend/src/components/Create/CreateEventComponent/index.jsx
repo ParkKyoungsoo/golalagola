@@ -42,6 +42,10 @@ const InputTitleComponent = () => {
     ViewContext,
   );
 
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const [productImage, setProductImage] = useState();
+
   const onChangeDescriptionTitleHandler = e => {
     setDescription(e.target.value);
   };
@@ -52,27 +56,25 @@ const InputTitleComponent = () => {
 
   return (
     <Wrapper>
-      <Input
-        placeholder="Vote Title"
-        defaultValue={title}
-        inputProps={{
-          'aria-label': 'description',
-        }}
-        fullWidth={true}
-        onChange={onChangeTitleHandler}
-        className="input-title-component-input1"
-      />
-      <Input
-        placeholder="Description of this vote."
-        defaultValue={description}
-        multiline={true}
-        inputProps={{
-          'aria-label': 'description',
-        }}
-        fullWidth={true}
-        onChange={onChangeDescriptionTitleHandler}
-        className="input-title-component-input2"
-      />
+      <Grid Stlye={{ display: 'flex' }}>
+        <Grid>
+          <img
+            src={Object(productDatas[newEventData.event_prod_A]).prod_image}
+            alt="productA.jpg"
+            style={{ height: '200px', width: '200px' }}
+          />
+        </Grid>
+        <Grid>
+          <h1>VS</h1>
+        </Grid>
+        <Grid>
+          <img
+            src={Object(productDatas[newEventData.event_prod_B]).prod_image}
+            alt="productA.jpg"
+            style={{ height: '200px', width: '200px' }}
+          />
+        </Grid>
+      </Grid>
     </Wrapper>
   );
 };
@@ -93,6 +95,48 @@ const SubTitleGroupComponent = () => {
     setIsPowerVoteChoice(e.target.checked);
   };
 
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const [filterDatas, setFilterDatas] = useState([]);
+  const [filterDatas2, setFilterDatas2] = useState([]);
+
+  const handleChangeA = e => {
+    setNewEventData({
+      ...newEventData,
+      event_prod_A: e.target.value,
+    });
+  };
+  const handleChangeB = e => {
+    setNewEventData({
+      ...newEventData,
+      event_prod_B: e.target.value,
+    });
+  };
+
+  const test = () => {
+    setFilterDatas(
+      productDatas.filter(
+        product => product.prod_category === newEventData.event_category,
+      ),
+    );
+  };
+
+  const test2 = () => {
+    setFilterDatas(
+      productDatas.filter(
+        product => product.prod_category === newEventData.event_category,
+        // && product.prod_id !== newEventData.event_prod_B,
+      ),
+    );
+  };
+  useEffect(() => {
+    test();
+  }, [newEventData.event_category]);
+
+  useEffect(() => {
+    test2();
+  }, [newEventData.event_category]);
+
   return (
     <Wrapper>
       <ThemeProvider theme={themeSubTitleGroupComponent}>
@@ -103,31 +147,55 @@ const SubTitleGroupComponent = () => {
           alignItems="center"
           spacing={2}
         >
-          <Grid item xs={12}>
-            <h2>
-              Question
-              <Divider
-                variant="fullWidth"
-                orientation="horizontal"
-                className="sub-title-group-component-divider"
-              />
-            </h2>
-          </Grid>
+          <Grid item xs={6}>
+            <h2>Select Item A</h2>
+            <Divider
+              variant="fullWidth"
+              orientation="horizontal"
+              className="sub-title-group-component-divider"
+            />
+            <Select
+              value={productDatas.prod_id}
+              onChange={handleChangeA}
+              displayEmpty
+              className="select-empty"
+              required
+            >
+              <MenuItem value={0} disabled>
+                Select category
+              </MenuItem>
 
-          <Grid item xs={12}>
-            <Grid item>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isMultipleChoice}
-                    onChange={onChangeIsMultipleChoiceHandler('checkedBt')}
-                    value="checkedBt"
-                    color="primary"
-                  />
-                }
-                label="Multiple choice"
-              />
-            </Grid>
+              {filterDatas.map((data, index) => (
+                <MenuItem key={index} value={data.prod_id}>
+                  {data.prod_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+          <Grid item xs={6}>
+            <h2>Select Item B</h2>
+            <Divider
+              variant="fullWidth"
+              orientation="horizontal"
+              className="sub-title-group-component-divider"
+            />
+            <Select
+              value={productDatas.prod_id}
+              onChange={handleChangeB}
+              displayEmpty
+              className="select-empty"
+              required
+            >
+              <MenuItem value={0} disabled>
+                Select category
+              </MenuItem>
+
+              {filterDatas.map((data, index) => (
+                <MenuItem key={index} value={data.prod_id}>
+                  {data.prod_name}
+                </MenuItem>
+              ))}
+            </Select>
           </Grid>
         </Grid>
       </ThemeProvider>
@@ -151,17 +219,23 @@ const useGetCategoryDatas = url => {
 };
 
 const SelectCategoryComponent = () => {
-  const { category, setCategory } = useContext(ViewContext);
-  const categoryDatas = useGetCategoryDatas('/category');
+  const { categoryDatas, setCategoryDatas } = useContext(CommonContext);
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+
+  const [category, setCategory] = useState(newEventData.event_category);
+
   const handleChange = e => {
-    setCategory(e.target.value);
+    setNewEventData({
+      ...newEventData,
+      event_category: e.target.value,
+    });
   };
 
   return (
     <Wrapper>
       <FormControl className="form-control">
         <Select
-          value={category}
+          value={newEventData.event_category}
           onChange={handleChange}
           displayEmpty
           className="select-empty"
@@ -173,7 +247,7 @@ const SelectCategoryComponent = () => {
 
           {categoryDatas.map((data, index) => (
             <MenuItem key={index} value={data.cat_no}>
-              {data.cat_type}
+              {data.cat_title}
             </MenuItem>
           ))}
         </Select>
@@ -208,7 +282,6 @@ const CreateVoteMainComponent = () => {
         </Grid>
         <Grid item xs={12} className="create-vote-main-component-grid-item">
           <SubTitleGroupComponent />
-          <RadioButtonsGroup />
         </Grid>
       </Grid>
     </Wrapper>

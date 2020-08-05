@@ -18,7 +18,7 @@ const ManageEvent = () => {
     <Layout>
       <button onClick={() => setModalTrigger(true)}>이벤트 만들기</button>
       <Dialog open={modalTrigger} onClose={handleTrigger}>
-        <ModalManage />
+        <ModalManage setModalTrigger={setModalTrigger} />
       </Dialog>
     </Layout>
   );
