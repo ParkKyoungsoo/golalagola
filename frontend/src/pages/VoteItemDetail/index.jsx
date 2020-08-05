@@ -18,7 +18,7 @@ import { CommonContext } from '../../context/CommonContext';
 
 const QuizDialog = () => {
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+  const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const handleClose = () => {
     setWebQuizDialogOpen(false);
@@ -70,9 +70,8 @@ const ItemDetail = ({ match }) => {
   const { eventNum, setEventNum } = useContext(CommonContext);
 
   const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
 
-  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+  const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
@@ -80,11 +79,11 @@ const ItemDetail = ({ match }) => {
   // console.log(testimg.items[0].prod_image);
 
   const click1 = () => {
-    setItemDialogOpen(itemDialogOpen => true);
+    setItemDialogOpen((itemDialogOpen) => true);
   };
 
   const handleClose = () => {
-    setItemDialogOpen(itemDialogOpen => false);
+    setItemDialogOpen((itemDialogOpen) => false);
   };
 
   const QuizDialogOpen = () => {
@@ -95,14 +94,13 @@ const ItemDetail = ({ match }) => {
   // match.params.id 를 통해 해당 상품의 id를 조회 할 수 있습니다.
   // carouselDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
   const CheckEvent = () => {
-    for (var i = 0; i < currentEventDatas.length; i++) {
+    for (var i = 0; i < carouselDatas.length; i++) {
       if (
-        Number(match.params.id) ===
-          currentEventDatas[i].event_item['1'].prod_id ||
-        Number(match.params.id) === currentEventDatas[i].event_item['2'].prod_id
+        Number(match.params.id) === carouselDatas[i].event_item['1'].prod_id ||
+        Number(match.params.id) === carouselDatas[i].event_item['2'].prod_id
       ) {
-        setEventActivated(eventActivated => true);
-        setEventNum(currentEventDatas[i].event_id - 1);
+        setEventActivated((eventActivated) => true);
+        setEventNum(carouselDatas[i].event_no - 1);
       }
     }
   };
@@ -127,7 +125,6 @@ const ItemDetail = ({ match }) => {
             if (productDatas[match.params.id - 1].prod_id === product.prod_id) {
               return (
                 <Card>
-                  <p>{`https://i3b309.p.ssafy.io/${product.prod_id}`}</p>
                   <img
                     src={`https://i3b309.p.ssafy.io/${product.prod_image}`}
                     // src={`../../${productDatas[match.params.id - 1].prod_image}`}
@@ -141,15 +138,28 @@ const ItemDetail = ({ match }) => {
         </Grid>
 
         <Grid item>
-          <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
-          <hr />
-          <div>
-            <p>여기는 간단한 설명 작성을 하면 됩니다.</p>
-            {productDatas.map((product, index) => {
-              if (productDatas[match.params.id - 1].prod_id === product.prod_id)
-                return <p>{productDatas[match.params.id - 1].prod_desc}</p>;
-            })}
-          </div>
+          {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
+          <hr /> */}
+          {productDatas.map((product, index) => {
+            if (productDatas[match.params.id - 1].prod_id === product.prod_id)
+              return (
+                <Grid>
+                  <p>뱃지</p>
+                  <h2>{productDatas[match.params.id - 1].prod_title}</h2>
+                  <h4>{productDatas[match.params.id - 1].prod_weight}</h4>
+                  <br />
+                  <h1>
+                    가격 : {productDatas[match.params.id - 1].prod_price}원
+                  </h1>
+                  <br />
+                  <br />
+                  <br />
+                  <p>수량</p>
+                  <br />
+                  <h3>{productDatas[match.params.id - 1].prod_desc}</h3>
+                </Grid>
+              );
+          })}
           <hr />
 
           {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
