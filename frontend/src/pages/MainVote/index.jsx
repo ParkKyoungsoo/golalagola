@@ -120,7 +120,7 @@ const MainVote = props => {
 
   let history = useHistory();
   // 실시간 순위
-  const [realtime, setRealTime] = useState([]);
+  // const [realtime, setRealTime] = useState([]);
 
   // useEffect(() => {
   //   Axios.get(
