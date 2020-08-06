@@ -39,7 +39,7 @@ const useGetdata = (value, index, categoryData, itemType, itemValue) => {
     await getDatas();
   };
 
-  const onChangeFilterItem = (event) => {
+  const onChangeFilterItem = event => {
     setFilterItem(event.target.value);
   };
 
@@ -50,7 +50,7 @@ const useGetdata = (value, index, categoryData, itemType, itemValue) => {
   return [gridItemDatas, filterItem, onChangeFilterItem];
 };
 
-const ImageGridFilter = (props) => {
+const ImageGridFilter = props => {
   const { filterItem, onChangeFilterItem } = props;
 
   const items = [
@@ -79,7 +79,7 @@ const ImageGridFilter = (props) => {
   );
 };
 
-const VoteGridList = (props) => {
+const VoteGridList = props => {
   const nowCols = useNowCols();
 
   const { categoryData, value, index, itemType, itemValue } = props;
@@ -96,7 +96,7 @@ const VoteGridList = (props) => {
   if (value === -1) {
     return (
       <Wrapper className="root">
-        {console.log('data from server : ', productDatas)}
+        {/* {console.log('data from server : ', productDatas)} */}
         <GridList
           className="grid-list"
           cols={Number.isInteger(nowCols) ? nowCols : 1}

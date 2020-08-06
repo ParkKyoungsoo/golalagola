@@ -16,7 +16,8 @@ import {
 } from '@material-ui/core';
 import Wrapper from './styles';
 import RadioButtonsGroup from './../RadioButtonsGroup/index';
-import BasicDateTimePicker from './../DateTimePicker';
+import StartDateTimePicker from '../StartDateTimePicker';
+import EndDateTimePicker from '../EndDateTimePicker';
 import { CommonContext } from '../../../context/CommonContext';
 import { ViewContext } from '../../../context/ViewContext';
 import { useDropzone } from 'react-dropzone';
@@ -267,9 +268,6 @@ const CreateVoteMainComponent = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={3}>
               <SelectCategoryComponent />
-            </Grid>
-            <Grid item>
-              <BasicDateTimePicker />
             </Grid>
           </Grid>
         </Grid>

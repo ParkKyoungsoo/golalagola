@@ -30,7 +30,6 @@ import MyCoupon from './pages/MyCoupon/';
 import VoteItemDetail from './pages/VoteItemDetail';
 import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
-import ManageEvent from './pages/AdminPage/ManageEvent';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
 import AdminQuiz from './pages/Admin/Quiz/';
@@ -105,10 +104,10 @@ const App = () => {
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
   const [productDatas, setProductDatas] = useState([]); // 전체 데이터
-  const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 이벤트(VS) 데이터
-  const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
+  const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
+  // const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
   const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
-  const [quizDatas, setQuizDatas] = useState([]); // 퀴즈 데이터
+
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
   const [eventNum, setEventNum] = useState(null);
 
@@ -146,11 +145,11 @@ const App = () => {
     });
   };
   // 카테고리 데이터
-  // const getCategoryDatas = () => {
-  //   Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
-  //     setCategoryDatas(res.data);
-  //   });
-  // };
+  const getCategoryDatas = () => {
+    Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
+      setCategoryDatas(res.data);
+    });
+  };
 
   // 쿠폰 데이터
   const getMyCouponDatas = () => {
@@ -159,14 +158,7 @@ const App = () => {
     });
   };
 
-  // 퀴즈 데이터
-  const getQuizDatas = () => {
-    Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
-      setQuizDatas(res.data);
-    });
-  };
   // import CarouselData from './pages/Kiosk/KioskMain/dump.json';
-  // const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 캐로젤에 들어가는 데이터
 
   // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
   // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.
@@ -175,9 +167,8 @@ const App = () => {
   useEffect(() => {
     getProductDatas();
     getEventDatas();
-    // getCategoryDatas();
+    getCategoryDatas();
     getMyCouponDatas();
-    getQuizDatas();
   }, []);
 
   useEffect(() => {
@@ -218,8 +209,6 @@ const App = () => {
         /* 이부분이 commonContext에 넣어주는 부분입니다. */
         productDatas,
         setProductDatas,
-        carouselDatas,
-        setCarouselDatas,
         categoryDatas,
         setCategoryDatas,
         myCouponDatas,
@@ -235,8 +224,6 @@ const App = () => {
         setNewEventData,
         eventNum,
         setEventNum,
-        quizDatas,
-        setQuizDatas,
       }}
     >
       <MuiThemeProvider theme={theme}>
@@ -251,6 +238,7 @@ const App = () => {
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/SearchVote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
+            <Route exact path="/CreateEvent" component={CreateEvent} />
             <Route exact path="/KioskMains" component={KioskMains} />
             <Route exact path="/KioskCoupons" component={KioskCoupons} />
             <Route exact path="/KioskQuiz" component={KioskQuiz} />
@@ -262,14 +250,11 @@ const App = () => {
             />
             <Route path="/SearchResult/:searchValue" component={SearchResult} />
 
-            <Route exact path="/Admin/ManageEvent" component={ManageEvent} />
-
             <Route exact path="/Admin" component={Admin} />
             <Route path="/Admin/VS" component={AdminVS} />
             <Route path="/Admin/Quiz" component={AdminQuiz} />
             <Route path="/Admin/User" component={AdminUser} />
             <Route path="/Admin/Product" component={AdminProduct} />
-            <Route exact path="/Admin/CreateEvent" component={CreateEvent} />
 
             <Redirect to="/not-found" />
           </Switch>
