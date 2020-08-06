@@ -9,61 +9,59 @@ import {
 } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Wrapper, Close, Date } from './styles';
-import { Link, Route } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { CommonContext } from '../../../context/CommonContext';
 import KioskItemModal from '../KioskModal/KioskItemListModal';
-
 import { FaHome } from 'react-icons/fa';
 import { GoPlus } from 'react-icons/go';
+import { IoMdRefresh } from 'react-icons/io';
 
 // React icon 사용하는 방법은 재경이에게 문의하세요.
 
 // 아이콘
 
 const Home = () => {
-  return (
-    <h1>
-      <FaHome />
-    </h1>
-  );
+  return <FaHome />;
 };
 const Plus = () => {
   return <GoPlus />;
+};
+const Refresh = () => {
+  return <IoMdRefresh />;
 };
 
 const Navbar = () => {
   const [userAns, setUserAns] = useState();
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
+  const { mainUrl } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const openDialog = () => {
     setUserAns(userAns => true);
     setSuccessModalTrigger(successModalTrigger => true);
-    movePage();
   };
 
   const handleClose = () => {
-    console.log('close');
     setSuccessModalTrigger(false);
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   const displayEndTime = dt => {
-    console.log('VoteGridItem -> dt', dt);
     return '14:00:00';
   };
-
-  const movePage = () => {
-    console.log('movepage');
-
-    const timer = setTimeout(() => {
-      if (window.location.href === 'http://localhost:3000/KioskMains') {
-        console.log(123);
-        handleClose();
-      } else {
-        console.log('timeout!!');
-        window.location.href = 'http://localhost:3000/KioskMains';
-      }
-    }, 30000);
-  };
+  // Time out 기능
+  // 필요없다 생각해서 지움 나중에 다시 얘기해서 살려보던가 합시다
+  // const timer = setTimeout(() => {
+  //   // if (window.location.href === 'http://localhost:3000/KioskMains') {
+  //   //   handleClose();
+  //   // } else {
+  //   console.log('timeout!!');
+  //   window.location.href = `${mainUrl}/KioskMains`;
+  //   // }
+  // }, 60000);
 
   return (
     <>
@@ -72,10 +70,15 @@ const Navbar = () => {
         <Grid>
           <Box className="Nav_bar">
             <Link to={'/KioskMains/'}>
-              <Home />
+              <h1>
+                <Home />
+              </h1>
             </Link>
             <h1 className="icon_pointer" onClick={openDialog}>
               <Plus />
+            </h1>
+            <h1 className="icon_pointer" onClick={refreshPage}>
+              <Refresh />
             </h1>
           </Box>
         </Grid>

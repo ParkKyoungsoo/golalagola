@@ -64,6 +64,11 @@ export default function VoteGridItem(props) {
 
   return (
     <Wrapper className="root">
+<<<<<<< HEAD
+=======
+      {/* {console.log(itemData)} */}
+
+>>>>>>> 56c6eac787504c19b57ddcc8c25d207da9e4ad3c
       <Grid container className="info-open-handler-grid">
         <Grid item xs={12}>
           <Grid className="img-box" onClick={click}>
