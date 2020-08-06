@@ -240,7 +240,7 @@ const SelectCategoryComponent = () => {
           </MenuItem>
 
           {categoryDatas.map((data, index) => (
-            <MenuItem key={index} value={data.cat_no}>
+            <MenuItem key={index} value={data.cat_id}>
               {data.cat_title}
             </MenuItem>
           ))}

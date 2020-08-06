@@ -33,6 +33,9 @@ const Quiz = () => {
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const [number, setNumber] = useState();
+  useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
+
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
       setUserAns(userAns => true);
@@ -51,8 +54,8 @@ const Quiz = () => {
     border: '6px solid green',
   };
 
-  const randomNumber = Math.random();
-  const num = Math.floor(randomNumber * quizDatas.length);
+  // const randomNumber = Math.random();
+  // const num = Math.floor(randomNumber * quizDatas.length);
   return (
     <>
       <Wrapper>
@@ -61,9 +64,8 @@ const Quiz = () => {
           <h1>오늘의 퀴즈</h1>
         </Grid>
         <Grid className="quizCentering">
-          {console.log(quizDatas[num])}
-
-          <h3>{Object(quizDatas[num]).quiz_question}</h3>
+          {/* {console.log(quizDatas[num])} */}
+          (if {})<h3>{Object(quizDatas[number]).quiz_question}</h3>
         </Grid>
         <Grid className="quizCentering">
           <button

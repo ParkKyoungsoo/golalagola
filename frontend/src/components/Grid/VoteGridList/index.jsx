@@ -154,6 +154,9 @@ const VoteGridList = props => {
                     index={index}
                     itemType={itemType}
                   />
+                  <h3 style={{ marginLeft: '20px' }}>
+                    {itemData.prod_price}원
+                  </h3>
                 </Grid>
               );
             } else {

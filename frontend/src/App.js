@@ -33,14 +33,15 @@ import EventAll from './pages/EventAll';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
 import AdminQuiz from './pages/Admin/Quiz/';
+import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
 import AdminProduct from './pages/Admin/Product/';
+import AdminProductForm from './pages/Admin/Product/Form';
 
 //
 import CategoryData from './pages/MainVote/dump.json';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
-import CarouselData from './pages/Kiosk/KioskMain/dump.json'; // 이벤트 데이터, 로컬
 
 // css
 // import './index.css';
@@ -78,11 +79,11 @@ const theme = createMuiTheme({
 const App = () => {
   const [user, setUser] = useLocalStorageSetState(
     {
-      user_no: 0,
-      user_id: '',
-      user_nm: '',
+      user_id: 0,
+      user_email: '',
+      user_name: '',
       user_pwd: '',
-      user_img_url: '',
+      isAdmin: '',
       status: '',
       web_site: '',
       token: '',
@@ -104,8 +105,8 @@ const App = () => {
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
   const [productDatas, setProductDatas] = useState([]); // 전체 데이터
-  const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
-  // const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
+  // const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
+  const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
   const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
 
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
@@ -119,6 +120,12 @@ const App = () => {
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
+
+  // 관리지 페이지 중 Quiz CRUD를 위해 선언했습니다.
+  const [currentQuizDatas, setCurrentQuizDatas] = useState({});
+
+  // 관리지 페이지 중 Product CRUD를 위해 선언했습니다.
+  const [currentProductDatas, setCurrentProductDatas] = useState({});
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -135,6 +142,7 @@ const App = () => {
   const getProductDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
+      getEventDatas();
     });
   };
   // 이벤트(VS) 데이터
@@ -142,14 +150,15 @@ const App = () => {
   const getEventDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
       setCurrentEventDatas(res.data);
+      getMyCouponDatas();
     });
   };
   // 카테고리 데이터
-  const getCategoryDatas = () => {
-    Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
-      setCategoryDatas(res.data);
-    });
-  };
+  // const getCategoryDatas = () => {
+  //   Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
+  //     setCategoryDatas(res.data);
+  //   });
+  // };
 
   // 쿠폰 데이터
   const getMyCouponDatas = () => {
@@ -158,23 +167,21 @@ const App = () => {
     });
   };
 
-  // import CarouselData from './pages/Kiosk/KioskMain/dump.json';
-
   // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
   // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.
   // 참고 자료 : https://react.vlpt.us/basic/16-useEffect.html
 
   useEffect(() => {
     getProductDatas();
-    getEventDatas();
-    getCategoryDatas();
-    getMyCouponDatas();
+    // getEventDatas();
+    // getCategoryDatas();
+    // getMyCouponDatas();
   }, []);
 
   useEffect(() => {
     getEventDatas();
     console.log('App.js currentEventDatas', currentEventDatas);
-  }, currentEventDatas);
+  }, []);
 
   return (
     <CommonContext.Provider
@@ -217,8 +224,14 @@ const App = () => {
         setSelectedEventItem,
         mainUrl,
         setMainUrl,
+
+        // 관리자 페이지에서 Event, Quiz, Product CRUD에 사용하는 부분입니다.
         currentEventDatas,
         setCurrentEventDatas,
+        currentQuizDatas,
+        setCurrentQuizDatas,
+        currentProductDatas,
+        setCurrentProductDatas,
 
         newEventData,
         setNewEventData,
@@ -226,6 +239,10 @@ const App = () => {
         setEventNum,
       }}
     >
+      {console.log('dump', CategoryData)}
+      {console.log('dump', typeof CategoryData)}
+      {console.log('axios', categoryDatas)}
+      {console.log('axios', typeof categoryDatas)}
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
@@ -245,16 +262,29 @@ const App = () => {
             <Route exact path="/MyCoupon" component={MyCoupon} />
             <Route exact path="/EventAll" component={EventAll} />
             <Route
+              exact
               path="/VoteItemDetail/:name/:id"
               component={VoteItemDetail}
             />
-            <Route path="/SearchResult/:searchValue" component={SearchResult} />
+            <Route
+              exact
+              path="/SearchResult/:searchValue"
+              component={SearchResult}
+            />
 
             <Route exact path="/Admin" component={Admin} />
-            <Route path="/Admin/VS" component={AdminVS} />
-            <Route path="/Admin/Quiz" component={AdminQuiz} />
-            <Route path="/Admin/User" component={AdminUser} />
-            <Route path="/Admin/Product" component={AdminProduct} />
+            <Route exact path="/Admin/VS" component={AdminVS} />
+            <Route exact path="/Admin/Quiz" component={AdminQuiz} />
+            <Route exact path="/Admin/Quiz/Form" component={AdminQuizForm} />
+
+            <Route exact path="/Admin/User" component={AdminUser} />
+            <Route exact path="/Admin/Product" component={AdminProduct} />
+            <Route
+              exact
+              path="/Admin/Product/Form"
+              component={AdminProductForm}
+            />
+            <Route exact path="/Admin/CreateEvent" component={CreateEvent} />
 
             <Redirect to="/not-found" />
           </Switch>

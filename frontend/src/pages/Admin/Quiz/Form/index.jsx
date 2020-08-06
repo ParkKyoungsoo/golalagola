@@ -1,4 +1,6 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
+import { CommonContext } from '../../../../context/CommonContext';
+
 import {
   Paper,
   Grid,
@@ -29,16 +31,17 @@ import AdminNav from '../../Nav/index.jsx';
 
 const AdminQuizForm = () => {
   const [forceRender, setForceRender] = useState({});
+  const { currentQuizDatas, setCurrentQuizDatas } = useContext(CommonContext);
 
   const [title, setTitle] = useState({
-    value: '',
+    value: currentQuizDatas.quiz_question,
     error: false,
   });
   const [hint, setHint] = useState({
-    value: '',
+    value: currentQuizDatas.quiz_hint,
     error: false,
   });
-  const [answer, setAnswer] = useState(true);
+  const [answer, setAnswer] = useState(currentQuizDatas.quiz_answer);
 
   const handleTitleChange = event => {
     if (event.target.value !== '') {
@@ -62,37 +65,9 @@ const AdminQuizForm = () => {
     setAnswer(event.target.value);
   };
 
-  const [thumbnailImageData, setThumbnailImageData] = useState('');
-
-  const onDrop = useCallback(acceptedFiles => {
-    console.log('PPAP: Basic -> acceptedFiles', acceptedFiles);
-    // Do something with the files
-  }, []);
-
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone(onDrop);
-
-  useEffect(() => {
-    for (const file of acceptedFiles) {
-      console.log('TCL: Basic -> file', file);
-      setThumbnailImageData({
-        img: URL.createObjectURL(file),
-        file: file,
-      });
-    }
-  }, [acceptedFiles]);
-
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
-  let history = useHistory();
-
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(title, hint, answer);
-    if (title.value === '' || !hint.valye === '') {
+    if (title.value === '' || hint.valye === '') {
       if (title.value === '') {
         setTitle({ value: '', error: true });
       }
@@ -102,55 +77,45 @@ const AdminQuizForm = () => {
       setForceRender({});
       alert('validation error');
     } else {
-      Axios.post('https://i3b309.p.ssafy.io/api/quiz/insert', {
-        quiz_question: title.value,
-        quiz_answer: answer,
-        quiz_hint: hint.value,
-      })
-        .then(response => {
-          console.log('Response', response.data);
-          alert('퀴즈가 등록 되었습니다.');
+      // status: create
+      if (currentQuizDatas.status === 'create') {
+        await Axios.post('https://i3b309.p.ssafy.io/api/quiz', {
+          quiz_question: title.value,
+          quiz_hint: hint.value,
+          quiz_answer: answer,
         })
-        .catch(e => {
-          console.log('Error: ', e.response.data);
-        });
-      history.push('/admin/quiz');
+          .then(response => {
+            console.log('Response', response.data);
+            alert('퀴즈가 등록 되었습니다.');
+          })
+          .catch(e => {
+            console.log('Error: ', e.response.data);
+          });
+      } else {
+        // status: create
+        await Axios.put('https://i3b309.p.ssafy.io/api/quiz', {
+          quiz_id: currentQuizDatas.quiz_id,
+          quiz_question: title.value,
+          quiz_hint: hint.value,
+          quiz_answer: answer,
+        })
+          .then(response => {
+            console.log('Response', response.data);
+            alert('퀴즈가 수정 되었습니다.');
+          })
+          .catch(e => {
+            console.log('Error: ', e.response.data);
+          });
+      }
+      window.location.href = '/admin/quiz';
     }
   }
 
   return (
     <div>
-      <AdminNav></AdminNav>
+      <AdminNav />
       <Grid container justify="center" alignItems="flex-start" spacing={2}>
-        <Grid item xs={12} sm={3}>
-          <p>그리드 3</p>
-          <h4 className="ThumbnailImageComponentH4">corver preview</h4>
-          <Paper>
-            <section className="container">
-              <div {...getRootProps({ className: 'dropzone' })}>
-                {thumbnailImageData.img ? (
-                  <Avatar
-                    variant="square"
-                    src={thumbnailImageData.img}
-                    className="coverAvatar"
-                  />
-                ) : (
-                  <Fab variant="extended" className="cover-upload-fab">
-                    <NavigationIcon className="extended-icon" />
-                    Upload Image
-                  </Fab>
-                )}
-                <input {...getInputProps()} />
-              </div>
-              <aside className="thumbnail-image-component-aside">
-                <h4>Image Requirement</h4>
-                <h4>Minimum size of "800x600"</h4>
-                <ul>{files}</ul>
-              </aside>
-            </section>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12}>
           <p>그리드 9</p>
           <Grid
             container

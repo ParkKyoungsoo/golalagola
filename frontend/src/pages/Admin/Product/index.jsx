@@ -1,8 +1,9 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, useContext } from 'react';
+import { CommonContext } from '../../../context/CommonContext';
+import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 
 import AdminNav from '../Layout/nav.jsx';
-import NestedList from '../Layout/sidebar.jsx';
 
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
@@ -61,6 +62,9 @@ const tableIcons = {
 };
 
 const AdminProduct = () => {
+  const { currentProductDatas, setCurrentProductDatas } = useContext(
+    CommonContext,
+  );
   const [categories, setCategories] = useState({});
   const [products, setProducts] = useState({
     columns: [
@@ -96,67 +100,112 @@ const AdminProduct = () => {
     setCategories(obj);
   });
 
+  let history = useHistory();
+
+  const createProductData = () => {
+    const productData = {
+      prod_title: '',
+      prod_name: '',
+      prod_category: '',
+      prod_price: '',
+      prod_amount: '',
+      prod_expiration: '',
+      prod_image: '',
+      prod_desc: '',
+      prod_sale: '',
+      prod_weight: '',
+      status: 'create',
+    };
+    setCurrentProductDatas(productData);
+    history.push('/admin/product/form');
+  };
+  const updateProductData = rowData => {
+    // console.log('rowData', rowData);
+    const productData = {
+      prod_id: rowData.prod_id,
+      prod_title: rowData.prod_title,
+      prod_name: rowData.prod_name,
+      prod_category: rowData.prod_category,
+      prod_price: rowData.prod_price,
+      prod_amount: rowData.prod_amount,
+      prod_expiration: rowData.prod_expiration,
+      prod_image: rowData.prod_image,
+      prod_desc: rowData.prod_desc,
+      prod_sale: rowData.prod_sale,
+      prod_weight: rowData.prod_weight,
+      status: 'update',
+    };
+    setCurrentProductDatas(productData);
+    history.push('/admin/product/form');
+  };
+
+  const deleteProductData = targetProdId => {
+    Axios.delete('https://i3b309.p.ssafy.io/api/product', {
+      data: {
+        prod_id: targetProdId,
+      },
+    })
+      .then(res => {
+        console.log(res);
+        alert('삭제되었습니다.');
+        // window.location.reload();
+      })
+      .catch(e => {
+        console.log('Error: ', e.response.data);
+      });
+  };
+
   const classes = useStyles();
   return (
     <div>
-      <AdminNav></AdminNav>
-      <h1>재고 페이지</h1>
-      <div classes={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={2}>
-            <Paper className={classes.paper}>
-              <NestedList></NestedList>
-            </Paper>
-          </Grid>
-          <Grid item xs={10}>
-            <Paper className={classes.paper}>
-              <MaterialTable
-                icons={tableIcons}
-                title="재고 목록"
-                columns={products.columns}
-                data={products.data}
-                editable={{
-                  onRowAdd: newData =>
-                    new Promise(resolve => {
-                      setTimeout(() => {
-                        resolve();
-                        setProducts(prevState => {
-                          const data = [...prevState.data];
-                          data.push(newData);
-                          return { ...prevState, data };
-                        });
-                      }, 600);
-                    }),
-                  onRowUpdate: (newData, oldData) =>
-                    new Promise(resolve => {
-                      setTimeout(() => {
-                        resolve();
-                        if (oldData) {
-                          setProducts(prevState => {
-                            const data = [...prevState.data];
-                            data[data.indexOf(oldData)] = newData;
-                            return { ...prevState, data };
-                          });
-                        }
-                      }, 600);
-                    }),
-                  onRowDelete: oldData =>
-                    new Promise(resolve => {
-                      setTimeout(() => {
-                        resolve();
-                        setProducts(prevState => {
-                          const data = [...prevState.data];
-                          data.splice(data.indexOf(oldData), 1);
-                          return { ...prevState, data };
-                        });
-                      }, 600);
-                    }),
-                }}
-              />
-            </Paper>
-          </Grid>
-        </Grid>
-      </div>
+      <AdminNav />
+      <h1>재고 상품 페이지</h1>
+      <MaterialTable
+        icons={tableIcons}
+        title="재고 목록"
+        columns={products.columns}
+        data={products.data}
+        options={{ actionsColumnIndex: -1, pageSize: 20 }}
+        detailPanel={rowData => {
+          return (
+            <Grid>
+              <p>{rowData.prod_title}</p>
+              <p>{rowData.prod_name}</p>
+              <p>{rowData.prod_category}</p>
+              <p>{rowData.prod_price}</p>
+              <p>{rowData.prod_amount}</p>
+              <p>{rowData.prod_expiration}</p>
+              <p>{rowData.prod_image}</p>
+              <p>{rowData.prod_desc}</p>
+              <p>{rowData.prod_sale}</p>
+              <p>{rowData.prod_weight}</p>
+            </Grid>
+          );
+        }}
+        actions={[
+          {
+            icon: AddBox,
+            tooltip: 'Add Product',
+            isFreeAction: true,
+            onClick: event => createProductData(),
+          },
+          rowData => ({
+            icon: Edit,
+            tooltip: 'Update Product',
+            onClick: (event, rowData) => updateProductData(rowData),
+          }),
+          rowData => ({
+            icon: DeleteOutline,
+            tooltip: 'Delete Product',
+            onClick: (event, rowData) => {
+              console.log(rowData);
+              if (window.confirm('You want to delete ' + rowData.prod_name)) {
+                deleteProductData(rowData.prod_id);
+              }
+            },
+          }),
+        ]}
+      />
     </div>
   );
 };
