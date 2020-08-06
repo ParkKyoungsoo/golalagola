@@ -30,7 +30,6 @@ import MyCoupon from './pages/MyCoupon/';
 import VoteItemDetail from './pages/VoteItemDetail';
 import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
-import ManageEvent from './pages/AdminPage/ManageEvent';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
 import AdminQuiz from './pages/Admin/Quiz/';
@@ -43,7 +42,6 @@ import AdminProductForm from './pages/Admin/Product/Form';
 import CategoryData from './pages/MainVote/dump.json';
 
 // VoteGridList에서 쓰고있던 상품들 입니다.
-import CarouselData from './pages/Kiosk/KioskMain/dump.json'; // 이벤트 데이터, 로컬
 
 // css
 // import './index.css';
@@ -107,10 +105,10 @@ const App = () => {
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
   const [productDatas, setProductDatas] = useState([]); // 전체 데이터
-  const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 이벤트(VS) 데이터
+  // const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
   const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
   const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
-  const [quizDatas, setQuizDatas] = useState([]); // 퀴즈 데이터
+
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
   const [eventNum, setEventNum] = useState(null);
 
@@ -144,6 +142,7 @@ const App = () => {
   const getProductDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
+      getEventDatas();
     });
   };
   // 이벤트(VS) 데이터
@@ -151,6 +150,7 @@ const App = () => {
   const getEventDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
       setCurrentEventDatas(res.data);
+      getMyCouponDatas();
     });
   };
   // 카테고리 데이터
@@ -167,31 +167,21 @@ const App = () => {
     });
   };
 
-  // 퀴즈 데이터
-  const getQuizDatas = () => {
-    Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
-      setQuizDatas(res.data);
-    });
-  };
-  // import CarouselData from './pages/Kiosk/KioskMain/dump.json';
-  // const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 캐로젤에 들어가는 데이터
-
   // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
   // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.
   // 참고 자료 : https://react.vlpt.us/basic/16-useEffect.html
 
   useEffect(() => {
     getProductDatas();
-    getEventDatas();
+    // getEventDatas();
     // getCategoryDatas();
-    getMyCouponDatas();
-    getQuizDatas();
+    // getMyCouponDatas();
   }, []);
 
   useEffect(() => {
     getEventDatas();
     console.log('App.js currentEventDatas', currentEventDatas);
-  }, currentEventDatas);
+  }, []);
 
   return (
     <CommonContext.Provider
@@ -226,8 +216,6 @@ const App = () => {
         /* 이부분이 commonContext에 넣어주는 부분입니다. */
         productDatas,
         setProductDatas,
-        carouselDatas,
-        setCarouselDatas,
         categoryDatas,
         setCategoryDatas,
         myCouponDatas,
@@ -249,10 +237,12 @@ const App = () => {
         setNewEventData,
         eventNum,
         setEventNum,
-        quizDatas,
-        setQuizDatas,
       }}
     >
+      {console.log('dump', CategoryData)}
+      {console.log('dump', typeof CategoryData)}
+      {console.log('axios', categoryDatas)}
+      {console.log('axios', typeof categoryDatas)}
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
@@ -265,6 +255,7 @@ const App = () => {
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/SearchVote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
+            <Route exact path="/CreateEvent" component={CreateEvent} />
             <Route exact path="/KioskMains" component={KioskMains} />
             <Route exact path="/KioskCoupons" component={KioskCoupons} />
             <Route exact path="/KioskQuiz" component={KioskQuiz} />
@@ -280,8 +271,6 @@ const App = () => {
               path="/SearchResult/:searchValue"
               component={SearchResult}
             />
-
-            <Route exact path="/Admin/ManageEvent" component={ManageEvent} />
 
             <Route exact path="/Admin" component={Admin} />
             <Route exact path="/Admin/VS" component={AdminVS} />

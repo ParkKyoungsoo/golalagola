@@ -5,7 +5,6 @@ import Layout from '../../layout';
 import Wrapper from './styles';
 
 const EventAll = () => {
-  const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
 
@@ -54,7 +53,6 @@ const EventAll = () => {
   });
 
   const submitCouponData = () => {
-    // console.log(carouselDatas);
     // data 가공해서 post 요청 보내기,
     // get 요청으로 데이터 받아서 다시 랜더링하기
     setForceRender({});

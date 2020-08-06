@@ -16,23 +16,31 @@ const CreateVote = props => {
   const { newEventData, setNewEventData } = useContext(CommonContext);
 
   const createEvent = () => {
-    axios
-      .post('https://i3b309.p.ssafy.io/api/event', newEventData)
-      .then(function(response) {
-        console.log(response);
-        setNewEventData({
-          event_prod_A: '',
-          event_prod_B: '',
-          event_date: '',
-          event_expire: '',
-          event_category: '',
+    if (newEventData.event_prod_A === '') {
+      alert('A 상품을 선택해주세요');
+    } else if (newEventData.event_prod_B === '') {
+      alert('B 상품을 선택해주세요');
+    } else if (newEventData.event_category === '') {
+      alert('카테고리를 선택 해 주세요');
+    } else {
+      axios
+        .post('https://i3b309.p.ssafy.io/api/event', newEventData)
+        .then(function(response) {
+          console.log(response);
+          setNewEventData({
+            event_prod_A: '',
+            event_prod_B: '',
+            event_date: '',
+            event_expire: '',
+            event_category: '',
+          });
+          // history.push('/Admin/VS');
+          window.location.href = 'http://localhost:3000/admin/vs';
+        })
+        .catch(error => {
+          console.log('error : ', error.response);
         });
-        // history.push('/Admin/VS');
-        window.location.href = 'http://localhost:3000/admin/vs';
-      })
-      .catch(error => {
-        console.log('error : ', error.response);
-      });
+    }
   };
 
   const [readyToUpload, setReadyToUpload] = useState(true);
