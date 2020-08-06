@@ -8,10 +8,10 @@ import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
 import MultiCarousel from './MultiCarousel';
+import Axios from 'axios';
 
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
-
 const SuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
   // useEffect(() => {
@@ -30,12 +30,24 @@ const SuccessModal = () => {
 
 const Quiz = () => {
   const quizAns = Test.questions[0].correctAnswer; // 추후 데이터에서 가져올 문제의 정답.
+  const [number, setNumber] = useState();
 
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+
+  useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
+
+  // const pp = () => {
+  //   const randomNumber = Math.random();
+  //   number = Math.floor(randomNumber * quizDatas.length);
+  //   console.log('in pp number', number);
+  // };
+
+  // const number = Math.random();
+  // const num = Math.floor(number * quizDatas.length);
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -45,7 +57,12 @@ const Quiz = () => {
       setUserAns(userAns => false);
       setFailModalTrigger(failModalTrigger => true);
     }
+    // pp();
   };
+
+  // const MoveToQuiz = () => {
+  //   number();
+  // };
 
   const modalHandler = () => {
     setSuccessModalTrigger(false);
@@ -62,9 +79,6 @@ const Quiz = () => {
     setIndex(selectedIndex);
   };
 
-  const randomNumber = Math.random();
-
-  const num = Math.floor(randomNumber * quizDatas.length);
   // console.log('aaa', quizDatas.length);
   return (
     <>
@@ -91,7 +105,8 @@ const Quiz = () => {
           >
             {/* {console.log(quizDatas[1].quiz_question)} */}
             {/* {console.log(randomNumber)} */}
-            {Object(quizDatas[num]).quiz_question}
+            {/* {console.log(number)} */}
+            {Object(quizDatas[number]).quiz_question}
           </h2>
         </Grid>
         <Grid className="quizCentering">
