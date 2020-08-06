@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core';
 import Wrapper from './styles';
 
-import userData from './dump.json';
+// import userData from './dump.json';
 
 const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -29,7 +29,6 @@ const DialogTitleComponent = () => {
     </Wrapper>
   );
 };
-
 
 // 로그인 화면에서 가장 먼저 나타나는 부분, 흰색 박스부분입니다.
 const SignInSection01 = () => {
@@ -57,50 +56,64 @@ const SignInSection01 = () => {
   };
 
   const onSignInHandler = async e => {
-    var { id, password } = signInUserData;
+    // 로그인 버튼 눌리면
+    var { user_email, user_pwd, status } = signInUserData;
 
-    console.log('TCL: onSignInHandler -> id, password', id, password);
+    // console.log('TCL: onSignInHandler -> id, password', user_email, user_pwd);
 
-    if (!password || !id) {
+    if (!user_pwd || !user_email) {
       alert('You need both email and password.');
       return;
     }
 
-    if (!regExp.test(id)) {
+    if (!regExp.test(user_email)) {
       alert('The email format is invalid.');
       return;
     }
 
-    let respone = [];
-    let hashPassword = '';
-    try {
-      hashPassword = crypto
-        .createHash('sha512')
-        .update(password)
-        .digest('hex');
-    } catch (error) {
-      return;
-    }
+    // let respone = [];
+    // let hashPassword = '';
+    // console.log('user_pwd', user_pwd);
+
+    // try {
+    //   hashPassword = crypto
+    //     .createHash('sha512')
+    //     .update(user_pwd)
+    //     .digest('hex');
+    // } catch (error) {
+    //   return;
+    // }
+    // signInUserData.user_pwd = hashPassword;
+    // console.log('hashPassword', hashPassword);
+    signInUserData.status = 'login';
 
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
-    setUser({ ...userData });
-    setSignDialogOpen(false);
-    setIsSignUp('SignIn');
+    // console.log('userData', signInUserData);
+    Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
+      .then(res => {
+        console.log('res', res);
+        setUser(signInUserData, (signInUserData.token = res.data.token));
+        setSignDialogOpen(false);
+        setIsSignUp('SignIn');
+        // console.log('여기 안들어옴?');
+      })
+      .catch(res => {
+        alert('로그인 실패');
+      });
 
     history.goBack();
   };
 
   useEffect(() => {
-    console.log({ user });
-
-    if (signInUserData.id !== '' && signInUserData.email !== '') {
+    if (signInUserData.user_email !== '' && signInUserData.user_pwd !== '') {
       setDisabled(false);
     }
 
-    if (signInUserData.id === '' || signInUserData.email === '') {
+    if (signInUserData.user_email === '' || signInUserData.user_pwd === '') {
       setDisabled(true);
     }
-  }, [signInUserData.id, signInUserData.email, user]);
+    console.log('effect', user);
+  }, [signInUserData.user_email, signInUserData.user_pwd, user]);
 
   return (
     <Wrapper>
@@ -119,10 +132,10 @@ const SignInSection01 = () => {
             id="outlined-required"
             label="Email"
             className="text-field"
-            defaultValue={signInUserData.id}
+            defaultValue={signInUserData.user_email}
             variant="outlined"
             fullWidth={true}
-            onChange={OnChangeHandler('id')}
+            onChange={OnChangeHandler('user_email')}
             onFocus={event => {
               setIsShowKeyborad(true);
             }}
@@ -137,10 +150,10 @@ const SignInSection01 = () => {
             className="text-field"
             type="password"
             autoComplete="current-password"
-            defaultValue={signInUserData.password}
+            defaultValue={signInUserData.user_pwd}
             variant="outlined"
             fullWidth={true}
-            onChange={OnChangeHandler('password')}
+            onChange={OnChangeHandler('user_pwd')}
             onFocus={event => {
               setIsShowKeyborad(true);
             }}
@@ -272,63 +285,93 @@ const SignUpSection02 = () => {
 
   const OnChangeHandler = name => e => {
     if (
-      signUpUserData.name !== '' &&
-      signUpUserData.id !== '' &&
-      signUpUserData.email !== ''
+      signUpUserData.user_email !== '' &&
+      signUpUserData.user_name !== '' &&
+      signUpUserData.password_1 !== '' &&
+      signUpUserData.password_2 !== '' &&
+      signUpUserData.user_phone !== ''
     ) {
       setDisabled(false);
     }
 
     if (
-      signUpUserData.name === '' ||
-      signUpUserData.id === '' ||
-      signUpUserData.email === ''
+      signUpUserData.user_email === '' ||
+      signUpUserData.user_name === '' ||
+      signUpUserData.password_1 === '' ||
+      signUpUserData.password_2 === '' ||
+      signUpUserData.user_phone === ''
     ) {
       setDisabled(true);
     }
-
+    // console.log('signUpUserData', signUpUserData);
     setSignUpUserData({ ...signUpUserData, [name]: e.target.value });
   };
 
   const onSignUpHandler = async () => {
-    var { name, id, password } = signUpUserData;
+    var {
+      user_name,
+      user_email,
+      password_1,
+      password_2,
+      user_phone,
+    } = signUpUserData;
 
-    if (name === '' || id === '' || password === '') {
+    if (
+      user_name === '' ||
+      user_email === '' ||
+      password_1 === '' ||
+      password_2 === '' ||
+      user_phone === ''
+    ) {
       alert('You need both email and password and username.');
       return;
     }
+    // if (password_1 == password_2) {
+    //   alert('비밀번호가 일치하지 않습니다.');
+    //   return;
+    // }
 
-    if (!regExp.test(id)) {
+    if (!regExp.test(user_email)) {
       alert('The email format is invalid.');
       return;
     }
 
-    let respone = [];
-    let hashPassword = 'test2';
-    try {
-      hashPassword = crypto
-        .createHash('sha512')
-        .update(password)
-        .digest('hex');
-    } catch (error) {
-      console.log('PPAP: signInHandler -> error', error);
-    }
+    // let respone = [];
+    // let hashPassword = 'test2';
+    // try {
+    //   hashPassword = crypto
+    //     .createHash('sha512')
+    //     .update(password)
+    //     .digest('hex');
+    // } catch (error) {
+    //   console.log('PPAP: signInHandler -> error', error);
+    // }
 
-    var body = {
-      id: id,
-      name: name,
-      pwd: hashPassword,
-    };
-    console.log('PPAP: signUpHandler -> body', body);
+    // var body = {
+    //   user_email: user_email,
+    //   user_name: user_name,
+    //   user_pwd: user_pwd,
+    // };
+    // console.log('PPAP: signUpHandler -> body', body);
 
     //
 
-    setIsSignUp('SignIn');
-    setSignUpUserData({
-      id: '',
-      name: '',
-      password: '',
-    });
+    //
+
+    // setSignUpUserData({
+    //   user_email: '',
+    //   user_name: '',
+    //   user_pwd: '',
+    // });
+    // console.log('SignUpUserData', signUpUserData);
+    Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
+      .then(data => {
+        // console.log(data);
+        setSignUpUserData(signUpUserData);
+        setIsSignUp('SignIn');
+        // alert(data.message);
+      })
+      .catch(alert('이메일 인증 후 사용해주세요.'));
   };
 
   return (
@@ -346,12 +389,12 @@ const SignUpSection02 = () => {
             required
             id="outlined-required"
             label="Email"
-            defaultValue={signUpUserData.id}
+            defaultValue={signUpUserData.user_email}
             className="text-field"
             variant="outlined"
             placeholder=""
             fullWidth={true}
-            onChange={OnChangeHandler('id')}
+            onChange={OnChangeHandler('user_email')}
           />
         </Grid>
         <Grid item xs={12} className="sign-up-grid-item1">
@@ -359,12 +402,12 @@ const SignUpSection02 = () => {
             required
             id="outlined-required"
             label="User Name"
-            defaultValue={signUpUserData.name}
+            defaultValue={signUpUserData.user_name}
             className="text-field"
             variant="outlined"
             placeholder=""
             fullWidth={true}
-            onChange={OnChangeHandler('name')}
+            onChange={OnChangeHandler('user_name')}
           />
         </Grid>
         <Grid item xs={12} className="sign-up-grid-item2">
@@ -375,11 +418,41 @@ const SignUpSection02 = () => {
             className="textField"
             type="password"
             autoComplete="current-password"
-            defaultValue={signUpUserData.password}
+            defaultValue={signUpUserData.password_1}
             variant="outlined"
             placeholder="비밀번호"
             fullWidth={true}
-            onChange={OnChangeHandler('password')}
+            onChange={OnChangeHandler('password_1')}
+          />
+        </Grid>
+        <Grid item xs={12} className="sign-up-grid-item2">
+          <TextField
+            required
+            id="outlined-password-input"
+            label="Password"
+            className="textField"
+            type="password"
+            autoComplete="current-password"
+            defaultValue={signUpUserData.password_2}
+            variant="outlined"
+            placeholder="비밀번호"
+            fullWidth={true}
+            onChange={OnChangeHandler('password_2')}
+          />
+        </Grid>
+        <Grid item xs={12} className="sign-up-grid-item2">
+          <TextField
+            required
+            id="outlined-password-input"
+            label="Phone Number"
+            className="textField"
+            type="text"
+            autoComplete="current-password"
+            defaultValue={signUpUserData.user_phone}
+            variant="outlined"
+            placeholder="핸드폰 번호"
+            fullWidth={true}
+            onChange={OnChangeHandler('user_phone')}
           />
         </Grid>
         <Grid item xs={12} className="sign-up-grid-item3">
@@ -706,13 +779,16 @@ const ResponsiveDialogSign = () => {
 
   const [isSignUp, setIsSignUp] = useState('SignIn');
   const [signInUserData, setSignInUserData] = useState({
-    id: '',
-    password: '',
+    user_email: '',
+    status: '',
+    token: '',
   });
   const [signUpUserData, setSignUpUserData] = useState({
-    id: '',
-    name: '',
-    password: '',
+    user_email: '',
+    user_name: '',
+    password_1: '',
+    password_2: '',
+    user_phone: '',
   });
   const [recoverPwUserData, setRecoverPwUserData] = useState({
     email: '',
