@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext, useEffect } from 'react';
+import Badge from 'react-bootstrap/Badge';
 import { PriorityHighSharp, CodeSharp } from '@material-ui/icons';
 import Header from '../../layout/Header/';
 import {
@@ -137,50 +138,94 @@ const ItemDetail = ({ match }) => {
           })}
         </Grid>
 
-        <Grid item>
+        <Grid item xs={6}>
           {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
           <hr /> */}
           {productDatas.map((product, index) => {
             if (productDatas[match.params.id - 1].prod_id === product.prod_id)
               return (
                 <Grid>
-                  <p>뱃지</p>
-                  <h2>{productDatas[match.params.id - 1].prod_title}</h2>
-                  <h4>{productDatas[match.params.id - 1].prod_weight}</h4>
-                  <br />
-                  <h1>
-                    가격 : {productDatas[match.params.id - 1].prod_price}원
-                  </h1>
+                  <h2>
+                    <Badge variant="success">Event</Badge>
+                  </h2>
                   <br />
                   <br />
+                  <h2>
+                    <strong>
+                      {productDatas[match.params.id - 1].prod_title}
+                    </strong>
+                  </h2>
                   <br />
-                  <p>수량</p>
+                  <span className="price">
+                    {productDatas[match.params.id - 1].prod_price}
+                  </span>
+                  <span className="unit1">원</span>
+                  <h5>
+                    (총 용량 : {productDatas[match.params.id - 1].prod_weight})
+                  </h5>{' '}
                   <br />
-                  <h3>{productDatas[match.params.id - 1].prod_desc}</h3>
+                  <h3 className="select">
+                    {productDatas[match.params.id - 1].prod_desc}
+                  </h3>
+                  <br />
+                  {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
+                  <hr />
+                  <span className="cate">할인가</span>
+                  <span className="thro">
+                    {productDatas[match.params.id - 1].prod_price}원
+                  </span>
+                  <span className="unit2">원</span>
+                  <span className="sale">
+                    {parseInt(
+                      (productDatas[match.params.id - 1].prod_price *
+                        (100 -
+                          (productDatas[match.params.id - 1].prod_sale - 10))) /
+                        100,
+                    )}
+                  </span>
+                  <span className="unit2">원</span>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disableElevation
+                    onClick={click1}
+                    disabled={!eventActivated}
+                    style={{ marginLeft: '20px' }}
+                  >
+                    쿠폰 받기
+                  </Button>
+                  <br />
+                  <br />
+                  {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
+                  <Grid>
+                    <span className="cate">할인가</span>
+                    <span className="thro">
+                      {productDatas[match.params.id - 1].prod_price}원
+                    </span>
+                    <span className="sale">
+                      {productDatas[match.params.id - 1].prod_price * 0.9}
+                    </span>
+                    <span className="unit2">원</span>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disableElevation
+                      onClick={QuizDialogOpen}
+                      style={{ marginLeft: '20px' }}
+                    >
+                      퀴즈 풀기
+                    </Button>
+                    <hr />
+                  </Grid>
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
                 </Grid>
               );
           })}
           <hr />
-
-          {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={click1}
-            disabled={!eventActivated}
-          >
-            쿠폰 받기
-          </Button>
-          {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={QuizDialogOpen}
-          >
-            퀴즈 풀기
-          </Button>
         </Grid>
       </Grid>
       <Dialog
