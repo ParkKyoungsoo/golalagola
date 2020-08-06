@@ -19,7 +19,7 @@ const ControlledCarousel = props => {
       {currentEventDatas.map((data, index) => (
         <Carousel.Item>
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={6} className="KisokCentering">
               <Link
                 className="KisokCentering"
                 to={`VoteItemDetail/${
@@ -40,7 +40,7 @@ const ControlledCarousel = props => {
                 />
               </Link>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} className="KisokCentering">
               <Link
                 className="KisokCentering"
                 to={`VoteItemDetail/${
