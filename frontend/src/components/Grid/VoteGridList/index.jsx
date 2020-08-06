@@ -96,7 +96,7 @@ const VoteGridList = props => {
   if (value === -1) {
     return (
       <Wrapper className="root">
-        {console.log('data from server : ', productDatas)}
+        {/* {console.log('data from server : ', productDatas)} */}
         <GridList
           className="grid-list"
           cols={Number.isInteger(nowCols) ? nowCols : 1}
