@@ -89,7 +89,7 @@ const SignInSection01 = () => {
 
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
     // console.log('userData', signInUserData);
-    Axios.post('http://localhost:5000/api/auth/signin', signInUserData)
+    Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
       .then(res => {
         console.log('res', res);
         setUser(signInUserData, (signInUserData.token = res.data.token));
@@ -364,7 +364,7 @@ const SignUpSection02 = () => {
     //   user_pwd: '',
     // });
     // console.log('SignUpUserData', signUpUserData);
-    Axios.post('http://localhost:5000/api/auth/signup', signUpUserData)
+    Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
       .then(data => {
         // console.log(data);
         setSignUpUserData(signUpUserData);
