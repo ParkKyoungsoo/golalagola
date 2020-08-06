@@ -41,6 +41,14 @@ const DialogActionsComponet = () => {
       .post('https://i3b309.p.ssafy.io/api/event/insert', newEventData)
       .then(function(response) {
         console.log(response);
+        setNewEventData({
+          event_id: '',
+          event_prod_A: '',
+          event_prod_B: '',
+          event_date: '',
+          event_expire: '',
+          event_category: '',
+        });
       })
       .catch(error => {
         console.log('error : ', error.response);

@@ -5,8 +5,6 @@ import CheckBox from '../WebModal/CheckBox';
 import { CommonContext } from '../../context/CommonContext';
 
 const EventModal = modalNum => {
-  const { carouselDatas, setCarouselDatas } = useContext(CommonContext);
-
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
 

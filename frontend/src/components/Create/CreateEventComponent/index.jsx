@@ -56,23 +56,37 @@ const InputTitleComponent = () => {
 
   return (
     <Wrapper>
-      <Grid Stlye={{ display: 'flex' }}>
-        <Grid>
-          <img
-            src={Object(productDatas[newEventData.event_prod_A]).prod_image}
-            alt="productA.jpg"
-            style={{ height: '200px', width: '200px' }}
-          />
+      <Grid style={{ display: 'flex' }}>
+        <Grid item xs={5}>
+          {Object(productDatas[newEventData.event_prod_A - 1]).prod_image !==
+          undefined ? (
+            <img
+              src={
+                Object(productDatas[newEventData.event_prod_A - 1]).prod_image
+              }
+              alt="productA.jpg"
+              style={{ height: '200px', width: '200px' }}
+            />
+          ) : (
+            <h1>상품 A</h1>
+          )}
         </Grid>
-        <Grid>
+        <Grid item xs={2}>
           <h1>VS</h1>
         </Grid>
-        <Grid>
-          <img
-            src={Object(productDatas[newEventData.event_prod_B]).prod_image}
-            alt="productA.jpg"
-            style={{ height: '200px', width: '200px' }}
-          />
+        <Grid item xs={5}>
+          {Object(productDatas[newEventData.event_prod_B - 1]).prod_image !==
+          undefined ? (
+            <img
+              src={
+                Object(productDatas[newEventData.event_prod_B - 1]).prod_image
+              }
+              alt="productA.jpg"
+              style={{ height: '200px', width: '200px' }}
+            />
+          ) : (
+            <h1>상품 B</h1>
+          )}
         </Grid>
       </Grid>
     </Wrapper>
@@ -97,8 +111,8 @@ const SubTitleGroupComponent = () => {
 
   const { newEventData, setNewEventData } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
-  const [filterDatas, setFilterDatas] = useState([]);
-  const [filterDatas2, setFilterDatas2] = useState([]);
+  const [filterADatas, setFilterADatas] = useState([]);
+  const [filterBDatas, setFilterBDatas] = useState([]);
 
   const handleChangeA = e => {
     setNewEventData({
@@ -114,28 +128,31 @@ const SubTitleGroupComponent = () => {
   };
 
   const test = () => {
-    setFilterDatas(
+    setFilterADatas(
       productDatas.filter(
-        product => product.prod_category === newEventData.event_category,
+        product =>
+          product.prod_category === newEventData.event_category &&
+          product.prod_id !== newEventData.event_prod_B,
       ),
     );
   };
 
   const test2 = () => {
-    setFilterDatas(
+    setFilterBDatas(
       productDatas.filter(
-        product => product.prod_category === newEventData.event_category,
-        // && product.prod_id !== newEventData.event_prod_B,
+        product =>
+          product.prod_category === newEventData.event_category &&
+          product.prod_id !== newEventData.event_prod_A,
       ),
     );
   };
   useEffect(() => {
     test();
-  }, [newEventData.event_category]);
+  }, [newEventData]);
 
   useEffect(() => {
     test2();
-  }, [newEventData.event_category]);
+  }, [newEventData]);
 
   return (
     <Wrapper>
@@ -165,7 +182,7 @@ const SubTitleGroupComponent = () => {
                 Select category
               </MenuItem>
 
-              {filterDatas.map((data, index) => (
+              {filterADatas.map((data, index) => (
                 <MenuItem key={index} value={data.prod_id}>
                   {data.prod_name}
                 </MenuItem>
@@ -190,7 +207,7 @@ const SubTitleGroupComponent = () => {
                 Select category
               </MenuItem>
 
-              {filterDatas.map((data, index) => (
+              {filterBDatas.map((data, index) => (
                 <MenuItem key={index} value={data.prod_id}>
                   {data.prod_name}
                 </MenuItem>
