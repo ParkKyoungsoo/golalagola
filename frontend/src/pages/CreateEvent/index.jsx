@@ -1,69 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Layout from '../../layout';
-import { ViewContext } from '../../context/ViewContext';
+import { ViewContext } from '../../context/CommonContext';
 import DialogActionsComponet from '../../components/Create/DialogActionsComponet/index';
 import CreateEventComponent from '../../components/Create/CreateEventComponent/index';
 
+import axios from 'axios';
+import Fab from '@material-ui/core/Fab';
+import { CommonContext } from '../../context/CommonContext';
+import { useHistory, Link, Redirect } from 'react-router-dom';
+
 const CreateVote = props => {
-  const [nowSelectedIndex, setNowSelectedIndex] = useState(0);
-  const [isMultipleChoice, setIsMultipleChoice] = useState(false);
-  const [isPowerVoteChoice, setIsPowerVoteChoice] = useState(false);
-  const [category, setCategory] = useState(0);
+  let history = useHistory();
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [thumbnailImageData, setThumbnailImageData] = useState({
-    img: '',
-  });
+  const { newEventData, setNewEventData } = useContext(CommonContext);
+
+  const createEvent = () => {
+    axios
+      .post('https://i3b309.p.ssafy.io/api/event', newEventData)
+      .then(function(response) {
+        console.log(response);
+        setNewEventData({
+          event_prod_A: '',
+          event_prod_B: '',
+          event_date: '',
+          event_expire: '',
+          event_category: '',
+        });
+        // history.push('/Admin/VS');
+        window.location.href = 'http://localhost:3000/admin/vs';
+      })
+      .catch(error => {
+        console.log('error : ', error.response);
+      });
+  };
+
   const [readyToUpload, setReadyToUpload] = useState(true);
-
-  const [data, setData] = useState([
-    {
-      optionTitle: '',
-      targetUploadType: '',
-      uploadTarget: '',
-      uploadTargetPath: '',
-    },
-    {
-      optionTitle: '',
-      targetUploadType: '',
-      uploadTarget: '',
-      uploadTargetPath: '',
-    },
-  ]);
-  const [endDt, setEndDt] = useState(0);
 
   return (
     <Layout>
-      <ViewContext.Provider
-        value={{
-          data,
-          setData,
-          nowSelectedIndex,
-          setNowSelectedIndex,
-          title,
-          setTitle,
-          thumbnailImageData,
-          setThumbnailImageData,
-          isMultipleChoice,
-          category,
-          setCategory,
-          setIsMultipleChoice,
-          isPowerVoteChoice,
-          setIsPowerVoteChoice,
-          description,
-          setDescription,
-          readyToUpload,
-          setReadyToUpload,
-          endDt,
-          setEndDt,
+      <Fab
+        variant="extended"
+        aria-label="like"
+        onClick={() => history.push('/Admin/VS')}
+        className="up-cancel-fab dialog-actions-componet-fab1"
+      >
+        CANCEL
+      </Fab>
+      <Fab
+        variant="extended"
+        aria-label="like"
+        color="inherit"
+        onClick={createEvent}
+        className="up-cancel-fab"
+        style={{
+          backgroundColor: readyToUpload ? '#1FA212' : '#E0E0E0',
         }}
       >
-        <DialogActionsComponet props={props} />
-        <h2>Create New Vote</h2>
-        <CreateEventComponent />
-      </ViewContext.Provider>
+        UPLOAD
+      </Fab>
+      <h2>Create New Vote</h2>
+      <CreateEventComponent />
     </Layout>
   );
 };
