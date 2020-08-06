@@ -33,7 +33,6 @@ export default function VoteGridItem(props) {
   } = useContext(CommonContext);
 
   const infoOpenHandler = async event => {
-    // console.log('aaa');
     let respone = [];
 
     setInfoData(productDatas);
@@ -48,7 +47,6 @@ export default function VoteGridItem(props) {
   };
 
   const displayEndTime = dt => {
-    console.log('VoteGridItem -> dt', dt);
     return '16:00:00';
   };
 

@@ -108,7 +108,7 @@ const App = () => {
   const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 이벤트(VS) 데이터
   const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
   const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
-  const [quizDatas, setQuizDatas] = useState([]); // 퀴즈 데이터
+
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
   const [eventNum, setEventNum] = useState(null);
 
@@ -159,12 +159,6 @@ const App = () => {
     });
   };
 
-  // 퀴즈 데이터
-  const getQuizDatas = () => {
-    Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
-      setQuizDatas(res.data);
-    });
-  };
   // import CarouselData from './pages/Kiosk/KioskMain/dump.json';
   // const [carouselDatas, setCarouselDatas] = useState(CarouselData); // 캐로젤에 들어가는 데이터
 
@@ -177,7 +171,6 @@ const App = () => {
     getEventDatas();
     // getCategoryDatas();
     getMyCouponDatas();
-    getQuizDatas();
   }, []);
 
   useEffect(() => {
@@ -235,8 +228,6 @@ const App = () => {
         setNewEventData,
         eventNum,
         setEventNum,
-        quizDatas,
-        setQuizDatas,
       }}
     >
       <MuiThemeProvider theme={theme}>
