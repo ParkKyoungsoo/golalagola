@@ -16,27 +16,26 @@ const ControlledCarousel = props => {
 
   return (
     <Carousel container activeIndex={index} onSelect={handleSelect}>
-      {currentEventDatas.map((TmpData, index) => (
+      {currentEventDatas.map((data, index) => (
         <Carousel.Item>
           <Grid container>
             <Grid item xs={6}>
               <Link
                 className="KisokCentering"
                 to={`VoteItemDetail/${
-                  Object(productDatas[TmpData.event_item['1'].prod_id - 1])
+                  Object(productDatas[data.event_item['1'].prod_id - 1])
                     .prod_name
                 }/${
-                  Object(productDatas[TmpData.event_item['1'].prod_id - 1])
-                    .prod_id
+                  Object(productDatas[data.event_item['1'].prod_id - 1]).prod_id
                 }`}
                 // to={`VoteItemDetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
               >
                 <img
                   className="tmp"
-                  src={
-                    Object(productDatas[TmpData.event_item['1'].prod_id - 1])
+                  src={`https://i3b309.p.ssafy.io/${
+                    Object(productDatas[data.event_item['1'].prod_id - 1])
                       .prod_image
-                  }
+                  }`}
                   alt="image1"
                 />
               </Link>
@@ -45,20 +44,19 @@ const ControlledCarousel = props => {
               <Link
                 className="KisokCentering"
                 to={`VoteItemDetail/${
-                  Object(productDatas[TmpData.event_item['2'].prod_id - 1])
+                  Object(productDatas[data.event_item['2'].prod_id - 1])
                     .prod_name
                 }/${
-                  Object(productDatas[TmpData.event_item['2'].prod_id - 1])
-                    .prod_id
+                  Object(productDatas[data.event_item['2'].prod_id - 1]).prod_id
                 }`}
                 // to={`VoteItemDetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
               >
                 <img
                   className="tmp"
-                  src={
-                    Object(productDatas[TmpData.event_item['2'].prod_id - 1])
+                  src={`https://i3b309.p.ssafy.io/${
+                    Object(productDatas[data.event_item['2'].prod_id - 1])
                       .prod_image
-                  }
+                  }`}
                   alt="image2"
                 />
               </Link>
