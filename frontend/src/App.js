@@ -127,6 +127,8 @@ const App = () => {
   // 관리지 페이지 중 Product CRUD를 위해 선언했습니다.
   const [currentProductDatas, setCurrentProductDatas] = useState({});
 
+  const [quizDatas, setQuizDatas] = useState([]); // 퀴즈 데이터
+
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
@@ -164,6 +166,14 @@ const App = () => {
   const getMyCouponDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
       setMyCouponDatas(res.data);
+      getQuizDatas();
+    });
+  };
+
+  // 퀴즈 데이터
+  const getQuizDatas = () => {
+    Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
+      setQuizDatas(res.data);
     });
   };
 
@@ -237,6 +247,9 @@ const App = () => {
         setNewEventData,
         eventNum,
         setEventNum,
+
+        quizDatas,
+        setQuizDatas,
       }}
     >
       {console.log('dump', CategoryData)}
