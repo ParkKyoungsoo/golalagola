@@ -79,11 +79,11 @@ const theme = createMuiTheme({
 const App = () => {
   const [user, setUser] = useLocalStorageSetState(
     {
-      user_no: 0,
-      user_id: '',
-      user_nm: '',
+      user_id: 0,
+      user_email: '',
+      user_name: '',
       user_pwd: '',
-      user_img_url: '',
+      isAdmin: '',
       status: '',
       web_site: '',
       token: '',
