@@ -38,21 +38,9 @@ const themeSubTitleGroupComponent = createMuiTheme({
 });
 
 const InputTitleComponent = () => {
-  const { title, setTitle, description, setDescription } = useContext(
-    ViewContext,
-  );
-
   const { newEventData, setNewEventData } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const [productImage, setProductImage] = useState();
-
-  const onChangeDescriptionTitleHandler = e => {
-    setDescription(e.target.value);
-  };
-
-  const onChangeTitleHandler = e => {
-    setTitle(e.target.value);
-  };
 
   return (
     <Wrapper>
@@ -61,9 +49,9 @@ const InputTitleComponent = () => {
           {Object(productDatas[newEventData.event_prod_A - 1]).prod_image !==
           undefined ? (
             <img
-              src={
+              src={`https://i3b309.p.ssafy.io/${
                 Object(productDatas[newEventData.event_prod_A - 1]).prod_image
-              }
+              }`}
               alt="productA.jpg"
               style={{ height: '200px', width: '200px' }}
             />
@@ -78,9 +66,9 @@ const InputTitleComponent = () => {
           {Object(productDatas[newEventData.event_prod_B - 1]).prod_image !==
           undefined ? (
             <img
-              src={
+              src={`https://i3b309.p.ssafy.io/${
                 Object(productDatas[newEventData.event_prod_B - 1]).prod_image
-              }
+              }`}
               alt="productA.jpg"
               style={{ height: '200px', width: '200px' }}
             />
@@ -94,23 +82,11 @@ const InputTitleComponent = () => {
 };
 
 const SubTitleGroupComponent = () => {
-  const {
-    isMultipleChoice,
-    setIsMultipleChoice,
-    isPowerVoteChoice,
-    setIsPowerVoteChoice,
-  } = useContext(ViewContext);
-
-  const onChangeIsMultipleChoiceHandler = name => e => {
-    setIsMultipleChoice(e.target.checked);
-  };
-
-  const onChangeIsPowerVoteChoiceHandler = name => e => {
-    setIsPowerVoteChoice(e.target.checked);
-  };
-
   const { newEventData, setNewEventData } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const [allEventItem, setAllEventItem] = useState([]);
+
   const [filterADatas, setFilterADatas] = useState([]);
   const [filterBDatas, setFilterBDatas] = useState([]);
 
@@ -305,63 +281,6 @@ const CreateVoteMainComponent = () => {
   );
 };
 
-const ThumbnailImageComponent = props => {
-  const { thumbnailImageData, setThumbnailImageData } = useContext(ViewContext);
-
-  const onDrop = useCallback(acceptedFiles => {
-    console.log('PPAP: Basic -> acceptedFiles', acceptedFiles);
-    // Do something with the files
-  }, []);
-
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone(onDrop);
-
-  useEffect(() => {
-    for (const file of acceptedFiles) {
-      console.log('TCL: Basic -> file', file);
-      setThumbnailImageData({
-        img: URL.createObjectURL(file),
-        file: file,
-      });
-    }
-  }, [acceptedFiles]);
-
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
-  return (
-    <Wrapper>
-      <h4 className="ThumbnailImageComponentH4">corver preview</h4>
-      <Paper>
-        <section className="container">
-          <div {...getRootProps({ className: 'dropzone' })}>
-            {thumbnailImageData.img ? (
-              <Avatar
-                variant="square"
-                src={thumbnailImageData.img}
-                className="coverAvatar"
-              />
-            ) : (
-              <Fab variant="extended" className="cover-upload-fab">
-                <NavigationIcon className="extended-icon" />
-                Upload Image
-              </Fab>
-            )}
-            <input {...getInputProps()} />
-          </div>
-          <aside className="thumbnail-image-component-aside">
-            <h4>Image Requirement</h4>
-            <h4>Minimum size of "800x600"</h4>
-            <ul>{files}</ul>
-          </aside>
-        </section>
-      </Paper>
-    </Wrapper>
-  );
-};
-
 const CreateVoteComponent = () => {
   return (
     <Grid
@@ -373,9 +292,6 @@ const CreateVoteComponent = () => {
     >
       <Grid item xs={12} sm={9}>
         <CreateVoteMainComponent />
-      </Grid>
-      <Grid item xs={12} sm={3}>
-        <ThumbnailImageComponent />
       </Grid>
     </Grid>
   );

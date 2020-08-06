@@ -242,7 +242,6 @@ const App = () => {
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/SearchVote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
-            <Route exact path="/CreateEvent" component={CreateEvent} />
             <Route exact path="/KioskMains" component={KioskMains} />
             <Route exact path="/KioskCoupons" component={KioskCoupons} />
             <Route exact path="/KioskQuiz" component={KioskQuiz} />
@@ -261,6 +260,7 @@ const App = () => {
             <Route path="/Admin/Quiz" component={AdminQuiz} />
             <Route path="/Admin/User" component={AdminUser} />
             <Route path="/Admin/Product" component={AdminProduct} />
+            <Route exact path="/Admin/CreateEvent" component={CreateEvent} />
 
             <Redirect to="/not-found" />
           </Switch>
