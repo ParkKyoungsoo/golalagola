@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import AdminNav from './Layout/nav.jsx';
-import NestedList from './Layout/sidebar.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -28,9 +27,7 @@ const MainAdmin = props => {
       <div classes={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={2}>
-            <Paper className={classes.paper}>
-              <NestedList></NestedList>
-            </Paper>
+            <Paper className={classes.paper}></Paper>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paper}>오늘의 날씨는~</Paper>
