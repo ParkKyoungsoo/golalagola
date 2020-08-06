@@ -80,16 +80,6 @@ const DialogActionsComponet = () => {
       return;
     }
 
-    const formData = new FormData();
-
-    formData.append('files', thumbnailImageData.file);
-
-    for (const optionData of data) {
-      if (optionData.targetUploadType === 'image') {
-        formData.append('files', optionData.uploadTarget);
-      }
-    }
-
     var optionData = {
       title: title,
       description: description,
@@ -110,8 +100,6 @@ const DialogActionsComponet = () => {
       end_dt: endDt,
     };
 
-    formData.append('optionData', JSON.stringify(optionData));
-
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
@@ -120,7 +108,6 @@ const DialogActionsComponet = () => {
     };
 
     console.log({ user });
-    console.log({ formData });
     console.log({ config });
 
     //
@@ -154,7 +141,6 @@ const DialogActionsComponet = () => {
           variant="extended"
           aria-label="like"
           color="inherit"
-          // onClick={readyToUpload && createVoteHandler}
           onClick={createEvent}
           className="up-cancel-fab"
           style={{

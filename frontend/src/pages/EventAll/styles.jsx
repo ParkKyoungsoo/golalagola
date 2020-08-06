@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  & .Nav_bar {
+  .Nav_bar {
     display: flex;
     // justify-content: flex-start;
     // justify-content: flex-end;
-    // justify-content: center;
+    justify-content: center;
     // justify-content: space-between;
-    justify-content: space-around;
+    // justify-content: space-around;
     // justify-content: space-evenly;
+    margin: 2vh;
   }
 
-  & .KisokCentering {
+  .KisokCentering {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -19,11 +20,11 @@ const Wrapper = styled.div`
     // background-color: green;
   }
 
-  & .tmp {
-    width: 100%;
+  .tmp {
+    width: 35vw;
     height: auto;
     border-radius: 5%;
-    padding: 0px 10px 0px 10px;
+    margin: 0 1vw 0 1vw;
   }
 `;
 
