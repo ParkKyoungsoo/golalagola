@@ -14,7 +14,6 @@ import MultiCarousel from './MultiCarousel';
 
 const SuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
-
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     console.log('timeout!!');
@@ -36,6 +35,7 @@ const Quiz = () => {
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { quizDatas, setQuizDatas } = useContext(CommonContext);
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -48,7 +48,7 @@ const Quiz = () => {
   };
 
   const modalHandler = () => {
-    setSuccessModalTrigger(false)
+    setSuccessModalTrigger(false);
     setFailModalTrigger(failModalTrigger => false);
   };
 
@@ -62,6 +62,10 @@ const Quiz = () => {
     setIndex(selectedIndex);
   };
 
+  const randomNumber = Math.random();
+
+  const num = Math.floor(randomNumber * quizDatas.length);
+  // console.log('aaa', quizDatas.length);
   return (
     <>
       <Wrapper>
@@ -85,7 +89,9 @@ const Quiz = () => {
               marginBottom: '50px',
             }}
           >
-            {Test.questions[0].question}
+            {/* {console.log(quizDatas[1].quiz_question)} */}
+            {/* {console.log(randomNumber)} */}
+            {Object(quizDatas[num]).quiz_question}
           </h2>
         </Grid>
         <Grid className="quizCentering">
@@ -108,10 +114,10 @@ const Quiz = () => {
           <SuccessModal />
         </Dialog>
       ) : (
-          <Dialog open={failModalTrigger} onClose={modalHandler}>
-            <Fail />
-          </Dialog>
-        )}
+        <Dialog open={failModalTrigger} onClose={modalHandler}>
+          <Fail />
+        </Dialog>
+      )}
     </>
   );
 };
