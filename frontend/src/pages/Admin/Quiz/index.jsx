@@ -1,4 +1,5 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, useContext } from 'react';
+import { CommonContext } from '../../../context/CommonContext';
 import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 import { Grid } from '@material-ui/core';
@@ -47,7 +48,7 @@ const tableIcons = {
 };
 
 const AdminQuiz = () => {
-  const [forceRender, setForceRender] = useState({});
+  const { currentQuizDatas, setCurrentQuizDatas } = useContext(CommonContext);
   const [quizzes, setQuizzes] = useState({
     columns: [
       // { title: 'quiz_id', field: 'quiz_id' },
@@ -60,26 +61,40 @@ const AdminQuiz = () => {
   });
 
   Axios.get('https://i3b309.p.ssafy.io/api/quiz/').then(({ data }) => {
-    console.log('aaa', data);
     quizzes.data = data;
     setQuizzes(quizzes);
   });
 
-  useEffect(() => {
-    // renderQuizList();
-    console.log('useEffect');
-    console.log('quizzes', quizzes);
-  }, [quizzes]);
+  const createQuizData = () => {
+    const QuizData = {
+      quiz_question: '',
+      quiz_hint: '',
+      quiz_answer: true,
+      status: 'create',
+    };
+    setCurrentQuizDatas(QuizData);
+    history.push('/admin/quiz/form');
+  };
+  const updateQuizData = rowData => {
+    // console.log('rowData', rowData);
+    const QuizData = {
+      quiz_id: rowData.quiz_id,
+      quiz_question: rowData.quiz_question,
+      quiz_hint: rowData.quiz_question,
+      quiz_answer: rowData.quiz_answer,
+      status: 'update',
+    };
+    setCurrentQuizDatas(QuizData);
+    history.push('/admin/quiz/form');
+  };
 
   const deleteQuizData = targetQuizId => {
-    console.log(targetQuizId);
-    Axios.delete('https://i3b309.p.ssafy.io/api/quiz/delete', {
+    Axios.delete('https://i3b309.p.ssafy.io/api/quiz', {
       data: {
         quiz_id: targetQuizId,
       },
     })
       .then(res => {
-        console.log(res.data);
         alert('삭제되었습니다.');
         window.location.reload();
       })
@@ -90,50 +105,6 @@ const AdminQuiz = () => {
 
   let history = useHistory();
 
-  // const renderQuizList = () => {
-  //   console.log('renderQuizList');
-  //   return (
-  //     <MaterialTable
-  //       icons={tableIcons}
-  //       title="재고 목록"
-  //       columns={quizzes.columns}
-  //       data={quizzes.data}
-  //       options={{ actionsColumnIndex: -1 }}
-  //       detailPanel={rowData => {
-  //         return (
-  //           <Grid>
-  //             <p>{rowData.quiz_id}</p>
-  //             <p>{rowData.quiz_question}</p>
-  //             <p>{rowData.quiz_answer}</p>
-  //             <p>{rowData.quiz_hint}</p>
-  //             <p>{rowData.quiz_num}</p>
-  //           </Grid>
-  //         );
-  //       }}
-  //       actions={[
-  //         {
-  //           icon: AddBox,
-  //           tooltip: 'Add User',
-  //           isFreeAction: true,
-  //           onClick: event => history.push('/admin/quiz/create'),
-  //         },
-  //         {
-  //           icon: Edit,
-  //           tooltip: 'Save User',
-  //           onClick: event => history.push('/admin/quiz/create'),
-  //         },
-  //         rowData => ({
-  //           icon: DeleteOutline,
-  //           tooltip: 'Delete User',
-  //           onClick: (event, rowData) => {
-  //             console.log(rowData);
-  //             window.confirm('You want to delete ' + rowData.quiz_question);
-  //           },
-  //         }),
-  //       ]}
-  //     />
-  //   );
-  // };
   console.log('quizzes', quizzes);
 
   return (
@@ -145,8 +116,7 @@ const AdminQuiz = () => {
         title="재고 목록"
         columns={quizzes.columns}
         data={quizzes.data}
-        options={{ actionsColumnIndex: -1 }}
-        // onChangeRowsPerPage="20"
+        options={{ actionsColumnIndex: -1, pageSize: 10 }}
         detailPanel={rowData => {
           return (
             <Grid>
@@ -163,13 +133,13 @@ const AdminQuiz = () => {
             icon: AddBox,
             tooltip: 'Add Quiz',
             isFreeAction: true,
-            onClick: event => history.push('/admin/quiz/create'),
+            onClick: event => createQuizData(),
           },
-          {
+          rowData => ({
             icon: Edit,
             tooltip: 'Update Quiz',
-            onClick: event => history.push('/admin/quiz/create'),
-          },
+            onClick: (event, rowData) => updateQuizData(rowData),
+          }),
           rowData => ({
             icon: DeleteOutline,
             tooltip: 'Delete Quiz',
