@@ -65,6 +65,8 @@ const AdminQuiz = () => {
     setQuizzes(quizzes);
   });
 
+  let history = useHistory();
+
   const createQuizData = () => {
     const QuizData = {
       quiz_question: '',
@@ -102,10 +104,6 @@ const AdminQuiz = () => {
         console.log('Error: ', e.response.data);
       });
   };
-
-  let history = useHistory();
-
-  console.log('quizzes', quizzes);
 
   return (
     <div>

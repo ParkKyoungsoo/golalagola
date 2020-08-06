@@ -34,8 +34,10 @@ import ManageEvent from './pages/AdminPage/ManageEvent';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
 import AdminQuiz from './pages/Admin/Quiz/';
+import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
 import AdminProduct from './pages/Admin/Product/';
+import AdminProductForm from './pages/Admin/Product/Form';
 
 //
 import CategoryData from './pages/MainVote/dump.json';
@@ -120,6 +122,12 @@ const App = () => {
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
+
+  // 관리지 페이지 중 Quiz CRUD를 위해 선언했습니다.
+  const [currentQuizDatas, setCurrentQuizDatas] = useState({});
+
+  // 관리지 페이지 중 Product CRUD를 위해 선언했습니다.
+  const [currentProductDatas, setCurrentProductDatas] = useState({});
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -228,8 +236,14 @@ const App = () => {
         setSelectedEventItem,
         mainUrl,
         setMainUrl,
+
+        // 관리자 페이지에서 Event, Quiz, Product CRUD에 사용하는 부분입니다.
         currentEventDatas,
         setCurrentEventDatas,
+        currentQuizDatas,
+        setCurrentQuizDatas,
+        currentProductDatas,
+        setCurrentProductDatas,
 
         newEventData,
         setNewEventData,
@@ -257,18 +271,30 @@ const App = () => {
             <Route exact path="/MyCoupon" component={MyCoupon} />
             <Route exact path="/EventAll" component={EventAll} />
             <Route
+              exact
               path="/VoteItemDetail/:name/:id"
               component={VoteItemDetail}
             />
-            <Route path="/SearchResult/:searchValue" component={SearchResult} />
+            <Route
+              exact
+              path="/SearchResult/:searchValue"
+              component={SearchResult}
+            />
 
             <Route exact path="/Admin/ManageEvent" component={ManageEvent} />
 
             <Route exact path="/Admin" component={Admin} />
-            <Route path="/Admin/VS" component={AdminVS} />
-            <Route path="/Admin/Quiz" component={AdminQuiz} />
-            <Route path="/Admin/User" component={AdminUser} />
-            <Route path="/Admin/Product" component={AdminProduct} />
+            <Route exact path="/Admin/VS" component={AdminVS} />
+            <Route exact path="/Admin/Quiz" component={AdminQuiz} />
+            <Route exact path="/Admin/Quiz/Form" component={AdminQuizForm} />
+
+            <Route exact path="/Admin/User" component={AdminUser} />
+            <Route exact path="/Admin/Product" component={AdminProduct} />
+            <Route
+              exact
+              path="/Admin/Product/Form"
+              component={AdminProductForm}
+            />
             <Route exact path="/Admin/CreateEvent" component={CreateEvent} />
 
             <Redirect to="/not-found" />
