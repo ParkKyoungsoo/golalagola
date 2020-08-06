@@ -184,7 +184,7 @@
 
 1. Scrum 미팅
 
-2. Fron-end   Kiosk 페이지 CSS
+2. Front-end   Kiosk 페이지 CSS
 
    ​					Kiosk Timeout 에러 잡기
 
@@ -205,3 +205,38 @@
    Back-end	서버 오류 잡기
 
 3. JIRA 정리
+
+
+
+#### 2020.08.06(목)
+
+1. 발표 준비 (종례 이후)
+
+   README 정리
+
+   와이어프레임 정리
+
+   PPT
+
+   시연 영상
+
+2. Front-end   실시간
+
+   ​					Web Main 페이지 고치기 
+
+   ​					Web Detail 페이지 고치기
+
+   ​					Web Result 페이지 고치기
+
+   ​					Kiosk Timeout & 새로고침 버튼 추가
+
+   ​					Axios 요청
+
+   ​					회원정보
+
+   ​					관리자 페이지 퀴즈 CRUD
+
+   ​					퀴즈 데이터  추가
+
+   Back-end	REST API 정리
+

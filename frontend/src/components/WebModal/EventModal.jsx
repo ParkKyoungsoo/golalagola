@@ -11,6 +11,7 @@ const EventModal = modalNum => {
   const { eventNum, setEventNum } = useContext(CommonContext);
   const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
   const [tmpData, setTmpData] = useState();
+
   const RadioTest = e => {
     setSelectedEventItem(e.target.value);
     console.log(selectedEventItem);
@@ -24,7 +25,7 @@ const EventModal = modalNum => {
   return (
     <>
       <Wrapper>
-        {console.log('mainValue', selectedEventItem)}
+        {console.log('mainValue', eventNum)}
         <Grid className="EM">
           <Grid container>
             <Grid className="eventM" item xs={5}>
@@ -46,7 +47,7 @@ const EventModal = modalNum => {
               <input
                 type="radio"
                 name="event"
-                value={currentEventDatas[eventNum].event_item['1'].prod_id}
+                value={currentEventDatas[eventNum].event_item['1'].prod_id - 1}
                 onChange={RadioTest}
               ></input>
               <p>
@@ -78,7 +79,7 @@ const EventModal = modalNum => {
               <input
                 type="radio"
                 name="event"
-                value={currentEventDatas[eventNum].event_item['2'].prod_id}
+                value={currentEventDatas[eventNum].event_item['2'].prod_id - 1}
                 onChange={RadioTest}
               ></input>
               <p>
