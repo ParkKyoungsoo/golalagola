@@ -218,11 +218,11 @@
 
    PPT
 
-   시연 영상
+   
 
 2. Front-end   실시간
 
-   ​					Web Main 페이지 수정 
+   ​					Web Main 페이지 수정
 
    ​					Web Detail 페이지 수정
 
