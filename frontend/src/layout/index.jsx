@@ -14,11 +14,12 @@ const Layout = props => {
     <Wrapper>
       <CssBaseline />
       <Drawer />
-      {!wannaHide && <Header maxWidth="lg"/>}
+      {!wannaHide && <Header maxWidth="lg" />}
       <Container
         open={drawerOpen}
         className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
         maxWidth="xl"
+
         // maxWidth="lg"
       >
         <div>{children}</div>
