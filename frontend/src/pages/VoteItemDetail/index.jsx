@@ -101,7 +101,7 @@ const ItemDetail = ({ match }) => {
         Number(match.params.id) === currentEventDatas[i].event_item['2'].prod_id
       ) {
         setEventActivated(eventActivated => true);
-        setEventNum(currentEventDatas[i].event_id - 1);
+        setEventNum(i);
       }
     }
   };

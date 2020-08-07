@@ -245,7 +245,6 @@ const SelectCategoryComponent = () => {
             </MenuItem>
           ))}
         </Select>
-        {/* <FormHelperText>Select category</FormHelperText> */}
       </FormControl>
     </Wrapper>
   );
