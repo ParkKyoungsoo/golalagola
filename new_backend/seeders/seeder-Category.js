@@ -4,6 +4,11 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     let datas = [
       {
+        cat_id: 100,
+        cat_title: "전체",
+        cat_image: "images/bono.jpg",
+      },
+      {
         cat_id: 1,
         cat_title: "냉장 / 냉동 / 간편식",
         cat_image: "images/Simple.jpg",
