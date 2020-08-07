@@ -190,7 +190,6 @@ const App = () => {
 
   useEffect(() => {
     getEventDatas();
-    console.log('App.js currentEventDatas', currentEventDatas);
   }, []);
 
   return (
@@ -252,10 +251,6 @@ const App = () => {
         setQuizDatas,
       }}
     >
-      {console.log('dump', CategoryData)}
-      {console.log('dump', typeof CategoryData)}
-      {console.log('axios', categoryDatas)}
-      {console.log('axios', typeof categoryDatas)}
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
