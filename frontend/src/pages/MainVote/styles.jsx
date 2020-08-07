@@ -48,11 +48,12 @@ const Wrapper = styled.div`
     // background-color: green;
   }
 
-  & .tmp {
-    width: 70%; 
-    // height: auto;
-    max-height: 50vh; 
-    // min-height: 40vh;
+  .tmp {
+    // background-color: green;
+    width: 30vw 
+    height: auto;
+    // max-height: 50vh; 
+    // min-height: 30vh;
     border-radius:5%;
     cursor: pointer;
     transform: scale(1);       //default값

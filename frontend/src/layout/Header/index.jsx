@@ -97,8 +97,26 @@ const Header = props => {
       maxWidth="lg"
     >
       <Wrapper>
+        {isTablet && (
+          <Grid
+            container
+            direction="column"
+            justify="space-between"
+            aria-label="open drawer"
+            onClick={() => {
+              setDrawerOpen(!drawerOpen);
+            }}
+            className={drawerOpen ? 'menu-button ' : 'menu-button'}
+          >
+            <Grid></Grid>
+            <Grid></Grid>
+            <Grid></Grid>
+          </Grid>
+        )}
         <AppBar
           // position="relative"
+          // position="fixed"
+          // className={drawerOpen ? 'appbar a?Wppbar-shift' : 'appbar'}
           style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -147,6 +165,7 @@ const Header = props => {
                         color="primary"
                         variant="contained"
                         onClick={onClickRedirectPathHandler('EventAll')}
+                        className="display-none header-button"
                       >
                         <h5>
                           <Event />
@@ -157,6 +176,7 @@ const Header = props => {
                       color="primary"
                       variant="contained"
                       onClick={onClickRedirectPathHandler('MyCoupon')}
+                      className="display-none header-button"
                     >
                       <h5>
                         <Coupon />
@@ -166,6 +186,7 @@ const Header = props => {
                       color="primary"
                       variant="contained"
                       onClick={handleSignInDialogOpen}
+                      className="display-none header-button"
                     >
                       {user.status === 'login' ? (
                         <h5>
