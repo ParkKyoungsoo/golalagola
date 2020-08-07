@@ -7,11 +7,23 @@ const Wrapper = styled.div`
   .searchIcon {
     cursor: pointer;
   }
+
+  .mobileHome {
+    // position: fixed;
+    // left: 70px;
+    // top: 10px;
+  }
+  & .mobileSearchIcon {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
   .navbarCentering {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
   }
 
   .navbarRight {
