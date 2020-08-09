@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-
+.test {
+  display: flex;
+  flex-wrap: wrap;
+  // align-items: center;
+  // justify-content: center;
+}
 & .KisokCentering {
   display: flex;
   flex-wrap: wrap;

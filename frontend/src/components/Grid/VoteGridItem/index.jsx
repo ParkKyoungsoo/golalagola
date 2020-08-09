@@ -2,7 +2,13 @@ import React, { useContext, useState, useEffect, createContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 
-import { Grid, Typography, Avatar, Badge } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Avatar,
+  Badge,
+  useMediaQuery,
+} from '@material-ui/core';
 import HowToVoteIcon from '@material-ui/icons/HowToVote';
 import MessageIcon from '@material-ui/icons/Message';
 import CheckIcon from '@material-ui/icons/Check';
@@ -51,6 +57,7 @@ export default function VoteGridItem(props) {
   };
 
   let history = useHistory();
+  const isTablet = useMediaQuery('(max-width:960px)');
   const click = () => {
     if (history.location.pathname.includes('SearchResult')) {
       history.replace('');
@@ -63,19 +70,24 @@ export default function VoteGridItem(props) {
   };
 
   return (
-    <Wrapper className="root">
+    <Wrapper className="root" style={isTablet ? null : { margin: '10px' }}>
       <Grid container className="info-open-handler-grid">
-        <Grid item xs={12}>
+        <Grid>
           <Grid className="img-box" onClick={click}>
             <Avatar
               variant="square"
               src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
               className={'large'}
-              imgProps={{
-                className: sw ? 'img' : 'img deactivated',
-              }}
+              // imgProps={{
+              //   className: sw ? 'img' : 'img deactivated',
+              // }}
             />
-            <h3>{itemData.prod_name}</h3>
+            {isTablet ? null : (
+              <>
+                <h3>{itemData.prod_name}</h3>
+                <h3>{itemData.prod_price}원</h3>
+              </>
+            )}
             <span className="date on">{displayEndTime(itemData.end_dt)}</span>
           </Grid>
         </Grid>
