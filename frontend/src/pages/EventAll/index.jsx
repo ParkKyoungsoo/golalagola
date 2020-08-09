@@ -10,7 +10,7 @@ const EventAll = () => {
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
   const [couponData, setCouponData] = useState([]);
-  const { drawerOpen, setDrawerOpen } = useContext(CommonContext);
+
   function choiceProduct(tmpData, productNumber) {
     // 같은 event_id가 존재하지 않는다면 추가
     // 같은 event_id가 존재한다면 선택한 상품을 수정
@@ -24,13 +24,13 @@ const EventAll = () => {
         selectedEvent[tmpData.event_id] = productNumber;
       }
     }
-    console.log('selectedEvent', selectedEvent);
+    // console.log('selectedEvent', selectedEvent);
     setSelectedEvent(selectedEvent);
     setForceRender({});
   }
 
   useEffect(() => {
-    console.log('couponData 받아오기');
+    // console.log('couponData 받아오기');
     // axios로 coupon data 받아오기
     const couponData = [
       {
@@ -48,7 +48,7 @@ const EventAll = () => {
   }, []);
 
   useEffect(() => {
-    console.log('reRender');
+    // console.log('reRender');
   });
 
   const submitCouponData = () => {
@@ -62,6 +62,7 @@ const EventAll = () => {
     const checkedStyle = {
       // border: '1px solid red',
       opacity: '0.5',
+      border: '1px solid black',
     };
 
     // if (index === 2 || index === 4) {
@@ -141,16 +142,16 @@ const EventAll = () => {
   }
 
   return (
-    <Layout>
-      <Wrapper>
-        <button onClick={submitCouponData}>쿠폰 데이터 넘기기</button>
+    <Wrapper>
+      <Layout>
         <Grid>
+          <button onClick={submitCouponData}>쿠폰 데이터 넘기기</button>
           {currentEventDatas.map((tmpData, index) =>
             eventGridRender(index, tmpData),
           )}
         </Grid>
-      </Wrapper>
-    </Layout>
+      </Layout>
+    </Wrapper>
   );
 };
 

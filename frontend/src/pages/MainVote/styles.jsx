@@ -44,7 +44,7 @@ export const Wrapper = styled.div`
   
   .tmp {
     // background-color: green;
-    width: 30vw 
+    width: 25vw
     height: auto;
     // max-height: 50vh; 
     // min-height: 30vh;
