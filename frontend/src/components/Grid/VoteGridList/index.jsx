@@ -6,6 +6,7 @@ import {
   FormControl,
   Select,
   Typography,
+  useMediaQuery,
 } from '@material-ui/core';
 import TuneIcon from '@material-ui/icons/Tune';
 import Wrapper from './styles';
@@ -93,36 +94,47 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
+  const isTablet = useMediaQuery('(max-width:960px)');
   if (value === -1) {
     return (
       <Wrapper className="root">
-        {/* {console.log('data from server : ', productDatas)} */}
-        <GridList
-          className="grid-list"
-          cols={Number.isInteger(nowCols) ? nowCols : 1}
-          cellHeight={'auto'}
-        >
-          {productDatas.map((itemData, index) => {
-            return (
-              <Grid key={index}>
-                <VoteGridItem
-                  itemData={itemData}
-                  index={index}
-                  itemType={itemType}
-                />
-                <p>
-                  <h3 style={{ marginLeft: '20px' }}>
-                    {itemData.prod_price}원
-                  </h3>
-                </p>
-                {/* <img
-                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
-                  alt="TEST"
-                /> */}
-              </Grid>
-            );
-          })}
-        </GridList>
+        {isTablet ? (
+          <GridList
+            className="grid-list"
+            cols={Number.isInteger(nowCols) ? nowCols : 1}
+            cellHeight={'auto'}
+          >
+            {productDatas.map((itemData, index) => {
+              return (
+                <Grid key={index} xs={4}>
+                  <VoteGridItem
+                    itemData={itemData}
+                    index={index}
+                    itemType={itemType}
+                  />
+                </Grid>
+              );
+            })}
+          </GridList>
+        ) : (
+          <GridList
+            className="grid-list"
+            cols={Number.isInteger(nowCols) ? nowCols : 1}
+            cellHeight={'auto'}
+          >
+            {productDatas.map((itemData, index) => {
+              return (
+                <Grid key={index}>
+                  <VoteGridItem
+                    itemData={itemData}
+                    index={index}
+                    itemType={itemType}
+                  />
+                </Grid>
+              );
+            })}
+          </GridList>
+        )}
       </Wrapper>
     );
   } else {
@@ -140,30 +152,51 @@ const VoteGridList = props => {
             />
           </Grid>
         </Grid> */}
-        <GridList
-          className="grid-list"
-          cols={Number.isInteger(nowCols) ? nowCols : 1}
-          cellHeight={'auto'}
-        >
-          {gridItemDatas.map((itemData, index) => {
-            if (itemData.prod_category === value + 1) {
-              return (
-                <Grid key={index}>
-                  <VoteGridItem
-                    itemData={itemData}
-                    index={index}
-                    itemType={itemType}
-                  />
-                  <h3 style={{ marginLeft: '20px' }}>
-                    {itemData.prod_price}원
-                  </h3>
-                </Grid>
-              );
-            } else {
-              return;
-            }
-          })}
-        </GridList>
+        {isTablet ? (
+          <GridList
+            className="grid-list"
+            cols={Number.isInteger(nowCols) ? nowCols : 1}
+            cellHeight={'auto'}
+          >
+            {gridItemDatas.map((itemData, index) => {
+              if (itemData.prod_category === value + 1) {
+                return (
+                  <Grid key={index} xs={4}>
+                    <VoteGridItem
+                      itemData={itemData}
+                      index={index}
+                      itemType={itemType}
+                    />
+                  </Grid>
+                );
+              } else {
+                return;
+              }
+            })}
+          </GridList>
+        ) : (
+          <GridList
+            className="grid-list"
+            cols={Number.isInteger(nowCols) ? nowCols : 1}
+            cellHeight={'auto'}
+          >
+            {gridItemDatas.map((itemData, index) => {
+              if (itemData.prod_category === value + 1) {
+                return (
+                  <Grid key={index}>
+                    <VoteGridItem
+                      itemData={itemData}
+                      index={index}
+                      itemType={itemType}
+                    />
+                  </Grid>
+                );
+              } else {
+                return;
+              }
+            })}
+          </GridList>
+        )}
       </Wrapper>
     );
   }
