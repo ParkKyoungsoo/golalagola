@@ -9,9 +9,9 @@ const Wrapper = styled.div`
   }
 
   .mobileHome {
-    // position: fixed;
-    // left: 70px;
-    // top: 10px;
+    position: fixed;
+    left: 70px;
+    top: 10px;
   }
   & .mobileSearchIcon {
     cursor: pointer;
@@ -24,6 +24,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
   }
 
   .navbarRight {

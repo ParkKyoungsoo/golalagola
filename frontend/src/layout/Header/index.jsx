@@ -19,6 +19,7 @@ import {
   Container,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+
 import Wrapper from './styles';
 import { FiUser } from 'react-icons/fi';
 import { RiCoupon3Line } from 'react-icons/ri';
@@ -97,26 +98,7 @@ const Header = props => {
       maxWidth="lg"
     >
       <Wrapper>
-        {isTablet && (
-          <Grid
-            container
-            direction="column"
-            justify="space-between"
-            aria-label="open drawer"
-            onClick={() => {
-              setDrawerOpen(!drawerOpen);
-            }}
-            className={drawerOpen ? 'menu-button ' : 'menu-button'}
-          >
-            <Grid></Grid>
-            <Grid></Grid>
-            <Grid></Grid>
-          </Grid>
-        )}
         <AppBar
-          // position="relative"
-          // position="fixed"
-          // className={drawerOpen ? 'appbar a?Wppbar-shift' : 'appbar'}
           style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -131,21 +113,38 @@ const Header = props => {
             className="appbar"
           >
             {isTablet ? (
-              <Grid className="mobileHome mobileSearchIcon">
-                <Typography
-                  variant="h5"
-                  className="logo"
-                  onClick={onClickRedirectPathHandler('/MainVote')}
-                >
-                  <span>Gola la</span>
-                  <br />
-                  <span>Gola</span>
-                </Typography>
+              <Grid className="mobileSearchIcon">
+                <Grid className="mobileHome">
+                  <Typography
+                    variant="h5"
+                    className="logo"
+                    onClick={onClickRedirectPathHandler('/MainVote')}
+                  >
+                    <span>Gola la</span>
+                    <br />
+                    <span>Gola</span>
+                  </Typography>
+                </Grid>
                 <Grid className="mobileSearchIcon">
                   {successSearchbarTrigger ? <SearchComponent /> : null}
                   <h5 className="searchIcon" onClick={openSearchbar}>
                     <Search />
                   </h5>
+                </Grid>
+                <Grid
+                  container
+                  direction="column"
+                  justify="space-between"
+                  aria-label="open drawer"
+                  onClick={() => {
+                    setDrawerOpen(!drawerOpen);
+                  }}
+                  className="menu-button"
+                >
+                  {console.log(drawerOpen)}
+                  <Grid></Grid>
+                  <Grid></Grid>
+                  <Grid></Grid>
                 </Grid>
               </Grid>
             ) : (

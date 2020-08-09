@@ -41,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
       email_verify: {
         type: DataTypes.BOOLEAN,
       },
+      isAdmin: {
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
