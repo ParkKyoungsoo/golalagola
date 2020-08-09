@@ -54,14 +54,23 @@ const DrawerHeaderGroup = () => {
     <Grid container direction="row" justify="space-between" alignItems="center">
       <Grid item>
         {user.status ? (
-          <Button
-            variant="contained"
-            color="primary"
-            className="up-cancel-fab"
-            onClick={onClickRedirectPathHandler('/CreateVote')}
-          >
-            Create a Vote
-          </Button>
+          // <Button
+          //   variant="contained"
+          //   color="primary"
+          //   className="up-cancel-fab"
+          //   onClick={onClickRedirectPathHandler('/CreateVote')}
+          // >
+          //   Create a Vote
+          // </Button>
+          <Fragment>
+            <Button
+              variant="outlined"
+              className="up-cancel-fab"
+              onClick={handleSignInDialogOpen}
+            >
+              Sign Out
+            </Button>
+          </Fragment>
         ) : (
           <Fragment>
             <Button
@@ -127,21 +136,21 @@ const DrawerListGroup = () => {
   return (
     <>
       <List className="drawer-list-group-list">
-        <ListItem
+        {/* <ListItem
           button
           key={'Vote'}
           onClick={onClickRedirectPathHandler('/MainVote')}
         >
           <ListItemText primary={'Vote'} disableTypography />
-        </ListItem>
+        </ListItem> */}
         {user.status && (
           <Fragment>
             <ListItem
               button
-              key={'My Vote'}
-              onClick={onClickRedirectPathHandler('/MyVote')}
+              key={'My Coupon'}
+              onClick={onClickRedirectPathHandler('/MyCoupon')}
             >
-              <ListItemText primary={'My Vote'} disableTypography />
+              <ListItemText primary={'My Coupon'} disableTypography />
             </ListItem>
             <ListItem button key={'Me'} className="bg-unset">
               <Accordion className="panel">
@@ -200,6 +209,13 @@ const DrawerListGroup = () => {
         )}
         <ListItem
           button
+          key={'EventAll'}
+          onClick={onClickRedirectPathHandler('/EventAll')}
+        >
+          <ListItemText primary={'Event All'} disableTypography />
+        </ListItem>
+        {/* <ListItem
+          button
           key={'AboutMe'}
           onClick={onClickRedirectPathHandler('/AboutMe')}
         >
@@ -218,7 +234,7 @@ const DrawerListGroup = () => {
           onClick={onClickRedirectPathHandler('/Terms')}
         >
           <ListItemText primary={'Terms'} disableTypography />
-        </ListItem>
+        </ListItem> */}
       </List>
     </>
   );
