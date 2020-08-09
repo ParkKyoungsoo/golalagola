@@ -70,7 +70,7 @@ export default function VoteGridItem(props) {
   };
 
   return (
-    <Wrapper className="root">
+    <Wrapper className="root" style={isTablet ? null : { margin: '10px' }}>
       <Grid container className="info-open-handler-grid">
         <Grid>
           <Grid className="img-box" onClick={click}>

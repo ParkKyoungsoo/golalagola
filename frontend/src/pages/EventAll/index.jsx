@@ -62,7 +62,7 @@ const EventAll = () => {
     const checkedStyle = {
       // border: '1px solid red',
       opacity: '0.5',
-      border: '1px solid black',
+      border: '2px solid black',
     };
 
     // if (index === 2 || index === 4) {
@@ -145,7 +145,11 @@ const EventAll = () => {
     <Wrapper>
       <Layout>
         <Grid>
-          <button onClick={submitCouponData}>쿠폰 데이터 넘기기</button>
+          <Grid style={{ position: 'fixed' }}>
+            <button onClick={submitCouponData}>쿠폰 담기</button>
+            <br />
+            <button>쿠폰함</button>
+          </Grid>
           {currentEventDatas.map((tmpData, index) =>
             eventGridRender(index, tmpData),
           )}
