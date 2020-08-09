@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express.Router();
 const db = require("../models");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const fileUpload = require("express-fileupload");
 
 // 상품 전체 조회
 app.get("/", async function (req, res) {
@@ -33,6 +37,7 @@ app.post("/insert", async (req, res) => {
 
   // ** 중복된 데이터 있는지 검사
 
+  console.log(req.body);
   await db.Product.create(req.body)
     .then((data) => res.json(data))
     .catch((err) => res.status(404).send(err));
@@ -57,6 +62,27 @@ app.delete("/delete", async function (req, res) {
   })
     .then((data) => res.json(data))
     .catch((err) => res.json(err));
+});
+
+// 이미지 업로드
+app.post("/imageupload", fileUpload());
+app.post("/imageupload", async (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: "No file uploaded" });
+  }
+
+  const file = req.files.image;
+  console.log(file);
+
+  // 경로 수정 필요
+  file.mv(`${__dirname}/../config/${file.name}`, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+  });
 });
 
 module.exports = app;
