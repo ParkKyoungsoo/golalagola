@@ -70,7 +70,6 @@ const ItemDetail = ({ match }) => {
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
   const [eventActivated, setEventActivated] = useState(false);
   const { eventNum, setEventNum } = useContext(CommonContext);
-
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.

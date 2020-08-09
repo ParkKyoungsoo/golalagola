@@ -68,20 +68,11 @@ const AdminProduct = () => {
   const [categories, setCategories] = useState({});
   const [products, setProducts] = useState({
     columns: [
-      { title: 'prod_title', field: 'prod_title' },
-      { title: 'prod_name', field: 'prod_name' },
-      {
-        title: 'prod_category',
-        field: 'prod_category',
-        lookup: categories,
-      },
-      { title: 'prod_price', field: 'prod_price' },
-      { title: 'prod_amount', field: 'prod_amount' },
-      { title: 'prod_expiration', field: 'prod_expiration' },
-      { title: 'prod_image', field: 'prod_image' },
-      { title: 'prod_desc', field: 'prod_desc' },
-      { title: 'prod_sale', field: 'prod_sale', type: 'numeric' },
-      { title: 'prod_weight', field: 'prod_weight' },
+      { title: '상품', field: 'prod_name' },
+      { title: '가격', field: 'prod_price' },
+      { title: '수량', field: 'prod_amount' },
+      { title: '유통기한', field: 'prod_expiration' },
+      { title: '할인율', field: 'prod_sale', type: 'numeric' },
     ],
     data: [],
   });
@@ -114,6 +105,7 @@ const AdminProduct = () => {
       prod_desc: '',
       prod_sale: '',
       prod_weight: '',
+      uploadedImage: '',
       status: 'create',
     };
     setCurrentProductDatas(productData);
@@ -168,17 +160,24 @@ const AdminProduct = () => {
         options={{ actionsColumnIndex: -1, pageSize: 20 }}
         detailPanel={rowData => {
           return (
-            <Grid>
-              <p>{rowData.prod_title}</p>
-              <p>{rowData.prod_name}</p>
-              <p>{rowData.prod_category}</p>
-              <p>{rowData.prod_price}</p>
-              <p>{rowData.prod_amount}</p>
-              <p>{rowData.prod_expiration}</p>
-              <p>{rowData.prod_image}</p>
-              <p>{rowData.prod_desc}</p>
-              <p>{rowData.prod_sale}</p>
-              <p>{rowData.prod_weight}</p>
+            <Grid container>
+              <Grid item>
+                <img
+                  src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
+                  alt={`${rowData.prod_name} 이미지`}
+                />
+              </Grid>
+              <Grid>
+                <h3>상품: {rowData.prod_name}</h3>
+                <h5>{rowData.prod_title}</h5>
+                <p>품목: {rowData.prod_category}</p>
+                <p>가격: {rowData.prod_price}</p>
+                <p>수량: {rowData.prod_amount}</p>
+                <p>유통기한: {rowData.prod_expiration}</p>
+                <p>상품 설명: {rowData.prod_desc}</p>
+                <p>할인율: {rowData.prod_sale}</p>
+                <p>무게: {rowData.prod_weight}</p>
+              </Grid>
             </Grid>
           );
         }}

@@ -7,11 +7,10 @@ import Wrapper from './styles';
 const EventAll = () => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
   const [couponData, setCouponData] = useState([]);
-
+  const { drawerOpen, setDrawerOpen } = useContext(CommonContext);
   function choiceProduct(tmpData, productNumber) {
     // 같은 event_id가 존재하지 않는다면 추가
     // 같은 event_id가 존재한다면 선택한 상품을 수정
