@@ -2,6 +2,9 @@ const express = require("express");
 const app = express.Router();
 const db = require("../models");
 
+const authMiddleware = require("../middleware/auth");
+const authAdminMiddleware = require("../middleware/authAdmin");
+
 // Coupon 전체 조회
 app.get("/", async function (req, res) {
   db.Coupon.findAll()
@@ -10,11 +13,10 @@ app.get("/", async function (req, res) {
 });
 
 // Coupon 한개 조회
-app.get("/selectOne/:input_user_id/:input_event_id", async function (req, res) {
+app.get("/:input_user_id", async function (req, res) {
   db.Coupon.findOne({
     where: {
       user_id: req.params.input_user_id,
-      event_id: req.params.input_event_id,
     },
   })
     .then((data) => res.json(data))
@@ -22,7 +24,8 @@ app.get("/selectOne/:input_user_id/:input_event_id", async function (req, res) {
 });
 
 // Coupon 등록하기
-app.post("/insert", async (req, res) => {
+// app.post("/", authMiddleware);
+app.post("/", async (req, res) => {
   // ** 중복된 데이터 있는지 검사
   await db.Coupon.create(req.body)
     .then((data) => res.json(data))
@@ -30,7 +33,8 @@ app.post("/insert", async (req, res) => {
 });
 
 // Coupon 수정
-app.put("/update", async function (req, res) {
+// app.put("/", authAdminMiddleware);
+app.put("/", async function (req, res) {
   await db.Coupon.update(req.body, {
     where: { coupon_id: req.body.coupon_id },
   })
@@ -39,7 +43,8 @@ app.put("/update", async function (req, res) {
 });
 
 // Coupon 삭제
-app.delete("/delete", async function (req, res) {
+// app.delete("/", authAdminMiddleware);
+app.delete("/", async function (req, res) {
   await db.Coupon.destroy({
     where: { coupon_id: req.body.coupon_id },
   })
@@ -62,7 +67,7 @@ app.get("/realtime", async (req, res) => {
         couponSelect[i * 2] = 0;
         couponSelect[i * 2 + 1] = 0;
       }
-      // console.log("obj", obj);
+      console.log("obj", obj);
       console.log("eventProd", eventProd); // 이벤트에 등록한 상품 prod_id 모음
 
       db.Product.findAll()

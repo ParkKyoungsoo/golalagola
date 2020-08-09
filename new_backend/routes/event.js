@@ -2,6 +2,9 @@ const express = require("express");
 const app = express.Router();
 const db = require("../models");
 
+const authMiddleware = require("../middleware/auth");
+const authAdminMiddleware = require("../middleware/authAdmin");
+
 // Event 전체 조회
 app.get("/", async function (req, res) {
   var resList = new Array();
@@ -25,19 +28,31 @@ app.get("/", async function (req, res) {
       res.json(resList);
     })
     .catch((err) => res.status(404).send(err));
+
+  console.log(resList);
+
+  // for(var i=0 ; i<db.Product.length;i++){
+  //   db.Product.findOne({
+  //     where:{prod_}
+  //   })
+  // .then((data) => {
+
+  // })
+  // }
 });
 
 // Event 한개 조회
-app.get("/selectOne/:input_id", async function (req, res) {
-  db.Event.findOne({
-    where: { event_id: req.params.input_id },
-  })
-    .then((data) => res.json(data))
-    .catch((err) => res.status(404).send(err));
-});
+// app.get("/selectOne/:input_id", async function (req, res) {
+//   db.Event.findOne({
+//     where: { event_id: req.params.input_id },
+//   })
+//     .then((data) => res.json(data))
+//     .catch((err) => res.status(404).send(err));
+// });
 
 // Event 등록하기
-app.post("/insert", async (req, res) => {
+// app.post("/", authAdminMiddleware);
+app.post("/", async (req, res) => {
   // ** 중복된 데이터 있는지 검사
   await db.Event.create(req.body)
     .then((data) => res.json(data))
@@ -45,7 +60,8 @@ app.post("/insert", async (req, res) => {
 });
 
 // Event 수정
-app.put("/update", async function (req, res) {
+// app.put("/", authAdminMiddleware);
+app.put("/", async function (req, res) {
   await db.Event.update(req.body, {
     where: { event_id: req.body.event_id },
   })
@@ -54,7 +70,8 @@ app.put("/update", async function (req, res) {
 });
 
 // Event 삭제
-app.delete("/delete", async function (req, res) {
+// app.delete("/", authAdminMiddleware);
+app.delete("/", async function (req, res) {
   await db.Event.destroy({
     where: { event_id: req.body.event_id },
   })

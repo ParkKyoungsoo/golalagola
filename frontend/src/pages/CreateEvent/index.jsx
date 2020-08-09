@@ -35,7 +35,7 @@ const CreateVote = props => {
             event_category: '',
           });
           // history.push('/Admin/VS');
-          window.location.href = 'http://localhost:3000/admin/vs';
+          window.location.href = '/admin/vs';
         })
         .catch(error => {
           console.log('error : ', error.response);
