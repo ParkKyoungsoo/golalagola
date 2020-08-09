@@ -141,7 +141,7 @@ const Header = props => {
                   }}
                   className="menu-button"
                 >
-                  {console.log(drawerOpen)}
+                  {/* {console.log(drawerOpen)} */}
                   <Grid></Grid>
                   <Grid></Grid>
                   <Grid></Grid>
