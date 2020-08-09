@@ -212,6 +212,39 @@ const useGetCategoryDatas = url => {
   return data;
 };
 
+// const RecommandProduct = () => {
+//   const { sortedDatas, setSortedDatas } = useContext(CommonContext);
+//   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+
+//   sortedDatas.sort(function(a, b) {
+//     if (a.prod_amount > b.prod_amount) {
+//       return -1;
+//     }
+//     if (a.prod_amount < b.prod_amount) {
+//       return 1;
+//     }
+//     return 0;
+//   });
+
+//   const newSortedData = [];
+
+//   for (var i = 0; i < 10; i++) {
+//     for (var j = 0; j < currentEventDatas.length; j++) {
+//       if (
+//         sortedDatas[i].prod_id !==
+//         (currentEventDatas[j].event_item['1'].prod_id ||
+//           currentEventDatas[j].event_item['2'].prod_id)
+//       ) {
+//         newSortedData.push(sortedDatas[i]);
+//       }
+//     }
+//   }
+
+//   return (
+//     <Wrapper>{newSortedData.map((data, index) => data.prod_name)}</Wrapper>
+//   );
+// };
+
 const SelectCategoryComponent = () => {
   const { categoryDatas, setCategoryDatas } = useContext(CommonContext);
   const { newEventData, setNewEventData } = useContext(CommonContext);
@@ -261,6 +294,7 @@ const CreateVoteMainComponent = () => {
         spacing={2}
       >
         <Grid item xs={12}>
+          {/* <RecommandProduct /> */}
           <InputTitleComponent />
         </Grid>
         <Grid item xs={12}>
