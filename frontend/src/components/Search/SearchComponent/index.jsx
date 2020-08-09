@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Axios from 'axios';
 
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, useMediaQuery } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
 import { useHistory, useParams } from 'react-router-dom';
@@ -15,6 +15,7 @@ const Search = () => {
 const SearchComponent = () => {
   let history = useHistory();
   let location = useParams();
+  const isTablet = useMediaQuery('(max-width:960px)');
   const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
@@ -45,30 +46,40 @@ const SearchComponent = () => {
 
   return (
     <Wrapper>
-      <Grid
-        container
-        // direction="row"
-        className="search-component-grid"
-        onClick={TopSearchCloseHandler}
-      >
-        {/* <Grid item>
+      {isTablet ? (
+        <TextField
+          placeholder="Search..."
+          autoFocus={true}
+          onKeyPress={onKeyPress(history.location)}
+          className="input2"
+          style={{ width: '100px' }}
+        />
+      ) : (
+        <Grid
+          container
+          // direction="row"
+          className="search-component-grid"
+          onClick={TopSearchCloseHandler}
+        >
+          {/* <Grid item>
           <Grid container spacing={1} alignItems="flex-end"> */}
-        {/* <Grid item xs={3}>
+          {/* <Grid item xs={3}>
               <SearchIcon
                 className="search-component-grid-item-se-icon"
                 fontSize="large"
               />
             </Grid> */}
 
-        <Grid item xs={9}>
-          <TextField
-            placeholder="Search..."
-            autoFocus={true}
-            onKeyPress={onKeyPress(history.location)}
-            className="input2"
-          />
+          <Grid item xs={9}>
+            <TextField
+              placeholder="Search..."
+              autoFocus={true}
+              onKeyPress={onKeyPress(history.location)}
+              className="input2"
+            />
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Wrapper>
   );
 };
