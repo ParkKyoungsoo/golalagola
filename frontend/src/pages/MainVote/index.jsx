@@ -101,9 +101,10 @@ const useOnChangeIndex = categoryDatas => {
 // main
 
 const MainVote = props => {
-  const { drawerOpen, serverUrlBase, serverImgUrl } = useContext(CommonContext);
+  const { drawerOpen, serverUrlBase, serverImgUrl, setDrawerOpen } = useContext(
+    CommonContext,
+  );
   const { productDatas, setProductDatas } = useContext(CommonContext);
-
   const categoryDatas = useGetCategoryDatas('/category');
 
   const [flag, setFlag] = useState(false);
@@ -118,6 +119,10 @@ const MainVote = props => {
   ] = useOnChangeIndex(categoryDatas);
 
   let history = useHistory();
+
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, []);
   // 실시간 순위
   // const [realtime, setRealTime] = useState([]);
 
@@ -135,13 +140,13 @@ const MainVote = props => {
       }}
     >
       <Layout>
-        <Wrapper>
+        <Wrapper
+          onClick={() => {
+            setDrawerOpen(0);
+          }}
+        >
           {/* carousel, 실시간 순위 */}
-          <AppBar
-            position="relative"
-            color="inherit"
-            className={drawerOpen ? 'appbar appbar-shift' : 'appbar'}
-          >
+          <AppBar position="relative" color="inherit" className="appbar">
             <Grid container>
               <Grid item md={10} xs={12}>
                 <ControlledCarousel />

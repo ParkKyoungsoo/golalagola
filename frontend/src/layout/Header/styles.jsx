@@ -34,8 +34,8 @@ const Wrapper = styled.div`
   }
   & .menu-button {
     position: fixed;
-    left: 12px;
-    top: 14px;
+    right: 30px;
+    top: 30px;
     z-index: 1300;
     margin-left: 0;
     width: 23px;
@@ -79,7 +79,7 @@ const Wrapper = styled.div`
     width: 80%;
     transition: all 0.3s ease;
     // box-sizing: border-box;
-    
+
     &.appbar-shift {
       width: calc(100% -280px);
       margin-left: 280px;

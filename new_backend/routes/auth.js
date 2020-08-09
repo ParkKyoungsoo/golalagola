@@ -9,6 +9,7 @@ const smtpTransporter = require("nodemailer-smtp-transport");
 
 // jwt middleware
 const authMiddleware = require("../middleware/auth");
+const authAdminMiddleware = require("../middleware/authAdmin");
 
 // jwt
 const jwt = require("jsonwebtoken");
@@ -35,17 +36,19 @@ app.post("/signin", async (req, res) => {
           .createHmac("sha1", config.secret)
           .update(reqeustData.user_pwd)
           .digest("base64");
-
+        // console.log("login", encrypted);
         // 비밀번호 일치 여부 확인
         if (userData.user_pwd !== encrypted) {
           res.status(403).send({ message: "비밀번호가 일치하지 않습니다." });
         } else {
           // 아아디, 비밀번호 일치
+          // console.log("id/pwd", userData);
           const token = jwt.sign(
             {
               // 첫번째 인자: 로그인을 위한 정보
               user_email: userData.user_email,
               user_pwd: encrypted,
+              isAdmin: userData.isAdmin,
             },
             // 두번째 인자: 비밀 키
             secretObj.secret,
@@ -61,7 +64,9 @@ app.post("/signin", async (req, res) => {
                   message: "로그인에 성공하여 토큰이 발급되었습니다.",
                   token: token,
                 });
-                console.log("로그인에 성공하여 토큰이 발급되었습니다.");
+                res.json({
+                  message: "로그인에 성공하여 토큰이 발급되었습니다.",
+                });
               }
             }
           );
@@ -74,20 +79,21 @@ app.post("/signin", async (req, res) => {
 });
 
 // 이메일 보내는 주체
-// var smtpTransport = nodemailer.createTransport(
-//   smtpTransporter({
-//     service: "Gmail",
-//     host: "smtp.gmail.com",
-//     auth: {
-//       user: "jugiaro95@gmail.com",
-//       pass: "sh95923517ahn!",
-//     },
-//   })
-// );
+var smtpTransport = nodemailer.createTransport(
+  smtpTransporter({
+    service: "Gmail",
+    host: "smtp.gmail.com",
+    auth: {
+      user: "gusangbuck@gmail.com",
+      pass: "728q728q@",
+    },
+  })
+);
 
 //회원가입
 app.post("/signup", async (req, res) => {
   // 이미 로그인이 되어있다면 이미 되어있다고 알리기
+  console.log("로긍니 시도", req.body);
   if (req.headers.token) {
     res.status(403).json({ message: "이미 로그인 되어있습니다." });
   } else {
@@ -119,14 +125,13 @@ app.post("/signup", async (req, res) => {
             .update(reqeustData.password_1)
             .digest("base64");
 
-          console.log("req", reqeustData);
-
           db.User.create({
             user_email: reqeustData.user_email,
             user_pwd: encrypted,
             user_name: reqeustData.user_name,
             user_phone: reqeustData.user_phone,
             key_verify: key_for_verify,
+            // isAdmin: reqeustData.isAdmin,
           }).then(() => {
             //옵션
             var mailOpt = {
@@ -139,7 +144,7 @@ app.post("/signup", async (req, res) => {
                 reqeustData.user_email +
                 "님 회원가입을 환영합니다.</h3>" +
                 "<h1>이메일 인증을 위해 인증버튼을 클릭해주세요.</h1><br>" +
-                "<form method='post' action='http://localhost:5000/api/auth/approval'>" +
+                "<form method='post' action='https://i3b309.p.ssafy.io/api/auth/approval'>" +
                 "<input type='hidden' name='user_email' value='" +
                 reqeustData.user_email +
                 "'>" +
@@ -151,9 +156,10 @@ app.post("/signup", async (req, res) => {
             //전송
             smtpTransport.sendMail(mailOpt, function (err, res) {
               if (err) {
-                console.log(err);
+                res.json({ message: err });
               } else {
-                console.log("email has been sent.");
+                // res.send({ message: "email has been sent." });
+                console.log("이메일 전송");
               }
               smtpTransport.close();
             });
@@ -174,8 +180,6 @@ app.post("/signup", async (req, res) => {
 
 // 회원가입 후 이메일 인증
 app.post("/approval", async (req, res) => {
-  // console.log("req", req);
-  console.log("***********", req.body);
   await db.User.update(
     { email_verify: true },
     {
@@ -240,9 +244,9 @@ app.post("/find_pwd", async (req, res) => {
             //전송
             smtpTransport.sendMail(mailOpt, function (err, res) {
               if (err) {
-                console.log(err);
+                res.json({ message: err });
               } else {
-                console.log("email has been sent.");
+                res.json({ message: "email has been sent." });
               }
               smtpTransport.close();
             });
@@ -264,7 +268,7 @@ app.post("/find_pwd", async (req, res) => {
 // });
 
 // 회원정보 수정
-app.use("/update", authMiddleware);
+// app.put("/update", authMiddleware);
 app.put("/update", async (req, res) => {
   const token = req.headers.token;
   if (!token) {
@@ -297,6 +301,35 @@ app.put("/update", async (req, res) => {
   }
 });
 
-// 회원 탈퇴
+// User 전체 조회
+// app.get("/", authAdminMiddleware);
+app.get("/", async function (req, res) {
+  db.User.findAll()
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// User 한개 조회
+// app.get("/:input_id", authAdminMiddleware);
+app.get("/:input_id", async function (req, res) {
+  db.User.findOne({
+    where: {
+      user_id: req.params.input_id,
+      event_id: req.params.input_id,
+    },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.status(404).send(err));
+});
+
+// User 삭제
+// app.delete("/", authAdminMiddleware);
+app.delete("/", async function (req, res) {
+  await db.User.destroy({
+    where: { user_id: req.body.user_id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.json(err));
+});
 
 module.exports = app;

@@ -19,9 +19,9 @@ const ControlledCarousel = props => {
       {currentEventDatas.map((data, index) => (
         <Carousel.Item>
           <Grid container>
-            <Grid item xs={6} className="KisokCentering">
+            <Grid item xs={6} className="KisokCentering tmp">
               <Link
-                className="KisokCentering"
+                className="KisokCentering tmp"
                 to={`VoteItemDetail/${
                   Object(productDatas[data.event_item['1'].prod_id - 1])
                     .prod_name
@@ -40,9 +40,9 @@ const ControlledCarousel = props => {
                 />
               </Link>
             </Grid>
-            <Grid item xs={6} className="KisokCentering">
+            <Grid item xs={6} className="KisokCentering tmp">
               <Link
-                className="KisokCentering"
+                className="KisokCentering tmp"
                 to={`VoteItemDetail/${
                   Object(productDatas[data.event_item['2'].prod_id - 1])
                     .prod_name
