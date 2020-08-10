@@ -57,7 +57,7 @@ export default function VoteGridItem(props) {
   };
 
   let history = useHistory();
-  const isMobile = useMediaQuery('(max-width:920px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   const click = () => {
     if (history.location.pathname.includes('SearchResult')) {
       history.replace('');
@@ -68,8 +68,17 @@ export default function VoteGridItem(props) {
       history.push(`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`);
     }
   };
+  var originPrice = itemData.prod_price;
+  var quizSale = itemData.prod_sale;
+  var quizSalePrice = parseInt((originPrice * (100 - quizSale)) / 100);
 
-  return (
+  // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  //fruitdev.tistory.com/160 [과일가게 개발자]
+  출처: https: return (
     <Wrapper className="root" style={isMobile ? null : { margin: '10px' }}>
       <Grid container className="info-open-handler-grid">
         <Grid>
@@ -82,10 +91,54 @@ export default function VoteGridItem(props) {
               //   className: sw ? 'img' : 'img deactivated',
               // }}
             />
-            {isMobile ? null : (
+            {isMobile ? (
               <>
-                <h3>{itemData.prod_name}</h3>
-                <h3>{itemData.prod_price}원</h3>
+                <span>{itemData.prod_title}</span>
+                <span
+                  style={{
+                    color: 'red',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                    border: '3px solid pink',
+                  }}
+                >
+                  {'   '}
+                  {itemData.prod_sale}%{'   '}
+                </span>
+                <br />
+                <span style={{ textDecoration: 'line-through' }}>
+                  {numberWithCommas(originPrice)}원{'  '}
+                </span>
+
+                <span style={{ fontWeight: 'bold' }}>
+                  {numberWithCommas(quizSalePrice)}원
+                </span>
+              </>
+            ) : (
+              <>
+                <span style={{ fontSize: '1.5vw' }}>{itemData.prod_title}</span>
+                <span
+                  style={{
+                    color: 'red',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                    border: '3px solid pink',
+                    fontSize: '1.5vw',
+                  }}
+                >
+                  {'   '}
+                  {itemData.prod_sale}%{'   '}
+                </span>
+                <br />
+                <span
+                  style={{ textDecoration: 'line-through', fontSize: '1.5vw' }}
+                >
+                  {numberWithCommas(originPrice)}원{'  '}
+                </span>
+
+                <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
+                  {numberWithCommas(quizSalePrice)}원
+                </span>
               </>
             )}
             <span className="date on">{displayEndTime(itemData.end_dt)}</span>

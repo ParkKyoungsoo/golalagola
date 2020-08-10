@@ -13,7 +13,7 @@ const ButtonBases = props => {
   } = props;
 
   const imgUrl = `${categoryData.cat_img_url}`;
-  const isMobile = useMediaQuery('(max-width:920px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   return (
     <Wrapper>
       <div
