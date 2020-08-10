@@ -94,7 +94,7 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
-  const isMobile = useMediaQuery('(max-width:920px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   if (value === -1) {
     return (
       <Wrapper className="root">
@@ -103,6 +103,9 @@ const VoteGridList = props => {
             className="grid-list"
             cols={Number.isInteger(nowCols) ? nowCols : 1}
             cellHeight={'auto'}
+            style={{
+              marginTop: '10px',
+            }}
           >
             {productDatas.map((itemData, index) => {
               return (
@@ -124,7 +127,7 @@ const VoteGridList = props => {
           >
             {productDatas.map((itemData, index) => {
               return (
-                <Grid key={index}>
+                <Grid key={index} xs={3}>
                   <VoteGridItem
                     itemData={itemData}
                     index={index}
@@ -157,6 +160,9 @@ const VoteGridList = props => {
             className="grid-list"
             cols={Number.isInteger(nowCols) ? nowCols : 1}
             cellHeight={'auto'}
+            style={{
+              marginTop: '10px',
+            }}
           >
             {gridItemDatas.map((itemData, index) => {
               if (itemData.prod_category === value + 1) {
@@ -183,7 +189,7 @@ const VoteGridList = props => {
             {gridItemDatas.map((itemData, index) => {
               if (itemData.prod_category === value + 1) {
                 return (
-                  <Grid key={index}>
+                  <Grid key={index} xs={3}>
                     <VoteGridItem
                       itemData={itemData}
                       index={index}

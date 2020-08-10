@@ -15,7 +15,7 @@ const Search = () => {
 const SearchComponent = () => {
   let history = useHistory();
   let location = useParams();
-  const isMobile = useMediaQuery('(max-width:920px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
@@ -76,6 +76,9 @@ const SearchComponent = () => {
               autoFocus={true}
               onKeyPress={onKeyPress(history.location)}
               className="input2"
+              // style={{
+
+              // }}
             />
           </Grid>
         </Grid>
