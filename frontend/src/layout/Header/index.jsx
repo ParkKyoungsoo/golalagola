@@ -43,7 +43,7 @@ const Search = () => {
 const Header = props => {
   let history = useHistory();
   // const isTablet = useMediaQuery('(max-width:960px)');
-  const isMobile = useMediaQuery('(max-width:920px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
 
   const {
     user,
@@ -104,6 +104,7 @@ const Header = props => {
             style={{
               alignItems: 'center',
             }}
+            className="headerColor"
           >
             <Grid
               container
@@ -116,7 +117,7 @@ const Header = props => {
               <Grid className="mobileSearchIcon">
                 <Typography
                   variant="h5"
-                  className=""
+                  className="headerColor"
                   onClick={onClickRedirectPathHandler('/MainVote')}
                 >
                   <span>Gola la</span>
@@ -127,7 +128,7 @@ const Header = props => {
                   onClick={() => {
                     setDrawerOpen(0);
                   }}
-                  className="searchIcon"
+                  className="searchIcon headerColor"
                 >
                   {successSearchbarTrigger ? <SearchComponent /> : null}
                   <h5 onClick={openSearchbar}>
@@ -145,9 +146,21 @@ const Header = props => {
                   className="menu-button"
                 >
                   {/* {console.log(drawerOpen)} */}
-                  <Grid></Grid>
-                  <Grid></Grid>
-                  <Grid></Grid>
+                  <Grid
+                    style={{
+                      backgroundColor: 'black',
+                    }}
+                  ></Grid>
+                  <Grid
+                    style={{
+                      backgroundColor: 'black',
+                    }}
+                  ></Grid>
+                  <Grid
+                    style={{
+                      backgroundColor: 'black',
+                    }}
+                  ></Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -158,13 +171,13 @@ const Header = props => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
+            className="headerColor"
           >
             <Grid
               container
               style={{
                 height: '10vh',
                 // justifyContent: 'flex-end',
-                // backgroundColor: 'red',
               }}
               className="appbar"
             >
@@ -200,18 +213,26 @@ const Header = props => {
                       className="navbarRight"
                     >
                       {user.status === 'login' ? (
+                        // <Button
+                        //   color="primary"
+                        //   variant="contained"
+                        //   onClick={onClickRedirectPathHandler('EventAll')}
+                        //   className=" header-button"
+                        // >
+                        //   <h3>
+                        //     <Event />
+                        //   </h3>
+                        // </Button>
                         <Button
                           color="primary"
                           variant="contained"
                           onClick={onClickRedirectPathHandler('EventAll')}
-                          className=" header-button"
+                          className="header-button headerColor"
                         >
-                          <h3>
-                            <Event />
-                          </h3>
+                          <h6>이벤트</h6>
                         </Button>
                       ) : null}
-                      <Button
+                      {/* <Button
                         color="primary"
                         variant="contained"
                         onClick={onClickRedirectPathHandler('MyCoupon')}
@@ -220,19 +241,27 @@ const Header = props => {
                         <h3>
                           <Coupon />
                         </h3>
+                      </Button> */}
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={onClickRedirectPathHandler('MyCoupon')}
+                        className="header-button headerColor"
+                      >
+                        <h6>쿠폰</h6>
                       </Button>
                       <Button
                         color="primary"
                         variant="contained"
                         onClick={handleSignInDialogOpen}
-                        className=" header-button"
+                        className=" header-button headerColor"
                       >
                         {user.status === 'login' ? (
                           <h3>
                             <User />
                           </h3>
                         ) : (
-                          <h3>Sign in</h3>
+                          <h6>Sign in</h6>
                         )}
                       </Button>
                     </Grid>

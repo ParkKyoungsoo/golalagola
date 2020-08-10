@@ -4,7 +4,10 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 1300;
   height: 10vh;
-
+  .headerColor {
+    background-color: #f7f2f2;
+    color: black;
+  }
   .searchIcon {
     display: flex;
     flex-wrap: nowrap;
@@ -107,7 +110,7 @@ const Wrapper = styled.div`
     }
   }
   & .header-button {
-    margin-right: 12px;
+    // margin-right: 12px;
     font-weight: normal;
     box-shadow: none;
     letter-spacing: 1px;
@@ -120,6 +123,7 @@ const Wrapper = styled.div`
       box-shadow: none;
     }
   }
+
   & .header-location-searchbar {
     height: 100px;
   }

@@ -119,7 +119,7 @@ const MainVote = props => {
   ] = useOnChangeIndex(categoryDatas);
 
   let history = useHistory();
-  const isMobile = useMediaQuery('(max-width:920px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   useEffect(() => {
     setDrawerOpen(false);
   }, []);
@@ -154,6 +154,9 @@ const MainVote = props => {
                   xs={12}
                   className="tiemPopularity"
                   position="absolute"
+                  style={{
+                    backgroundColor: '#f7f2f2',
+                  }}
                 >
                   <Box
                     height="80%"
@@ -230,6 +233,9 @@ const MainVote = props => {
                   xs={12}
                   className="tiemPopularity"
                   position="absolute"
+                  style={{
+                    backgroundColor: '#f7f2f2',
+                  }}
                 >
                   <Box
                     height="80%"

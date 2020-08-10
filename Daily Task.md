@@ -255,3 +255,23 @@
    Back-end		User
 
    ​						Data 추가
+
+
+
+#### 2020.08.09(일)
+
+1. Front-end   메인화면 반응형
+
+   Back-end	
+
+   
+
+#### 2020.08.10(월)
+
+1. Scrum 미팅
+
+2. README 정리
+
+3. Front-end   메인화면 반응형 CSS
+
+   Back-end	User 연동
