@@ -1,49 +1,45 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  & .textCss {
+  & .inputCss {
+    margin-top: 10px;
+    justify-content: center;
     text-align: center;
-    margin-top: 120px;
-    // vertical-align: middle;
+    
   }
 
-  & .checkBox {
+  & .EM {
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  & .butt{
+    width: 20px;
+    height: 20px;
+  }
+
+  & .desCss {
+    margin-top: 10px;
+  }
+
+  & .textCss {
     display: flex;
-    justify-content: space-around;
-
-    // align-items: space-around;
-    // background-color: black;
-  }
-
-  & .radio1 {
-    margin-right: 230px;
-  }
-
-  & .radio2 {
-    margin-right: 5px;
+    justify-content: center;
   }
 
   & .BtnCss {
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    // background-color: black;
   }
-
-  // & .tmp {
-  //   display: block;
-  //   width: 500px;
-  //   height: auto;
-  //   align-items: center;
-  //   justify-content: center;
-  // }
 
   & .quizCentering {
     display: flex;
     align-items: center;
     justify-content: center;
     position: buttom:
+  }
+
   }
 `;
 

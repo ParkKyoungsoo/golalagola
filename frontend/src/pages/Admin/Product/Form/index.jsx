@@ -243,7 +243,7 @@ const AdminProductForm = () => {
           prod_price: price.value,
           prod_amount: amount.value,
           prod_expiration: expiration,
-          prod_image: image, // 수정이 필요함
+          prod_image: `images/${imageName}`, 
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
@@ -281,7 +281,7 @@ const AdminProductForm = () => {
           prod_price: price.value,
           prod_amount: amount.value,
           prod_expiration: expiration,
-          prod_image: image, // 수정이 필요함
+          prod_image: `images/${imageName}`, 
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
@@ -322,10 +322,10 @@ const AdminProductForm = () => {
     setImage(e.target.files[0]);
     setImageName(e.target.files[0].name);
     setUploadedImage(URL.createObjectURL(e.target.files[0]));
-    console.log(image);
   };
 
-  useEffect(() => {}, []);
+  console.log(image)
+  console.log(imageName)
   return (
     <div>
       <AdminNav />
