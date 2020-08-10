@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,6 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Nav from '../../layout/Header';
 import Layout from '../../layout/';
 import { CommonContext } from '../../context/CommonContext';
+
+import axios from 'axios';
 
 import QRCode from 'react.qrcode.generator';
 
@@ -89,7 +91,10 @@ export default function StickyHeadTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
+
+  const { user } = useContext(CommonContext);
+  // const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
+  const [myCouponDatas, setMyCouponDatas] = useState();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -100,12 +105,25 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get(`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`)
+        .then(res => {
+          setMyCouponDatas(res.data);
+        });
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <Layout>
         <div style={{ textAlign: 'center' }}>
-          {/* <img src="images/QR2.jpg" /> */}
-          <QRCode value="https://www.naver.com" size={300} />
+          <QRCode
+            value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+            size={300}
+          />
         </div>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
@@ -124,7 +142,8 @@ export default function StickyHeadTable() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {myCouponDatas
+                {console.log(myCouponDatas)}
+                {/* {myCouponDatas
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(row => {
                     return (
@@ -146,14 +165,14 @@ export default function StickyHeadTable() {
                         })}
                       </TableRow>
                     );
-                  })}
+                  })} */}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={myCouponDatas.length}
+            count={Object(myCouponDatas).length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
