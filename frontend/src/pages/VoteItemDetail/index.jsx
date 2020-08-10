@@ -106,168 +106,332 @@ const ItemDetail = ({ match }) => {
   };
   useEffect(CheckEvent, []);
   const product_id = match.params.id - 1;
-
+  const isMobile = useMediaQuery('(max-width:920px)');
   return (
     <Wrapper>
-      {/* <h2>{match.params.name}</h2> */}
-      <Layout>
-        {/* {testImg.map((testI, index) => ( */}
+      {isMobile ? (
+        <Layout>
+          <br />
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid item xs={10}>
+              {productDatas.map((product, index) => {
+                if (
+                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                ) {
+                  return (
+                    <Card>
+                      <h5>
+                        <Badge variant="success">Event</Badge>
+                      </h5>
+                      <img
+                        src={`https://i3b309.p.ssafy.io/${product.prod_image}`}
+                        alt="test"
+                        style={{ width: '100%', height: 'auto', mr: '10px' }}
+                      />
+                    </Card>
+                  );
+                }
+              })}
+            </Grid>
 
-        <br />
-        <Grid
-          container
-          direction="row"
-          justify="space-around"
-          alignItems="center"
-        >
-          <Grid item xs={4}>
-            {productDatas.map((product, index) => {
-              if (
-                productDatas[match.params.id - 1].prod_id === product.prod_id
-              ) {
-                return (
-                  <Card>
-                    <img
-                      src={`https://i3b309.p.ssafy.io/${product.prod_image}`}
-                      // src={`../../${productDatas[match.params.id - 1].prod_image}`}
-                      alt="test"
-                      style={{ width: '100%', height: 'auto', mr: '10px' }}
-                    />
-                  </Card>
-                );
-              }
-            })}
-          </Grid>
-
-          <Grid item xs={6}>
-            {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
-          <hr /> */}
-            {productDatas.map((product, index) => {
-              if (productDatas[match.params.id - 1].prod_id === product.prod_id)
-                return (
-                  <Grid>
-                    <h2>
-                      <Badge variant="success">Event</Badge>
-                    </h2>
-                    <br />
-                    <br />
-                    <h2>
-                      <strong>
-                        {productDatas[match.params.id - 1].prod_title}
-                      </strong>
-                    </h2>
-                    <br />
-                    <span className="price">
-                      {productDatas[match.params.id - 1].prod_price}
-                    </span>
-                    <span className="unit1">원</span>
-                    <h5>
+            <Grid item xs={12}>
+              {productDatas.map((product, index) => {
+                if (
+                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                )
+                  return (
+                    <Grid>
+                      <br />
+                      <br />
+                      <h5>
+                        <strong>
+                          {productDatas[match.params.id - 1].prod_title}
+                        </strong>
+                      </h5>
+                      <br />
+                      <span className="price1">
+                        {productDatas[match.params.id - 1].prod_price}
+                      </span>
+                      <span className="m_unit">원</span>
                       (총 용량 : {productDatas[match.params.id - 1].prod_weight}
                       )
-                    </h5>{' '}
-                    <br />
-                    <h3 className="select">
-                      {productDatas[match.params.id - 1].prod_desc}
-                    </h3>
-                    <br />
-                    {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
-                    <hr />
-                    <span className="cate">할인가</span>
-                    <span className="thro">
-                      {productDatas[match.params.id - 1].prod_price}원
-                    </span>
-                    <span className="unit2">원</span>
-                    <span className="sale">
-                      {parseInt(
-                        (productDatas[match.params.id - 1].prod_price *
-                          (100 -
-                            (productDatas[match.params.id - 1].prod_sale -
-                              10))) /
-                          100,
-                      )}
-                    </span>
-                    <span className="unit2">원</span>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disableElevation
-                      onClick={click1}
-                      disabled={!eventActivated}
-                      style={{ marginLeft: '20px' }}
-                    >
-                      쿠폰 받기
-                    </Button>
-                    <br />
-                    <br />
-                    {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
+                      <br />
+                      <br />
+                      <p className="select">
+                        {productDatas[match.params.id - 1].prod_desc}
+                      </p>
+                      <br />
+                      {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
+                      <hr />
+                      <Grid xs={12}>
+                        <span className="m_cate">할인가</span>
+                        <span className="m_thro">
+                          {productDatas[match.params.id - 1].prod_price}원
+                        </span>
+                        <strong>
+                          <span className="m_sale">
+                            {parseInt(
+                              (productDatas[match.params.id - 1].prod_price *
+                                (100 -
+                                  (productDatas[match.params.id - 1].prod_sale -
+                                    10))) /
+                                100,
+                            )}
+                          </span>
+                          <span className="m_unit2">원</span>
+                        </strong>
+                        <Button
+                          className="button"
+                          variant="contained"
+                          color="primary"
+                          disableElevation
+                          onClick={click1}
+                          disabled={!eventActivated}
+                          style={{ marginLeft: '20px' }}
+                        >
+                          쿠폰 받기
+                        </Button>
+                      </Grid>
+                      <br />
+                      <br />
+                      {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
+                      <Grid>
+                        <span className="m_cate">할인가</span>
+                        <span className="m_thro">
+                          {productDatas[match.params.id - 1].prod_price}원
+                        </span>
+                        <strong>
+                          <span className="m_sale">
+                            {productDatas[match.params.id - 1].prod_price * 0.9}
+                          </span>
+                          <span className="m_unit2">원</span>
+                        </strong>
+
+                        <Button
+                          className="button"
+                          variant="contained"
+                          color="primary"
+                          disableElevation
+                          onClick={QuizDialogOpen}
+                          style={{ marginLeft: '20px' }}
+                        >
+                          퀴즈 풀기
+                        </Button>
+                        <hr />
+                      </Grid>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                    </Grid>
+                  );
+              })}
+              <hr />
+            </Grid>
+          </Grid>
+          <Dialog
+            open={itemDialogOpen}
+            onClose={handleClose}
+            fullScreen={fullScreen}
+            aria-labelledby="max-width-dialog-title"
+            PaperProps={{
+              style: {
+                height: '90vh',
+                padding: '10px',
+                width: '1280px',
+                maxWidth: 'none',
+                overflowX: 'hidden',
+                overflowY: 'auto',
+                position: 'inherit',
+              },
+            }}
+            BackdropProps={{
+              style: {
+                backgroundColor: 'rgba(0,0,0,0.85)',
+              },
+            }}
+          >
+            <DialogActions style={{ padding: 0 }}>
+              {/* <Date>
+                <span className="date on">{displayEndTime()}</span>
+              </Date> */}
+              <Grid className="go-back-btn" onClick={handleClose}>
+                <ClearIcon
+                  size="medium"
+                  style={{ color: '#fff', cursor: 'pointer' }}
+                />
+              </Grid>
+            </DialogActions>
+            <WebDeatilModal />
+          </Dialog>
+          <QuizDialog />
+        </Layout>
+      ) : (
+        <Layout>
+          <br />
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid item xs={4}>
+              {productDatas.map((product, index) => {
+                if (
+                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                ) {
+                  return (
+                    <Card>
+                      <img
+                        src={`https://i3b309.p.ssafy.io/${product.prod_image}`}
+                        // src={`../../${productDatas[match.params.id - 1].prod_image}`}
+                        alt="test"
+                        style={{ width: '100%', height: 'auto', mr: '10px' }}
+                      />
+                    </Card>
+                  );
+                }
+              })}
+            </Grid>
+
+            <Grid item xs={6}>
+              {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
+          <hr /> */}
+              {productDatas.map((product, index) => {
+                if (
+                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                )
+                  return (
                     <Grid>
+                      <h2>
+                        <Badge variant="success">Event</Badge>
+                      </h2>
+                      <br />
+                      <br />
+                      <h2>
+                        <strong>
+                          {productDatas[match.params.id - 1].prod_title}
+                        </strong>
+                      </h2>
+                      <br />
+                      <span className="price2">
+                        {productDatas[match.params.id - 1].prod_price}
+                      </span>
+                      <span className="unit1">원</span>
+                      <h5>
+                        (총 용량 :{' '}
+                        {productDatas[match.params.id - 1].prod_weight})
+                      </h5>{' '}
+                      <br />
+                      <h3 className="select">
+                        {productDatas[match.params.id - 1].prod_desc}
+                      </h3>
+                      <br />
+                      {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
+                      <hr />
                       <span className="cate">할인가</span>
                       <span className="thro">
                         {productDatas[match.params.id - 1].prod_price}원
                       </span>
+                      <span className="unit2">원</span>
                       <span className="sale">
-                        {productDatas[match.params.id - 1].prod_price * 0.9}
+                        {parseInt(
+                          (productDatas[match.params.id - 1].prod_price *
+                            (100 -
+                              (productDatas[match.params.id - 1].prod_sale -
+                                10))) /
+                            100,
+                        )}
                       </span>
                       <span className="unit2">원</span>
                       <Button
                         variant="contained"
                         color="primary"
                         disableElevation
-                        onClick={QuizDialogOpen}
+                        onClick={click1}
+                        disabled={!eventActivated}
                         style={{ marginLeft: '20px' }}
                       >
-                        퀴즈 풀기
+                        쿠폰 받기
                       </Button>
-                      <hr />
+                      <br />
+                      <br />
+                      {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
+                      <Grid>
+                        <span className="cate">할인가</span>
+                        <span className="thro">
+                          {productDatas[match.params.id - 1].prod_price}원
+                        </span>
+                        <span className="sale">
+                          {productDatas[match.params.id - 1].prod_price * 0.9}
+                        </span>
+                        <span className="unit2">원</span>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          disableElevation
+                          onClick={QuizDialogOpen}
+                          style={{ marginLeft: '20px' }}
+                        >
+                          퀴즈 풀기
+                        </Button>
+                        <hr />
+                      </Grid>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
                     </Grid>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                  </Grid>
-                );
-            })}
-            <hr />
+                  );
+              })}
+              <hr />
+            </Grid>
           </Grid>
-        </Grid>
-        <Dialog
-          open={itemDialogOpen}
-          onClose={handleClose}
-          fullScreen={fullScreen}
-          aria-labelledby="max-width-dialog-title"
-          PaperProps={{
-            style: {
-              height: '90vh',
-              padding: '10px',
-              width: '1280px',
-              maxWidth: 'none',
-              overflowX: 'hidden',
-              overflowY: 'auto',
-              position: 'inherit',
-            },
-          }}
-          BackdropProps={{
-            style: {
-              backgroundColor: 'rgba(0,0,0,0.85)',
-            },
-          }}
-        >
-          <DialogActions style={{ padding: 0 }}>
-            {/* <Date>
+          <Dialog
+            open={itemDialogOpen}
+            onClose={handleClose}
+            fullScreen={fullScreen}
+            aria-labelledby="max-width-dialog-title"
+            PaperProps={{
+              style: {
+                height: '90vh',
+                padding: '10px',
+                width: '1280px',
+                maxWidth: 'none',
+                overflowX: 'hidden',
+                overflowY: 'auto',
+                position: 'inherit',
+              },
+            }}
+            BackdropProps={{
+              style: {
+                backgroundColor: 'rgba(0,0,0,0.85)',
+              },
+            }}
+          >
+            <DialogActions style={{ padding: 0 }}>
+              {/* <Date>
               <span className="date on">{displayEndTime()}</span>
             </Date> */}
-            <Grid className="go-back-btn" onClick={handleClose}>
-              <ClearIcon
-                size="medium"
-                style={{ color: '#fff', cursor: 'pointer' }}
-              />
-            </Grid>
-          </DialogActions>
-          <WebDeatilModal />
-        </Dialog>
-        <QuizDialog />
-      </Layout>
+              <Grid className="go-back-btn" onClick={handleClose}>
+                <ClearIcon
+                  size="medium"
+                  style={{ color: '#fff', cursor: 'pointer' }}
+                />
+              </Grid>
+            </DialogActions>
+            <WebDeatilModal />
+          </Dialog>
+          <QuizDialog />
+        </Layout>
+      )}
     </Wrapper>
   );
 };
