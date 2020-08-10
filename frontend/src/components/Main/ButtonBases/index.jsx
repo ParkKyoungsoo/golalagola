@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, useMediaQuery } from '@material-ui/core';
 import Wrapper from './styles';
 
 const ButtonBases = props => {
@@ -13,7 +13,7 @@ const ButtonBases = props => {
   } = props;
 
   const imgUrl = `${categoryData.cat_img_url}`;
-
+  const isMobile = useMediaQuery('(max-width:920px)');
   return (
     <Wrapper>
       <div
@@ -37,7 +37,12 @@ const ButtonBases = props => {
           }
         />
         <span className="image-button">
-          <Typography component="span" variant="h6" className="image-title">
+          <Typography
+            component="span"
+            variant="h6"
+            className={isMobile ? 'mobile-image-title' : 'image-title'}
+            style={isMobile ? { fontSize: '13px' } : null}
+          >
             {categoryData.cat_title}
           </Typography>
         </span>

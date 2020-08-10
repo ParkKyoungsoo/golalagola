@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../layout/';
-import Wrapper from './styles';
+import { Wrapper, MobileWrapper } from './styles';
 
 import {
   AppBar,
@@ -119,7 +119,7 @@ const MainVote = props => {
   ] = useOnChangeIndex(categoryDatas);
 
   let history = useHistory();
-
+  const isMobile = useMediaQuery('(max-width:920px)');
   useEffect(() => {
     setDrawerOpen(false);
   }, []);
@@ -140,81 +140,155 @@ const MainVote = props => {
       }}
     >
       <Layout>
-        <Wrapper
-          onClick={() => {
-            setDrawerOpen(0);
-          }}
-        >
-          {/* carousel, 실시간 순위 */}
-          <AppBar position="relative" color="inherit" className="appbar">
-            <Grid container>
-              <Grid item md={10} xs={12}>
-                <ControlledCarousel />
-              </Grid>
-              <Grid
-                item
-                md={2}
-                xs={12}
-                className="tiemPopularity"
-                position="absolute"
-              >
-                <Box
-                  height="80%"
-                  // border={1}
-                  // borderColor="secondary.main"
+        {isMobile ? (
+          <MobileWrapper>
+            {/* carousel, 실시간 순위 */}
+            <AppBar position="relative" color="inherit" className="appbar">
+              <Grid container>
+                <Grid item md={10} xs={12}>
+                  <ControlledCarousel />
+                </Grid>
+                <Grid
+                  item
+                  md={2}
+                  xs={12}
+                  className="tiemPopularity"
+                  position="absolute"
                 >
-                  <h2>실시간</h2>
-                  {/* {realtime.map((data, index) => (
+                  <Box
+                    height="80%"
+                    // border={1}
+                    // borderColor="secondary.main"
+                  >
+                    <h2>실시간</h2>
+                    {/* {realtime.map((data, index) => (
+                <p key={index}>{data.prod_name}</p>
+              ))} */}
+                  </Box>
+                </Grid>
+              </Grid>
+              <Tabs
+                value={appbarIndex + appbarIndexDelta}
+                onChange={onChangeIndexHandler}
+                indicatorColor="primary"
+                textColor="primary"
+                variant="scrollable"
+                aria-label="full width tabs example"
+                className="big-indicator"
+              >
+                {categoryDatas.map((categoryData, index) => (
+                  <Tab
+                    key={index}
+                    {...a11yProps(index)}
+                    label={
+                      <ButtonBases
+                        categoryData={categoryData}
+                        isSelected={index === appbarIndex ? true : false}
+                        serverUrlBase={serverUrlBase}
+                        serverImgUrl={serverImgUrl}
+                        index={index}
+                      />
+                    }
+                    className="tab"
+                  ></Tab>
+                ))}
+              </Tabs>
+              <Divider style={{ margin: '0px 0 0px 0' }} />
+            </AppBar>
+
+            {categoryDatas.map((categoryData, index) => (
+              <TabPanel
+                key={index}
+                value={appbarIndex}
+                index={index}
+                className="tab-panel"
+              >
+                <VoteGridList
+                  categoryData={categoryData}
+                  value={appbarIndex - 1}
+                  index={index}
+                  itemType={'vote'}
+                />
+              </TabPanel>
+            ))}
+          </MobileWrapper>
+        ) : (
+          <Wrapper
+            onClick={() => {
+              setDrawerOpen(0);
+            }}
+          >
+            {/* carousel, 실시간 순위 */}
+            <AppBar position="relative" color="inherit" className="appbar">
+              <Grid container>
+                <Grid item md={10} xs={12}>
+                  <ControlledCarousel />
+                </Grid>
+                <Grid
+                  item
+                  md={2}
+                  xs={12}
+                  className="tiemPopularity"
+                  position="absolute"
+                >
+                  <Box
+                    height="80%"
+                    // border={1}
+                    // borderColor="secondary.main"
+                  >
+                    <h2>실시간</h2>
+                    {/* {realtime.map((data, index) => (
                     <p key={index}>{data.prod_name}</p>
                   ))} */}
-                </Box>
+                  </Box>
+                </Grid>
               </Grid>
-            </Grid>
-            <Tabs
-              value={appbarIndex + appbarIndexDelta}
-              onChange={onChangeIndexHandler}
-              indicatorColor="primary"
-              textColor="primary"
-              variant="scrollable"
-              aria-label="full width tabs example"
-              className="big-indicator"
-            >
-              {categoryDatas.map((categoryData, index) => (
-                <Tab
-                  key={index}
-                  {...a11yProps(index)}
-                  label={
-                    <ButtonBases
-                      categoryData={categoryData}
-                      isSelected={index === appbarIndex ? true : false}
-                      serverUrlBase={serverUrlBase}
-                      serverImgUrl={serverImgUrl}
-                      index={index}
-                    />
-                  }
-                  className="tab"
-                ></Tab>
-              ))}
-            </Tabs>
-            <Divider style={{ margin: '0px 0 0px 0' }} />
-          </AppBar>
+              <Tabs
+                value={appbarIndex + appbarIndexDelta}
+                onChange={onChangeIndexHandler}
+                indicatorColor="primary"
+                textColor="primary"
+                variant="scrollable"
+                aria-label="full width tabs example"
+                className="big-indicator"
+              >
+                {categoryDatas.map((categoryData, index) => (
+                  <Tab
+                    key={index}
+                    {...a11yProps(index)}
+                    label={
+                      <ButtonBases
+                        categoryData={categoryData}
+                        isSelected={index === appbarIndex ? true : false}
+                        serverUrlBase={serverUrlBase}
+                        serverImgUrl={serverImgUrl}
+                        index={index}
+                      />
+                    }
+                    className="tab"
+                  ></Tab>
+                ))}
+              </Tabs>
+              <Divider style={{ margin: '0px 0 0px 0' }} />
+            </AppBar>
 
-          {categoryDatas.map((categoryData, index) => (
-            <TabPanel
-              key={index}
-              value={appbarIndex}
-              index={index}
-              className="tab-panel"
-            >
-              <VoteGridList
-                categoryData={categoryData}
-                value={appbarIndex - 1}
+            {categoryDatas.map((categoryData, index) => (
+              <TabPanel
+                key={index}
+                value={appbarIndex}
                 index={index}
-                itemType={'vote'}
-              />
-            </TabPanel>
-          ))}
-        </Wrapper>
+                className="tab-panel"
+              >
+                <VoteGridList
+                  categoryData={categoryData}
+                  value={appbarIndex - 1}
+                  index={index}
+                  itemType={'vote'}
+                />
+              </TabPanel>
+            ))}
+          </Wrapper>
+        )}
       </Layout>
     </ViewContext.Provider>
   );

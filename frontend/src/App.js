@@ -105,6 +105,7 @@ const App = () => {
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
   const [productDatas, setProductDatas] = useState([]); // 전체 데이터
+  const [sortedDatas, setSortedDatas] = useState([]);
   // const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
   const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
   const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
@@ -116,7 +117,7 @@ const App = () => {
   const [selectedEventItem, setSelectedEventItem] = useState();
   // 메인 주소로 사용할 URL 입니다.
   // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [mainUrl, setMainUrl] = useState('http://localhost:3000');
+  const [mainUrl, setMainUrl] = useState('https://i3b309.p.ssafy.io');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
@@ -127,7 +128,13 @@ const App = () => {
   // 관리지 페이지 중 Product CRUD를 위해 선언했습니다.
   const [currentProductDatas, setCurrentProductDatas] = useState({});
 
-  const [quizDatas, setQuizDatas] = useState([]); // 퀴즈 데이터
+  // 퀴즈 데이터
+  const [quizDatas, setQuizDatas] = useState([]);
+
+  // 유저가 참여한 Event의 id만 모아놓은 배열 입니다.
+  const [userEvent, setUserEvent] = useState([]);
+  // 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 product id만 모아놓은 배열입니다.
+  const [userCoupon, setUserCoupon] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -144,6 +151,7 @@ const App = () => {
   const getProductDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
+      setSortedDatas(res.data);
       getEventDatas();
     });
   };
@@ -225,6 +233,8 @@ const App = () => {
         /* 이부분이 commonContext에 넣어주는 부분입니다. */
         productDatas,
         setProductDatas,
+        sortedDatas,
+        setSortedDatas,
         categoryDatas,
         setCategoryDatas,
         myCouponDatas,
@@ -242,11 +252,18 @@ const App = () => {
         currentProductDatas,
         setCurrentProductDatas,
 
+        // EventAll 페이지와 myCoupon페이지에서 사용합니다.
+        userEvent,
+        setUserEvent,
+        userCoupon,
+        setUserCoupon,
+
         newEventData,
         setNewEventData,
         eventNum,
         setEventNum,
 
+        // admin/quiz에서 수정을 위해 사용되는 데이터 입니다.
         quizDatas,
         setQuizDatas,
       }}

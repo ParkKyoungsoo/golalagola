@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     // justify-content: space-between;
     // justify-content: space-around;
     // justify-content: space-evenly;
-    margin: 2vh;
+    margin: 10px 0px;
   }
 
   .KisokCentering {

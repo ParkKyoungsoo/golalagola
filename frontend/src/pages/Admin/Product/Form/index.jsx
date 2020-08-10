@@ -17,18 +17,19 @@ import {
   FormLabel,
 } from '@material-ui/core';
 import Wrapper from './styles';
-import { useDropzone } from 'react-dropzone';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { DropzoneArea } from 'material-ui-dropzone';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+
+import { Form } from 'react-bootstrap';
 
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
@@ -62,10 +63,6 @@ const AdminProductForm = () => {
     error: false,
   });
   const [expiration, setExpiration] = useState(new Date());
-  const [image, setImage] = useState({
-    value: currentProductDatas.prod_image,
-    error: false,
-  });
   const [desc, setDesc] = useState({
     value: currentProductDatas.prod_desc,
     error: false,
@@ -78,6 +75,11 @@ const AdminProductForm = () => {
     value: currentProductDatas.prod_weight,
     error: false,
   });
+  const [image, setImage] = useState('');
+  const [imageName, setImageName] = useState(currentProductDatas.prod_image);
+  const [uploadedImage, setUploadedImage] = useState(
+    `https://i3b309.p.ssafy.io/${currentProductDatas.prod_image}`,
+  );
 
   const handleTitleChange = event => {
     if (event.target.value !== '') {
@@ -124,21 +126,6 @@ const AdminProductForm = () => {
     setForceRender({});
   };
 
-  const handleExpirationChange = event => {
-    console.log(event);
-    setExpiration(event);
-    setForceRender({});
-  };
-
-  const handleImageChange = event => {
-    if (event.target.value !== '') {
-      setImage({ value: event.target.value, error: false });
-    } else {
-      setImage({ value: event.target.value, error: true });
-    }
-    setForceRender({});
-  };
-
   const handleDescChange = event => {
     if (event.target.value !== '') {
       setDesc({ value: event.target.value, error: false });
@@ -167,6 +154,20 @@ const AdminProductForm = () => {
   };
 
   // DateTimePicker
+  function getFormatDate(date) {
+    var year = date.getFullYear(); //yyyy
+    var month = 1 + date.getMonth(); //M
+    month = month >= 10 ? month : '0' + month; //month 두자리로 저장
+    var day = date.getDate(); //d
+    day = day >= 10 ? day : '0' + day; //day 두자리로 저장
+    return year + '-' + month + '-' + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+  }
+  const handleExpirationChange = event => {
+    const date = getFormatDate(event);
+    setExpiration(date);
+    setForceRender({});
+  };
+
   function MaterialUIPickers() {
     return (
       <div>
@@ -189,32 +190,6 @@ const AdminProductForm = () => {
     );
   }
 
-  // ImageUproader
-  const [thumbnailImageData, setThumbnailImageData] = useState('');
-
-  const onDrop = useCallback(acceptedFiles => {
-    console.log('PPAP: Basic -> acceptedFiles', acceptedFiles);
-    // Do something with the files
-  }, []);
-
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone(onDrop);
-
-  useEffect(() => {
-    for (const file of acceptedFiles) {
-      console.log('TCL: Basic -> file', file);
-      setThumbnailImageData({
-        img: URL.createObjectURL(file),
-        file: file,
-      });
-    }
-  }, [acceptedFiles]);
-
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
   async function handleSubmit(event) {
     event.preventDefault();
     if (
@@ -223,8 +198,6 @@ const AdminProductForm = () => {
       category.value === '' ||
       price.value === '' ||
       amount.value === '' ||
-      expiration.value === '' ||
-      image.value === '' ||
       desc.value === '' ||
       sale.value === '' ||
       weight.value === ''
@@ -244,12 +217,6 @@ const AdminProductForm = () => {
       if (amount.value === '') {
         setAmount({ value: '', error: true });
       }
-      if (expiration.value === '') {
-        setExpiration({ value: '', error: true });
-      }
-      if (image.value === '') {
-        setImage({ value: '', error: true });
-      }
       if (sale.value === '') {
         setDesc({ value: '', error: true });
       }
@@ -262,29 +229,50 @@ const AdminProductForm = () => {
       setForceRender({});
       alert('validation error');
     } else {
+      // formData 생성
+      const formData = new FormData();
+      formData.append('image', image);
+      console.log(formData);
+
       // status: create
       if (currentProductDatas.status === 'create') {
-        await Axios.post('https://i3b309.p.ssafy.io/api/product', {
+        await Axios.post('http://localhost:5000/api/product/insert', {
           prod_title: title.value,
           prod_name: name.value,
           prod_category: category.value,
           prod_price: price.value,
           prod_amount: amount.value,
-          prod_expiration: expiration.value,
-          prod_image: image.value,
+          prod_expiration: expiration,
+          prod_image: `images/${imageName}`, 
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
         })
-          .then(response => {
+          .then(async response => {
+            await Axios.post(
+              'http://localhost:5000/api/product/imageUpload',
+              formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              },
+            )
+              .then(response => {
+                console.log('Response', response.data);
+                alert('상품정보가 등록 되었습니다.');
+              })
+              .catch(e => {
+                console.log('Error: ', e.response.data);
+              });
             console.log('Response', response.data);
-            alert('상품정보가 등록 되었습니다.');
           })
           .catch(e => {
             console.log('Error: ', e.response.data);
           });
       } else {
-        // status: create
+        // status: update
+
         await Axios.put('https://i3b309.p.ssafy.io/api/product', {
           prod_id: currentProductDatas.prod_id,
           prod_title: title.value,
@@ -292,30 +280,79 @@ const AdminProductForm = () => {
           prod_category: category.value,
           prod_price: price.value,
           prod_amount: amount.value,
-          prod_expiration: expiration.value,
-          prod_image: image.value,
+          prod_expiration: expiration,
+          prod_image: `images/${imageName}`, 
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
         })
-          .then(response => {
+          .then(async response => {
+            if (image !== '') {
+              await Axios.post(
+                'http://localhost:5000/api/product/imageUpload',
+                formData,
+                {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                },
+              )
+                .then(response => {
+                  console.log('Response', response.data);
+                  alert('상품정보가 수정 되었습니다.');
+                })
+                .catch(e => {
+                  console.log('Error: ', e.response.data);
+                });
+            }
             console.log('Response', response.data);
-            alert('상품정보가 수정 되었습니다.');
           })
           .catch(e => {
             console.log('Error: ', e.response.data);
           });
       }
-      window.location.href = '/admin/product';
+      // window.location.href = '/admin/product';
     }
   }
 
+  // ImageUproader
+
+  const handleImageChange = e => {
+    console.log(e.target.files[0]);
+    setImage(e.target.files[0]);
+    setImageName(e.target.files[0].name);
+    setUploadedImage(URL.createObjectURL(e.target.files[0]));
+  };
+
+  console.log(image)
+  console.log(imageName)
   return (
     <div>
       <AdminNav />
       <Grid container justify="center" alignItems="flex-start" spacing={2}>
-        <Grid item xs={12}>
-          <p>그리드 9</p>
+        <Grid item xs={6}>
+          이미지 업로드
+          <div className="custom-file mb-4">
+            <input
+              type="file"
+              className="custom-file-input"
+              id="imageUpload"
+              onChange={handleImageChange}
+            />
+            <label className="custom-file-label" htmlFor="imageUpload">
+              {imageName}
+            </label>
+          </div>
+          {image ? (
+            <div className="row mt-5">
+              <div className="col-md-6 m-auto">
+                <h3 className="text-center">{imageName}</h3>
+                <img style={{ width: '100%' }} src={uploadedImage} alt="" />
+              </div>
+            </div>
+          ) : null}
+        </Grid>
+        <Grid item xs={6}>
           <Grid
             container
             direction="row"
@@ -394,19 +431,6 @@ const AdminProductForm = () => {
               </Grid>
               <Grid item xs={12}>
                 <MaterialUIPickers />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={image.error ? true : false}
-                  id="standard-required"
-                  label="Product Image"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={image.value}
-                  onChange={handleImageChange}
-                />
               </Grid>
               <Grid item xs={12}>
                 <TextField

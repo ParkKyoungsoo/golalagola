@@ -70,7 +70,7 @@ const NestedList = props => {
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemLink href="http://localhost:3000/Admin/Product/Estimate">
+            <ListItemLink href="https://i3b309.p.ssafy.io/Admin/Product/Estimate">
               <ListItemText primary="통계"></ListItemText>
             </ListItemLink>
           </ListItem>

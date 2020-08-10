@@ -4,8 +4,8 @@ const Wrapper = styled.div`
   position: relative;
   .content {
     transition: all 0.3s ease;
-    padding-bottom: 287px;
-    min-height: 1200px;
+    // padding-bottom: 287px;
+    min-height: 700px;
   }
   .content-shift {
     transition: all 0.3s ease;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     margin-bottom: 30px;
   }
   @media (max-width: 960px) {
-    padding-bottom: 377px;
+    // padding-bottom: 377px;
   }
 `;
 

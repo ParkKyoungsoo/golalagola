@@ -54,6 +54,12 @@ const Wrapper = styled.div`
     line-height: 26px;
     color: #fff;
   }
+  .mobile-image-title {
+    position: relative;
+    padding: 8px 16px 7px;
+    line-height: 26px;
+    color: #fff;
+  }
   .selected-tab {
     opacity: 1;
     background: #4248b5;

@@ -34,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
         type: Sequelize.DATE,
       },
       prod_image: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING(1234),
       },
       prod_desc: {
