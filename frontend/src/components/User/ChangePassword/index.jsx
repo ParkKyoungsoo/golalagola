@@ -21,7 +21,6 @@ const InputComponent = props => {
 
   const OnChangeHandler = name => e => {
     setInputValue({ ...inputValue, [name]: e.target.value });
-    console.log('OnChangeHandler -> inputValue', inputValue);
   };
 
   const onClickHandler = () => {
@@ -97,40 +96,47 @@ const MyInfoButtonGroupComponent = props => {
 
   const onMyInfoSaveHandelr = async props => {
     var before_pwd = inputValue['Before Password'];
-    var password = inputValue['New Password'];
+    var after_pwd = inputValue['New Password'];
     var changePassword = inputValue['New Password Confirm'];
-    if (password !== changePassword) {
+
+    // 1. 비밀번호 유효성 검사
+    if (after_pwd !== changePassword) {
       alert('Passwords that do not match between passwords.');
       return;
     }
-    if (!password || password.lengh < 5) {
+    if (!after_pwd || after_pwd.lengh < 5) {
       alert('Wrong password.');
       return;
     }
 
-    let respone = [];
-    let hashPassword = 'test2';
-    let hashBeforePwd = 'test2';
-    try {
-      hashPassword = crypto
-        .createHash('sha512')
-        .update(password)
-        .digest('hex');
-      hashBeforePwd = crypto
-        .createHash('sha512')
-        .update(before_pwd)
-        .digest('hex');
-    } catch (error) {
-      console.log('signInHandler -> error', error);
-    }
+    // 2. 비밀번호 암호화
+    const encrypted_beforePwd = crypto
+      .createHmac('sha1', 'ashtiger')
+      .update(before_pwd)
+      .digest('base64');
+    const encrypted_afterPwd = crypto
+      .createHmac('sha1', 'ashtiger')
+      .update(after_pwd)
+      .digest('base64');
 
-    var body = {
-      new_pwd: hashPassword,
-      before_pwd: hashBeforePwd,
-      user_id: user.user_id,
-    };
-
-    alert('Not implemented yet.');
+    // 3. 암호화된 비밀번호 Axios 요청
+    Axios({
+      method: 'PUT',
+      url: 'https://i3b309.p.ssafy.io/api/auth/change_pwd',
+      headers: {
+        token: user.token,
+      },
+      data: {
+        before_pwd: encrypted_beforePwd,
+        after_pwd: encrypted_afterPwd,
+      },
+    })
+      .then(res => {
+        alert(res.data.message);
+      })
+      .catch(err => {
+        console.log('err', err.response.data.message);
+      });
 
     // if (respone['status'] === 200) {
     //   alert('Has changed.');

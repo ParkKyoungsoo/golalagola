@@ -137,36 +137,65 @@ const MyInfoButtonGroupComponent = props => {
     let data = {};
     const formData = new FormData();
     formData.append('files', thumbnailImageData.file);
+    const res = await Axios.post(
+      'https://i3b309.p.ssafy.io/api/auth/upload',
+      formData,
+    );
 
     let body = {
       ...inputValue,
       ...thumbnailImageData,
     };
+    // console.log('userLLLL: ', user);
+    // console.log(
+    //   'update ',
+    //   inputValue,
+    //   'thumbnailImageData',
+    //   thumbnailImageData,
+    //   user.token,
+    // );
+
+    Axios({
+      method: 'PUT',
+      url: 'https://i3b309.p.ssafy.io/api/auth/update',
+      headers: {
+        token: user.token,
+      },
+      data: {
+        user_email: inputValue.user_email,
+        update_name: inputValue.user_name,
+        update_phone: inputValue.user_phone,
+      },
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log('err', err.response.data.message);
+      });
 
     formData.append('optionData', JSON.stringify(body));
-
-    alert('Not implemented yet.');
 
     setUser({ ...data, status: 'login' });
   };
 
   useEffect(() => {
-    if (inputValue.user_id !== user.user_id) {
+    if (inputValue.user_email !== user.user_id) {
       setIsReadyToUpload(true);
       return;
     }
 
-    if (inputValue.user_nm !== user.user_nm) {
+    if (inputValue.user_name !== user.user_name) {
       setIsReadyToUpload(true);
       return;
     }
 
-    if (inputValue.user_data !== '') {
+    if (inputValue.user_phone !== '') {
       setIsReadyToUpload(true);
       return;
     }
 
-    if (thumbnailImageData.img !== user.user_img_url) {
+    if (thumbnailImageData.img !== user.user_image) {
       setIsReadyToUpload(true);
       return;
     }
@@ -178,9 +207,9 @@ const MyInfoButtonGroupComponent = props => {
 
     setIsReadyToUpload(false);
   }, [
-    inputValue.user_id,
-    inputValue.user_nm,
-    inputValue.user_data,
+    inputValue.user_email,
+    inputValue.user_name,
+    inputValue.user_phone,
     thumbnailImageData.img,
     thumbnailImageData.file,
   ]);
@@ -258,14 +287,14 @@ const MyInfoContentComponent = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <MyInfoInputComponent title="ID" keyValue="user_id" />
+          <MyInfoInputComponent title="ID" keyValue="user_email" />
         </Grid>
         <Grid item xs={12}>
-          <MyInfoInputComponent title="Name" keyValue="user_nm" />
+          <MyInfoInputComponent title="Name" keyValue="user_name" />
         </Grid>
 
         <Grid item xs={12}>
-          <MyInfoInputComponent title="Web Site" keyValue="web_site" />
+          <MyInfoInputComponent title="Phone" keyValue="user_phone" />
         </Grid>
 
         <Grid item xs={12}>
@@ -285,9 +314,9 @@ const MyInfo = () => {
   });
 
   const [inputValue, setInputValue] = useState({
-    user_nm: user.user_nm,
-    user_id: user.user_id,
-    web_site: user.web_site,
+    user_email: user.user_email,
+    user_name: user.user_name,
+    user_phone: user.user_phone,
   });
   return (
     <ViewContext.Provider

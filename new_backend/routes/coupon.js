@@ -24,7 +24,7 @@ app.get("/:input_user_id", async function (req, res) {
 });
 
 // Coupon 등록하기
-// app.post("/", authMiddleware);
+app.post("/", authMiddleware);
 app.post("/", async (req, res) => {
   // ** 중복된 데이터 있는지 검사
   await db.Coupon.create(req.body)
@@ -33,7 +33,7 @@ app.post("/", async (req, res) => {
 });
 
 // Coupon 수정
-// app.put("/", authAdminMiddleware);
+app.put("/", authAdminMiddleware);
 app.put("/", async function (req, res) {
   await db.Coupon.update(req.body, {
     where: { coupon_id: req.body.coupon_id },
@@ -43,7 +43,7 @@ app.put("/", async function (req, res) {
 });
 
 // Coupon 삭제
-// app.delete("/", authAdminMiddleware);
+app.delete("/", authAdminMiddleware);
 app.delete("/", async function (req, res) {
   await db.Coupon.destroy({
     where: { coupon_id: req.body.coupon_id },
