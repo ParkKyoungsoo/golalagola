@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   }
   .image-title {
     position: relative;
-    padding: 16px 32px 14px;
+    //   padding: 16px 32px 14px;
     line-height: 26px;
     color: #fff;
   }
