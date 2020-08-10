@@ -9,14 +9,14 @@ const ControlledCarousel = props => {
   const [index, setIndex] = useState(0);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:920px)');
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   return (
     <>
-      {isTablet ? (
+      {isMobile ? (
         <MobileWrapper>
           <Carousel container activeIndex={index} onSelect={handleSelect}>
             {currentEventDatas.map((data, index) => (

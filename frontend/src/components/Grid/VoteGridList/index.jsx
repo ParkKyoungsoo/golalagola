@@ -94,11 +94,11 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:920px)');
   if (value === -1) {
     return (
       <Wrapper className="root">
-        {isTablet ? (
+        {isMobile ? (
           <GridList
             className="grid-list"
             cols={Number.isInteger(nowCols) ? nowCols : 1}
@@ -152,7 +152,7 @@ const VoteGridList = props => {
             />
           </Grid>
         </Grid> */}
-        {isTablet ? (
+        {isMobile ? (
           <GridList
             className="grid-list"
             cols={Number.isInteger(nowCols) ? nowCols : 1}
