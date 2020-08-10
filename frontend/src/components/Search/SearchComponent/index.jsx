@@ -15,7 +15,7 @@ const Search = () => {
 const SearchComponent = () => {
   let history = useHistory();
   let location = useParams();
-  const isMobile = useMediaQuery('(max-width:480px)');
+  const isMobile = useMediaQuery('(max-width:920px)');
   const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {

@@ -94,7 +94,7 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
-  const isMobile = useMediaQuery('(max-width:480px)');
+  const isMobile = useMediaQuery('(max-width:920px)');
   if (value === -1) {
     return (
       <Wrapper className="root">

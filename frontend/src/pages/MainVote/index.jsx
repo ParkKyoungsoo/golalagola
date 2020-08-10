@@ -119,7 +119,7 @@ const MainVote = props => {
   ] = useOnChangeIndex(categoryDatas);
 
   let history = useHistory();
-  const isMobile = useMediaQuery('(max-width:480px)');
+  const isMobile = useMediaQuery('(max-width:920px)');
   useEffect(() => {
     setDrawerOpen(false);
   }, []);

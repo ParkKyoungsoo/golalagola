@@ -42,8 +42,8 @@ const Search = () => {
 
 const Header = props => {
   let history = useHistory();
-  const isMobile = useMediaQuery('(max-width:480px)');
-  // const isMobile = useMediaQuery('(max-width:480px)');
+  // const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:920px)');
 
   const {
     user,
