@@ -12,7 +12,7 @@ import Nav from '../../layout/Header';
 import Layout from '../../layout/';
 import { CommonContext } from '../../context/CommonContext';
 
-import QRCode from 'react.qrcode.generator';
+// import QRCode from 'react.qrcode.generator';
 
 const columns = [
   { id: 'idx', label: '#', minWidth: 170 },
@@ -105,7 +105,7 @@ export default function StickyHeadTable() {
       <Layout>
         <div style={{ textAlign: 'center' }}>
           {/* <img src="images/QR2.jpg" /> */}
-          <QRCode value="https://www.naver.com" size={300} />
+          {/* <QRCode value="https://www.naver.com" size={300} /> */}
         </div>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
@@ -161,6 +161,7 @@ export default function StickyHeadTable() {
           />
         </Paper>
       </Layout>
+      {console.log('MyCoupon')}
     </>
   );
 }

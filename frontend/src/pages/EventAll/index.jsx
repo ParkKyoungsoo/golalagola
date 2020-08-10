@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { Grid } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
@@ -56,7 +55,7 @@ const EventAll = () => {
       .catch(err => console.log(err));
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     getUserCouponData();
   }, []);
 
