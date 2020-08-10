@@ -105,6 +105,7 @@ const App = () => {
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
   const [productDatas, setProductDatas] = useState([]); // 전체 데이터
+  const [sortedDatas, setSortedDatas] = useState([]);
   // const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
   const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
   const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
@@ -144,6 +145,7 @@ const App = () => {
   const getProductDatas = () => {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
+      setSortedDatas(res.data);
       getEventDatas();
     });
   };
@@ -225,6 +227,8 @@ const App = () => {
         /* 이부분이 commonContext에 넣어주는 부분입니다. */
         productDatas,
         setProductDatas,
+        sortedDatas,
+        setSortedDatas,
         categoryDatas,
         setCategoryDatas,
         myCouponDatas,

@@ -37,6 +37,7 @@
     "react-swipeable-views": "^0.13.9",
     "react-use": "^13.12.2",
     "react-vis": "^1.11.7",
+    "react.qrcode.generator": "0.0.3",
     "recharts": "^2.0.0-beta.1",
     "socket.io-client": "^2.3.0",
     "store": "^2.0.12",

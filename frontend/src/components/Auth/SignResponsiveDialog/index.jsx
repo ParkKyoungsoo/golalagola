@@ -95,13 +95,14 @@ const SignInSection01 = () => {
         setUser(signInUserData, (signInUserData.token = res.data.token));
         setSignDialogOpen(false);
         setIsSignUp('SignIn');
-        // console.log('여기 안들어옴?');
+        console.log('What is userInfo', user);
+        console.log('What is signInUserData', signInUserData);
+        history.goBack();
       })
       .catch(res => {
-        alert('로그인 실패');
+        alert('아이디 또는 비밀번호를 확인해 주세요.');
+        history.push('/auth');
       });
-
-    history.goBack();
   };
 
   useEffect(() => {

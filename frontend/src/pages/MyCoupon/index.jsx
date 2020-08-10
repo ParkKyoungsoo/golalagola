@@ -8,8 +8,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import Nav from '../../layout/Header';
 import Layout from '../../layout/';
 import { CommonContext } from '../../context/CommonContext';
+
+import QRCode from 'react.qrcode.generator';
 
 const columns = [
   { id: 'idx', label: '#', minWidth: 170 },
@@ -101,7 +104,8 @@ export default function StickyHeadTable() {
     <>
       <Layout>
         <div style={{ textAlign: 'center' }}>
-          <img src="images/QR2.jpg" />
+          {/* <img src="images/QR2.jpg" /> */}
+          <QRCode value="https://www.naver.com" size={300} />
         </div>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>

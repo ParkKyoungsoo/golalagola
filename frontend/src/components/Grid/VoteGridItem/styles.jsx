@@ -3,7 +3,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   flex-grow: 1;
-  margin: 10px;
+  
   .btn-check {
     position: absolute;
     left: 0;
