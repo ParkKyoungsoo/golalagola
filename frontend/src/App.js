@@ -128,7 +128,13 @@ const App = () => {
   // 관리지 페이지 중 Product CRUD를 위해 선언했습니다.
   const [currentProductDatas, setCurrentProductDatas] = useState({});
 
-  const [quizDatas, setQuizDatas] = useState([]); // 퀴즈 데이터
+  // 퀴즈 데이터
+  const [quizDatas, setQuizDatas] = useState([]);
+
+  // 유저가 참여한 Event의 id만 모아놓은 배열 입니다.
+  const [userEvent, setUserEvent] = useState([]);
+  // 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 product id만 모아놓은 배열입니다.
+  const [userCoupon, setUserCoupon] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -246,11 +252,18 @@ const App = () => {
         currentProductDatas,
         setCurrentProductDatas,
 
+        // EventAll 페이지와 myCoupon페이지에서 사용합니다.
+        userEvent,
+        setUserEvent,
+        userCoupon,
+        setUserCoupon,
+
         newEventData,
         setNewEventData,
         eventNum,
         setEventNum,
 
+        // admin/quiz에서 수정을 위해 사용되는 데이터 입니다.
         quizDatas,
         setQuizDatas,
       }}

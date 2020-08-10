@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from './Header/';
 import Footer from './Footer/';
 import Drawer from './Drawer/';
@@ -7,9 +7,11 @@ import { CssBaseline, Container, Grid } from '@material-ui/core';
 import Wrapper from './styles';
 
 const Layout = props => {
-  const { drawerOpen } = useContext(CommonContext);
+  const { drawerOpen, setDrawerOpen } = useContext(CommonContext);
   const { wannaHide, children } = props;
-
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, []);
   return (
     <Wrapper>
       <CssBaseline />
@@ -19,7 +21,9 @@ const Layout = props => {
         open={drawerOpen}
         className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
         maxWidth="xl"
-
+        onClick={() => {
+          setDrawerOpen(0);
+        }}
         // maxWidth="lg"
       >
         <div>{children}</div>

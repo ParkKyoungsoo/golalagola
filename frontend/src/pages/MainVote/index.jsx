@@ -141,11 +141,7 @@ const MainVote = props => {
     >
       <Layout>
         {isTablet ? (
-          <MobileWrapper
-            onClick={() => {
-              setDrawerOpen(0);
-            }}
-          >
+          <MobileWrapper>
             {/* carousel, 실시간 순위 */}
             <AppBar position="relative" color="inherit" className="appbar">
               <Grid container>
