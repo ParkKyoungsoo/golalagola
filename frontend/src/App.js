@@ -148,21 +148,21 @@ const App = () => {
 
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
-  const getProductDatas = () => {
+  async function getProductDatas() {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
       setSortedDatas(res.data);
       getEventDatas();
     });
-  };
+  }
   // 이벤트(VS) 데이터
   // 사용되는 곳: Web (캐로젤, 이벤트 페이지), 관리자 (이벤트 CRUD 페이지),Kiosk (캐로젤, 전체 보여주기)
-  const getEventDatas = () => {
+  async function getEventDatas() {
     Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
       setCurrentEventDatas(res.data);
       getMyCouponDatas();
     });
-  };
+  }
   // 카테고리 데이터
   // const getCategoryDatas = () => {
   //   Axios.get('https://i3b309.p.ssafy.io/api/category').then(function(res) {
@@ -171,19 +171,19 @@ const App = () => {
   // };
 
   // 쿠폰 데이터
-  const getMyCouponDatas = () => {
-    Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
+  async function getMyCouponDatas() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
       setMyCouponDatas(res.data);
       getQuizDatas();
     });
-  };
+  }
 
   // 퀴즈 데이터
-  const getQuizDatas = () => {
+  async function getQuizDatas() {
     Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
       setQuizDatas(res.data);
     });
-  };
+  }
 
   // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
   // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.

@@ -88,7 +88,7 @@ const ControlledCarousel = props => {
           }}
         >
           {currentEventDatas.map((data, index) => (
-            <Carousel.Item>
+            <Carousel.Item key={index}>
               <Grid container>
                 <Grid item xs={6} className="KisokCentering tmp">
                   <Link

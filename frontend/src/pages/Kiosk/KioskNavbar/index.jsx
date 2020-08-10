@@ -93,7 +93,7 @@ const Navbar = () => {
         PaperProps={{
           style: {
             height: '90vh',
-            padding: '10px',
+            margin: '10px',
             width: '1280px',
             maxWidth: 'none',
             overflowX: 'hidden',
@@ -108,7 +108,7 @@ const Navbar = () => {
         }}
       >
         <Close className="btn-close">
-          <DialogActions style={{ padding: 0 }}>
+          <DialogActions style={{ margin: 0 }}>
             <Date>
               <span className="date on">{displayEndTime()}</span>
             </Date>
