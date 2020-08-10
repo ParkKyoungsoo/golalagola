@@ -51,7 +51,7 @@ app.get("/", async function (req, res) {
 // });
 
 // Event 등록하기
-app.post("/", authAdminMiddleware);
+// app.post("/", authAdminMiddleware);
 app.post("/", async (req, res) => {
   // ** 중복된 데이터 있는지 검사
   await db.Event.create(req.body)
@@ -60,7 +60,7 @@ app.post("/", async (req, res) => {
 });
 
 // Event 수정
-app.put("/", authAdminMiddleware);
+// app.put("/", authAdminMiddleware);
 app.put("/", async function (req, res) {
   await db.Event.update(req.body, {
     where: { event_id: req.body.event_id },
@@ -70,7 +70,7 @@ app.put("/", async function (req, res) {
 });
 
 // Event 삭제
-app.delete("/", authAdminMiddleware);
+// app.delete("/", authAdminMiddleware);
 app.delete("/", async function (req, res) {
   await db.Event.destroy({
     where: { event_id: req.body.event_id },

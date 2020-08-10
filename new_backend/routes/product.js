@@ -26,7 +26,7 @@ app.get("/:input", async function (req, res) {
 });
 
 // 상품 등록하기
-app.post("/", authAdminMiddleware);
+// app.post("/", authAdminMiddleware);
 app.post("/", async (req, res) => {
   // ** 관리자인지 확인하기
 
@@ -39,7 +39,7 @@ app.post("/", async (req, res) => {
 });
 
 // 상품 수정
-app.put("/", authAdminMiddleware);
+// app.put("/", authAdminMiddleware);
 app.put("/", async function (req, res) {
   // const course = update.find((c) => c.id === parseInt(req.params.id));
   // if (!course) res.status(404).send(`ID was not found`);
@@ -52,7 +52,7 @@ app.put("/", async function (req, res) {
 });
 
 // 상품 삭제
-app.delete("/", authAdminMiddleware);
+// app.delete("/", authAdminMiddleware);
 app.delete("/", async function (req, res) {
   await db.Product.destroy({
     where: { prod_id: req.body.prod_id },
