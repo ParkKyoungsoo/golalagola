@@ -105,7 +105,6 @@ const SignInSection01 = () => {
 
           setSignDialogOpen(false);
           setIsSignUp('SignIn');
-          history.goBack();
         }
       })
       .catch(res => {
