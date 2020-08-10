@@ -17,7 +17,6 @@ import {
   TextField,
 } from '@material-ui/core';
 import Wrapper from './styles';
-
 // import userData from './dump.json';
 
 const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -59,8 +58,6 @@ const SignInSection01 = () => {
     // 로그인 버튼 눌리면
     var { user_email, user_pwd, status } = signInUserData;
 
-    // console.log('TCL: onSignInHandler -> id, password', user_email, user_pwd);
-
     if (!user_pwd || !user_email) {
       alert('You need both email and password.');
       return;
@@ -85,24 +82,36 @@ const SignInSection01 = () => {
     // }
     // signInUserData.user_pwd = hashPassword;
     // console.log('hashPassword', hashPassword);
-    signInUserData.status = 'login';
-
+    signInUserData.status = '';
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
-    // console.log('userData', signInUserData);
     Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
       .then(res => {
-        console.log('res', res);
-        setUser(signInUserData, (signInUserData.token = res.data.token));
-        setSignDialogOpen(false);
-        setIsSignUp('SignIn');
-        console.log('What is userInfo', user);
-        console.log('What is signInUserData', signInUserData);
-        history.goBack();
+        if (res.data.check_email === 0) {
+          alert('이메일 인증 후 사용해주세요.');
+        } else if (res.data.check_pwd === 0) {
+          alert('비밀번호가 틀렸습니다.');
+        } else {
+          var obj = {
+            user_id: res.data.user_id,
+            user_email: signInUserData.user_email,
+            user_name: res.data.user_name,
+            user_pwd: res.data.user_pwd,
+            isAdmin: res.data.isAdmin,
+            status: 'login',
+            web_site: '',
+            token: res.data.token,
+          };
+          setUser({ ...obj });
+
+          setSignDialogOpen(false);
+          setIsSignUp('SignIn');
+        }
       })
       .catch(res => {
-        alert('아이디 또는 비밀번호를 확인해 주세요.');
-        history.push('/auth');
+        alert(res.data.message);
       });
+
+    history.goBack();
   };
 
   useEffect(() => {
@@ -113,8 +122,7 @@ const SignInSection01 = () => {
     if (signInUserData.user_email === '' || signInUserData.user_pwd === '') {
       setDisabled(true);
     }
-    console.log('effect', user);
-  }, [signInUserData.user_email, signInUserData.user_pwd, user]);
+  }, [signInUserData.user_email, signInUserData.user_pwd, user, setUser]);
 
   return (
     <Wrapper>
@@ -597,6 +605,15 @@ const ForgotPwGroupComponent = () => {
       alert('The email format is invalid.');
       return;
     } else {
+      let res = {
+        user_email: searchWord,
+      };
+      console.log('searchWord', searchWord);
+      Axios.post('https://i3b309.p.ssafy.io/api/auth/find_pwd', res).then(
+        res => {
+          alert(res.data.message);
+        },
+      );
       alert('Not implemented yet.');
 
       // setRecoverPwUserData({ ...recoverPwUserData, email: searchWord });

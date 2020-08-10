@@ -24,7 +24,7 @@ app.get("/", async function (req, res) {
 // });
 
 // 퀴즈 등록하기
-// app.post("/", authAdminMiddleware);
+app.post("/", authAdminMiddleware);
 app.post("/", async function (req, res) {
   // ** 관리자인지 검사하기
   await db.Quiz.create(req.body)
@@ -33,7 +33,7 @@ app.post("/", async function (req, res) {
 });
 
 // 퀴즈 수정
-// app.put("/", authAdminMiddleware);
+app.put("/", authAdminMiddleware);
 app.put("/", async function (req, res) {
   // ** 관리자인지 검사하기
   await db.Quiz.update(req.body, {
@@ -44,7 +44,7 @@ app.put("/", async function (req, res) {
 });
 
 // 상품 삭제
-// app.delete("/", authAdminMiddleware);
+app.delete("/", authAdminMiddleware);
 app.delete("/", async function (req, res) {
   await db.Quiz.destroy({
     where: { quiz_id: req.body.quiz_id },
