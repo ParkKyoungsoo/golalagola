@@ -68,6 +68,7 @@ const Header = props => {
     //   } else {
     //     history.push(name);
     //   }
+
     if (name === '/MainVote') {
       history.push('/');
       // console.log(mainUrl);
