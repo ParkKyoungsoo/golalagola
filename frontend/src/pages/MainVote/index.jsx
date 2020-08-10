@@ -119,7 +119,7 @@ const MainVote = props => {
   ] = useOnChangeIndex(categoryDatas);
 
   let history = useHistory();
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:480px)');
   useEffect(() => {
     setDrawerOpen(false);
   }, []);
@@ -140,7 +140,7 @@ const MainVote = props => {
       }}
     >
       <Layout>
-        {isTablet ? (
+        {isMobile ? (
           <MobileWrapper>
             {/* carousel, 실시간 순위 */}
             <AppBar position="relative" color="inherit" className="appbar">

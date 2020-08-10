@@ -42,7 +42,8 @@ const Search = () => {
 
 const Header = props => {
   let history = useHistory();
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:480px)');
+  // const isMobile = useMediaQuery('(max-width:480px)');
 
   const {
     user,
@@ -98,7 +99,7 @@ const Header = props => {
       maxWidth="lg"
     >
       <Wrapper>
-        {isTablet ? (
+        {isMobile ? (
           <AppBar
             style={{
               alignItems: 'center',
@@ -203,7 +204,7 @@ const Header = props => {
                           color="primary"
                           variant="contained"
                           onClick={onClickRedirectPathHandler('EventAll')}
-                          className="display-none header-button"
+                          className=" header-button"
                         >
                           <h3>
                             <Event />
@@ -214,7 +215,7 @@ const Header = props => {
                         color="primary"
                         variant="contained"
                         onClick={onClickRedirectPathHandler('MyCoupon')}
-                        className="display-none header-button"
+                        className=" header-button"
                       >
                         <h3>
                           <Coupon />
@@ -224,7 +225,7 @@ const Header = props => {
                         color="primary"
                         variant="contained"
                         onClick={handleSignInDialogOpen}
-                        className="display-none header-button"
+                        className=" header-button"
                       >
                         {user.status === 'login' ? (
                           <h3>

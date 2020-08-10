@@ -57,7 +57,7 @@ export default function VoteGridItem(props) {
   };
 
   let history = useHistory();
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:480px)');
   const click = () => {
     if (history.location.pathname.includes('SearchResult')) {
       history.replace('');
@@ -70,7 +70,7 @@ export default function VoteGridItem(props) {
   };
 
   return (
-    <Wrapper className="root" style={isTablet ? null : { margin: '10px' }}>
+    <Wrapper className="root" style={isMobile ? null : { margin: '10px' }}>
       <Grid container className="info-open-handler-grid">
         <Grid>
           <Grid className="img-box" onClick={click}>
@@ -82,7 +82,7 @@ export default function VoteGridItem(props) {
               //   className: sw ? 'img' : 'img deactivated',
               // }}
             />
-            {isTablet ? null : (
+            {isMobile ? null : (
               <>
                 <h3>{itemData.prod_name}</h3>
                 <h3>{itemData.prod_price}원</h3>
