@@ -149,7 +149,7 @@ const Header = props => {
               </Grid>
             ) : (
               <>
-                <Grid xs={3} className="navbarCentering">
+                <Grid item xs={3} className="navbarCentering">
                   <Typography
                     variant="h5"
                     className="logo"
@@ -159,7 +159,7 @@ const Header = props => {
                   </Typography>
                 </Grid>
 
-                <Grid xs={9}>
+                <Grid item xs={9}>
                   <Grid
                     container
                     style={{
