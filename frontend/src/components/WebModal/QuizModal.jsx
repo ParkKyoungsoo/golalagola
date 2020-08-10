@@ -8,10 +8,7 @@ import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
 import MultiCarousel from './MultiCarousel';
-import Axios from 'axios';
 
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
 const SuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
   // useEffect(() => {
@@ -59,10 +56,6 @@ const Quiz = () => {
     }
     // pp();
   };
-
-  // const MoveToQuiz = () => {
-  //   number();
-  // };
 
   const modalHandler = () => {
     setSuccessModalTrigger(false);
