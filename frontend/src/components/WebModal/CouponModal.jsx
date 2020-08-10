@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Grid, Divider } from '@material-ui/core';
+import { Grid, Divider, useMediaQuery } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 
 const CouponModal = modalNum => {
@@ -11,6 +11,7 @@ const CouponModal = modalNum => {
     productDatas[selectedEventItem - 1],
   );
 
+  const isMobile = useMediaQuery('(max-width:920px)');
   return (
     <>
       {/* {console.log(couponPageItem)} */}
