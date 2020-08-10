@@ -13,8 +13,7 @@ import Layout from '../../layout/';
 import { CommonContext } from '../../context/CommonContext';
 
 import axios from 'axios';
-
-import QRCode from 'react.qrcode.generator';
+import QRCode from 'react-qr-code';
 
 const columns = [
   { id: 'idx', label: '#', minWidth: 170 },
@@ -122,7 +121,6 @@ export default function StickyHeadTable() {
         <div style={{ textAlign: 'center' }}>
           <QRCode
             value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
-            size={300}
           />
         </div>
         <Paper className={classes.root}>
