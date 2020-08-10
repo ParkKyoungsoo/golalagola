@@ -72,13 +72,13 @@ app.post("/imageupload", async (req, res) => {
   console.log(file);
 
   // 경로 수정 필요
-  file.mv(`${__dirname}/../config/${file.name}`, (err) => {
+  file.mv(`${__dirname}/images/${file.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    res.json({ fileName: file.name, filePath: `/images/${file.name}` });
   });
 });
 
