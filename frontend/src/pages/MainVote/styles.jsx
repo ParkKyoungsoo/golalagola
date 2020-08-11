@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
     display: none;
   }
   & .appbar {
-    top: 5px;
+    // top: 5px;
     box-shadow: none;
     /* transition: all 0.4s; */
     &.appbar-shift {
@@ -39,11 +39,10 @@ export const Wrapper = styled.div`
     // flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    // background-color: green;
+    background-color: #f7f2f2;
   }
   
   .tmp {
-    // background-color: green;
     width: 25vw
     height: auto;
     // max-height: 50vh; 
@@ -73,7 +72,7 @@ export const MobileWrapper = styled.div`{
     display: none;
   }
   & .appbar {
-    top: 5px;
+    // top: 5px;
     box-shadow: none;
     /* transition: all 0.4s; */
     &.appbar-shift {

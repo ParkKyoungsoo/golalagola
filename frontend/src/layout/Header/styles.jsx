@@ -7,21 +7,27 @@ const Wrapper = styled.div`
   .headerColor {
     background-color: #f7f2f2;
     color: black;
+    height: 5vh;
   }
   .searchIcon {
     display: flex;
     flex-wrap: nowrap;
     position: fixed;
     right: 30px;
-    top: 3.5vh;
+    top: 1.5vh;
+    background-color: #f7f2f2;
   }
 
+  .display-none {
+    display: none;
+  }
   .mobileHome {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-end;
   }
+
   & .mobileSearchIcon {
     cursor: pointer;
     display: flex;
@@ -56,7 +62,7 @@ const Wrapper = styled.div`
   & .menu-button {
     position: fixed;
     left: 30px;
-    top: 4vh;
+    top: 2vh;
     z-index: 1300;
     margin-left: 0;
     width: 23px;

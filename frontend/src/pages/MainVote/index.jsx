@@ -221,6 +221,14 @@ const MainVote = props => {
               setDrawerOpen(0);
             }}
           >
+            <Divider />
+            <div className="KisokCentering">
+              <h1 className="KisokCentering" style={{ height: '15vh' }}>
+                Gola la Gola
+              </h1>
+            </div>
+            <Divider />
+
             {/* carousel, 실시간 순위 */}
             <AppBar position="relative" color="inherit" className="appbar">
               <Grid container>

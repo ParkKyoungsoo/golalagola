@@ -37,10 +37,10 @@ const Wrapper = styled.div`
   .cover-grid {
   }
   .search-component-grid {
-    padding: 32px 0 12px 0;
+    // padding: 32px 0 12px 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
   .search-component-grid-item-se-icon {
     color: #ccc;

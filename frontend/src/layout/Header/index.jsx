@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 import store from 'store';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -61,17 +62,9 @@ const Header = props => {
 
   const onClickRedirectPathHandler = name => e => {
     window.scrollTo(0, 0);
-    // if (name === '/SearchVote') {
-    //   if (history.location.pathname === name) {
-    //     history.goBack();
-    //     store.remove('search');
-    //   } else {
-    //     history.push(name);
-    //   }
 
     if (name === '/mainvote') {
       history.push('/');
-      // console.log(mainUrl);
     } else {
       history.push(`/${name}`);
     }
@@ -93,6 +86,9 @@ const Header = props => {
     setInfoDetailDialogOpen(false);
     setUserDetailDialogOpen(false);
   }, []);
+  const click = () => {
+    console.log(document.documentElement.scrollTop);
+  };
 
   return (
     <Container
@@ -118,8 +114,10 @@ const Header = props => {
               <Grid className="mobileSearchIcon">
                 <Typography
                   variant="h5"
-                  className="headerColor"
                   onClick={onClickRedirectPathHandler('/mainvote')}
+                  style={{
+                    backgroundColor: '#f7f2f2',
+                  }}
                 >
                   <span>Gola la Gola</span>
                 </Typography>
@@ -127,7 +125,7 @@ const Header = props => {
                   onClick={() => {
                     setDrawerOpen(0);
                   }}
-                  className="searchIcon headerColor"
+                  className="searchIcon"
                 >
                   {successSearchbarTrigger ? <SearchComponent /> : null}
                   <h5 onClick={openSearchbar}>
@@ -171,6 +169,7 @@ const Header = props => {
               alignItems: 'center',
             }}
             className="headerColor"
+            onClick={click}
           >
             <Grid
               container
@@ -178,130 +177,81 @@ const Header = props => {
                 height: '5vh',
                 // justifyContent: 'flex-end',
               }}
-              className="appbar"
+              className="appbar "
             >
-              <Grid xs={3} className="navbarCentering">
+              <Grid
+                xs={4}
+                className="navbarCentering"
+                style={{
+                  height: '5vh',
+                }}
+              >
+                {successSearchbarTrigger ? <SearchComponent /> : null}
+                <h3 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
+                  <Search />
+                </h3>
+              </Grid>
+
+              <Grid
+                xs={4}
+                style={{
+                  height: '5vh',
+                }}
+              >
                 <Typography
                   variant="h5"
-                  className="logo"
+                  className={'navbarCentering'}
+                  // className="display-none"
                   onClick={onClickRedirectPathHandler('/mainvote')}
+                  style={{ cursor: 'pointer' }}
                 >
+                  {console.log(document.documentElement.scrollTop)}
                   Gola la Gola
                 </Typography>
               </Grid>
-
-              <Grid xs={9}>
+              <Grid
+                xs={4}
+                style={{
+                  height: '5vh',
+                }}
+              >
                 <Grid
-                  container
                   style={{
                     height: '5vh',
                   }}
+                  container
+                  className="navbarRight"
                 >
-                  <Grid item xs={7} className="navbarCentering ">
-                    {successSearchbarTrigger ? <SearchComponent /> : null}
-                    <h3 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
-                      <Search />
-                    </h3>
-                  </Grid>
-                  <Grid item xs={5}>
-                    <Grid
-                      style={{
-                        height: '5vh',
-                      }}
-                      container
-                      className="navbarRight"
+                  {user.status === 'login' ? (
+                    <Button
+                      variant="contained"
+                      onClick={onClickRedirectPathHandler('eventall')}
+                      className="header-button headerColor"
                     >
-                      {user.status === 'login' ? (
-                        // <Button
-                        //   color="primary"
-                        //   variant="contained"
-                        //   onClick={onClickRedirectPathHandler('EventAll')}
-                        //   className=" header-button"
-                        // >
-                        //   <h3>
-                        //     <Event />
-                        //   </h3>
-                        // </Button>
-                        <Button
-                          color="primary"
-                          variant="contained"
-                          onClick={onClickRedirectPathHandler('eventall')}
-                          className="header-button headerColor"
-                        >
-                          <h6>이벤트</h6>
-                        </Button>
-                      ) : null}
-                      {/* <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={onClickRedirectPathHandler('MyCoupon')}
-                        className=" header-button"
-                      >
-                        <h3>
-                          <Coupon />
-                        </h3>
-                      </Button> */}
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={onClickRedirectPathHandler('mycoupon')}
-                        className="header-button headerColor"
-                      >
-                        <h6>쿠폰</h6>
-                      </Button>
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={handleSignInDialogOpen}
-                        className=" header-button headerColor"
-                      >
-                        {user.status === 'login' ? (
-                          <h3>
-                            <User />
-                          </h3>
-                        ) : (
-                          <h6>Sign in</h6>
-                        )}
-                      </Button>
-                    </Grid>
-                    {/* <Grid container style={{ flexDirection:"column", height:"5vh"}} className="navbarCentering">
-                    <Grid ite style={{height:"5vh"}}>
-                      <Grid>
-                        <Button
-                          color="primary"
-                          variant="contained"
-                          onClick={handleSignInDialogOpen}
-                          // className="display-none header-button"
-                        >
-                          {user.status === 'login' ? 'My' : 'Sign In'}
-                        </Button>
-                      </Grid>
-                    </Grid>
-                    <Grid item style={{height:"5vh"}}>
-                      <Grid container justify="" spacing={2}>
-                        <Grid item>
-                          <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={onClickRedirectPathHandler('/MainVote')}
-                            // className="display-none header-button"
-                          >
-                            Event
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={onClickRedirectPathHandler('/MainVote')}
-                            // className="display-none header-button"
-                          >
-                            My Coupon
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Grid> */}
-                  </Grid>
+                      <h6>이벤트</h6>
+                    </Button>
+                  ) : null}
+
+                  <Button
+                    variant="contained"
+                    onClick={onClickRedirectPathHandler('mycoupon')}
+                    className="header-button headerColor"
+                  >
+                    <h6>쿠폰</h6>
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={handleSignInDialogOpen}
+                    className=" header-button headerColor"
+                  >
+                    {user.status === 'login' ? (
+                      <h3>
+                        <User />
+                      </h3>
+                    ) : (
+                      <h6>Sign in</h6>
+                    )}
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>

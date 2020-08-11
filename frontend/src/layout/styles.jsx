@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   .container {
     margin-bottom: 30px;
   }
-  @media (max-width: 960px) {
+  @media (max-width: 930px) {
     // padding-bottom: 377px;
   }
 `;
