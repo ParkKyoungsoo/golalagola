@@ -8,6 +8,16 @@ const Wrapper = styled.div`
     
   }
 
+  & .imgCss {
+    backgroundColor: #f7f2f2;
+  }
+
+  & .eventImg {
+    border:2px outset rgba(44, 134, 204, 0.67);
+    border-radius:5px;
+
+  }
+
   & .EM {
     justify-content: center;
     align-items: center;
@@ -31,6 +41,8 @@ const Wrapper = styled.div`
   & .BtnCss {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 
   & .quizCentering {

@@ -110,7 +110,7 @@ const Header = props => {
             <Grid
               container
               style={{
-                height: '10vh',
+                height: '5vh',
                 justifyContent: 'center',
               }}
               className="appbar"
@@ -121,9 +121,7 @@ const Header = props => {
                   className="headerColor"
                   onClick={onClickRedirectPathHandler('/mainvote')}
                 >
-                  <span>Gola la</span>
-                  <br />
-                  <span>Gola</span>
+                  <span>Gola la Gola</span>
                 </Typography>
                 <Grid
                   onClick={() => {
@@ -177,7 +175,7 @@ const Header = props => {
             <Grid
               container
               style={{
-                height: '10vh',
+                height: '5vh',
                 // justifyContent: 'flex-end',
               }}
               className="appbar"
@@ -196,7 +194,7 @@ const Header = props => {
                 <Grid
                   container
                   style={{
-                    height: '10vh',
+                    height: '5vh',
                   }}
                 >
                   <Grid item xs={7} className="navbarCentering ">
@@ -208,7 +206,7 @@ const Header = props => {
                   <Grid item xs={5}>
                     <Grid
                       style={{
-                        height: '10vh',
+                        height: '5vh',
                       }}
                       container
                       className="navbarRight"
@@ -266,7 +264,7 @@ const Header = props => {
                         )}
                       </Button>
                     </Grid>
-                    {/* <Grid container style={{ flexDirection:"column", height:"10vh"}} className="navbarCentering">
+                    {/* <Grid container style={{ flexDirection:"column", height:"5vh"}} className="navbarCentering">
                     <Grid ite style={{height:"5vh"}}>
                       <Grid>
                         <Button

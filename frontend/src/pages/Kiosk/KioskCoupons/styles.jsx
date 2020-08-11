@@ -16,7 +16,6 @@ const KioskCSS = styled.div`
 
 & .buttonType {
   text-align: center;
-  background: green;
   align-items: center;
   justify-content: center;
 }
