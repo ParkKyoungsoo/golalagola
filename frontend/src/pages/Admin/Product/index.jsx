@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 
 import AdminNav from '../Layout/nav.jsx';
+import NestedList from '../Layout/sidebar.jsx';
 
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
@@ -26,12 +27,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import Wrapper from './styles';
+import Divider from '@material-ui/core/Divider';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    width: '100%',
   },
   paper: {
-    margin: theme.spacing(2),
+    padding: theme.spacing(4),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -149,63 +154,88 @@ const AdminProduct = () => {
 
   const classes = useStyles();
   return (
-    <div>
-      <AdminNav />
-      <h1>재고 상품 페이지</h1>
-      <MaterialTable
-        icons={tableIcons}
-        title="재고 목록"
-        columns={products.columns}
-        data={products.data}
-        options={{ actionsColumnIndex: -1, pageSize: 20 }}
-        detailPanel={rowData => {
-          return (
-            <Grid container>
-              <Grid item>
-                <img
-                  src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
-                  alt={`${rowData.prod_name} 이미지`}
-                />
-              </Grid>
-              <Grid>
-                <h3>상품: {rowData.prod_name}</h3>
-                <h5>{rowData.prod_title}</h5>
-                <p>품목: {rowData.prod_category}</p>
-                <p>가격: {rowData.prod_price}</p>
-                <p>수량: {rowData.prod_amount}</p>
-                <p>유통기한: {rowData.prod_expiration}</p>
-                <p>상품 설명: {rowData.prod_desc}</p>
-                <p>할인율: {rowData.prod_sale}</p>
-                <p>무게: {rowData.prod_weight}</p>
-              </Grid>
+    <Wrapper>
+      <div className="admin_product__main">
+        {/* <AdminNav /> */}
+        <Grid container>
+          <Grid item>
+            <NestedList index={3} />
+          </Grid>
+          <Grid item>
+            <Grid className="admin_product__content">
+              <h5 className="admin_product__header">Products Dashboard</h5>
+              <Divider variant="middle" className="admin_product__divider" />
+              <MaterialTable
+                className="admin_product__table"
+                icons={tableIcons}
+                title="재고 목록"
+                columns={products.columns}
+                data={products.data}
+                options={{ actionsColumnIndex: -1, pageSize: 7 }}
+                detailPanel={rowData => {
+                  return (
+                    <Grid container className="admin_product__detail--grid">
+                      <Grid
+                        item
+                        xs={6}
+                        className="admin_product__detail--image_grid"
+                      >
+                        <img
+                          className="admin_product__detail--image"
+                          src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
+                          alt={`${rowData.prod_name} 이미지`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Divider />
+                        <h3 className="">상품: {rowData.prod_name}</h3>
+                        <h5>{rowData.prod_title}</h5>
+                        <p>품목: {rowData.prod_category}</p>
+                        <p>상품 설명: {rowData.prod_desc}</p>
+                        <Divider />
+                        <p>판매 가격: {rowData.prod_price}원</p>
+                        <p>남은 수량: {rowData.prod_amount}개</p>
+                        <p>유통 기한: {rowData.prod_expiration}</p>
+                        <p>할인율: {rowData.prod_sale}%</p>
+                        <p>무게: {rowData.prod_weight}g</p>
+                        <Divider />
+                      </Grid>
+                    </Grid>
+                  );
+                }}
+                actions={[
+                  {
+                    icon: AddBox,
+                    tooltip: 'Add Product',
+                    isFreeAction: true,
+                    onClick: event => createProductData(),
+                  },
+                  rowData => ({
+                    icon: Edit,
+                    tooltip: 'Update Product',
+                    onClick: (event, rowData) => updateProductData(rowData),
+                  }),
+                  rowData => ({
+                    icon: DeleteOutline,
+                    tooltip: 'Delete Product',
+                    onClick: (event, rowData) => {
+                      console.log(rowData);
+                      if (
+                        window.confirm(
+                          'You want to delete ' + rowData.prod_name,
+                        )
+                      ) {
+                        deleteProductData(rowData.prod_id);
+                      }
+                    },
+                  }),
+                ]}
+              />
             </Grid>
-          );
-        }}
-        actions={[
-          {
-            icon: AddBox,
-            tooltip: 'Add Product',
-            isFreeAction: true,
-            onClick: event => createProductData(),
-          },
-          rowData => ({
-            icon: Edit,
-            tooltip: 'Update Product',
-            onClick: (event, rowData) => updateProductData(rowData),
-          }),
-          rowData => ({
-            icon: DeleteOutline,
-            tooltip: 'Delete Product',
-            onClick: (event, rowData) => {
-              console.log(rowData);
-              if (window.confirm('You want to delete ' + rowData.prod_name)) {
-                deleteProductData(rowData.prod_id);
-              }
-            },
-          }),
-        ]}
-      />
-    </div>
+          </Grid>
+        </Grid>
+      </div>
+    </Wrapper>
   );
 };
 export default AdminProduct;

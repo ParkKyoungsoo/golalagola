@@ -32,14 +32,14 @@ const ControlledCarousel = props => {
                   <Grid item xs={6} className="KisokCentering mobiletmp">
                     <Link
                       className="KisokCentering mobiletmp"
-                      to={`VoteItemDetail/${
+                      to={`voteitemdetail/${
                         Object(productDatas[data.event_item['1'].prod_id - 1])
                           .prod_name
                       }/${
                         Object(productDatas[data.event_item['1'].prod_id - 1])
                           .prod_id
                       }`}
-                      // to={`VoteItemDetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
+                      // to={`voteitemdetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
                     >
                       <img
                         className="mobiletmp"
@@ -54,14 +54,14 @@ const ControlledCarousel = props => {
                   <Grid item xs={6} className="KisokCentering mobiletmp">
                     <Link
                       className="KisokCentering mobiletmp"
-                      to={`VoteItemDetail/${
+                      to={`voteitemdetail/${
                         Object(productDatas[data.event_item['2'].prod_id - 1])
                           .prod_name
                       }/${
                         Object(productDatas[data.event_item['2'].prod_id - 1])
                           .prod_id
                       }`}
-                      // to={`VoteItemDetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
+                      // to={`voteitemdetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
                     >
                       <img
                         className="mobiletmp"
@@ -93,14 +93,14 @@ const ControlledCarousel = props => {
                 <Grid item xs={6} className="KisokCentering tmp">
                   <Link
                     className="KisokCentering tmp"
-                    to={`VoteItemDetail/${
+                    to={`voteitemdetail/${
                       Object(productDatas[data.event_item['1'].prod_id - 1])
                         .prod_name
                     }/${
                       Object(productDatas[data.event_item['1'].prod_id - 1])
                         .prod_id
                     }`}
-                    // to={`VoteItemDetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
+                    // to={`voteitemdetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
                   >
                     <img
                       className="tmp"
@@ -115,14 +115,14 @@ const ControlledCarousel = props => {
                 <Grid item xs={6} className="KisokCentering tmp">
                   <Link
                     className="KisokCentering tmp"
-                    to={`VoteItemDetail/${
+                    to={`voteitemdetail/${
                       Object(productDatas[data.event_item['2'].prod_id - 1])
                         .prod_name
                     }/${
                       Object(productDatas[data.event_item['2'].prod_id - 1])
                         .prod_id
                     }`}
-                    // to={`VoteItemDetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
+                    // to={`voteitemdetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
                   >
                     <img
                       className="tmp"
