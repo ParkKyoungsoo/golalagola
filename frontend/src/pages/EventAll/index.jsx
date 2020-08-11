@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Grid, useMediaQuery } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
@@ -238,14 +238,15 @@ const EventAll = () => {
           </ListItemIcon>
           <ListItemText primary="쿠폰담기" />
         </ListItem>
-
-        <ListItem button className="sideBarColumn">
-          <ListItemIcon className="sideBarIcon">
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="쿠폰함" />
-          {/* {open ? <ExpandLess /> : <ExpandMore />} */}
-        </ListItem>
+        <Link>
+          <ListItem button className="sideBarColumn">
+            <ListItemIcon className="sideBarIcon">
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="쿠폰함" />
+            {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+          </ListItem>
+        </Link>
       </List>
     );
   };
