@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Button, Grid } from '@material-ui/core';
-import NestedList from './sidebar.jsx';
 
 const AdminNav = props => {
   let history = useHistory();
@@ -15,7 +14,7 @@ const AdminNav = props => {
   };
 
   return (
-    <div>
+    <>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -47,12 +46,7 @@ const AdminNav = props => {
           </Button>
         </Toolbar>
       </AppBar>
-      <Grid container>
-        <Grid item>
-          <NestedList />
-        </Grid>
-      </Grid>
-    </div>
+    </>
   );
 };
 export default AdminNav;
