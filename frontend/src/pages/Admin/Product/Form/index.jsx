@@ -1,40 +1,19 @@
-import React, { useState, useContext, useCallback, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { CommonContext } from '../../../../context/CommonContext';
 
-import {
-  Paper,
-  Grid,
-  Avatar,
-  Fab,
-  Input,
-  Select,
-  MenuItem,
-  FormControl,
-  Button,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  FormLabel,
-} from '@material-ui/core';
+import { Grid, FormControl, Button } from '@material-ui/core';
 import Wrapper from './styles';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { DropzoneArea } from 'material-ui-dropzone';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-import { Form } from 'react-bootstrap';
-
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
-import AdminNav from '../../Nav/index.jsx';
+// import AdminNav from '../../Nav/index.jsx';
 
 const AdminProductForm = () => {
   const [forceRender, setForceRender] = useState({});
@@ -325,7 +304,7 @@ const AdminProductForm = () => {
 
   return (
     <Wrapper>
-      <AdminNav />
+      {/* <AdminNav /> */}
       <Grid container justify="center" alignItems="flex-start" spacing={2}>
         <Grid item xs={6}>
           이미지 업로드
@@ -468,26 +447,6 @@ const AdminProductForm = () => {
                   onChange={handleWeightChange}
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup
-                  aria-label="answer"
-                  name="answer"
-                  value={hint.value}
-                  onChange={handleAnswerChange}
-                >
-                  <FormControlLabel
-                    value="true"
-                    control={<Radio />}
-                    label="ture"
-                  />
-                  <FormControlLabel
-                    value="false"
-                    control={<Radio />}
-                    label="false"
-                  />
-                </RadioGroup>
-              </Grid> */}
               <Button
                 variant="contained"
                 color="primary"

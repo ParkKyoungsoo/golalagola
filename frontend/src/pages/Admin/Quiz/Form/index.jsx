@@ -27,7 +27,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
-import AdminNav from '../../Nav/index.jsx';
+// import AdminNav from '../../Nav/index.jsx';
 
 const AdminQuizForm = () => {
   const [forceRender, setForceRender] = useState({});
@@ -113,7 +113,7 @@ const AdminQuizForm = () => {
 
   return (
     <div>
-      <AdminNav />
+      {/* <AdminNav /> */}
       <Grid container justify="center" alignItems="flex-start" spacing={2}>
         <Grid item xs={12}>
           <p>그리드 9</p>
