@@ -26,13 +26,14 @@ const EventAll = () => {
     setUserEvent,
     userCoupon,
     setUserCoupon,
+    mainUrl,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
   const [couponData, setCouponData] = useState([]);
 
-  const history = useHistory();
+  let history = useHistory();
   const isMobile = useMediaQuery('(max-width:930px)');
   function choiceProduct(tmpData, productNumber) {
     // 같은 event_id가 존재하지 않는다면 추가
@@ -56,7 +57,7 @@ const EventAll = () => {
   // 최초 1회 couponData 받아오기
   const userId = 1; // user Data 필요
   const getUserCouponData = async () => {
-    console.log('couponData 받아오기');
+    // console.log('couponData 받아오기');
     await Axios.get(`https://i3b309.p.ssafy.io/api/coupon/${userId}`)
       .then(res => {
         console.log(res);
@@ -210,6 +211,16 @@ const EventAll = () => {
     return <ListItem button component="a" {...props} />;
   }
 
+  const onClickRedirectPathHandler = name => e => {
+    window.scrollTo(0, 0);
+    if (name === '/mainvote') {
+      history.push('/');
+      // console.log(mainUrl);
+    } else {
+      history.push(`/${name}`);
+    }
+  };
+
   const NestedList = props => {
     // sidebar 스타일 정의
     const classes = useStyles();
@@ -238,15 +249,17 @@ const EventAll = () => {
           </ListItemIcon>
           <ListItemText primary="쿠폰담기" />
         </ListItem>
-        <Link>
-          <ListItem button className="sideBarColumn">
-            <ListItemIcon className="sideBarIcon">
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="쿠폰함" />
-            {/* {open ? <ExpandLess /> : <ExpandMore />} */}
-          </ListItem>
-        </Link>
+        <ListItem
+          button
+          className="sideBarColumn"
+          onClick={onClickRedirectPathHandler('mycoupon')}
+        >
+          <ListItemIcon className="sideBarIcon">
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="쿠폰함" />
+          {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+        </ListItem>
       </List>
     );
   };

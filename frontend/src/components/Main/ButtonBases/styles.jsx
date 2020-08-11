@@ -52,13 +52,13 @@ const Wrapper = styled.div`
     position: relative;
     //   padding: 16px 32px 14px;
     line-height: 26px;
-    color: #fff;
+    color: #f7f2f2;
   }
   .mobile-image-title {
     position: relative;
     padding: 8px 16px 7px;
     line-height: 26px;
-    color: #fff;
+    color: #f7f2f2;
   }
   .selected-tab {
     opacity: 1;
