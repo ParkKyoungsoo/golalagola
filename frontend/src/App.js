@@ -274,54 +274,54 @@ const App = () => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={MainVote} />
-            <Route exact path="/MainVote" component={MainVote} />
-            <Route exact path="/Auth" component={Auth} />
-            <Route exact path="/Terms" component={Terms} />
-            <Route exact path="/MyVote" component={MyVote} />
-            <Route exact path="/AboutMe" component={AboutMe} />
-            <Route exact path="/ContactUs" component={ContactUs} />
-            <Route exact path="/SearchVote" component={SearchVote} />
+            <Route exact path="/mainvote" component={MainVote} />
+            <Route exact path="/auth" component={Auth} />
+            <Route exact path="/terms" component={Terms} />
+            <Route exact path="/myvote" component={MyVote} />
+            <Route exact path="/aboutme" component={AboutMe} />
+            <Route exact path="/contactus" component={ContactUs} />
+            <Route exact path="/searchvote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
-            <Route exact path="/CreateEvent" component={CreateEvent} />
-            <Route exact path="/KioskMains" component={KioskMains} />
-            <Route exact path="/KioskCoupons" component={KioskCoupons} />
-            <Route exact path="/KioskQuiz" component={KioskQuiz} />
-            <Route exact path="/MyCoupon" component={MyCoupon} />
-            <Route exact path="/EventAll" component={EventAll} />
+            <Route exact path="/createevent" component={CreateEvent} />
+            <Route exact path="/kioskmains" component={KioskMains} />
+            <Route exact path="/kioskcoupons" component={KioskCoupons} />
+            <Route exact path="/kioskquiz" component={KioskQuiz} />
+            <Route exact path="/mycoupon" component={MyCoupon} />
+            <Route exact path="/eventall" component={EventAll} />
             <Route
               exact
-              path="/VoteItemDetail/:name/:id"
+              path="/voteitemdetail/:name/:id"
               component={VoteItemDetail}
             />
             <Route
               exact
-              path="/SearchResult/:searchValue"
+              path="/searchresult/:searchValue"
               component={SearchResult}
             />
 
-            <Route exact path="/Admin" component={Admin} />
-            <Route exact path="/Admin/VS" component={AdminVS} />
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/admin/vs" component={AdminVS} />
             <Route
               exact
-              path="/Admin/VS/Estimate"
+              path="/admin/vs/estimate"
               component={AdminVSEstimate}
             />
             <Route
               exact
-              path="/Admin/VS/Recommand"
+              path="/admin/vs/recommand"
               component={AdminVSRecommand}
             />
-            <Route exact path="/Admin/Quiz" component={AdminQuiz} />
-            <Route exact path="/Admin/Quiz/Form" component={AdminQuizForm} />
+            <Route exact path="/admin/quiz" component={AdminQuiz} />
+            <Route exact path="/admin/quiz/form" component={AdminQuizForm} />
 
-            <Route exact path="/Admin/User" component={AdminUser} />
-            <Route exact path="/Admin/Product" component={AdminProduct} />
+            <Route exact path="/admin/user" component={AdminUser} />
+            <Route exact path="/admin/product" component={AdminProduct} />
             <Route
               exact
-              path="/Admin/Product/Form"
+              path="/admin/product/form"
               component={AdminProductForm}
             />
-            <Route exact path="/Admin/CreateEvent" component={CreateEvent} />
+            <Route exact path="/admin/createevent" component={CreateEvent} />
 
             <Redirect to="/not-found" />
           </Switch>
