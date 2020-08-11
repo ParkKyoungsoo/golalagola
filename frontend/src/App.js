@@ -274,7 +274,7 @@ const App = () => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={MainVote} />
-            <Route exact path="/MgtainVote" component={MainVote} />
+            <Route exact path="/MainVote" component={MainVote} />
             <Route exact path="/Auth" component={Auth} />
             <Route exact path="/Terms" component={Terms} />
             <Route exact path="/MyVote" component={MyVote} />
