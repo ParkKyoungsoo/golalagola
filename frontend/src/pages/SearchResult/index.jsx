@@ -28,7 +28,7 @@ const Result = ({ match }) => {
   let history = useHistory();
   const onClick = itemData => {
     history.replace(
-      `VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}}`,
+      `voteitemdetail/${itemData.prod_name}/${itemData.prod_id}}`,
     );
   };
 

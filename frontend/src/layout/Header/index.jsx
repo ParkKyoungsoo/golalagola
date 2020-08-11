@@ -56,7 +56,7 @@ const Header = props => {
   } = useContext(CommonContext);
 
   const handleSignInDialogOpen = () => {
-    history.push('/Auth');
+    history.push('/auth');
   };
 
   const onClickRedirectPathHandler = name => e => {
@@ -69,7 +69,7 @@ const Header = props => {
     //     history.push(name);
     //   }
 
-    if (name === '/MainVote') {
+    if (name === '/mainvote') {
       history.push('/');
       // console.log(mainUrl);
     } else {
@@ -119,7 +119,7 @@ const Header = props => {
                 <Typography
                   variant="h5"
                   className="headerColor"
-                  onClick={onClickRedirectPathHandler('/MainVote')}
+                  onClick={onClickRedirectPathHandler('/mainvote')}
                 >
                   <span>Gola la</span>
                   <br />
@@ -186,7 +186,7 @@ const Header = props => {
                 <Typography
                   variant="h5"
                   className="logo"
-                  onClick={onClickRedirectPathHandler('/MainVote')}
+                  onClick={onClickRedirectPathHandler('/mainvote')}
                 >
                   Gola la Gola
                 </Typography>
@@ -227,7 +227,7 @@ const Header = props => {
                         <Button
                           color="primary"
                           variant="contained"
-                          onClick={onClickRedirectPathHandler('EventAll')}
+                          onClick={onClickRedirectPathHandler('eventall')}
                           className="header-button headerColor"
                         >
                           <h6>이벤트</h6>
@@ -246,7 +246,7 @@ const Header = props => {
                       <Button
                         color="primary"
                         variant="contained"
-                        onClick={onClickRedirectPathHandler('MyCoupon')}
+                        onClick={onClickRedirectPathHandler('mycoupon')}
                         className="header-button headerColor"
                       >
                         <h6>쿠폰</h6>
