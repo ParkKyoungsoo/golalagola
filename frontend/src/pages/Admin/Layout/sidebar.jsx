@@ -83,6 +83,32 @@ const NestedList = props => {
         </ListItemIcon>
         <ListItemText primary="VS 이벤트 관리" />
       </ListItem>
+	  
+	  <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemLink href="https://i3b309.p.ssafy.io/Admin/VS/Estimate">
+              <ListItemText primary="통계"></ListItemText>
+            </ListItemLink>
+          </ListItem>
+        </List>
+      </Collapse>
+
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemLink href="https://i3b309.p.ssafy.io/Admin/VS/Recommand">
+              <ListItemText primary="추천"></ListItemText>
+            </ListItemLink>
+          </ListItem>
+        </List>
+      </Collapse>
 
       <ListItem button>
         <ListItemIcon>
