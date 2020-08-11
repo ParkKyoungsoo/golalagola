@@ -25,8 +25,8 @@ export const Wrapper = styled.div`
     padding: 0;
     margin: 10px 5px;
     border-radius: 5px;
-    min-width: 120px;
-    width: 200px;
+    // min-width: 120px;
+    // width: 200px;
   }
   & .tab-panel {
     // padding: 170px 0 20px 0;

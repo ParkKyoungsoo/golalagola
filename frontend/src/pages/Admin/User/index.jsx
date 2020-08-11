@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 
-import AdminNav from '../Nav/index.jsx';
+import AdminNav from '../Layout/nav';
 
 const AdminUser = props => {
   return (

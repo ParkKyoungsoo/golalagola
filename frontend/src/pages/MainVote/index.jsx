@@ -119,7 +119,7 @@ const MainVote = props => {
   ] = useOnChangeIndex(categoryDatas);
 
   let history = useHistory();
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   useEffect(() => {
     setDrawerOpen(false);
   }, []);
@@ -140,12 +140,8 @@ const MainVote = props => {
       }}
     >
       <Layout>
-        {isTablet ? (
-          <MobileWrapper
-            onClick={() => {
-              setDrawerOpen(0);
-            }}
-          >
+        {isMobile ? (
+          <MobileWrapper>
             {/* carousel, 실시간 순위 */}
             <AppBar position="relative" color="inherit" className="appbar">
               <Grid container>
@@ -158,6 +154,9 @@ const MainVote = props => {
                   xs={12}
                   className="tiemPopularity"
                   position="absolute"
+                  style={{
+                    backgroundColor: '#f7f2f2',
+                  }}
                 >
                   <Box
                     height="80%"
@@ -234,6 +233,9 @@ const MainVote = props => {
                   xs={12}
                   className="tiemPopularity"
                   position="absolute"
+                  style={{
+                    backgroundColor: '#f7f2f2',
+                  }}
                 >
                   <Box
                     height="80%"

@@ -69,7 +69,6 @@ const Result = ({ match }) => {
                   itemData={itemData}
                   index={index}
                 />
-                <h3 style={{ marginLeft: '20px' }}>{itemData.prod_price}원</h3>
               </Grid>
             );
           })}

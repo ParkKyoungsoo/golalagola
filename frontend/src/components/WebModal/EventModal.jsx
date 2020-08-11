@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, useMediaQuery } from '@material-ui/core';
 import Wrapper from './styles';
 import CheckBox from '../WebModal/CheckBox';
 import { CommonContext } from '../../context/CommonContext';
+import MultiCarousel from './MultiCarousel';
 
 const EventModal = modalNum => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
@@ -14,7 +15,7 @@ const EventModal = modalNum => {
 
   const RadioTest = e => {
     setSelectedEventItem(e.target.value);
-    console.log(selectedEventItem);
+    // console.log(selectedEventItem);
   };
 
   // 다음 모달창을 띄워주고 selectedEventItem에 선택한 제품을 넣어주기 위한 함수
@@ -22,15 +23,20 @@ const EventModal = modalNum => {
     modalNum.setModalNum(2);
   };
 
+  const isMobile = useMediaQuery('(max-width:920px)');
   return (
     <>
-      <Wrapper>
-        {console.log('mainValue', eventNum)}
-        <Grid className="EM">
+      {isMobile ? (
+        <Wrapper>
           <Grid container>
-            <Grid className="eventM" item xs={5}>
+            <Grid item xs={12}>
+              <MultiCarousel />
+            </Grid>
+          </Grid>
+          <Grid className="EM" container direction="row">
+            <Grid item xs={4}>
               <img
-                className="tmp"
+                className="eventImg"
                 src={`https://i3b309.p.ssafy.io/${
                   Object(
                     productDatas[
@@ -42,25 +48,17 @@ const EventModal = modalNum => {
                 style={{
                   width: '100%',
                   height: 'auto',
+                  borderRadius: '8px',
+                  border: 'none',
                 }}
               />
-              <input
-                type="radio"
-                name="event"
-                value={currentEventDatas[eventNum].event_item['1'].prod_id - 1}
-                onChange={RadioTest}
-              ></input>
-              <p>
-                <h3> 이곳은 설명 글 입니다.</h3>
-              </p>
-              {/* <CheckBox /> */}
             </Grid>
-
-            <Grid item xs={2} className="textCss">
-              <strong>VS</strong>
+            <Grid item xs={1}>
+              <h4 className="textCss">
+                <strong>VS</strong>
+              </h4>
             </Grid>
-
-            <Grid className="eventM" item xs={5}>
+            <Grid item xs={4}>
               <img
                 className="tmp"
                 src={`https://i3b309.p.ssafy.io/${
@@ -74,22 +72,73 @@ const EventModal = modalNum => {
                 style={{
                   width: '100%',
                   height: 'auto',
+                  borderRadius: '8px',
                 }}
               />
-              <input
-                type="radio"
-                name="event"
-                value={currentEventDatas[eventNum].event_item['2'].prod_id - 1}
-                onChange={RadioTest}
-              ></input>
-              <p>
-                <h3>이곳은 설명 글 입니다.</h3>
-              </p>
             </Grid>
           </Grid>
-          {/* <Grid>
-            <CheckBox />
-          </Grid> */}
+          <Grid className="inputCss" container direction="row">
+            <Grid item item xs={4}>
+              <Grid container direction="column">
+                <Grid item>
+                  <input
+                    className="butt"
+                    type="radio"
+                    name="event"
+                    value={
+                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                    }
+                    onChange={RadioTest}
+                  ></input>
+                </Grid>
+                <Grid item>
+                  <p>
+                    <h5 className="desCss">
+                      {
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['1']
+                              .prod_id - 1
+                          ],
+                        ).prod_title
+                      }
+                    </h5>
+                  </p>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={4}>
+              <Grid container direction="column">
+                <Grid item>
+                  <input
+                    className="butt"
+                    type="radio"
+                    name="event"
+                    value={
+                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                    }
+                    onChange={RadioTest}
+                  ></input>
+                </Grid>
+                <Grid item>
+                  <p>
+                    <h5 className="desCss">
+                      {
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['2']
+                              .prod_id - 1
+                          ],
+                        ).prod_title
+                      }
+                    </h5>
+                  </p>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+
           <Grid className="BtnCss">
             <Button
               variant="contained"
@@ -102,8 +151,134 @@ const EventModal = modalNum => {
               Disable elevation
             </Button>
           </Grid>
-        </Grid>
-      </Wrapper>
+        </Wrapper>
+      ) : (
+        <Wrapper>
+          <Grid container>
+            <Grid item xs={12}>
+              <MultiCarousel />
+            </Grid>
+          </Grid>
+          <Grid className="EM" container direction="row">
+            <Grid item xs={4}>
+              <img
+                className="eventImg"
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(
+                    productDatas[
+                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                    ],
+                  ).prod_image
+                }`}
+                alt="nature"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '8px',
+                  border: 'none',
+                }}
+              />
+            </Grid>
+            <Grid item xs={1}>
+              <h4 className="textCss">
+                <strong>VS</strong>
+              </h4>
+            </Grid>
+            <Grid item xs={4}>
+              <img
+                className="tmp"
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(
+                    productDatas[
+                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                    ],
+                  ).prod_image
+                }`}
+                alt="people"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '8px',
+                }}
+              />
+            </Grid>
+          </Grid>
+          <Grid className="inputCss" container direction="row">
+            <Grid item item xs={4}>
+              <Grid container direction="column">
+                <Grid item>
+                  <input
+                    className="butt"
+                    type="radio"
+                    name="event"
+                    value={
+                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                    }
+                    onChange={RadioTest}
+                  ></input>
+                </Grid>
+                <Grid item>
+                  <p>
+                    <h5 className="desCss">
+                      {
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['1']
+                              .prod_id - 1
+                          ],
+                        ).prod_title
+                      }
+                    </h5>
+                  </p>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={4}>
+              <Grid container direction="column">
+                <Grid item>
+                  <input
+                    className="butt"
+                    type="radio"
+                    name="event"
+                    value={
+                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                    }
+                    onChange={RadioTest}
+                  ></input>
+                </Grid>
+                <Grid item>
+                  <p>
+                    <h5 className="desCss">
+                      {
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['2']
+                              .prod_id - 1
+                          ],
+                        ).prod_title
+                      }
+                    </h5>
+                  </p>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid className="BtnCss">
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              // style={{ alignItems: 'center' }}
+              onClick={EventTrigger}
+              disabled={selectedEventItem === undefined}
+            >
+              Disable elevation
+            </Button>
+          </Grid>
+        </Wrapper>
+      )}
     </>
   );
 };

@@ -11,9 +11,7 @@ const KioskPages = () => {
     <Wrapper>
       <Grid>
         <Navbar />
-        <Link to={'/KioskQuiz/'}>
-          <Carousel />
-        </Link>
+        <Carousel />
       </Grid>
     </Wrapper>
   );

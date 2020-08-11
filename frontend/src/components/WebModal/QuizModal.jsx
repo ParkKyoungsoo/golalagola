@@ -3,15 +3,12 @@ import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
 import { Route, Link } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid } from '@material-ui/core';
+import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
 import MultiCarousel from './MultiCarousel';
-import Axios from 'axios';
 
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
 const SuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
   // useEffect(() => {
@@ -60,10 +57,6 @@ const Quiz = () => {
     // pp();
   };
 
-  // const MoveToQuiz = () => {
-  //   number();
-  // };
-
   const modalHandler = () => {
     setSuccessModalTrigger(false);
     setFailModalTrigger(failModalTrigger => false);
@@ -79,6 +72,7 @@ const Quiz = () => {
     setIndex(selectedIndex);
   };
 
+  const isMobile = useMediaQuery('(max-width:920px)');
   // console.log('aaa', quizDatas.length);
   return (
     <>

@@ -49,6 +49,7 @@ const NestedList = props => {
           <p className="sidebar__p">Products</p>
         </ListItem>
 
+<<<<<<< HEAD
         <ListItem
           button
           className="sidebar__item"
@@ -58,6 +59,40 @@ const NestedList = props => {
           <DraftsIcon className="sidebar__icon" />
           <p className="sidebar__p">Events</p>
         </ListItem>
+=======
+      <ListItem button>
+        <ListItemIcon>
+          <DraftsIcon />
+        </ListItemIcon>
+        <ListItemText primary="VS 이벤트 관리" />
+      </ListItem>
+	  
+	  <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemLink href="http://localhost:3000/Admin/VS/Estimate">
+              <ListItemText primary="통계"></ListItemText>
+            </ListItemLink>
+          </ListItem>
+        </List>
+      </Collapse>
+
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemLink href="http://localhost:3000/Admin/VS/Recommand">
+              <ListItemText primary="추천"></ListItemText>
+            </ListItemLink>
+          </ListItem>
+        </List>
+      </Collapse>
+>>>>>>> 7194df7ae55d2834c5ea2d2491eaddafe4347aa8
 
         <ListItem
           button

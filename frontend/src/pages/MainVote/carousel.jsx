@@ -9,16 +9,23 @@ const ControlledCarousel = props => {
   const [index, setIndex] = useState(0);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const isTablet = useMediaQuery('(max-width:960px)');
+  const isMobile = useMediaQuery('(max-width:930px)');
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   return (
     <>
-      {isTablet ? (
+      {isMobile ? (
         <MobileWrapper>
-          <Carousel container activeIndex={index} onSelect={handleSelect}>
+          <Carousel
+            container
+            activeIndex={index}
+            onSelect={handleSelect}
+            style={{
+              backgroundColor: '#f7f2f2',
+            }}
+          >
             {currentEventDatas.map((data, index) => (
               <Carousel.Item>
                 <Grid container>
@@ -72,9 +79,16 @@ const ControlledCarousel = props => {
           </Carousel>
         </MobileWrapper>
       ) : (
-        <Carousel container activeIndex={index} onSelect={handleSelect}>
+        <Carousel
+          container
+          activeIndex={index}
+          onSelect={handleSelect}
+          style={{
+            backgroundColor: '#f7f2f2',
+          }}
+        >
           {currentEventDatas.map((data, index) => (
-            <Carousel.Item>
+            <Carousel.Item key={index}>
               <Grid container>
                 <Grid item xs={6} className="KisokCentering tmp">
                   <Link

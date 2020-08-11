@@ -4,21 +4,30 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 1300;
   height: 10vh;
+  .headerColor {
+    background-color: #f7f2f2;
+    color: black;
+  }
   .searchIcon {
-    cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    position: fixed;
+    right: 30px;
+    top: 3.5vh;
   }
 
   .mobileHome {
-    position: fixed;
-    left: 70px;
-    top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
   }
   & .mobileSearchIcon {
     cursor: pointer;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
   }
   .navbarCentering {
     display: flex;
@@ -43,12 +52,11 @@ const Wrapper = styled.div`
   }
   & .logo {
     cursor: pointer;
-    // padding-left: 16px;
   }
   & .menu-button {
     position: fixed;
-    right: 30px;
-    top: 30px;
+    left: 30px;
+    top: 4vh;
     z-index: 1300;
     margin-left: 0;
     width: 23px;
@@ -102,7 +110,7 @@ const Wrapper = styled.div`
     }
   }
   & .header-button {
-    margin-right: 12px;
+    // margin-right: 12px;
     font-weight: normal;
     box-shadow: none;
     letter-spacing: 1px;
@@ -115,6 +123,7 @@ const Wrapper = styled.div`
       box-shadow: none;
     }
   }
+
   & .header-location-searchbar {
     height: 100px;
   }
