@@ -51,7 +51,7 @@ const SearchComponent = () => {
           placeholder="Search..."
           autoFocus={true}
           onKeyPress={onKeyPress(history.location)}
-          className="input2"
+          // className="input2"
           style={{ width: '100px' }}
         />
       ) : (
@@ -75,10 +75,11 @@ const SearchComponent = () => {
               placeholder="Search..."
               autoFocus={true}
               onKeyPress={onKeyPress(history.location)}
-              className="input2"
-              // style={{
-
-              // }}
+              // className="input2"
+              style={{
+                height: '5vh',
+                // width: '100px',
+              }}
             />
           </Grid>
         </Grid>
