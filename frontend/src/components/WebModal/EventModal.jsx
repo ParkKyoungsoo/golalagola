@@ -4,6 +4,7 @@ import Wrapper from './styles';
 import CheckBox from '../WebModal/CheckBox';
 import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
+import Box from '@material-ui/core/Box';
 
 const EventModal = modalNum => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
@@ -30,55 +31,67 @@ const EventModal = modalNum => {
         <Wrapper>
           <Grid container>
             <Grid item xs={12}>
-              <MultiCarousel />
+              선택 할인!!
             </Grid>
           </Grid>
           <Grid className="EM" container direction="row">
-            <Grid item xs={4}>
-              <img
-                className="eventImg"
-                src={`https://i3b309.p.ssafy.io/${
-                  Object(
-                    productDatas[
-                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
-                    ],
-                  ).prod_image
-                }`}
-                alt="nature"
+            <Grid item xs={5}>
+              <Box
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '8px',
-                  border: 'none',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-              />
+              >
+                <img
+                  className="eventImg"
+                  src={`https://i3b309.p.ssafy.io/${
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                      ],
+                    ).prod_image
+                  }`}
+                  alt="nature"
+                  style={{
+                    width: '80%',
+                    height: 'auto',
+                    borderRadius: '8px',
+                    border: 'none',
+                  }}
+                />
+              </Box>
             </Grid>
-            <Grid item xs={1}>
-              <h4 className="textCss">
-                <strong>VS</strong>
-              </h4>
-            </Grid>
-            <Grid item xs={4}>
-              <img
-                className="tmp"
-                src={`https://i3b309.p.ssafy.io/${
-                  Object(
-                    productDatas[
-                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
-                    ],
-                  ).prod_image
-                }`}
-                alt="people"
+            <Grid item xs={5}>
+              <Box
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '8px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-              />
+              >
+                <img
+                  className="tmp"
+                  src={`https://i3b309.p.ssafy.io/${
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                      ],
+                    ).prod_image
+                  }`}
+                  alt="people"
+                  style={{
+                    width: '80%',
+                    height: 'auto',
+                    borderRadius: '8px',
+                  }}
+                />
+              </Box>
             </Grid>
+            <strong style={{ position: 'absolute' }}>VS</strong>
           </Grid>
           <Grid className="inputCss" container direction="row">
-            <Grid item item xs={4}>
+            <Grid item item xs={5}>
               <Grid container direction="column">
                 <Grid item>
                   <input
@@ -107,8 +120,7 @@ const EventModal = modalNum => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <Grid container direction="column">
                 <Grid item>
                   <input
@@ -150,61 +162,112 @@ const EventModal = modalNum => {
             >
               Disable elevation
             </Button>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <MultiCarousel />
+            </Grid>
           </Grid>
         </Wrapper>
       ) : (
         <Wrapper>
           <Grid container>
             <Grid item xs={12}>
-              <MultiCarousel />
+              선택 할인!!
             </Grid>
           </Grid>
-          <Grid className="EM" container direction="row">
-            <Grid item xs={4}>
-              <img
-                className="eventImg"
-                src={`https://i3b309.p.ssafy.io/${
-                  Object(
-                    productDatas[
-                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
-                    ],
-                  ).prod_image
-                }`}
-                alt="nature"
+          <Grid
+            className="EM"
+            container
+            direction="row"
+            style={{ backgroundColor: '#f7f2f2' }}
+          >
+            <Grid
+              className="imgCss"
+              item
+              xs={5}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                // backgroundColor: '#f7f2f2',
+                justifyContent: 'center',
+              }}
+            >
+              <Box
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '8px',
-                  border: 'none',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-              />
+              >
+                <img
+                  className="eventImg"
+                  src={`https://i3b309.p.ssafy.io/${
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                      ],
+                    ).prod_image
+                  }`}
+                  alt="nature"
+                  style={{
+                    display: 'flex',
+                    // justifyContent: 'center',
+                    width: '80%',
+                    height: '80%',
+                    borderRadius: '8px',
+                  }}
+                />
+                {/* <span style={{ textAlign: 'right', marginLeft: '1px' }}>V</span> */}
+              </Box>
             </Grid>
-            <Grid item xs={1}>
-              <h4 className="textCss">
-                <strong>VS</strong>
-              </h4>
-            </Grid>
-            <Grid item xs={4}>
-              <img
-                className="tmp"
-                src={`https://i3b309.p.ssafy.io/${
-                  Object(
-                    productDatas[
-                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
-                    ],
-                  ).prod_image
-                }`}
-                alt="people"
+            {/* <h5 className="textCss"> */}
+            {/* <strong>VS</strong> */}
+            {/* </h5> */}
+            <Grid
+              className="imgCss"
+              item
+              xs={5}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                // backgroundColor: '#f7f2f2',
+                justifyContent: 'center',
+              }}
+            >
+              <Box
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '8px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-              />
+              >
+                <img
+                  className="tmp"
+                  src={`https://i3b309.p.ssafy.io/${
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                      ],
+                    ).prod_image
+                  }`}
+                  alt="people"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '80%',
+                    height: '80%',
+                    borderRadius: '8px',
+                  }}
+                />
+              </Box>
             </Grid>
+            <h3 style={{ position: 'absolute' }}>
+              <strong>VS</strong>
+            </h3>
           </Grid>
           <Grid className="inputCss" container direction="row">
-            <Grid item item xs={4}>
+            <Grid item item xs={5}>
               <Grid container direction="column">
                 <Grid item>
                   <input
@@ -233,8 +296,7 @@ const EventModal = modalNum => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <Grid container direction="column">
                 <Grid item>
                   <input
@@ -270,12 +332,20 @@ const EventModal = modalNum => {
               variant="contained"
               color="primary"
               disableElevation
-              // style={{ alignItems: 'center' }}
               onClick={EventTrigger}
               disabled={selectedEventItem === undefined}
+              style={{
+                width: '20vw',
+                height: '5vh',
+              }}
             >
               Disable elevation
             </Button>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <MultiCarousel />
+            </Grid>
           </Grid>
         </Wrapper>
       )}
