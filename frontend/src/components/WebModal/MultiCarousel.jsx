@@ -34,7 +34,14 @@ const MultiCarousel = () => {
       {isMobile ? (
         <Grid container>
           <Grid item xs={12}>
-            <AliceCarousel responsive={responsive}>
+            <AliceCarousel
+              responsive={responsive}
+              autoPlay={true}
+              autoPlayInterval={2000}
+              // autoPlayDirection="rtl"
+              fadeOutAnimation={true}
+              playButtonEnabled={false}
+            >
               {productDatas.map((TmpData, index) => (
                 <img
                   src={`../../${TmpData.prod_image}`}
@@ -50,7 +57,18 @@ const MultiCarousel = () => {
           <Carousel.Item>
             <Grid container>
               <Grid item xs={12}>
-                <AliceCarousel responsive={responsive}>
+                <AliceCarousel
+                  responsive={responsive}
+                  autoPlay={true}
+                  autoPlayInterval={2000}
+                  // autoPlayDirection="rtl"
+                  fadeOutAnimation={true}
+                  playButtonEnabled={false}
+                  fadeOutAnimation={false}
+                  mouseTrackingEnabled={true}
+                  playButtonEnabled={false}
+                  disableAutoPlayOnAction={false}
+                >
                   {productDatas.map((TmpData, index) => (
                     <img
                       src={`../../${TmpData.prod_image}`}
