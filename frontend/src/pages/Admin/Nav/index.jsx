@@ -8,10 +8,10 @@ const AdminNav = props => {
     window.scrollTo(0, 0);
     if (name === '/MainVote') {
       // console.log('s');
-      history.replace('/');
+      history.push('/');
     } else {
       // console.log(`/Admin/${name}`);
-      history.replace(`/Admin/${name}`);
+      history.push(`/Admin/${name}`);
     }
   };
 

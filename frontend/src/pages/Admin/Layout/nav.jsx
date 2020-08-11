@@ -8,9 +8,9 @@ const AdminNav = props => {
   const onClickRedirectPathHandler = name => e => {
     window.scrollTo(0, 0);
     if (name === '/MainVote') {
-      history.replace('/');
+      history.push('/');
     } else {
-      history.replace(`/Admin/${name}`);
+      history.push(`/Admin/${name}`);
     }
   };
 
