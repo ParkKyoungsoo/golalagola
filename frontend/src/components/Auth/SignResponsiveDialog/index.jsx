@@ -78,7 +78,7 @@ const SignInSection01 = () => {
 
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
     // console.log('signInUserData', signInUserData); // 잘 나옴
-    Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
+    Axios.post('http://localhost:5000/api/auth/signin', signInUserData)
       .then(res => {
         if (res.data.check_email === 0) {
           alert('이메일 인증 후 사용해주세요.');
@@ -359,7 +359,7 @@ const SignUpSection02 = () => {
     //   user_pwd: '',
     // });
     console.log('SignUpUserData', signUpUserData);
-    Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
+    Axios.post('http://localhost:5000/api/auth/signup', signUpUserData)
       .then(data => {
         // console.log(data);
         setSignUpUserData(signUpUserData);
@@ -595,7 +595,7 @@ const ForgotPwGroupComponent = () => {
         user_email: searchWord,
       };
       console.log('searchWord', searchWord);
-      Axios.post('https://i3b309.p.ssafy.io/api/auth/find_pwd', res).then(res => {
+      Axios.post('http://localhost:5000/api/auth/find_pwd', res).then(res => {
         alert(res.data.message);
       });
 

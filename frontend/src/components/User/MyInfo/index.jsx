@@ -158,7 +158,7 @@ const MyInfoButtonGroupComponent = props => {
 
     Axios({
       method: 'PUT',
-      url: 'https://i3b309.p.ssafy.io/api/auth/update',
+      url: 'http://localhost:5000/api/auth/update',
       headers: {
         token: user.token,
         user_email: inputValue.user_email,

@@ -122,7 +122,7 @@ const MyInfoButtonGroupComponent = props => {
     // 3. 암호화된 비밀번호 Axios 요청
     Axios({
       method: 'PUT',
-      url: 'https://i3b309.p.ssafy.io/api/auth/change_pwd',
+      url: 'http://localhost:5000/api/auth/change_pwd',
       headers: {
         token: user.token,
       },
