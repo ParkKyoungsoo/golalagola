@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
 import { useHistory, Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 import AdminNav from '../Layout/nav.jsx';
 import NestedList from '../Layout/sidebar.jsx';
@@ -76,8 +77,6 @@ const AdminVS = props => {
 
   return (
     <div>
-      <AdminNav></AdminNav>
-      <h1>vs 페이지</h1>
       <div classes={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={2}>
@@ -87,11 +86,11 @@ const AdminVS = props => {
           </Grid>
           <Grid item xs={9}>
             <Grid style={{ display: 'flex' }}>
-              <Grid item xs={10}>
+              <Grid item xs={10} container alignItems="center" justify="center">
                 <h1>진행중인 이벤트</h1>
               </Grid>
-              <Grid item xs={2}>
-                <button onClick={moveCreatePage}>추가</button>
+              <Grid item xs={2} container alignItems="center" justify="center">
+                <Button onClick={moveCreatePage}>추가</Button>
               </Grid>
             </Grid>
             {currentEventDatas.map((data, index) => (
@@ -101,7 +100,12 @@ const AdminVS = props => {
                 key={data.event_id}
               >
                 <Grid container>
-                  <Grid className="KisokCentering" item xs={5}>
+                  <Grid
+                    className="KisokCentering"
+                    item
+                    xs={5}
+                    style={{ display: 'flex' }}
+                  >
                     <img
                       className="tmp"
                       src={`https://i3b309.p.ssafy.io/${
@@ -111,11 +115,41 @@ const AdminVS = props => {
                       alt="image1"
                       style={{ height: '150px', width: '150px' }}
                     />
+                    <Grid item xs={1}></Grid>
+                    <Grid>
+                      <Grid>
+                        상품명 :{' '}
+                        {
+                          Object(productDatas[data.event_item['1'].prod_id - 1])
+                            .prod_name
+                        }
+                      </Grid>
+                      <Grid>
+                        남은 개수 :{' '}
+                        {
+                          Object(productDatas[data.event_item['1'].prod_id - 1])
+                            .prod_amount
+                        }
+                      </Grid>
+                      <Grid>
+                        할인율 :{' '}
+                        {
+                          Object(productDatas[data.event_item['1'].prod_id - 1])
+                            .prod_sale
+                        }
+                        %
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item xs={1}>
                     <h1>VS</h1>
                   </Grid>
-                  <Grid className="KisokCentering" item xs={5}>
+                  <Grid
+                    className="KisokCentering"
+                    item
+                    xs={5}
+                    style={{ display: 'flex' }}
+                  >
                     <img
                       className="tmp"
                       src={`https://i3b309.p.ssafy.io/${
@@ -125,13 +159,54 @@ const AdminVS = props => {
                       alt="image2"
                       style={{ height: '150px', width: '150px' }}
                     />
-                  </Grid>
-                  <Grid item xs={1}>
+                    <Grid item xs={1}></Grid>
                     <Grid>
-                      <button onClick={eventUpdate(data.event_id)}>수정</button>
+                      <Grid>
+                        상품명 :{' '}
+                        {
+                          Object(productDatas[data.event_item['2'].prod_id - 1])
+                            .prod_name
+                        }
+                      </Grid>
+                      <Grid>
+                        남은 개수 :{' '}
+                        {
+                          Object(productDatas[data.event_item['2'].prod_id - 1])
+                            .prod_amount
+                        }
+                      </Grid>
+                      <Grid>
+                        할인율 :{' '}
+                        {
+                          Object(productDatas[data.event_item['2'].prod_id - 1])
+                            .prod_sale
+                        }
+                        %
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={1}
+                    container
+                    alignItems="center"
+                    justify="center"
+                  >
+                    <Grid>
+                      <Button
+                        variant="outline-secondary"
+                        onClick={eventUpdate(data.event_id)}
+                      >
+                        수정
+                      </Button>
                     </Grid>
                     <Grid>
-                      <button onClick={eventDelete(data.event_id)}>삭제</button>
+                      <Button
+                        variant="outline-danger"
+                        onClick={eventDelete(data.event_id)}
+                      >
+                        삭제
+                      </Button>
                     </Grid>
                   </Grid>
                 </Grid>
