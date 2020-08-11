@@ -34,7 +34,7 @@ const authAdminMiddleware = (req, res, next) => {
     if (decoded.user_email != req.headers.user_email) {
       res.status(403).send({ message: "인증된 사용자가 아닙니다." });
     } else {
-      if (!decoded.admin) {
+      if (!decoded.isAdmin) {
         res.status(403).send({ message: "관리자가 아닙니다." });
       } else {
         next();

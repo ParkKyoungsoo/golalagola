@@ -59,7 +59,7 @@ const Navbar = () => {
   //   //   handleClose();
   //   // } else {
   //   console.log('timeout!!');
-  //   window.location.href = `${mainUrl}/KioskMains`;
+  // window.location.href = `${mainUrl}/KioskMains`;
   //   // }
   // }, 60000);
 
