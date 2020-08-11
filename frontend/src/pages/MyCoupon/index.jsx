@@ -8,6 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+
+import { Grid } from '@material-ui/core';
 import Nav from '../../layout/Header';
 import Layout from '../../layout/';
 import { CommonContext } from '../../context/CommonContext';
@@ -16,28 +18,12 @@ import axios from 'axios';
 import QRCode from 'react-qr-code';
 
 const columns = [
-  { id: 'idx', label: '#', minWidth: 170 },
-  { id: 'prod_name', label: '상품명', minWidth: 100 },
+  { id: 'coupon_select', label: '상품명', minWidth: 100, align: 'center' },
   {
-    id: 'price',
-    label: '할인율',
+    id: 'coupon_date',
+    label: '만료 기간',
     minWidth: 170,
-    align: 'right',
-    // format: value => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'event_name',
-    label: '참여이벤트',
-    minWidth: 170,
-    align: 'right',
-    // format: value => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'period',
-    label: '기간',
-    minWidth: 170,
-    align: 'right',
-    // format: value => value.toFixed(2),
+    align: 'center',
   },
 ];
 
@@ -45,37 +31,6 @@ function createData(name, code, population, size) {
   // const density = population / size;
   return { name, code, population, size };
 }
-
-// const rows = [
-//   createData('India', 'IN', 1324171354, 3287263),
-//   createData('China', 'CN', 1403500365, 9596961),
-//   createData('Italy', 'IT', 60483973, 301340),
-//   createData('United States', 'US', 327167434, 9833520),
-//   createData('Canada', 'CA', 37602103, 9984670),
-//   createData('Australia', 'AU', 25475400, 7692024),
-//   createData('Germany', 'DE', 83019200, 357578),
-//   createData('Ireland', 'IE', 4857000, 70273),
-//   createData('Mexico', 'MX', 126577691, 1972550),
-//   createData('Japan', 'JP', 126317000, 377973),
-//   createData('France', 'FR', 67022000, 640679),
-//   createData('United Kingdom', 'GB', 67545757, 242495),
-//   createData('Russia', 'RU', 146793744, 17098246),
-//   createData('Nigeria', 'NG', 200962417, 923768),
-//   createData('Brazil', 'BR', 210147125, 8515767),
-// ];
-
-/*{
-  {
-    name : India, 
-    code : IN, 
-    population : , 
-    size :  ,
-    density: 
-  }
-}
-
-
- */
 
 const useStyles = makeStyles({
   root: {
@@ -93,7 +48,9 @@ export default function StickyHeadTable() {
 
   const { user } = useContext(CommonContext);
   // const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
-  const [myCouponDatas, setMyCouponDatas] = useState();
+  const [myCouponDatas, setMyCouponDatas] = useState([]);
+
+  const { productDatas, setProductDatas } = useContext(CommonContext);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -114,6 +71,12 @@ export default function StickyHeadTable() {
     }
     fetchData();
   }, []);
+  // const userCoupondata = () => {
+  //   console.log('Function call');
+  //   for (let i = 0; i < Object(myCouponDatas).length; i++) {
+  //     return <Grid>{myCouponDatas[i].event_id}</Grid>;
+  //   }
+  // };
 
   return (
     <>
@@ -140,45 +103,32 @@ export default function StickyHeadTable() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {console.log(myCouponDatas)}
-                {/* {myCouponDatas
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(row => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        {columns.map(column => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })} */}
+                {myCouponDatas.map(row => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      {columns.map(column => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {typeof value === 'number'
+                              ? Object(productDatas[value - 1]).prod_name
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={Object(myCouponDatas).length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
         </Paper>
       </Layout>
-      {console.log('MyCoupon')}
     </>
   );
 }

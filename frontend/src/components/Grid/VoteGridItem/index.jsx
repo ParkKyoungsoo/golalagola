@@ -77,75 +77,158 @@ export default function VoteGridItem(props) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  //fruitdev.tistory.com/160 [과일가게 개발자]
-  // 출처: https:
+  const [realtime, setRealTime] = useState([]);
+
+  useEffect(() => {
+    Axios.get('https://i3b309.p.ssafy.io/api/event/eventProd').then(res => {
+      setRealTime(res.data);
+    });
+  }, []);
   return (
     <Wrapper className="root" style={isMobile ? null : { margin: '10px' }}>
-      <Grid container className="info-open-handler-grid">
-        <Grid>
-          <Grid className="img-box" onClick={click}>
-            <Avatar
-              variant="square"
-              src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
-              className={'large'}
-              // imgProps={{
-              //   className: sw ? 'img' : 'img deactivated',
-              // }}
-            />
-            {isMobile ? (
-              <>
-                <span>{itemData.prod_title}</span>
-                <span
-                  style={{
-                    color: 'red',
-                    borderRadius: '5px',
-                    fontWeight: 'bold',
-                    border: '3px solid pink',
-                  }}
-                >
-                  {'   '}
-                  {itemData.prod_sale}%{'   '}
-                </span>
-                <br />
-                <span style={{ textDecoration: 'line-through' }}>
-                  {numberWithCommas(originPrice)}원{'  '}
-                </span>
+      {realtime.includes(itemData.prod_id) ? (
+        <Grid container className="info-open-handler-grid">
+          <Grid className="effect">
+            <Grid className="img-box" onClick={click}>
+              <Avatar
+                variant="square"
+                src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                className={'large'}
+                // imgProps={{
+                //   className: sw ? 'img' : 'img deactivated',
+                // }}
+              />
+              {isMobile ? (
+                <>
+                  <span>{itemData.prod_title}</span>
+                  <span
+                    style={{
+                      color: 'red',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      border: '3px solid pink',
+                    }}
+                  >
+                    {'   '}
+                    {itemData.prod_sale}%{'   '}
+                  </span>
+                  <br />
+                  <span style={{ textDecoration: 'line-through' }}>
+                    {numberWithCommas(originPrice)}원{'  '}
+                  </span>
 
-                <span style={{ fontWeight: 'bold' }}>
-                  {numberWithCommas(quizSalePrice)}원
-                </span>
-              </>
-            ) : (
-              <>
-                <span style={{ fontSize: '1.5vw' }}>{itemData.prod_title}</span>
-                <span
-                  style={{
-                    color: 'red',
-                    borderRadius: '5px',
-                    fontWeight: 'bold',
-                    border: '3px solid pink',
-                    fontSize: '1.5vw',
-                  }}
-                >
-                  {'   '}
-                  {itemData.prod_sale}%{'   '}
-                </span>
-                <br />
-                <span
-                  style={{ textDecoration: 'line-through', fontSize: '1.5vw' }}
-                >
-                  {numberWithCommas(originPrice)}원{'  '}
-                </span>
+                  <span style={{ fontWeight: 'bold' }}>
+                    {numberWithCommas(quizSalePrice)}원
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span style={{ fontSize: '1.5vw' }}>
+                    {itemData.prod_title}
+                  </span>
+                  <span
+                    style={{
+                      color: 'red',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      border: '3px solid pink',
+                      fontSize: '1.5vw',
+                    }}
+                  >
+                    {'   '}
+                    {itemData.prod_sale}%{'   '}
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      textDecoration: 'line-through',
+                      fontSize: '1.5vw',
+                    }}
+                  >
+                    {numberWithCommas(originPrice)}원{'  '}
+                  </span>
 
-                <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
-                  {numberWithCommas(quizSalePrice)}원
-                </span>
-              </>
-            )}
-            <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
+                    {numberWithCommas(quizSalePrice)}원
+                  </span>
+                </>
+              )}
+              <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Grid container className="info-open-handler-grid">
+          <Grid>
+            <Grid className="img-box" onClick={click}>
+              <Avatar
+                variant="square"
+                src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                className={'large'}
+                // imgProps={{
+                //   className: sw ? 'img' : 'img deactivated',
+                // }}
+              />
+              {isMobile ? (
+                <>
+                  <span>{itemData.prod_title}</span>
+                  <span
+                    style={{
+                      color: 'red',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      border: '3px solid pink',
+                    }}
+                  >
+                    {'   '}
+                    {itemData.prod_sale}%{'   '}
+                  </span>
+                  <br />
+                  <span style={{ textDecoration: 'line-through' }}>
+                    {numberWithCommas(originPrice)}원{'  '}
+                  </span>
+
+                  <span style={{ fontWeight: 'bold' }}>
+                    {numberWithCommas(quizSalePrice)}원
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span style={{ fontSize: '1.5vw' }}>
+                    {itemData.prod_title}
+                  </span>
+                  <span
+                    style={{
+                      color: 'red',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      border: '3px solid pink',
+                      fontSize: '1.5vw',
+                    }}
+                  >
+                    {'   '}
+                    {itemData.prod_sale}%{'   '}
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      textDecoration: 'line-through',
+                      fontSize: '1.5vw',
+                    }}
+                  >
+                    {numberWithCommas(originPrice)}원{'  '}
+                  </span>
+
+                  <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
+                    {numberWithCommas(quizSalePrice)}원
+                  </span>
+                </>
+              )}
+              <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
     </Wrapper>
   );
 }
