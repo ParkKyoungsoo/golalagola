@@ -30,16 +30,16 @@ const SearchComponent = () => {
     if (e.key === 'Enter') {
       console.log(e.target.value);
       // 만약에 서치에서 또 서치를 하면
-      if (currentPathname.pathname.includes('SearchResult')) {
+      if (currentPathname.pathname.includes('searchresult')) {
         history.push(`${e.target.value}`);
       }
       // 만약에 디테일에서 서치를 하면
-      else if (currentPathname.pathname.includes('VoteItemDetail')) {
-        history.push(`/SearchResult/${e.target.value}`);
+      else if (currentPathname.pathname.includes('voteitemdetail')) {
+        history.push(`/searchresult/${e.target.value}`);
       }
       // 아니라면
       else {
-        history.push(`/SearchResult/${e.target.value}`);
+        history.push(`/searchresult/${e.target.value}`);
       }
     }
   };
