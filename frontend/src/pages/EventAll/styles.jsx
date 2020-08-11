@@ -26,6 +26,24 @@ const Wrapper = styled.div`
     border-radius: 5%;
     margin: 0 1vw 0 1vw;
   }
+  .mobileButton {
+    position: fixed;
+    right: 10px;
+    // top: 3.5vh;
+  }
+  .webButton {
+    position: fixed;
+    right: 0px;
+    // top: 3.5vh;
+  }
+  .sideBarColumn {
+    display: flex;
+    flex-direction: column;
+  }
+  .sideBarIcon {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export default Wrapper;

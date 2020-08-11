@@ -59,18 +59,18 @@ export default function VoteGridItem(props) {
   let history = useHistory();
   const isMobile = useMediaQuery('(max-width:930px)');
   const click = () => {
-    if (history.location.pathname.includes('SearchResult')) {
+    if (history.location.pathname.includes('searchresult')) {
       history.replace('');
       history.replace(
-        `VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`,
+        `voteitemdetail/${itemData.prod_name}/${itemData.prod_id}`,
       );
     } else {
-      history.push(`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`);
+      history.push(`voteitemdetail/${itemData.prod_name}/${itemData.prod_id}`);
     }
   };
-  var originPrice = itemData.prod_price;
-  var quizSale = itemData.prod_sale;
-  var quizSalePrice = parseInt((originPrice * (100 - quizSale)) / 100);
+  let originPrice = itemData.prod_price;
+  let quizSale = itemData.prod_sale;
+  let quizSalePrice = parseInt((originPrice * (100 - quizSale)) / 100);
 
   // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
   function numberWithCommas(x) {
@@ -78,7 +78,8 @@ export default function VoteGridItem(props) {
   }
 
   //fruitdev.tistory.com/160 [과일가게 개발자]
-  출처: https: return (
+  // 출처: https:
+  return (
     <Wrapper className="root" style={isMobile ? null : { margin: '10px' }}>
       <Grid container className="info-open-handler-grid">
         <Grid>

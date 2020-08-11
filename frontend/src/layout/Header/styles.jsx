@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   position: relative;
   z-index: 1300;
-  height: 10vh;
+  height: 5vh;
   .headerColor {
     background-color: #f7f2f2;
     color: black;

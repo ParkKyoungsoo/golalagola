@@ -59,8 +59,42 @@ const Wrapper = styled.div`
     word-break: break-all;
   }
   .button {
-    font-size: 10px;
     padding: 10px 10px;
+  }
+  .info {
+    padding: 10px;
+    height: auto;
+  }
+  .center {
+    text-align: center;
+  }
+  .priceinfo {
+    text-align: right;
+  }
+  .effect {
+    position: relative;
+    display: inline-block;
+    overflow: hidden; /* 불필요한 부분 가리기 */
+    padding: 1px;
+  }
+  .effect:after {
+    content: '';
+    position: absolute;
+    font-size: 20px;
+    z-index: 1;
+    width: 300px;
+    height: auto;
+    background: green;
+    content: 'Event'; /* 보여주는 텍스트 */
+    text-align: center;
+    color: #fff;
+    font-family: 'Arial';
+    font-weight: bold;
+    padding: 20px 20px;
+    left: -90px;
+    top: 3px;
+    transform: rotate(-30deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 `;
 
