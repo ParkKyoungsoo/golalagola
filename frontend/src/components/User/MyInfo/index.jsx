@@ -66,7 +66,7 @@ const MyInfoUploadImageComponent = () => {
       </Grid>
       <Grid item xs={12}>
         <Fragment>
-          <Typography> {user.nick_name} </Typography>
+          <Typography> {user.user_name} </Typography>
           <section className="container">
             <div {...getRootProps({ className: 'dropzone' })}>
               <Button
@@ -137,10 +137,10 @@ const MyInfoButtonGroupComponent = props => {
     let data = {};
     const formData = new FormData();
     formData.append('files', thumbnailImageData.file);
-    const res = await Axios.post(
-      'https://i3b309.p.ssafy.io/api/auth/upload',
-      formData,
-    );
+    // const res = await Axios.post(
+    //   'http://localhost:5000/api/auth/upload',
+    //   formData,
+    // );
 
     let body = {
       ...inputValue,
@@ -154,12 +154,14 @@ const MyInfoButtonGroupComponent = props => {
     //   thumbnailImageData,
     //   user.token,
     // );
+    console.log('body::', body);
 
     Axios({
       method: 'PUT',
-      url: 'https://i3b309.p.ssafy.io/api/auth/update',
+      url: 'http://localhost:5000/api/auth/update',
       headers: {
         token: user.token,
+        user_email: inputValue.user_email,
       },
       data: {
         user_email: inputValue.user_email,
@@ -168,7 +170,8 @@ const MyInfoButtonGroupComponent = props => {
       },
     })
       .then(res => {
-        console.log(res);
+        alert('회원정보가 수정되었습니다.');
+        history.push('/');
       })
       .catch(err => {
         console.log('err', err.response.data.message);

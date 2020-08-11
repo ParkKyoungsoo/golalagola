@@ -56,35 +56,29 @@ const SignInSection01 = () => {
 
   const onSignInHandler = async e => {
     // 로그인 버튼 눌리면
-    var { user_email, user_pwd, status } = signInUserData;
+    var { user_email, user_pwd } = signInUserData;
 
     if (!user_pwd || !user_email) {
-      alert('You need both email and password.');
+      alert('이메일/패스워드 모두 입력해주세요.');
       return;
     }
 
     if (!regExp.test(user_email)) {
-      alert('The email format is invalid.');
+      alert('이메일 형식이 아닙니다.');
       return;
     }
 
-    // let respone = [];
-    // let hashPassword = '';
-    // console.log('user_pwd', user_pwd);
+    const encrypted = crypto
+      .createHmac('sha1', 'ashtiger')
+      .update(user_pwd)
+      .digest('base64');
 
-    // try {
-    //   hashPassword = crypto
-    //     .createHash('sha512')
-    //     .update(user_pwd)
-    //     .digest('hex');
-    // } catch (error) {
-    //   return;
-    // }
-    // signInUserData.user_pwd = hashPassword;
-    // console.log('hashPassword', hashPassword);
+    signInUserData.user_pwd = encrypted;
     signInUserData.status = '';
+
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
-    Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
+    // console.log('signInUserData', signInUserData); // 잘 나옴
+    Axios.post('http://localhost:5000/api/auth/signin', signInUserData)
       .then(res => {
         if (res.data.check_email === 0) {
           alert('이메일 인증 후 사용해주세요.');
@@ -95,7 +89,7 @@ const SignInSection01 = () => {
             user_id: res.data.user_id,
             user_email: signInUserData.user_email,
             user_name: res.data.user_name,
-            user_pwd: res.data.user_pwd,
+            user_phone: res.data.user_phone,
             isAdmin: res.data.isAdmin,
             status: 'login',
             web_site: '',
@@ -108,7 +102,8 @@ const SignInSection01 = () => {
         }
       })
       .catch(res => {
-        alert(res.data.message);
+        // alert(res.data.message);
+        console.log('실패');
       });
 
     history.goBack();
@@ -345,35 +340,26 @@ const SignUpSection02 = () => {
       return;
     }
 
-    // let respone = [];
-    // let hashPassword = 'test2';
-    // try {
-    //   hashPassword = crypto
-    //     .createHash('sha512')
-    //     .update(password)
-    //     .digest('hex');
-    // } catch (error) {
-    //   console.log('PPAP: signInHandler -> error', error);
-    // }
+    const encrypted1 = crypto
+      .createHmac('sha1', 'ashtiger')
+      .update(password_1)
+      .digest('base64');
+    const encrypted2 = crypto
+      .createHmac('sha1', 'ashtiger')
+      .update(password_2)
+      .digest('base64');
 
-    // var body = {
-    //   user_email: user_email,
-    //   user_name: user_name,
-    //   user_pwd: user_pwd,
-    // };
-    // console.log('PPAP: signUpHandler -> body', body);
-
-    //
-
-    //
+    signUpUserData.password_1 = encrypted1;
+    signUpUserData.password_2 = encrypted2;
+    signUpUserData.user_phone = user_phone;
 
     // setSignUpUserData({
     //   user_email: '',
     //   user_name: '',
     //   user_pwd: '',
     // });
-    // console.log('SignUpUserData', signUpUserData);
-    Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
+    console.log('SignUpUserData', signUpUserData);
+    Axios.post('http://localhost:5000/api/auth/signup', signUpUserData)
       .then(data => {
         // console.log(data);
         setSignUpUserData(signUpUserData);
@@ -609,12 +595,9 @@ const ForgotPwGroupComponent = () => {
         user_email: searchWord,
       };
       console.log('searchWord', searchWord);
-      Axios.post('https://i3b309.p.ssafy.io/api/auth/find_pwd', res).then(
-        res => {
-          alert(res.data.message);
-        },
-      );
-      alert('Not implemented yet.');
+      Axios.post('http://localhost:5000/api/auth/find_pwd', res).then(res => {
+        alert(res.data.message);
+      });
 
       // setRecoverPwUserData({ ...recoverPwUserData, email: searchWord });
       // alert('Authentication code has been sent to you by email');

@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
@@ -44,3 +46,4 @@ const AdminNav = props => {
   );
 };
 export default AdminNav;
+>>>>>>> 7194df7ae55d2834c5ea2d2491eaddafe4347aa8
