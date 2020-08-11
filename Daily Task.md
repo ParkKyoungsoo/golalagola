@@ -280,3 +280,24 @@
    
    Back-end	User 연동
 
+
+
+2020.08.11(화)
+
+1. Scrum 미팅
+
+2. Front-end  Detail 페이지 CSS
+
+   ​					List CSS
+
+   ​					Modal CSS
+
+   ​					Navbar CSS
+
+   ​					User Coupon 데이터
+
+   Back-end	User
+
+   ​					사진 업로드
+
+   ​	

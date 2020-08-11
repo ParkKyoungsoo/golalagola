@@ -1,11 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { useHistory, Link } from 'react-router-dom';
+import { Grid, useMediaQuery } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
 import Wrapper from './styles';
 import Axios from 'axios';
 
+// sidebar 용 import
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import SendIcon from '@material-ui/icons/Send';
+
+//EventAll
 const EventAll = () => {
   const {
     productDatas,
@@ -16,14 +26,15 @@ const EventAll = () => {
     setUserEvent,
     userCoupon,
     setUserCoupon,
+    mainUrl,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
   const [couponData, setCouponData] = useState([]);
 
-  const history = useHistory();
-
+  let history = useHistory();
+  const isMobile = useMediaQuery('(max-width:930px)');
   function choiceProduct(tmpData, productNumber) {
     // 같은 event_id가 존재하지 않는다면 추가
     // 같은 event_id가 존재한다면 선택한 상품을 수정
@@ -45,10 +56,8 @@ const EventAll = () => {
 
   // 최초 1회 couponData 받아오기
   const userId = 1; // user Data 필요
-  // commonContext에서 user.user_id 를 받아오면 현재 로그인해있는 유저의 userId를 받아올 수 있음.
-
   const getUserCouponData = async () => {
-    console.log('couponData 받아오기');
+    // console.log('couponData 받아오기');
     await Axios.get(`https://i3b309.p.ssafy.io/api/coupon/${userId}`)
       .then(res => {
         console.log(res);
@@ -91,7 +100,7 @@ const EventAll = () => {
     }
   };
 
-  console.log('Coupon DATA', userCoupon);
+  // console.log('Coupon DATA', userCoupon);
 
   function eventGridRender(index, tmpData) {
     const checkedStyle = {
@@ -186,16 +195,84 @@ const EventAll = () => {
     }
   }
 
-  console.log(currentEventDatas);
+  ///////////////////////////////////////////////////////////////////////
+  // SideBar
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      maxWidth: 100,
+      // backgroundColor: theme.palette.background.paper,
+    },
+    // nested: {
+    //   paddingLeft: theme.spacing(4),
+    // },
+  }));
+  function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />;
+  }
+
+  const onClickRedirectPathHandler = name => e => {
+    window.scrollTo(0, 0);
+    if (name === '/mainvote') {
+      history.push('/');
+      // console.log(mainUrl);
+    } else {
+      history.push(`/${name}`);
+    }
+  };
+
+  const NestedList = props => {
+    // sidebar 스타일 정의
+    const classes = useStyles();
+
+    // *** 사이드 바 내에서 open 기능
+    const [open, setOpen] = React.useState(true);
+    const handleClick = () => {
+      setOpen(!open);
+    };
+    // ***
+
+    return (
+      <List
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        // subheader={
+        //   <ListSubheader component="div" id="nested-list-subheader">
+        //     관리자 목록
+        //   </ListSubheader>
+        // }
+        className={classes.root}
+      >
+        <ListItem button onClick={submitCouponData} className="sideBarColumn">
+          <ListItemIcon className="sideBarIcon">
+            <SendIcon />
+          </ListItemIcon>
+          <ListItemText primary="쿠폰담기" />
+        </ListItem>
+        <ListItem
+          button
+          className="sideBarColumn"
+          onClick={onClickRedirectPathHandler('mycoupon')}
+        >
+          <ListItemIcon className="sideBarIcon">
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="쿠폰함" />
+          {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+        </ListItem>
+      </List>
+    );
+  };
+  ///////////////////////////////////////////////////////////////////////
+
+  // console.log(currentEventDatas);
   return (
     <Wrapper>
       <Layout>
+        <Grid className={isMobile ? 'mobileButton' : 'webButton'}>
+          <NestedList />
+        </Grid>
         <Grid>
-          <Grid style={{ position: 'fixed' }}>
-            <button onClick={submitCouponData}>쿠폰 담기</button>
-            <br />
-            <button>쿠폰함</button>
-          </Grid>
           {currentEventDatas.map((tmpData, index) =>
             eventGridRender(index, tmpData),
           )}
