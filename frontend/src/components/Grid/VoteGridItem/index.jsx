@@ -68,9 +68,9 @@ export default function VoteGridItem(props) {
       history.push(`VoteItemDetail/${itemData.prod_name}/${itemData.prod_id}`);
     }
   };
-  var originPrice = itemData.prod_price;
-  var quizSale = itemData.prod_sale;
-  var quizSalePrice = parseInt((originPrice * (100 - quizSale)) / 100);
+  let originPrice = itemData.prod_price;
+  let quizSale = itemData.prod_sale;
+  let quizSalePrice = parseInt((originPrice * (100 - quizSale)) / 100);
 
   // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
   function numberWithCommas(x) {

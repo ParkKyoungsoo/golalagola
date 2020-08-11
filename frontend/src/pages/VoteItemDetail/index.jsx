@@ -72,6 +72,10 @@ const ItemDetail = ({ match }) => {
   const { eventNum, setEventNum } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
+  // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
 
@@ -119,17 +123,14 @@ const ItemDetail = ({ match }) => {
             alignItems="center"
           >
             <Grid item xs={10}>
-              {productDatas.map((product, index) => {
+              {productDatas.map((itemData, index) => {
                 if (
-                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                  productDatas[match.params.id - 1].prod_id === itemData.prod_id
                 ) {
                   return (
-                    <Card>
-                      <h5>
-                        <Badge variant="success">Event</Badge>
-                      </h5>
+                    <Card className="effect">
                       <img
-                        src={`https://i3b309.p.ssafy.io/${product.prod_image}`}
+                        src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                         alt="test"
                         style={{ width: '100%', height: 'auto', mr: '10px' }}
                       />
@@ -140,47 +141,53 @@ const ItemDetail = ({ match }) => {
             </Grid>
 
             <Grid item xs={12}>
-              {productDatas.map((product, index) => {
+              {productDatas.map((itemData, index) => {
                 if (
-                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                  productDatas[match.params.id - 1].prod_id === itemData.prod_id
                 )
                   return (
-                    <Grid>
+                    <Grid className="info">
                       <br />
                       <br />
-                      <h5>
-                        <strong>
-                          {productDatas[match.params.id - 1].prod_title}
-                        </strong>
+                      <h5 className="center">
+                        {productDatas[match.params.id - 1].prod_title}
                       </h5>
                       <br />
-                      <span className="price1">
-                        {productDatas[match.params.id - 1].prod_price}
-                      </span>
-                      <span className="m_unit">원</span>
-                      (총 용량 : {productDatas[match.params.id - 1].prod_weight}
-                      )
-                      <br />
+                      <div className="priceinfo">
+                        <span className="price1">
+                          {numberWithCommas(
+                            productDatas[match.params.id - 1].prod_price,
+                          )}
+                        </span>
+                        <span className="m_unit">원</span>
+                        (총 용량 :{' '}
+                        {productDatas[match.params.id - 1].prod_weight})
+                      </div>
                       <br />
                       <p className="select">
                         {productDatas[match.params.id - 1].prod_desc}
                       </p>
-                      <br />
                       {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
                       <hr />
                       <Grid xs={12}>
                         <span className="m_cate">할인가</span>
                         <span className="m_thro">
-                          {productDatas[match.params.id - 1].prod_price}원
+                          {numberWithCommas(
+                            productDatas[match.params.id - 1].prod_price,
+                          )}
+                          원
                         </span>
                         <strong>
                           <span className="m_sale">
-                            {parseInt(
-                              (productDatas[match.params.id - 1].prod_price *
-                                (100 -
-                                  (productDatas[match.params.id - 1].prod_sale -
-                                    10))) /
-                                100,
+                            {numberWithCommas(
+                              parseInt(
+                                (productDatas[match.params.id - 1].prod_price *
+                                  (100 -
+                                    (productDatas[match.params.id - 1]
+                                      .prod_sale -
+                                      10))) /
+                                  100,
+                              ),
                             )}
                           </span>
                           <span className="m_unit2">원</span>
@@ -203,11 +210,17 @@ const ItemDetail = ({ match }) => {
                       <Grid>
                         <span className="m_cate">할인가</span>
                         <span className="m_thro">
-                          {productDatas[match.params.id - 1].prod_price}원
+                          {numberWithCommas(
+                            productDatas[match.params.id - 1].prod_price,
+                          )}
+                          원
                         </span>
                         <strong>
                           <span className="m_sale">
-                            {productDatas[match.params.id - 1].prod_price * 0.9}
+                            {numberWithCommas(
+                              productDatas[match.params.id - 1].prod_price *
+                                0.9,
+                            )}
                           </span>
                           <span className="m_unit2">원</span>
                         </strong>
@@ -224,15 +237,9 @@ const ItemDetail = ({ match }) => {
                         </Button>
                         <hr />
                       </Grid>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
                     </Grid>
                   );
               })}
-              <hr />
             </Grid>
           </Grid>
           <Dialog
@@ -282,14 +289,14 @@ const ItemDetail = ({ match }) => {
             alignItems="center"
           >
             <Grid item xs={4}>
-              {productDatas.map((product, index) => {
+              {productDatas.map((itemData, index) => {
                 if (
-                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                  productDatas[match.params.id - 1].prod_id === itemData.prod_id
                 ) {
                   return (
-                    <Card>
+                    <Card className="effect">
                       <img
-                        src={`https://i3b309.p.ssafy.io/${product.prod_image}`}
+                        src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                         // src={`../../${productDatas[match.params.id - 1].prod_image}`}
                         alt="test"
                         style={{ width: '100%', height: 'auto', mr: '10px' }}
@@ -303,15 +310,14 @@ const ItemDetail = ({ match }) => {
             <Grid item xs={6}>
               {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
           <hr /> */}
-              {productDatas.map((product, index) => {
+              {productDatas.map((itemData, index) => {
                 if (
-                  productDatas[match.params.id - 1].prod_id === product.prod_id
+                  productDatas[match.params.id - 1].prod_id === itemData.prod_id
                 )
                   return (
                     <Grid>
-                      <h2>
-                        <Badge variant="success">Event</Badge>
-                      </h2>
+                      <br />
+                      <br />
                       <br />
                       <br />
                       <h2>
@@ -320,8 +326,12 @@ const ItemDetail = ({ match }) => {
                         </strong>
                       </h2>
                       <br />
+                      <br />
+                      <br />
                       <span className="price2">
-                        {productDatas[match.params.id - 1].prod_price}
+                        {numberWithCommas(
+                          productDatas[match.params.id - 1].prod_price,
+                        )}
                       </span>
                       <span className="unit1">원</span>
                       <h5>
@@ -329,24 +339,32 @@ const ItemDetail = ({ match }) => {
                         {productDatas[match.params.id - 1].prod_weight})
                       </h5>{' '}
                       <br />
+                      <br />
+                      <br />
                       <h3 className="select">
                         {productDatas[match.params.id - 1].prod_desc}
                       </h3>
+                      <br />
+                      <br />
                       <br />
                       {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
                       <hr />
                       <span className="cate">할인가</span>
                       <span className="thro">
-                        {productDatas[match.params.id - 1].prod_price}원
+                        {numberWithCommas(
+                          productDatas[match.params.id - 1].prod_price,
+                        )}
+                        원
                       </span>
-                      <span className="unit2">원</span>
                       <span className="sale">
-                        {parseInt(
-                          (productDatas[match.params.id - 1].prod_price *
-                            (100 -
-                              (productDatas[match.params.id - 1].prod_sale -
-                                10))) /
-                            100,
+                        {numberWithCommas(
+                          parseInt(
+                            (productDatas[match.params.id - 1].prod_price *
+                              (100 -
+                                (productDatas[match.params.id - 1].prod_sale -
+                                  10))) /
+                              100,
+                          ),
                         )}
                       </span>
                       <span className="unit2">원</span>
@@ -366,10 +384,15 @@ const ItemDetail = ({ match }) => {
                       <Grid>
                         <span className="cate">할인가</span>
                         <span className="thro">
-                          {productDatas[match.params.id - 1].prod_price}원
+                          {numberWithCommas(
+                            productDatas[match.params.id - 1].prod_price,
+                          )}
+                          원
                         </span>
                         <span className="sale">
-                          {productDatas[match.params.id - 1].prod_price * 0.9}
+                          {numberWithCommas(
+                            productDatas[match.params.id - 1].prod_price * 0.9,
+                          )}
                         </span>
                         <span className="unit2">원</span>
                         <Button
@@ -391,7 +414,6 @@ const ItemDetail = ({ match }) => {
                     </Grid>
                   );
               })}
-              <hr />
             </Grid>
           </Grid>
           <Dialog
