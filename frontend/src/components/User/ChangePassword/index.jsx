@@ -133,6 +133,7 @@ const MyInfoButtonGroupComponent = props => {
     })
       .then(res => {
         alert(res.data.message);
+        history.push('/');
       })
       .catch(err => {
         console.log('err', err.response.data.message);

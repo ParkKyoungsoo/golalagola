@@ -32,6 +32,8 @@ import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
+import AdminVSEstimate from './pages/Admin/VS/Estimate/estimate';
+import AdminVSRecommand from './pages/Admin/VS/Recommand/recommand';
 import AdminQuiz from './pages/Admin/Quiz/';
 import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
@@ -299,6 +301,16 @@ const App = () => {
 
             <Route exact path="/Admin" component={Admin} />
             <Route exact path="/Admin/VS" component={AdminVS} />
+			<Route
+              exact
+              path="/Admin/VS/Estimate"
+              component={AdminVSEstimate}
+            />
+            <Route
+              exact
+              path="/Admin/VS/Recommand"
+              component={AdminVSRecommand}
+            />
             <Route exact path="/Admin/Quiz" component={AdminQuiz} />
             <Route exact path="/Admin/Quiz/Form" component={AdminQuizForm} />
 
