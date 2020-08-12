@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Grid, useMediaQuery } from '@material-ui/core';
+import { Grid, useMediaQuery, Divider } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
 import Wrapper from './styles';
@@ -111,56 +111,101 @@ const EventAll = () => {
 
     if (!userCoupon.includes(tmpData.event_id)) {
       return (
-        <Grid container className="Nav_bar">
-          <Grid
-            className="KisokCentering"
-            onClick={() => choiceProduct(tmpData, 1)}
-          >
-            {/* {console.log(tmpData)} */}
-            <img
-              className="tmp"
-              src={`https://i3b309.p.ssafy.io/${
-                Object(productDatas[tmpData.event_item['1'].prod_id - 1])
-                  .prod_image
-              }`}
-              style={
-                selectedEvent[tmpData.event_id] ===
-                tmpData.event_item['1'].prod_id
-                  ? checkedStyle
-                  : null
-              }
-              alt="image1"
-            />
+        <>
+          <Grid container className="Nav_bar">
+            <Grid
+              className="KisokCentering"
+              onClick={() => choiceProduct(tmpData, 1)}
+            >
+              {/* {console.log(tmpData)} */}
+              <img
+                className="tmp"
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                    .prod_image
+                }`}
+                style={
+                  selectedEvent[tmpData.event_id] ===
+                  tmpData.event_item['1'].prod_id
+                    ? checkedStyle
+                    : null
+                }
+                alt="image1"
+              />
+              <div>
+                <p>
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_title
+                  }
+                </p>
+                <p>
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_price
+                  }
+                </p>
+                <p>
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_sale
+                  }
+                  %
+                </p>
+              </div>
+            </Grid>
+            {/* <Grid
+              style={{
+                marginTop: 'auto',
+                marginBottom: 'auto',
+              }}
+            >
+              <h3>VS</h3>
+              <p>vs{JSON.stringify(selectedEvent)}</p>
+            </Grid> */}
+            <Grid
+              className="KisokCentering"
+              onClick={() => choiceProduct(tmpData, 2)}
+            >
+              <img
+                className="tmp"
+                src={`https://i3b309.p.ssafy.io/${
+                  Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                    .prod_image
+                }`}
+                style={
+                  selectedEvent[tmpData.event_id] ===
+                  tmpData.event_item['2'].prod_id
+                    ? checkedStyle
+                    : null
+                }
+                alt="image2"
+              />
+              <div>
+                <p>
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_title
+                  }
+                </p>
+                <p>
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_price
+                  }
+                </p>
+                <p>
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_sale
+                  }
+                  %
+                </p>
+              </div>
+            </Grid>
           </Grid>
-          <Grid
-            style={{
-              marginTop: 'auto',
-              marginBottom: 'auto',
-            }}
-          >
-            <h3>VS</h3>
-            {/* <p>vs{JSON.stringify(selectedEvent)}</p> */}
-          </Grid>
-          <Grid
-            className="KisokCentering"
-            onClick={() => choiceProduct(tmpData, 2)}
-          >
-            <img
-              className="tmp"
-              src={`https://i3b309.p.ssafy.io/${
-                Object(productDatas[tmpData.event_item['2'].prod_id - 1])
-                  .prod_image
-              }`}
-              style={
-                selectedEvent[tmpData.event_id] ===
-                tmpData.event_item['2'].prod_id
-                  ? checkedStyle
-                  : null
-              }
-              alt="image2"
-            />
-          </Grid>
-        </Grid>
+          <Divider style={{ margin: '0px 0 0px 0' }} />
+        </>
       );
     } else {
       return (
@@ -236,11 +281,6 @@ const EventAll = () => {
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
-        // subheader={
-        //   <ListSubheader component="div" id="nested-list-subheader">
-        //     관리자 목록
-        //   </ListSubheader>
-        // }
         className={classes.root}
       >
         <ListItem button onClick={submitCouponData} className="sideBarColumn">
@@ -258,7 +298,6 @@ const EventAll = () => {
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="쿠폰함" />
-          {/* {open ? <ExpandLess /> : <ExpandMore />} */}
         </ListItem>
       </List>
     );
@@ -269,13 +308,17 @@ const EventAll = () => {
   return (
     <Wrapper>
       <Layout>
-        <Grid className={isMobile ? 'mobileButton' : 'webButton'}>
-          <NestedList />
-        </Grid>
+        <h3>두 개의 상품중 마음에 드는 상품을 골라가세요</h3>
+        <Divider style={{ margin: '0px 0 0px 0' }} />
         <Grid>
-          {currentEventDatas.map((tmpData, index) =>
-            eventGridRender(index, tmpData),
-          )}
+          <Grid item>
+            {currentEventDatas.map((tmpData, index) =>
+              eventGridRender(index, tmpData),
+            )}
+          </Grid>
+          {/* <Grid item className={isMobile ? null : null}>
+            <NestedList />
+          </Grid> */}
         </Grid>
       </Layout>
     </Wrapper>

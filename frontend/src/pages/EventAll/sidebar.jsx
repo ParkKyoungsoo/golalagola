@@ -7,8 +7,39 @@
 // import ListItemText from '@material-ui/core/ListItemText';
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
 // import SendIcon from '@material-ui/icons/Send';
+// import Axios from 'axios';
 
 // const NestedList = props => {
+//   // 쿠폰 데이터를 보내고 다시 받아오는 요청
+//   const submitCouponData = async () => {
+//     // data 가공해서 post 요청 보내기,
+//     console.log(selectedEvent);
+//     for (let event_id in selectedEvent) {
+//       console.log(event_id, selectedEvent[event_id]);
+//       if (selectedEvent[event_id] !== null) {
+//         await Axios.post('https://i3b309.p.ssafy.io/api/coupon/', {
+//           user_id: userId,
+//           event_id: event_id,
+//           coupon_select: selectedEvent[event_id],
+//           coupon_date: new Date(),
+//           coupon_use: false,
+//         })
+//           .then(res => console.log(res))
+//           .catch(err => console.log(err));
+//       }
+//     }
+
+//     // get 요청으로 데이터 받아서 다시 랜더링하기
+//     getUserCouponData();
+//     setForceRender({});
+
+//     // myCoupon으로 이동할 것인지 물어보기
+//     const confirmMessage = window.confirm('마이쿠폰으로 이동하시겠습니까?');
+//     if (confirmMessage) {
+//       window.location.href = '/MyCoupon';
+//     }
+//   };
+
 //   // sidebar 스타일 정의
 //   const classes = useStyles();
 //   let history = useHistory();
