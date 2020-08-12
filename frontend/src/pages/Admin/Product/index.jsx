@@ -1,12 +1,14 @@
-import React, { useState, useEffect, forwardRef, useContext } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
+import { Grid, Divider } from '@material-ui/core';
+import MaterialTable from 'material-table';
 
-import AdminNav from '../Layout/nav.jsx';
+import Wrapper from './styles';
+
 import NestedList from '../Layout/sidebar.jsx';
 
-import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -22,25 +24,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-import Wrapper from './styles';
-import Divider from '@material-ui/core/Divider';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-  },
-  paper: {
-    padding: theme.spacing(4),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -152,18 +135,16 @@ const AdminProduct = () => {
       });
   };
 
-  const classes = useStyles();
   return (
     <Wrapper>
       <div className="admin_product__main">
-        {/* <AdminNav /> */}
         <Grid container>
           <Grid item>
-            <NestedList index={3} />
+            <NestedList index={2} />
           </Grid>
           <Grid item>
             <Grid className="admin_product__content">
-              <h5 className="admin_product__header">Products Dashboard</h5>
+              <h5 className="admin_product__header">Product Dashboard</h5>
               <Divider variant="middle" className="admin_product__divider" />
               <MaterialTable
                 className="admin_product__table"
@@ -171,7 +152,7 @@ const AdminProduct = () => {
                 title="재고 목록"
                 columns={products.columns}
                 data={products.data}
-                options={{ actionsColumnIndex: -1, pageSize: 7 }}
+                options={{ actionsColumnIndex: -1, pageSize: 8 }}
                 detailPanel={rowData => {
                   return (
                     <Grid container className="admin_product__detail--grid">
