@@ -36,7 +36,7 @@
     "react-quiz-component": "^0.3.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
+    "react-scripts": "^3.4.2",
     "react-simple-keyboard": "^2.1.82",
     "react-swipeable-views": "^0.13.9",
     "react-use": "^13.12.2",

@@ -61,7 +61,7 @@ const EventAll = () => {
     await Axios.get(`https://i3b309.p.ssafy.io/api/coupon/${userId}`)
       .then(res => {
         console.log(res);
-        setUserCoupon([res.data.event_id]);
+        setUserCoupon([...res.data.event_id]);
       })
       .catch(err => console.log(err));
   };
