@@ -62,6 +62,8 @@ const AdminProduct = () => {
     setCurrentProductDatas,
     productsTableData,
     setProductsTableData,
+	buyDatas,
+    setBuyDatas,
   } = useContext(CommonContext);
 
   const [categories, setCategories] = useState({});

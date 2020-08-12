@@ -140,6 +140,9 @@ const App = () => {
   const [userCoupon, setUserCoupon] = useState([]); // 쿠폰 데이터 리스트
   const [userEvent, setUserEvent] = useState([]); // 쿠폰 데이터 리스트
 
+  // 제품 수량 && 판매 현황 개수
+  const [buyDatas, setBuyDatas] = useState([]);
+  
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
