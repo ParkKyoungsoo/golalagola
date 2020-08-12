@@ -84,6 +84,7 @@ const App = () => {
       user_id: 0,
       user_email: '',
       user_name: '',
+      user_phone: '',
       user_pwd: '',
       user_image: '',
       user_quiz: '',
@@ -251,9 +252,17 @@ const App = () => {
       setQuizDatas(res.data);
     });
   }
+  
+  // 제품 수량 && 판매 현황 개수
+  async function getBuyDatas() {
+    Axios.get('http://localhost:5000/api/product/buy/').then(function(res) {
+      setBuyDatas(res.data);
+    });
+  }
 
   useEffect(() => {
     getProductDatas();
+	getBuyDatas();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -335,6 +344,10 @@ const App = () => {
         // admin/quiz에서 수정을 위해 사용되는 데이터 입니다.
         quizDatas,
         setQuizDatas,
+		
+		// 제품 수량 && 판매 현황 개수
+        buyDatas,
+        setBuyDatas,
       }}
     >
       <MuiThemeProvider theme={theme}>

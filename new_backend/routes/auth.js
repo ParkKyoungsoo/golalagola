@@ -311,8 +311,8 @@ app.put("/change_pwd", async (req, res) => {
                     res.send(err);
                   } else {
                     res.json({
-                      message: "비밀번호가 변경되었습니다.",
                       token: token,
+                      message: "비밀번호가 변경되었습니다.",
                       status: "login",
                     });
                   }
@@ -395,7 +395,7 @@ app.post("/imageupload", async (req, res) => {
 });
 
 // User 전체 조회
-app.get("/", authAdminMiddleware);
+// app.get("/", authAdminMiddleware);
 app.get("/", async function (req, res) {
   db.User.findAll()
     .then((data) => res.json(data))
