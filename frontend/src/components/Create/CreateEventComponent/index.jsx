@@ -23,7 +23,7 @@ import { ViewContext } from '../../../context/ViewContext';
 import { useDropzone } from 'react-dropzone';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { useHistory } from 'react-router-dom';
-import Axios from 'axios';
+import axios from 'axios';
 
 import categoryDats from './dump.json';
 
@@ -91,6 +91,19 @@ const SubTitleGroupComponent = () => {
   const [filterADatas, setFilterADatas] = useState([]);
   const [filterBDatas, setFilterBDatas] = useState([]);
 
+  const [progressedItem, setProgressedItem] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get(`https://i3b309.p.ssafy.io/api/event/eventProd`)
+        .then(res => {
+          setProgressedItem(res.data);
+        });
+    }
+    fetchData();
+  }, []);
+
   const handleChangeA = e => {
     setNewEventData({
       ...newEventData,
@@ -108,6 +121,7 @@ const SubTitleGroupComponent = () => {
     setFilterADatas(
       productDatas.filter(
         product =>
+          !progressedItem.includes(product.prod_id) &&
           product.prod_category === newEventData.event_category &&
           product.prod_id !== newEventData.event_prod_B,
       ),
@@ -118,6 +132,7 @@ const SubTitleGroupComponent = () => {
     setFilterBDatas(
       productDatas.filter(
         product =>
+          !progressedItem.includes(product.prod_id) &&
           product.prod_category === newEventData.event_category &&
           product.prod_id !== newEventData.event_prod_A,
       ),
