@@ -65,6 +65,8 @@ const Header = props => {
 
     if (name === '/mainvote') {
       history.push('/');
+    } else if (name === '/mycoupon') {
+      window.location.href = '/mycoupon';
     } else {
       history.push(`/${name}`);
     }

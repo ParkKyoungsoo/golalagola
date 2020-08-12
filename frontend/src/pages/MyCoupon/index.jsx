@@ -47,9 +47,7 @@ export default function StickyHeadTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { user } = useContext(CommonContext);
-  // const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
-  const [myCouponDatas, setMyCouponDatas] = useState([]);
-
+  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
 
   const handleChangePage = (event, newPage) => {
@@ -60,17 +58,6 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      await axios
-        .get(`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`)
-        .then(res => {
-          setMyCouponDatas(res.data);
-        });
-    }
-    fetchData();
-  }, []);
 
   return (
     <>
