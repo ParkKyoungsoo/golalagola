@@ -73,11 +73,11 @@ app.post("/signin", async (req, res) => {
                     isAdmin: userData.isAdmin,
                     user_phone: userData.user_phone,
                     user_image: userData.user_image,
+                    user_quiz: userData.user_quiz,
                   });
                 }
               }
             );
-            console.log("로그인 토큰", token);
           }
         }
       })
@@ -311,17 +311,13 @@ app.put("/change_pwd", async (req, res) => {
                     res.send(err);
                   } else {
                     res.json({
-                      message:
-                        "비밀번호가 변경이 되어 토큰이 재발급되었습니다.",
+                      message: "비밀번호가 변경되었습니다.",
                       token: token,
                       status: "login",
                     });
                   }
                 }
               );
-              console.log("비밀번호 변경 토큰", token);
-
-              res.status(200).send({ message: "비밀번호가 변경되었습니다." });
             })
             .catch((err) =>
               res
