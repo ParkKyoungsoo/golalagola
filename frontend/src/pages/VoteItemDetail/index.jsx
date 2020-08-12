@@ -75,6 +75,7 @@ const ItemDetail = ({ match }) => {
   const [eventActivated, setEventActivated] = useState(false);
   const { eventNum, setEventNum } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
 
   // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
   function numberWithCommas(x) {
@@ -113,7 +114,19 @@ const ItemDetail = ({ match }) => {
       }
     }
   };
+
+  // const CheckUser = () => {
+  //   console.log(myCouponDatas);
+  //   for (var i = 0; i < myCouponDatas.length; i++) {
+  //     if (Number(match.params.id) === myCouponDatas[i].coupon_select) {
+  //       setEventActivated(false);
+  //       setEventNum(i);
+  //     }
+  //   }
+  // };
+
   useEffect(CheckEvent);
+  // useEffect(CheckUser);
 
   const product_id = match.params.id - 1;
   const isMobile = useMediaQuery('(max-width:920px)');
