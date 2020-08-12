@@ -137,10 +137,10 @@ const MainVote = props => {
   // 실시간 순위
   const [realtime, setRealTime] = useState([]);
 
-  const onClickRedirectPathHandler = name => e => {
+  const onClickRedirectPathHandler = (name, id) => e => {
     window.scrollTo(0, 0);
 
-    history.push(`/${name}`);
+    history.push(`/voteitemdetail/${name}/${id}`);
   };
   useEffect(() => {
     Axios.get(
@@ -297,11 +297,17 @@ const MainVote = props => {
                                       height: '50px',
                                     }}
                                   >
-                                    <Link>
-                                      <h2>
-                                        {index + 1}. {data.prod_name}
-                                      </h2>
-                                    </Link>
+                                    <h2
+                                      onClick={onClickRedirectPathHandler(
+                                        data.prod_name,
+                                        data.event_prod,
+                                      )}
+                                      style={{
+                                        cursor: 'pointer',
+                                      }}
+                                    >
+                                      {index + 1}. {data.prod_name}
+                                    </h2>
                                   </Slide>
                                 </Grid>
                               ) : null,
