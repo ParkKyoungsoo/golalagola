@@ -37,12 +37,6 @@ const MyInfoUploadImageComponent = () => {
         img: URL.createObjectURL(file),
         file: file,
       });
-      console.log(
-        'setThumbnailImageData',
-        thumbnailImageData.img,
-        ' ',
-        thumbnailImageData.file,
-      );
     }
   }, [acceptedFiles]);
 
@@ -62,7 +56,7 @@ const MyInfoUploadImageComponent = () => {
               src={
                 thumbnailImageData.img
                   ? thumbnailImageData.img
-                  : `${serverImgUrl}${user.user_name}`
+                  : `https://i3b309.p.ssafy.io/images/${user.user_image}`
               }
               className="cover-avatar"
             />
@@ -143,22 +137,12 @@ const MyInfoButtonGroupComponent = props => {
     let data = {};
     const formData = new FormData();
     formData.append('image', thumbnailImageData.file); // 파일명
-    console.log('thumbnailImageData.file', thumbnailImageData.file);
+    formData.append('user_email', user.user_email);
 
     let body = {
       ...inputValue,
       ...thumbnailImageData,
     };
-    console.log('userLLLL: ', body);
-    console.log(
-      'update ',
-      inputValue,
-      'thumbnailImageData',
-      thumbnailImageData,
-      user.token,
-    );
-
-    // console.log('formDAta', formData);
 
     Axios({
       method: 'PUT',
@@ -171,38 +155,59 @@ const MyInfoButtonGroupComponent = props => {
         user_email: inputValue.user_email,
         update_name: inputValue.user_name,
         update_phone: inputValue.user_phone,
-        user_image: `images/${inputValue.user_name}`,
       },
     })
       .then(async res => {
-        console.log('aaa', `images/${inputValue.user_name}`);
-        console.log('form Data', formData);
-        await Axios.post(
-          'https://i3b309.p.ssafy.io/api/auth/imageupload',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
+        if (thumbnailImageData.file != '') {
+          await Axios.post(
+            'https://i3b309.p.ssafy.io/api/auth/imageupload',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
             },
-          },
-        )
-          .then(response => {
-            console.log('Response', response.data);
+          ).then(response => {
+            var obj = {
+              user_id: user.user_id,
+              user_email: inputValue.user_email,
+              user_name: inputValue.user_name,
+              user_phone: inputValue.user_phone,
+              user_image: thumbnailImageData.file.name,
+              isAdmin: user.isAdmin,
+              status: 'login',
+              web_site: '',
+              token: user.token,
+            };
+            setUser({ ...obj });
+            // setUser({ ...data, status: 'login' });
             alert('회원정보가 수정되었습니다.');
 
             history.push('/');
-          })
-          .catch(err => {
-            console.log('Error: ', err);
           });
+        } else {
+          var obj = {
+            user_id: user.user_id,
+            user_email: inputValue.user_email,
+            user_name: inputValue.user_name,
+            user_phone: inputValue.user_phone,
+            user_image: user.user_image,
+            isAdmin: user.isAdmin,
+            status: 'login',
+            web_site: '',
+            token: user.token,
+          };
+          setUser({ ...obj });
+          alert('회원정보가 수정되었습니다.');
+
+          history.push('/');
+        }
       })
       .catch(err => {
         console.log('err', err.response.data.message);
       });
 
     formData.append('optionData', JSON.stringify(body));
-
-    // setUser({ ...data, status: 'login' });
   };
 
   useEffect(() => {
