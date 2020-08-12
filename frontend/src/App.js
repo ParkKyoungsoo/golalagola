@@ -149,12 +149,26 @@ const App = () => {
     event_category: '',
   });
 
+  // admin product 페이지에서 사용하는 변수 입니다.
+  const [productsTableData, setProductsTableData] = useState({
+    columns: [
+      { title: '상품', field: 'prod_name' },
+      { title: '가격', field: 'prod_price' },
+      { title: '수량', field: 'prod_amount' },
+      { title: '유통기한', field: 'prod_expiration' },
+      { title: '할인율', field: 'prod_sale', type: 'numeric' },
+    ],
+    data: [],
+  });
+
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
   async function getProductDatas() {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
       setSortedDatas(res.data);
+      productsTableData.data = res.data;
+      setProductsTableData(productsTableData);
       getEventDatas();
     });
   }
@@ -254,6 +268,8 @@ const App = () => {
         setCurrentQuizDatas,
         currentProductDatas,
         setCurrentProductDatas,
+        productsTableData,
+        setProductsTableData,
 
         // EventAll 페이지와 myCoupon페이지에서 사용합니다.
         userEvent,
