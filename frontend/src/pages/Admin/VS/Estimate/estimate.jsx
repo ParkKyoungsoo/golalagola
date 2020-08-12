@@ -30,14 +30,13 @@ const Recommand = props => {
   return (
     <div>
       <AdminNav></AdminNav>
-      <h1>이벤트 추천 상품</h1>
+      <h1>vs이벤트 현황</h1>
       <div>
         <Clock
           format={'YYYY년 MM월 DD일'}
           ticking={true}
           timezome={'US/Pacific'}
         ></Clock>
-        <h1>React Pie Chart</h1>
         <div>
           {vsData.map((vsdata, index) => (
             <CanvasJSChart

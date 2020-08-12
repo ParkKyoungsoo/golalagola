@@ -9,6 +9,7 @@ const smtpTransporter = require("nodemailer-smtp-transport");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+const fileUpload = require("express-fileupload");
 
 // jwt middleware
 const authMiddleware = require("../middleware/auth");
@@ -22,10 +23,8 @@ const { rejects } = require("assert");
 // 로그인
 app.post("/signin", async (req, res) => {
   // 이미 로그인이 되어있다면 이미 되어있다고 알리기
-  console.log("data", req.body);
 
   if (req.headers.token) {
-    console.log("1");
     res.status(403).json({ message: "이미 로그인 되어있습니다." });
   } else {
     const reqeustData = req.body;
@@ -39,12 +38,10 @@ app.post("/signin", async (req, res) => {
         const userData = user.dataValues;
         // 이메일 검증 여부
         if (userData.email_verify != 1) {
-          console.log("2");
           res.json({ check_email: 0 });
         } else {
           // 비밀번호 일치 여부 확인
           if (userData.user_pwd !== reqeustData.user_pwd) {
-            console.log("3");
             res.json({ check_pwd: 0 });
           } else {
             // 아아디, 비밀번호 일치
@@ -83,7 +80,6 @@ app.post("/signin", async (req, res) => {
         }
       })
       .catch((err) => {
-        console.log("4");
         res.status(403).send({ message: "존재하지 않는 아이디 입니다." });
       });
   }
@@ -163,7 +159,6 @@ app.post("/signup", async (req, res) => {
                 res.json({ message: err });
               } else {
                 // res.send({ message: "email has been sent." });
-                console.log("이메일 전송");
               }
               smtpTransport.close();
             });
@@ -282,8 +277,6 @@ app.put("/change_pwd", async (req, res) => {
       } else {
         // 수정을 요청하는 사용자와 로그인 되어있는 사용자의 정보가 같아야함
         if (decoded.user_pwd !== req.body.before_pwd) {
-          console.log("decoded.user_pwd", decoded.user_pwd);
-          console.log("req.body.before_pwd", req.body.before_pwd);
           res.status(403).send({ message: "인증된 사용자가 아닙니다." });
         } else {
           db.User.update(
@@ -302,28 +295,8 @@ app.put("/change_pwd", async (req, res) => {
   }
 });
 
-// const upload = multer({
-//   storage: multer.memoryStorage({
-//     destination(req, file, cb) {
-//       cb(null, "http://localhost:5000/images/");
-//       console.log("cb", cb);
-//     },
-//     filename(req, file, cb) {
-//       const ext = path.extname(file.originalname);
-//       cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
-//     },
-//   }),
-//   // limits: { fileSize: 5 * 1024 * 1024 },
-// });
-// 이미지 업로드를 위한 API
-// upload의 single 메서드는 하나의 이미지를 업로드할 때 사용
-// app.post("/upload", upload.single("img"), (req, res) => {
-//   console.log(req.file);
-//   res.json({ url: `/img/${req.file.filename}` });
-// });
-
 // 회원정보 수정
-app.put("/update", authMiddleware);
+// app.put("/update", authMiddleware);
 app.put("/update", async (req, res) => {
   const token = req.headers.token;
 
@@ -337,8 +310,6 @@ app.put("/update", async (req, res) => {
       } else {
         // 수정을 요청하는 사용자와 로그인 되어있는 사용자의 정보가 같아야함
         if (decoded.user_email !== req.body.user_email) {
-          console.log("decoded.user_email", decoded.user_email);
-          console.log("req.body.user_email", req.body.user_email);
           res.status(403).send({ message: "인증된 사용자가 아닙니다." });
         } else {
           db.User.update(
@@ -355,6 +326,27 @@ app.put("/update", async (req, res) => {
       }
     });
   }
+});
+
+// 이미지 업로드
+app.post("/imageupload", fileUpload());
+app.post("/imageupload", async (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: "No file uploaded" });
+  }
+
+  const file = req.files.image;
+  console.log("file", file);
+
+  // 경로 수정 필요
+  file.mv(`${__dirname}/../../front/build/images/${file.name}`, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/images/${file.name}` });
+  });
 });
 
 // User 전체 조회
