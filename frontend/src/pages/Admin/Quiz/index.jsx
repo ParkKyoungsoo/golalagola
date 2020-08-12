@@ -50,22 +50,12 @@ const tableIcons = {
 };
 
 const AdminQuiz = () => {
-  const { currentQuizDatas, setCurrentQuizDatas } = useContext(CommonContext);
-  const [quizzes, setQuizzes] = useState({
-    columns: [
-      // { title: 'quiz_id', field: 'quiz_id' },
-      { title: '퀴즈', field: 'quiz_question' },
-      { title: '정답', field: 'quiz_answer' },
-      { title: '힌트', field: 'quiz_hint' },
-      { title: '참여자 수', field: 'quiz_num' },
-    ],
-    data: [],
-  });
-
-  Axios.get('https://i3b309.p.ssafy.io/api/quiz/').then(({ data }) => {
-    quizzes.data = data;
-    setQuizzes(quizzes);
-  });
+  const {
+    currentQuizDatas,
+    setCurrentQuizDatas,
+    quizzesTableData,
+    setQuizzesTableData,
+  } = useContext(CommonContext);
 
   let history = useHistory();
 
@@ -121,8 +111,8 @@ const AdminQuiz = () => {
               <MaterialTable
                 icons={tableIcons}
                 title="재고 목록"
-                columns={quizzes.columns}
-                data={quizzes.data}
+                columns={quizzesTableData.columns}
+                data={quizzesTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
                 actions={[
                   {
