@@ -24,6 +24,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { da } from 'date-fns/esm/locale';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -50,25 +51,16 @@ const tableIcons = {
 };
 
 const AdminProduct = () => {
-  const { currentProductDatas, setCurrentProductDatas } = useContext(
-    CommonContext,
-  );
-  const [categories, setCategories] = useState({});
-  const [products, setProducts] = useState({
-    columns: [
-      { title: '상품', field: 'prod_name' },
-      { title: '가격', field: 'prod_price' },
-      { title: '수량', field: 'prod_amount' },
-      { title: '유통기한', field: 'prod_expiration' },
-      { title: '할인율', field: 'prod_sale', type: 'numeric' },
-    ],
-    data: [],
-  });
-  Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
-    products.data = data;
-    setProducts(products);
-  });
+  const {
+    productDatas,
+    setProductDatas,
+    currentProductDatas,
+    setCurrentProductDatas,
+    productsTableData,
+    setProductsTableData,
+  } = useContext(CommonContext);
 
+  const [categories, setCategories] = useState({});
   var obj = categories;
   let index = 1;
   Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
@@ -150,8 +142,8 @@ const AdminProduct = () => {
                 className="admin_product__table"
                 icons={tableIcons}
                 title="재고 목록"
-                columns={products.columns}
-                data={products.data}
+                columns={productsTableData.columns}
+                data={productsTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
                 detailPanel={rowData => {
                   return (

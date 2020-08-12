@@ -181,19 +181,6 @@ const Header = props => {
             >
               <Grid
                 xs={4}
-                className="navbarCentering"
-                style={{
-                  height: '5vh',
-                }}
-              >
-                {successSearchbarTrigger ? <SearchComponent /> : null}
-                <h3 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
-                  <Search />
-                </h3>
-              </Grid>
-
-              <Grid
-                xs={4}
                 style={{
                   height: '5vh',
                 }}
@@ -209,6 +196,19 @@ const Header = props => {
                   Gola la Gola
                 </Typography>
               </Grid>
+              <Grid
+                xs={4}
+                className="navbarCentering"
+                style={{
+                  height: '5vh',
+                }}
+              >
+                {successSearchbarTrigger ? <SearchComponent /> : null}
+                <h3 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
+                  <Search />
+                </h3>
+              </Grid>
+
               <Grid
                 xs={4}
                 style={{

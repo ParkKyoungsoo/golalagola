@@ -90,6 +90,7 @@ const SignInSection01 = () => {
             user_name: res.data.user_name,
             user_phone: res.data.user_phone,
             user_image: res.data.user_image,
+            user_quiz: res.data.user_quiz,
             isAdmin: res.data.isAdmin,
             status: 'login',
             web_site: '',
@@ -360,7 +361,6 @@ const SignUpSection02 = () => {
     // });
     Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
       .then(data => {
-        // console.log(data);
         setSignUpUserData(signUpUserData);
         setIsSignUp('SignIn');
         // alert(data.message);
@@ -692,7 +692,6 @@ const RecoverPwGroupComponent = () => {
   };
 
   const sendSearchWordHandler = async searchWord => {
-
     if (searchWord === '') {
       alert('Please enter your e-mail');
       return;

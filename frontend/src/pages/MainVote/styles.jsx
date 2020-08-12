@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  .test {
+  .test{
+    background-color:red;
+  }
+  .liveTimeBar {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 
   .tiemPopularity {
@@ -66,6 +69,11 @@ export const Wrapper = styled.div`
 `;
 
 export const MobileWrapper = styled.div`{
+  .liveTimeBar {
+    display: flex;
+    justify-content: space-around;
+    
+  }
   .tiemPopularity {
     display: flex;
     // flex-wrap: wrap;
