@@ -159,7 +159,7 @@ const MainVote = props => {
                   }}
                 >
                   <Box
-                    height="100%"
+                    height="80%"
                     // border={1}
                     // borderColor="secondary.main"
                   >
