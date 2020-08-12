@@ -86,6 +86,7 @@ const App = () => {
       user_name: '',
       user_pwd: '',
       user_image: '',
+      user_quiz: '',
       isAdmin: '',
       status: '',
       web_site: '',

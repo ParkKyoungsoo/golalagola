@@ -133,15 +133,16 @@ const MyInfoButtonGroupComponent = props => {
     })
       .then(res => {
         var obj = {
+          token: res.data.token,
           user_id: user.user_id,
           user_email: user.user_email,
           user_name: user.user_name,
           user_phone: user.user_phone,
           user_image: user.user_image,
+          user_quiz: user.user_quiz,
           isAdmin: user.isAdmin,
           status: 'login',
           web_site: '',
-          token: res.data.token,
         };
         setUser({ ...obj });
 
