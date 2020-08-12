@@ -49,22 +49,8 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-const AdminUser = props => {
-  const [products, setProducts] = useState({
-    columns: [
-      { title: '상품', field: 'prod_name' },
-      { title: '가격', field: 'prod_price' },
-      { title: '수량', field: 'prod_amount' },
-      { title: '유통기한', field: 'prod_expiration' },
-      { title: '할인율', field: 'prod_sale', type: 'numeric' },
-    ],
-    data: [],
-  });
-
-  Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
-    products.data = data;
-    setProducts(products);
-  });
+const AdminUser = () => {
+  const { usersTableData, setUsersTableData } = useContext(CommonContext);
 
   const deleteProductData = targetProdId => {
     Axios.delete('https://i3b309.p.ssafy.io/api/product', {
@@ -84,32 +70,32 @@ const AdminUser = props => {
 
   return (
     <Wrapper>
-      <div className="admin_product__main">
+      <div className="admin_user__main">
         <Grid container>
           <Grid item>
-            <NestedList index={2} />
+            <NestedList index={1} />
           </Grid>
           <Grid item>
-            <Grid className="admin_product__content">
-              <h5 className="admin_product__header">Product Dashboard</h5>
-              <Divider variant="middle" className="admin_product__divider" />
+            <Grid className="admin_user__content">
+              <h5 className="admin_user__header">User Dashboard</h5>
+              <Divider variant="middle" className="admin_user__divider" />
               <MaterialTable
-                className="admin_product__table"
+                className="admin_user__table"
                 icons={tableIcons}
                 title="재고 목록"
-                columns={products.columns}
-                data={products.data}
+                columns={usersTableData.columns}
+                data={usersTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
                 detailPanel={rowData => {
                   return (
-                    <Grid container className="admin_product__detail--grid">
+                    <Grid container className="admin_user__detail--grid">
                       <Grid
                         item
                         xs={6}
-                        className="admin_product__detail--image_grid"
+                        className="admin_user__detail--image_grid"
                       >
                         <img
-                          className="admin_product__detail--image"
+                          className="admin_user__detail--image"
                           src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
                           alt={`${rowData.prod_name} 이미지`}
                         />
