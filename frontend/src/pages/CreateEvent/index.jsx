@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 
-import Layout from '../../layout';
-import { ViewContext } from '../../context/CommonContext';
-import DialogActionsComponet from '../../components/Create/DialogActionsComponet/index';
+import { Grid, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import NestedList from '../Admin/Layout/sidebar';
 import CreateEventComponent from '../../components/Create/CreateEventComponent/index';
 
 import axios from 'axios';
@@ -10,8 +10,21 @@ import Fab from '@material-ui/core/Fab';
 import { CommonContext } from '../../context/CommonContext';
 import { useHistory, Link, Redirect } from 'react-router-dom';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    margin: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
 const CreateVote = props => {
   let history = useHistory();
+
+  const classes = useStyles(); // Grid
 
   const { newEventData, setNewEventData } = useContext(CommonContext);
 
@@ -46,30 +59,46 @@ const CreateVote = props => {
   const [readyToUpload, setReadyToUpload] = useState(true);
 
   return (
-    <Layout>
-      <Fab
-        variant="extended"
-        aria-label="like"
-        onClick={() => history.push('/Admin/VS')}
-        className="up-cancel-fab dialog-actions-componet-fab1"
-      >
-        CANCEL
-      </Fab>
-      <Fab
-        variant="extended"
-        aria-label="like"
-        color="inherit"
-        onClick={createEvent}
-        className="up-cancel-fab"
-        style={{
-          backgroundColor: readyToUpload ? '#1FA212' : '#E0E0E0',
-        }}
-      >
-        UPLOAD
-      </Fab>
-      <h2>Create New Vote</h2>
-      <CreateEventComponent />
-    </Layout>
+    <div>
+      <div classes={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              <NestedList></NestedList>
+            </Paper>
+          </Grid>
+          <Grid item xs={9}>
+            <Grid>
+              <br />
+            </Grid>
+            <Fab
+              variant="extended"
+              aria-label="like"
+              onClick={() => history.push('/Admin/VS')}
+              className="up-cancel-fab dialog-actions-componet-fab1"
+            >
+              CANCEL
+            </Fab>
+            <Fab
+              variant="extended"
+              aria-label="like"
+              color="inherit"
+              onClick={createEvent}
+              className="up-cancel-fab"
+              style={{
+                backgroundColor: readyToUpload ? '#1FA212' : '#E0E0E0',
+              }}
+            >
+              UPLOAD
+            </Fab>
+            <Grid container justify="center" alignItems="center">
+              <h2>Create New Vote</h2>
+            </Grid>
+            <CreateEventComponent />
+          </Grid>
+        </Grid>
+      </div>
+    </div>
   );
 };
 
