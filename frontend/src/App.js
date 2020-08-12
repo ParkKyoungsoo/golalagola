@@ -84,6 +84,7 @@ const App = () => {
       user_id: 0,
       user_email: '',
       user_name: '',
+      user_phone: '',
       user_pwd: '',
       user_image: '',
       isAdmin: '',
@@ -139,6 +140,9 @@ const App = () => {
   // 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 product id만 모아놓은 배열입니다.
   const [userCoupon, setUserCoupon] = useState([]);
 
+  // 제품 수량 && 판매 현황 개수
+  const [buyDatas, setBuyDatas] = useState([]);
+  
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
@@ -187,6 +191,13 @@ const App = () => {
       setQuizDatas(res.data);
     });
   }
+  
+  // 제품 수량 && 판매 현황 개수
+  async function getBuyDatas() {
+    Axios.get('http://localhost:5000/api/product/buy/').then(function(res) {
+      setBuyDatas(res.data);
+    });
+  }
 
   // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
   // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.
@@ -194,6 +205,7 @@ const App = () => {
 
   useEffect(() => {
     getProductDatas();
+	getBuyDatas();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -269,6 +281,10 @@ const App = () => {
         // admin/quiz에서 수정을 위해 사용되는 데이터 입니다.
         quizDatas,
         setQuizDatas,
+		
+		// 제품 수량 && 판매 현황 개수
+        buyDatas,
+        setBuyDatas,
       }}
     >
       <MuiThemeProvider theme={theme}>
