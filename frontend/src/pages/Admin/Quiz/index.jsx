@@ -1,12 +1,14 @@
-import React, { useState, useEffect, forwardRef, useContext } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
-import { Grid } from '@material-ui/core';
-
-import AdminNav from '../Layout/nav.jsx';
-
+import { Grid, Divider } from '@material-ui/core';
 import MaterialTable from 'material-table';
+
+import Wrapper from './styles';
+
+import NestedList from '../Layout/sidebar.jsx';
+
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -52,10 +54,10 @@ const AdminQuiz = () => {
   const [quizzes, setQuizzes] = useState({
     columns: [
       // { title: 'quiz_id', field: 'quiz_id' },
-      { title: 'quiz_question', field: 'quiz_question' },
-      { title: 'quiz_answer', field: 'quiz_answer' },
-      { title: 'quiz_hint', field: 'quiz_hint' },
-      { title: 'quiz_num', field: 'quiz_num' },
+      { title: '퀴즈', field: 'quiz_question' },
+      { title: '정답', field: 'quiz_answer' },
+      { title: '힌트', field: 'quiz_hint' },
+      { title: '참여자 수', field: 'quiz_num' },
     ],
     data: [],
   });
@@ -106,53 +108,55 @@ const AdminQuiz = () => {
   };
 
   return (
-    <div>
-      <AdminNav />
-      <h1>퀴즈 페이지</h1>
-      <MaterialTable
-        icons={tableIcons}
-        title="재고 목록"
-        columns={quizzes.columns}
-        data={quizzes.data}
-        options={{ actionsColumnIndex: -1, pageSize: 10 }}
-        detailPanel={rowData => {
-          return (
-            <Grid>
-              <p>{rowData.quiz_id}</p>
-              <p>{rowData.quiz_question}</p>
-              <p>{rowData.quiz_answer}</p>
-              <p>{rowData.quiz_hint}</p>
-              <p>{rowData.quiz_num}</p>
+    <Wrapper>
+      <div className="admin_quiz__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={4} />
+          </Grid>
+          <Grid item>
+            <Grid className="admin_quiz__content">
+              <h5 className="admin_quiz__header">Quiz Dashboard</h5>
+              <Divider variant="middle" className="admin_quiz__divider" />
+              <MaterialTable
+                icons={tableIcons}
+                title="재고 목록"
+                columns={quizzes.columns}
+                data={quizzes.data}
+                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                actions={[
+                  {
+                    icon: AddBox,
+                    tooltip: 'Add Quiz',
+                    isFreeAction: true,
+                    onClick: event => createQuizData(),
+                  },
+                  rowData => ({
+                    icon: Edit,
+                    tooltip: 'Update Quiz',
+                    onClick: (event, rowData) => updateQuizData(rowData),
+                  }),
+                  rowData => ({
+                    icon: DeleteOutline,
+                    tooltip: 'Delete Quiz',
+                    onClick: (event, rowData) => {
+                      console.log(rowData);
+                      if (
+                        window.confirm(
+                          'You want to delete ' + rowData.quiz_question,
+                        )
+                      ) {
+                        deleteQuizData(rowData.quiz_id);
+                      }
+                    },
+                  }),
+                ]}
+              />
             </Grid>
-          );
-        }}
-        actions={[
-          {
-            icon: AddBox,
-            tooltip: 'Add Quiz',
-            isFreeAction: true,
-            onClick: event => createQuizData(),
-          },
-          rowData => ({
-            icon: Edit,
-            tooltip: 'Update Quiz',
-            onClick: (event, rowData) => updateQuizData(rowData),
-          }),
-          rowData => ({
-            icon: DeleteOutline,
-            tooltip: 'Delete Quiz',
-            onClick: (event, rowData) => {
-              console.log(rowData);
-              if (
-                window.confirm('You want to delete ' + rowData.quiz_question)
-              ) {
-                deleteQuizData(rowData.quiz_id);
-              }
-            },
-          }),
-        ]}
-      />
-    </div>
+          </Grid>
+        </Grid>
+      </div>
+    </Wrapper>
   );
 };
 export default AdminQuiz;

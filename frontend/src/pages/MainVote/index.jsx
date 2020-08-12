@@ -164,9 +164,11 @@ const MainVote = props => {
                     // borderColor="secondary.main"
                   >
                     <h2>실시간</h2>
-                    {realtime.map((data, index) => (
-                      <p key={index}>{data.prod_name}</p>
-                    ))}
+                    <div className="KisokCentering">
+                      {realtime.map((data, index) =>
+                        index < 7 ? <p key={index}>{data.prod_name}</p> : null,
+                      )}
+                    </div>
                   </Box>
                 </Grid>
               </Grid>
@@ -251,9 +253,9 @@ const MainVote = props => {
                     // borderColor="secondary.main"
                   >
                     <h2>실시간</h2>
-                    {realtime.map((data, index) => (
-                      <p key={index}>{data.prod_name}</p>
-                    ))}
+                    {realtime.map((data, index) =>
+                      index < 7 ? <p key={index}>{data.prod_name}</p> : null,
+                    )}
                   </Box>
                 </Grid>
               </Grid>
