@@ -126,9 +126,25 @@ const MyInfoButtonGroupComponent = props => {
       data: {
         before_pwd: encrypted_beforePwd,
         after_pwd: encrypted_afterPwd,
+        user_id: user.user_id,
+        user_email: user.user_email,
+        isAdmin: user.isAdmin,
       },
     })
       .then(res => {
+        var obj = {
+          user_id: user.user_id,
+          user_email: user.user_email,
+          user_name: user.user_name,
+          user_phone: user.user_phone,
+          user_image: user.user_image,
+          isAdmin: user.isAdmin,
+          status: 'login',
+          web_site: '',
+          token: res.data.token,
+        };
+        setUser({ ...obj });
+
         alert(res.data.message);
         history.push('/');
       })
