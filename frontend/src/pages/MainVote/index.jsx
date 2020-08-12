@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -137,6 +137,11 @@ const MainVote = props => {
   // 실시간 순위
   const [realtime, setRealTime] = useState([]);
 
+  const onClickRedirectPathHandler = (name, id) => e => {
+    window.scrollTo(0, 0);
+
+    history.push(`/voteitemdetail/${name}/${id}`);
+  };
   useEffect(() => {
     Axios.get(
       'https://i3b309.p.ssafy.io/api/coupon/realtime',
@@ -262,64 +267,43 @@ const MainVote = props => {
                   item
                   // md={2}
                   xs={12}
+                  style={{
+                    margin: '1vh 0 ',
+                  }}
                 >
                   <Box className="test">
                     <Grid>
                       <h2>실시간</h2>
                     </Grid>
-                    <Grid
-                      style={{
-                        width: '100px',
-                        hegiht: 'auto',
-                        display: 'flex',
-                        alignContent: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
+                    <Grid>
                       <CarouselProvider
                         naturalSlideWidth={1000}
-                        naturalSlideHeight={800}
+                        naturalSlideHeight={150}
                         totalSlides={7}
                         orientation="vertical"
-                        // interval={3000}
-                        // isPlaying={true}
-                        // infinite={true}
+                        interval={3000}
+                        isPlaying={true}
+                        infinite={true}
                       >
                         <Grid>
-                          <Slider
-                            style={{
-                              width: '100px',
-                              hegiht: 'auto',
-                              display: 'flex',
-                              alignContent: 'center',
-                              justifyContent: 'center',
-                            }}
-                          >
+                          <Slider>
                             {realtime.map((data, index) =>
                               index < 7 ? (
-                                <Grid
-                                  style={{
-                                    width: '100px',
-                                    hegiht: 'auto',
-                                    display: 'flex',
-                                    alignContent: 'center',
-                                    justifyContent: 'center',
-                                  }}
-                                >
+                                <Grid>
                                   <Slide
                                     key={index}
                                     style={{
-                                      width: '100px',
-                                      hegiht: 'auto',
-                                      display: 'flex',
-                                      alignContent: 'center',
-                                      justifyContent: 'center',
+                                      width: '300px',
+                                      height: '50px',
                                     }}
                                   >
                                     <h2
+                                      onClick={onClickRedirectPathHandler(
+                                        data.prod_name,
+                                        data.event_prod,
+                                      )}
                                       style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
+                                        cursor: 'pointer',
                                       }}
                                     >
                                       {index + 1}. {data.prod_name}
