@@ -71,12 +71,6 @@ export default function StickyHeadTable() {
     }
     fetchData();
   }, []);
-  // const userCoupondata = () => {
-  //   console.log('Function call');
-  //   for (let i = 0; i < Object(myCouponDatas).length; i++) {
-  //     return <Grid>{myCouponDatas[i].event_id}</Grid>;
-  //   }
-  // };
 
   return (
     <>

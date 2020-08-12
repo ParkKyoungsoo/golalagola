@@ -98,6 +98,7 @@ const ItemDetail = ({ match }) => {
   // vs이벤트가 진행중인지 판단하는 함수 입니다.
   // match.params.id 를 통해 해당 상품의 id를 조회 할 수 있습니다.
   // currentEventDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
+
   const CheckEvent = () => {
     for (var i = 0; i < currentEventDatas.length; i++) {
       if (
@@ -105,12 +106,13 @@ const ItemDetail = ({ match }) => {
           currentEventDatas[i].event_item['1'].prod_id ||
         Number(match.params.id) === currentEventDatas[i].event_item['2'].prod_id
       ) {
-        setEventActivated(eventActivated => true);
+        setEventActivated(true);
         setEventNum(i);
       }
     }
   };
-  useEffect(CheckEvent, []);
+  useEffect(CheckEvent);
+
   const product_id = match.params.id - 1;
   const isMobile = useMediaQuery('(max-width:920px)');
   return (
