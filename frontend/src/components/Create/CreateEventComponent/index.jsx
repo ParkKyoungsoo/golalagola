@@ -1,18 +1,13 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
 import {
-  Paper,
   Grid,
-  Avatar,
   createMuiTheme,
   ThemeProvider,
-  Fab,
   Divider,
-  FormControlLabel,
-  Checkbox,
-  Input,
   Select,
   MenuItem,
   FormControl,
+  InputLabel,
 } from '@material-ui/core';
 import Wrapper from './styles';
 import RadioButtonsGroup from './../RadioButtonsGroup/index';
@@ -54,13 +49,13 @@ const InputTitleComponent = () => {
                 Object(productDatas[newEventData.event_prod_A - 1]).prod_image
               }`}
               alt="productA.jpg"
-              style={{ height: '200px', width: '200px' }}
+              style={{ height: '100%', width: '100%' }}
             />
           ) : (
             <h1>상품 A</h1>
           )}
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} container justify="center" alignItems="center">
           <h1>VS</h1>
         </Grid>
         <Grid item xs={5}>
@@ -71,7 +66,7 @@ const InputTitleComponent = () => {
                 Object(productDatas[newEventData.event_prod_B - 1]).prod_image
               }`}
               alt="productA.jpg"
-              style={{ height: '200px', width: '200px' }}
+              style={{ height: '100%', width: '100%' }}
             />
           ) : (
             <h1>상품 B</h1>
@@ -156,55 +151,64 @@ const SubTitleGroupComponent = () => {
           alignItems="center"
           spacing={2}
         >
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <h2>Select Item A</h2>
             <Divider
               variant="fullWidth"
               orientation="horizontal"
               className="sub-title-group-component-divider"
             />
-            <Select
-              value={productDatas.prod_id}
-              onChange={handleChangeA}
-              displayEmpty
-              className="select-empty"
-              required
-            >
-              <MenuItem value={0} disabled>
-                Select category
-              </MenuItem>
-
-              {filterADatas.map((data, index) => (
-                <MenuItem key={index} value={data.prod_id}>
-                  {data.prod_name}
+            <FormControl className="form-control">
+              <InputLabel id="A-label">상품 A</InputLabel>
+              <Select
+                labelId="A-label"
+                value={productDatas.prod_id}
+                onChange={handleChangeA}
+                displayEmpty
+                className="select-empty"
+                required
+              >
+                <MenuItem value={0} disabled>
+                  Select category
                 </MenuItem>
-              ))}
-            </Select>
+
+                {filterADatas.map((data, index) => (
+                  <MenuItem key={index} value={data.prod_id}>
+                    {data.prod_name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={5}>
             <h2>Select Item B</h2>
             <Divider
               variant="fullWidth"
               orientation="horizontal"
               className="sub-title-group-component-divider"
             />
-            <Select
-              value={productDatas.prod_id}
-              onChange={handleChangeB}
-              displayEmpty
-              className="select-empty"
-              required
-            >
-              <MenuItem value={0} disabled>
-                Select category
-              </MenuItem>
-
-              {filterBDatas.map((data, index) => (
-                <MenuItem key={index} value={data.prod_id}>
-                  {data.prod_name}
+            <FormControl className="form-control">
+              <InputLabel id="B-label">상품 B</InputLabel>
+              <Select
+                labelId="B-label"
+                value={productDatas.prod_id}
+                onChange={handleChangeB}
+                displayEmpty
+                className="select-empty"
+                required
+              >
+                <MenuItem value={0} disabled>
+                  Select category
                 </MenuItem>
-              ))}
-            </Select>
+
+                {filterBDatas.map((data, index) => (
+                  <MenuItem key={index} value={data.prod_id}>
+                    {data.prod_name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
       </ThemeProvider>
@@ -227,39 +231,6 @@ const useGetCategoryDatas = url => {
   return data;
 };
 
-// const RecommandProduct = () => {
-//   const { sortedDatas, setSortedDatas } = useContext(CommonContext);
-//   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-
-//   sortedDatas.sort(function(a, b) {
-//     if (a.prod_amount > b.prod_amount) {
-//       return -1;
-//     }
-//     if (a.prod_amount < b.prod_amount) {
-//       return 1;
-//     }
-//     return 0;
-//   });
-
-//   const newSortedData = [];
-
-//   for (var i = 0; i < 10; i++) {
-//     for (var j = 0; j < currentEventDatas.length; j++) {
-//       if (
-//         sortedDatas[i].prod_id !==
-//         (currentEventDatas[j].event_item['1'].prod_id ||
-//           currentEventDatas[j].event_item['2'].prod_id)
-//       ) {
-//         newSortedData.push(sortedDatas[i]);
-//       }
-//     }
-//   }
-
-//   return (
-//     <Wrapper>{newSortedData.map((data, index) => data.prod_name)}</Wrapper>
-//   );
-// };
-
 const SelectCategoryComponent = () => {
   const { categoryDatas, setCategoryDatas } = useContext(CommonContext);
   const { newEventData, setNewEventData } = useContext(CommonContext);
@@ -268,7 +239,10 @@ const SelectCategoryComponent = () => {
 
   const handleChange = e => {
     setNewEventData({
-      ...newEventData,
+      event_prod_A: '',
+      event_prod_B: '',
+      event_date: '',
+      event_expire: '',
       event_category: e.target.value,
     });
   };
@@ -276,7 +250,9 @@ const SelectCategoryComponent = () => {
   return (
     <Wrapper>
       <FormControl className="form-control">
+        <InputLabel id="category-label">Category</InputLabel>
         <Select
+          labelId="category-label"
           value={newEventData.event_category}
           onChange={handleChange}
           displayEmpty
@@ -309,18 +285,22 @@ const CreateVoteMainComponent = () => {
         spacing={2}
       >
         <Grid item xs={12}>
-          {/* <RecommandProduct /> */}
-          <InputTitleComponent />
-        </Grid>
-        <Grid item xs={12}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3} style={{ margin: '20px' }}>
               <SelectCategoryComponent />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} className="create-vote-main-component-grid-item">
+        <Grid
+          item
+          xs={12}
+          className="create-vote-main-component-grid-item"
+          style={{ margin: '20px' }}
+        >
           <SubTitleGroupComponent />
+        </Grid>
+        <Grid item xs={12} style={{ margin: '20px' }}>
+          <InputTitleComponent />
         </Grid>
       </Grid>
     </Wrapper>

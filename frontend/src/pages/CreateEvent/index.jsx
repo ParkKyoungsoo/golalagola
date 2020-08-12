@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 
 import { Grid, Paper } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import NestedList from '../Admin/Layout/sidebar';
 import CreateEventComponent from '../../components/Create/CreateEventComponent/index';
 
 import axios from 'axios';
-import Fab from '@material-ui/core/Fab';
 import { CommonContext } from '../../context/CommonContext';
 import { useHistory, Link, Redirect } from 'react-router-dom';
 
@@ -29,15 +29,15 @@ const CreateVote = props => {
   const { newEventData, setNewEventData } = useContext(CommonContext);
 
   const createEvent = () => {
-    if (newEventData.event_prod_A === '') {
+    if (newEventData.event_category === '') {
+      alert('카테고리를 선택 해 주세요');
+    } else if (newEventData.event_prod_A === '') {
       alert('A 상품을 선택해주세요');
     } else if (newEventData.event_prod_B === '') {
       alert('B 상품을 선택해주세요');
-    } else if (newEventData.event_category === '') {
-      alert('카테고리를 선택 해 주세요');
     } else {
       axios
-        .post('https://i3b309.p.ssafy.io/api/event', newEventData)
+        .post('https://i3b309.p.ssafy.io/api/event/', newEventData)
         .then(function(response) {
           console.log(response);
           setNewEventData({
@@ -71,26 +71,17 @@ const CreateVote = props => {
             <Grid>
               <br />
             </Grid>
-            <Fab
-              variant="extended"
-              aria-label="like"
-              onClick={() => history.push('/Admin/VS')}
-              className="up-cancel-fab dialog-actions-componet-fab1"
-            >
-              CANCEL
-            </Fab>
-            <Fab
-              variant="extended"
-              aria-label="like"
-              color="inherit"
-              onClick={createEvent}
-              className="up-cancel-fab"
-              style={{
-                backgroundColor: readyToUpload ? '#1FA212' : '#E0E0E0',
-              }}
-            >
-              UPLOAD
-            </Fab>
+            <Grid container justify="flex-end" alignItems="center">
+              <Button variant="success" onClick={createEvent}>
+                UPLOAD
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => history.push('/Admin/VS')}
+              >
+                CANCEL
+              </Button>
+            </Grid>
             <Grid container justify="center" alignItems="center">
               <h2>Create New Vote</h2>
             </Grid>
