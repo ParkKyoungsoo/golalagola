@@ -64,8 +64,7 @@ const Quiz = () => {
           <h1>오늘의 퀴즈</h1>
         </Grid>
         <Grid className="quizCentering">
-          {/* {console.log(quizDatas[num])} */}
-          (if {})<h3>{Object(quizDatas[number]).quiz_question}</h3>
+          <h3>{Object(quizDatas[number]).quiz_question}</h3>
         </Grid>
         <Grid className="quizCentering">
           <button
