@@ -5,13 +5,14 @@ import Drawer from './Drawer/';
 import { CommonContext } from '../context/CommonContext';
 import { CssBaseline, Container, Grid, useMediaQuery } from '@material-ui/core';
 import Wrapper from './styles';
-
+// import EventSideBar from '../pages/EventAll/sidebar';
 const Layout = props => {
-  const { drawerOpen, setDrawerOpen } = useContext(CommonContext);
+  const { drawerOpen, setDrawerOpen, mainUrl } = useContext(CommonContext);
   const { wannaHide, children } = props;
   useEffect(() => {
     setDrawerOpen(false);
   }, []);
+
   const isMobile = useMediaQuery('(max-width:920px)');
   return (
     <Wrapper>
@@ -31,7 +32,14 @@ const Layout = props => {
           <div>{children}</div>
         </Container>
       ) : (
-        <Grid container style={{ justifyContent: 'center' }}>
+        <Grid
+          container
+          style={
+            window.location.href === `${mainUrl}/eventall`
+              ? { justifyContent: 'flex-end' }
+              : { justifyContent: 'center' }
+          }
+        >
           <Grid xs={12} md={10}>
             <Container
               open={drawerOpen}
@@ -47,6 +55,12 @@ const Layout = props => {
               <div>{children}</div>
             </Container>
           </Grid>
+          {window.location.href === `${mainUrl}/eventall` ? (
+            <Grid md={1}>
+              {mainUrl}
+              {/* <EventSideBar /> */}
+            </Grid>
+          ) : null}
         </Grid>
       )}
       {/* <Grid className="footer">{!wannaHide && <Footer />}</Grid> */}

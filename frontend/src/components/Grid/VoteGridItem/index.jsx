@@ -153,7 +153,7 @@ export default function VoteGridItem(props) {
                   </span>
                 </>
               )}
-              <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+              {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
             </Grid>
           </Grid>
         </Grid>
@@ -224,7 +224,7 @@ export default function VoteGridItem(props) {
                   </span>
                 </>
               )}
-              <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+              {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
             </Grid>
           </Grid>
         </Grid>
