@@ -77,7 +77,6 @@ const SignInSection01 = () => {
     signInUserData.status = '';
 
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
-    // console.log('signInUserData', signInUserData); // 잘 나옴
     Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
       .then(res => {
         if (res.data.check_email === 0) {

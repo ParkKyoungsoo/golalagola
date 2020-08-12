@@ -124,13 +124,13 @@ const MainVote = props => {
     setDrawerOpen(false);
   }, []);
   // 실시간 순위
-  // const [realtime, setRealTime] = useState([]);
+  const [realtime, setRealTime] = useState([]);
 
-  // useEffect(() => {
-  //   Axios.get(
-  //     'https://i3b309.p.ssafy.io/api/coupon/realtime',
-  //   ).then(({ data }) => setRealTime(data));
-  // }, []);
+  useEffect(() => {
+    Axios.get(
+      'https://i3b309.p.ssafy.io/api/coupon/realtime',
+    ).then(({ data }) => setRealTime(data));
+  }, []);
   // console.log(history.length)
   // const RepresentativeItems = SelectItem()
   return (
@@ -164,9 +164,11 @@ const MainVote = props => {
                     // borderColor="secondary.main"
                   >
                     <h2>실시간</h2>
-                    {/* {realtime.map((data, index) => (
-                <p key={index}>{data.prod_name}</p>
-              ))} */}
+                    <div className="KisokCentering">
+                      {realtime.map((data, index) =>
+                        index < 7 ? <p key={index}>{data.prod_name}</p> : null,
+                      )}
+                    </div>
                   </Box>
                 </Grid>
               </Grid>
@@ -221,6 +223,14 @@ const MainVote = props => {
               setDrawerOpen(0);
             }}
           >
+            <Divider />
+            <div className="KisokCentering">
+              <h1 className="KisokCentering" style={{ height: '15vh' }}>
+                Gola la Gola
+              </h1>
+            </div>
+            <Divider />
+
             {/* carousel, 실시간 순위 */}
             <AppBar position="relative" color="inherit" className="appbar">
               <Grid container>
@@ -238,14 +248,14 @@ const MainVote = props => {
                   }}
                 >
                   <Box
-                    height="80%"
+                    height="100%"
                     // border={1}
                     // borderColor="secondary.main"
                   >
                     <h2>실시간</h2>
-                    {/* {realtime.map((data, index) => (
-                    <p key={index}>{data.prod_name}</p>
-                  ))} */}
+                    {realtime.map((data, index) =>
+                      index < 7 ? <p key={index}>{data.prod_name}</p> : null,
+                    )}
                   </Box>
                 </Grid>
               </Grid>

@@ -15,15 +15,13 @@ app.get("/realtime", async (req, res) => {
   db.Event.findAll()
     .then((eventData) => {
       // res.json(data);
-      // console.log("111", eventData);
       for (var i = 0; i < eventData.length; i++) {
         eventProd.push(eventData[i].dataValues.event_prod_A);
         eventProd.push(eventData[i].dataValues.event_prod_B);
         couponSelect[i * 2] = 0;
         couponSelect[i * 2 + 1] = 0;
       }
-      // console.log("obj", obj);
-      // console.log("eventProd", eventProd); // 이벤트에 등록한 상품 prod_id 모음
+      // 이벤트에 등록한 상품 prod_id 모음
 
       db.Product.findAll()
         .then((productData) => {
@@ -67,22 +65,17 @@ app.get("/realtime", async (req, res) => {
                 return b[sortingField] - a[sortingField];
               });
 
-              console.log(objList);
-
               res.json(objList);
             })
             .catch((err) => {
-              console.log("1");
               res.json({ msg: "쿠폰에 등록된 상품이 이벤트 상품에 없습니다." });
             });
         })
         .catch((err) => {
-          console.log("2");
           res.json("Product에 등록된 상품이 없습니다.");
         });
     })
     .catch((err) => {
-      console.log("3");
       res.json({ msg: "Event에 등록된 상품이 없습니다." });
     });
 });
@@ -96,15 +89,12 @@ app.get("/estimation", async (req, res) => {
   db.Event.findAll()
     .then((eventData) => {
       // res.json(data);
-      // console.log("111", eventData);
       for (var i = 0; i < eventData.length; i++) {
         eventProd.push(eventData[i].dataValues.event_prod_A);
         eventProd.push(eventData[i].dataValues.event_prod_B);
         couponSelect[i * 2] = 0;
         couponSelect[i * 2 + 1] = 0;
       }
-      // console.log("obj", obj);
-      console.log("eventProd", eventProd); // 이벤트에 등록한 상품 prod_id 모음
 
       db.Coupon.findAll()
         .then((couponData) => {
@@ -147,18 +137,14 @@ app.get("/estimation", async (req, res) => {
             objList.push(obj);
           }
 
-          // console.log(objList);
-
           res.json(objList);
         })
         .catch((err) => {
-          console.log("1");
           res.json({ msg: "쿠폰에 등록된 상품이 이벤트 상품에 없습니다." });
         });
     })
 
     .catch((err) => {
-      console.log("3");
       res.json({ msg: "Event에 등록된 상품이 없습니다." });
     });
 });
@@ -172,7 +158,7 @@ app.get("/", async function (req, res) {
 
 // Coupon 한개 조회
 app.get("/:input_user_id", async function (req, res) {
-  db.Coupon.findOne({
+  db.Coupon.findAll({
     where: {
       user_id: req.params.input_user_id,
     },
@@ -209,6 +195,5 @@ app.delete("/", async function (req, res) {
     .then((data) => res.json(data))
     .catch((err) => res.json(err));
 });
-
 
 module.exports = app;
