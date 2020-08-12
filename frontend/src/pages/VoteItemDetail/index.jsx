@@ -11,6 +11,7 @@ import {
   useMediaQuery,
   DialogActions,
 } from '@material-ui/core';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Wrapper from './styles';
 import Axios from 'axios';
 import WebDeatilModal from '../../components/WebModal/ModalMain';
@@ -347,8 +348,6 @@ const ItemDetail = ({ match }) => {
                             </strong>
                           </h2>
                           <br />
-                          <br />
-                          <br />
                           <span className="price2">
                             {numberWithCommas(
                               productDatas[match.params.id - 1].prod_price,
@@ -361,63 +360,12 @@ const ItemDetail = ({ match }) => {
                           </h5>{' '}
                           <br />
                           <br />
-                          <br />
                           <h3 className="select">
                             {productDatas[match.params.id - 1].prod_desc}
                           </h3>
                           <br />
                           <br />
-                          <br />
-                          {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
-                          <hr />
-                          <span className="cate">할인가</span>
-                          <span className="thro">
-                            {numberWithCommas(
-                              productDatas[match.params.id - 1].prod_price,
-                            )}
-                            원
-                          </span>
-                          <span className="sale">
-                            {numberWithCommas(
-                              parseInt(
-                                (productDatas[match.params.id - 1].prod_price *
-                                  (100 -
-                                    (productDatas[match.params.id - 1]
-                                      .prod_sale -
-                                      10))) /
-                                  100,
-                              ),
-                            )}
-                          </span>
-                          <span className="unit2">원</span>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            disableElevation
-                            onClick={click1}
-                            disabled={!eventActivated}
-                            style={{ marginLeft: '20px' }}
-                          >
-                            쿠폰 받기
-                          </Button>
-                          <br />
-                          <br />
-                          {/* 유저가 OX 퀴즈를 풀지 않았다면 활성화 시킬 버튼입니다. */}
-                          <Grid>
-                            <span className="cate">할인가</span>
-                            <span className="thro">
-                              {numberWithCommas(
-                                productDatas[match.params.id - 1].prod_price,
-                              )}
-                              원
-                            </span>
-                            <span className="sale">
-                              {numberWithCommas(
-                                productDatas[match.params.id - 1].prod_price *
-                                  0.9,
-                              )}
-                            </span>
-                            <span className="unit2">원</span>
+                          <div className="button">
                             <Button
                               variant="contained"
                               color="primary"
@@ -427,13 +375,116 @@ const ItemDetail = ({ match }) => {
                             >
                               퀴즈 풀기
                             </Button>
-                            <hr />
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              disableElevation
+                              onClick={click1}
+                              disabled={!eventActivated}
+                              style={{ marginLeft: '20px' }}
+                            >
+                              쿠폰 받기
+                            </Button>
+                          </div>
+                          {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
+                          <hr />
+                          <Grid
+                            style={{
+                              justifyContent: 'space-between',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <span className="w_DCT">
+                              <FiberManualRecordIcon
+                                style={{ fontSize: '15px' }}
+                              />
+                              &nbsp; 퀴즈 참여 적용 할인(
+                              {productDatas[match.params.id - 1].prod_sale -
+                                (productDatas[match.params.id - 1].prod_sale -
+                                  10)}
+                              %)
+                            </span>{' '}
+                            <span className="w_DCP">
+                              -
+                              {numberWithCommas(
+                                productDatas[match.params.id - 1].prod_price *
+                                  0.1,
+                              )}
+                              원
+                            </span>
+                          </Grid>
+                          <Grid
+                            style={{
+                              justifyContent: 'space-between',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <span className="w_DCT">
+                              <FiberManualRecordIcon
+                                style={{ fontSize: '15px' }}
+                              />
+                              &nbsp; 이벤트 참여 적용 할인(
+                              {productDatas[match.params.id - 1].prod_sale - 10}
+                              %)
+                            </span>{' '}
+                            <span className="w_DCP">
+                              -
+                              {numberWithCommas(
+                                parseInt(
+                                  productDatas[match.params.id - 1].prod_price *
+                                    ((productDatas[match.params.id - 1]
+                                      .prod_sale -
+                                      10) /
+                                      100),
+                                ),
+                              )}
+                              원
+                            </span>
+                          </Grid>
+                          <hr />
+                          <Grid
+                            style={{
+                              justifyContent: 'space-between',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <span className="mST">구매 가격</span>
+                            <span className="mSP">
+                              {numberWithCommas(
+                                parseInt(
+                                  productDatas[match.params.id - 1].prod_price *
+                                    ((100 -
+                                      productDatas[match.params.id - 1]
+                                        .prod_sale) /
+                                      100),
+                                ),
+                              )}
+                              원
+                            </span>
                           </Grid>
                           <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
+                          <Box
+                            style={{
+                              border: '1px solid',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <span className="w_DCP">
+                              {productDatas[match.params.id - 1].prod_price *
+                                (productDatas[match.params.id - 1].prod_sale /
+                                  100)}
+                              원
+                            </span>
+                            &nbsp;
+                            <span style={{ fontSize: '20px' }}>
+                              할인 혜택을 받으셨습니다.
+                            </span>
+                          </Box>
                         </Grid>
                       );
                   })}

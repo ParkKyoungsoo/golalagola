@@ -86,7 +86,6 @@ const App = () => {
       user_name: '',
       user_pwd: '',
       user_image: '',
-      user_quiz: '',
       isAdmin: '',
       status: '',
       web_site: '',
@@ -112,6 +111,7 @@ const App = () => {
   const [sortedDatas, setSortedDatas] = useState([]);
   // const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
   const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
+  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
 
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
   const [eventNum, setEventNum] = useState(null);
@@ -120,7 +120,7 @@ const App = () => {
   const [selectedEventItem, setSelectedEventItem] = useState();
   // 메인 주소로 사용할 URL 입니다.
   // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [mainUrl, setMainUrl] = useState('http://localhost:3000');
+  const [mainUrl, setMainUrl] = useState('https://i3b309.p.ssafy.io');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
@@ -134,8 +134,10 @@ const App = () => {
   // 퀴즈 데이터
   const [quizDatas, setQuizDatas] = useState([]);
 
-  // MyCoupon, EventAll 페이지에서 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 데이터를 모아놓은 배열입니다.
-  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
+  // 유저가 참여한 Event의 id만 모아놓은 배열 입니다.
+  const [userEvent, setUserEvent] = useState([]);
+  // 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 product id만 모아놓은 배열입니다.
+  const [userCoupon, setUserCoupon] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -147,26 +149,12 @@ const App = () => {
     event_category: '',
   });
 
-  // admin product 페이지에서 사용하는 변수 입니다.
-  const [productsTableData, setProductsTableData] = useState({
-    columns: [
-      { title: '상품', field: 'prod_name' },
-      { title: '가격', field: 'prod_price' },
-      { title: '수량', field: 'prod_amount' },
-      { title: '유통기한', field: 'prod_expiration' },
-      { title: '할인율', field: 'prod_sale', type: 'numeric' },
-    ],
-    data: [],
-  });
-
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
   async function getProductDatas() {
     Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
       setProductDatas(res.data);
       setSortedDatas(res.data);
-      productsTableData.data = res.data;
-      setProductsTableData(productsTableData);
       getEventDatas();
     });
   }
@@ -187,15 +175,10 @@ const App = () => {
 
   // 쿠폰 데이터
   async function getMyCouponDatas() {
-    if (user.user_id) {
-      await Axios.get(
-        `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
-      ).then(function(res) {
-        // myCouponDatas, eventAllDatas 만들기
-        setMyCouponDatas(res.data);
-      });
-    }
-    getQuizDatas();
+    await Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
+      setMyCouponDatas(res.data);
+      getQuizDatas();
+    });
   }
 
   // 퀴즈 데이터
@@ -257,6 +240,8 @@ const App = () => {
         setSortedDatas,
         categoryDatas,
         setCategoryDatas,
+        myCouponDatas,
+        setMyCouponDatas,
         selectedEventItem,
         setSelectedEventItem,
         mainUrl,
@@ -269,12 +254,12 @@ const App = () => {
         setCurrentQuizDatas,
         currentProductDatas,
         setCurrentProductDatas,
-        productsTableData,
-        setProductsTableData,
 
         // EventAll 페이지와 myCoupon페이지에서 사용합니다.
-        myCouponDatas,
-        setMyCouponDatas,
+        userEvent,
+        setUserEvent,
+        userCoupon,
+        setUserCoupon,
 
         newEventData,
         setNewEventData,

@@ -183,7 +183,7 @@ const MainVote = props => {
                 >
                   <Box className="liveTimeBar">
                     <Grid>
-                      <h3>실시간</h3>
+                      <h3>실시간 순위</h3>
                     </Grid>
                     <Grid>
                       <CarouselProvider
@@ -314,7 +314,7 @@ const MainVote = props => {
                 >
                   <Box className="liveTimeBar">
                     <Grid>
-                      <h2>실시간</h2>
+                      <h2>실시간 순위</h2>
                     </Grid>
                     <Grid>
                       <CarouselProvider

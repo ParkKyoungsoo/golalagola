@@ -17,9 +17,6 @@ const Wrapper = styled.div`
     font-size: 180%;
     margin-left: 15px;
   }
-  .cate {
-    font-size: 120%;
-  }
   .price1 {
     font-size: 130%;
   }
@@ -95,6 +92,29 @@ const Wrapper = styled.div`
     top: 3px;
     transform: rotate(-30deg);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  .button {
+    text-align: right;
+  }
+  .w_DCT {
+    font-size: 20px;
+  }
+  .w_DCP {
+    color: #f68a09;
+    font-size: 20px;
+  }
+  .mST {
+    color: #ef001e;
+    font-size: 30px;
+  }
+  .mSP {
+    color: #ef001e;
+    font-size: 30px;
+  }
+  .BOX {
+    border: 1px;
+  }
+  & .FiberManualRecordIcon {
   }
 `;
 
