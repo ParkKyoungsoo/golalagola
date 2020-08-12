@@ -12,17 +12,23 @@ const Wrapper = styled.div`
     margin: 10px 0px;
   }
 
-  .KisokCentering {
+  .Event1 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     // background-color: green;
   }
-
+  .Event2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    // justify-content: space-evenly;
+    // background-color: green;
+  }
   .tmp {
-    width: auto;
-    height: 15vh;
+    width: 15vw;
+    // height: 15vh;
     border-radius: 5%;
     margin: 0 1vw 0 1vw;
   }
