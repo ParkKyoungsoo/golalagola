@@ -89,6 +89,7 @@ const SignInSection01 = () => {
             user_email: signInUserData.user_email,
             user_name: res.data.user_name,
             user_phone: res.data.user_phone,
+            user_image: res.data.user_image,
             isAdmin: res.data.isAdmin,
             status: 'login',
             web_site: '',
@@ -357,7 +358,6 @@ const SignUpSection02 = () => {
     //   user_name: '',
     //   user_pwd: '',
     // });
-    console.log('SignUpUserData', signUpUserData);
     Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
       .then(data => {
         // console.log(data);
@@ -593,10 +593,11 @@ const ForgotPwGroupComponent = () => {
       let res = {
         user_email: searchWord,
       };
-      console.log('searchWord', searchWord);
-      Axios.post('https://i3b309.p.ssafy.io/api/auth/find_pwd', res).then(res => {
-        alert(res.data.message);
-      });
+      Axios.post('https://i3b309.p.ssafy.io/api/auth/find_pwd', res).then(
+        res => {
+          alert(res.data.message);
+        },
+      );
 
       // setRecoverPwUserData({ ...recoverPwUserData, email: searchWord });
       // alert('Authentication code has been sent to you by email');
@@ -691,7 +692,6 @@ const RecoverPwGroupComponent = () => {
   };
 
   const sendSearchWordHandler = async searchWord => {
-    console.log({ searchWord });
 
     if (searchWord === '') {
       alert('Please enter your e-mail');

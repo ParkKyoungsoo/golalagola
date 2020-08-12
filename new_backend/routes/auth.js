@@ -72,10 +72,12 @@ app.post("/signin", async (req, res) => {
                     user_name: userData.user_name,
                     isAdmin: userData.isAdmin,
                     user_phone: userData.user_phone,
+                    user_image: userData.user_image,
                   });
                 }
               }
             );
+            console.log("로그인 토큰", token);
           }
         }
       })
@@ -277,7 +279,9 @@ app.put("/change_pwd", async (req, res) => {
       } else {
         // 수정을 요청하는 사용자와 로그인 되어있는 사용자의 정보가 같아야함
         if (decoded.user_pwd !== req.body.before_pwd) {
-          res.status(403).send({ message: "인증된 사용자가 아닙니다." });
+          res
+            .status(403)
+            .send({ message: "이전 패스워드가 일치하지 않습니다." });
         } else {
           db.User.update(
             {
@@ -286,9 +290,44 @@ app.put("/change_pwd", async (req, res) => {
             {
               where: { user_email: decoded.user_email },
             }
-          );
+          )
+            .then(() => {
+              const token = jwt.sign(
+                {
+                  // 첫번째 인자: 로그인을 위한 정보
+                  user_id: req.body.user_id,
+                  user_email: req.body.user_email,
+                  isAdmin: req.body.isAdmin,
+                  user_pwd: req.body.after_pwd,
+                },
+                // 두번째 인자: 비밀 키
+                secretObj.secret,
+                // 세번째 인자:  유효 시간
+                { expiresIn: "1h" },
 
-          res.status(200).send({ message: "비밀번호가 변경되었습니다." });
+                // 네번째 인자: 콜백함수
+                function (err, token) {
+                  if (err) {
+                    res.send(err);
+                  } else {
+                    res.json({
+                      message:
+                        "비밀번호가 변경이 되어 토큰이 재발급되었습니다.",
+                      token: token,
+                      status: "login",
+                    });
+                  }
+                }
+              );
+              console.log("비밀번호 변경 토큰", token);
+
+              res.status(200).send({ message: "비밀번호가 변경되었습니다." });
+            })
+            .catch((err) =>
+              res
+                .status(400)
+                .send({ message: "비밀번호 변경이 실패되었습니다." })
+            );
         }
       }
     });
@@ -334,9 +373,19 @@ app.post("/imageupload", async (req, res) => {
   if (req.files === null) {
     return res.status(400).json({ msg: "No file uploaded" });
   }
+  // console.log(req);
 
   const file = req.files.image;
   console.log("file", file);
+
+  db.User.update(
+    {
+      user_image: file.name,
+    },
+    {
+      where: { user_email: req.body.user_email },
+    }
+  );
 
   // 경로 수정 필요
   file.mv(`${__dirname}/../../front/build/images/${file.name}`, (err) => {
