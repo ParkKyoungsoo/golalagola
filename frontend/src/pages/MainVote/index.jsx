@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -27,7 +27,18 @@ import VoteGridList from '../../components/Grid/VoteGridList';
 import VoteGridTitle from '../../components/Grid/VoteGridTitle';
 
 import ControlledCarousel from './carousel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 ///////////////////////////////////////////////
+// Vertical Carousel
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
@@ -126,6 +137,11 @@ const MainVote = props => {
   // 실시간 순위
   const [realtime, setRealTime] = useState([]);
 
+  const onClickRedirectPathHandler = (name, id) => e => {
+    window.scrollTo(0, 0);
+
+    history.push(`/voteitemdetail/${name}/${id}`);
+  };
   useEffect(() => {
     Axios.get(
       'https://i3b309.p.ssafy.io/api/coupon/realtime',
@@ -143,20 +159,23 @@ const MainVote = props => {
         {isMobile ? (
           <MobileWrapper>
             {/* carousel, 실시간 순위 */}
-            <AppBar position="relative" color="inherit" className="appbar">
+            <AppBar
+              position="relative"
+              color="inherit"
+              className="appbar"
+              style={{
+                backgroundColor: '#f7f2f2',
+              }}
+            >
               <Grid container>
-                <Grid item md={10} xs={12}>
+                <Grid item xs={12}>
                   <ControlledCarousel />
                 </Grid>
                 <Grid
                   item
-                  md={2}
                   xs={12}
                   className="tiemPopularity"
                   position="absolute"
-                  style={{
-                    backgroundColor: '#f7f2f2',
-                  }}
                 >
                   <Box
                     height="80%"
@@ -232,30 +251,83 @@ const MainVote = props => {
             <Divider />
 
             {/* carousel, 실시간 순위 */}
-            <AppBar position="relative" color="inherit" className="appbar">
+            <AppBar
+              position="relative"
+              color="inherit"
+              className="appbar"
+              style={{
+                backgroundColor: '#f7f2f2',
+              }}
+            >
               <Grid container>
-                <Grid item md={10} xs={12}>
+                <Grid item xs={12}>
                   <ControlledCarousel />
                 </Grid>
                 <Grid
                   item
-                  md={2}
+                  // md={2}
                   xs={12}
-                  className="tiemPopularity"
-                  position="absolute"
                   style={{
-                    backgroundColor: '#f7f2f2',
+                    margin: '1vh 0 ',
                   }}
                 >
-                  <Box
-                    height="100%"
-                    // border={1}
-                    // borderColor="secondary.main"
-                  >
-                    <h2>실시간</h2>
-                    {realtime.map((data, index) =>
-                      index < 7 ? <p key={index}>{data.prod_name}</p> : null,
-                    )}
+                  <Box className="test">
+                    <Grid>
+                      <h2>실시간</h2>
+                    </Grid>
+                    <Grid>
+                      <CarouselProvider
+                        naturalSlideWidth={1000}
+                        naturalSlideHeight={150}
+                        totalSlides={7}
+                        orientation="vertical"
+                        interval={3000}
+                        isPlaying={true}
+                        infinite={true}
+                      >
+                        <Grid>
+                          <Slider>
+                            {realtime.map((data, index) =>
+                              index < 7 ? (
+                                <Grid>
+                                  <Slide
+                                    key={index}
+                                    style={{
+                                      width: '300px',
+                                      height: '50px',
+                                    }}
+                                  >
+                                    <h2
+                                      onClick={onClickRedirectPathHandler(
+                                        data.prod_name,
+                                        data.event_prod,
+                                      )}
+                                      style={{
+                                        cursor: 'pointer',
+                                      }}
+                                    >
+                                      {index + 1}. {data.prod_name}
+                                    </h2>
+                                  </Slide>
+                                </Grid>
+                              ) : null,
+                            )}
+                          </Slider>
+                        </Grid>
+                        {/* <Grid>
+                          <ButtonBack>
+                            <p>
+                              <ExpandLessIcon />
+                            </p>
+                          </ButtonBack>
+                          <ButtonNext>
+                            <p>
+                              <ExpandMoreIcon />
+                            </p>
+                          </ButtonNext>
+                        </Grid> */}
+                      </CarouselProvider>
+                    </Grid>
                   </Box>
                 </Grid>
               </Grid>
@@ -263,7 +335,7 @@ const MainVote = props => {
                 value={appbarIndex + appbarIndexDelta}
                 onChange={onChangeIndexHandler}
                 indicatorColor="primary"
-                textColor="primary"
+                // textColor="primary"
                 variant="scrollable"
                 aria-label="full width tabs example"
                 className="big-indicator"

@@ -53,7 +53,7 @@ const defaultThumbnailImage = 'default_user.jpg';
 const HOST = '192.168.0.82:3001';
 const serverUrl = `http://${HOST}/v1`;
 const serverUrlBase = `http://${HOST}`;
-const serverImgUrl = `https://ssafy-viba-s3.s3.ap-northeast-2.amazonaws.com/public/`;
+const serverImgUrl = `https://i3b309.p.ssafy.io/images`;
 
 /// theme
 const theme = createMuiTheme({
@@ -85,6 +85,7 @@ const App = () => {
       user_email: '',
       user_name: '',
       user_pwd: '',
+      user_image: '',
       isAdmin: '',
       status: '',
       web_site: '',

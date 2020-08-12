@@ -30,17 +30,19 @@ const QuizDialog = () => {
     <Dialog
       open={webQuizDialogOpen}
       onClose={handleClose}
-      fullScreen={fullScreen}
+      // fullScreen={fullScreen}
       aria-labelledby="max-width-dialog-title"
       PaperProps={{
         style: {
-          height: '90vh',
+          height: '10vh',
           padding: '10px',
-          width: '1280px',
+          width: '90vw',
           maxWidth: 'none',
           overflowX: 'hidden',
           overflowY: 'auto',
           position: 'inherit',
+          width: '80%',
+          height: '80%',
         },
       }}
       BackdropProps={{
@@ -619,9 +621,9 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '90vh',
+                    // height: '90vh',
                     padding: '10px',
-                    width: '1280px',
+                    width: '80%',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'auto',
@@ -801,9 +803,9 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '90vh',
+                    // height: '90vh',
                     padding: '10px',
-                    width: '1280px',
+                    width: '80%',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'auto',

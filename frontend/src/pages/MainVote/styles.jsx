@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  .test {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   .tiemPopularity {
     display: flex;
     // flex-wrap: wrap;
