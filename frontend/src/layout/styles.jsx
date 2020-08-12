@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   .content {
     transition: all 0.3s ease;
     // padding-bottom: 287px;
-    min-height: 700px;
+    // min-height: 700px;
   }
   .content-shift {
     transition: all 0.3s ease;

@@ -27,7 +27,18 @@ import VoteGridList from '../../components/Grid/VoteGridList';
 import VoteGridTitle from '../../components/Grid/VoteGridTitle';
 
 import ControlledCarousel from './carousel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 ///////////////////////////////////////////////
+// Vertical Carousel
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
@@ -143,20 +154,23 @@ const MainVote = props => {
         {isMobile ? (
           <MobileWrapper>
             {/* carousel, 실시간 순위 */}
-            <AppBar position="relative" color="inherit" className="appbar">
+            <AppBar
+              position="relative"
+              color="inherit"
+              className="appbar"
+              style={{
+                backgroundColor: '#f7f2f2',
+              }}
+            >
               <Grid container>
-                <Grid item md={10} xs={12}>
+                <Grid item xs={12}>
                   <ControlledCarousel />
                 </Grid>
                 <Grid
                   item
-                  md={2}
                   xs={12}
                   className="tiemPopularity"
                   position="absolute"
-                  style={{
-                    backgroundColor: '#f7f2f2',
-                  }}
                 >
                   <Box
                     height="80%"
@@ -232,30 +246,104 @@ const MainVote = props => {
             <Divider />
 
             {/* carousel, 실시간 순위 */}
-            <AppBar position="relative" color="inherit" className="appbar">
+            <AppBar
+              position="relative"
+              color="inherit"
+              className="appbar"
+              style={{
+                backgroundColor: '#f7f2f2',
+              }}
+            >
               <Grid container>
-                <Grid item md={10} xs={12}>
+                <Grid item xs={12}>
                   <ControlledCarousel />
                 </Grid>
                 <Grid
                   item
-                  md={2}
+                  // md={2}
                   xs={12}
-                  className="tiemPopularity"
-                  position="absolute"
-                  style={{
-                    backgroundColor: '#f7f2f2',
-                  }}
                 >
-                  <Box
-                    height="100%"
-                    // border={1}
-                    // borderColor="secondary.main"
-                  >
-                    <h2>실시간</h2>
-                    {realtime.map((data, index) =>
-                      index < 7 ? <p key={index}>{data.prod_name}</p> : null,
-                    )}
+                  <Box className="test">
+                    <Grid>
+                      <h2>실시간</h2>
+                    </Grid>
+                    <Grid
+                      style={{
+                        width: '100px',
+                        hegiht: 'auto',
+                        display: 'flex',
+                        alignContent: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CarouselProvider
+                        naturalSlideWidth={1000}
+                        naturalSlideHeight={800}
+                        totalSlides={7}
+                        orientation="vertical"
+                        // interval={3000}
+                        // isPlaying={true}
+                        // infinite={true}
+                      >
+                        <Grid>
+                          <Slider
+                            style={{
+                              width: '100px',
+                              hegiht: 'auto',
+                              display: 'flex',
+                              alignContent: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {realtime.map((data, index) =>
+                              index < 7 ? (
+                                <Grid
+                                  style={{
+                                    width: '100px',
+                                    hegiht: 'auto',
+                                    display: 'flex',
+                                    alignContent: 'center',
+                                    justifyContent: 'center',
+                                  }}
+                                >
+                                  <Slide
+                                    key={index}
+                                    style={{
+                                      width: '100px',
+                                      hegiht: 'auto',
+                                      display: 'flex',
+                                      alignContent: 'center',
+                                      justifyContent: 'center',
+                                    }}
+                                  >
+                                    <h2
+                                      style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                      }}
+                                    >
+                                      {index + 1}. {data.prod_name}
+                                    </h2>
+                                  </Slide>
+                                </Grid>
+                              ) : null,
+                            )}
+                          </Slider>
+                        </Grid>
+                        {/* <Grid>
+                          <ButtonBack>
+                            <p>
+                              <ExpandLessIcon />
+                            </p>
+                          </ButtonBack>
+                          <ButtonNext>
+                            <p>
+                              <ExpandMoreIcon />
+                            </p>
+                          </ButtonNext>
+                        </Grid> */}
+                      </CarouselProvider>
+                    </Grid>
                   </Box>
                 </Grid>
               </Grid>
@@ -263,7 +351,7 @@ const MainVote = props => {
                 value={appbarIndex + appbarIndexDelta}
                 onChange={onChangeIndexHandler}
                 indicatorColor="primary"
-                textColor="primary"
+                // textColor="primary"
                 variant="scrollable"
                 aria-label="full width tabs example"
                 className="big-indicator"

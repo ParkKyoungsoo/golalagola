@@ -99,7 +99,6 @@ const MyInfoButtonGroupComponent = props => {
     var after_pwd = inputValue['New Password'];
     var changePassword = inputValue['New Password Confirm'];
 
-    // 1. 비밀번호 유효성 검사
     if (after_pwd !== changePassword) {
       alert('Passwords that do not match between passwords.');
       return;
@@ -109,7 +108,6 @@ const MyInfoButtonGroupComponent = props => {
       return;
     }
 
-    // 2. 비밀번호 암호화
     const encrypted_beforePwd = crypto
       .createHmac('sha1', 'ashtiger')
       .update(before_pwd)
@@ -119,7 +117,6 @@ const MyInfoButtonGroupComponent = props => {
       .update(after_pwd)
       .digest('base64');
 
-    // 3. 암호화된 비밀번호 Axios 요청
     Axios({
       method: 'PUT',
       url: 'https://i3b309.p.ssafy.io/api/auth/change_pwd',
@@ -129,9 +126,25 @@ const MyInfoButtonGroupComponent = props => {
       data: {
         before_pwd: encrypted_beforePwd,
         after_pwd: encrypted_afterPwd,
+        user_id: user.user_id,
+        user_email: user.user_email,
+        isAdmin: user.isAdmin,
       },
     })
       .then(res => {
+        var obj = {
+          user_id: user.user_id,
+          user_email: user.user_email,
+          user_name: user.user_name,
+          user_phone: user.user_phone,
+          user_image: user.user_image,
+          isAdmin: user.isAdmin,
+          status: 'login',
+          web_site: '',
+          token: res.data.token,
+        };
+        setUser({ ...obj });
+
         alert(res.data.message);
         history.push('/');
       })
