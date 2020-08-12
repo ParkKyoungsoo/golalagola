@@ -41,12 +41,13 @@ const MultiCarousel = () => {
               // autoPlayDirection="rtl"
               fadeOutAnimation={true}
               playButtonEnabled={false}
+              disableAutoPlayOnAction={true}
             >
               {productDatas.map((TmpData, index) => (
                 <img
                   src={`../../${TmpData.prod_image}`}
                   alt="Prod_image"
-                  style={{ width: '20vw', height: 'auto' }}
+                  style={{ width: '100%', height: 'auto' }}
                 />
               ))}
             </AliceCarousel>
@@ -64,16 +65,15 @@ const MultiCarousel = () => {
                   // autoPlayDirection="rtl"
                   fadeOutAnimation={true}
                   playButtonEnabled={false}
-                  fadeOutAnimation={false}
-                  mouseTrackingEnabled={true}
-                  playButtonEnabled={false}
-                  disableAutoPlayOnAction={false}
+                  dotsDisabled={false}
+                  buttonsDisabled={true}
+                  // style={{ width: '100%', height: 'auto' }}
                 >
                   {productDatas.map((TmpData, index) => (
                     <img
                       src={`../../${TmpData.prod_image}`}
                       alt="Prod_image"
-                      style={{ width: '150px', height: '150px' }}
+                      style={{ width: '100%', height: 'auto' }}
                     />
                   ))}
                 </AliceCarousel>

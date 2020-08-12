@@ -56,7 +56,7 @@ const MyInfoUploadImageComponent = () => {
               src={
                 thumbnailImageData.img
                   ? thumbnailImageData.img
-                  : `${serverImgUrl}${user.user_img_url}`
+                  : `https://i3b309.p.ssafy.io/images/${user.user_image}`
               }
               className="cover-avatar"
             />
@@ -136,25 +136,13 @@ const MyInfoButtonGroupComponent = props => {
     let respone = [];
     let data = {};
     const formData = new FormData();
-    formData.append('files', thumbnailImageData.file);
-    // const res = await Axios.post(
-    //   'http://localhost:5000/api/auth/upload',
-    //   formData,
-    // );
+    formData.append('image', thumbnailImageData.file); // 파일명
+    formData.append('user_email', user.user_email);
 
     let body = {
       ...inputValue,
       ...thumbnailImageData,
     };
-    // console.log('userLLLL: ', user);
-    // console.log(
-    //   'update ',
-    //   inputValue,
-    //   'thumbnailImageData',
-    //   thumbnailImageData,
-    //   user.token,
-    // );
-    console.log('body::', body);
 
     Axios({
       method: 'PUT',
@@ -169,17 +157,57 @@ const MyInfoButtonGroupComponent = props => {
         update_phone: inputValue.user_phone,
       },
     })
-      .then(res => {
-        alert('회원정보가 수정되었습니다.');
-        history.push('/');
+      .then(async res => {
+        if (thumbnailImageData.file != '') {
+          await Axios.post(
+            'https://i3b309.p.ssafy.io/api/auth/imageupload',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          ).then(response => {
+            var obj = {
+              user_id: user.user_id,
+              user_email: inputValue.user_email,
+              user_name: inputValue.user_name,
+              user_phone: inputValue.user_phone,
+              user_image: thumbnailImageData.file.name,
+              isAdmin: user.isAdmin,
+              status: 'login',
+              web_site: '',
+              token: user.token,
+            };
+            setUser({ ...obj });
+            // setUser({ ...data, status: 'login' });
+            alert('회원정보가 수정되었습니다.');
+
+            history.push('/');
+          });
+        } else {
+          var obj = {
+            user_id: user.user_id,
+            user_email: inputValue.user_email,
+            user_name: inputValue.user_name,
+            user_phone: inputValue.user_phone,
+            user_image: user.user_image,
+            isAdmin: user.isAdmin,
+            status: 'login',
+            web_site: '',
+            token: user.token,
+          };
+          setUser({ ...obj });
+          alert('회원정보가 수정되었습니다.');
+
+          history.push('/');
+        }
       })
       .catch(err => {
         console.log('err', err.response.data.message);
       });
 
     formData.append('optionData', JSON.stringify(body));
-
-    setUser({ ...data, status: 'login' });
   };
 
   useEffect(() => {
@@ -213,8 +241,8 @@ const MyInfoButtonGroupComponent = props => {
     inputValue.user_email,
     inputValue.user_name,
     inputValue.user_phone,
-    thumbnailImageData.img,
-    thumbnailImageData.file,
+    thumbnailImageData.img, // blob:http://localhost:3000/9dcfe061-4161-41f9-9e9f-b4c163393536
+    thumbnailImageData.file, // File
   ]);
 
   return (

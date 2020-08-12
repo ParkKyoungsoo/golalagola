@@ -31,7 +31,10 @@ const EventModal = modalNum => {
         <Wrapper>
           <Grid container>
             <Grid item xs={12}>
-              선택 할인!!
+              <h5 style={{ textAlign: 'center' }}>
+                버튼을 눌러 <strong style={{ color: 'red' }}>할인</strong>을
+                받으세요!
+              </h5>
             </Grid>
           </Grid>
           <Grid className="EM" container direction="row">
@@ -163,17 +166,23 @@ const EventModal = modalNum => {
               Disable elevation
             </Button>
           </Grid>
-          <Grid container>
+          {/* <Grid container>
             <Grid item xs={12}>
               <MultiCarousel />
             </Grid>
-          </Grid>
+          </Grid> */}
         </Wrapper>
       ) : (
         <Wrapper>
           <Grid container>
             <Grid item xs={12}>
-              선택 할인!!
+              <h4 style={{ textAlign: 'center' }}>
+                버튼을 눌러{' '}
+                <strong style={{ color: 'red', textAlign: 'center' }}>
+                  할인
+                </strong>
+                을 받으세요!
+              </h4>
             </Grid>
           </Grid>
           <Grid
@@ -212,18 +221,13 @@ const EventModal = modalNum => {
                   alt="nature"
                   style={{
                     display: 'flex',
-                    // justifyContent: 'center',
                     width: '80%',
                     height: '80%',
                     borderRadius: '8px',
                   }}
                 />
-                {/* <span style={{ textAlign: 'right', marginLeft: '1px' }}>V</span> */}
               </Box>
             </Grid>
-            {/* <h5 className="textCss"> */}
-            {/* <strong>VS</strong> */}
-            {/* </h5> */}
             <Grid
               className="imgCss"
               item
@@ -327,26 +331,35 @@ const EventModal = modalNum => {
             </Grid>
           </Grid>
 
-          <Grid className="BtnCss">
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={EventTrigger}
-              disabled={selectedEventItem === undefined}
+          <Grid container className="BtnCss">
+            <Grid
+              item
+              xs={4}
               style={{
-                width: '20vw',
-                height: '5vh',
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
-              Disable elevation
-            </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                onClick={EventTrigger}
+                disabled={selectedEventItem === undefined}
+                style={{
+                  width: '20vw',
+                  height: '10vh',
+                }}
+              >
+                Disable elevation
+              </Button>
+            </Grid>
           </Grid>
-          <Grid container>
+          {/* <Grid container>
             <Grid item xs={12}>
               <MultiCarousel />
             </Grid>
-          </Grid>
+          </Grid> */}
         </Wrapper>
       )}
     </>

@@ -27,22 +27,23 @@ const Wrapper = styled.div`
   & .butt{
     width: 20px;
     height: 20px;
+    margin-top:3vh;
   }
 
   & .desCss {
-    margin-top: 10px;
+    margin-top: 3vh;
   }
 
   & .textCss {
     display: flex;
     justify-content: center;
+    margin-bottom: 3vh;
   }
 
   & .BtnCss {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 3vh;
   }
 
   & .quizCentering {
