@@ -135,7 +135,9 @@ const App = () => {
   const [quizDatas, setQuizDatas] = useState([]);
 
   // MyCoupon, EventAll 페이지에서 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 데이터를 모아놓은 배열입니다.
-  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
+  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터 객체
+  const [userCoupon, setUserCoupon] = useState([]); // 쿠폰 데이터 리스트
+  const [userEvent, setUserEvent] = useState([]); // 쿠폰 데이터 리스트
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -191,8 +193,18 @@ const App = () => {
       await Axios.get(
         `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
       ).then(function(res) {
-        // myCouponDatas, eventAllDatas 만들기
+        // myCouponDatas 만들기
         setMyCouponDatas(res.data);
+
+        // userCoupom, userEvent 만들기
+        const tmpCoupon = [];
+        const tmpEvent = [];
+        res.data.forEach(element => {
+          tmpCoupon.push(element.coupon_select);
+          tmpEvent.push(element.event_id);
+        });
+        setUserCoupon(tmpCoupon);
+        setUserEvent(tmpEvent);
       });
     }
     getQuizDatas();
@@ -275,6 +287,10 @@ const App = () => {
         // EventAll 페이지와 myCoupon페이지에서 사용합니다.
         myCouponDatas,
         setMyCouponDatas,
+        userCoupon,
+        setUserCoupon,
+        userEvent,
+        setUserEvent,
 
         newEventData,
         setNewEventData,
