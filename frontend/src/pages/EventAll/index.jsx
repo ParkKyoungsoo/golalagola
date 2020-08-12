@@ -18,6 +18,7 @@ import SendIcon from '@material-ui/icons/Send';
 //EventAll
 const EventAll = () => {
   const {
+    user,
     productDatas,
     setProductDatas,
     currentEventDatas,
@@ -27,11 +28,11 @@ const EventAll = () => {
     userCoupon,
     setUserCoupon,
     mainUrl,
+    myCouponDatas,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
-  const [couponData, setCouponData] = useState([]);
 
   let history = useHistory();
   const isMobile = useMediaQuery('(max-width:930px)');
@@ -54,22 +55,6 @@ const EventAll = () => {
     setForceRender({});
   }
 
-  // 최초 1회 couponData 받아오기
-  const userId = 1; // user Data 필요
-  const getUserCouponData = async () => {
-    // console.log('couponData 받아오기');
-    await Axios.get(`https://i3b309.p.ssafy.io/api/coupon/${userId}`)
-      .then(res => {
-        console.log(res);
-        setUserCoupon([res.data.event_id]);
-      })
-      .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    getUserCouponData();
-  }, []);
-
   // 쿠폰 데이터를 보내고 다시 받아오는 요청
   const submitCouponData = async () => {
     // data 가공해서 post 요청 보내기,
@@ -78,7 +63,7 @@ const EventAll = () => {
       console.log(event_id, selectedEvent[event_id]);
       if (selectedEvent[event_id] !== null) {
         await Axios.post('https://i3b309.p.ssafy.io/api/coupon/', {
-          user_id: userId,
+          user_id: user.user_id,
           event_id: event_id,
           coupon_select: selectedEvent[event_id],
           coupon_date: new Date(),
@@ -90,7 +75,6 @@ const EventAll = () => {
     }
 
     // get 요청으로 데이터 받아서 다시 랜더링하기
-    getUserCouponData();
     setForceRender({});
 
     // myCoupon으로 이동할 것인지 물어보기
@@ -108,8 +92,8 @@ const EventAll = () => {
       opacity: '0.5',
       border: '2px solid black',
     };
-
-    if (!userCoupon.includes(tmpData.event_id)) {
+    console.log(tmpData);
+    if (!userEvent.includes(tmpData.event_id)) {
       return (
         <>
           <Grid container className="Nav_bar">
@@ -218,7 +202,11 @@ const EventAll = () => {
                   .prod_image
               }`}
               alt="image1"
-              style={{ width: '150px', height: '150px' }}
+              style={
+                userCoupon.includes(tmpData.event_item[1].prod_id)
+                  ? { border: '3px solid green' }
+                  : null
+              }
             />
           </Grid>
           <Grid>
@@ -232,7 +220,11 @@ const EventAll = () => {
                   .prod_image
               }`}
               alt="image2"
-              style={{ width: '150px', height: '150px' }}
+              style={
+                userCoupon.includes(tmpData.event_item[2].prod_id)
+                  ? { border: '3px solid green' }
+                  : null
+              }
             />
           </Grid>
         </Grid>
