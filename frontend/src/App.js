@@ -142,6 +142,7 @@ const App = () => {
 
   // 제품 수량 && 판매 현황 개수
   const [buyDatas, setBuyDatas] = useState([]);
+  const [vsData, setVSData] = useState([]);
   
   //
   const [newEventData, setNewEventData] = useState({
@@ -262,10 +263,18 @@ const App = () => {
       setBuyDatas(res.data);
     });
   }
+  async function getEventProducts() {
+    Axios.get('https://i3b309.p.ssafy.io/api/coupon/estimation').then(function(
+      res,
+    ) {
+      setVSData(res.data);
+    });
+  }
 
   useEffect(() => {
     getProductDatas();
 	getBuyDatas();
+	getEventProducts();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -351,6 +360,8 @@ const App = () => {
 		// 제품 수량 && 판매 현황 개수
         buyDatas,
         setBuyDatas,
+		vsData,
+        setVSData,
       }}
     >
       <MuiThemeProvider theme={theme}>

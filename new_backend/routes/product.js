@@ -10,7 +10,6 @@ const authMiddleware = require("../middleware/auth");
 const authAdminMiddleware = require("../middleware/authAdmin");
 
 app.get("/buy", async function (req, res) {
-  var buyAmount = new Array();
   var obj = new Object();
   db.Buy.findAll().then((buyData) => {
     buyData.forEach((element) => {

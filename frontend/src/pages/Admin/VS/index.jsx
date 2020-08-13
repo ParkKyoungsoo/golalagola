@@ -12,6 +12,10 @@ import Grid from '@material-ui/core/Grid';
 
 import axios from 'axios';
 
+import CanvasJSReact from '../asset/canvasjs.react';
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -28,7 +32,12 @@ const AdminVS = props => {
 
   const { newEventData, setNewEventData } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const {
+    currentEventDatas,
+    setCurrentEventDatas,
+    vsData,
+    setVSData,
+  } = useContext(CommonContext);
 
   let history = useHistory();
 
@@ -210,6 +219,63 @@ const AdminVS = props => {
                     </Grid>
                   </Grid>
                 </Grid>
+                <div>
+                  <CanvasJSChart
+                    options={{
+                      animationEnabled: true,
+
+                      subtitles: [
+                        {
+                          text: Object(
+                            productDatas[
+                              vsData[index].event_item['3'].more_item - 1
+                            ],
+                          ).prod_name,
+                          verticalAlign: 'center',
+                          fontSize: 24,
+                          dockInsidePlotArea: true,
+                        },
+                      ],
+                      data: [
+                        {
+                          type: 'doughnut',
+                          showInLegend: true,
+                          indexLabel: '{name}: {y}',
+                          yValueFormatString: "#,###'%'",
+                          dataPoints: [
+                            {
+                              name: Object(
+                                productDatas[
+                                  vsData[index].event_item['1'].event_prod - 1
+                                ],
+                              ).prod_name,
+                              y:
+                                (vsData[index].event_item['1'].coupon_select /
+                                  (vsData[index].event_item['1'].coupon_select +
+                                    vsData[index].event_item['2']
+                                      .coupon_select)) *
+                                100,
+                            },
+                            {
+                              name: Object(
+                                productDatas[
+                                  vsData[index].event_item['2'].event_prod - 1
+                                ],
+                              ).prod_name,
+                              y:
+                                (vsData[index].event_item['2'].coupon_select /
+                                  (vsData[index].event_item['1'].coupon_select +
+                                    vsData[index].event_item['2']
+                                      .coupon_select)) *
+                                100,
+                            },
+                          ],
+                        },
+                      ],
+                    }}
+                    /* onRef={ref => this.chart = ref} */
+                  />
+                </div>
               </Paper>
             ))}
           </Grid>
