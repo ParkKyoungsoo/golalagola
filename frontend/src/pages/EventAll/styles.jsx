@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   }
   .webButton {
     position: fixed;
-    right: 1.2vw;
+    right: 8vw;
     top: 20vh;
   }
   .sideBarColumn {

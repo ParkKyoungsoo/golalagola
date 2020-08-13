@@ -1,40 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
+import { CommonContext } from '../../context/CommonContext';
+import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
+import { Grid, Divider, Paper } from '@material-ui/core';
+import MaterialTable from 'material-table';
 
-import AdminNav from './Layout/nav.jsx';
+import Wrapper from './styles';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-// Grid Styles
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    margin: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
+import NestedList from './Layout/sidebar.jsx';
 
 const MainAdmin = props => {
-  const classes = useStyles(); // Grid
   return (
-    <div>
-      <AdminNav></AdminNav>
-      <h1>관리자 페이지</h1>
-      <div classes={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={2}>
-            <Paper className={classes.paper}></Paper>
+    <Wrapper>
+      <div className="admin_product__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={0} />
           </Grid>
-          <Grid item xs={10}>
-            <Paper className={classes.paper}>오늘의 날씨는~</Paper>
+          <Grid item>
+            <Grid className="admin_product__content">
+              <h5 className="admin_product__header">Chart</h5>
+              <Divider variant="middle" className="admin_product__divider" />
+              <Paper elevation={2}>차트 들어갈 곳</Paper>
+            </Grid>
           </Grid>
         </Grid>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 export default MainAdmin;
