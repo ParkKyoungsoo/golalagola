@@ -43,6 +43,14 @@ const Wrapper = styled.div`
     // border-radius: 5%;
     border-radius: 50%;
   }
+  & .admin_event__item--chart {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    // border-radius: 5%;
+    border-radius: 50%;
+  }
   & .admin_event__item--divider {
     margin: 15px 0px 10px;
     width: 78vw;
