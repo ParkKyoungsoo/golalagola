@@ -17,16 +17,19 @@ html::-webkit-scrollbar {
 @font-face {
   font-family: LotteDream;
   font-weight: 300;
+  font-style: small;
   src: url('fonts/LotteDreamLight.ttf') format('truetype');
 }
 @font-face {
   font-family: LotteDream;
   font-weight: 500;
+  font-style: medium;
   src: url('fonts/LotteDreamMedium.ttf') format('truetype');
 }
 @font-face {
   font-family: LotteDream;
   font-weight: 700;
+  font-style: large;
   src: url('fonts/LotteDreamBold.ttf') format('truetype');
 }
 
@@ -36,4 +39,5 @@ html::-webkit-scrollbar {
   list-style: none;
   text-decoration: none;
   font-family: 'LotteDream', sans-serif;
+  font-weight: medium;
 }
