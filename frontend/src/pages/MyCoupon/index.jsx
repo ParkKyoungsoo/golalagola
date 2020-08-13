@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { Grid } from '@material-ui/core';
 import Nav from '../../layout/Header';
-import Layout from '../../layout/Header';
+import Layout from '../../layout';
 import { CommonContext } from '../../context/CommonContext';
 
 import axios from 'axios';
@@ -61,49 +61,55 @@ export default function StickyHeadTable() {
 
   return (
     <>
-      <Layout />
-      <div style={{ textAlign: 'center' }}>
-        <QRCode
-          value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
-        />
-      </div>
-      <Paper className={classes.root}>
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map(column => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {myCouponDatas.map(row => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map(column => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {typeof value === 'number'
-                            ? Object(productDatas[value - 1]).prod_name
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
+      <Layout>
+        <div style={{ textAlign: 'center' }}>
+          <QRCode
+            value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+          />
+        </div>
+        <Paper className={classes.root}>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map(column => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {myCouponDatas.map(row => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      {columns.map(column => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {typeof value === 'number'
+                              ? Object(productDatas[value - 1]).prod_name
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </Layout>
     </>
   );
 }

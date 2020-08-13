@@ -46,7 +46,7 @@ import CategoryData from './pages/MainVote/dump.json';
 // VoteGridList에서 쓰고있던 상품들 입니다.
 
 // css
-// import './index.css';
+import './index.css';
 
 // const
 const defaultThumbnailImage = 'default_user.jpg';

@@ -88,9 +88,6 @@ const Header = props => {
     setInfoDetailDialogOpen(false);
     setUserDetailDialogOpen(false);
   }, []);
-  const click = () => {
-    console.log(document.documentElement.scrollTop);
-  };
 
   return (
     <Container
@@ -171,7 +168,6 @@ const Header = props => {
               alignItems: 'center',
             }}
             className="headerColor"
-            onClick={click}
           >
             <Grid
               container
@@ -194,7 +190,6 @@ const Header = props => {
                   onClick={onClickRedirectPathHandler('/mainvote')}
                   style={{ cursor: 'pointer' }}
                 >
-                  {console.log(document.documentElement.scrollTop)}
                   Gola la Gola
                 </Typography>
               </Grid>
