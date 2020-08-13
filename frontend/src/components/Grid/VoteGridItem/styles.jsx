@@ -141,7 +141,7 @@ const Wrapper = styled.div`
   .effect:after {
     content: '';
     position: absolute;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 1;
     width: 300px;
     height: auto;
@@ -151,7 +151,7 @@ const Wrapper = styled.div`
     color: #fff;
     font-family: 'Arial';
     font-weight: bold;
-    padding: 15px 20px;
+    padding: 10px 15px;
     left: -90px;
     top: 3px;
     transform: rotate(-30deg);
