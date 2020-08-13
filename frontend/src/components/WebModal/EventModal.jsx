@@ -97,7 +97,12 @@ const EventModal = modalNum => {
               </h5>
             </Grid>
           </Grid>
-          <Grid className="EM" container direction="row">
+          <Grid
+            className="EM"
+            container
+            direction="row"
+            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
+          >
             <Grid item xs={5}>
               <Box
                 style={{
@@ -117,10 +122,12 @@ const EventModal = modalNum => {
                   }`}
                   alt="nature"
                   style={{
-                    width: '80%',
-                    height: 'auto',
+                    display: 'flex',
+                    maxWidth: '20vw',
                     borderRadius: '8px',
-                    border: 'none',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                   }}
                 />
               </Box>
@@ -144,9 +151,12 @@ const EventModal = modalNum => {
                   }`}
                   alt="people"
                   style={{
-                    width: '80%',
-                    height: 'auto',
+                    display: 'flex',
+                    maxWidth: '20vw',
                     borderRadius: '8px',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                   }}
                 />
               </Box>
@@ -259,7 +269,7 @@ const EventModal = modalNum => {
             className="EM"
             container
             direction="row"
-            style={{ backgroundColor: '#f7f2f2' }}
+            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
           >
             <Grid
               className="imgCss"
@@ -269,7 +279,6 @@ const EventModal = modalNum => {
                 display: 'flex',
                 justifyContent: 'center',
                 // backgroundColor: '#f7f2f2',
-                justifyContent: 'center',
               }}
             >
               <Box
@@ -291,9 +300,11 @@ const EventModal = modalNum => {
                   alt="nature"
                   style={{
                     display: 'flex',
-                    width: '80%',
-                    height: '80%',
+                    maxWidth: '20vw',
                     borderRadius: '8px',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                   }}
                 />
               </Box>
@@ -327,9 +338,11 @@ const EventModal = modalNum => {
                   alt="people"
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',
-                    width: '80%',
-                    height: '80%',
+                    // justifyContent: 'center',
+                    maxWidth: '20vw',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                     borderRadius: '8px',
                   }}
                 />
