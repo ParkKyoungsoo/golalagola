@@ -13,6 +13,8 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 import Wrapper from './styles';
 
@@ -91,6 +93,66 @@ const AdminVS = props => {
       });
   };
 
+  // 차트 데이터
+  const options = (data, index) => {
+    return {
+      animationEnabled: true,
+
+      subtitles: [
+        {
+          // text: `${
+          //   Object(productDatas[data.event_item['1'].prod_id - 1]).prod_name
+          // } vs ${
+          //   Object(productDatas[data.event_item['2'].prod_id - 1]).prod_name
+          // }`,
+          text: 'VS',
+          verticalAlign: 'center',
+          fontSize: 16,
+          dockInsidePlotArea: true,
+        },
+      ],
+
+      data: [
+        {
+          type: 'doughnut',
+          // showInLegend: true,
+          startAngle: 90,
+          radius: '100%',
+          innerRadius: '75%',
+          // legendText: '{name}',
+          // indexLabel: '{y}',
+          // yValueFormatString: "#,###'%'",
+          // indexLabelPlacement: 'inside',
+          // indexLabelFontColor: 'white',
+          dataPoints: [
+            {
+              color: '#5646FF',
+              name: Object(
+                productDatas[vsData[index].event_item['1'].event_prod - 1],
+              ).prod_name,
+              y:
+                (vsData[index].event_item['1'].coupon_select /
+                  (vsData[index].event_item['1'].coupon_select +
+                    vsData[index].event_item['2'].coupon_select)) *
+                100,
+            },
+            {
+              color: '#FD636D',
+              name: Object(
+                productDatas[vsData[index].event_item['2'].event_prod - 1],
+              ).prod_name,
+              y:
+                (vsData[index].event_item['2'].coupon_select /
+                  (vsData[index].event_item['1'].coupon_select +
+                    vsData[index].event_item['2'].coupon_select)) *
+                100,
+            },
+          ],
+        },
+      ],
+    };
+  };
+
   return (
     <Wrapper>
       <div className="admin_event__main">
@@ -126,16 +188,16 @@ const AdminVS = props => {
                       className="admin_event__table--title"
                       container
                       direction="row"
-                      justify="space-between"
+                      justify="space-evenly"
                       alignItems="center"
                     >
-                      <Grid item xs={4}>
+                      <Grid item xs={2}>
                         A상품
                       </Grid>
-                      <Grid item xs={4}>
-                        B상품
+                      <Grid item xs={2}>
+                        차트
                       </Grid>
-                      <Grid item xs={4}>
+                      <Grid item xs={2}>
                         B상품
                       </Grid>
                     </Grid>
@@ -148,21 +210,25 @@ const AdminVS = props => {
                         key={data.event_id}
                       >
                         <Grid
+                          item
                           container
-                          direction="column"
-                          justify="center"
-                          alignItems="flex-start"
+                          direction="row"
+                          justify="space-around"
+                          alignItems="center"
                         >
                           <Grid
                             item
+                            xs={10}
                             container
                             direction="row"
-                            justify="flex-start"
+                            justify="space-evenly"
                             alignItems="center"
                           >
-                            <Grid item xs={2}>
+                            {/* A상품 */}
+                            <Grid item>
+                              {/* A상품 이미지 */}
                               <img
-                                className="admin_event__item--image"
+                                className="admin_event__item--image_A"
                                 src={`https://i3b309.p.ssafy.io/${
                                   Object(
                                     productDatas[
@@ -172,47 +238,97 @@ const AdminVS = props => {
                                 }`}
                                 alt="image1"
                               />
+                              <p className="admin_event__item--title">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_name
+                                }
+                              </p>
+                              <p className="admin_event__item--desc">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_amount
+                                }
+                                개{' / '}
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_sale
+                                }
+                                %
+                              </p>
                             </Grid>
-                            <Grid item xs={2}>
+
+                            {/* 차트 */}
+                            <Grid
+                              item
+                              className="admin_event__item--chart_box"
+                              container
+                              direction="row"
+                              justify="space-evenly"
+                              alignItems="center"
+                            >
                               <Grid>
-                                <p className="admin_event__item--desc">
-                                  {
-                                    Object(
-                                      productDatas[
-                                        data.event_item['1'].prod_id - 1
-                                      ],
-                                    ).prod_name
-                                  }
+                                {/* A상품 %, 갯수 */}
+                                <p className="admin_event__item--percent_A">
+                                  {(
+                                    (vsData[index].event_item['1']
+                                      .coupon_select /
+                                      (vsData[index].event_item['1']
+                                        .coupon_select +
+                                        vsData[index].event_item['2']
+                                          .coupon_select)) *
+                                    100
+                                  ).toFixed(0)}
+                                  %
                                 </p>
-                                <p className="admin_event__item--desc">
-                                  {
-                                    Object(
-                                      productDatas[
-                                        data.event_item['1'].prod_id - 1
-                                      ],
-                                    ).prod_amount
-                                  }
+                                <p className="admin_event__item--amount">
+                                  {vsData[index].event_item['1'].coupon_select}
                                   개
                                 </p>
-                                <p className="admin_event__item--desc">
-                                  {
-                                    Object(
-                                      productDatas[
-                                        data.event_item['1'].prod_id - 1
-                                      ],
-                                    ).prod_sale
-                                  }
+                              </Grid>
+                              <Grid>
+                                <div className="admin_event__item--chart">
+                                  <CanvasJSChart
+                                    // style={{ width: '200px', height: '200px' }}
+                                    options={options(data, index)}
+                                  />
+                                </div>
+                              </Grid>
+                              <Grid>
+                                {/* B상품 %, 갯수 */}
+                                <p className="admin_event__item--percent_B">
+                                  {(
+                                    (vsData[index].event_item['2']
+                                      .coupon_select /
+                                      (vsData[index].event_item['1']
+                                        .coupon_select +
+                                        vsData[index].event_item['2']
+                                          .coupon_select)) *
+                                    100
+                                  ).toFixed(0)}
                                   %
+                                </p>
+                                <p className="admin_event__item--amount">
+                                  {vsData[index].event_item['2'].coupon_select}
+                                  개
                                 </p>
                               </Grid>
                             </Grid>
 
-                            <Grid item xs={1}>
-                              <h5>VS</h5>
-                            </Grid>
-                            <Grid item xs={2}>
+                            {/* B상품 */}
+                            <Grid item>
+                              {/* B상품 이미지 */}
                               <img
-                                className="admin_event__item--image"
+                                className="admin_event__item--image_B"
                                 src={`https://i3b309.p.ssafy.io/${
                                   Object(
                                     productDatas[
@@ -222,123 +338,49 @@ const AdminVS = props => {
                                 }`}
                                 alt="image2"
                               />
+                              <p className="admin_event__item--title">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_name
+                                }
+                              </p>
+                              <p className="admin_event__item--desc">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_amount
+                                }
+                                개{' / '}
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_sale
+                                }
+                                %
+                              </p>
                             </Grid>
-                            <Grid item xs={2}>
-                              <Grid>
-                                <p className="admin_event__item--desc">
-                                  {
-                                    Object(
-                                      productDatas[
-                                        data.event_item['2'].prod_id - 1
-                                      ],
-                                    ).prod_name
-                                  }
-                                </p>
-                                <p className="admin_event__item--desc">
-                                  {
-                                    Object(
-                                      productDatas[
-                                        data.event_item['2'].prod_id - 1
-                                      ],
-                                    ).prod_amount
-                                  }
-                                  개
-                                </p>
-                                <p className="admin_event__item--desc">
-                                  {
-                                    Object(
-                                      productDatas[
-                                        data.event_item['2'].prod_id - 1
-                                      ],
-                                    ).prod_sale
-                                  }
-                                  %
-                                </p>
-                              </Grid>
-                            </Grid>
+                          </Grid>
+                          <Grid item xs={1}>
                             <Grid
                               item
-                              xs={3}
-                              className="admin_event__item--chart"
-                            >
-                              <div>
-                                <CanvasJSChart
-                                  options={{
-                                    animationEnabled: true,
-
-                                    subtitles: [
-                                      {
-                                        text: Object(
-                                          productDatas[
-                                            vsData[index].event_item['3']
-                                              .more_item - 1
-                                          ],
-                                        ).prod_name,
-                                        verticalAlign: 'center',
-                                        fontSize: 24,
-                                        dockInsidePlotArea: true,
-                                      },
-                                    ],
-                                    data: [
-                                      {
-                                        type: 'doughnut',
-                                        showInLegend: true,
-                                        indexLabel: '{name}: {y}',
-                                        yValueFormatString: "#,###'%'",
-                                        dataPoints: [
-                                          {
-                                            name: Object(
-                                              productDatas[
-                                                vsData[index].event_item['1']
-                                                  .event_prod - 1
-                                              ],
-                                            ).prod_name,
-                                            y:
-                                              (vsData[index].event_item['1']
-                                                .coupon_select /
-                                                (vsData[index].event_item['1']
-                                                  .coupon_select +
-                                                  vsData[index].event_item['2']
-                                                    .coupon_select)) *
-                                              100,
-                                          },
-                                          {
-                                            name: Object(
-                                              productDatas[
-                                                vsData[index].event_item['2']
-                                                  .event_prod - 1
-                                              ],
-                                            ).prod_name,
-                                            y:
-                                              (vsData[index].event_item['2']
-                                                .coupon_select /
-                                                (vsData[index].event_item['1']
-                                                  .coupon_select +
-                                                  vsData[index].event_item['2']
-                                                    .coupon_select)) *
-                                              100,
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                  }}
-                                  /* onRef={ref => this.chart = ref} */
-                                />
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={1}
                               container
+                              // direction="column"
                               alignItems="center"
-                              justify="center"
+                              justify="space-evenly"
                             >
                               <Grid>
                                 <Button
                                   variant="outline-secondary"
                                   onClick={eventUpdate(data.event_id)}
                                 >
-                                  수정
+                                  <EditIcon />
                                 </Button>
                               </Grid>
                               <Grid>
@@ -346,7 +388,7 @@ const AdminVS = props => {
                                   variant="outline-danger"
                                   onClick={eventDelete(data.event_id)}
                                 >
-                                  삭제
+                                  <DeleteOutlineIcon />
                                 </Button>
                               </Grid>
                             </Grid>
