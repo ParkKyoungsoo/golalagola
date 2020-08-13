@@ -121,7 +121,7 @@ const ItemDetail = ({ match }) => {
   const CheckUser = () => {
     console.log(myCouponDatas);
     for (var i = 0; i < myCouponDatas.length; i++) {
-      if (Number(match.params.id) === myCouponDatas[i].event_id) {
+      if (Number(match.params.id) === myCouponDatas[i].coupon_select) {
         setUserJoinedEvent(true);
         setEventNum(i);
       }
