@@ -124,6 +124,9 @@ const App = () => {
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
 
+  //현재 진행중인 이벤트들의 ID만 받아온다
+  const [progressedEventDatas, setProgressedEventDatas] = useState([]);
+
   // 관리지 페이지 중 Quiz CRUD를 위해 선언했습니다.
   const [currentQuizDatas, setCurrentQuizDatas] = useState({});
 
@@ -252,6 +255,7 @@ const App = () => {
       quizzesTableData.data = res.data;
       setQuizzesTableData(quizzesTableData);
       setQuizDatas(res.data);
+      getProgressedEventId();
     });
   }
 
@@ -267,6 +271,14 @@ const App = () => {
     ) {
       setVSData(res.data);
     });
+  }
+
+  async function getProgressedEventId() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/event/eventId').then(
+      function(res) {
+        setProgressedEventDatas(res.data);
+      },
+    );
   }
 
   useEffect(() => {

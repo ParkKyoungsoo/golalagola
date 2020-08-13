@@ -135,9 +135,6 @@ const SubTitleGroupComponent = () => {
   };
   useEffect(() => {
     test();
-  }, [newEventData]);
-
-  useEffect(() => {
     test2();
   }, [newEventData]);
 

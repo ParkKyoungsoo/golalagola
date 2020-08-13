@@ -83,7 +83,14 @@ const EventAll = () => {
     // myCoupon으로 이동할 것인지 물어보기
     const confirmMessage = window.confirm('마이쿠폰으로 이동하시겠습니까?');
     if (confirmMessage) {
-      window.location.href = '/MyCoupon';
+      window.location.href = '/mycoupon';
+    }
+  };
+
+  const userNotLogin = () => {
+    const confirmMessage = window.confirm('로그인 후 이용 가능합니다.');
+    if (confirmMessage) {
+      window.location.href = '/auth';
     }
   };
 
@@ -411,11 +418,16 @@ const EventAll = () => {
 
   const onClickRedirectPathHandler = name => e => {
     window.scrollTo(0, 0);
-    if (name === '/mainvote') {
-      history.push('/');
-      // console.log(mainUrl);
+    if (user.status === 'login') {
+      if (name === '/mainvote') {
+        history.push('/');
+        // console.log(mainUrl);
+      } else {
+        history.push(`/${name}`);
+      }
     } else {
-      history.push(`/${name}`);
+      alert('로그인 후 이용 가능 합니다.');
+      history.push('/auth');
     }
   };
 
@@ -436,7 +448,11 @@ const EventAll = () => {
         aria-labelledby="nested-list-subheader"
         className={classes.root}
       >
-        <ListItem button onClick={submitCouponData} className="sideBarColumn">
+        <ListItem
+          button
+          onClick={user.status === 'login' ? submitCouponData : userNotLogin}
+          className="sideBarColumn"
+        >
           <ListItemIcon className="sideBarIcon">
             <SendIcon />
           </ListItemIcon>
