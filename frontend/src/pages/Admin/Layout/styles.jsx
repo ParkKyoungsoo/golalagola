@@ -24,17 +24,18 @@ const Wrapper = styled.div`
   }
   & .sidebar__item {
     padding: 13px 20px;
-    margin: 7px 0;
+    margin: 5px 0;
     font-size: small;
     font-weight: 100;
     color: #bfbbff;
   }
   & .sidebar__icon {
     margin: 0 0 0 20px;
+    font-size: 22px;
     // color: black;
   }
   & .sidebar__p {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 15px;
     // color: black;
   }
   & .sidebar__admin_grid {
@@ -55,7 +56,7 @@ const Wrapper = styled.div`
     font-weight: 100;
   }
   & .sidebar__admin_avatar {
-    margin: 20px;
+    margin: 15px;
   }
   & .sidebar__admin_desc {
     color: #bfbbff;
