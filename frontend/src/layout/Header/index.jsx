@@ -142,7 +142,6 @@ const Header = props => {
                   }}
                   className="menu-button"
                 >
-                  {/* {console.log(drawerOpen)} */}
                   <Grid
                     style={{
                       backgroundColor: 'black',
