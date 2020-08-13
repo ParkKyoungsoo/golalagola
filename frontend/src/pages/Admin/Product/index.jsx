@@ -26,6 +26,10 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { da } from 'date-fns/esm/locale';
 
+import CanvasJSReact from '../asset/canvasjs.react';
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -58,6 +62,8 @@ const AdminProduct = () => {
     setCurrentProductDatas,
     productsTableData,
     setProductsTableData,
+	buyDatas,
+    setBuyDatas,
   } = useContext(CommonContext);
 
   const [categories, setCategories] = useState({});
@@ -150,7 +156,37 @@ const AdminProduct = () => {
                     <Grid container className="admin_product__detail--grid">
                       <Grid
                         item
-                        xs={6}
+                        xs={4}
+                        className="admin_product__detail--image_grid"
+                      >
+                        <CanvasJSChart
+                          options={{
+                            title: {
+                              text: '판매 현황',
+                            },
+                            data: [
+                              {
+                                // Change type to "doughnut", "line", "splineArea", etc.
+                                type: 'column',
+                                dataPoints: [
+                                  {
+                                    label: '총 개수',
+                                    y: rowData.prod_amount,
+                                  },
+                                  {
+                                    label: '판매 개수',
+                                    y: buyDatas[`${rowData.prod_id}`],
+                                  },
+                                ],
+                              },
+                            ],
+                          }}
+                          /* onRef={ref => this.chart = ref} */
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xs={4}
                         className="admin_product__detail--image_grid"
                       >
                         <img
@@ -159,7 +195,7 @@ const AdminProduct = () => {
                           alt={`${rowData.prod_name} 이미지`}
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={4}>
                         <Divider />
                         <h3 className="">상품: {rowData.prod_name}</h3>
                         <h5>{rowData.prod_title}</h5>

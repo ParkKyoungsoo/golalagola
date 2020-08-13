@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../layout/';
 import { Wrapper, MobileWrapper } from './styles';
+import { palette } from '@material-ui/system';
 
 import {
   AppBar,
@@ -13,6 +14,9 @@ import {
   Paper,
   useMediaQuery,
   Dialog,
+  Menu,
+  MenuItem,
+  Button,
 } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel';
@@ -91,7 +95,7 @@ const useOnChangeIndex = categoryDatas => {
 
   const onChangeIndexHandler = (event, newIndex) => {
     let deltaValue = 0;
-    console.log('clickclick');
+    // console.log('clickclick');
     // 현재 선택된 거 기준 오른쪽 클릭
     if (newIndex > appbarIndex && newIndex !== categoryDatas.length - 1) {
       deltaValue = 1;
@@ -151,6 +155,16 @@ const MainVote = props => {
   }, []);
   // console.log(history.length)
   // const RepresentativeItems = SelectItem()
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <ViewContext.Provider
       value={{
@@ -183,7 +197,7 @@ const MainVote = props => {
                 >
                   <Box className="liveTimeBar">
                     <Grid>
-                      <h3>실시간</h3>
+                      <h3>실시간 순위</h3>
                     </Grid>
                     <Grid>
                       <CarouselProvider
@@ -313,10 +327,10 @@ const MainVote = props => {
                   }}
                 >
                   <Box className="liveTimeBar">
-                    <Grid>
-                      <h2>실시간</h2>
+                    <Grid style={{ margin: '0 5vw' }}>
+                      <h2>실시간 순위</h2>
                     </Grid>
-                    <Grid>
+                    <Grid style={{ margin: '0 0 0 5vw' }}>
                       <CarouselProvider
                         naturalSlideWidth={1000}
                         naturalSlideHeight={150}
@@ -355,19 +369,27 @@ const MainVote = props => {
                             )}
                           </Slider>
                         </Grid>
-                        {/* <Grid>
-                          <ButtonBack>
-                            <p>
-                              <ExpandLessIcon />
-                            </p>
-                          </ButtonBack>
-                          <ButtonNext>
-                            <p>
-                              <ExpandMoreIcon />
-                            </p>
-                          </ButtonNext>
-                        </Grid> */}
                       </CarouselProvider>
+                    </Grid>
+                    <Grid>
+                      <Button
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                      >
+                        Open Menu
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      </Menu>
                     </Grid>
                   </Box>
                 </Grid>

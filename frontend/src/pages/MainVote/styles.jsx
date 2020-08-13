@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   }
   .liveTimeBar {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .tiemPopularity {

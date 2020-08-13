@@ -5,36 +5,44 @@ const Wrapper = styled.div`
     display: flex;
     // justify-content: flex-start;
     // justify-content: flex-end;
-    justify-content: center;
+    // justify-content: center;
     // justify-content: space-between;
     // justify-content: space-around;
-    // justify-content: space-evenly;
+    justify-content: space-evenly;
     margin: 10px 0px;
   }
 
-  .KisokCentering {
+  .Event1 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     // background-color: green;
   }
-
+  .Event2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    // justify-content: space-evenly;
+    // background-color: green;
+  }
   .tmp {
-    width: 35vw;
-    height: auto;
+    width: 15vw;
+    // height: 15vh;
     border-radius: 5%;
     margin: 0 1vw 0 1vw;
   }
   .mobileButton {
     position: fixed;
-    right: 10px;
-    // top: 3.5vh;
+    right: -3vw;
+    top: 20vh;
+    // width: 50%;
+    // heigth: 50%;
   }
   .webButton {
     position: fixed;
-    right: 0px;
-    // top: 3.5vh;
+    right: 1.2vw;
+    top: 20vh;
   }
   .sideBarColumn {
     display: flex;
