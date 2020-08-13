@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   & .eventImg {
     border:2px outset rgba(44, 134, 204, 0.67);
     border-radius:5px;
+    max-width: 
 
   }
 
@@ -22,22 +23,24 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    backgroundColor: #f7f2f2;
+    position:relative;
   }
 
   & .butt{
     width: 20px;
     height: 20px;
-    margin-top:3vh;
+    margin-top:10px;
   }
 
   & .desCss {
-    margin-top: 3vh;
+    margin-top: 1vh;
   }
 
   & .textCss {
     display: flex;
     justify-content: center;
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
   }
 
   & .BtnCss {

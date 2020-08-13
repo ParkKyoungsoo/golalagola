@@ -279,7 +279,7 @@ const MainVote = props => {
                 key={index}
                 value={appbarIndex}
                 index={index}
-                className="tab-panel"
+                className="tab-pansel"
               >
                 <VoteGridList
                   categoryData={categoryData}

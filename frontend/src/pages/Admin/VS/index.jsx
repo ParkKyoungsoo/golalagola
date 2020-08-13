@@ -58,6 +58,7 @@ const AdminVS = props => {
       event_date: '',
       event_expire: '',
       event_category: '',
+      event_id: '',
     });
     history.push('/Admin/CreateEvent');
   };
@@ -71,6 +72,7 @@ const AdminVS = props => {
           event_date: '',
           event_expire: '',
           event_category: currentEventDatas[i].event_category,
+          event_id: eventId,
         });
       }
     }

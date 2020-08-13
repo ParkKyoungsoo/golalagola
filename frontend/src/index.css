@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
 body,
 html {
   margin: 0;
@@ -6,6 +8,7 @@ html {
   /* font-family: 'Black Han Sans', sans-serif; */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  font-family: 'Nanum Pen Script', cursive;
 }
 body::-webkit-scrollbar,
 html::-webkit-scrollbar {
@@ -15,22 +18,31 @@ html::-webkit-scrollbar {
 
 /* LotteDream */
 @font-face {
-  font-family: LotteDream;
+  font-family: 'LotteDream';
   font-weight: 300;
-  font-style: small;
-  src: url('fonts/LotteDreamLight.ttf') format('truetype');
+  /* font-style: small; */
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2')
+      format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff')
+      format('woff');
 }
 @font-face {
-  font-family: LotteDream;
+  font-family: 'LotteDream';
   font-weight: 500;
   font-style: medium;
-  src: url('fonts/LotteDreamMedium.ttf') format('truetype');
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2')
+      format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff')
+      format('woff');
 }
 @font-face {
-  font-family: LotteDream;
+  font-family: 'LotteDream';
   font-weight: 700;
   font-style: large;
-  src: url('fonts/LotteDreamBold.ttf') format('truetype');
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2')
+      format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff')
+      format('woff');
 }
 
 * {
@@ -38,6 +50,8 @@ html::-webkit-scrollbar {
   padding: 0;
   list-style: none;
   text-decoration: none;
+  /* font-family: 'Noto Sans KR', sans-serif !important; */
   font-family: 'LotteDream', sans-serif;
-  font-weight: medium;
+  /* font-family:  */
+  font-weight: 300;
 }

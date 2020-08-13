@@ -6,25 +6,85 @@ import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import Box from '@material-ui/core/Box';
 
+import axios from 'axios';
+import { ContactlessOutlined } from '@material-ui/icons';
+
 const EventModal = modalNum => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const { user } = useContext(CommonContext);
 
   const { eventNum, setEventNum } = useContext(CommonContext);
   const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
   const [tmpData, setTmpData] = useState();
 
+  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
+
+  const [userChoice, setUserChoice] = useState([]);
+
   const RadioTest = e => {
     setSelectedEventItem(e.target.value);
-    // console.log(selectedEventItem);
+    console.log(e.target.value);
+    console.log('eventNum', eventNum);
+
+    // setMyCouponDatas({
+    //   ...myCouponDatas,
+    //   userChoice,
+    // });
+
+    setUserChoice({
+      ...userChoice,
+      coupon_select: selectedEventItem,
+      coupon_use: false,
+      coupon_date: '',
+      event_id: currentEventDatas[eventNum].event_id,
+      user_id: user.user_id,
+    });
+
+    console.log('userSelect', userChoice);
   };
 
+  async function setMyCouponUpdate() {
+    axios
+      .post('https://i3b309.p.ssafy.io/api/coupon/', userChoice)
+      .then(function(response) {
+        console.log('axios', userChoice);
+        console.log(response);
+
+        setUserChoice({
+          coupon_select: '',
+          coupon_use: '',
+          coupon_date: '',
+          event_id: '',
+          user_id: '',
+        });
+
+        modalNum.setModalNum(2);
+      })
+      .catch(error => {
+        console.log('axios', userChoice);
+        console.log('error : ', error.response);
+      });
+  }
+
   // 다음 모달창을 띄워주고 selectedEventItem에 선택한 제품을 넣어주기 위한 함수
-  const EventTrigger = () => {
-    modalNum.setModalNum(2);
+  const EventTrigger = e => {
+    setUserChoice({
+      ...userChoice,
+      coupon_select: selectedEventItem,
+      coupon_use: false,
+      coupon_date: '',
+      event_id: currentEventDatas[eventNum].event_id,
+      user_id: user.user_id,
+    });
+
+    console.log('userSelect', userChoice);
+
+    setMyCouponUpdate();
   };
 
   const isMobile = useMediaQuery('(max-width:920px)');
+
   return (
     <>
       {isMobile ? (
@@ -37,7 +97,12 @@ const EventModal = modalNum => {
               </h5>
             </Grid>
           </Grid>
-          <Grid className="EM" container direction="row">
+          <Grid
+            className="EM"
+            container
+            direction="row"
+            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
+          >
             <Grid item xs={5}>
               <Box
                 style={{
@@ -57,10 +122,12 @@ const EventModal = modalNum => {
                   }`}
                   alt="nature"
                   style={{
-                    width: '80%',
-                    height: 'auto',
+                    display: 'flex',
+                    maxWidth: '20vw',
                     borderRadius: '8px',
-                    border: 'none',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                   }}
                 />
               </Box>
@@ -84,9 +151,12 @@ const EventModal = modalNum => {
                   }`}
                   alt="people"
                   style={{
-                    width: '80%',
-                    height: 'auto',
+                    display: 'flex',
+                    maxWidth: '20vw',
                     borderRadius: '8px',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                   }}
                 />
               </Box>
@@ -102,7 +172,12 @@ const EventModal = modalNum => {
                     type="radio"
                     name="event"
                     value={
-                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['1'].prod_id -
+                            1
+                        ],
+                      ).prod_id
                     }
                     onChange={RadioTest}
                   ></input>
@@ -131,7 +206,12 @@ const EventModal = modalNum => {
                     type="radio"
                     name="event"
                     value={
-                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['2'].prod_id -
+                            1
+                        ],
+                      ).prod_id
                     }
                     onChange={RadioTest}
                   ></input>
@@ -189,7 +269,7 @@ const EventModal = modalNum => {
             className="EM"
             container
             direction="row"
-            style={{ backgroundColor: '#f7f2f2' }}
+            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
           >
             <Grid
               className="imgCss"
@@ -199,7 +279,6 @@ const EventModal = modalNum => {
                 display: 'flex',
                 justifyContent: 'center',
                 // backgroundColor: '#f7f2f2',
-                justifyContent: 'center',
               }}
             >
               <Box
@@ -221,9 +300,11 @@ const EventModal = modalNum => {
                   alt="nature"
                   style={{
                     display: 'flex',
-                    width: '80%',
-                    height: '80%',
+                    maxWidth: '20vw',
                     borderRadius: '8px',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                   }}
                 />
               </Box>
@@ -236,7 +317,6 @@ const EventModal = modalNum => {
                 display: 'flex',
                 justifyContent: 'center',
                 // backgroundColor: '#f7f2f2',
-                justifyContent: 'center',
               }}
             >
               <Box
@@ -258,9 +338,11 @@ const EventModal = modalNum => {
                   alt="people"
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',
-                    width: '80%',
-                    height: '80%',
+                    // justifyContent: 'center',
+                    maxWidth: '20vw',
+                    // maxHeight: '20vh',
+                    marginTop: '2vh',
+                    marginBottom: '2vh',
                     borderRadius: '8px',
                   }}
                 />
@@ -279,7 +361,12 @@ const EventModal = modalNum => {
                     type="radio"
                     name="event"
                     value={
-                      currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['1'].prod_id -
+                            1
+                        ],
+                      ).prod_id
                     }
                     onChange={RadioTest}
                   ></input>
@@ -308,7 +395,12 @@ const EventModal = modalNum => {
                     type="radio"
                     name="event"
                     value={
-                      currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['2'].prod_id -
+                            1
+                        ],
+                      ).prod_id
                     }
                     onChange={RadioTest}
                   ></input>

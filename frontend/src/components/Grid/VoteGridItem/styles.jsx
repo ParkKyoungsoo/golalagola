@@ -141,7 +141,7 @@ const Wrapper = styled.div`
   .effect:after {
     content: '';
     position: absolute;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 1;
     width: 300px;
     height: auto;
@@ -151,7 +151,32 @@ const Wrapper = styled.div`
     color: #fff;
     font-family: 'Arial';
     font-weight: bold;
-    padding: 15px 20px;
+    padding: 10px 15px;
+    left: -90px;
+    top: 3px;
+    transform: rotate(-30deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  .m_effect {
+    position: relative;
+    display: inline-block;
+    overflow: hidden; /* 불필요한 부분 가리기 */
+    padding: 1px;
+  }
+  .m_effect:after {
+    content: '';
+    position: absolute;
+    font-size: 20px;
+    z-index: 1;
+    width: 300px;
+    height: auto;
+    background: green;
+    content: 'Event'; /* 보여주는 텍스트 */
+    text-align: center;
+    color: #fff;
+    font-family: 'Arial';
+    font-weight: bold;
+    padding: 10px 15px;
     left: -90px;
     top: 3px;
     transform: rotate(-30deg);

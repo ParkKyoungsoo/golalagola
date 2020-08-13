@@ -41,7 +41,8 @@ const MultiCarousel = () => {
               // autoPlayDirection="rtl"
               fadeOutAnimation={true}
               playButtonEnabled={false}
-              disableAutoPlayOnAction={true}
+              dotsDisabled={false}
+              buttonsDisabled={true}
             >
               {productDatas.map((TmpData, index) => (
                 <img
