@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  .Nav_bar {
+  .Card_align {
     display: flex;
     // justify-content: flex-start;
     // justify-content: flex-end;
@@ -9,7 +9,8 @@ const Wrapper = styled.div`
     // justify-content: space-between;
     // justify-content: space-around;
     justify-content: space-evenly;
-    margin: 10px 0px;
+    align-content: center;
+    // margin: 10px 0px;
   }
 
   .Event1 {
@@ -27,10 +28,10 @@ const Wrapper = styled.div`
     // background-color: green;
   }
   .tmp {
-    width: 15vw;
+    width: 100%;
     // height: 15vh;
     border-radius: 5%;
-    margin: 0 1vw 0 1vw;
+    // margin: 0 1vw 0 1vw;
   }
   .mobileButton {
     position: fixed;

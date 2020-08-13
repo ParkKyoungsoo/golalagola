@@ -39,7 +39,7 @@ const Wrapper = styled.div`
   }
   .image-grid-filter-select {
     color: #5d5d5d;
-    font-weight: bold;
+    // font-weight: bold;
   }
   .vote-grid-list-grid {
     margin-bottom: 10px;
