@@ -1,18 +1,14 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  .test {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  //   backgronud-color:red;
+  .test{
+    background-color:red;
   }
-  .test1 {
+  .liveTimeBar {
     display: flex;
-    align-items: center;
     justify-content: center;
-    // backgronud-color:red;
   }
+
   .tiemPopularity {
     display: flex;
     // flex-wrap: wrap;
@@ -73,6 +69,11 @@ export const Wrapper = styled.div`
 `;
 
 export const MobileWrapper = styled.div`{
+  .liveTimeBar {
+    display: flex;
+    justify-content: space-around;
+    
+  }
   .tiemPopularity {
     display: flex;
     // flex-wrap: wrap;

@@ -6,33 +6,14 @@ import { useHistory } from 'react-router-dom';
 
 import Fab from '@material-ui/core/Fab';
 
-import Axios from 'axios';
-
 import { CommonContext } from '../../../context/CommonContext';
-import { ViewContext } from '../../../context/ViewContext';
 
 import Wrapper from './styles';
 
 import axios from 'axios';
 
 const DialogActionsComponet = () => {
-  const { serverUrl, user, setSignDialogOpen, setUser, setEndDt } = useContext(
-    CommonContext,
-  );
-
   let history = useHistory();
-
-  const {
-    data,
-    title,
-    thumbnailImageData,
-    isMultipleChoice,
-    isPowerVoteChoice,
-    description,
-    readyToUpload,
-    category,
-    endDt,
-  } = useContext(ViewContext);
 
   const { newEventData, setNewEventData } = useContext(CommonContext);
 
@@ -53,66 +34,6 @@ const DialogActionsComponet = () => {
       .catch(error => {
         console.log('error : ', error.response);
       });
-  };
-
-  const createVoteHandler = async () => {
-    if (user.user_id === '') {
-      alert('Pleae sign in to upload.');
-      setSignDialogOpen(true);
-      return;
-    }
-
-    if (title === '') {
-      alert(`Please enter your vote title.`);
-      return;
-    }
-    if (category === 0) {
-      alert(`Please select your vote category.`);
-      return;
-    }
-
-    if (thumbnailImageData.img === '') {
-      alert(`Please register thumbnail image to upload your vote.`);
-      return;
-    }
-    if (data[0].optionTitle === '' || data[1].optionTitle === '') {
-      alert(`Option1 and option2 are mandatory.`);
-      return;
-    }
-
-    var optionData = {
-      title: title,
-      description: description,
-      data: data.map(x => {
-        return {
-          optionTitle: x.optionTitle,
-          targetUploadType: x.targetUploadType,
-          uploadTargetPath:
-            x.targetUploadType !== 'image'
-              ? x.uploadTarget
-              : x.uploadTarget.path,
-        };
-      }),
-      isMultipleChoice,
-      category,
-      isPowerVoteChoice,
-      thumbnailImage: thumbnailImageData.file.path,
-      end_dt: endDt,
-    };
-
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-        authorization: user.token,
-      },
-    };
-
-    console.log({ user });
-    console.log({ config });
-
-    //
-    alert('Registered.');
-    history.push(`/MyVote`);
   };
 
   const handleClose = () => {
@@ -143,9 +64,6 @@ const DialogActionsComponet = () => {
           color="inherit"
           onClick={createEvent}
           className="up-cancel-fab"
-          style={{
-            backgroundColor: readyToUpload ? '#1FA212' : '#E0E0E0',
-          }}
         >
           UPLOAD
         </Fab>

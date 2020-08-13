@@ -9,6 +9,20 @@ const fileUpload = require("express-fileupload");
 const authMiddleware = require("../middleware/auth");
 const authAdminMiddleware = require("../middleware/authAdmin");
 
+app.get("/buy", async function (req, res) {
+  var obj = new Object();
+  db.Buy.findAll().then((buyData) => {
+    buyData.forEach((element) => {
+      if (obj[element.dataValues.prod_id]) {
+        obj[element.dataValues.prod_id] += element.dataValues.buy_amount;
+      } else {
+        obj[element.dataValues.prod_id] = element.dataValues.buy_amount;
+      }
+    });
+    res.json(obj);
+  });
+});
+
 // 상품 전체 조회
 app.get("/", async function (req, res) {
   db.Product.findAll()
@@ -72,7 +86,7 @@ app.post("/imageupload", async (req, res) => {
   console.log(file);
 
   // 경로 수정 필요
-  file.mv(`${__dirname}/images/${file.name}`, (err) => {
+  file.mv(`${__dirname}/../../front/build/images/${file.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);

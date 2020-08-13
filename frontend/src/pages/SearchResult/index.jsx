@@ -9,6 +9,7 @@ import {
   FormControl,
   Select,
   Typography,
+  useMediaQuery,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useNowCols } from '../../common/MediaQueryHooks';
@@ -31,7 +32,7 @@ const Result = ({ match }) => {
       `voteitemdetail/${itemData.prod_name}/${itemData.prod_id}}`,
     );
   };
-
+  const isMobile = useMediaQuery('(max-width:930px)');
   return (
     <Wrapper className="root">
       <Layout>
@@ -59,11 +60,14 @@ const Result = ({ match }) => {
           cols={Number.isInteger(nowCols) ? nowCols : 1}
           cellHeight={'auto'}
         >
-          {console.log('length', items.length)}
+          {/* {console.log('length', items.length)} */}
 
           {items.map((itemData, index) => {
             return (
-              <Grid key={index}>
+              <Grid
+                key={index}
+                style={isMobile ? { padding: '5vh 5vw' } : null}
+              >
                 <VoteGridItem
                   // onClick={onClick(itemData)}
                   itemData={itemData}

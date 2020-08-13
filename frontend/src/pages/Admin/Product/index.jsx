@@ -24,6 +24,11 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { da } from 'date-fns/esm/locale';
+
+import CanvasJSReact from '../asset/canvasjs.react';
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -50,25 +55,18 @@ const tableIcons = {
 };
 
 const AdminProduct = () => {
-  const { currentProductDatas, setCurrentProductDatas } = useContext(
-    CommonContext,
-  );
-  const [categories, setCategories] = useState({});
-  const [products, setProducts] = useState({
-    columns: [
-      { title: '상품', field: 'prod_name' },
-      { title: '가격', field: 'prod_price' },
-      { title: '수량', field: 'prod_amount' },
-      { title: '유통기한', field: 'prod_expiration' },
-      { title: '할인율', field: 'prod_sale', type: 'numeric' },
-    ],
-    data: [],
-  });
-  Axios.get('https://i3b309.p.ssafy.io/api/product/').then(({ data }) => {
-    products.data = data;
-    setProducts(products);
-  });
+  const {
+    productDatas,
+    setProductDatas,
+    currentProductDatas,
+    setCurrentProductDatas,
+    productsTableData,
+    setProductsTableData,
+	buyDatas,
+    setBuyDatas,
+  } = useContext(CommonContext);
 
+  const [categories, setCategories] = useState({});
   var obj = categories;
   let index = 1;
   Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
@@ -149,16 +147,46 @@ const AdminProduct = () => {
               <MaterialTable
                 className="admin_product__table"
                 icons={tableIcons}
-                title="재고 목록"
-                columns={products.columns}
-                data={products.data}
+                title=""
+                columns={productsTableData.columns}
+                data={productsTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
                 detailPanel={rowData => {
                   return (
                     <Grid container className="admin_product__detail--grid">
                       <Grid
                         item
-                        xs={6}
+                        xs={4}
+                        className="admin_product__detail--image_grid"
+                      >
+                        <CanvasJSChart
+                          options={{
+                            title: {
+                              text: '판매 현황',
+                            },
+                            data: [
+                              {
+                                // Change type to "doughnut", "line", "splineArea", etc.
+                                type: 'column',
+                                dataPoints: [
+                                  {
+                                    label: '총 개수',
+                                    y: rowData.prod_amount,
+                                  },
+                                  {
+                                    label: '판매 개수',
+                                    y: buyDatas[`${rowData.prod_id}`],
+                                  },
+                                ],
+                              },
+                            ],
+                          }}
+                          /* onRef={ref => this.chart = ref} */
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xs={4}
                         className="admin_product__detail--image_grid"
                       >
                         <img
@@ -167,7 +195,7 @@ const AdminProduct = () => {
                           alt={`${rowData.prod_name} 이미지`}
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={4}>
                         <Divider />
                         <h3 className="">상품: {rowData.prod_name}</h3>
                         <h5>{rowData.prod_title}</h5>

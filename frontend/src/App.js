@@ -32,8 +32,6 @@ import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
-import AdminVSEstimate from './pages/Admin/VS/Estimate/estimate';
-import AdminVSRecommand from './pages/Admin/VS/Recommand/recommand';
 import AdminQuiz from './pages/Admin/Quiz/';
 import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
@@ -46,7 +44,7 @@ import CategoryData from './pages/MainVote/dump.json';
 // VoteGridList에서 쓰고있던 상품들 입니다.
 
 // css
-// import './index.css';
+import './index.css';
 
 // const
 const defaultThumbnailImage = 'default_user.jpg';
@@ -84,8 +82,10 @@ const App = () => {
       user_id: 0,
       user_email: '',
       user_name: '',
+      user_phone: '',
       user_pwd: '',
       user_image: '',
+      user_quiz: '',
       isAdmin: '',
       status: '',
       web_site: '',
@@ -111,7 +111,6 @@ const App = () => {
   const [sortedDatas, setSortedDatas] = useState([]);
   // const [categoryDatas, setCategoryDatas] = useState([]); // 카테고리 데이터
   const [categoryDatas, setCategoryDatas] = useState(CategoryData); // 카테고리 데이터
-  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터
 
   // 이벤트중인 아이템들을 모달창에 띄우기 위해 선언했습니다.
   const [eventNum, setEventNum] = useState(null);
@@ -120,10 +119,13 @@ const App = () => {
   const [selectedEventItem, setSelectedEventItem] = useState();
   // 메인 주소로 사용할 URL 입니다.
   // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [mainUrl, setMainUrl] = useState('https://i3b309.p.ssafy.io');
+  const [mainUrl, setMainUrl] = useState('http://localhost:3000');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
+
+  //현재 진행중인 이벤트들의 ID만 받아온다
+  const [progressedEventDatas, setProgressedEventDatas] = useState([]);
 
   // 관리지 페이지 중 Quiz CRUD를 위해 선언했습니다.
   const [currentQuizDatas, setCurrentQuizDatas] = useState({});
@@ -134,10 +136,14 @@ const App = () => {
   // 퀴즈 데이터
   const [quizDatas, setQuizDatas] = useState([]);
 
-  // 유저가 참여한 Event의 id만 모아놓은 배열 입니다.
-  const [userEvent, setUserEvent] = useState([]);
-  // 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 product id만 모아놓은 배열입니다.
-  const [userCoupon, setUserCoupon] = useState([]);
+  // MyCoupon, EventAll 페이지에서 유저가 참여한 이벤트에서 유저가 고른 쿠폰의 데이터를 모아놓은 배열입니다.
+  const [myCouponDatas, setMyCouponDatas] = useState([]); // 쿠폰 데이터 객체
+  const [userCoupon, setUserCoupon] = useState([]); // 쿠폰 데이터 리스트
+  const [userEvent, setUserEvent] = useState([]); // 쿠폰 데이터 리스트
+
+  // 제품 수량 && 판매 현황 개수
+  const [buyDatas, setBuyDatas] = useState([]);
+  const [vsData, setVSData] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -149,19 +155,57 @@ const App = () => {
     event_category: '',
   });
 
+  // admin product 페이지에서 사용하는 변수 입니다.
+  const [productsTableData, setProductsTableData] = useState({
+    columns: [
+      { title: '상품', field: 'prod_name' },
+      { title: '가격', field: 'prod_price' },
+      { title: '수량', field: 'prod_amount' },
+      { title: '유통기한', field: 'prod_expiration' },
+      { title: '할인율', field: 'prod_sale', type: 'numeric' },
+    ],
+    data: [],
+  });
+
+  // admin product 페이지에서 사용하는 변수 입니다.
+  const [quizzesTableData, setQuizzesTableData] = useState({
+    columns: [
+      { title: '퀴즈', field: 'quiz_question' },
+      { title: '정답', field: 'quiz_answer' },
+      { title: '힌트', field: 'quiz_hint' },
+      { title: '참여자 수', field: 'quiz_num' },
+    ],
+    data: [],
+  });
+
+  // admin product 페이지에서 사용하는 변수 입니다.
+  const [usersTableData, setUsersTableData] = useState({
+    columns: [
+      { title: 'ID', field: 'user_email' },
+      { title: '이름', field: 'user_name' },
+      { title: '전화 번호', field: 'user_phone' },
+      { title: '퀴즈 참여 여부', field: 'user_quiz' },
+    ],
+    data: [],
+  });
+
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
   async function getProductDatas() {
-    Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(res) {
+    await Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(
+      res,
+    ) {
       setProductDatas(res.data);
       setSortedDatas(res.data);
+      productsTableData.data = res.data;
+      setProductsTableData(productsTableData);
       getEventDatas();
     });
   }
   // 이벤트(VS) 데이터
   // 사용되는 곳: Web (캐로젤, 이벤트 페이지), 관리자 (이벤트 CRUD 페이지),Kiosk (캐로젤, 전체 보여주기)
   async function getEventDatas() {
-    Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
+    await Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
       setCurrentEventDatas(res.data);
       getMyCouponDatas();
     });
@@ -175,33 +219,80 @@ const App = () => {
 
   // 쿠폰 데이터
   async function getMyCouponDatas() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/coupon').then(function(res) {
-      setMyCouponDatas(res.data);
-      getQuizDatas();
+    if (user.user_id) {
+      await Axios.get(
+        `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
+      ).then(function(res) {
+        // myCouponDatas 만들기
+        setMyCouponDatas(res.data);
+
+        // userCoupom, userEvent 만들기
+        const tmpCoupon = [];
+        const tmpEvent = [];
+        res.data.forEach(element => {
+          tmpCoupon.push(element.coupon_select);
+          tmpEvent.push(element.event_id);
+        });
+        setUserCoupon(tmpCoupon);
+        setUserEvent(tmpEvent);
+      });
+    }
+    getUserDatas();
+  }
+
+  // 유저 데이터
+  async function getUserDatas() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/auth/').then(function(res) {
+      usersTableData.data = res.data;
+      setUsersTableData(usersTableData);
     });
+    getQuizDatas();
   }
 
   // 퀴즈 데이터
   async function getQuizDatas() {
-    Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
+    await Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
+      quizzesTableData.data = res.data;
+      setQuizzesTableData(quizzesTableData);
       setQuizDatas(res.data);
+      getProgressedEventId();
     });
   }
 
-  // useEffect(실행될 함수, 의존값이 들어있는 배열(deps)),
-  // deps를 비우게 될 경우 컴포넌트가 처음 나타날때만 useEffect에 등록한 함수가 호출된다.
-  // 참고 자료 : https://react.vlpt.us/basic/16-useEffect.html
+  // 제품 수량 && 판매 현황 개수
+  async function getBuyDatas() {
+    Axios.get('http://localhost:5000/api/product/buy/').then(function(res) {
+      setBuyDatas(res.data);
+    });
+  }
+  async function getEventProducts() {
+    Axios.get('https://i3b309.p.ssafy.io/api/coupon/estimation').then(function(
+      res,
+    ) {
+      setVSData(res.data);
+    });
+  }
+
+  async function getProgressedEventId() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/event/eventId').then(
+      function(res) {
+        setProgressedEventDatas(res.data);
+      },
+    );
+  }
 
   useEffect(() => {
     getProductDatas();
+    getBuyDatas();
+    getEventProducts();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
   }, []);
 
-  useEffect(() => {
-    getEventDatas();
-  }, []);
+  // useEffect(() => {
+  //   getEventDatas();
+  // }, []);
 
   return (
     <CommonContext.Provider
@@ -240,8 +331,6 @@ const App = () => {
         setSortedDatas,
         categoryDatas,
         setCategoryDatas,
-        myCouponDatas,
-        setMyCouponDatas,
         selectedEventItem,
         setSelectedEventItem,
         mainUrl,
@@ -254,12 +343,20 @@ const App = () => {
         setCurrentQuizDatas,
         currentProductDatas,
         setCurrentProductDatas,
+        productsTableData,
+        setProductsTableData,
+        quizzesTableData,
+        setQuizzesTableData,
+        usersTableData,
+        setUsersTableData,
 
         // EventAll 페이지와 myCoupon페이지에서 사용합니다.
-        userEvent,
-        setUserEvent,
+        myCouponDatas,
+        setMyCouponDatas,
         userCoupon,
         setUserCoupon,
+        userEvent,
+        setUserEvent,
 
         newEventData,
         setNewEventData,
@@ -269,6 +366,12 @@ const App = () => {
         // admin/quiz에서 수정을 위해 사용되는 데이터 입니다.
         quizDatas,
         setQuizDatas,
+
+        // 제품 수량 && 판매 현황 개수
+        buyDatas,
+        setBuyDatas,
+        vsData,
+        setVSData,
       }}
     >
       <MuiThemeProvider theme={theme}>
@@ -302,16 +405,6 @@ const App = () => {
 
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/vs" component={AdminVS} />
-            <Route
-              exact
-              path="/admin/vs/estimate"
-              component={AdminVSEstimate}
-            />
-            <Route
-              exact
-              path="/admin/vs/recommand"
-              component={AdminVSRecommand}
-            />
             <Route exact path="/admin/quiz" component={AdminQuiz} />
             <Route exact path="/admin/quiz/form" component={AdminQuizForm} />
 

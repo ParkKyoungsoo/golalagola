@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { Grid } from '@material-ui/core';
 import Nav from '../../layout/Header';
-import Layout from '../../layout/';
+import Layout from '../../layout';
 import { CommonContext } from '../../context/CommonContext';
 
 import axios from 'axios';
@@ -47,9 +47,7 @@ export default function StickyHeadTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { user } = useContext(CommonContext);
-  // const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
-  const [myCouponDatas, setMyCouponDatas] = useState([]);
-
+  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
   const { productDatas, setProductDatas } = useContext(CommonContext);
 
   const handleChangePage = (event, newPage) => {
@@ -60,23 +58,6 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      await axios
-        .get(`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`)
-        .then(res => {
-          setMyCouponDatas(res.data);
-        });
-    }
-    fetchData();
-  }, []);
-  // const userCoupondata = () => {
-  //   console.log('Function call');
-  //   for (let i = 0; i < Object(myCouponDatas).length; i++) {
-  //     return <Grid>{myCouponDatas[i].event_id}</Grid>;
-  //   }
-  // };
 
   return (
     <>

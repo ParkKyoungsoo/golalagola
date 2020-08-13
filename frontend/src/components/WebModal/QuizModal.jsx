@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useHistory } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
 import { Dialog, Grid, useMediaQuery, Button } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
@@ -17,22 +17,23 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // ClickAwayListener
 
 const SuccessModal = () => {
-  const [moveToNext, setMoveToNext] = useState(false);
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     console.log('timeout!!');
-  //     setMoveToNext(true);
-  //   }, 1500);
-  // });
+  const { user } = useContext(CommonContext);
+  let history = useHistory();
+
+  // 유저가 가지고 있는 Quiz 상태 바꿔줘야함
 
   return (
     <>
       <h2> 정답입니다 ^^ </h2>
+      <Button onClick={() => history.push(`/mycoupon`)}>
+        마이 쿠폰함 바로가기
+      </Button>
+      <Button onClick={() => history.push('/')}>쇼핑 계속하기</Button>
     </>
   );
 };
 
-const Quiz = () => {
+const Quiz = modalNum => {
   const quizAns = Test.questions[0].correctAnswer; // 추후 데이터에서 가져올 문제의 정답.
   const [number, setNumber] = useState();
 
@@ -128,7 +129,7 @@ const Quiz = () => {
             }}
           >
             <ClickAwayListener onClickAway={handleClickAway}>
-              <Grid className>
+              <Grid className style={{ display: 'flex' }}>
                 <NotListedLocationIcon
                   onClick={handleClick}
                   style={{ fontSize: '10vh' }}
@@ -174,7 +175,7 @@ const Quiz = () => {
         </Grid>
       </Wrapper>
       {userAns ? (
-        <Dialog open={successModalTrigger} onClose={modalHandler}>
+        <Dialog open={successModalTrigger} onClose={modalHandler} modalNum={1}>
           <SuccessModal />
         </Dialog>
       ) : (

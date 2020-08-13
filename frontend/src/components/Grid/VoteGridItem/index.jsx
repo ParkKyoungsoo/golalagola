@@ -97,10 +97,14 @@ export default function VoteGridItem(props) {
                 // imgProps={{
                 //   className: sw ? 'img' : 'img deactivated',
                 // }}
+                style={{
+                  borderRadius: '5%',
+                }}
               />
               {isMobile ? (
-                <>
+                <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
+                  <br />
                   <span
                     style={{
                       color: 'red',
@@ -116,44 +120,42 @@ export default function VoteGridItem(props) {
                   <span style={{ textDecoration: 'line-through' }}>
                     {numberWithCommas(originPrice)}원{'  '}
                   </span>
-
+                  <br />
                   <span style={{ fontWeight: 'bold' }}>
                     {numberWithCommas(quizSalePrice)}원
                   </span>
-                </>
+                </Grid>
               ) : (
                 <>
-                  <span style={{ fontSize: '1.5vw' }}>
-                    {itemData.prod_title}
-                  </span>
+                  <span>{itemData.prod_title}</span>
+                  <br />
                   <span
                     style={{
                       color: 'red',
                       borderRadius: '5px',
                       fontWeight: 'bold',
                       border: '3px solid pink',
-                      fontSize: '1.5vw',
                     }}
                   >
                     {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
+
                   <br />
                   <span
                     style={{
                       textDecoration: 'line-through',
-                      fontSize: '1.5vw',
                     }}
                   >
                     {numberWithCommas(originPrice)}원{'  '}
                   </span>
-
-                  <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
+                  <br />
+                  <span style={{ fontWeight: 'bold' }}>
                     {numberWithCommas(quizSalePrice)}원
                   </span>
                 </>
               )}
-              <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+              {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
             </Grid>
           </Grid>
         </Grid>
@@ -168,10 +170,14 @@ export default function VoteGridItem(props) {
                 // imgProps={{
                 //   className: sw ? 'img' : 'img deactivated',
                 // }}
+                style={{
+                  borderRadius: '5%',
+                }}
               />
               {isMobile ? (
-                <>
+                <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
+                  <br />
                   <span
                     style={{
                       color: 'red',
@@ -187,44 +193,42 @@ export default function VoteGridItem(props) {
                   <span style={{ textDecoration: 'line-through' }}>
                     {numberWithCommas(originPrice)}원{'  '}
                   </span>
-
+                  <br />
                   <span style={{ fontWeight: 'bold' }}>
                     {numberWithCommas(quizSalePrice)}원
                   </span>
-                </>
+                </Grid>
               ) : (
                 <>
-                  <span style={{ fontSize: '1.5vw' }}>
-                    {itemData.prod_title}
-                  </span>
+                  <span>{itemData.prod_title}</span>
+                  <br />
                   <span
                     style={{
                       color: 'red',
                       borderRadius: '5px',
                       fontWeight: 'bold',
                       border: '3px solid pink',
-                      fontSize: '1.5vw',
                     }}
                   >
                     {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
+
                   <br />
                   <span
                     style={{
                       textDecoration: 'line-through',
-                      fontSize: '1.5vw',
                     }}
                   >
                     {numberWithCommas(originPrice)}원{'  '}
                   </span>
-
-                  <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
+                  <br />
+                  <span style={{ fontWeight: 'bold' }}>
                     {numberWithCommas(quizSalePrice)}원
                   </span>
                 </>
               )}
-              <span className="date on">{displayEndTime(itemData.end_dt)}</span>
+              {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
             </Grid>
           </Grid>
         </Grid>

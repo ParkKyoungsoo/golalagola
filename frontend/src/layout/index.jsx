@@ -31,8 +31,8 @@ const Layout = props => {
           <div>{children}</div>
         </Container>
       ) : (
-        <Grid container style={{ justifyContent: 'center' }}>
-          <Grid xs={12} md={10}>
+        <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid xs={12} md={8}>
             <Container
               open={drawerOpen}
               className={
