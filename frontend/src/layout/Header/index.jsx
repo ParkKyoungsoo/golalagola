@@ -219,23 +219,23 @@ const Header = props => {
                   container
                   className="navbarRight"
                 >
+                  <Button
+                    variant="contained"
+                    onClick={onClickRedirectPathHandler('eventall')}
+                    className="header-button headerColor"
+                  >
+                    <h6>이벤트</h6>
+                  </Button>
+
                   {user.status === 'login' ? (
                     <Button
                       variant="contained"
-                      onClick={onClickRedirectPathHandler('eventall')}
+                      onClick={onClickRedirectPathHandler('mycoupon')}
                       className="header-button headerColor"
                     >
-                      <h6>이벤트</h6>
+                      <h6>쿠폰</h6>
                     </Button>
                   ) : null}
-
-                  <Button
-                    variant="contained"
-                    onClick={onClickRedirectPathHandler('mycoupon')}
-                    className="header-button headerColor"
-                  >
-                    <h6>쿠폰</h6>
-                  </Button>
                   <Button
                     variant="contained"
                     onClick={handleSignInDialogOpen}

@@ -32,8 +32,6 @@ import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
-import AdminVSEstimate from './pages/Admin/VS/Estimate/estimate';
-import AdminVSRecommand from './pages/Admin/VS/Recommand/recommand';
 import AdminQuiz from './pages/Admin/Quiz/';
 import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
@@ -126,6 +124,9 @@ const App = () => {
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
 
+  //현재 진행중인 이벤트들의 ID만 받아온다
+  const [progressedEventDatas, setProgressedEventDatas] = useState([]);
+
   // 관리지 페이지 중 Quiz CRUD를 위해 선언했습니다.
   const [currentQuizDatas, setCurrentQuizDatas] = useState({});
 
@@ -142,6 +143,7 @@ const App = () => {
 
   // 제품 수량 && 판매 현황 개수
   const [buyDatas, setBuyDatas] = useState([]);
+  const [vsData, setVSData] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -253,6 +255,7 @@ const App = () => {
       quizzesTableData.data = res.data;
       setQuizzesTableData(quizzesTableData);
       setQuizDatas(res.data);
+      getProgressedEventId();
     });
   }
 
@@ -262,10 +265,26 @@ const App = () => {
       setBuyDatas(res.data);
     });
   }
+  async function getEventProducts() {
+    Axios.get('https://i3b309.p.ssafy.io/api/coupon/estimation').then(function(
+      res,
+    ) {
+      setVSData(res.data);
+    });
+  }
+
+  async function getProgressedEventId() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/event/eventId').then(
+      function(res) {
+        setProgressedEventDatas(res.data);
+      },
+    );
+  }
 
   useEffect(() => {
     getProductDatas();
     getBuyDatas();
+    getEventProducts();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -351,6 +370,8 @@ const App = () => {
         // 제품 수량 && 판매 현황 개수
         buyDatas,
         setBuyDatas,
+        vsData,
+        setVSData,
       }}
     >
       <MuiThemeProvider theme={theme}>
@@ -384,16 +405,6 @@ const App = () => {
 
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/vs" component={AdminVS} />
-            <Route
-              exact
-              path="/admin/vs/estimate"
-              component={AdminVSEstimate}
-            />
-            <Route
-              exact
-              path="/admin/vs/recommand"
-              component={AdminVSRecommand}
-            />
             <Route exact path="/admin/quiz" component={AdminQuiz} />
             <Route exact path="/admin/quiz/form" component={AdminQuizForm} />
 

@@ -69,10 +69,13 @@ const QuizDialog = () => {
 };
 
 const ItemDetail = ({ match }) => {
-  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { user, productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+
   const [eventActivated, setEventActivated] = useState(false);
+  const [userJoinedEvent, setUserJoinedEvent] = useState(false);
+
   const { eventNum, setEventNum } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
   const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
@@ -115,21 +118,28 @@ const ItemDetail = ({ match }) => {
     }
   };
 
-  // const CheckUser = () => {
-  //   console.log(myCouponDatas);
-  //   for (var i = 0; i < myCouponDatas.length; i++) {
-  //     if (Number(match.params.id) === myCouponDatas[i].coupon_select) {
-  //       setEventActivated(false);
-  //       setEventNum(i);
-  //     }
-  //   }
-  // };
+  const CheckUser = () => {
+    console.log(myCouponDatas);
+    for (var i = 0; i < myCouponDatas.length; i++) {
+      if (Number(match.params.id) === myCouponDatas[i].event_id) {
+        setUserJoinedEvent(true);
+        setEventNum(i);
+      }
+    }
+  };
 
   useEffect(CheckEvent);
-  // useEffect(CheckUser);
+  useEffect(CheckUser);
 
   const product_id = match.params.id - 1;
   const isMobile = useMediaQuery('(max-width:920px)');
+
+  const userNotLogin = () => {
+    const confirmMessage = window.confirm('로그인 후 이용 가능합니다.');
+    if (confirmMessage) {
+      window.location.href = '/auth';
+    }
+  };
 
   return (
     <Wrapper>
@@ -226,8 +236,10 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={click1}
-                              disabled={!eventActivated}
+                              onClick={
+                                user.status === 'login' ? click1 : userNotLogin
+                              }
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -259,7 +271,11 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={QuizDialogOpen}
+                              onClick={
+                                user.status === 'login'
+                                  ? QuizDialogOpen
+                                  : userNotLogin
+                              }
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
@@ -383,7 +399,11 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={QuizDialogOpen}
+                              onClick={
+                                user.status === 'login'
+                                  ? QuizDialogOpen
+                                  : userNotLogin
+                              }
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
@@ -392,8 +412,10 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={click1}
-                              disabled={!eventActivated}
+                              onClick={
+                                user.status === 'login' ? click1 : userNotLogin
+                              }
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -635,8 +657,10 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={click1}
-                              disabled={!eventActivated}
+                              onClick={
+                                user.status === 'login' ? click1 : userNotLogin
+                              }
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -668,7 +692,11 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={QuizDialogOpen}
+                              onClick={
+                                user.status === 'login'
+                                  ? QuizDialogOpen
+                                  : userNotLogin
+                              }
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
@@ -817,8 +845,10 @@ const ItemDetail = ({ match }) => {
                             variant="contained"
                             color="primary"
                             disableElevation
-                            onClick={click1}
-                            disabled={!eventActivated}
+                            onClick={
+                              user.status === 'login' ? click1 : userNotLogin
+                            }
+                            disabled={!(eventActivated && !userJoinedEvent)}
                             style={{ marginLeft: '20px' }}
                           >
                             쿠폰 받기
@@ -845,7 +875,11 @@ const ItemDetail = ({ match }) => {
                               variant="contained"
                               color="primary"
                               disableElevation
-                              onClick={QuizDialogOpen}
+                              onClick={
+                                user.status === 'login'
+                                  ? QuizDialogOpen
+                                  : userNotLogin
+                              }
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기

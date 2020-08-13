@@ -61,11 +61,14 @@ export default function VerticalTabs() {
   const onClickSignOutOpenHandler = () => {
     setDrawerOpen(false);
     setUser({
-      user_no: 0,
-      user_id: '',
-      user_nm: '',
+      user_id: 0,
+      user_email: '',
+      user_name: '',
+      user_phone: '',
       user_pwd: '',
-      user_img_url: '',
+      user_image: '',
+      user_quiz: '',
+      isAdmin: '',
       status: '',
       web_site: '',
       token: '',

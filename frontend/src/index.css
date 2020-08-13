@@ -4,6 +4,8 @@ body,
 html {
   margin: 0;
   padding: 0;
+  /* font-family: 'Noto Sans KR', sans-serif; */
+  /* font-family: 'Black Han Sans', sans-serif; */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   font-family: 'Nanum Pen Script', cursive;
@@ -11,11 +13,34 @@ html {
 body::-webkit-scrollbar,
 html::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
+  /* font-family: 'Black Han Sans', sans-serif; */
 }
+
+/* LotteDream */
+@font-face {
+  font-family: LotteDream;
+  font-weight: 300;
+  font-style: small;
+  src: url('fonts/LotteDreamLight.ttf') format('truetype');
+}
+@font-face {
+  font-family: LotteDream;
+  font-weight: 500;
+  font-style: medium;
+  src: url('fonts/LotteDreamMedium.ttf') format('truetype');
+}
+@font-face {
+  font-family: LotteDream;
+  font-weight: 700;
+  font-style: large;
+  src: url('fonts/LotteDreamBold.ttf') format('truetype');
+}
+
 * {
   margin: 0;
   padding: 0;
   list-style: none;
   text-decoration: none;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 'LotteDream', sans-serif;
+  font-weight: medium;
 }

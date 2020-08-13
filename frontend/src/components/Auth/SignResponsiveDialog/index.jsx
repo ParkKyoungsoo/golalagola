@@ -89,7 +89,7 @@ const SignInSection01 = () => {
             user_email: signInUserData.user_email,
             user_name: res.data.user_name,
             user_phone: res.data.user_phone,
-            user_image: res.data.user_imag,
+            user_image: res.data.user_image,
             user_quiz: res.data.user_quiz,
             isAdmin: res.data.isAdmin,
             status: 'login',

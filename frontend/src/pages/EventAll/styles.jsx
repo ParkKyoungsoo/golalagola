@@ -34,13 +34,15 @@ const Wrapper = styled.div`
   }
   .mobileButton {
     position: fixed;
-    right: 10px;
-    // top: 3.5vh;
+    right: -3vw;
+    top: 20vh;
+    // width: 50%;
+    // heigth: 50%;
   }
   .webButton {
     position: fixed;
-    right: 0px;
-    // top: 3.5vh;
+    right: 1.2vw;
+    top: 20vh;
   }
   .sideBarColumn {
     display: flex;
