@@ -251,11 +251,9 @@ const ItemDetail = ({ match }) => {
             aria-labelledby="max-width-dialog-title"
             PaperProps={{
               style: {
-                // height: '90vh',
+                height: '85vh',
                 padding: '10px',
-                // width: '1280px',
-                width: '80%',
-                height: 'auto',
+                width: '85vw',
                 maxWidth: 'none',
                 overflowX: 'hidden',
                 overflowY: 'auto',
@@ -427,11 +425,9 @@ const ItemDetail = ({ match }) => {
             aria-labelledby="max-width-dialog-title"
             PaperProps={{
               style: {
-                // height: '90vh',
+                height: '85vh',
                 padding: '10px',
-                // width: '1280px',
-                width: '80%',
-                height: 'auto',
+                width: '85vw',
                 maxWidth: 'none',
                 overflowX: 'hidden',
                 overflowY: 'auto',

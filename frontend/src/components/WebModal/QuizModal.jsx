@@ -3,11 +3,18 @@ import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
 import { Route, Link } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
+import { Dialog, Grid, useMediaQuery, Button } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
-import MultiCarousel from './MultiCarousel';
+// import MultiCarousel from './MultiCarousel';
+import ClearIcon from '@material-ui/icons/Clear';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+// ClickAwayListener
 
 const SuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
@@ -74,48 +81,96 @@ const Quiz = () => {
 
   const isMobile = useMediaQuery('(max-width:920px)');
   // console.log('aaa', quizDatas.length);
+
+  // ClickAwayListener
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(prev => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
   return (
     <>
       <Wrapper>
-        <MultiCarousel />
-        <Grid className="quizCentering">
-          <h3
-            style={{
-              textAlign: 'center',
-              marginTop: '70px',
-              marginBottom: '10px',
-            }}
-          >
-            오늘의 퀴즈
-          </h3>
-        </Grid>
-        <Grid className="quizCentering">
-          <h2
+        <Grid container direction="column" xs={12}>
+          <Grid item className="quizCentering">
+            <h3
+              style={{
+                textAlign: 'center',
+                marginBottom: '3vh',
+              }}
+            >
+              오늘의 퀴즈
+            </h3>
+          </Grid>
+          <Grid
+            item
+            className="quizCentering"
             style={{
               textAlign: 'center',
               marginTop: '10px',
               marginBottom: '50px',
+              fontSize: 'xx-large',
             }}
           >
-            {/* {console.log(quizDatas[1].quiz_question)} */}
-            {/* {console.log(randomNumber)} */}
-            {/* {console.log(number)} */}
             {Object(quizDatas[number]).quiz_question}
-          </h2>
-        </Grid>
-        <Grid className="quizCentering">
-          <button
-            onClick={click(true)}
-            style={userAns === true ? buttonStyle : null}
+          </Grid>
+          <Grid
+            style={{
+              textAlign: 'center',
+              marginTop: '10px',
+              marginBottom: '50px',
+              fontSize: 'x-large',
+            }}
           >
-            <img src={Test.answers[0]} alt="quiz" />
-          </button>
-          <button
-            onClick={click(false)}
-            style={userAns === false ? buttonStyle : null}
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <Grid className>
+                <NotListedLocationIcon
+                  onClick={handleClick}
+                  style={{ fontSize: '10vh' }}
+                />
+                {open ? (
+                  <Grid className>{Object(quizDatas[number]).quiz_hint}</Grid>
+                ) : null}
+              </Grid>
+            </ClickAwayListener>
+          </Grid>
+          <Grid
+            item
+            className="quizCentering"
+            style={{ justifyContent: 'space-evenly' }}
           >
-            <img src={Test.answers[1]} alt="quiz" />
-          </button>
+            <Button
+              onClick={click(true)}
+              style={userAns === true ? buttonStyle : null}
+              color="primary"
+              style={{ backgroundColor: 'black' }}
+            >
+              <RadioButtonUncheckedIcon style={{ fontSize: '10vw' }} />
+              {/* <img
+                src={Test.answers[0]}
+                alt="quiz"
+                style={{ width: '30vw', height: '27vh' }}
+              /> */}
+            </Button>
+            <Button
+              onClick={click(false)}
+              style={userAns === false ? buttonStyle : null}
+              color="secondary"
+              style={{ backgroundColor: 'gray' }}
+            >
+              <ClearIcon style={{ fontSize: '10vw' }} />
+              {/* <img
+                src={Test.answers[1]}
+                alt="quiz"
+                style={{ width: '30vw', height: '27vh' }}
+              /> */}
+            </Button>
+          </Grid>
         </Grid>
       </Wrapper>
       {userAns ? (
