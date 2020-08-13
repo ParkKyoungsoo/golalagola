@@ -469,9 +469,9 @@ const EventAll = () => {
               eventGridRender(index, tmpData),
             )}
           </Grid>
-          {/* <Grid item className={isMobile ? null : null}>
+          <Grid item className={isMobile ? 'mobileButton' : 'webButton'}>
             <NestedList />
-          </Grid> */}
+          </Grid>
         </Grid>
       </Layout>
     </Wrapper>

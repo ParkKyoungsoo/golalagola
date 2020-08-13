@@ -147,7 +147,7 @@ const AdminProduct = () => {
               <MaterialTable
                 className="admin_product__table"
                 icons={tableIcons}
-                title="재고 목록"
+                title=""
                 columns={productsTableData.columns}
                 data={productsTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
