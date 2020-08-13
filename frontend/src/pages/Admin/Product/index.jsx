@@ -62,7 +62,7 @@ const AdminProduct = () => {
     setCurrentProductDatas,
     productsTableData,
     setProductsTableData,
-	buyDatas,
+    buyDatas,
     setBuyDatas,
   } = useContext(CommonContext);
 
@@ -133,6 +133,31 @@ const AdminProduct = () => {
       });
   };
 
+  // 차트 데이터
+  const options = rowData => {
+    return {
+      title: {
+        text: '판매 현황',
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: 'column',
+          dataPoints: [
+            {
+              label: '총 개수',
+              y: rowData.prod_amount,
+            },
+            {
+              label: '판매 개수',
+              y: buyDatas[`${rowData.prod_id}`],
+            },
+          ],
+        },
+      ],
+    };
+  };
+
   return (
     <Wrapper>
       <div className="admin_product__main">
@@ -159,30 +184,7 @@ const AdminProduct = () => {
                         xs={4}
                         className="admin_product__detail--image_grid"
                       >
-                        <CanvasJSChart
-                          options={{
-                            title: {
-                              text: '판매 현황',
-                            },
-                            data: [
-                              {
-                                // Change type to "doughnut", "line", "splineArea", etc.
-                                type: 'column',
-                                dataPoints: [
-                                  {
-                                    label: '총 개수',
-                                    y: rowData.prod_amount,
-                                  },
-                                  {
-                                    label: '판매 개수',
-                                    y: buyDatas[`${rowData.prod_id}`],
-                                  },
-                                ],
-                              },
-                            ],
-                          }}
-                          /* onRef={ref => this.chart = ref} */
-                        />
+                        <CanvasJSChart options={options(rowData)} />
                       </Grid>
                       <Grid
                         item
