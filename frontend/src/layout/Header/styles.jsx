@@ -14,8 +14,8 @@ const Wrapper = styled.div`
     flex-wrap: nowrap;
     position: fixed;
     right: 30px;
-    top: 1.5vh;
-    background-color: #f7f2f2;
+    top: 0.8vh;
+    // background-color: #f7f2f2;
   }
 
   .display-none {
@@ -62,7 +62,7 @@ const Wrapper = styled.div`
   & .menu-button {
     position: fixed;
     left: 30px;
-    top: 2vh;
+    top: 1.5vh;
     z-index: 1300;
     margin-left: 0;
     width: 23px;

@@ -75,6 +75,7 @@ const ItemDetail = ({ match }) => {
 
   const [eventActivated, setEventActivated] = useState(false);
   const [userJoinedEvent, setUserJoinedEvent] = useState(false);
+  const [userHasCoupon, setUserHasCoupon] = useState(false);
 
   const { eventNum, setEventNum } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
@@ -104,8 +105,7 @@ const ItemDetail = ({ match }) => {
   // vs이벤트가 진행중인지 판단하는 함수 입니다.
   // match.params.id 를 통해 해당 상품의 id를 조회 할 수 있습니다.
   // currentEventDatas.length 를 통해 행사중인 이벤트의 개수를 알 수 있습니다.
-
-  const CheckEvent = () => {
+  const checkEvent = () => {
     for (var i = 0; i < currentEventDatas.length; i++) {
       if (
         Number(match.params.id) ===
@@ -118,18 +118,38 @@ const ItemDetail = ({ match }) => {
     }
   };
 
-  const CheckUser = () => {
-    console.log(myCouponDatas);
+  const checkedUserHasCoupon = () => {
     for (var i = 0; i < myCouponDatas.length; i++) {
       if (Number(match.params.id) === myCouponDatas[i].coupon_select) {
-        setUserJoinedEvent(true);
-        setEventNum(i);
+        setUserHasCoupon(true);
       }
     }
   };
 
-  useEffect(CheckEvent);
-  useEffect(CheckUser);
+  const checkUser = () => {
+    let eventNum = '';
+
+    for (var i = 0; i < currentEventDatas.length; i++) {
+      if (
+        Number(match.params.id) ===
+          Object(currentEventDatas[i]).event_item['1'].prod_id ||
+        Number(match.params.id) ===
+          Object(currentEventDatas[i]).event_item['2'].prod_id
+      ) {
+        eventNum = Object(currentEventDatas[i]).event_id;
+      }
+    }
+
+    for (let j = 0; j < myCouponDatas.length; j++) {
+      if (eventNum === Object(myCouponDatas[j]).event_id) {
+        setUserJoinedEvent(true);
+      }
+    }
+  };
+
+  useEffect(checkEvent);
+  useEffect(checkUser);
+  useEffect(checkedUserHasCoupon);
 
   const product_id = match.params.id - 1;
   const isMobile = useMediaQuery('(max-width:920px)');
@@ -277,6 +297,7 @@ const ItemDetail = ({ match }) => {
                                   : userNotLogin
                               }
                               style={{ marginLeft: '20px' }}
+                              disabled={user.user_quiz}
                             >
                               퀴즈 풀기
                             </Button>
@@ -404,6 +425,7 @@ const ItemDetail = ({ match }) => {
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
@@ -431,8 +453,14 @@ const ItemDetail = ({ match }) => {
                             }}
                           >
                             <span className="w_DCT">
-                              <FiberManualRecordIcon
+                              {/* <FiberManualRecordIcon
                                 style={{ fontSize: '15px' }}
+                              /> */}
+                              <input
+                                type="checkBox"
+                                className="quizChecked"
+                                disabled={true}
+                                checked={user.user_quiz}
                               />
                               &nbsp; 퀴즈 참여 적용 할인(
                               {productDatas[match.params.id - 1].prod_sale -
@@ -457,9 +485,16 @@ const ItemDetail = ({ match }) => {
                             }}
                           >
                             <span className="w_DCT">
-                              <FiberManualRecordIcon
-                                style={{ fontSize: '15px' }}
+                              <input
+                                type="checkBox"
+                                className="quizChecked"
+                                disabled={true}
+                                checked={
+                                  !(eventActivated && !userJoinedEvent) &&
+                                  userHasCoupon
+                                }
                               />
+                              {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
                               &nbsp; 이벤트 참여 적용 할인(
                               {productDatas[match.params.id - 1].prod_sale - 10}
                               %)
@@ -490,11 +525,19 @@ const ItemDetail = ({ match }) => {
                             <span className="mSP">
                               {numberWithCommas(
                                 parseInt(
-                                  productDatas[match.params.id - 1].prod_price *
-                                    ((100 -
-                                      productDatas[match.params.id - 1]
-                                        .prod_sale) /
-                                      100),
+                                  productDatas[match.params.id - 1].prod_price -
+                                    ((user.user_quiz
+                                      ? productDatas[match.params.id - 1]
+                                          .prod_price * 0.1
+                                      : 0) +
+                                      (userHasCoupon
+                                        ? productDatas[match.params.id - 1]
+                                            .prod_price *
+                                          ((productDatas[match.params.id - 1]
+                                            .prod_sale -
+                                            10) /
+                                            100)
+                                        : 0)),
                                 ),
                               )}
                               원
@@ -510,9 +553,19 @@ const ItemDetail = ({ match }) => {
                             }}
                           >
                             <span className="w_DCP">
-                              {productDatas[match.params.id - 1].prod_price *
-                                (productDatas[match.params.id - 1].prod_sale /
-                                  100)}
+                              {0 +
+                                (user.user_quiz
+                                  ? productDatas[match.params.id - 1]
+                                      .prod_price * 0.1
+                                  : 0) +
+                                (userHasCoupon
+                                  ? productDatas[match.params.id - 1]
+                                      .prod_price *
+                                    ((productDatas[match.params.id - 1]
+                                      .prod_sale -
+                                      10) /
+                                      100)
+                                  : 0)}
                               원
                             </span>
                             &nbsp;
@@ -697,6 +750,7 @@ const ItemDetail = ({ match }) => {
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
@@ -880,6 +934,7 @@ const ItemDetail = ({ match }) => {
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기

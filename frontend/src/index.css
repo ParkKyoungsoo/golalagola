@@ -19,14 +19,14 @@ html::-webkit-scrollbar {
 /* LotteDream */
 @font-face {
   font-family: 'LotteDream';
-  /* font-weight: 500; */
+  font-weight: 300;
   /* font-style: small; */
   src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2')
       format('woff2'),
     url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff')
       format('woff');
 }
-/* @font-face {
+@font-face {
   font-family: 'LotteDream';
   font-weight: 500;
   font-style: medium;
@@ -43,7 +43,7 @@ html::-webkit-scrollbar {
       format('woff2'),
     url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff')
       format('woff');
-} */
+}
 
 * {
   margin: 0;
@@ -53,5 +53,5 @@ html::-webkit-scrollbar {
   /* font-family: 'Noto Sans KR', sans-serif !important; */
   font-family: 'LotteDream', sans-serif;
   /* font-family:  */
-  font-weight: 500;
+  font-weight: 300;
 }

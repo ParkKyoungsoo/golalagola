@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { Grid, Divider, useMediaQuery, Button } from '@material-ui/core';
+import { Grid, Divider, useMediaQuery, Button, Link } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import { CenterFocusStrong } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 const CouponModal = modalNum => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
@@ -14,9 +15,25 @@ const CouponModal = modalNum => {
   );
 
   const isMobile = useMediaQuery('(max-width:920px)');
+
+  let history = useHistory();
+
+  // const onClickRedirect = () => {
+  //   history.push('/mainvote');
+  // };
+
+  const onClickRedirect = name => e => {
+    window.scrollTo(0, 0);
+    setItemDialogOpen(false);
+    if (name === '/mainvote') {
+      history.push('/');
+    } else {
+      history.push(`/${name}`);
+    }
+  };
+
   return (
     <>
-      {/* {console.log(couponPageItem)} */}
       <Grid container direction="column" style={{ display: 'flex' }} xs={12}>
         {/* <Grid>
           <img
@@ -28,19 +45,17 @@ const CouponModal = modalNum => {
         <Grid item style={{ textAlign: 'center' }} xs={12}>
           <Grid style={{ marginBottom: '5vh' }}>
             <Grid container direction="column">
-              <Grid item>
+              <Grid item style={{ marginTop: '4vh' }}>
                 <h3>상품에 대한 쿠폰이 발행되었습니다!</h3>
               </Grid>
-              <Grid item>
-                <h3>간단한 퀴즈를 풀고 추가 할인혜택을 받으세요!</h3>
+              <Grid item style={{ marginTop: '4vh' }}>
+                <h3>
+                  간단한 퀴즈를 풀고 추가 전체 재고에 대한 할인혜택을 받으세요!
+                </h3>
               </Grid>
             </Grid>
           </Grid>
 
-          {/* <Divider /> */}
-          {/* <Grid>상품은 상품입니다.</Grid> */}
-
-          {/* <Divider /> */}
           <Grid
             item
             style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
@@ -50,24 +65,26 @@ const CouponModal = modalNum => {
               style={{ justifyContent: 'space-evenly' }}
               direction="row"
             >
-              <Grid item xs={2}>
+              <Grid item>
                 <Button
-                  onClick={() => modalNum.setModalNum(3)}
-                  style={{ width: '15vw', height: '10vh' }}
                   variant="contained"
+                  onClick={() => modalNum.setModalNum(3)}
                   color="primary"
+                  disableElevation
+                  style={{ width: '100%', height: '10vh', fontSize: 'larger' }}
+                  // disabled={selectedEventItem === undefined}
                 >
-                  퀴즈 풀고 추가 할인 받기
+                  추가 할인 받기
                 </Button>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item>
                 <Button
-                  onClick={() => setItemDialogOpen(false)}
-                  style={{ width: '15vw', height: '10vh' }}
+                  onClick={onClickRedirect('/mainvote')}
+                  style={{ width: '15vw', height: '10vh', fontSize: 'larger' }}
                   variant="contained"
                   color="secondary"
                 >
-                  창 닫기
+                  Home
                 </Button>
               </Grid>
             </Grid>
