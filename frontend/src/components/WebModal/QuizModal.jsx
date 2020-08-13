@@ -9,12 +9,29 @@ import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
 import MultiCarousel from './MultiCarousel';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 const SuccessModal = () => {
-  const { user } = useContext(CommonContext);
+  const { user, setUser } = useContext(CommonContext);
+  const userQuizState = {
+    user_quiz: true,
+  };
   let history = useHistory();
 
   // 유저가 가지고 있는 Quiz 상태 바꿔줘야함
+  const userUpdate = () => {
+    axios
+      .put(
+        `https://i3b309.p.ssafy.io/api/auth/solveQuiz/${user.user_id}`,
+        userQuizState,
+      )
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(error => {});
+  };
+
+  useEffect(userUpdate, []);
 
   return (
     <>
