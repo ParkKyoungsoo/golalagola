@@ -260,7 +260,6 @@ const EventModal = modalNum => {
               variant="contained"
               color="primary"
               disableElevation
-              // style={{ alignItems: 'center' }}
               onClick={EventTrigger}
               disabled={selectedEventItem === undefined}
             >
