@@ -191,6 +191,7 @@ const App = () => {
 
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
+  // console.log(123123123123);
   async function getProductDatas() {
     await Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(
       res,
