@@ -47,7 +47,7 @@ const Result = ({ match }) => {
           <Grid
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'center',
               textAlign: 'center',
             }}
           >
@@ -58,35 +58,36 @@ const Result = ({ match }) => {
                 상품이 검색되었습니다.
               </p>
               <Divider />
+              <Grid
+                style={{
+                  color: '#838383',
+                  textAlign: 'left',
+                }}
+              >
+                <br />
+                <h2>찾으시는 상품이 없으신가요?</h2>
+                <p>
+                  찾으시는 제품이 사이트 내에서 검색 되지 않는다면 고객센터로
+                  연락주세요.
+                </p>
+                <p>편안하고 즐거운 쇼핑을 위해 원하시는 상품을 찾아드립니다.</p>
+                <div>
+                  <h3 style={{ float: 'left' }}>고객센터&nbsp;</h3>
+                  <h3 style={{ color: '#2570CB' }}>9463 - 9454</h3>
+                  <p>월~금 : 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</p>
+                  <p>토, 일, 공휴일 휴무</p>
+                </div>
+                <h5>SEARCH TIPS</h5>
+                <ol>
+                  <li>검색어가 올바르게 입력되었는지 확인해주세요.</li>
+                  <li>검색어의 띄어쓰기를 다르게 해보세요.</li>
+                  <li>
+                    한글을 영어로 혹은 영어를 한글로 입력했는지 확인해보세요.
+                  </li>
+                  <li>상품이 품절되었을 경우 검색이 되지 않을 수 있습니다.</li>
+                </ol>
+              </Grid>
             </Alert>
-            <Grid
-              style={{
-                color: '#838383',
-                textAlign: 'left',
-              }}
-            >
-              <h2>찾으시는 상품이 없으신가요?</h2>
-              <p>
-                찾으시는 제품이 사이트 내에서 검색 되지 않는다면 고객센터로
-                연락주세요.
-              </p>
-              <p>편안하고 즐거운 쇼핑을 위해 원하시는 상품을 찾아드립니다.</p>
-              <div>
-                <h3 style={{ float: 'left' }}>고객센터&nbsp;</h3>
-                <h3 style={{ color: '#2570CB' }}>9463 - 9454</h3>
-                <p>월~금 : 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</p>
-                <p>토, 일, 공휴일 휴무</p>
-              </div>
-              <h5>SEARCH TIPS</h5>
-              <ol>
-                <li>검색어가 올바르게 입력되었는지 확인해주세요.</li>
-                <li>검색어의 띄어쓰기를 다르게 해보세요.</li>
-                <li>
-                  한글을 영어로 혹은 영어를 한글로 입력했는지 확인해보세요.
-                </li>
-                <li>상품이 품절되었을 경우 검색이 되지 않을 수 있습니다.</li>
-              </ol>
-            </Grid>
           </Grid>
         ) : (
           <Grid
@@ -98,7 +99,6 @@ const Result = ({ match }) => {
           >
             <Grid>
               <p>'{match.params.searchValue}' 검색 결과</p>
-              <p>디자인이 마음에 안 듬 matarial ui snakbar 괜찮을 거 같음</p>
             </Grid>
           </Grid>
         )}
