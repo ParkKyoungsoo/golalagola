@@ -368,7 +368,7 @@ const MainVote = props => {
                                         style={{
                                           width: '100px',
                                           height: '50px',
-                                          margin: '1vh auto',
+                                          padding: '0',
                                         }}
                                       >
                                         <p
