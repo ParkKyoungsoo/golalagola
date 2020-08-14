@@ -162,6 +162,7 @@ const Wrapper = styled.div`
     display: inline-block;
     overflow: hidden; /* 불필요한 부분 가리기 */
     padding: 1px;
+    
   }
   .m_effect:after {
     content: '';

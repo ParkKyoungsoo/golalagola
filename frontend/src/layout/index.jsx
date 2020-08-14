@@ -32,7 +32,7 @@ const Layout = props => {
         </Container>
       ) : (
         <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-          <Grid xs={12} md={8}>
+          <Grid xs={12} md={9}>
             <Container
               open={drawerOpen}
               className={

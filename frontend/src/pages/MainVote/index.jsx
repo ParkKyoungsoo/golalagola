@@ -244,6 +244,15 @@ const MainVote = props => {
                 </Grid>
               </Grid>
               <Divider style={{ margin: '0px 0 0px 0' }} />
+            </AppBar>
+            <Grid
+              style={{
+                position: 'sticky',
+                top: '5vh',
+                zIndex: '1',
+                backgroundColor: '#f7f2f2',
+              }}
+            >
               <Tabs
                 value={appbarIndex + appbarIndexDelta}
                 onChange={onChangeIndexHandler}
@@ -271,9 +280,7 @@ const MainVote = props => {
                   ></Tab>
                 ))}
               </Tabs>
-              <Divider style={{ margin: '0px 0 0px 0' }} />
-            </AppBar>
-
+            </Grid>
             {categoryDatas.map((categoryData, index) => (
               <TabPanel
                 key={index}
@@ -395,6 +402,16 @@ const MainVote = props => {
                 </Grid>
               </Grid>
               <Divider style={{ margin: '0px 0 0px 0' }} />
+            </AppBar>
+
+            <Grid
+              style={{
+                position: 'sticky',
+                top: '5vh',
+                zIndex: '1',
+                backgroundColor: '#f7f2f2',
+              }}
+            >
               <Tabs
                 value={appbarIndex + appbarIndexDelta}
                 onChange={onChangeIndexHandler}
@@ -421,9 +438,7 @@ const MainVote = props => {
                   ></Tab>
                 ))}
               </Tabs>
-              <Divider style={{ margin: '0px 0 0px 0' }} />
-            </AppBar>
-
+            </Grid>
             {categoryDatas.map((categoryData, index) => (
               <TabPanel
                 key={index}
