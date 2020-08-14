@@ -44,6 +44,7 @@ const QuizDialog = () => {
           position: 'inherit',
           width: '80%',
           height: '80%',
+          justifyContent: 'center',
         },
       }}
       BackdropProps={{
@@ -322,6 +323,7 @@ const ItemDetail = ({ match }) => {
                     overflowX: 'hidden',
                     overflowY: 'auto',
                     position: 'inherit',
+                    justifyContent: 'center',
                   },
                 }}
                 BackdropProps={{
@@ -587,11 +589,12 @@ const ItemDetail = ({ match }) => {
                   style: {
                     height: '90vh',
                     padding: '10px',
-                    width: '1280px',
+                    width: '70vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'auto',
                     position: 'inherit',
+                    justifyContent: 'center',
                   },
                 }}
                 BackdropProps={{
@@ -776,6 +779,7 @@ const ItemDetail = ({ match }) => {
                     overflowX: 'hidden',
                     overflowY: 'auto',
                     position: 'inherit',
+                    justifyContent: 'center',
                   },
                 }}
                 BackdropProps={{

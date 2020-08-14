@@ -29,7 +29,7 @@ const EventModal = modalNum => {
   });
 
   const RadioTest = num => {
-    let today = new Date().toLocaleDateString();
+    let today = new Date();
     let year = today.getFullYear(); // 년도
     let month = today.getMonth() + 1; // 월
     let date = today.getDate(); // 날짜
@@ -44,7 +44,7 @@ const EventModal = modalNum => {
       user_id: user.user_id,
     });
 
-    console.log('userSelect', userChoice);
+    //   console.log('userSelect', userChoice);
   };
 
   async function setMyCouponUpdate() {
@@ -81,7 +81,7 @@ const EventModal = modalNum => {
       user_id: user.user_id,
     });
 
-    console.log('userSelect', userChoice);
+    // console.log('userSelect', userChoice);
 
     setMyCouponUpdate();
   };
@@ -276,13 +276,13 @@ const EventModal = modalNum => {
         <Wrapper>
           <Grid container>
             <Grid item xs={12}>
-              <h4 style={{ textAlign: 'center' }}>
+              <h3 style={{ textAlign: 'center', marginBottom: '5vh' }}>
                 버튼을 눌러{' '}
                 <strong style={{ color: 'red', textAlign: 'center' }}>
                   할인
                 </strong>
                 을 받으세요!
-              </h4>
+              </h3>
             </Grid>
           </Grid>
           <Grid
@@ -400,19 +400,18 @@ const EventModal = modalNum => {
                     }
                   ></input>
                 </Grid>
-                <Grid item>
-                  <p>
-                    <h5 className="desCss">
-                      {
-                        Object(
-                          productDatas[
-                            currentEventDatas[eventNum].event_item['1']
-                              .prod_id - 1
-                          ],
-                        ).prod_title
-                      }
-                    </h5>
-                  </p>
+                <Grid item className="desCss">
+                  {/* <p> */}
+                  {/* <h5 className="desCss"> */}
+                  {
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                      ],
+                    ).prod_title
+                  }
+                  {/* </h5> */}
+                  {/* </p> */}
                 </Grid>
               </Grid>
             </Grid>
@@ -444,18 +443,18 @@ const EventModal = modalNum => {
                   ></input>
                 </Grid>
                 <Grid item>
-                  <p>
-                    <h5 className="desCss">
-                      {
-                        Object(
-                          productDatas[
-                            currentEventDatas[eventNum].event_item['2']
-                              .prod_id - 1
-                          ],
-                        ).prod_title
-                      }
-                    </h5>
-                  </p>
+                  {/* <p> */}
+                  <h5 className="desCss">
+                    {
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['2'].prod_id -
+                            1
+                        ],
+                      ).prod_title
+                    }
+                  </h5>
+                  {/* </p> */}
                 </Grid>
               </Grid>
             </Grid>

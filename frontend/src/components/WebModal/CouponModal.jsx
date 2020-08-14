@@ -34,25 +34,30 @@ const CouponModal = modalNum => {
 
   return (
     <>
-      <Grid container direction="column" style={{ display: 'flex' }} xs={12}>
-        {/* <Grid>
-          <img
-            src={`../../${couponPageItem.prod_image}`}
-            alt="ItemImage"
-            style={{ height: '250px', width: '250px' }}
-          />
-        </Grid> */}
-        <Grid item style={{ textAlign: 'center' }} xs={12}>
-          <Grid style={{ marginBottom: '5vh' }}>
-            <Grid container direction="column">
-              <Grid item style={{ marginTop: '4vh' }}>
-                <h3>상품에 대한 쿠폰이 발행되었습니다!</h3>
-              </Grid>
-              <Grid item style={{ marginTop: '4vh' }}>
-                <h3>
-                  간단한 퀴즈를 풀고 추가 전체 재고에 대한 할인혜택을 받으세요!
-                </h3>
-              </Grid>
+      <Grid
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+        }}
+        xs={12}
+      >
+        <Grid
+          item
+          style={{
+            margin: 'auto',
+            textAlign: 'center',
+          }}
+          xs={12}
+        >
+          <Grid container direction="column" style={{ marginBottom: '4vh' }}>
+            <Grid item style={{ marginTop: '4vh' }}>
+              <h3>상품에 대한 쿠폰이 발행되었습니다!</h3>
+            </Grid>
+            <Grid item style={{ marginTop: '4vh' }}>
+              <h3>
+                간단한 퀴즈를 풀고 추가 전체 재고에 대한 할인혜택을 받으세요!
+              </h3>
             </Grid>
           </Grid>
 
@@ -71,7 +76,7 @@ const CouponModal = modalNum => {
                   onClick={() => modalNum.setModalNum(3)}
                   color="primary"
                   disableElevation
-                  style={{ width: '100%', height: '10vh', fontSize: 'larger' }}
+                  style={{ width: '15vw', height: '10vh', fontSize: 'larger' }}
                   // disabled={selectedEventItem === undefined}
                 >
                   추가 할인 받기
