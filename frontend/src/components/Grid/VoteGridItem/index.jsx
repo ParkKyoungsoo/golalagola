@@ -89,7 +89,7 @@ export default function VoteGridItem(props) {
       {realtime.includes(itemData.prod_id) ? (
         <Grid container className="info-open-handler-grid">
           {isMobile ? (
-            <Grid className="m_effect">
+            <Grid className="m_effect" style={{ zIndex: '0' }}>
               <Grid className="img-box" onClick={click}>
                 <Avatar
                   variant="square"
@@ -129,7 +129,7 @@ export default function VoteGridItem(props) {
               </Grid>
             </Grid>
           ) : (
-            <Grid className="effect">
+            <Grid className="effect" style={{ zIndex: '0' }}>
               <Grid className="img-box" onClick={click}>
                 <Avatar
                   variant="square"
