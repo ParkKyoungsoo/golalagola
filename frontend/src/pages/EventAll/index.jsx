@@ -395,7 +395,7 @@ const EventAll = () => {
   const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
-      maxWidth: 100,
+
       // backgroundColor: theme.palette.background.paper,
     },
     // nested: {
@@ -450,6 +450,14 @@ const EventAll = () => {
         component="nav"
         aria-labelledby="nested-list-subheader"
         className={classes.root}
+        style={
+          isMobile
+            ? {
+                display: 'flex',
+                justifyContent: 'center',
+              }
+            : { maxWidth: 100 }
+        }
       >
         <ListItem
           button
@@ -480,83 +488,73 @@ const EventAll = () => {
   return (
     <Wrapper>
       <Layout>
-        <h3>두 개의 상품중 마음에 드는 상품을 골라가세요</h3>
-        <Grid>
+        <Grid
+          style={{
+            position: 'sticky',
+            top: '5vh',
+            display: 'flex',
+            justifyContent: 'center',
+            backgroundColor: '#f7f2f2',
+          }}
+        >
+          <h4>두 개의 상품중 마음에 드는 상품을 골라가세요</h4>
+        </Grid>
+        <Grid style={{ display: 'flex', flexDirection: 'column' }}>
           {isMobile ? (
-            <Grid
-              style={{
-                position: 'sticky',
-                top: '90vh',
-                display: 'flex',
-                justifyContent: 'flex-end',
-              }}
-            >
-              <Button
-                // aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-                color="secondary"
+            <>
+              <Grid
+                style={{
+                  position: 'sticky',
+                  // top: '8.5vh',
+                  top: '93vh',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  backgroundColor: '#f7f2f2',
+                }}
               >
-                <Fab color="primary" aria-label="add">
-                  <AddIcon />
-                </Fab>
-                {/* <AddIcon /> */}
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
+                <NestedList />
+              </Grid>
+              <Grid
+                item
+                style={{
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  marginTop: '-7vh',
+                  paddingBottom: '10vh',
+                }}
               >
-                <MenuItem
-                  onClick={
-                    user.status === 'login' ? submitCouponData : userNotLogin
-                  }
-                >
-                  <SendIcon />
-                  <span> 쿠폰담기</span>
-                </MenuItem>
-                <MenuItem onClick={onClickRedirectPathHandler('mycoupon')}>
-                  <InboxIcon />
-                  <span> 쿠폰함</span>
-                </MenuItem>
-              </Menu>
-            </Grid>
+                {currentEventDatas.map((tmpData, index) =>
+                  eventGridRender(index, tmpData),
+                )}
+              </Grid>
+            </>
           ) : (
-            <Grid
-              style={{
-                position: 'sticky',
-                top: '100px',
-                display: 'flex',
-                justifyContent: 'flex-end',
-              }}
-            >
-              <NestedList />
-            </Grid>
+            <>
+              <Grid
+                style={{
+                  position: 'sticky',
+                  top: '100px',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <NestedList />
+              </Grid>
+              <Grid
+                xs={11}
+                item
+                style={{
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  marginTop: '-15vh',
+                }}
+              >
+                {currentEventDatas.map((tmpData, index) =>
+                  eventGridRender(index, tmpData),
+                )}
+              </Grid>
+            </>
           )}
-
-          <Grid
-            xs={11}
-            item
-            style={
-              isMobile
-                ? {
-                    textAlign: 'center',
-                    verticalAlign: 'middle',
-                    marginTop: '-5vh',
-                  }
-                : {
-                    textAlign: 'center',
-                    verticalAlign: 'middle',
-                    marginTop: '-15vh',
-                  }
-            }
-          >
-            {currentEventDatas.map((tmpData, index) =>
-              eventGridRender(index, tmpData),
-            )}
-          </Grid>
         </Grid>
       </Layout>
     </Wrapper>

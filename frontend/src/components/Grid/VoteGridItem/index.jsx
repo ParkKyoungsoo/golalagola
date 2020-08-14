@@ -106,6 +106,7 @@ export default function VoteGridItem(props) {
                 <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
                   <br />
+                  <span>최대</span>
                   <span
                     style={{
                       color: 'red',
@@ -114,7 +115,6 @@ export default function VoteGridItem(props) {
                       border: '3px solid pink',
                     }}
                   >
-                    {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
                   <br />
@@ -146,6 +146,7 @@ export default function VoteGridItem(props) {
                 <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
                   <br />
+                  <span>최대</span>
                   <span
                     style={{
                       color: 'red',
@@ -154,7 +155,6 @@ export default function VoteGridItem(props) {
                       border: '3px solid pink',
                     }}
                   >
-                    {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
                   <br />
@@ -191,6 +191,7 @@ export default function VoteGridItem(props) {
                 <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
                   <br />
+                  <span>최대</span>
                   <span
                     style={{
                       color: 'red',
@@ -199,7 +200,6 @@ export default function VoteGridItem(props) {
                       border: '3px solid pink',
                     }}
                   >
-                    {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
                   <br />
@@ -231,6 +231,7 @@ export default function VoteGridItem(props) {
                 <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
                   <br />
+                  <span>최대</span>
                   <span
                     style={{
                       color: 'red',
@@ -239,7 +240,6 @@ export default function VoteGridItem(props) {
                       border: '3px solid pink',
                     }}
                   >
-                    {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
                   <br />
