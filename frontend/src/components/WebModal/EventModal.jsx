@@ -20,6 +20,8 @@ const EventModal = modalNum => {
 
   const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
 
+  const { eventListener, setEventListener } = useContext(CommonContext);
+
   const [userChoice, setUserChoice] = useState({
     coupon_select: '',
     coupon_use: '',
@@ -63,6 +65,7 @@ const EventModal = modalNum => {
         });
 
         modalNum.setModalNum(2);
+        setEventListener(eventListener => eventListener + 1);
       })
       .catch(error => {
         console.log('axios', userChoice);
