@@ -24,7 +24,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { da } from 'date-fns/esm/locale';
 
 import CanvasJSReact from '../asset/canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -167,7 +166,7 @@ const AdminProduct = () => {
           </Grid>
           <Grid item>
             <Grid className="admin_product__content">
-              <h5 className="admin_product__header">Product Dashboard</h5>
+              <h5 className="admin_product__header">재고 목록</h5>
               <Divider variant="middle" className="admin_product__divider" />
               <MaterialTable
                 className="admin_product__table"

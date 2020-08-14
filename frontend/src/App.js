@@ -171,8 +171,9 @@ const App = () => {
   const [quizzesTableData, setQuizzesTableData] = useState({
     columns: [
       { title: '퀴즈', field: 'quiz_question' },
-      { title: '정답', field: 'quiz_answer' },
       { title: '힌트', field: 'quiz_hint' },
+      { title: '설명', field: 'quiz_desc' },
+      { title: '정답', field: 'quiz_answer' },
       { title: '참여자 수', field: 'quiz_num' },
     ],
     data: [],
@@ -261,7 +262,9 @@ const App = () => {
 
   // 제품 수량 && 판매 현황 개수
   async function getBuyDatas() {
-    Axios.get('http://localhost:5000/api/product/buy/').then(function(res) {
+    Axios.get('https://i3b309.p.ssafy.io/api/buy/buyAmount').then(function(
+      res,
+    ) {
       setBuyDatas(res.data);
     });
   }

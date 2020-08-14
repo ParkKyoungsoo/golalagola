@@ -77,12 +77,12 @@ const AdminUser = () => {
           </Grid>
           <Grid item>
             <Grid className="admin_user__content">
-              <h5 className="admin_user__header">User Dashboard</h5>
+              <h5 className="admin_user__header">유저 목록</h5>
               <Divider variant="middle" className="admin_user__divider" />
               <MaterialTable
                 className="admin_user__table"
                 icons={tableIcons}
-                title="재고 목록"
+                title=""
                 columns={usersTableData.columns}
                 data={usersTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
