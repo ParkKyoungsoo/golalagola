@@ -21,7 +21,7 @@ const columns = [
   { id: 'coupon_select', label: '상품명', minWidth: 100, align: 'center' },
   {
     id: 'coupon_date',
-    label: '만료 기간',
+    label: '쿠폰 발행 일자',
     minWidth: 170,
     align: 'center',
   },
@@ -61,12 +61,18 @@ export default function StickyHeadTable() {
 
   return (
     <>
+      {console.log(user)}
       <Layout>
         <div style={{ textAlign: 'center' }}>
           <QRCode
             value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
           />
         </div>
+        {user.user_quiz ? (
+          <Grid>이미 퀴즈를 풀었네?</Grid>
+        ) : (
+          <Grid>퀴즈풀면 할인 더 해줌</Grid>
+        )}
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
@@ -84,27 +90,31 @@ export default function StickyHeadTable() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {myCouponDatas.map(row => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {columns.map(column => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {typeof value === 'number'
-                              ? Object(productDatas[value - 1]).prod_name
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
+                {myCouponDatas.length !== 0 ? (
+                  myCouponDatas.map(row => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.code}
+                      >
+                        {columns.map(column => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {typeof value === 'number'
+                                ? Object(productDatas[value - 1]).prod_name
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <Grid>발급받은 쿠폰이 없습니다</Grid>
+                )}
               </TableBody>
             </Table>
           </TableContainer>
