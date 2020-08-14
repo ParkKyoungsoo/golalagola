@@ -3,10 +3,13 @@ import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
 import { Route, Link, useHistory } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid, useMediaQuery, Button } from '@material-ui/core';
+import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
+import MultiCarousel from './MultiCarousel';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 // import MultiCarousel from './MultiCarousel';
 import ClearIcon from '@material-ui/icons/Clear';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
@@ -17,18 +20,49 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // ClickAwayListener
 
 const SuccessModal = () => {
-  const { user } = useContext(CommonContext);
+  const { user, setUser } = useContext(CommonContext);
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+
+  const userQuizState = {
+    user_quiz: true,
+  };
+
   let history = useHistory();
 
   // 유저가 가지고 있는 Quiz 상태 바꿔줘야함
+  const userUpdate = () => {
+    axios
+      .put(
+        `https://i3b309.p.ssafy.io/api/auth/solveQuiz/${user.user_id}`,
+        userQuizState,
+      )
+      .then(function(response) {
+        console.log(response);
+        setUser({
+          ...user,
+          user_quiz: true,
+        });
+      })
+      .catch(error => {});
+  };
+
+  const goToMyCoupon = () => {
+    setWebQuizDialogOpen(false);
+    history.push(`/mycoupon`);
+  };
+
+  const goToMain = () => {
+    setWebQuizDialogOpen(false);
+    history.push('/');
+  };
+
+  useEffect(userUpdate, []);
 
   return (
     <>
       <h2> 정답입니다 ^^ </h2>
-      <Button onClick={() => history.push(`/mycoupon`)}>
-        마이 쿠폰함 바로가기
-      </Button>
-      <Button onClick={() => history.push('/')}>쇼핑 계속하기</Button>
+      <Button onClick={goToMyCoupon}>마이 쿠폰함 바로가기</Button>
+      <Button onClick={goToMain}>쇼핑 계속하기</Button>
     </>
   );
 };
