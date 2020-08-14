@@ -189,6 +189,8 @@ const App = () => {
     data: [],
   });
 
+  const [eventListener, setEventListener] = useState(1);
+
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
   async function getProductDatas() {
@@ -207,7 +209,7 @@ const App = () => {
   async function getEventDatas() {
     await Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
       setCurrentEventDatas(res.data);
-      getMyCouponDatas();
+      // getMyCouponDatas();
     });
   }
   // 카테고리 데이터
@@ -290,9 +292,10 @@ const App = () => {
     // getMyCouponDatas();
   }, []);
 
-  // useEffect(() => {
-  //   getEventDatas();
-  // }, []);
+  useEffect(() => {
+    console.log('execute eventListener');
+    getMyCouponDatas();
+  }, [eventListener]);
 
   return (
     <CommonContext.Provider
@@ -372,6 +375,10 @@ const App = () => {
         setBuyDatas,
         vsData,
         setVSData,
+
+        // 이벤트 변화 감지
+        eventListener,
+        setEventListener,
       }}
     >
       <MuiThemeProvider theme={theme}>

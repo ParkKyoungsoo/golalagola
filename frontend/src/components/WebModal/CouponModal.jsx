@@ -6,7 +6,7 @@ import { CenterFocusStrong } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 const CouponModal = modalNum => {
-  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { user, productDatas, setProductDatas } = useContext(CommonContext);
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
   const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
 
@@ -66,16 +66,26 @@ const CouponModal = modalNum => {
               direction="row"
             >
               <Grid item>
-                <Button
-                  variant="contained"
-                  onClick={() => modalNum.setModalNum(3)}
-                  color="primary"
-                  disableElevation
-                  style={{ width: '100%', height: '10vh', fontSize: 'larger' }}
-                  // disabled={selectedEventItem === undefined}
-                >
-                  추가 할인 받기
-                </Button>
+                {user.user_quiz ? (
+                  <Button variant="primary" disabled>
+                    이미 퀴즈에 참여하였습니다.
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    onClick={() => modalNum.setModalNum(3)}
+                    color="primary"
+                    disableElevation
+                    style={{
+                      width: '100%',
+                      height: '10vh',
+                      fontSize: 'larger',
+                    }}
+                    disabled={user.user_quiz}
+                  >
+                    추가 할인 받기
+                  </Button>
+                )}
               </Grid>
               <Grid item>
                 <Button
