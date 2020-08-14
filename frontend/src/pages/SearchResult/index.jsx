@@ -10,6 +10,7 @@ import {
   Select,
   Typography,
   useMediaQuery,
+  Divider,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useNowCols } from '../../common/MediaQueryHooks';
@@ -51,10 +52,28 @@ const Result = ({ match }) => {
             }}
           >
             <Alert severity="error">
-              <h2>검색 결과가 없습니다. 다시 검색해 주세요.</h2>
+              <p>'{match.params.searchValue}' 상품을 찾지 못했습니다.</p>
+              <Divider />
+              <br />
+              <p>다시 검색해보세요 단어의 철자가 정확한지 확인해 보세요.</p>
+              <p>띄어쓰기 또는 넓은 의미의 단어를 사용해 보세요.</p>
             </Alert>
           </Grid>
-        ) : null}
+        ) : (
+          <Grid
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              textAlign: 'center',
+            }}
+          >
+            <Grid>
+              <p>'{match.params.searchValue}' 검색 결과</p>
+              <p>디자인이 마음에 안 듬 matarial ui snakbar 괜찮을 거 같음</p>
+            </Grid>
+          </Grid>
+        )}
+        <Divider />
         <GridList
           className="grid-list"
           cols={Number.isInteger(nowCols) ? nowCols : 1}

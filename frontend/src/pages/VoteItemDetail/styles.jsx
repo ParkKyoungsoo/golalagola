@@ -17,14 +17,14 @@ const Wrapper = styled.div`
     font-size: 180%;
     margin-left: 15px;
   }
-  .price1 {
-    font-size: 130%;
+  .m_price {
+    font-size: 200%;
   }
   .price2 {
     font-size: 300%;
   }
   .m_unit {
-    font-size: 150%;
+    font-size: 160%;
   }
   .m_cate {
     font-size: 100%;
@@ -77,7 +77,7 @@ const Wrapper = styled.div`
   .effect:after {
     content: '';
     position: absolute;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 1;
     width: 300px;
     height: auto;
