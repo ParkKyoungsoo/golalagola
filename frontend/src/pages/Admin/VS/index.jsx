@@ -164,7 +164,7 @@ const AdminVS = props => {
           </Grid>
           <Grid item>
             <Grid className="admin_event__content">
-              <h5 className="admin_event__header">Event Dashboard</h5>
+              <h5 className="admin_event__header">VS 이벤트 목록</h5>
               <Divider variant="middle" className="admin_event__divider" />
               <Paper elevation={2}>
                 <List>
@@ -175,7 +175,7 @@ const AdminVS = props => {
                       justify="space-between"
                       alignItems="center"
                     >
-                      <Grid item>이벤트 목록</Grid>
+                      <Grid item></Grid>
                       <Grid item>
                         <Tooltip title="Add">
                           <Button onClick={moveCreatePage}>
