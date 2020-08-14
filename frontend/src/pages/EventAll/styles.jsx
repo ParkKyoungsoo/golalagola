@@ -33,18 +33,7 @@ const Wrapper = styled.div`
     border-radius: 5%;
     // margin: 0 1vw 0 1vw;
   }
-  .mobileButton {
-    position: fixed;
-    right: -3vw;
-    top: 20vh;
-    // width: 50%;
-    // heigth: 50%;
-  }
-  .webButton {
-    position: fixed;
-    right: 8vw;
-    top: 20vh;
-  }
+
   .sideBarColumn {
     display: flex;
     flex-direction: column;
