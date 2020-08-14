@@ -16,7 +16,7 @@
   },
   {
     "cat_id": 3,
-    "cat_title": "쌀/잡곡/견과",
+    "cat_title": "곡류/견과",
     "cat_img_url": "images/Rice.jpg"
   },
   {
@@ -41,32 +41,32 @@
   },
   {
     "cat_id": 8,
-    "cat_title": "라면 / 면류 /  즉석식품",
+    "cat_title": "면류/통조림",
     "cat_img_url": "images/Ramen.jpg"
   },
   {
     "cat_id": 9,
-    "cat_title": "생수 / 음료 / 주류",
+    "cat_title": "생수/음료",
     "cat_img_url": "images/water.jpg"
   },
   {
     "cat_id": 10,
-    "cat_title": "장류 / 양념 / 가루 / 오일",
+    "cat_title": "조미료/오일",
     "cat_img_url": "images/Source.jpg"
   },
   {
     "cat_id": 11,
-    "cat_title": "과자 / 간식 / 시리얼 / 빙과",
+    "cat_title": "과자/빙과",
     "cat_img_url": "images/Cookie.jpg"
   },
   {
     "cat_id": 12,
-    "cat_title": "베이커리 / 잼 / 샐러드",
+    "cat_title": "빵/샐러드",
     "cat_img_url": "images/Bread.jpg"
   },
   {
     "cat_id": 13,
-    "cat_title": "세제 / 제지 / 위생용품",
+    "cat_title": "세제/위생용품",
     "cat_img_url": "images/Detergent.jpg"
   }
 ]

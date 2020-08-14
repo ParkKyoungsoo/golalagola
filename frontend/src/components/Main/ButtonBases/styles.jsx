@@ -56,8 +56,8 @@ const Wrapper = styled.div`
   }
   .mobile-image-title {
     position: relative;
-    padding: 8px 16px 7px;
-    line-height: 26px;
+    // padding: 8px 16px 7px;
+    // line-height: 26px;
     color: #f7f2f2;
   }
   .selected-tab {
@@ -66,11 +66,11 @@ const Wrapper = styled.div`
   }
   .button-base {
     width: 100%;
-    height: 80px;
+    height: 5vh;
   }
   @media (max-width: 600px) {
     width: 100% !important;
-    height: 100px;
+    // height: 100px;
   }
 `;
 

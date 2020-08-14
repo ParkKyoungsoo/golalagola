@@ -1,8 +1,19 @@
 import React, { useState, useContext } from 'react';
 import { CommonContext } from '../../../../context/CommonContext';
 
-import { Grid, FormControl, Button } from '@material-ui/core';
+import {
+  InputLabel,
+  Select,
+  MenuItem,
+  Grid,
+  FormControl,
+  Button,
+  Divider,
+  Paper,
+} from '@material-ui/core';
 import Wrapper from './styles';
+import NestedList from '../../Layout/sidebar.jsx';
+
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -41,7 +52,7 @@ const AdminProductForm = () => {
     value: currentProductDatas.prod_amount,
     error: false,
   });
-  const [expiration, setExpiration] = useState(new Date());
+  const [expiration, setExpiration] = useState(getFormatDate(new Date()));
   const [desc, setDesc] = useState({
     value: currentProductDatas.prod_desc,
     error: false,
@@ -141,9 +152,9 @@ const AdminProductForm = () => {
     day = day >= 10 ? day : '0' + day; //day 두자리로 저장
     return year + '-' + month + '-' + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
   }
-  const handleExpirationChange = event => {
+  const handleExpirationChange = async event => {
     const date = getFormatDate(event);
-    setExpiration(date);
+    await setExpiration(date);
     setForceRender({});
   };
 
@@ -155,9 +166,9 @@ const AdminProductForm = () => {
             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
-              label="Product Expiration"
+              label="유통기한"
               format="yyyy-MM-dd"
-              value={expiration.value}
+              value={expiration}
               onChange={handleExpirationChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
@@ -304,160 +315,204 @@ const AdminProductForm = () => {
 
   return (
     <Wrapper>
-      {/* <AdminNav /> */}
-      <Grid container justify="center" alignItems="flex-start" spacing={2}>
-        <Grid item xs={6}>
-          이미지 업로드
-          <div className="custom-file mb-4">
-            <input
-              type="file"
-              className="custom-file-input"
-              id="imageUpload"
-              onChange={handleImageChange}
-            />
-            <label className="custom-file-label" htmlFor="imageUpload">
-              {imageName}
-            </label>
-          </div>
-          {image ? (
-            <div className="row mt-5">
-              <div className="col-md-6 m-auto">
-                <h3 className="text-center">{imageName}</h3>
-                <img style={{ width: '100%' }} src={uploadedImage} alt="" />
-              </div>
-            </div>
-          ) : null}
-        </Grid>
-        <Grid item xs={6}>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={2}
-          >
-            <FormControl
-              // className={classes.root}
-              noValidate
-            >
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={title.error ? true : false}
-                  id="standard-required"
-                  label="Product Title"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={title.value}
-                  onChange={handleTitleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={name.error ? true : false}
-                  id="standard-required"
-                  label="Product Name"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={name.value}
-                  onChange={handleNameChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={category.error ? true : false}
-                  id="standard-required"
-                  label="Product Category"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={category.value}
-                  onChange={handleCategoryChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={price.error ? true : false}
-                  id="standard-required"
-                  label="Product Price"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={price.value}
-                  onChange={handlePriceChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={amount.error ? true : false}
-                  id="standard-required"
-                  label="Product Amount"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={amount.value}
-                  onChange={handleAmountChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <MaterialUIPickers />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={desc.error ? true : false}
-                  id="standard-required"
-                  label="Product Desc"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={desc.value}
-                  onChange={handleDescChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={sale.error ? true : false}
-                  id="standard-required"
-                  label="Product Sale"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={sale.value}
-                  onChange={handleSaleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={weight.error ? true : false}
-                  id="standard-required"
-                  label="Product Weight"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={weight.value}
-                  onChange={handleWeightChange}
-                />
-              </Grid>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-              >
-                Primary
-              </Button>
-            </FormControl>
+      <div className="admin_product_form__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={2} />
+          </Grid>
+          <Grid item>
+            <Grid className="admin_product_form__content">
+              <h5 className="admin_product_form__header">상품 등록</h5>
+              <Divider
+                variant="middle"
+                className="admin_product_form__divider"
+              />
+              <Paper elevation={2} className="admin_product_form__paper">
+                <Grid
+                  container
+                  justify="center"
+                  alignItems="flex-start"
+                  spacing={2}
+                >
+                  <Grid item xs={6}>
+                    이미지 업로드
+                    <div className="custom-file mb-4">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        id="imageUpload"
+                        onChange={handleImageChange}
+                      />
+                      <label
+                        className="custom-file-label"
+                        htmlFor="imageUpload"
+                      >
+                        {imageName}
+                      </label>
+                    </div>
+                    {image ? (
+                      <div className="row mt-5">
+                        <div className="col-md-6 m-auto">
+                          <h3 className="text-center">{imageName}</h3>
+                          <img
+                            style={{ width: '100%' }}
+                            src={uploadedImage}
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    ) : null}
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Grid
+                      container
+                      justify="center"
+                      alignItems="center"
+                      spacing={1}
+                    >
+                      <FormControl
+                      // className={classes.root}
+                      >
+                        <Grid item xs={12}>
+                          <InputLabel id="category-label">카테고리</InputLabel>
+                          <Select
+                            className="admin_product_form__input"
+                            required
+                            label="카테고리"
+                            labelId="category-label"
+                            id="demo-simple-select"
+                            value={category.value}
+                            error={category.error ? true : false}
+                            onChange={handleCategoryChange}
+                          >
+                            <MenuItem value={1}>간편식</MenuItem>
+                            <MenuItem value={2}>과일/채소</MenuItem>
+                            <MenuItem value={3}>곡류/견과</MenuItem>
+                            <MenuItem value={4}>정육/계란</MenuItem>
+                            <MenuItem value={5}>수산물/건해산</MenuItem>
+                            <MenuItem value={6}>우유/유제품</MenuItem>
+                            <MenuItem value={7}>김치/반찬</MenuItem>
+                            <MenuItem value={8}>면류/통조림</MenuItem>
+                            <MenuItem value={9}>생수/음료</MenuItem>
+                            <MenuItem value={10}>조미료/오일</MenuItem>
+                            <MenuItem value={11}>과자/빙과</MenuItem>
+                            <MenuItem value={12}>빵/샐러드</MenuItem>
+                            <MenuItem value={13}>세제/위생용품</MenuItem>
+                          </Select>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={title.error ? true : false}
+                            id="standard-required"
+                            label="상품 제목"
+                            type="text"
+                            multiline
+                            rowsMax={4}
+                            value={title.value}
+                            onChange={handleTitleChange}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={name.error ? true : false}
+                            id="standard-required"
+                            label="상품 이름"
+                            type="text"
+                            multiline
+                            rowsMax={4}
+                            value={name.value}
+                            onChange={handleNameChange}
+                          />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={price.error ? true : false}
+                            id="standard-required"
+                            label="가격"
+                            type="number"
+                            multiline
+                            rowsMax={4}
+                            value={price.value}
+                            onChange={handlePriceChange}
+                          />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={amount.error ? true : false}
+                            id="standard-required"
+                            label="수량"
+                            type="number"
+                            value={amount.value}
+                            onChange={handleAmountChange}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <MaterialUIPickers />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={desc.error ? true : false}
+                            id="standard-required"
+                            label="상품 설명"
+                            type="text"
+                            multiline
+                            rowsMax={4}
+                            value={desc.value}
+                            onChange={handleDescChange}
+                          />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={sale.error ? true : false}
+                            id="standard-required"
+                            label="할인율"
+                            type="number"
+                            value={sale.value}
+                            onChange={handleSaleChange}
+                          />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <TextField
+                            required
+                            className="admin_product_form__input"
+                            error={weight.error ? true : false}
+                            id="standard-required"
+                            label="제품 무게"
+                            type="number"
+                            value={weight.value}
+                            onChange={handleWeightChange}
+                          />
+                        </Grid>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleSubmit}
+                          className="admin_product_form__button"
+                        >
+                          제품 등록
+                        </Button>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </div>
     </Wrapper>
   );
 };

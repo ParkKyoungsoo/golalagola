@@ -71,7 +71,7 @@ export const Wrapper = styled.div`
 export const MobileWrapper = styled.div`{
   .liveTimeBar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     
   }
   .tiemPopularity {

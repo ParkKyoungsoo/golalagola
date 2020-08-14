@@ -1,6 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Grid, useMediaQuery, Divider, Card } from '@material-ui/core';
+import {
+  Grid,
+  useMediaQuery,
+  Divider,
+  Card,
+  Popover,
+  Typography,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Fab,
+} from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
 import Wrapper from './styles';
@@ -8,12 +23,14 @@ import Axios from 'axios';
 
 // sidebar 용 import
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
+import { TiPlus } from 'react-icons/ti';
+const Plus = () => {
+  return <TiPlus />;
+};
 
 //EventAll
 const EventAll = () => {
@@ -96,23 +113,19 @@ const EventAll = () => {
 
   function eventGridRender(index, tmpData) {
     const checkedStyle = {
-      // border: '1px solid red',
       opacity: '0.5',
       border: '2px solid black',
     };
-    console.log(tmpData);
-    if (isMobile) {
-      console.log(123);
-    } else {
-      console.log(456);
-    }
+
     if (!userEvent.includes(tmpData.event_id)) {
       return (
         <>
           {index % 2 === 0 ? (
             <Divider style={{ margin: '0px 0 0px 0' }} />
           ) : null}
-
+          {isMobile && index % 2 === 1 ? (
+            <Divider style={{ margin: '0px 0 0px 0' }} />
+          ) : null}
           <Grid
             xs={12}
             md={6}
@@ -244,6 +257,9 @@ const EventAll = () => {
       return (
         <>
           {index % 2 === 0 ? (
+            <Divider style={{ margin: '0px 0 0px 0' }} />
+          ) : null}
+          {isMobile && index % 2 === 1 ? (
             <Divider style={{ margin: '0px 0 0px 0' }} />
           ) : null}
           <Grid
@@ -379,7 +395,7 @@ const EventAll = () => {
   const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
-      maxWidth: 100,
+
       // backgroundColor: theme.palette.background.paper,
     },
     // nested: {
@@ -405,6 +421,19 @@ const EventAll = () => {
     }
   };
 
+  /////////////////////////////////////////////////////////////
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  ////Mobile + 버튼///////////////////////////////////////////////////
+
   const NestedList = props => {
     // sidebar 스타일 정의
     const classes = useStyles();
@@ -421,6 +450,14 @@ const EventAll = () => {
         component="nav"
         aria-labelledby="nested-list-subheader"
         className={classes.root}
+        style={
+          isMobile
+            ? {
+                display: 'flex',
+                justifyContent: 'center',
+              }
+            : { maxWidth: 100 }
+        }
       >
         <ListItem
           button
@@ -451,17 +488,73 @@ const EventAll = () => {
   return (
     <Wrapper>
       <Layout>
-        <h3>두 개의 상품중 마음에 드는 상품을 골라가세요</h3>
-        <Divider style={{ margin: '0px 0 0px 0' }} />
-        <Grid>
-          <Grid item style={{ textAlign: 'center', verticalAlign: 'middle' }}>
-            {currentEventDatas.map((tmpData, index) =>
-              eventGridRender(index, tmpData),
-            )}
-          </Grid>
-          <Grid item className={isMobile ? 'mobileButton' : 'webButton'}>
-            <NestedList />
-          </Grid>
+        <Grid
+          style={{
+            position: 'sticky',
+            top: '5vh',
+            display: 'flex',
+            justifyContent: 'center',
+            backgroundColor: '#f7f2f2',
+          }}
+        >
+          <h4>두 개의 상품중 마음에 드는 상품을 골라가세요</h4>
+        </Grid>
+        <Grid style={{ display: 'flex', flexDirection: 'column' }}>
+          {isMobile ? (
+            <>
+              <Grid
+                style={{
+                  position: 'sticky',
+                  // top: '8.5vh',
+                  top: '93vh',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  backgroundColor: '#f7f2f2',
+                }}
+              >
+                <NestedList />
+              </Grid>
+              <Grid
+                item
+                style={{
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  marginTop: '-7vh',
+                  paddingBottom: '10vh',
+                }}
+              >
+                {currentEventDatas.map((tmpData, index) =>
+                  eventGridRender(index, tmpData),
+                )}
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid
+                style={{
+                  position: 'sticky',
+                  top: '100px',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <NestedList />
+              </Grid>
+              <Grid
+                xs={11}
+                item
+                style={{
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  marginTop: '-15vh',
+                }}
+              >
+                {currentEventDatas.map((tmpData, index) =>
+                  eventGridRender(index, tmpData),
+                )}
+              </Grid>
+            </>
+          )}
         </Grid>
       </Layout>
     </Wrapper>

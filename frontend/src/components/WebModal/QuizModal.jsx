@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
 import { Route, Link, useHistory } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
@@ -22,6 +21,7 @@ import HelpIcon from '@material-ui/icons/Help';
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
 
   const userQuizState = {
     user_quiz: true,
@@ -48,11 +48,14 @@ const SuccessModal = () => {
 
   const goToMyCoupon = () => {
     setWebQuizDialogOpen(false);
-    history.push(`/mycoupon`);
+    setItemDialogOpen(false);
+    // window.location.href = '/mycoupon';
+    history.push('/mycoupon');
   };
 
   const goToMain = () => {
     setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
     history.push('/');
   };
 
@@ -126,7 +129,6 @@ const SuccessModal = () => {
 };
 
 const Quiz = modalNum => {
-  const quizAns = Test.questions[0].correctAnswer; // 추후 데이터에서 가져올 문제의 정답.
   const [number, setNumber] = useState();
 
   const [userAns, setUserAns] = useState(3);
@@ -134,6 +136,7 @@ const Quiz = modalNum => {
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
 
