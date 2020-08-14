@@ -1,10 +1,13 @@
 import React, { useState, useContext } from 'react';
 
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Divider } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import NestedList from '../Admin/Layout/sidebar';
 import CreateEventComponent from '../../components/Create/CreateEventComponent/index';
+
+import Wrapper from './styles';
+
+import NestedList from '../Admin/Layout/sidebar';
 
 import axios from 'axios';
 import { CommonContext } from '../../context/CommonContext';
@@ -82,37 +85,42 @@ const CreateVote = props => {
   const [readyToUpload, setReadyToUpload] = useState(true);
 
   return (
-    <div>
-      <div classes={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={2}>
-            <Paper className={classes.paper}>
-              <NestedList></NestedList>
-            </Paper>
+    <Wrapper>
+      <div className="admin_event_form__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={3} />
           </Grid>
-          <Grid item xs={9}>
-            <Grid>
-              <br />
+          <Grid item>
+            <Grid className="admin_event_form__content">
+              <h5 className="admin_event_form__header">VS 이벤트</h5>
+              <Divider variant="middle" className="admin_event_form__divider" />
+              <Paper elevation={2} className="admin_event_form__paper">
+                <Grid container justify="flex-end" alignItems="center">
+                  <Grid className="admin_event_form__button_group">
+                    <Button
+                      variant="primary"
+                      onClick={createEvent}
+                      className="admin_event_form__button"
+                    >
+                      UPLOAD
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => history.push('/admin/vs')}
+                      className="admin_event_form__button"
+                    >
+                      CANCEL
+                    </Button>
+                  </Grid>
+                  <CreateEventComponent className="admin_event_form__table" />
+                </Grid>
+              </Paper>
             </Grid>
-            <Grid container justify="flex-end" alignItems="center">
-              <Button variant="success" onClick={createEvent}>
-                UPLOAD
-              </Button>
-              <Button
-                variant="danger"
-                onClick={() => history.push('/Admin/VS')}
-              >
-                CANCEL
-              </Button>
-            </Grid>
-            <Grid container justify="center" alignItems="center">
-              <h2>Create New Vote</h2>
-            </Grid>
-            <CreateEventComponent />
           </Grid>
         </Grid>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
