@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
 import { Route, Link, useHistory } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid, useMediaQuery, Button } from '@material-ui/core';
+import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
+import MultiCarousel from './MultiCarousel';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 // import MultiCarousel from './MultiCarousel';
 import ClearIcon from '@material-ui/icons/Clear';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
@@ -17,24 +19,58 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // ClickAwayListener
 
 const SuccessModal = () => {
-  const { user } = useContext(CommonContext);
+  const { user, setUser } = useContext(CommonContext);
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+
+  const userQuizState = {
+    user_quiz: true,
+  };
+
   let history = useHistory();
 
   // 유저가 가지고 있는 Quiz 상태 바꿔줘야함
+  const userUpdate = () => {
+    axios
+      .put(
+        `https://i3b309.p.ssafy.io/api/auth/solveQuiz/${user.user_id}`,
+        userQuizState,
+      )
+      .then(function(response) {
+        console.log(response);
+        setUser({
+          ...user,
+          user_quiz: true,
+        });
+      })
+      .catch(error => {});
+  };
+
+  const goToMyCoupon = () => {
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
+    // window.location.href = '/mycoupon';
+    history.push('/mycoupon');
+  };
+
+  const goToMain = () => {
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
+    history.push('/');
+  };
+
+  useEffect(userUpdate, []);
 
   return (
     <>
       <h2> 정답입니다 ^^ </h2>
-      <Button onClick={() => history.push(`/mycoupon`)}>
-        마이 쿠폰함 바로가기
-      </Button>
-      <Button onClick={() => history.push('/')}>쇼핑 계속하기</Button>
+      <Button onClick={goToMyCoupon}>마이 쿠폰함 바로가기</Button>
+      <Button onClick={goToMain}>쇼핑 계속하기</Button>
     </>
   );
 };
 
 const Quiz = modalNum => {
-  const quizAns = Test.questions[0].correctAnswer; // 추후 데이터에서 가져올 문제의 정답.
   const [number, setNumber] = useState();
 
   const [userAns, setUserAns] = useState(3);
@@ -42,6 +78,7 @@ const Quiz = modalNum => {
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
 
@@ -152,11 +189,6 @@ const Quiz = modalNum => {
               style={{ backgroundColor: 'black' }}
             >
               <RadioButtonUncheckedIcon style={{ fontSize: '10vw' }} />
-              {/* <img
-                src={Test.answers[0]}
-                alt="quiz"
-                style={{ width: '30vw', height: '27vh' }}
-              /> */}
             </Button>
             <Button
               onClick={click(false)}
@@ -165,11 +197,6 @@ const Quiz = modalNum => {
               style={{ backgroundColor: 'gray' }}
             >
               <ClearIcon style={{ fontSize: '10vw' }} />
-              {/* <img
-                src={Test.answers[1]}
-                alt="quiz"
-                style={{ width: '30vw', height: '27vh' }}
-              /> */}
             </Button>
           </Grid>
         </Grid>

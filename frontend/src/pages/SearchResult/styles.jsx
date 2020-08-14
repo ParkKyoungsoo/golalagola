@@ -47,5 +47,4 @@ const Wrapper = styled.div`
     font-weight: bold;
   }
 `;
-
 export default Wrapper;

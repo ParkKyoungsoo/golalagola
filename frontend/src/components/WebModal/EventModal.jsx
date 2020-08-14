@@ -20,23 +20,28 @@ const EventModal = modalNum => {
 
   const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
 
-  const [userChoice, setUserChoice] = useState([]);
+  const { eventListener, setEventListener } = useContext(CommonContext);
 
-  const RadioTest = e => {
-    setSelectedEventItem(e.target.value);
-    console.log(e.target.value);
-    console.log('eventNum', eventNum);
+  const [userChoice, setUserChoice] = useState({
+    coupon_select: '',
+    coupon_use: '',
+    coupon_date: '',
+    event_id: '',
+    user_id: '',
+  });
 
-    // setMyCouponDatas({
-    //   ...myCouponDatas,
-    //   userChoice,
-    // });
+  const RadioTest = num => {
+    let today = new Date();
+    let year = today.getFullYear(); // 년도
+    let month = today.getMonth() + 1; // 월
+    let date = today.getDate(); // 날짜
 
+    setSelectedEventItem(num);
     setUserChoice({
       ...userChoice,
-      coupon_select: selectedEventItem,
+      coupon_select: num,
       coupon_use: false,
-      coupon_date: '',
+      coupon_date: year + '-' + month + '-' + date,
       event_id: currentEventDatas[eventNum].event_id,
       user_id: user.user_id,
     });
@@ -60,6 +65,7 @@ const EventModal = modalNum => {
         });
 
         modalNum.setModalNum(2);
+        setEventListener(eventListener => eventListener + 1);
       })
       .catch(error => {
         console.log('axios', userChoice);
@@ -179,7 +185,16 @@ const EventModal = modalNum => {
                         ],
                       ).prod_id
                     }
-                    onChange={RadioTest}
+                    onChange={() =>
+                      RadioTest(
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['1']
+                              .prod_id - 1
+                          ],
+                        ).prod_id,
+                      )
+                    }
                   ></input>
                 </Grid>
                 <Grid item>
@@ -213,7 +228,16 @@ const EventModal = modalNum => {
                         ],
                       ).prod_id
                     }
-                    onChange={RadioTest}
+                    onChange={() =>
+                      RadioTest(
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['2']
+                              .prod_id - 1
+                          ],
+                        ).prod_id,
+                      )
+                    }
                   ></input>
                 </Grid>
                 <Grid item>
@@ -239,7 +263,6 @@ const EventModal = modalNum => {
               variant="contained"
               color="primary"
               disableElevation
-              // style={{ alignItems: 'center' }}
               onClick={EventTrigger}
               disabled={selectedEventItem === undefined}
             >
@@ -368,7 +391,16 @@ const EventModal = modalNum => {
                         ],
                       ).prod_id
                     }
-                    onChange={RadioTest}
+                    onChange={() =>
+                      RadioTest(
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['1']
+                              .prod_id - 1
+                          ],
+                        ).prod_id,
+                      )
+                    }
                   ></input>
                 </Grid>
                 <Grid item>
@@ -402,7 +434,16 @@ const EventModal = modalNum => {
                         ],
                       ).prod_id
                     }
-                    onChange={RadioTest}
+                    onChange={() =>
+                      RadioTest(
+                        Object(
+                          productDatas[
+                            currentEventDatas[eventNum].event_item['2']
+                              .prod_id - 1
+                          ],
+                        ).prod_id,
+                      )
+                    }
                   ></input>
                 </Grid>
                 <Grid item>

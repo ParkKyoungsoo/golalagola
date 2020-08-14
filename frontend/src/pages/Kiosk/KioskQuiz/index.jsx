@@ -27,13 +27,13 @@ const KioskQuizSuccessModal = () => {
 };
 
 const Quiz = () => {
-  const quizAns = Test.questions[0].correctAnswer; // 추후 데이터에서 가져올 문제의 정답.
-
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
   const [number, setNumber] = useState();
+  const quizAns = Object(quizDatas[number]).quiz_answer;
+
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
 
   const click = choiceAns => event => {
