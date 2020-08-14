@@ -29,7 +29,7 @@ const EventModal = modalNum => {
   });
 
   const RadioTest = num => {
-    let today = new Date().toLocaleDateString();
+    let today = new Date();
     let year = today.getFullYear(); // 년도
     let month = today.getMonth() + 1; // 월
     let date = today.getDate(); // 날짜
