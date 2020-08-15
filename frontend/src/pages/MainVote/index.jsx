@@ -266,6 +266,7 @@ const MainVote = props => {
               >
                 {categoryDatas.map((categoryData, index) => (
                   <Tab
+                    style={{ borderRadius: '20%' }}
                     key={index}
                     {...a11yProps(index)}
                     label={
@@ -454,6 +455,7 @@ const MainVote = props => {
               >
                 {categoryDatas.map((categoryData, index) => (
                   <Tab
+                    style={{ borderRadius: '20%' }}
                     key={index}
                     {...a11yProps(index)}
                     label={

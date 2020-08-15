@@ -128,13 +128,61 @@ const Wrapper = styled.div`
     color: #f68a09;
     font-size: 20px;
   }
+  .loading1 span {
+    font-size: 40px;
+    color: #ef001e;
+    display: inline-block;
+    animation: loading1 0.8s infinite;
+  }
+  .loading2 span {
+    font-size: 40px;
+    color: #ef001e;
+    display: inline-block;
+    animation: loading2 1s infinite;
+  }
+  .loading1 span:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .loading1 span:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .loading1 span:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  .loading1 span:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+  .loading1 span:nth-child(6) {
+    animation-delay: 0.5s;
+  }
+  .loading2 span:nth-child(2) {
+    animation-delay: 1s;
+  }
+  @keyframes loading2 {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  @keyframes loading1 {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
   .mST {
     color: #ef001e;
-    font-size: 30px;
+    font-size: 40px;
   }
   .mSP {
     color: #ef001e;
-    font-size: 30px;
+    font-size: 40px;
   }
   .BOX {
     border: 1px;
