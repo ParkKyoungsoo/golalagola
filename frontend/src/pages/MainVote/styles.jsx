@@ -105,7 +105,7 @@ export const MobileWrapper = styled.div`{
   .mainvote-orderlist {
     border: 1px solid black;
   }
-  .KisokCentering {
+  .Centering {
     display: flex;
     // flex-wrap: wrap;
     align-items: center;

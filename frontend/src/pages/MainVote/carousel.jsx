@@ -29,9 +29,9 @@ const ControlledCarousel = props => {
             {currentEventDatas.map((data, index) => (
               <Carousel.Item>
                 <Grid container>
-                  <Grid item xs={6} className="KisokCentering mobiletmp">
+                  <Grid item xs={6} className="Centering mobiletmp">
                     <Link
-                      className="KisokCentering mobiletmp"
+                      className="Centering mobiletmp"
                       to={`voteitemdetail/${
                         Object(productDatas[data.event_item['1'].prod_id - 1])
                           .prod_name
@@ -51,9 +51,9 @@ const ControlledCarousel = props => {
                       />
                     </Link>
                   </Grid>
-                  <Grid item xs={6} className="KisokCentering mobiletmp">
+                  <Grid item xs={6} className="Centering mobiletmp">
                     <Link
-                      className="KisokCentering mobiletmp"
+                      className="Centering mobiletmp"
                       to={`voteitemdetail/${
                         Object(productDatas[data.event_item['2'].prod_id - 1])
                           .prod_name
@@ -90,9 +90,9 @@ const ControlledCarousel = props => {
           {currentEventDatas.map((data, index) => (
             <Carousel.Item key={index}>
               <Grid container>
-                <Grid item xs={6} className="KisokCentering tmp">
+                <Grid item xs={6} className="Centering tmp">
                   <Link
-                    className="KisokCentering tmp"
+                    className="Centering tmp"
                     to={`voteitemdetail/${
                       Object(productDatas[data.event_item['1'].prod_id - 1])
                         .prod_name
@@ -112,9 +112,9 @@ const ControlledCarousel = props => {
                     />
                   </Link>
                 </Grid>
-                <Grid item xs={6} className="KisokCentering tmp">
+                <Grid item xs={6} className="Centering tmp">
                   <Link
-                    className="KisokCentering tmp"
+                    className="Centering tmp"
                     to={`voteitemdetail/${
                       Object(productDatas[data.event_item['2'].prod_id - 1])
                         .prod_name
