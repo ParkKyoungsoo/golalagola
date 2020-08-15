@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  .test{
-    background-color:red;
+  .test {
+    background-color: red;
   }
   .liveTimeBar {
     display: flex;
@@ -47,22 +47,25 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
   }
-  
+
   .tmp {
-    width: 25vw
+    // height: 45vh;
+    width: 100%;
+
     height: auto;
-    // max-height: 50vh; 
+    // width: 25vw
+    // max-height: 50vh;
     // min-height: 30vh;
-    border-radius:5%;
-    cursor: pointer;
-    transform: scale(1);       //default값
-    -webkit-transform: scale(1); ////default값
-    -moz-transform: scale(1);   //crome
-    transition: all 0.2s ease-in-out;
-        &:hover {
-            transform: scale(1.1);   //hover시 확대되는 범위 조정
-            -webkit-transform: scale(1.1);
-            -moz-transform: scale(1.1);
+    // border-radius:5%;
+    // cursor: pointer;
+    // transform: scale(1);       //default값
+    // -webkit-transform: scale(1); ////default값
+    // -moz-transform: scale(1);   //crome
+    // transition: all 0.2s ease-in-out;
+    //     &:hover {
+    //         transform: scale(1.1);   //hover시 확대되는 범위 조정
+    //         -webkit-transform: scale(1.1);
+    //         -moz-transform: scale(1.1);
   }
 `;
 
@@ -115,7 +118,7 @@ export const MobileWrapper = styled.div`{
   .mobiletmp
   {
     // background-color: green;
-    width: 45vw 
+    width: 100%;
     height: auto;
     // max-height: 50vh; 
     // min-height: 30vh;
