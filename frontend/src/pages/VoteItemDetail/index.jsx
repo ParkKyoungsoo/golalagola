@@ -44,6 +44,7 @@ const QuizDialog = () => {
           position: 'inherit',
           width: '80%',
           height: '80%',
+          justifyContent: 'center',
         },
       }}
       BackdropProps={{
@@ -276,7 +277,7 @@ const ItemDetail = ({ match }) => {
                               &nbsp; 퀴즈 참여 적용 할인(
                               {productDatas[match.params.id - 1].prod_sale -
                                 (productDatas[match.params.id - 1].prod_sale -
-                                  10)}
+                                  30)}
                               %)
                             </span>{' '}
                             {user.user_quiz ? (
@@ -284,7 +285,7 @@ const ItemDetail = ({ match }) => {
                                 -
                                 {numberWithCommas(
                                   productDatas[match.params.id - 1].prod_price *
-                                    0.1,
+                                    0.3,
                                 )}
                                 원
                               </span>
@@ -311,7 +312,7 @@ const ItemDetail = ({ match }) => {
                               />
                               {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
                               &nbsp; 이벤트 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale - 10}
+                              {productDatas[match.params.id - 1].prod_sale - 30}
                               %)
                             </span>{' '}
                             {!(eventActivated && !userJoinedEvent) &&
@@ -324,7 +325,7 @@ const ItemDetail = ({ match }) => {
                                       .prod_price *
                                       ((productDatas[match.params.id - 1]
                                         .prod_sale -
-                                        10) /
+                                        30) /
                                         100),
                                   ),
                                 )}
@@ -349,14 +350,14 @@ const ItemDetail = ({ match }) => {
                                   productDatas[match.params.id - 1].prod_price -
                                     ((user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                       (userHasCoupon
                                         ? productDatas[match.params.id - 1]
                                             .prod_price *
                                           ((productDatas[match.params.id - 1]
                                             .prod_sale -
-                                            10) /
+                                            30) /
                                             100)
                                         : 0)),
                                 ),
@@ -380,14 +381,14 @@ const ItemDetail = ({ match }) => {
                                   0 +
                                     (user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                     (userHasCoupon
                                       ? productDatas[match.params.id - 1]
                                           .prod_price *
                                         ((productDatas[match.params.id - 1]
                                           .prod_sale -
-                                          10) /
+                                          30) /
                                           100)
                                       : 0),
                                 ),
@@ -418,6 +419,7 @@ const ItemDetail = ({ match }) => {
                     overflowX: 'hidden',
                     overflowY: 'auto',
                     position: 'inherit',
+                    justifyContent: 'center',
                   },
                 }}
                 BackdropProps={{
@@ -561,7 +563,7 @@ const ItemDetail = ({ match }) => {
                               &nbsp; 퀴즈 참여 적용 할인(
                               {productDatas[match.params.id - 1].prod_sale -
                                 (productDatas[match.params.id - 1].prod_sale -
-                                  10)}
+                                  30)}
                               %)
                             </span>{' '}
                             {user.user_quiz ? (
@@ -569,7 +571,7 @@ const ItemDetail = ({ match }) => {
                                 -
                                 {numberWithCommas(
                                   productDatas[match.params.id - 1].prod_price *
-                                    0.1,
+                                    0.3,
                                 )}
                                 원
                               </span>
@@ -596,7 +598,7 @@ const ItemDetail = ({ match }) => {
                               />
                               {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
                               &nbsp; 이벤트 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale - 10}
+                              {productDatas[match.params.id - 1].prod_sale - 30}
                               %)
                             </span>{' '}
                             {!(eventActivated && !userJoinedEvent) &&
@@ -609,7 +611,7 @@ const ItemDetail = ({ match }) => {
                                       .prod_price *
                                       ((productDatas[match.params.id - 1]
                                         .prod_sale -
-                                        10) /
+                                        30) /
                                         100),
                                   ),
                                 )}
@@ -634,14 +636,14 @@ const ItemDetail = ({ match }) => {
                                   productDatas[match.params.id - 1].prod_price -
                                     ((user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                       (userHasCoupon
                                         ? productDatas[match.params.id - 1]
                                             .prod_price *
                                           ((productDatas[match.params.id - 1]
                                             .prod_sale -
-                                            10) /
+                                            30) /
                                             100)
                                         : 0)),
                                 ),
@@ -665,14 +667,14 @@ const ItemDetail = ({ match }) => {
                                   0 +
                                     (user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                     (userHasCoupon
                                       ? productDatas[match.params.id - 1]
                                           .prod_price *
                                         ((productDatas[match.params.id - 1]
                                           .prod_sale -
-                                          10) /
+                                          30) /
                                           100)
                                       : 0),
                                 ),
@@ -698,11 +700,12 @@ const ItemDetail = ({ match }) => {
                   style: {
                     height: '90vh',
                     padding: '10px',
-                    width: '1280px',
+                    width: '70vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'auto',
                     position: 'inherit',
+                    justifyContent: 'center',
                   },
                 }}
                 BackdropProps={{
@@ -841,7 +844,7 @@ const ItemDetail = ({ match }) => {
                               &nbsp; 퀴즈 참여 적용 할인(
                               {productDatas[match.params.id - 1].prod_sale -
                                 (productDatas[match.params.id - 1].prod_sale -
-                                  10)}
+                                  30)}
                               %)
                             </span>{' '}
                             {user.user_quiz ? (
@@ -849,7 +852,7 @@ const ItemDetail = ({ match }) => {
                                 -
                                 {numberWithCommas(
                                   productDatas[match.params.id - 1].prod_price *
-                                    0.1,
+                                    0.3,
                                 )}
                                 원
                               </span>
@@ -876,7 +879,7 @@ const ItemDetail = ({ match }) => {
                               />
                               {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
                               &nbsp; 이벤트 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale - 10}
+                              {productDatas[match.params.id - 1].prod_sale - 30}
                               %)
                             </span>{' '}
                             {!(eventActivated && !userJoinedEvent) &&
@@ -889,7 +892,7 @@ const ItemDetail = ({ match }) => {
                                       .prod_price *
                                       ((productDatas[match.params.id - 1]
                                         .prod_sale -
-                                        10) /
+                                        30) /
                                         100),
                                   ),
                                 )}
@@ -914,14 +917,14 @@ const ItemDetail = ({ match }) => {
                                   productDatas[match.params.id - 1].prod_price -
                                     ((user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                       (userHasCoupon
                                         ? productDatas[match.params.id - 1]
                                             .prod_price *
                                           ((productDatas[match.params.id - 1]
                                             .prod_sale -
-                                            10) /
+                                            30) /
                                             100)
                                         : 0)),
                                 ),
@@ -945,14 +948,14 @@ const ItemDetail = ({ match }) => {
                                   0 +
                                     (user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                     (userHasCoupon
                                       ? productDatas[match.params.id - 1]
                                           .prod_price *
                                         ((productDatas[match.params.id - 1]
                                           .prod_sale -
-                                          10) /
+                                          30) /
                                           100)
                                       : 0),
                                 ),
@@ -983,6 +986,7 @@ const ItemDetail = ({ match }) => {
                     overflowX: 'hidden',
                     overflowY: 'auto',
                     position: 'inherit',
+                    justifyContent: 'center',
                   },
                 }}
                 BackdropProps={{
@@ -1126,7 +1130,7 @@ const ItemDetail = ({ match }) => {
                               &nbsp; 퀴즈 참여 적용 할인(
                               {productDatas[match.params.id - 1].prod_sale -
                                 (productDatas[match.params.id - 1].prod_sale -
-                                  10)}
+                                  30)}
                               %)
                             </span>{' '}
                             {user.user_quiz ? (
@@ -1134,7 +1138,7 @@ const ItemDetail = ({ match }) => {
                                 -
                                 {numberWithCommas(
                                   productDatas[match.params.id - 1].prod_price *
-                                    0.1,
+                                    0.3,
                                 )}
                                 원
                               </span>
@@ -1161,7 +1165,7 @@ const ItemDetail = ({ match }) => {
                               />
                               {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
                               &nbsp; 이벤트 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale - 10}
+                              {productDatas[match.params.id - 1].prod_sale - 30}
                               %)
                             </span>{' '}
                             {!(eventActivated && !userJoinedEvent) &&
@@ -1174,7 +1178,7 @@ const ItemDetail = ({ match }) => {
                                       .prod_price *
                                       ((productDatas[match.params.id - 1]
                                         .prod_sale -
-                                        10) /
+                                        30) /
                                         100),
                                   ),
                                 )}
@@ -1199,14 +1203,14 @@ const ItemDetail = ({ match }) => {
                                   productDatas[match.params.id - 1].prod_price -
                                     ((user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                       (userHasCoupon
                                         ? productDatas[match.params.id - 1]
                                             .prod_price *
                                           ((productDatas[match.params.id - 1]
                                             .prod_sale -
-                                            10) /
+                                            30) /
                                             100)
                                         : 0)),
                                 ),
@@ -1230,14 +1234,14 @@ const ItemDetail = ({ match }) => {
                                   0 +
                                     (user.user_quiz
                                       ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.1
+                                          .prod_price * 0.3
                                       : 0) +
                                     (userHasCoupon
                                       ? productDatas[match.params.id - 1]
                                           .prod_price *
                                         ((productDatas[match.params.id - 1]
                                           .prod_sale -
-                                          10) /
+                                          30) /
                                           100)
                                       : 0),
                                 ),
