@@ -7,12 +7,13 @@ html {
   /* font-family: 'Noto Sans KR', sans-serif; */
   /* font-family: 'Black Han Sans', sans-serif; */
   -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  /* scrollbar-width: none;  */
+  /* Firefox */
   font-family: 'Nanum Pen Script', cursive;
 }
 body::-webkit-scrollbar,
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
+  /*display: none; */ /* Chrome, Safari, Opera*/
   /* font-family: 'Black Han Sans', sans-serif; */
 }
 
