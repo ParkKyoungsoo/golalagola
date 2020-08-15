@@ -342,27 +342,37 @@ const ItemDetail = ({ match }) => {
                               alignItems: 'center',
                             }}
                           >
-                            <span className="mST">구매 가격</span>
-                            <span className="mSP">
-                              {numberWithCommas(
-                                parseInt(
-                                  productDatas[match.params.id - 1].prod_price -
-                                    ((user.user_quiz
-                                      ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.3
-                                      : 0) +
-                                      (userHasCoupon
+                            <div className="loading1">
+                              <span>실</span>
+                              <span>구</span>
+                              <span>매</span>
+                              &nbsp; &nbsp;
+                              <span>가</span>
+                              <span>격</span>
+                            </div>
+                            <div className="loading2">
+                              <span>
+                                {numberWithCommas(
+                                  parseInt(
+                                    productDatas[match.params.id - 1]
+                                      .prod_price -
+                                      ((user.user_quiz
                                         ? productDatas[match.params.id - 1]
-                                            .prod_price *
-                                          ((productDatas[match.params.id - 1]
-                                            .prod_sale -
-                                            30) /
-                                            100)
-                                        : 0)),
-                                ),
-                              )}
-                              원
-                            </span>
+                                            .prod_price * 0.3
+                                        : 0) +
+                                        (userHasCoupon
+                                          ? productDatas[match.params.id - 1]
+                                              .prod_price *
+                                            ((productDatas[match.params.id - 1]
+                                              .prod_sale -
+                                              30) /
+                                              100)
+                                          : 0)),
+                                  ),
+                                )}
+                                원
+                              </span>
+                            </div>
                           </Grid>
                           <br />
                           <Box
@@ -627,27 +637,37 @@ const ItemDetail = ({ match }) => {
                               alignItems: 'center',
                             }}
                           >
-                            <span className="mST">구매 가격</span>
-                            <span className="mSP">
-                              {numberWithCommas(
-                                parseInt(
-                                  productDatas[match.params.id - 1].prod_price -
-                                    ((user.user_quiz
-                                      ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.3
-                                      : 0) +
-                                      (userHasCoupon
+                            <div className="loading1">
+                              <span>실</span>
+                              <span>구</span>
+                              <span>매</span>
+                              &nbsp; &nbsp;
+                              <span>가</span>
+                              <span>격</span>
+                            </div>
+                            <div className="loading2">
+                              <span>
+                                {numberWithCommas(
+                                  parseInt(
+                                    productDatas[match.params.id - 1]
+                                      .prod_price -
+                                      ((user.user_quiz
                                         ? productDatas[match.params.id - 1]
-                                            .prod_price *
-                                          ((productDatas[match.params.id - 1]
-                                            .prod_sale -
-                                            30) /
-                                            100)
-                                        : 0)),
-                                ),
-                              )}
-                              원
-                            </span>
+                                            .prod_price * 0.3
+                                        : 0) +
+                                        (userHasCoupon
+                                          ? productDatas[match.params.id - 1]
+                                              .prod_price *
+                                            ((productDatas[match.params.id - 1]
+                                              .prod_sale -
+                                              30) /
+                                              100)
+                                          : 0)),
+                                  ),
+                                )}
+                                원
+                              </span>
+                            </div>
                           </Grid>
                           <br />
                           <Box
@@ -907,27 +927,37 @@ const ItemDetail = ({ match }) => {
                               alignItems: 'center',
                             }}
                           >
-                            <span className="mST">구매 가격</span>
-                            <span className="mSP">
-                              {numberWithCommas(
-                                parseInt(
-                                  productDatas[match.params.id - 1].prod_price -
-                                    ((user.user_quiz
-                                      ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.3
-                                      : 0) +
-                                      (userHasCoupon
+                            <div className="loading1">
+                              <span>실</span>
+                              <span>구</span>
+                              <span>매</span>
+                              &nbsp; &nbsp;
+                              <span>가</span>
+                              <span>격</span>
+                            </div>
+                            <div className="loading2">
+                              <span>
+                                {numberWithCommas(
+                                  parseInt(
+                                    productDatas[match.params.id - 1]
+                                      .prod_price -
+                                      ((user.user_quiz
                                         ? productDatas[match.params.id - 1]
-                                            .prod_price *
-                                          ((productDatas[match.params.id - 1]
-                                            .prod_sale -
-                                            30) /
-                                            100)
-                                        : 0)),
-                                ),
-                              )}
-                              원
-                            </span>
+                                            .prod_price * 0.3
+                                        : 0) +
+                                        (userHasCoupon
+                                          ? productDatas[match.params.id - 1]
+                                              .prod_price *
+                                            ((productDatas[match.params.id - 1]
+                                              .prod_sale -
+                                              30) /
+                                              100)
+                                          : 0)),
+                                  ),
+                                )}
+                                원
+                              </span>
+                            </div>
                           </Grid>
                           <br />
                           <Box
@@ -1192,27 +1222,37 @@ const ItemDetail = ({ match }) => {
                               alignItems: 'center',
                             }}
                           >
-                            <span className="mST">구매 가격</span>
-                            <span className="mSP">
-                              {numberWithCommas(
-                                parseInt(
-                                  productDatas[match.params.id - 1].prod_price -
-                                    ((user.user_quiz
-                                      ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.3
-                                      : 0) +
-                                      (userHasCoupon
+                            <div className="loading1">
+                              <span>실</span>
+                              <span>구</span>
+                              <span>매</span>
+                              &nbsp; &nbsp;
+                              <span>가</span>
+                              <span>격</span>
+                            </div>
+                            <div className="loading2">
+                              <span>
+                                {numberWithCommas(
+                                  parseInt(
+                                    productDatas[match.params.id - 1]
+                                      .prod_price -
+                                      ((user.user_quiz
                                         ? productDatas[match.params.id - 1]
-                                            .prod_price *
-                                          ((productDatas[match.params.id - 1]
-                                            .prod_sale -
-                                            30) /
-                                            100)
-                                        : 0)),
-                                ),
-                              )}
-                              원
-                            </span>
+                                            .prod_price * 0.3
+                                        : 0) +
+                                        (userHasCoupon
+                                          ? productDatas[match.params.id - 1]
+                                              .prod_price *
+                                            ((productDatas[match.params.id - 1]
+                                              .prod_sale -
+                                              30) /
+                                              100)
+                                          : 0)),
+                                  ),
+                                )}
+                                원
+                              </span>
+                            </div>
                           </Grid>
                           <br />
                           <Box
