@@ -271,7 +271,7 @@ const EventAll = () => {
               padding: '1vh 3vw ',
             }}
           >
-            <Card className="Card_align" style={{ background: 'gray' }}>
+            <Card className="Card_align" style={{ opacity: '50%' }}>
               <Grid
                 xs={5}
                 // className="Event1"
@@ -456,7 +456,7 @@ const EventAll = () => {
                 display: 'flex',
                 justifyContent: 'center',
               }
-            : { maxWidth: 100 }
+            : { maxWidth: 100, zIndex: '2' }
         }
       >
         <ListItem
@@ -495,6 +495,7 @@ const EventAll = () => {
             display: 'flex',
             justifyContent: 'center',
             backgroundColor: '#f7f2f2',
+            zIndex: '2',
           }}
         >
           <h4>두 개의 상품중 마음에 드는 상품을 골라가세요</h4>
@@ -506,10 +507,11 @@ const EventAll = () => {
                 style={{
                   position: 'sticky',
                   // top: '8.5vh',
-                  top: '93vh',
+                  top: '90vh',
                   display: 'flex',
                   justifyContent: 'center',
                   backgroundColor: '#f7f2f2',
+                  zIndex: '2',
                 }}
               >
                 <NestedList />
@@ -519,8 +521,8 @@ const EventAll = () => {
                 style={{
                   textAlign: 'center',
                   verticalAlign: 'middle',
-                  marginTop: '-7vh',
-                  paddingBottom: '10vh',
+                  marginTop: '-8vh',
+                  paddingBottom: '15vh',
                 }}
               >
                 {currentEventDatas.map((tmpData, index) =>
@@ -531,22 +533,24 @@ const EventAll = () => {
           ) : (
             <>
               <Grid
+                xs={2}
                 style={{
-                  position: 'sticky',
-                  top: '100px',
+                  position: 'fixed',
+                  top: '10vh',
+                  right: '5vw',
                   display: 'flex',
-                  justifyContent: 'flex-end',
+                  // justifyContent: 'flex-end',
                 }}
               >
                 <NestedList />
               </Grid>
               <Grid
-                xs={11}
+                xs={12}
                 item
                 style={{
                   textAlign: 'center',
                   verticalAlign: 'middle',
-                  marginTop: '-15vh',
+                  // marginTop: '-10vh',
                 }}
               >
                 {currentEventDatas.map((tmpData, index) =>
