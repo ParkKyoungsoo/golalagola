@@ -26,56 +26,19 @@ const ControlledCarousel = props => {
               backgroundColor: '#f7f2f2',
             }}
           >
-            {currentEventDatas.map((data, index) => (
-              <Carousel.Item>
-                <Grid container>
-                  <Grid item xs={6} className="Centering mobiletmp">
-                    <Link
-                      className="Centering mobiletmp"
-                      to={`voteitemdetail/${
-                        Object(productDatas[data.event_item['1'].prod_id - 1])
-                          .prod_name
-                      }/${
-                        Object(productDatas[data.event_item['1'].prod_id - 1])
-                          .prod_id
-                      }`}
-                      // to={`voteitemdetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
-                    >
-                      <img
-                        className="mobiletmp"
-                        src={`https://i3b309.p.ssafy.io/${
-                          Object(productDatas[data.event_item['1'].prod_id - 1])
-                            .prod_image
-                        }`}
-                        alt="image1"
-                      />
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} className="Centering mobiletmp">
-                    <Link
-                      className="Centering mobiletmp"
-                      to={`voteitemdetail/${
-                        Object(productDatas[data.event_item['2'].prod_id - 1])
-                          .prod_name
-                      }/${
-                        Object(productDatas[data.event_item['2'].prod_id - 1])
-                          .prod_id
-                      }`}
-                      // to={`voteitemdetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
-                    >
-                      <img
-                        className="mobiletmp"
-                        src={`https://i3b309.p.ssafy.io/${
-                          Object(productDatas[data.event_item['2'].prod_id - 1])
-                            .prod_image
-                        }`}
-                        alt="image2"
-                      />
-                    </Link>
+            <Carousel.Item>
+              <Grid container className="Centering ">
+                <Grid item className="Centering ">
+                  <Grid className="Centering ">
+                    <img
+                      className="mobiletmp"
+                      src="images/배너너너너너.jpg"
+                      alt="image2"
+                    />
                   </Grid>
                 </Grid>
-              </Carousel.Item>
-            ))}
+              </Grid>
+            </Carousel.Item>
           </Carousel>
         </MobileWrapper>
       ) : (
@@ -87,56 +50,21 @@ const ControlledCarousel = props => {
             backgroundColor: '#f7f2f2',
           }}
         >
-          {currentEventDatas.map((data, index) => (
-            <Carousel.Item key={index}>
-              <Grid container>
-                <Grid item xs={6} className="Centering tmp">
-                  <Link
-                    className="Centering tmp"
-                    to={`voteitemdetail/${
-                      Object(productDatas[data.event_item['1'].prod_id - 1])
-                        .prod_name
-                    }/${
-                      Object(productDatas[data.event_item['1'].prod_id - 1])
-                        .prod_id
-                    }`}
-                    // to={`voteitemdetail/${TmpData.event_item['1'].prod_name}/${TmpData.event_item['1'].prod_id}`}
-                  >
-                    <img
-                      className="tmp"
-                      src={`https://i3b309.p.ssafy.io/${
-                        Object(productDatas[data.event_item['1'].prod_id - 1])
-                          .prod_image
-                      }`}
-                      alt="image1"
-                    />
-                  </Link>
-                </Grid>
-                <Grid item xs={6} className="Centering tmp">
-                  <Link
-                    className="Centering tmp"
-                    to={`voteitemdetail/${
-                      Object(productDatas[data.event_item['2'].prod_id - 1])
-                        .prod_name
-                    }/${
-                      Object(productDatas[data.event_item['2'].prod_id - 1])
-                        .prod_id
-                    }`}
-                    // to={`voteitemdetail/${TmpData.event_item['2'].prod_name}/${TmpData.event_item['2'].prod_id}`}
-                  >
-                    <img
-                      className="tmp"
-                      src={`https://i3b309.p.ssafy.io/${
-                        Object(productDatas[data.event_item['2'].prod_id - 1])
-                          .prod_image
-                      }`}
-                      alt="image2"
-                    />
-                  </Link>
+          {/* 배너 */}
+
+          <Carousel.Item>
+            <Grid container className="Centering ">
+              <Grid item className="Centering ">
+                <Grid className="Centering ">
+                  <img
+                    className="tmp"
+                    src="images/배너너너너너.jpg"
+                    alt="image2"
+                  />
                 </Grid>
               </Grid>
-            </Carousel.Item>
-          ))}
+            </Grid>
+          </Carousel.Item>
         </Carousel>
       )}
     </>

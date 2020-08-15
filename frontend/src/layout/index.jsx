@@ -22,7 +22,7 @@ const Layout = props => {
         <Container
           open={drawerOpen}
           className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
-          maxWidth="xl"
+          // maxWidth="xl"
           onClick={() => {
             setDrawerOpen(0);
           }}
