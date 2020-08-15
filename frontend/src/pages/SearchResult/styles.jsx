@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
 
-.Centering {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .Centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 
 & .tmp {
