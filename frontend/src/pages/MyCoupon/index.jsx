@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
+import {
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  useMediaQuery,
+} from '@material-ui/core';
 
-import { Grid } from '@material-ui/core';
-import Nav from '../../layout/Header';
 import Layout from '../../layout';
 import { CommonContext } from '../../context/CommonContext';
 
@@ -58,68 +60,69 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const isMobile = useMediaQuery('(max-width:930px)');
   return (
-    <>
-      {console.log(user)}
-      <Layout>
-        <div style={{ textAlign: 'center' }}>
-          <QRCode
-            value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
-          />
-        </div>
-        {user.user_quiz ? (
-          <Grid>이미 퀴즈를 풀었네?</Grid>
-        ) : (
-          <Grid>퀴즈풀면 할인 더 해줌</Grid>
-        )}
-        <Paper className={classes.root}>
-          <TableContainer className={classes.container}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map(column => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {myCouponDatas.length !== 0 ? (
-                  myCouponDatas.map(row => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
+    <Layout>
+      <Grid style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid xs={12} md={9}>
+          <Grid style={{ textAlign: 'center' }}>
+            <QRCode
+              value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+            />
+          </Grid>
+          {user.user_quiz ? (
+            <Grid>이미 퀴즈를 풀었네?</Grid>
+          ) : (
+            <Grid>퀴즈풀면 할인 더 해줌</Grid>
+          )}
+          <Paper className={classes.root}>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map(column => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
                       >
-                        {columns.map(column => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {typeof value === 'number'
-                                ? Object(productDatas[value - 1]).prod_name
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })
-                ) : (
-                  <Grid>발급받은 쿠폰이 없습니다</Grid>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Layout>
-    </>
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {myCouponDatas.length !== 0 ? (
+                    myCouponDatas.map(row => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          {columns.map(column => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {typeof value === 'number'
+                                  ? Object(productDatas[value - 1]).prod_name
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })
+                  ) : (
+                    <Grid>발급받은 쿠폰이 없습니다</Grid>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Layout>
   );
 }

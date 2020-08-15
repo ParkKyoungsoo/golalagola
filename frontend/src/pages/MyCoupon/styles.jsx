@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  .Centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   & .mycoupon-box {
     margin: 5%;
     padding: 5%;
