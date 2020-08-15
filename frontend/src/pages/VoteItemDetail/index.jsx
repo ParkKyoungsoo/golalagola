@@ -456,259 +456,266 @@ const ItemDetail = ({ match }) => {
           ) : (
             <Layout>
               <br />
-              <Grid
-                container
-                direction="row"
-                justify="space-around"
-                alignItems="center"
-              >
-                <Grid item xs={4}>
-                  {productDatas.map((itemData, index) => {
-                    if (
-                      productDatas[match.params.id - 1].prod_id ===
-                      itemData.prod_id
-                    ) {
-                      return (
-                        <Card className="effect">
-                          <img
-                            src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
-                            // src={`../../${productDatas[match.params.id - 1].prod_image}`}
-                            alt="test"
-                            style={{
-                              width: '100%',
-                              height: 'auto',
-                              mr: '10px',
-                            }}
-                          />
-                        </Card>
-                      );
-                    }
-                  })}
-                </Grid>
+              <Grid className="Centering">
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-around"
+                  alignItems="center"
+                  md={9}
+                >
+                  <Grid item xs={4}>
+                    {productDatas.map((itemData, index) => {
+                      if (
+                        productDatas[match.params.id - 1].prod_id ===
+                        itemData.prod_id
+                      ) {
+                        return (
+                          <Card className="effect">
+                            <img
+                              src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                              // src={`../../${productDatas[match.params.id - 1].prod_image}`}
+                              alt="test"
+                              style={{
+                                width: '100%',
+                                height: 'auto',
+                                mr: '10px',
+                              }}
+                            />
+                          </Card>
+                        );
+                      }
+                    })}
+                  </Grid>
 
-                <Grid item xs={6}>
-                  {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
-          <hr /> */}
-                  {productDatas.map((itemData, index) => {
-                    if (
-                      productDatas[match.params.id - 1].prod_id ===
-                      itemData.prod_id
-                    )
-                      return (
-                        <Grid>
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <h2>
-                            <strong>
-                              {productDatas[match.params.id - 1].prod_title}
-                            </strong>
-                          </h2>
-                          <br />
-                          <span className="price2">
-                            {numberWithCommas(
-                              productDatas[match.params.id - 1].prod_price,
-                            )}
-                          </span>
-                          <span className="unit1">원</span>
-                          <h5>
-                            (총 용량 :{' '}
-                            {productDatas[match.params.id - 1].prod_weight})
-                          </h5>{' '}
-                          <br />
-                          <br />
-                          <h3 className="select">
-                            {productDatas[match.params.id - 1].prod_desc}
-                          </h3>
-                          <br />
-                          <br />
-                          <div className="button">
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              disableElevation
-                              onClick={
-                                user.status === 'login'
-                                  ? QuizDialogOpen
-                                  : userNotLogin
-                              }
-                              disabled={user.user_quiz}
-                              style={{ marginLeft: '20px' }}
+                  <Grid item xs={6}>
+                    {/* <h2 style={{ textAlign: 'center' }}>{match.params.name}</h2>
+                    <hr /> */}
+                    {productDatas.map((itemData, index) => {
+                      if (
+                        productDatas[match.params.id - 1].prod_id ===
+                        itemData.prod_id
+                      )
+                        return (
+                          <Grid>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <h2>
+                              <strong>
+                                {productDatas[match.params.id - 1].prod_title}
+                              </strong>
+                            </h2>
+                            <br />
+                            <span className="price2">
+                              {numberWithCommas(
+                                productDatas[match.params.id - 1].prod_price,
+                              )}
+                            </span>
+                            <span className="unit1">원</span>
+                            <h5>
+                              (총 용량 :{' '}
+                              {productDatas[match.params.id - 1].prod_weight})
+                            </h5>{' '}
+                            <br />
+                            <br />
+                            <h3 className="select">
+                              {productDatas[match.params.id - 1].prod_desc}
+                            </h3>
+                            <br />
+                            <br />
+                            <div className="button">
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                disableElevation
+                                onClick={
+                                  user.status === 'login'
+                                    ? QuizDialogOpen
+                                    : userNotLogin
+                                }
+                                disabled={user.user_quiz}
+                                style={{ marginLeft: '20px' }}
+                              >
+                                퀴즈 풀기
+                              </Button>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                disableElevation
+                                onClick={
+                                  user.status === 'login'
+                                    ? click1
+                                    : userNotLogin
+                                }
+                                disabled={!(eventActivated && !userJoinedEvent)}
+                                style={{ marginLeft: '20px' }}
+                              >
+                                쿠폰 받기
+                              </Button>
+                            </div>
+                            {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
+                            <hr />
+                            <Grid
+                              style={{
+                                justifyContent: 'space-between',
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
                             >
-                              퀴즈 풀기
-                            </Button>
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              disableElevation
-                              onClick={
-                                user.status === 'login' ? click1 : userNotLogin
-                              }
-                              disabled={!(eventActivated && !userJoinedEvent)}
-                              style={{ marginLeft: '20px' }}
-                            >
-                              쿠폰 받기
-                            </Button>
-                          </div>
-                          {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
-                          <hr />
-                          <Grid
-                            style={{
-                              justifyContent: 'space-between',
-                              display: 'flex',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <span className="w_DCT">
-                              {/* <FiberManualRecordIcon
+                              <span className="w_DCT">
+                                {/* <FiberManualRecordIcon
                                 style={{ fontSize: '15px' }}
                               /> */}
-                              <input
-                                type="checkBox"
-                                className="quizChecked"
-                                disabled={true}
-                                checked={user.user_quiz}
-                              />
-                              &nbsp; 퀴즈 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale -
-                                (productDatas[match.params.id - 1].prod_sale -
-                                  30)}
-                              %)
-                            </span>{' '}
-                            {user.user_quiz ? (
-                              <span className="w_DCP">
-                                -
-                                {numberWithCommas(
-                                  productDatas[match.params.id - 1].prod_price *
-                                    0.3,
-                                )}
-                                원
-                              </span>
-                            ) : (
-                              <span className="w_DCP">미적용</span>
-                            )}
-                          </Grid>
-                          <Grid
-                            style={{
-                              justifyContent: 'space-between',
-                              display: 'flex',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <span className="w_DCT">
-                              <input
-                                type="checkBox"
-                                className="quizChecked"
-                                disabled={true}
-                                checked={
-                                  !(eventActivated && !userJoinedEvent) &&
-                                  userHasCoupon
-                                }
-                              />
-                              {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
-                              &nbsp; 이벤트 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale - 30}
-                              %)
-                            </span>{' '}
-                            {!(eventActivated && !userJoinedEvent) &&
-                            userHasCoupon ? (
-                              <span className="w_DCP">
-                                -
-                                {numberWithCommas(
-                                  parseInt(
+                                <input
+                                  type="checkBox"
+                                  className="quizChecked"
+                                  disabled={true}
+                                  checked={user.user_quiz}
+                                />
+                                &nbsp; 퀴즈 참여 적용 할인(
+                                {productDatas[match.params.id - 1].prod_sale -
+                                  (productDatas[match.params.id - 1].prod_sale -
+                                    30)}
+                                %)
+                              </span>{' '}
+                              {user.user_quiz ? (
+                                <span className="w_DCP">
+                                  -
+                                  {numberWithCommas(
                                     productDatas[match.params.id - 1]
-                                      .prod_price *
-                                      ((productDatas[match.params.id - 1]
-                                        .prod_sale -
-                                        30) /
-                                        100),
-                                  ),
-                                )}
-                                원
-                              </span>
-                            ) : (
-                              <span className="w_DCP">미적용</span>
-                            )}
-                          </Grid>
-                          <hr />
-                          <Grid
-                            style={{
-                              justifyContent: 'space-between',
-                              display: 'flex',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <div className="loading1">
-                              <span>실</span>
-                              <span>구</span>
-                              <span>매</span>
-                              &nbsp; &nbsp;
-                              <span>가</span>
-                              <span>격</span>
-                            </div>
-                            <div className="loading2">
-                              <span>
-                                {numberWithCommas(
-                                  parseInt(
-                                    productDatas[match.params.id - 1]
-                                      .prod_price -
-                                      ((user.user_quiz
-                                        ? productDatas[match.params.id - 1]
-                                            .prod_price * 0.3
-                                        : 0) +
-                                        (userHasCoupon
-                                          ? productDatas[match.params.id - 1]
-                                              .prod_price *
-                                            ((productDatas[match.params.id - 1]
-                                              .prod_sale -
-                                              30) /
-                                              100)
-                                          : 0)),
-                                  ),
-                                )}
-                                원
-                              </span>
-                            </div>
-                          </Grid>
-                          <br />
-                          <Box
-                            style={{
-                              border: '1px solid',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <span className="w_DCP">
-                              총 &nbsp;
-                              {numberWithCommas(
-                                parseInt(
-                                  0 +
-                                    (user.user_quiz
-                                      ? productDatas[match.params.id - 1]
-                                          .prod_price * 0.3
-                                      : 0) +
-                                    (userHasCoupon
-                                      ? productDatas[match.params.id - 1]
-                                          .prod_price *
+                                      .prod_price * 0.3,
+                                  )}
+                                  원
+                                </span>
+                              ) : (
+                                <span className="w_DCP">미적용</span>
+                              )}
+                            </Grid>
+                            <Grid
+                              style={{
+                                justifyContent: 'space-between',
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <span className="w_DCT">
+                                <input
+                                  type="checkBox"
+                                  className="quizChecked"
+                                  disabled={true}
+                                  checked={
+                                    !(eventActivated && !userJoinedEvent) &&
+                                    userHasCoupon
+                                  }
+                                />
+                                {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
+                                &nbsp; 이벤트 참여 적용 할인(
+                                {productDatas[match.params.id - 1].prod_sale -
+                                  30}
+                                %)
+                              </span>{' '}
+                              {!(eventActivated && !userJoinedEvent) &&
+                              userHasCoupon ? (
+                                <span className="w_DCP">
+                                  -
+                                  {numberWithCommas(
+                                    parseInt(
+                                      productDatas[match.params.id - 1]
+                                        .prod_price *
                                         ((productDatas[match.params.id - 1]
                                           .prod_sale -
                                           30) /
-                                          100)
-                                      : 0),
-                                ),
+                                          100),
+                                    ),
+                                  )}
+                                  원
+                                </span>
+                              ) : (
+                                <span className="w_DCP">미적용</span>
                               )}
-                              원
-                            </span>
-                            &nbsp;
-                            <span style={{ fontSize: '20px' }}>
-                              할인 혜택을 받으셨습니다.
-                            </span>
-                          </Box>
-                        </Grid>
-                      );
-                  })}
+                            </Grid>
+                            <hr />
+                            <Grid
+                              style={{
+                                justifyContent: 'space-between',
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <div className="loading1">
+                                <span>실</span>
+                                <span>구</span>
+                                <span>매</span>
+                                &nbsp; &nbsp;
+                                <span>가</span>
+                                <span>격</span>
+                              </div>
+                              <div className="loading2">
+                                <span>
+                                  {numberWithCommas(
+                                    parseInt(
+                                      productDatas[match.params.id - 1]
+                                        .prod_price -
+                                        ((user.user_quiz
+                                          ? productDatas[match.params.id - 1]
+                                              .prod_price * 0.3
+                                          : 0) +
+                                          (userHasCoupon
+                                            ? productDatas[match.params.id - 1]
+                                                .prod_price *
+                                              ((productDatas[
+                                                match.params.id - 1
+                                              ].prod_sale -
+                                                30) /
+                                                100)
+                                            : 0)),
+                                    ),
+                                  )}
+                                  원
+                                </span>
+                              </div>
+                            </Grid>
+                            <br />
+                            <Box
+                              style={{
+                                border: '1px solid',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <span className="w_DCP">
+                                총 &nbsp;
+                                {numberWithCommas(
+                                  parseInt(
+                                    0 +
+                                      (user.user_quiz
+                                        ? productDatas[match.params.id - 1]
+                                            .prod_price * 0.3
+                                        : 0) +
+                                      (userHasCoupon
+                                        ? productDatas[match.params.id - 1]
+                                            .prod_price *
+                                          ((productDatas[match.params.id - 1]
+                                            .prod_sale -
+                                            30) /
+                                            100)
+                                        : 0),
+                                  ),
+                                )}
+                                원
+                              </span>
+                              &nbsp;
+                              <span style={{ fontSize: '20px' }}>
+                                할인 혜택을 받으셨습니다.
+                              </span>
+                            </Box>
+                          </Grid>
+                        );
+                    })}
+                  </Grid>
                 </Grid>
               </Grid>
               <Dialog

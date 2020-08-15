@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  // & .BoxCss {
-  //   border: 1px solid red;
-  // }
+  .Centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   & .img-box {
     height: 100%;
