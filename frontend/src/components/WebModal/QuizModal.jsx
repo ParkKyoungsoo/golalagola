@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Wrapper from './styles';
 import { Route, Link, useHistory } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
+import { Dialog, Grid, useMediaQuery, Box } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
@@ -15,7 +15,7 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
+import HelpIcon from '@material-ui/icons/Help';
 // ClickAwayListener
 
 const SuccessModal = () => {
@@ -60,12 +60,70 @@ const SuccessModal = () => {
   };
 
   useEffect(userUpdate, []);
-
+  const Mobile = useMediaQuery('(max-width:920px)');
   return (
     <>
-      <h2> 정답입니다 ^^ </h2>
-      <Button onClick={goToMyCoupon}>마이 쿠폰함 바로가기</Button>
-      <Button onClick={goToMain}>쇼핑 계속하기</Button>
+      {Mobile ? (
+        <Grid container direction="column">
+          <Grid item style={{ fontSize: '2em', textAlign: 'center' }}>
+            축하드립니다 ~~~
+          </Grid>
+          <Grid item>
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                <Button
+                  onClick={goToMyCoupon}
+                  style={{ width: '100%', height: '100%' }}
+                >
+                  마이 쿠폰함 바로가기
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={goToMain}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'red',
+                  }}
+                >
+                  Home
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      ) : (
+        <Grid
+          container
+          direction="column"
+          style={{ width: '50vw', height: '20vh' }}
+        >
+          <Grid item style={{ fontSize: '2.3em', textAlign: 'center' }}>
+            축하드립니다 ~~~
+          </Grid>
+          <Grid item style={{ height: '37%' }}>
+            <Button
+              onClick={goToMyCoupon}
+              style={{ width: '100%', height: '100%' }}
+            >
+              마이 쿠폰함 바로가기
+            </Button>
+          </Grid>
+          <Grid item style={{ height: '37%' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={goToMain}
+              style={{ width: '100%', height: '100%', backgroundColor: 'red' }}
+            >
+              Home
+            </Button>
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };
@@ -131,77 +189,217 @@ const Quiz = modalNum => {
   const handleClickAway = () => {
     setOpen(false);
   };
+
   return (
     <>
-      <Wrapper>
-        <Grid container direction="column" xs={12}>
-          <Grid item className="quizCentering">
-            <h3
+      {isMobile ? (
+        <Wrapper>
+          <Grid container direction="column" xs={12}>
+            <Grid item className="quizCentering" style={{ fontSize: '1.2em' }}>
+              {/* <h4
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '3vh',
+                }}
+              > */}
+              <strong>오늘의 퀴즈</strong>
+              {/* </h4> */}
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
               style={{
                 textAlign: 'center',
-                marginBottom: '3vh',
+                marginTop: '10px',
+                marginBottom: '20px',
+                fontSize: 'x-large',
               }}
             >
-              오늘의 퀴즈
-            </h3>
-          </Grid>
-          <Grid
-            item
-            className="quizCentering"
-            style={{
-              textAlign: 'center',
-              marginTop: '10px',
-              marginBottom: '50px',
-              fontSize: 'xx-large',
-            }}
-          >
-            {Object(quizDatas[number]).quiz_question}
-          </Grid>
-          <Grid
-            style={{
-              textAlign: 'center',
-              marginTop: '10px',
-              marginBottom: '50px',
-              fontSize: 'x-large',
-            }}
-          >
-            <ClickAwayListener onClickAway={handleClickAway}>
-              <Grid className style={{ display: 'flex' }}>
-                <NotListedLocationIcon
-                  onClick={handleClick}
-                  style={{ fontSize: '10vh' }}
-                />
-                {open ? (
-                  <Grid className>{Object(quizDatas[number]).quiz_hint}</Grid>
-                ) : null}
-              </Grid>
-            </ClickAwayListener>
-          </Grid>
-          <Grid
-            item
-            className="quizCentering"
-            style={{ justifyContent: 'space-evenly' }}
-          >
-            <Button
-              onClick={click(true)}
-              style={userAns === true ? buttonStyle : null}
-              color="primary"
-              style={{ backgroundColor: 'black' }}
+              {Object(quizDatas[number]).quiz_question}
+            </Grid>
+            <Grid
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '2vh',
+                fontSize: '2.5em',
+              }}
             >
-              <RadioButtonUncheckedIcon style={{ fontSize: '10vw' }} />
-            </Button>
-            <Button
-              onClick={click(false)}
-              style={userAns === false ? buttonStyle : null}
-              color="secondary"
-              style={{ backgroundColor: 'gray' }}
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Grid
+                  className
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <NotListedLocationIcon
+                    onClick={handleClick}
+                    style={{ fontSize: '2.5em' }}
+                  />
+                  {open ? (
+                    <Grid className="quizCss" style={{ fontSize: '1.5em' }}>
+                      {Object(quizDatas[number]).quiz_hint}
+                    </Grid>
+                  ) : null}
+                </Grid>
+              </ClickAwayListener>
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{ justifyContent: 'space-evenly' }}
             >
-              <ClearIcon style={{ fontSize: '10vw' }} />
-            </Button>
+              <Button
+                onClick={click(true)}
+                style={userAns === true ? buttonStyle : null}
+                color="primary"
+                style={{ backgroundColor: 'black' }}
+              >
+                <RadioButtonUncheckedIcon style={{ fontSize: '10vw' }} />
+              </Button>
+              <Button
+                onClick={click(false)}
+                style={userAns === false ? buttonStyle : null}
+                color="secondary"
+                style={{ backgroundColor: 'gray' }}
+              >
+                <ClearIcon style={{ fontSize: '10vw' }} />
+              </Button>
+            </Grid>
+            <Grid
+              style={{
+                fontSize: '1.5em',
+                textAlign: 'center',
+                marginTop: '2vh',
+              }}
+            >
+              DESC
+            </Grid>
           </Grid>
-        </Grid>
-      </Wrapper>
-      {userAns ? (
+          {userAns ? (
+            <Dialog
+              open={successModalTrigger}
+              onClose={modalHandler}
+              modalNum={1}
+              style={{ width: '100%', textAlign: 'center' }}
+            >
+              <SuccessModal />
+            </Dialog>
+          ) : (
+            <Dialog open={failModalTrigger} onClose={modalHandler}>
+              <Fail />
+            </Dialog>
+          )}
+        </Wrapper>
+      ) : (
+        <Wrapper>
+          <Grid container direction="column" xs={12}>
+            <Grid item className="quizCentering">
+              <h3
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '3vh',
+                }}
+              >
+                오늘의 퀴즈
+              </h3>
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '2vh',
+                fontSize: 'xx-large',
+              }}
+            >
+              {Object(quizDatas[number]).quiz_question}
+            </Grid>
+            <Grid
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '50px',
+                fontSize: 'x-large',
+              }}
+            >
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Grid
+                  className
+                  direction="column"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Grid item>
+                    <HelpIcon
+                      onClick={handleClick}
+                      style={{ fontSize: '2.5em' }}
+                    />
+                  </Grid>
+                  <Grid item>
+                    {open ? (
+                      <Grid>{Object(quizDatas[number]).quiz_hint}</Grid>
+                    ) : (
+                      '힌트'
+                    )}
+                  </Grid>
+                </Grid>
+              </ClickAwayListener>
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{ justifyContent: 'space-evenly' }}
+            >
+              <Button
+                onClick={click(true)}
+                style={userAns === true ? buttonStyle : null}
+                color="primary"
+                style={{ backgroundColor: 'black' }}
+              >
+                <RadioButtonUncheckedIcon style={{ fontSize: '20vw' }} />
+              </Button>
+              <Button
+                onClick={click(false)}
+                style={userAns === false ? buttonStyle : null}
+                color="secondary"
+                style={{ backgroundColor: 'gray' }}
+              >
+                <ClearIcon style={{ fontSize: '20vw' }} />
+              </Button>
+            </Grid>
+            <Grid
+              style={{
+                fontSize: '1.5em',
+                textAlign: 'center',
+                marginTop: '2vh',
+              }}
+            >
+              DESC
+            </Grid>
+          </Grid>
+          {userAns ? (
+            <Dialog
+              open={successModalTrigger}
+              onClose={modalHandler}
+              modalNum={1}
+            >
+              <SuccessModal />
+            </Dialog>
+          ) : (
+            <Dialog open={failModalTrigger} onClose={modalHandler}>
+              <Fail />
+            </Dialog>
+          )}
+        </Wrapper>
+      )}
+      {/* {userAns ? (
         <Dialog open={successModalTrigger} onClose={modalHandler} modalNum={1}>
           <SuccessModal />
         </Dialog>
@@ -209,7 +407,7 @@ const Quiz = modalNum => {
         <Dialog open={failModalTrigger} onClose={modalHandler}>
           <Fail />
         </Dialog>
-      )}
+      )} */}
     </>
   );
 };
