@@ -3,11 +3,11 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   position: relative;
   z-index: 1300;
-  height: 5vh;
+  height: 8vh;
   .headerColor {
     background-color: #f7f2f2;
     color: black;
-    height: 5vh;
+    height: 8vh;
   }
   .searchIcon {
     display: flex;
@@ -40,6 +40,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    height: 8vh;
   }
 
   .navbarRight {

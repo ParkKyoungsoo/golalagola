@@ -131,7 +131,7 @@ const EventAll = () => {
             md={6}
             style={{
               display: 'inline-flex',
-              padding: '1vh 3vw ',
+              padding: '2vh 5vw ',
             }}
           >
             <Card className="Card_align">
@@ -267,8 +267,7 @@ const EventAll = () => {
             md={6}
             style={{
               display: 'inline-flex',
-
-              padding: '1vh 3vw ',
+              padding: '2vh 5vw ',
             }}
           >
             <Card className="Card_align" style={{ opacity: '50%' }}>
@@ -395,12 +394,7 @@ const EventAll = () => {
   const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
-
-      // backgroundColor: theme.palette.background.paper,
     },
-    // nested: {
-    //   paddingLeft: theme.spacing(4),
-    // },
   }));
   function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;

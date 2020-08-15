@@ -39,6 +39,19 @@ const ControlledCarousel = props => {
                 </Grid>
               </Grid>
             </Carousel.Item>
+            <Carousel.Item>
+              <Grid container className="Centering ">
+                <Grid item className="Centering ">
+                  <Grid className="Centering ">
+                    <img
+                      className="mobiletmp"
+                      src="images/과다.jpg"
+                      alt="image2"
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Carousel.Item>
           </Carousel>
         </MobileWrapper>
       ) : (
@@ -61,6 +74,15 @@ const ControlledCarousel = props => {
                     src="images/배너너너너너.jpg"
                     alt="image2"
                   />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Grid container className="Centering ">
+              <Grid item className="Centering ">
+                <Grid className="Centering ">
+                  <img className="tmp" src="images/과다.jpg" alt="image2" />
                 </Grid>
               </Grid>
             </Grid>

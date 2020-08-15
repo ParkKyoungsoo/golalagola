@@ -249,7 +249,7 @@ const MainVote = props => {
             <Grid
               style={{
                 position: 'sticky',
-                top: '5vh',
+                top: '8vh',
                 zIndex: '1',
                 backgroundColor: '#f7f2f2',
               }}
@@ -443,7 +443,7 @@ const MainVote = props => {
               className="Centering"
               style={{
                 position: 'sticky',
-                top: '5vh',
+                top: '8vh',
                 zIndex: '1',
               }}
             >
@@ -451,7 +451,7 @@ const MainVote = props => {
                 md={9}
                 style={{
                   position: 'sticky',
-                  top: '5vh',
+                  top: '8vh',
                   zIndex: '1',
                   backgroundColor: '#f7f2f2',
                 }}
