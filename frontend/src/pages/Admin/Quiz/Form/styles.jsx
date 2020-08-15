@@ -1,78 +1,55 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  & .container {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Noto sans KR', sans-serif;
-    height: 330px;
+  * {
+    margin: 0;
+    padding: 0;
   }
-  & .dropzone {
-    display: flex;
-    height: 70%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    border-width: 2px;
-    border-radius: 2px;
-    border-color: #a2a2a2;
-    border-style: dashed;
-    background: #efefef;
-    color: #bdbdbd;
-    outline: none;
-    transition: border 0.24s ease-in-out;
-    &:focus {
-      border-color: #2196f3;
-    }
-    &:disabled {
-      opacity: 0.6;
-    }
+
+  button:focus {
+    outline: 0;
   }
-  & .up-cancel-fab {
-    margin: 10px 5px;
-    color: white;
+
+  & .admin_quiz_form__main {
+    background-color: #efeff5;
+    height: 100vh;
+    width: 100vw;
   }
-  & .cover-avatar {
-    width: 100%;
+
+  & .admin_quiz_form__content {
+    background-color: #efeff5;
+    width: 84vw;
     height: 100%;
+    padding: 41px 3vw 0 3vw;
+    margin-left: 16vw;
+    font-size: 14px;
   }
-  & .form-control {
-    padding-top: 8px;
-    min-width: 200px;
+
+  & .admin_quiz_form__header {
+    font-weight: 100;
   }
-  & .input-title-component-input1 {
-    font-size: 35px;
+
+  & .admin_quiz_form__paper {
+    // margin: 18px 0 0 0;
+    padding: 50px;
   }
-  & .input-title-component-input2 {
-    margin-top: 30px;
+
+  & .admin_quiz_form__divider {
+    margin: 15px 10px 10px;
   }
-  & .sub-title-group-component-divider {
+
+  & .admin_quiz_form__table {
+    width: 500px;
+  }
+
+  & .admin_quiz_form__input {
     width: 100%;
   }
-  & .create-vote-main-component {
-    padding: 20px;
-  }
-  & .create-vote-main-component-grid-item {
-    padding-top: 30px;
-  }
-  & .thumbnail-image-component-h4 {
-    color: #939393;
-  }
-  & .thumbnail-image-component-aside {
-    padding: 0 10px;
-    color: #a2a2a2;
-  }
-  @media (max-width: 600px) {
-    .container {
-      height: 50vh;
-      & > p {
-        font-size: 1rem;
-      }
-      & > em {
-        font-size: 0.8rem;
-      }
-    }
+
+  & .admin_quiz_form__button {
+    margin: 15px 0 0 0;
+    width: 100%;
   }
 `;
+
 export default Wrapper;

@@ -13,7 +13,6 @@ const Wrapper = styled.div`
   }
 
   & .eventImg {
-    border:2px outset rgba(44, 134, 204, 0.67);
     border-radius:5px;
     max-width: 
 
@@ -56,6 +55,8 @@ const Wrapper = styled.div`
     position: buttom:
   }
 
+  & .quizCss{
+    font-size: 1.5em;
   }
 `;
 

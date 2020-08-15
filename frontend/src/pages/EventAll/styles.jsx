@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   .tmp {
     width: 100%;
     // height: 15vh;
-    border-radius: 5%;
+    // border-radius: 5%;
     // margin: 0 1vw 0 1vw;
   }
 
