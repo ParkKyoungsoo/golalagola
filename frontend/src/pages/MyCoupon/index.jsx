@@ -63,16 +63,20 @@ export default function StickyHeadTable() {
     <>
       {console.log(user)}
       <Layout>
-        <div style={{ textAlign: 'center' }}>
-          <QRCode
-            value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
-          />
-        </div>
-        {user.user_quiz ? (
-          <Grid>이미 퀴즈를 풀었네?</Grid>
-        ) : (
-          <Grid>퀴즈풀면 할인 더 해줌</Grid>
-        )}
+        <Grid style={{ display: 'flex' }}>
+          <Grid style={{ padding: '20px', margin: '20px' }}>
+            <QRCode
+              value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+            />
+          </Grid>
+          <Grid style={{ padding: '20px', margin: '20px' }}>
+            {user.user_quiz ? (
+              <Grid>이미 퀴즈를 풀었네?</Grid>
+            ) : (
+              <Grid>퀴즈풀면 할인 더 해줌</Grid>
+            )}
+          </Grid>
+        </Grid>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
@@ -113,7 +117,9 @@ export default function StickyHeadTable() {
                     );
                   })
                 ) : (
-                  <Grid>발급받은 쿠폰이 없습니다</Grid>
+                  <Grid container alignItems="center" justify="center">
+                    발급받은 쿠폰이 없습니다
+                  </Grid>
                 )}
               </TableBody>
             </Table>
