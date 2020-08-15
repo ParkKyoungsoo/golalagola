@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  .Centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .Card_align {
     display: flex;
     // justify-content: flex-start;
