@@ -118,8 +118,9 @@ const App = () => {
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
   // 메인 주소로 사용할 URL 입니다.
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [mainUrl, setMainUrl] = useState('http://localhost:3000');
+  const [mainUrl, setMainUrl] = useState('http://localhost:3000/');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);

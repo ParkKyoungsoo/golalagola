@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  .Centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .Card_align {
     display: flex;
     // justify-content: flex-start;
@@ -30,7 +36,7 @@ const Wrapper = styled.div`
   .tmp {
     width: 100%;
     // height: 15vh;
-    border-radius: 5%;
+    // border-radius: 5%;
     // margin: 0 1vw 0 1vw;
   }
 

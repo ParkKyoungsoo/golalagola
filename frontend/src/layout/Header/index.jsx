@@ -24,7 +24,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
 import { FiUser } from 'react-icons/fi';
 import { RiCoupon3Line } from 'react-icons/ri';
-import { GiPresent } from 'react-icons/gi';
+import { BsList } from 'react-icons/bs';
 import { FiGift } from 'react-icons/fi';
 import { BsSearch } from 'react-icons/bs';
 
@@ -40,7 +40,9 @@ const Event = () => {
 const Search = () => {
   return <BsSearch />;
 };
-
+const MobileList = () => {
+  return <BsList />;
+};
 const Header = props => {
   let history = useHistory();
   // const isTablet = useMediaQuery('(max-width:960px)');
@@ -107,12 +109,30 @@ const Header = props => {
             <Grid
               container
               style={{
-                height: '5vh',
+                height: '8vh',
                 justifyContent: 'center',
               }}
               className="appbar"
             >
-              <Grid className="mobileSearchIcon">
+              <Grid xs={4} className="navbarCentering">
+                <Grid
+                  onClick={() => {
+                    setDrawerOpen(!drawerOpen);
+                  }}
+                  // className="menu-button"
+                >
+                  <h5>
+                    <MobileList />
+                  </h5>
+                </Grid>
+              </Grid>
+              <Grid
+                xs={4}
+                className="navbarCentering"
+                onClick={() => {
+                  setDrawerOpen(0);
+                }}
+              >
                 <Typography
                   variant="h5"
                   onClick={onClickRedirectPathHandler('/mainvote')}
@@ -122,42 +142,18 @@ const Header = props => {
                 >
                   <span>Gola la Gola</span>
                 </Typography>
+              </Grid>
+              <Grid xs={4} className="navbarCentering">
                 <Grid
                   onClick={() => {
                     setDrawerOpen(0);
                   }}
-                  className="searchIcon"
+                  style={{ display: 'flex' }}
                 >
                   {successSearchbarTrigger ? <SearchComponent /> : null}
                   <h5 onClick={openSearchbar}>
                     <Search />
                   </h5>
-                </Grid>
-                <Grid
-                  container
-                  direction="column"
-                  justify="space-between"
-                  aria-label="open drawer"
-                  onClick={() => {
-                    setDrawerOpen(!drawerOpen);
-                  }}
-                  className="menu-button"
-                >
-                  <Grid
-                    style={{
-                      backgroundColor: 'black',
-                    }}
-                  ></Grid>
-                  <Grid
-                    style={{
-                      backgroundColor: 'black',
-                    }}
-                  ></Grid>
-                  <Grid
-                    style={{
-                      backgroundColor: 'black',
-                    }}
-                  ></Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -173,20 +169,13 @@ const Header = props => {
             <Grid
               container
               style={{
-                height: '5vh',
-                // justifyContent: 'flex-end',
+                height: '8vh',
               }}
-              className="appbar "
+              className="appbar"
             >
-              <Grid
-                xs={4}
-                style={{
-                  height: '5vh',
-                }}
-              >
+              <Grid xs={4} className="navbarCentering">
                 <Typography
                   variant="h5"
-                  className={'navbarCentering'}
                   // className="display-none"
                   onClick={onClickRedirectPathHandler('/mainvote')}
                   style={{ cursor: 'pointer' }}
@@ -194,60 +183,43 @@ const Header = props => {
                   Gola la Gola
                 </Typography>
               </Grid>
-              <Grid
-                xs={4}
-                className="navbarCentering"
-                style={{
-                  height: '5vh',
-                }}
-              >
+              <Grid xs={4} className="navbarCentering">
                 {successSearchbarTrigger ? <SearchComponent /> : null}
-                <h3 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
+                <h4 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
                   <Search />
-                </h3>
+                </h4>
               </Grid>
 
-              <Grid
-                xs={4}
-                style={{
-                  height: '5vh',
-                }}
-              >
-                <Grid
-                  style={{
-                    height: '5vh',
-                  }}
-                  container
-                  className="navbarRight"
-                >
+              <Grid xs={4} className="navbarCentering">
+                <Grid className="navbarCentering" container>
                   <Button
                     variant="contained"
                     onClick={onClickRedirectPathHandler('eventall')}
-                    className="header-button headerColor"
+                    className="header-button headerColor "
                   >
-                    <h6>이벤트</h6>
+                    <h6 style={{ margin: 'auto' }}>이벤트</h6>
                   </Button>
 
                   {user.status === 'login' ? (
                     <Button
                       variant="contained"
                       onClick={onClickRedirectPathHandler('mycoupon')}
-                      className="header-button headerColor"
+                      className="header-button headerColor "
                     >
-                      <h6>쿠폰</h6>
+                      <h6 style={{ margin: 'auto' }}>쿠폰</h6>
                     </Button>
                   ) : null}
                   <Button
                     variant="contained"
                     onClick={handleSignInDialogOpen}
-                    className=" header-button headerColor"
+                    className=" header-button headerColor "
                   >
                     {user.status === 'login' ? (
-                      <h3>
+                      <h4>
                         <User />
-                      </h3>
+                      </h4>
                     ) : (
-                      <h6>Sign in</h6>
+                      <h6 style={{ margin: 'auto' }}>Sign in</h6>
                     )}
                   </Button>
                 </Grid>

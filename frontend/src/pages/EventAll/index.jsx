@@ -131,7 +131,7 @@ const EventAll = () => {
             md={6}
             style={{
               display: 'inline-flex',
-              padding: '1vh 3vw ',
+              padding: '2vh 5vw ',
             }}
           >
             <Card className="Card_align">
@@ -267,11 +267,10 @@ const EventAll = () => {
             md={6}
             style={{
               display: 'inline-flex',
-
-              padding: '1vh 3vw ',
+              padding: '2vh 5vw ',
             }}
           >
-            <Card className="Card_align" style={{ background: 'gray' }}>
+            <Card className="Card_align" style={{ opacity: '50%' }}>
               <Grid
                 xs={5}
                 // className="Event1"
@@ -395,12 +394,7 @@ const EventAll = () => {
   const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
-
-      // backgroundColor: theme.palette.background.paper,
     },
-    // nested: {
-    //   paddingLeft: theme.spacing(4),
-    // },
   }));
   function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
@@ -456,7 +450,7 @@ const EventAll = () => {
                 display: 'flex',
                 justifyContent: 'center',
               }
-            : { maxWidth: 100 }
+            : { maxWidth: 100, zIndex: '2' }
         }
       >
         <ListItem
@@ -488,16 +482,21 @@ const EventAll = () => {
   return (
     <Wrapper>
       <Layout>
-        <Grid
-          style={{
-            position: 'sticky',
-            top: '5vh',
-            display: 'flex',
-            justifyContent: 'center',
-            backgroundColor: '#f7f2f2',
-          }}
-        >
-          <h4>두 개의 상품중 마음에 드는 상품을 골라가세요</h4>
+        <Grid className="Centering">
+          <Grid
+            xs={12}
+            md={9}
+            style={{
+              position: 'sticky',
+              top: '5vh',
+              display: 'flex',
+              justifyContent: 'center',
+              backgroundColor: '#f7f2f2',
+              zIndex: '2',
+            }}
+          >
+            <h4>두 개의 상품중 마음에 드는 상품을 골라가세요</h4>
+          </Grid>
         </Grid>
         <Grid style={{ display: 'flex', flexDirection: 'column' }}>
           {isMobile ? (
@@ -506,10 +505,11 @@ const EventAll = () => {
                 style={{
                   position: 'sticky',
                   // top: '8.5vh',
-                  top: '93vh',
+                  top: '90vh',
                   display: 'flex',
                   justifyContent: 'center',
                   backgroundColor: '#f7f2f2',
+                  zIndex: '2',
                 }}
               >
                 <NestedList />
@@ -519,8 +519,8 @@ const EventAll = () => {
                 style={{
                   textAlign: 'center',
                   verticalAlign: 'middle',
-                  marginTop: '-7vh',
-                  paddingBottom: '10vh',
+                  marginTop: '-8vh',
+                  paddingBottom: '15vh',
                 }}
               >
                 {currentEventDatas.map((tmpData, index) =>
@@ -529,31 +529,34 @@ const EventAll = () => {
               </Grid>
             </>
           ) : (
-            <>
-              <Grid
-                style={{
-                  position: 'sticky',
-                  top: '100px',
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <NestedList />
+            <Grid className="Centering">
+              <Grid md={9}>
+                <Grid
+                  xs={2}
+                  style={{
+                    position: 'fixed',
+                    top: '10vh',
+                    right: '5vw',
+                    display: 'flex',
+                    // justifyContent: 'flex-end',
+                  }}
+                >
+                  <NestedList />
+                </Grid>
+                <Grid
+                  xs={12}
+                  style={{
+                    textAlign: 'center',
+                    verticalAlign: 'middle',
+                    // marginTop: '-10vh',
+                  }}
+                >
+                  {currentEventDatas.map((tmpData, index) =>
+                    eventGridRender(index, tmpData),
+                  )}
+                </Grid>
               </Grid>
-              <Grid
-                xs={11}
-                item
-                style={{
-                  textAlign: 'center',
-                  verticalAlign: 'middle',
-                  marginTop: '-15vh',
-                }}
-              >
-                {currentEventDatas.map((tmpData, index) =>
-                  eventGridRender(index, tmpData),
-                )}
-              </Grid>
-            </>
+            </Grid>
           )}
         </Grid>
       </Layout>

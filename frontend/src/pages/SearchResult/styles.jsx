@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-& .KisokCentering {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  // fgfg
-}
+
+  .Centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 
 & .tmp {
   width: 70%; 
