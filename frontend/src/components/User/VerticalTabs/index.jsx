@@ -15,7 +15,7 @@ import {
   Tab,
 } from '@material-ui/core';
 import Wrapper from './styles';
-import { StoreOutlined } from '@material-ui/icons';
+
 function TabPanel(props) {
   const { value, index, ...other } = props;
   return (
