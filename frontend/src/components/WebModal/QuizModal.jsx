@@ -136,18 +136,13 @@ const Quiz = modalNum => {
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
 
-  // const pp = () => {
-  //   const randomNumber = Math.random();
-  //   number = Math.floor(randomNumber * quizDatas.length);
-  //   console.log('in pp number', number);
-  // };
-
-  // const number = Math.random();
-  // const num = Math.floor(number * quizDatas.length);
+  let history = useHistory();
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -163,6 +158,8 @@ const Quiz = modalNum => {
   const modalHandler = () => {
     setSuccessModalTrigger(false);
     setFailModalTrigger(failModalTrigger => false);
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
   };
 
   const buttonStyle = {

@@ -1,18 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
+import {
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  useMediaQuery,
+} from '@material-ui/core';
 
-import { Grid } from '@material-ui/core';
-import Nav from '../../layout/Header';
 import Layout from '../../layout';
 import { CommonContext } from '../../context/CommonContext';
+import Button from 'react-bootstrap/Button';
 
 import axios from 'axios';
 import QRCode from 'react-qr-code';
@@ -58,7 +61,7 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const isMobile = useMediaQuery('(max-width:930px)');
   return (
     <>
       {console.log(user)}
@@ -69,11 +72,23 @@ export default function StickyHeadTable() {
               value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
             />
           </Grid>
-          <Grid style={{ padding: '20px', margin: '20px' }}>
+          <Grid
+            style={{ padding: '20px', margin: '20px' }}
+            container
+            justify="center"
+            alignItems="center"
+          >
             {user.user_quiz ? (
-              <Grid>이미 퀴즈를 풀었네?</Grid>
+              <Grid>이미 퀴즈 품</Grid>
             ) : (
-              <Grid>퀴즈풀면 할인 더 해줌</Grid>
+              <Grid>
+                <Grid container justify="center">
+                  추가 할인을 받을 수 있습니다.
+                </Grid>
+                <Grid>
+                  <Button>간단한 퀴즈 풀고 추가 할인 받으러 가기</Button>
+                </Grid>
+              </Grid>
             )}
           </Grid>
         </Grid>
