@@ -223,6 +223,7 @@ const MainVote = props => {
                                       cursor: 'pointer',
                                       whiteSpace: 'nowrap',
                                       overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
                                       lineHeight: '200%',
                                     }}
                                   >
@@ -412,6 +413,7 @@ const MainVote = props => {
                                         cursor: 'pointer',
                                         whiteSpace: 'nowrap',
                                         overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
                                         lineHeight: '200%',
                                       }}
                                     >
