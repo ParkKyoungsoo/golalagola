@@ -164,7 +164,7 @@ const AdminVS = props => {
           </Grid>
           <Grid item>
             <Grid className="admin_event__content">
-              <h5 className="admin_event__header">VS 이벤트 목록</h5>
+              <h5 className="admin_event__header">이벤트 목록</h5>
               <Divider variant="middle" className="admin_event__divider" />
               <Paper elevation={2}>
                 <List>

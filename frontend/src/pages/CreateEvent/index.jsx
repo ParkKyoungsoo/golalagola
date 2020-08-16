@@ -54,9 +54,13 @@ const CreateVote = props => {
               event_category: '',
             });
             // history.push('/Admin/VS');
+            alert('이벤트가 등록되었습니다.');
+
             window.location.href = '/admin/vs';
           })
           .catch(error => {
+            alert('이벤트가 등록되지 않았습니다. 다시 시도해주세요.');
+
             console.log('error : ', error.response);
           });
       } else {
@@ -93,7 +97,7 @@ const CreateVote = props => {
           </Grid>
           <Grid item>
             <Grid className="admin_event_form__content">
-              <h5 className="admin_event_form__header">VS 이벤트</h5>
+              <h5 className="admin_event_form__header">이벤트 등록</h5>
               <Divider variant="middle" className="admin_event_form__divider" />
               <Paper elevation={2} className="admin_event_form__paper">
                 <Grid container justify="flex-end" alignItems="center">
@@ -103,14 +107,14 @@ const CreateVote = props => {
                       onClick={createEvent}
                       className="admin_event_form__button"
                     >
-                      UPLOAD
+                      등록하기
                     </Button>
                     <Button
                       variant="danger"
                       onClick={() => history.push('/admin/vs')}
                       className="admin_event_form__button"
                     >
-                      CANCEL
+                      뒤로가기
                     </Button>
                   </Grid>
                   <CreateEventComponent className="admin_event_form__table" />
