@@ -125,10 +125,13 @@ const AdminProduct = () => {
       .then(res => {
         console.log(res);
         alert('삭제되었습니다.');
-        // window.location.reload();
+        window.location.reload();
       })
       .catch(e => {
         console.log('Error: ', e.response.data);
+        alert(
+          '상품 정보가 삭제되지 않았습니다. 서비스 관리자에게 문의해 주세요.',
+        );
       });
   };
 
@@ -166,7 +169,7 @@ const AdminProduct = () => {
           </Grid>
           <Grid item>
             <Grid className="admin_product__content">
-              <h5 className="admin_product__header">재고 목록</h5>
+              <h5 className="admin_product__header">상품 목록</h5>
               <Divider variant="middle" className="admin_product__divider" />
               <MaterialTable
                 className="admin_product__table"
@@ -232,7 +235,7 @@ const AdminProduct = () => {
                       console.log(rowData);
                       if (
                         window.confirm(
-                          'You want to delete ' + rowData.prod_name,
+                          `${rowData.prod_name}를 삭제하시겠습니까?`,
                         )
                       ) {
                         deleteProductData(rowData.prod_id);

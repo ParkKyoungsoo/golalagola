@@ -82,7 +82,7 @@ const NestedList = props => {
           style={currentOpen === 0 ? currentStyle : null}
         >
           <EqualizerIcon className="sidebar__icon" />
-          <p className="sidebar__p">Chart</p>
+          <p className="sidebar__p">판매 현황</p>
         </ListItem>
         <ListItem
           button
@@ -91,7 +91,7 @@ const NestedList = props => {
           style={currentOpen === 1 ? currentStyle : null}
         >
           <PersonIcon className="sidebar__icon" />
-          <p className="sidebar__p">User Dashboard</p>
+          <p className="sidebar__p">사용자 관리</p>
         </ListItem>
         <ListItem
           button
@@ -100,7 +100,7 @@ const NestedList = props => {
           style={currentOpen === 2 ? currentStyle : null}
         >
           <InboxIcon className="sidebar__icon" />
-          <p className="sidebar__p">Product Dashboard</p>
+          <p className="sidebar__p">상품 관리</p>
         </ListItem>
 
         <ListItem
@@ -110,7 +110,7 @@ const NestedList = props => {
           style={currentOpen === 3 ? currentStyle : null}
         >
           <EventIcon className="sidebar__icon" />
-          <p className="sidebar__p">Event Dashboard</p>
+          <p className="sidebar__p">이벤트 관리</p>
         </ListItem>
 
         <ListItem
@@ -120,7 +120,7 @@ const NestedList = props => {
           style={currentOpen === 4 ? currentStyle : null}
         >
           <DraftsIcon className="sidebar__icon" />
-          <p className="sidebar__p">Quiz Dashboard</p>
+          <p className="sidebar__p">퀴즈 관리</p>
         </ListItem>
         <Grid
           container
@@ -147,8 +147,11 @@ const NestedList = props => {
           <div className="sidebar__admin_desc">싸피마트 (대전, 봉명동)</div>
           {/* <div className="sidebar__admin_item">Main Page</div> */}
           <button className="sidebar__logout_button">
-            &nbsp;&nbsp;Log out
-            <ArrowForwardRoundedIcon style={{ marginLeft: '5px' }} />
+            &nbsp;&nbsp;로그아웃
+            <ArrowForwardRoundedIcon
+              fontSize="small"
+              style={{ marginLeft: '5px' }}
+            />
           </button>
         </Grid>
       </List>

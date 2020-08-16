@@ -180,7 +180,15 @@ const AdminProductForm = () => {
     );
   }
 
-  async function handleSubmit(event) {
+  // 잘못된 경우에는 이전 페이지로 보내기
+  if (
+    currentProductDatas.status === undefined ||
+    currentProductDatas.status === null
+  ) {
+    window.location.href = '/admin/product';
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
     if (
       title.value === '' ||
@@ -217,7 +225,11 @@ const AdminProductForm = () => {
         setWeight({ value: '', error: true });
       }
       setForceRender({});
-      alert('validation error');
+      alert('입력하지 않은 내용이 존재합니다.');
+    } else if (sale.value > 99) {
+      setSale({ value: sale.value, error: true });
+      setForceRender({});
+      alert('할인율을 99% 이하로 다시 입력해주세요.');
     } else {
       // formData 생성
       const formData = new FormData();
@@ -225,7 +237,7 @@ const AdminProductForm = () => {
 
       // status: create
       if (currentProductDatas.status === 'create') {
-        await Axios.post('https://i3b309.p.ssafy.io/api/product/', {
+        Axios.post('https://i3b309.p.ssafy.io/api/product/', {
           prod_title: title.value,
           prod_name: name.value,
           prod_category: category.value,
@@ -238,7 +250,7 @@ const AdminProductForm = () => {
           prod_weight: weight.value,
         })
           .then(async response => {
-            await Axios.post(
+            Axios.post(
               'https://i3b309.p.ssafy.io/api/product/imageUpload',
               formData,
               {
@@ -259,10 +271,10 @@ const AdminProductForm = () => {
           .catch(e => {
             console.log('Error: ', e);
           });
-      } else {
+      } else if (currentProductDatas.status === 'update') {
         // status: update
 
-        await Axios.put('https://i3b309.p.ssafy.io/api/product', {
+        Axios.put('https://i3b309.p.ssafy.io/api/product', {
           prod_id: currentProductDatas.prod_id,
           prod_title: title.value,
           prod_name: name.value,
@@ -277,7 +289,7 @@ const AdminProductForm = () => {
         })
           .then(async response => {
             if (image !== '') {
-              await Axios.post(
+              Axios.post(
                 'https://i3b309.p.ssafy.io/api/product/imageUpload',
                 formData,
                 {
@@ -292,20 +304,25 @@ const AdminProductForm = () => {
                 })
                 .catch(e => {
                   console.log('Error: ', e);
+                  alert('이미지가 수정되지 않았습니다. 다시 시도해주세요.');
                 });
             }
             console.log('Response', response.data);
+            alert('상품정보가 수정 되었습니다.');
           })
           .catch(e => {
             console.log('Error: ', e);
+            alert('상품 정보가 수정되지 않았습니다. 다시 시도해주세요.');
           });
+      } else {
+        alert('다시 시도해주세요.');
       }
-      // window.location.href = '/admin/product';
+      setCurrentProductDatas([]);
+      window.location.href = '/admin/product';
     }
   }
 
   // ImageUproader
-
   const handleImageChange = e => {
     console.log(e.target.files[0]);
     setImage(e.target.files[0]);

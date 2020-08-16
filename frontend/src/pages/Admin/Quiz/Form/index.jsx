@@ -77,6 +77,14 @@ const AdminQuizForm = () => {
     setAnswer(event.target.value);
   };
 
+  // 잘못된 경우에는 이전 페이지로 보내기
+  if (
+    currentQuizDatas.status === undefined ||
+    currentQuizDatas.status === null
+  ) {
+    window.location.href = '/admin/quiz';
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     if (title.value === '' || hint.valye === '') {
@@ -90,7 +98,7 @@ const AdminQuizForm = () => {
         setDesc({ value: '', error: true });
       }
       setForceRender({});
-      alert('validation error');
+      alert('입력하지 않은 내용이 존재합니다.');
     } else {
       // status: create
       if (currentQuizDatas.status === 'create') {
@@ -106,8 +114,9 @@ const AdminQuizForm = () => {
           })
           .catch(e => {
             console.log('Error: ', e.response.data);
+            alert('퀴즈가 등록 되지 않았습니다. 다시 시도해주세요.');
           });
-      } else {
+      } else if (currentQuizDatas.status === 'update') {
         // status: create
         await Axios.put('https://i3b309.p.ssafy.io/api/quiz', {
           quiz_id: currentQuizDatas.quiz_id,
@@ -122,8 +131,10 @@ const AdminQuizForm = () => {
           })
           .catch(e => {
             console.log('Error: ', e.response.data);
+            alert('퀴즈 정보가 수정되지 않았습니다. 다시 시도해주세요.');
           });
       }
+      setCurrentQuizDatas([]);
       window.location.href = '/admin/quiz';
     }
   }
