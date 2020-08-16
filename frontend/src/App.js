@@ -183,7 +183,7 @@ const App = () => {
   // admin product 페이지에서 사용하는 변수 입니다.
   const [usersTableData, setUsersTableData] = useState({
     columns: [
-      { title: 'ID', field: 'user_email' },
+      { title: '사용자 ID', field: 'user_email' },
       { title: '이름', field: 'user_name' },
       { title: '전화 번호', field: 'user_phone' },
       { title: '퀴즈 참여 여부', field: 'user_quiz' },
