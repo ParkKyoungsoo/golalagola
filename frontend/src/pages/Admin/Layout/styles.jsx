@@ -86,7 +86,7 @@ const Wrapper = styled.div`
     border: 0;
     background-color: #3023d5;
     margin-bottom: 55px;
-    padding: 0 0 3px;
+    padding: 0 0 0px;
   }
 
   button:focus {
