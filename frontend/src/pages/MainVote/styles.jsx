@@ -6,7 +6,12 @@ export const Wrapper = styled.div`
   }
   .liveTimeBar {
     display: flex;
-    justify-content: center;
+    // justify-content: flex-start;
+    // justify-content: flex-end;
+    // justify-content: center;
+    // justify-content: space-between;
+    // justify-content: space-around;
+    justify-content: space-evenly;
   }
 
   .tiemPopularity {
