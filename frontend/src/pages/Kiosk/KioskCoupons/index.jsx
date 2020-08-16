@@ -95,13 +95,10 @@ const SaleItem = ({ match }) => {
                   '쿠폰출력하기' 버튼을 누른후 쿠폰 받기
                 </Grid>
               </Grid>
-              <Button variant="warning" size="lg">
+              <Button variant="warning" size="lg" onClick={click}>
                 추가 할인 받으러 가기
               </Button>
             </Box>
-            <Button className="buttonType" variant="primary" onClick={click}>
-              99%할인 행사
-            </Button>
           </Card>
           <Dialog open={QRModalTrigger} onClose={handleClose}>
             <CouponsQR />

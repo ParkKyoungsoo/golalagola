@@ -102,7 +102,7 @@ const SuccessModal = () => {
           style={{ width: '50vw', height: '20vh' }}
         >
           <Grid item style={{ fontSize: '2.3em', textAlign: 'center' }}>
-            축하드립니다 ~~~
+            정답입니다!
           </Grid>
           <Grid item style={{ height: '37%' }}>
             <Button
@@ -136,18 +136,13 @@ const Quiz = modalNum => {
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
 
-  // const pp = () => {
-  //   const randomNumber = Math.random();
-  //   number = Math.floor(randomNumber * quizDatas.length);
-  //   console.log('in pp number', number);
-  // };
-
-  // const number = Math.random();
-  // const num = Math.floor(number * quizDatas.length);
+  let history = useHistory();
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -163,6 +158,8 @@ const Quiz = modalNum => {
   const modalHandler = () => {
     setSuccessModalTrigger(false);
     setFailModalTrigger(failModalTrigger => false);
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
   };
 
   const buttonStyle = {
@@ -222,12 +219,12 @@ const Quiz = modalNum => {
                 textAlign: 'center',
                 marginTop: '10px',
                 marginBottom: '2vh',
-                fontSize: '2.5em',
+                fontSize: '1.5em',
               }}
             >
               <ClickAwayListener onClickAway={handleClickAway}>
                 <Grid
-                  className
+                  direction="column"
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -236,13 +233,14 @@ const Quiz = modalNum => {
                 >
                   <NotListedLocationIcon
                     onClick={handleClick}
-                    style={{ fontSize: '2.5em' }}
+                    style={{ fontSize: '1.5em' }}
                   />
+
                   {open ? (
-                    <Grid className="quizCss" style={{ fontSize: '1.5em' }}>
-                      {Object(quizDatas[number]).quiz_hint}
-                    </Grid>
-                  ) : null}
+                    <Grid>{Object(quizDatas[number]).quiz_hint}</Grid>
+                  ) : (
+                    '힌트'
+                  )}
                 </Grid>
               </ClickAwayListener>
             </Grid>
@@ -254,28 +252,31 @@ const Quiz = modalNum => {
               <Button
                 onClick={click(true)}
                 style={userAns === true ? buttonStyle : null}
-                color="primary"
-                style={{ backgroundColor: 'black' }}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
               >
-                <RadioButtonUncheckedIcon style={{ fontSize: '10vw' }} />
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                ></img>
               </Button>
               <Button
                 onClick={click(false)}
                 style={userAns === false ? buttonStyle : null}
-                color="secondary"
-                style={{ backgroundColor: 'gray' }}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
               >
-                <ClearIcon style={{ fontSize: '10vw' }} />
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                ></img>
               </Button>
-            </Grid>
-            <Grid
-              style={{
-                fontSize: '1.5em',
-                textAlign: 'center',
-                marginTop: '2vh',
-              }}
-            >
-              DESC
             </Grid>
           </Grid>
           {userAns ? (
@@ -360,28 +361,31 @@ const Quiz = modalNum => {
               <Button
                 onClick={click(true)}
                 style={userAns === true ? buttonStyle : null}
-                color="primary"
-                style={{ backgroundColor: 'black' }}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
               >
-                <RadioButtonUncheckedIcon style={{ fontSize: '20vw' }} />
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                ></img>
               </Button>
               <Button
                 onClick={click(false)}
                 style={userAns === false ? buttonStyle : null}
-                color="secondary"
-                style={{ backgroundColor: 'gray' }}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
               >
-                <ClearIcon style={{ fontSize: '20vw' }} />
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                ></img>
               </Button>
-            </Grid>
-            <Grid
-              style={{
-                fontSize: '1.5em',
-                textAlign: 'center',
-                marginTop: '2vh',
-              }}
-            >
-              DESC
             </Grid>
           </Grid>
           {userAns ? (
