@@ -106,7 +106,7 @@ const SaleItem = ({ match }) => {
           <Dialog open={QRModalTrigger} onClose={handleClose}>
             <CouponsQR />
           </Dialog>
-          {myURL ? <Redirect to="/KioskMains" /> : null}
+          {myURL ? <Redirect to="/kioskmains" /> : null}
         </Grid>
       </KioskCSS>
     </>
