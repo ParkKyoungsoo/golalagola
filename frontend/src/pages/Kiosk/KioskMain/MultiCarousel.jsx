@@ -7,6 +7,7 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Badge from 'react-bootstrap/Badge';
 import { Link } from 'react-router-dom';
+import Wrapper from './styles';
 
 const MultiCarousel = () => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
@@ -35,7 +36,7 @@ const MultiCarousel = () => {
   }
 
   return (
-    <>
+    <Wrapper>
       {isMobile ? (
         <Grid container>
           <Grid item xs={12}>
@@ -74,6 +75,7 @@ const MultiCarousel = () => {
           >
             {productDatas.map((data, index) => (
               <Grid
+                key={index}
                 style={{
                   padding: '0 10px',
                   textDecoration: 'none',
@@ -113,40 +115,27 @@ const MultiCarousel = () => {
                       {data.prod_title}
                     </h5>
                     <Grid
+                      container
                       style={{
                         display: 'flex',
                         justifyContent: 'flex-end',
                         color: 'red',
                       }}
                     >
-                      <p
-                        style={{
-                          fontSize: '1.5vw',
-                          fontWeight: '500',
-                          margin: 'auto 0',
-                        }}
-                      >
-                        최대
-                      </p>
+                      <p className="fontVerticalMiddle fontMedium">최대</p>
                       &nbsp;&nbsp;
-                      <p
-                        style={{
-                          fontSize: '2vw',
-                          fontWeight: 'bold',
-                          margin: 'auto 0',
-                        }}
-                      >
+                      <p className="fontVerticalMiddle fontLarge">
                         {data.prod_sale}%
                       </p>
                     </Grid>
                     <Grid
                       style={{ display: 'flex', justifyContent: 'flex-end' }}
                     >
-                      <p className="fontVerticalMiddle mobilefontMedium fontCancelLine">
+                      <p className="fontVerticalMiddle fontMedium fontCancelLine">
                         {numberWithCommas(data.prod_price)}원
                       </p>
                       &nbsp;&nbsp;
-                      <p className="fontVerticalMiddle mobilefontLarge">
+                      <p className="fontVerticalMiddle fontLarge">
                         {numberWithCommas(
                           parseInt(
                             data.prod_price -
@@ -163,7 +152,7 @@ const MultiCarousel = () => {
           </AliceCarousel>
         </Link>
       )}
-    </>
+    </Wrapper>
   );
 };
 
