@@ -84,14 +84,20 @@ const ContentDefaultComponent = props => {
 
 const MyInfoButtonGroupComponent = props => {
   let history = useHistory();
-  const { setUserDetailDialogOpen, user, serverUrl, setUser } = useContext(
-    CommonContext,
-  );
+  const {
+    setUserDetailDialogOpen,
+    user,
+    serverUrl,
+    setUser,
+    mainUrl,
+  } = useContext(CommonContext);
   const { inputValue } = useContext(ViewContext);
 
   const handleClose = () => {
     setUserDetailDialogOpen(false);
-    history.goBack();
+    if (window.location.href === `${mainUrl}auth`) {
+      history.goBack('/');
+    }
   };
 
   const onMyInfoSaveHandelr = async props => {

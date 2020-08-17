@@ -121,15 +121,22 @@ const MyInfoInputComponent = props => {
 
 const MyInfoButtonGroupComponent = props => {
   let history = useHistory();
-  const { setUserDetailDialogOpen, user, serverUrl, setUser } = useContext(
-    CommonContext,
-  );
+  const {
+    setUserDetailDialogOpen,
+    user,
+    serverUrl,
+    setUser,
+    mainUrl,
+  } = useContext(CommonContext);
   const { inputValue, thumbnailImageData } = useContext(ViewContext);
 
   const [isReadyToUpload, setIsReadyToUpload] = useState(false);
 
   const handleClose = () => {
     setUserDetailDialogOpen(false);
+    if (window.location.href === `${mainUrl}auth`) {
+      history.goBack('/');
+    }
   };
 
   const onMyInfoSaveHandelr = async props => {
