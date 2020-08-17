@@ -68,6 +68,11 @@ const Wrapper = styled.div`
 
   & .price {
     text-decoration: line-through
+    color: black;
+  }
+
+  & .price2 {
+    color: black;
   }
 
   & .quizCss{

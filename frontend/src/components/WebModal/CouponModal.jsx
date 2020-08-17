@@ -66,8 +66,9 @@ const CouponModal = modalNum => {
                   fontWeight: '700',
                 }}
               >
-                퀴즈를 풀고 <strong style={{ color: 'red' }}>30%</strong> 추가
-                할인을 받아 보세요!
+                퀴즈를 풀고{' '}
+                <strong style={{ color: 'red', fontSize: '2.5vw' }}>30%</strong>{' '}
+                추가 할인을 받아 보세요!
               </Grid>
             </Grid>
 
@@ -155,8 +156,9 @@ const CouponModal = modalNum => {
                   fontWeight: '700',
                 }}
               >
-                퀴즈를 풀고 <strong style={{ color: 'red' }}>30%</strong> 추가
-                할인을 받아 보세요!
+                퀴즈를 풀고{' '}
+                <strong style={{ color: 'red', fontSize: '2.5vw' }}>30%</strong>{' '}
+                추가 할인을 받아 보세요!
               </Grid>
             </Grid>
 
