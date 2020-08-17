@@ -109,7 +109,7 @@ export default function VoteGridItem(props) {
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
-                      width: '40vw',
+                      width: '32vw',
                     }}
                   >
                     {itemData.prod_title}
@@ -121,32 +121,20 @@ export default function VoteGridItem(props) {
                       color: 'red',
                     }}
                   >
-                    <h5 className="fontVerticalMiddle">최대</h5>
+                    <p className="fontVerticalMiddle mobilefontMedium">최대</p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle mobilefontLarge">
                       {itemData.prod_sale}%
-                    </h3>
+                    </p>
                   </Grid>
                   <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <h5
-                      className="fontVerticalMiddle"
-                      style={{
-                        textDecoration: 'line-through',
-                        opacity: '50%',
-                      }}
-                    >
-                      {numberWithCommas(originPrice)}원{'  '}
-                    </h5>
+                    <p className="fontVerticalMiddle mobilefontMedium fontCancelLine">
+                      {numberWithCommas(originPrice)}원
+                    </p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle mobilefontLarge">
                       {numberWithCommas(quizSalePrice)}원
-                    </h3>
+                    </p>
                   </Grid>
                 </Grid>
               </Grid>
@@ -184,32 +172,20 @@ export default function VoteGridItem(props) {
                       color: 'red',
                     }}
                   >
-                    <h5 className="fontVerticalMiddle">최대</h5>
+                    <p className="fontVerticalMiddle fontMedium">최대</p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle fontLarge">
                       {itemData.prod_sale}%
-                    </h3>
+                    </p>
                   </Grid>
                   <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <h5
-                      className="fontVerticalMiddle"
-                      style={{
-                        textDecoration: 'line-through',
-                        opacity: '50%',
-                      }}
-                    >
-                      {numberWithCommas(originPrice)}원{'  '}
-                    </h5>
+                    <p className="fontVerticalMiddle fontMedium fontCancelLine">
+                      {numberWithCommas(originPrice)}원
+                    </p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle fontLarge">
                       {numberWithCommas(quizSalePrice)}원
-                    </h3>
+                    </p>
                   </Grid>
                 </Grid>
               </Grid>
@@ -240,7 +216,7 @@ export default function VoteGridItem(props) {
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
-                      width: '40vw',
+                      width: '32vw',
                     }}
                   >
                     {itemData.prod_title}
@@ -252,32 +228,20 @@ export default function VoteGridItem(props) {
                       color: 'red',
                     }}
                   >
-                    <h5 className="fontVerticalMiddle">최대</h5>
+                    <p className="fontVerticalMiddle mobilefontMedium">최대</p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle mobilefontLarge">
                       {itemData.prod_sale}%
-                    </h3>
+                    </p>
                   </Grid>
                   <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <h5
-                      className="fontVerticalMiddle"
-                      style={{
-                        textDecoration: 'line-through',
-                        opacity: '50%',
-                      }}
-                    >
-                      {numberWithCommas(originPrice)}원{'  '}
-                    </h5>
+                    <p className="fontVerticalMiddle mobilefontMedium fontCancelLine">
+                      {numberWithCommas(originPrice)}원
+                    </p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle mobilefontLarge">
                       {numberWithCommas(quizSalePrice)}원
-                    </h3>
+                    </p>
                   </Grid>
                 </Grid>
               </Grid>
@@ -316,32 +280,20 @@ export default function VoteGridItem(props) {
                       color: 'red',
                     }}
                   >
-                    <h5 className="fontVerticalMiddle">최대</h5>
+                    <p className="fontVerticalMiddle fontMedium">최대</p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle fontLarge">
                       {itemData.prod_sale}%
-                    </h3>
+                    </p>
                   </Grid>
                   <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <h5
-                      className="fontVerticalMiddle"
-                      style={{
-                        textDecoration: 'line-through',
-                        opacity: '50%',
-                      }}
-                    >
-                      {numberWithCommas(originPrice)}원{'  '}
-                    </h5>
+                    <p className="fontVerticalMiddle fontMedium fontCancelLine">
+                      {numberWithCommas(originPrice)}원
+                    </p>
                     &nbsp;&nbsp;
-                    <h3
-                      className="fontVerticalMiddle"
-                      style={{ fontWeight: 'bold' }}
-                    >
+                    <p className="fontVerticalMiddle fontLarge">
                       {numberWithCommas(quizSalePrice)}원
-                    </h3>
+                    </p>
                   </Grid>
                 </Grid>
               </Grid>
