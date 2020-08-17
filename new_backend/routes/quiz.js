@@ -39,7 +39,7 @@ app.put("/", async function (req, res) {
   await db.Quiz.update(req.body, {
     where: { quiz_id: req.body.quiz_id },
   })
-    .then((data) => res.json(data))
+    .then((data) => res.send({ message: "성공" }))
     .catch((err) => res.status(404).send(err));
 });
 

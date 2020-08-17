@@ -330,6 +330,16 @@ app.put("/change_pwd", async (req, res) => {
   }
 });
 
+// 퀴즈 풀었을 시 user_quiz true로 바꿔주기
+app.put("/solveQuiz/:input_userid", async function (req, res) {
+  console.log("req", req.body);
+  await db.User.update(req.body, {
+    where: { user_id: req.params.input_userid },
+  })
+    .then((data) => res.status(200).send(data))
+    .catch((err) => res.status(404).send(err));
+});
+
 // 회원정보 수정
 // app.put("/update", authMiddleware);
 app.put("/update", async (req, res) => {

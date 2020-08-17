@@ -32,7 +32,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src="images/배너1.jpg"
+                      src="https://i3b309.p.ssafy.io/images/배너1.jpg"
                       alt="image2"
                     />
                   </Grid>
@@ -45,7 +45,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src="images/배너2.jpg"
+                      src="https://i3b309.p.ssafy.io/images/배너2.jpg"
                       alt="image2"
                     />
                   </Grid>
@@ -58,7 +58,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src="images/배너3.jpg"
+                      src="https://i3b309.p.ssafy.io/images/배너3.jpg"
                       alt="image2"
                     />
                   </Grid>
@@ -82,7 +82,11 @@ const ControlledCarousel = props => {
             <Grid container className="Centering ">
               <Grid item className="Centering ">
                 <Grid className="Centering ">
-                  <img className="tmp" src="images/배너1.jpg" alt="image2" />
+                  <img
+                    className="tmp"
+                    src="https://i3b309.p.ssafy.io/images/배너1.jpg"
+                    alt="image2"
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -91,7 +95,11 @@ const ControlledCarousel = props => {
             <Grid container className="Centering ">
               <Grid item className="Centering ">
                 <Grid className="Centering ">
-                  <img className="tmp" src="images/배너2.jpg" alt="image2" />
+                  <img
+                    className="tmp"
+                    src="https://i3b309.p.ssafy.io/images/배너2.jpg"
+                    alt="image2"
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -100,7 +108,11 @@ const ControlledCarousel = props => {
             <Grid container className="Centering ">
               <Grid item className="Centering ">
                 <Grid className="Centering ">
-                  <img className="tmp" src="images/배너3.jpg" alt="image2" />
+                  <img
+                    className="tmp"
+                    src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                    alt="image2"
+                  />
                 </Grid>
               </Grid>
             </Grid>

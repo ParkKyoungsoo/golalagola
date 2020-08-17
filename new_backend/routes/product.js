@@ -9,16 +9,58 @@ const fileUpload = require("express-fileupload");
 const authMiddleware = require("../middleware/auth");
 const authAdminMiddleware = require("../middleware/authAdmin");
 
-app.get("/buy", async function (req, res) {
+app.get("/recommandProd", async function (req, res) {
   var obj = new Object();
-  db.Buy.findAll().then((buyData) => {
-    buyData.forEach((element) => {
-      if (obj[element.dataValues.prod_id]) {
-        obj[element.dataValues.prod_id] += element.dataValues.buy_amount;
+  await db.Product.findAll().then(async (prodData) => {
+    for (var i = 0; i < prodData.length; i++) {
+      var amount = prodData[i].dataValues.prod_amount;
+
+      await db.Buy.findAll({
+        where: { prod_id: prodData[i].dataValues.prod_id },
+      }).then((buyData) => {
+        for (var j = 0; j < buyData.length; j++) {
+          amount -= buyData[j].dataValues.buy_amount;
+        }
+      });
+
+      if (obj[prodData[i].dataValues.prod_category]) {
+        var objInsert = new Object();
+        objInsert.label = prodData[i].dataValues.prod_name;
+        objInsert.y = prodData[i].dataValues.prod_price * amount;
+        obj[prodData[i].dataValues.prod_category].push(objInsert);
       } else {
-        obj[element.dataValues.prod_id] = element.dataValues.buy_amount;
+        obj[prodData[i].dataValues.prod_category] = new Array();
+        var objInsert = new Object();
+        objInsert.label = prodData[i].dataValues.prod_name;
+        objInsert.y = prodData[i].dataValues.prod_price * amount;
+        obj[prodData[i].dataValues.prod_category].push(objInsert);
       }
-    });
+    }
+
+    // 오름차순 정렬
+    var sortingField = "y";
+    for (var len = 1; len < 14; len++) {
+      obj[`${len}`].sort(function (a, b) {
+        return b[sortingField] - a[sortingField];
+      });
+    }
+    console.log("sort", obj);
+
+    for (var len = 1; len < 14; len++) {
+      obj[`${len}`].splice(6, obj[`${len}`].length - 6);
+    }
+
+    // for (var len = 1; len < 14; len++) {
+    //   var price_sum = 0;
+    //   for (var i = 0; i < 6; i++) {
+    //     price_sum += obj[`${len}`][i].prod_price;
+    //   }
+    //   for (var i = 0; i < 6; i++) {
+    //     obj[`${len}`][i].prod_percent =
+    //       (obj[`${len}`][i].prod_price / price_sum) * 100;
+    //   }
+    // }
+
     res.json(obj);
   });
 });
