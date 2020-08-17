@@ -1,28 +1,28 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Wrapper from './styles';
-import { Route, Link, useHistory } from 'react-router-dom';
-import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid, useMediaQuery, Box } from '@material-ui/core';
-import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
+import { useHistory } from 'react-router-dom';
+import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
+import WebFailModal from './WebFailModal';
 import { CommonContext } from '../../context/CommonContext';
-import { Carousel } from 'react-bootstrap';
 import MultiCarousel from './MultiCarousel';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-// import MultiCarousel from './MultiCarousel';
 import ClearIcon from '@material-ui/icons/Clear';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
+import { CenterFocusStrong } from '@material-ui/icons';
 // ClickAwayListener
 
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
-
+  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const { eventNum, setEventNum } = useContext(CommonContext);
   const userQuizState = {
     user_quiz: true,
   };
@@ -63,67 +63,71 @@ const SuccessModal = () => {
   const Mobile = useMediaQuery('(max-width:920px)');
   return (
     <>
-      {Mobile ? (
-        <Grid container direction="column">
-          <Grid item style={{ fontSize: '2em', textAlign: 'center' }}>
-            정답입니다.
+      <Grid
+        container
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+        }}
+        xs={12}
+      >
+        <Grid
+          item
+          style={{
+            margin: 'auto',
+            textAlign: 'center',
+          }}
+          xs={12}
+        >
+          <Grid container direction="column" style={{ marginBottom: '4vh' }}>
+            <Grid item style={{ marginTop: '4vh' }}>
+              축하드립니다. &nbsp;&nbsp; 이곳은 설명
+            </Grid>
+            <Grid item style={{ marginTop: '4vh' }}>
+              모든 상품에 대한 30% 할인 쿠폰이 발급 되었습니다.
+            </Grid>
           </Grid>
-          <Grid item>
-            <Grid container direction="row">
-              <Grid item xs={6}>
+          <Grid
+            item
+            style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+          >
+            <Grid
+              container
+              style={{ justifyContent: 'space-evenly' }}
+              direction="row"
+            >
+              <Grid item>
                 <Button
-                  onClick={goToMyCoupon}
-                  style={{ width: '100%', height: '100%' }}
-                >
-                  마이 쿠폰함 바로가기
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={goToMain}
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'red',
+                    width: '15vw',
+                    height: '10vh',
+                    fontSize: 'larger',
+                    backgroundColor: '#4D48FB',
                   }}
                 >
-                  Home
+                  마이 쿠폰 바로 가기
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  style={{
+                    width: '15vw',
+                    height: '10vh',
+                    fontSize: 'larger',
+                    backgroundColor: '#ff3b47',
+                  }}
+                >
+                  홈으로 가기 또는 지도
                 </Button>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      ) : (
-        <Grid
-          container
-          direction="column"
-          style={{ width: '50vw', height: '20vh' }}
-        >
-          <Grid item style={{ fontSize: '2.3em', textAlign: 'center' }}>
-            정답입니다!
-          </Grid>
-          <Grid item style={{ height: '37%' }}>
-            <Button
-              onClick={goToMyCoupon}
-              style={{ width: '100%', height: '100%' }}
-            >
-              마이 쿠폰함 바로가기
-            </Button>
-          </Grid>
-          <Grid item style={{ height: '37%' }}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={goToMain}
-              style={{ width: '100%', height: '100%', backgroundColor: 'red' }}
-            >
-              Home
-            </Button>
+          <Grid item style={{ height: '30vh' }}>
+            <MultiCarousel style={{ height: '30vh' }} />
           </Grid>
         </Grid>
-      )}
+      </Grid>
     </>
   );
 };
@@ -296,14 +300,33 @@ const Quiz = modalNum => {
                   width: '80%',
                   height: '80%',
                   justifyContent: 'center',
+                  textAlign: 'center',
                 },
               }}
             >
               <SuccessModal />
             </Dialog>
           ) : (
-            <Dialog open={failModalTrigger} onClose={modalHandler}>
-              <Fail />
+            <Dialog
+              open={failModalTrigger}
+              onClose={modalHandler}
+              PaperProps={{
+                style: {
+                  height: '10vh',
+                  padding: '10px',
+                  width: '90vw',
+                  maxWidth: 'none',
+                  overflowX: 'hidden',
+                  overflowY: 'auto',
+                  position: 'inherit',
+                  width: '80%',
+                  height: '80%',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                },
+              }}
+            >
+              <WebFailModal />
             </Dialog>
           )}
         </Wrapper>
@@ -418,32 +441,15 @@ const Quiz = modalNum => {
                   width: '80%',
                   height: '80%',
                   justifyContent: 'center',
+                  textAlign: 'center',
                 },
               }}
             >
               <SuccessModal />
             </Dialog>
           ) : (
-            <Dialog
-              open={failModalTrigger}
-              onClose={modalHandler}
-              PaperProps={{
-                style: {
-                  height: '10vh',
-                  padding: '10px',
-                  width: '90vw',
-                  maxWidth: 'none',
-                  overflowX: 'hidden',
-                  overflowY: 'auto',
-                  position: 'inherit',
-                  width: '80%',
-                  height: '80%',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                },
-              }}
-            >
-              <Fail />
+            <Dialog open={failModalTrigger} onClose={modalHandler}>
+              <WebFailModal />
             </Dialog>
           )}
         </Wrapper>
