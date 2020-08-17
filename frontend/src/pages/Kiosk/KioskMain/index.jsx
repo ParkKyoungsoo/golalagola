@@ -9,12 +9,11 @@ import MultiCarousel from './MultiCarousel';
 
 const KioskPages = () => {
   return (
-    <Wrapper>
+    <>
       <Grid>
-        <Navbar />
         <MultiCarousel />
       </Grid>
-    </Wrapper>
+    </>
   );
 };
 
