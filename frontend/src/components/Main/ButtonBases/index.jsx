@@ -15,8 +15,9 @@ const ButtonBases = props => {
   const imgUrl = `${categoryData.cat_img_url}`;
   const isMobile = useMediaQuery('(max-width:930px)');
   return (
-    <Wrapper>
+    <Wrapper style={{ border: 'none' }}>
       <div
+        style={{ border: 'none' }}
         key={categoryData.cat_title}
         className={
           yAxis === 0 && categoeyXAxis === index
@@ -29,7 +30,7 @@ const ButtonBases = props => {
           style={{
             backgroundImage: `url(${imgUrl})`,
             backgroundSize: 'cover',
-            borderRadius: '8%',
+            // borderRadius: '8%',
           }}
         />
         <span
