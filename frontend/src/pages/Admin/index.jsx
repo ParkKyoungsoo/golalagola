@@ -122,7 +122,6 @@ const MainAdmin = props => {
           <Grid item>
             <NestedList index={0} />
           </Grid>
-<<<<<<< HEAD
           <Grid item>
             <Grid className="admin_chart__content">
               <h5 className="admin_chart__header">판매 현황 차트</h5>
@@ -178,11 +177,6 @@ const MainAdmin = props => {
                 </Grid>
               </Paper>
             </Grid>
-=======
-          <Grid item xs={10}>
-            <Paper className={classes.paper}>오늘의 날씨는~</Paper>
-            <CanvasJSChart options={options} />
->>>>>>> 35fda11ef10bd9ba33dcaebfcd24e0560935c83d
           </Grid>
         </Grid>
         <Grid item xs={12}>
