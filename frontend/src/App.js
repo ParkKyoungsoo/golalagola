@@ -101,6 +101,7 @@ const App = () => {
   const [infoDialogOpen, setInfoDetailDialogOpen] = useState(false);
   const [userDialogOpen, setUserDetailDialogOpen] = useState(false);
   const [itemDialogOpen, setItemDialogOpen] = useState(false);
+  const [number, setNumber] = useState(0);
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
   const [webQuizDialogOpen, setWebQuizDialogOpen] = useState(false);
@@ -121,6 +122,7 @@ const App = () => {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const [mainUrl, setMainUrl] = useState('http://localhost:3000/');
+  // const [mainUrl, setMainUrl] = useState('https://i3b309.p.ssafy.io/');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
@@ -446,6 +448,8 @@ const App = () => {
         setRecommandProds,
         realtime,
         setRealTime,
+        number,
+        setNumber,
       }}
     >
       <MuiThemeProvider theme={theme}>
