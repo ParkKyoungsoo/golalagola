@@ -101,6 +101,7 @@ const App = () => {
   const [infoDialogOpen, setInfoDetailDialogOpen] = useState(false);
   const [userDialogOpen, setUserDetailDialogOpen] = useState(false);
   const [itemDialogOpen, setItemDialogOpen] = useState(false);
+  const [number, setNumber] = useState(0);
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
   const [webQuizDialogOpen, setWebQuizDialogOpen] = useState(false);
@@ -446,6 +447,8 @@ const App = () => {
         setRecommandProds,
         realtime,
         setRealTime,
+        number,
+        setNumber,
       }}
     >
       <MuiThemeProvider theme={theme}>
