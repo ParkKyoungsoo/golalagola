@@ -175,7 +175,7 @@ const MainVote = props => {
             <Grid className="Centering">
               <Grid className="Centering" style={{ height: '30vh' }}>
                 <img
-                  src="images/골라라골라.png"
+                  src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
                   style={{ height: '100%' }}
                 />
@@ -183,6 +183,7 @@ const MainVote = props => {
             </Grid>
             <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Grid
+                item
                 xs={6}
                 style={{ border: '2px solid black' }}
                 className="liveTimeBar "
@@ -354,9 +355,14 @@ const MainVote = props => {
           >
             <Divider />
             <Grid className="Centering">
-              <Grid md={9} className="Centering" style={{ height: '30vh' }}>
+              <Grid
+                item
+                md={9}
+                className="Centering"
+                style={{ height: '30vh' }}
+              >
                 <img
-                  src="images/골라라골라.png"
+                  src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
                   style={{ height: '100%' }}
                 />
@@ -365,6 +371,7 @@ const MainVote = props => {
             {/* carousel, 실시간 순위 */}
             <Grid className="Centering">
               <Grid
+                item
                 md={9}
                 style={{
                   display: 'flex',
@@ -373,6 +380,7 @@ const MainVote = props => {
                 }}
               >
                 <Grid
+                  item
                   xs={4}
                   style={{ border: '2px solid black' }}
                   className="liveTimeBar "
@@ -481,7 +489,7 @@ const MainVote = props => {
               }}
             >
               <Grid className="Centering">
-                <Grid md={9} container>
+                <Grid item md={9} container>
                   <Grid item xs={12}>
                     <ControlledCarousel />
                   </Grid>
@@ -510,6 +518,7 @@ const MainVote = props => {
               }}
             >
               <Grid
+                item
                 md={9}
                 style={{
                   position: 'sticky',
@@ -548,7 +557,7 @@ const MainVote = props => {
               </Grid>
             </Grid>
             <Grid className="Centering">
-              <Grid md={9}>
+              <Grid item md={9}>
                 {categoryDatas.map((categoryData, index) => (
                   <TabPanel
                     key={index}

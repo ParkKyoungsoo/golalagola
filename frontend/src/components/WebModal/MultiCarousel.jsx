@@ -8,7 +8,9 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import Carousel from 'react-bootstrap/Carousel';
 
 const MultiCarousel = () => {
-  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { productDatas, setProductDatas, realtime, setRealTime } = useContext(
+    CommonContext,
+  );
 
   const responsive = {
     0: {
@@ -18,14 +20,19 @@ const MultiCarousel = () => {
     },
     920: {
       // breakpoint: { max: 1024, min: 920 },
-      items: 7,
+      items: 5,
       // slidesToSlide: 1, // optional, default to 1.
     },
-    // 2: {
-    //   breakpoint: { max: 920, min: 0 },
-    //   items: 4,
-    //   slidesToSlide: 1, // optional, default to 1.
-    // },
+    1024: {
+      breakpoint: { max: 920, min: 0 },
+      items: 6,
+      // slidesToSlide: 1, // optional, default to 1.
+    },
+    2000: {
+      breakpoint: { max: 920, min: 0 },
+      items: 4,
+      // slidesToSlide: 1, // optional, default to 1.
+    },
   };
   const isMobile = useMediaQuery('(max-width:920px)');
   const handleOnDragStart = e => e.preventDefault();
@@ -44,9 +51,9 @@ const MultiCarousel = () => {
               dotsDisabled={false}
               buttonsDisabled={true}
             >
-              {productDatas.map((TmpData, index) => (
+              {realtime.map((TmpData, index) => (
                 <img
-                  src={`../../${TmpData.prod_image}`}
+                  src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
                   alt="Prod_image"
                   style={{ width: '100%', height: 'auto' }}
                 />
@@ -70,9 +77,9 @@ const MultiCarousel = () => {
                   buttonsDisabled={true}
                   // style={{ width: '100%', height: 'auto' }}
                 >
-                  {productDatas.map((TmpData, index) => (
+                  {realtime.map((TmpData, index) => (
                     <img
-                      src={`../../${TmpData.prod_image}`}
+                      src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
                       alt="Prod_image"
                       style={{ width: '100%', height: 'auto' }}
                     />
