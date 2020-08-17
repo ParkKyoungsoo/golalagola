@@ -175,7 +175,7 @@ const MainVote = props => {
             <Grid className="Centering">
               <Grid className="Centering" style={{ height: '30vh' }}>
                 <img
-                  src="images/골라라골라.png"
+                  src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
                   style={{ height: '100%' }}
                 />
@@ -356,7 +356,7 @@ const MainVote = props => {
             <Grid className="Centering">
               <Grid md={9} className="Centering" style={{ height: '30vh' }}>
                 <img
-                  src="images/골라라골라.png"
+                  src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
                   style={{ height: '100%' }}
                 />
