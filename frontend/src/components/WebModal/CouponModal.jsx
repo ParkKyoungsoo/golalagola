@@ -34,81 +34,181 @@ const CouponModal = modalNum => {
 
   return (
     <>
-      <Grid
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-        xs={12}
-      >
+      {isMobile ? (
         <Grid
-          item
           style={{
-            margin: 'auto',
-            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
           }}
           xs={12}
         >
-          <Grid container direction="column" style={{ marginBottom: '4vh' }}>
-            <Grid item style={{ marginTop: '4vh' }}>
-              <h3>상품에 대한 쿠폰이 발행되었습니다!</h3>
-            </Grid>
-            <Grid item style={{ marginTop: '4vh' }}>
-              <h3>
-                간단한 퀴즈를 풀고 추가 전체 재고에 대한 할인혜택을 받으세요!
-              </h3>
-            </Grid>
-          </Grid>
-
           <Grid
             item
-            style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+            style={{
+              margin: 'auto',
+              textAlign: 'center',
+            }}
+            xs={12}
           >
-            <Grid
-              container
-              style={{ justifyContent: 'space-evenly' }}
-              direction="row"
-            >
-              <Grid item>
-                {user.user_quiz ? (
-                  <Button variant="primary" disabled>
-                    이미 퀴즈에 참여하였습니다.
-                  </Button>
-                ) : (
-                  <Button
-                    variant="contained"
-                    onClick={() => modalNum.setModalNum(3)}
-                    color="primary"
-                    disableElevation
-                    style={{
-                      width: '100%',
-                      height: '10vh',
-                      fontSize: 'larger',
-                    }}
-                    disabled={user.user_quiz}
-                  >
-                    추가 할인 받기
-                  </Button>
-                )}
+            <Grid container direction="column" style={{ marginBottom: '4vh' }}>
+              <Grid
+                item
+                style={{ marginTop: '4vh', fontSize: '3vw', fontWeight: '300' }}
+              >
+                상품에 대한 쿠폰이 발행되었습니다!
               </Grid>
-              <Grid item>
-                <Button
-                  onClick={onClickRedirect('/mainvote')}
-                  style={{ width: '15vw', height: '10vh', fontSize: 'larger' }}
-                  variant="contained"
-                  color="secondary"
-                >
-                  Home
-                </Button>
+              <Grid
+                item
+                style={{
+                  marginTop: '7vh',
+                  fontSize: '3.5vw',
+                  fontWeight: '700',
+                }}
+              >
+                퀴즈를 풀고 <strong style={{ color: 'red' }}>30%</strong> 추가
+                할인을 받아 보세요!
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item style={{ height: '30vh' }}>
-            <MultiCarousel style={{ height: '30vh' }} />
+
+            <Grid
+              item
+              style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+            >
+              <Grid
+                container
+                style={{ justifyContent: 'space-evenly' }}
+                direction="row"
+              >
+                <Grid item>
+                  {user.user_quiz ? (
+                    <Button variant="primary" disabled>
+                      이미 퀴즈에 참여하였습니다.
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      onClick={() => modalNum.setModalNum(3)}
+                      color="primary"
+                      disableElevation
+                      style={{
+                        width: '13vw',
+                        height: '7vh',
+                        fontSize: 'larger',
+                      }}
+                      disabled={user.user_quiz}
+                    >
+                      추가 할인 받기
+                    </Button>
+                  )}
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={onClickRedirect('/mainvote')}
+                    style={{ width: '13vw', height: '7vh', fontSize: 'larger' }}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Home
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item style={{ height: '30vh', marginTop: '10vh' }}>
+              <MultiCarousel style={{ height: '30vh', marginTop: '10vh' }} />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Grid
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+          }}
+          xs={12}
+        >
+          <Grid
+            item
+            style={{
+              margin: 'auto',
+              textAlign: 'center',
+            }}
+            xs={12}
+          >
+            <Grid container direction="column" style={{ marginBottom: '4vh' }}>
+              <Grid
+                item
+                style={{
+                  marginTop: '4vh',
+                  fontSize: '1.5em',
+                  fontWeight: '300',
+                }}
+              >
+                상품에 대한 쿠폰이 발행되었습니다!
+              </Grid>
+              <Grid
+                item
+                style={{
+                  marginTop: '7vh',
+                  fontSize: '1.5em',
+                  fontWeight: '700',
+                }}
+              >
+                퀴즈를 풀고 <strong style={{ color: 'red' }}>30%</strong> 추가
+                할인을 받아 보세요!
+              </Grid>
+            </Grid>
+
+            <Grid
+              item
+              style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+            >
+              <Grid
+                container
+                style={{ justifyContent: 'space-evenly' }}
+                direction="row"
+              >
+                <Grid item>
+                  {user.user_quiz ? (
+                    <Button variant="primary" disabled>
+                      이미 퀴즈에 참여하였습니다.
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      onClick={() => modalNum.setModalNum(3)}
+                      color="primary"
+                      disableElevation
+                      style={{
+                        width: '13vw',
+                        height: '7vh',
+                        fontSize: 'larger',
+                      }}
+                      disabled={user.user_quiz}
+                    >
+                      추가 할인 받기
+                    </Button>
+                  )}
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={onClickRedirect('/mainvote')}
+                    style={{ width: '13vw', height: '7vh', fontSize: 'larger' }}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Home
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item style={{ height: '30vh', marginTop: '10vh' }}>
+              <MultiCarousel style={{ height: '30vh', marginTop: '10vh' }} />
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };
