@@ -13,9 +13,7 @@ const MultiCarousel = () => {
 
   const responsive = {
     0: {
-      // breakpoint: { max: 3000, min: 1024 },
       items: 5,
-      // slidesToSlide: 3, // optional, default to 1.
     },
     920: {
       // breakpoint: { max: 1024, min: 920 },
