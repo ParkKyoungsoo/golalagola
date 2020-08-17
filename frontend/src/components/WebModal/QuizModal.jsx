@@ -14,7 +14,6 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
 import { CenterFocusStrong } from '@material-ui/icons';
-// ClickAwayListener
 
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
@@ -121,9 +120,6 @@ const SuccessModal = () => {
                   홈으로 가기 또는 지도
                 </Button>
               </Grid>
-            </Grid>
-            <Grid item style={{ height: '30vh' }}>
-              <MultiCarousel style={{ height: '30vh' }} />
             </Grid>
           </Grid>
           <Grid item style={{ height: '30vh' }}>
