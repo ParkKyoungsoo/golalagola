@@ -14,7 +14,6 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
 import { CenterFocusStrong } from '@material-ui/icons';
-// ClickAwayListener
 
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
