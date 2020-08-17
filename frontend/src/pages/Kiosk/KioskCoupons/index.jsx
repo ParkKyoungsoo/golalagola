@@ -33,78 +33,83 @@ const SaleItem = ({ match }) => {
     <>
       <KioskCSS>
         <Navbar />
-        <Grid className="KioskCard">
-          <Card
+
+        <Grid container direction="row" borderLeft="1px solid">
+          <Grid
+            item
+            xs={6}
             style={{
-              width: '80rem',
-              height: '40rem',
-              margin: '0px 5px 0px 5px',
+              textAlign: 'center',
+              verticalAlign: 'middle',
+              borderRight: '1px solid',
             }}
           >
-            <Card.Body>
-              <Card.Title>
-                <h3 align="center" fontWeight="bolder">
-                  재고 상품 <strong>5%</strong> 쿠폰
-                </h3>
-              </Card.Title>
-              <hr></hr>
-              <Grid style={{ display: 'flex' }}>
-                <Grid
-                  item
-                  xs={3}
-                  style={{ border: '1px solid black', borderRadius: '10px' }}
-                >
-                  11
-                </Grid>
-                <Grid
-                  item
-                  xs={7}
-                  style={{ border: '1px solid black', borderRadius: '10px' }}
-                >
-                  22
-                </Grid>
-              </Grid>
-            </Card.Body>
-            <Box className="boxType">
-              <Grid style={{ display: 'flex' }}>
-                <Grid
-                  style={{
-                    border: '1px solid #000099',
-                    borderRadius: '15px',
-                    width: '170px',
-                    height: '50px',
-                    backgroundColor: '#000099',
-                    color: 'white',
-                    fontSize: '25px',
-                  }}
-                  container
-                  alignItems="center"
-                  justify="center"
-                >
-                  이용 방법
-                </Grid>
-                <Grid
-                  style={{
-                    height: '50px',
-                    fontSize: '25px',
-                  }}
-                  container
-                  alignItems="center"
-                  justify="center"
-                >
-                  '쿠폰출력하기' 버튼을 누른후 쿠폰 받기
-                </Grid>
-              </Grid>
-              <Button variant="warning" size="lg" onClick={click}>
-                추가 할인 받으러 가기
-              </Button>
-            </Box>
-          </Card>
-          <Dialog open={QRModalTrigger} onClose={handleClose}>
-            <CouponsQR />
-          </Dialog>
-          {myURL ? <Redirect to="/kioskmains" /> : null}
+            <div style={{ fontSize: '40px' }}>
+              <stron>정답 입니다!</stron>
+            </div>
+            <Grid>
+              <img
+                style={{ width: '70%' }}
+                src="https://i3b309.p.ssafy.io/images/쿠폰1.jpg"
+                alt=""
+              />
+            </Grid>
+            <Grid>
+              <span style={{ fontSize: '40px' }}>모든 상품</span>
+              <br />
+              <span style={{ color: 'red', fontSize: '40px' }}>30% 할인</span>
+              &nbsp;
+              <span style={{ fontSize: '40px' }}>쿠폰이 출력됩니다.</span>
+            </Grid>
+            <br />
+            <br />
+            <Grid>
+              <span style={{ fontSize: '20px', color: 'blue' }}>이용 방법</span>
+              &nbsp;&nbsp;
+              <span style={{ fontSize: '20px' }}>
+                출력된 쿠폰을 결제하실 때 제시해주세요.
+              </span>
+            </Grid>
+          </Grid>
+
+          <Grid
+            item
+            xs={6}
+            style={{ textAlign: 'center', verticalAlign: 'middle' }}
+          >
+            <Grid>
+              <img
+                onClick={click}
+                style={{ width: '80%' }}
+                src="https://i3b309.p.ssafy.io/images/이용안내.jpg"
+                alt=""
+              />
+            </Grid>
+
+            <br />
+            <br />
+
+            <Grid>
+              <span style={{ fontSize: '30px' }}>더 많은 할인을 원하시면</span>
+            </Grid>
+
+            <Grid>
+              <span style={{ fontSize: '30px' }}>
+                아래의 버튼을 눌러 주세요.
+              </span>
+            </Grid>
+
+            <br />
+            <Button variant="warning" size="lg" onClick={click}>
+              추가 할인 받으러 가기
+            </Button>
+            <br />
+          </Grid>
         </Grid>
+        <Dialog open={QRModalTrigger} onClose={handleClose}>
+          <CouponsQR />
+        </Dialog>
+        {myURL ? <Redirect to="/kioskmains" /> : null}
       </KioskCSS>
     </>
   );

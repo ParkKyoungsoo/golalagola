@@ -6,11 +6,11 @@ import {
   Box,
   Grid,
   Card,
-  Button,
   Dialog,
   useMediaQuery,
   DialogActions,
 } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Wrapper from './styles';
 import Axios from 'axios';
@@ -37,13 +37,13 @@ const QuizDialog = () => {
         style: {
           height: '10vh',
           padding: '10px',
-          width: '90vw',
+          width: '85vw',
           maxWidth: 'none',
           overflowX: 'hidden',
-          overflowY: 'auto',
+          overflowY: 'hidden',
           position: 'inherit',
-          width: '80%',
-          height: '80%',
+          width: '70%',
+          height: '75%',
           justifyContent: 'center',
         },
       }}
@@ -165,8 +165,10 @@ const ItemDetail = ({ match }) => {
   return (
     <Wrapper>
       {eventActivated ? (
+        /////////////////////////////////////////////////////// 이벤트 상품의 경우
         <Grid>
           {isMobile ? (
+            ///////////////////////////////////// 모바일 화면
             <Layout>
               <br />
               <Grid
@@ -225,14 +227,12 @@ const ItemDetail = ({ match }) => {
                           </div>
 
                           <br />
-                          <h3 className="select">
+                          <h5 className="select">
                             {productDatas[match.params.id - 1].prod_desc}
-                          </h3>
+                          </h5>
                           <div className="button">
                             <Button
-                              variant="contained"
-                              color="primary"
-                              disableElevation
+                              variant="primary"
                               onClick={
                                 user.status === 'login'
                                   ? QuizDialogOpen
@@ -244,9 +244,7 @@ const ItemDetail = ({ match }) => {
                               퀴즈 풀기
                             </Button>
                             <Button
-                              variant="contained"
-                              color="primary"
-                              disableElevation
+                              variant="primary"
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
@@ -425,13 +423,13 @@ const ItemDetail = ({ match }) => {
                   style: {
                     height: '10vh',
                     padding: '10px',
-                    width: '90vw',
+                    width: '85vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
-                    overflowY: 'auto',
+                    overflowY: 'hidden',
                     position: 'inherit',
-                    width: '80%',
-                    height: '80%',
+                    width: '70%',
+                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -457,6 +455,7 @@ const ItemDetail = ({ match }) => {
               <QuizDialog />
             </Layout>
           ) : (
+            //////////////////////////////////////////////////////////////// 모바일이 아닐 경우
             <Layout>
               <br />
               <Grid className="Centering">
@@ -465,6 +464,7 @@ const ItemDetail = ({ match }) => {
                   direction="row"
                   justify="space-around"
                   alignItems="center"
+                  item
                   md={9}
                 >
                   <Grid item xs={4}>
@@ -474,7 +474,7 @@ const ItemDetail = ({ match }) => {
                         itemData.prod_id
                       ) {
                         return (
-                          <Card className="effect">
+                          <Card className="effect" key={index}>
                             <img
                               src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                               // src={`../../${productDatas[match.params.id - 1].prod_image}`}
@@ -500,7 +500,7 @@ const ItemDetail = ({ match }) => {
                         itemData.prod_id
                       )
                         return (
-                          <Grid>
+                          <Grid key={index}>
                             <br />
                             <br />
                             <br />
@@ -523,30 +523,28 @@ const ItemDetail = ({ match }) => {
                             </h5>{' '}
                             <br />
                             <br />
-                            <h3 className="select">
+                            <h5 className="select">
                               {productDatas[match.params.id - 1].prod_desc}
-                            </h3>
+                            </h5>
                             <br />
-                            <br />
-                            <div className="button">
+                            <Grid style={{ display: 'flex' }}>
                               <Button
-                                variant="contained"
-                                color="primary"
-                                disableElevation
+                                variant="primary"
                                 onClick={
                                   user.status === 'login'
                                     ? QuizDialogOpen
                                     : userNotLogin
                                 }
                                 // disabled={user.user_quiz}
-                                style={{ marginLeft: '20px' }}
+                                style={{ margin: '8px 0 0 20px' }}
+                                size="lg"
+                                block
                               >
                                 퀴즈 풀기
                               </Button>
+
                               <Button
-                                variant="contained"
-                                color="primary"
-                                disableElevation
+                                variant="primary"
                                 onClick={
                                   user.status === 'login'
                                     ? click1
@@ -554,10 +552,12 @@ const ItemDetail = ({ match }) => {
                                 }
                                 // disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
+                                size="lg"
+                                block
                               >
                                 쿠폰 받기
                               </Button>
-                            </div>
+                            </Grid>
                             {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
                             <hr />
                             <Grid
@@ -730,13 +730,13 @@ const ItemDetail = ({ match }) => {
                   style: {
                     height: '10vh',
                     padding: '10px',
-                    width: '90vw',
+                    width: '85vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
-                    overflowY: 'auto',
+                    overflowY: 'hidden',
                     position: 'inherit',
-                    width: '80%',
-                    height: '80%',
+                    width: '70%',
+                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -764,8 +764,10 @@ const ItemDetail = ({ match }) => {
           )}
         </Grid>
       ) : (
+        //////////////////////////////////////////////////////////////////////// 이벤트 상품이 아닐경우
         <Grid>
           {isMobile ? (
+            //////////////////////////////////////////////////////////////// 모바일일 경우
             <Layout>
               <br />
               <Grid
@@ -781,7 +783,7 @@ const ItemDetail = ({ match }) => {
                       itemData.prod_id
                     ) {
                       return (
-                        <Card>
+                        <Card key={index}>
                           <img
                             src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                             alt="test"
@@ -803,7 +805,7 @@ const ItemDetail = ({ match }) => {
                       itemData.prod_id
                     )
                       return (
-                        <Grid className="info">
+                        <Grid className="info" key={index}>
                           <br />
                           <br />
                           <h2 className="center">
@@ -824,14 +826,12 @@ const ItemDetail = ({ match }) => {
                           </div>
 
                           <br />
-                          <h3 className="select">
+                          <h5 className="select">
                             {productDatas[match.params.id - 1].prod_desc}
-                          </h3>
+                          </h5>
                           <div className="button">
                             <Button
-                              variant="contained"
-                              color="primary"
-                              disableElevation
+                              variant="primary"
                               onClick={
                                 user.status === 'login'
                                   ? QuizDialogOpen
@@ -843,9 +843,7 @@ const ItemDetail = ({ match }) => {
                               퀴즈 풀기
                             </Button>
                             <Button
-                              variant="contained"
-                              color="primary"
-                              disableElevation
+                              variant="primary"
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
@@ -1024,13 +1022,13 @@ const ItemDetail = ({ match }) => {
                   style: {
                     height: '10vh',
                     padding: '10px',
-                    width: '90vw',
+                    width: '85vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
-                    overflowY: 'auto',
+                    overflowY: 'hidden',
                     position: 'inherit',
-                    width: '80%',
-                    height: '80%',
+                    width: '70%',
+                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -1056,6 +1054,7 @@ const ItemDetail = ({ match }) => {
               <QuizDialog />
             </Layout>
           ) : (
+            ////////////////////////////////////////////////////////// 모바일이 아닐 경우
             <Layout>
               <br />
               <Grid className="Centering">
@@ -1064,6 +1063,7 @@ const ItemDetail = ({ match }) => {
                   direction="row"
                   justify="space-around"
                   alignItems="center"
+                  item
                   md={9}
                 >
                   <Grid item xs={4}>
@@ -1073,7 +1073,7 @@ const ItemDetail = ({ match }) => {
                         itemData.prod_id
                       ) {
                         return (
-                          <Card>
+                          <Card key={index}>
                             <img
                               src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                               // src={`../../${productDatas[match.params.id - 1].prod_image}`}
@@ -1099,7 +1099,7 @@ const ItemDetail = ({ match }) => {
                         itemData.prod_id
                       )
                         return (
-                          <Grid>
+                          <Grid key={index}>
                             <br />
                             <br />
                             <br />
@@ -1122,16 +1122,13 @@ const ItemDetail = ({ match }) => {
                             </h5>{' '}
                             <br />
                             <br />
-                            <h3 className="select">
+                            <h5 className="select">
                               {productDatas[match.params.id - 1].prod_desc}
-                            </h3>
+                            </h5>
                             <br />
-                            <br />
-                            <div className="button">
+                            <Grid style={{ display: 'flex' }}>
                               <Button
-                                variant="contained"
-                                color="primary"
-                                disableElevation
+                                variant="primary"
                                 onClick={
                                   user.status === 'login'
                                     ? QuizDialogOpen
@@ -1139,13 +1136,13 @@ const ItemDetail = ({ match }) => {
                                 }
                                 // disabled={user.user_quiz}
                                 style={{ marginLeft: '20px' }}
+                                size="lg"
+                                block
                               >
                                 퀴즈 풀기
                               </Button>
                               <Button
-                                variant="contained"
-                                color="primary"
-                                disableElevation
+                                variant="primary"
                                 onClick={
                                   user.status === 'login'
                                     ? click1
@@ -1153,10 +1150,12 @@ const ItemDetail = ({ match }) => {
                                 }
                                 // disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
+                                size="lg"
+                                block
                               >
                                 쿠폰 받기
                               </Button>
-                            </div>
+                            </Grid>
                             {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
                             <hr />
                             <Grid
@@ -1329,13 +1328,13 @@ const ItemDetail = ({ match }) => {
                   style: {
                     height: '10vh',
                     padding: '10px',
-                    width: '90vw',
+                    width: '85vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
-                    overflowY: 'auto',
+                    overflowY: 'hidden',
                     position: 'inherit',
-                    width: '80%',
-                    height: '80%',
+                    width: '70%',
+                    height: '75%',
                     justifyContent: 'center',
                     alignItems: 'center',
                   },

@@ -461,20 +461,23 @@ const EventModal = modalNum => {
                       <span>
                         <strong>
                           {numberWithCommas(
-                            Object(
-                              productDatas[
-                                currentEventDatas[eventNum].event_item['1']
-                                  .prod_id - 1
-                              ],
-                            ).prod_price *
-                              (100 -
-                                Object(
-                                  productDatas[
-                                    currentEventDatas[eventNum].event_item['1']
-                                      .prod_id - 1
-                                  ],
-                                ).prod_sale) *
-                              0.01,
+                            parseInt(
+                              Object(
+                                productDatas[
+                                  currentEventDatas[eventNum].event_item['1']
+                                    .prod_id - 1
+                                ],
+                              ).prod_price *
+                                (100 -
+                                  Object(
+                                    productDatas[
+                                      currentEventDatas[eventNum].event_item[
+                                        '1'
+                                      ].prod_id - 1
+                                    ],
+                                  ).prod_sale) *
+                                0.01,
+                            ),
                           )}
                           원
                         </strong>
@@ -555,20 +558,23 @@ const EventModal = modalNum => {
                       <span>
                         <strong>
                           {numberWithCommas(
-                            Object(
-                              productDatas[
-                                currentEventDatas[eventNum].event_item['2']
-                                  .prod_id - 1
-                              ],
-                            ).prod_price *
-                              (100 -
-                                Object(
-                                  productDatas[
-                                    currentEventDatas[eventNum].event_item['2']
-                                      .prod_id - 1
-                                  ],
-                                ).prod_sale) *
-                              0.01,
+                            parseInt(
+                              Object(
+                                productDatas[
+                                  currentEventDatas[eventNum].event_item['2']
+                                    .prod_id - 1
+                                ],
+                              ).prod_price *
+                                (100 -
+                                  Object(
+                                    productDatas[
+                                      currentEventDatas[eventNum].event_item[
+                                        '2'
+                                      ].prod_id - 1
+                                    ],
+                                  ).prod_sale) *
+                                0.01,
+                            ),
                           )}
                           원
                         </strong>

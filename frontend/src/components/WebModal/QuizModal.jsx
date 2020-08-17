@@ -19,12 +19,12 @@ const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
   const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const { quizDatas, setQuizDatas } = useContext(CommonContext);
   const { eventNum, setEventNum } = useContext(CommonContext);
   const userQuizState = {
     user_quiz: true,
   };
+  const { number, setNumber } = useContext(CommonContext);
 
   let history = useHistory();
 
@@ -36,7 +36,6 @@ const SuccessModal = () => {
         userQuizState,
       )
       .then(function(response) {
-        console.log(response);
         setUser({
           ...user,
           user_quiz: true,
@@ -62,77 +61,179 @@ const SuccessModal = () => {
   const Mobile = useMediaQuery('(max-width:920px)');
   return (
     <>
-      <Grid
-        container
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-        xs={12}
-      >
+      {Mobile ? (
         <Grid
-          item
+          container
           style={{
-            margin: 'auto',
-            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
           }}
           xs={12}
         >
-          <Grid container direction="column" style={{ marginBottom: '4vh' }}>
-            <Grid item style={{ marginTop: '4vh' }}>
-              축하드립니다. &nbsp;&nbsp; 이곳은 설명
-            </Grid>
-            <Grid item style={{ marginTop: '4vh' }}>
-              모든 상품에 대한 30% 할인 쿠폰이 발급 되었습니다.
-            </Grid>
-          </Grid>
           <Grid
             item
-            style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+            style={{
+              margin: 'auto',
+              textAlign: 'center',
+            }}
+            xs={12}
           >
-            <Grid
-              container
-              style={{ justifyContent: 'space-evenly' }}
-              direction="row"
-            >
-              <Grid item>
-                <Button
-                  style={{
-                    width: '15vw',
-                    height: '10vh',
-                    fontSize: 'larger',
-                    backgroundColor: '#4D48FB',
-                  }}
-                >
-                  마이 쿠폰 바로 가기
-                </Button>
+            <Grid container direction="column" style={{ marginBottom: '4vh' }}>
+              <Grid
+                item
+                style={{
+                  marginTop: '4vh',
+                  fontWeight: '200',
+                  fontSize: '3vw',
+                }}
+              >
+                축하드립니다. &nbsp;&nbsp;
+                {Object(quizDatas[number]).quiz_desc}
               </Grid>
-              <Grid item>
-                <Button
-                  style={{
-                    width: '15vw',
-                    height: '10vh',
-                    fontSize: 'larger',
-                    backgroundColor: '#ff3b47',
-                  }}
-                >
-                  홈으로 가기 또는 지도
-                </Button>
+              <Grid
+                item
+                style={{
+                  marginTop: '4vh',
+                  fontSize: '3.4vw',
+                  fontWeight: '700',
+                }}
+              >
+                모든 상품에 대한 30% 할인 쿠폰이 발급 되었습니다.
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item style={{ height: '30vh' }}>
-            <MultiCarousel style={{ height: '30vh' }} />
+            <Grid
+              item
+              style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+            >
+              <Grid
+                container
+                style={{ justifyContent: 'space-evenly', paddingTop: '3vh' }}
+                direction="row"
+              >
+                <Grid item>
+                  <Button
+                    onClick={goToMyCoupon}
+                    style={{
+                      width: '15vw',
+                      height: '10vh',
+                      fontSize: '2vw',
+                      backgroundColor: '#4D48FB',
+                    }}
+                  >
+                    쿠폰함 바로 가기
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={goToMain}
+                    style={{
+                      width: '15vw',
+                      height: '10vh',
+                      fontSize: '2vw',
+                      backgroundColor: '#ff3b47',
+                    }}
+                  >
+                    홈으로 가기 또는 지도
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item style={{ height: '30vh', paddingTop: '4vh' }}>
+              <MultiCarousel style={{ height: '30vh' }} />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Grid
+          container
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+          }}
+          xs={12}
+        >
+          <Grid
+            item
+            style={{
+              margin: 'auto',
+              textAlign: 'center',
+            }}
+            xs={12}
+          >
+            <Grid container direction="column" style={{ marginBottom: '4vh' }}>
+              <Grid
+                item
+                style={{
+                  marginTop: '4vh',
+                  fontWeight: '200',
+                  fontSize: '1.5rem',
+                }}
+              >
+                축하드립니다. &nbsp;&nbsp;
+                {Object(quizDatas[number]).quiz_desc}
+              </Grid>
+              <Grid
+                item
+                style={{
+                  marginTop: '4vh',
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                }}
+              >
+                모든 상품에 대한 30% 할인 쿠폰이 발급 되었습니다.
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              style={{ justifyContent: CenterFocusStrong, marginBottom: '5vh' }}
+            >
+              <Grid
+                container
+                style={{ justifyContent: 'space-evenly', paddingTop: '3vh' }}
+                direction="row"
+              >
+                <Grid item>
+                  <Button
+                    onClick={goToMyCoupon}
+                    style={{
+                      width: '15vw',
+                      height: '10vh',
+                      fontSize: 'large',
+                      backgroundColor: '#4D48FB',
+                    }}
+                  >
+                    쿠폰함 바로 가기
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={goToMain}
+                    style={{
+                      width: '15vw',
+                      height: '10vh',
+                      fontSize: 'large',
+                      backgroundColor: '#ff3b47',
+                    }}
+                  >
+                    홈으로 가기 또는 지도
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item style={{ height: '30vh', paddingTop: '4vh' }}>
+              <MultiCarousel style={{ height: '30vh' }} />
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };
 
 const Quiz = modalNum => {
-  const [number, setNumber] = useState();
+  const { number, setNumber } = useContext(CommonContext);
 
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
@@ -178,7 +279,6 @@ const Quiz = modalNum => {
   };
 
   const isMobile = useMediaQuery('(max-width:920px)');
-  // console.log('aaa', quizDatas.length);
 
   // ClickAwayListener
 
@@ -197,15 +297,12 @@ const Quiz = modalNum => {
       {isMobile ? (
         <Wrapper>
           <Grid container direction="column" xs={12}>
-            <Grid item className="quizCentering" style={{ fontSize: '1.2em' }}>
-              {/* <h4
-                style={{
-                  textAlign: 'center',
-                  marginBottom: '3vh',
-                }}
-              > */}
-              <strong>오늘의 퀴즈</strong>
-              {/* </h4> */}
+            <Grid
+              item
+              className="quizCentering"
+              style={{ fontSize: '1.2em', fontWeight: '600' }}
+            >
+              오늘의 퀴즈
             </Grid>
             <Grid
               item
@@ -214,7 +311,7 @@ const Quiz = modalNum => {
                 textAlign: 'center',
                 marginTop: '10px',
                 marginBottom: '20px',
-                fontSize: 'x-large',
+                fontSize: '1.5em',
               }}
             >
               {Object(quizDatas[number]).quiz_question}
@@ -238,11 +335,13 @@ const Quiz = modalNum => {
                 >
                   <NotListedLocationIcon
                     onClick={handleClick}
-                    style={{ fontSize: '1.5em' }}
+                    style={{ fontSize: '5vw' }}
                   />
 
                   {open ? (
-                    <Grid>{Object(quizDatas[number]).quiz_hint}</Grid>
+                    <Grid style={{ fontSize: '3vw' }}>
+                      {Object(quizDatas[number]).quiz_hint}
+                    </Grid>
                   ) : (
                     '힌트'
                   )}
@@ -293,40 +392,21 @@ const Quiz = modalNum => {
                 style: {
                   height: '10vh',
                   padding: '10px',
-                  width: '90vw',
+                  width: '85vw',
                   maxWidth: 'none',
                   overflowX: 'hidden',
-                  overflowY: 'auto',
+                  overflowY: 'hidden',
                   position: 'inherit',
-                  width: '80%',
-                  height: '80%',
+                  width: '70%',
+                  height: '75%',
                   justifyContent: 'center',
-                  textAlign: 'center',
                 },
               }}
             >
               <SuccessModal />
             </Dialog>
           ) : (
-            <Dialog
-              open={failModalTrigger}
-              onClose={failModalHandler}
-              PaperProps={{
-                style: {
-                  height: '10vh',
-                  padding: '10px',
-                  width: '90vw',
-                  maxWidth: 'none',
-                  overflowX: 'hidden',
-                  overflowY: 'auto',
-                  position: 'inherit',
-                  width: '80%',
-                  height: '80%',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                },
-              }}
-            >
+            <Dialog open={failModalTrigger} onClose={modalHandler}>
               <WebFailModal />
             </Dialog>
           )}
@@ -334,24 +414,24 @@ const Quiz = modalNum => {
       ) : (
         <Wrapper>
           <Grid container direction="column" xs={12}>
-            <Grid item className="quizCentering">
-              <h3
-                style={{
-                  textAlign: 'center',
-                  marginBottom: '3vh',
-                }}
-              >
-                오늘의 퀴즈
-              </h3>
+            <Grid
+              item
+              style={{
+                textAlign: 'center',
+                paddingBottom: '5vh',
+                fontSize: '2em',
+                fontWeight: '700',
+              }}
+            >
+              오늘의 퀴즈
             </Grid>
             <Grid
               item
-              className="quizCentering"
               style={{
                 textAlign: 'center',
-                marginTop: '10px',
+                fontSize: '1.8em',
+                fontWeight: '300',
                 marginBottom: '2vh',
-                fontSize: 'xx-large',
               }}
             >
               {Object(quizDatas[number]).quiz_question}
@@ -361,13 +441,13 @@ const Quiz = modalNum => {
                 textAlign: 'center',
                 marginTop: '10px',
                 marginBottom: '50px',
-                fontSize: 'x-large',
+                fontSize: '1.5em',
               }}
             >
               <ClickAwayListener onClickAway={handleClickAway}>
                 <Grid
                   className
-                  direction="column"
+                  // direction="column"
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -377,8 +457,9 @@ const Quiz = modalNum => {
                   <Grid item>
                     <HelpIcon
                       onClick={handleClick}
-                      style={{ fontSize: '2.5em' }}
+                      style={{ fontSize: '1.5em' }}
                     />
+                    &nbsp;
                   </Grid>
                   <Grid item>
                     {open ? (
@@ -402,7 +483,7 @@ const Quiz = modalNum => {
               >
                 <img
                   style={{
-                    width: '15vw',
+                    width: '13vw',
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
@@ -416,7 +497,7 @@ const Quiz = modalNum => {
               >
                 <img
                   style={{
-                    width: '15vw',
+                    width: '13vw',
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
@@ -434,15 +515,14 @@ const Quiz = modalNum => {
                 style: {
                   height: '10vh',
                   padding: '10px',
-                  width: '90vw',
+                  width: '85vw',
                   maxWidth: 'none',
                   overflowX: 'hidden',
-                  overflowY: 'auto',
+                  overflowY: 'hidden',
                   position: 'inherit',
-                  width: '80%',
-                  height: '80%',
+                  width: '70%',
+                  height: '75%',
                   justifyContent: 'center',
-                  textAlign: 'center',
                 },
               }}
             >

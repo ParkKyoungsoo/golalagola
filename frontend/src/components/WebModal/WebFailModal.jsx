@@ -6,8 +6,8 @@ const WebFail = () => {
   return (
     <>
       <Grid container direction="column">
-        <Grid item>
-          <h2> 틀렸어요ㅠㅠ 다시해보세요.</h2>
+        <Grid item style={{ fontSize: '3vw', fontWeight: '600' }}>
+          틀렸어요ㅠㅠ 다시해보세요.
         </Grid>
         <Grid item style={{ justifyContent: CenterFocusStrong }}></Grid>
       </Grid>
