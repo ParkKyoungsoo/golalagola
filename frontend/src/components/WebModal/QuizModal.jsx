@@ -93,6 +93,9 @@ const SuccessModal = () => {
                 </Button>
               </Grid>
             </Grid>
+            <Grid item style={{ height: '30vh' }}>
+              <MultiCarousel style={{ height: '30vh' }} />
+            </Grid>
           </Grid>
         </Grid>
       ) : (
