@@ -13,7 +13,7 @@ const User = () => {
 
   const handleClose = () => {
     setUserDetailDialogOpen(false);
-    history.goBack();
+    history.goBack('/');
   };
 
   return (

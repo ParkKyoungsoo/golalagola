@@ -66,14 +66,14 @@ const MyInfoUploadImageComponent = () => {
       </Grid>
       <Grid item xs={12}>
         <Fragment>
-          <Typography> {user.user_name} </Typography>
+          <Typography> </Typography>
           <section className="container">
             <div {...getRootProps({ className: 'dropzone' })}>
               <Button
                 size={'small'}
                 className="my-info-upload-image-component-button"
               >
-                EDIT PROFILE
+                프로필 사진 편집
               </Button>
               <input {...getInputProps()} />
             </div>
@@ -92,6 +92,7 @@ const MyInfoInputComponent = props => {
 
   const OnChangeHandler = e => {
     setInputValue({ ...inputValue, [keyValue]: e.target.value });
+    console.log('inputValue', inputValue);
   };
 
   return (
@@ -103,7 +104,7 @@ const MyInfoInputComponent = props => {
       }
       RightComponet={
         <TextField
-          disabled={keyValue === 'user_id' ? true : false}
+          disabled={keyValue === 'user_email' ? true : false}
           id={`outlined-basic-${keyValue}`}
           defaultValue={inputValue[keyValue]}
           variant="outlined"
@@ -129,7 +130,6 @@ const MyInfoButtonGroupComponent = props => {
 
   const handleClose = () => {
     setUserDetailDialogOpen(false);
-    history.goBack();
   };
 
   const onMyInfoSaveHandelr = async props => {
@@ -261,7 +261,7 @@ const MyInfoButtonGroupComponent = props => {
         onClick={handleClose}
         className="cancel-fab on-my-info-save-handelr-grid-fab1"
       >
-        CANCEL
+        취소
       </Fab>
 
       <Fab
@@ -278,7 +278,7 @@ const MyInfoButtonGroupComponent = props => {
           backgroundColor: isReadyToUpload ? '#4248b5' : '#E0E0E0',
         }}
       >
-        UPLOAD
+        변경
       </Fab>
     </Grid>
   );
@@ -320,14 +320,14 @@ const MyInfoContentComponent = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <MyInfoInputComponent title="ID" keyValue="user_email" />
+          <MyInfoInputComponent title="이메일" keyValue="user_email" />
         </Grid>
         <Grid item xs={12}>
-          <MyInfoInputComponent title="Name" keyValue="user_name" />
+          <MyInfoInputComponent title="이름" keyValue="user_name" />
         </Grid>
 
         <Grid item xs={12}>
-          <MyInfoInputComponent title="Phone" keyValue="user_phone" />
+          <MyInfoInputComponent title="핸드폰 번호" keyValue="user_phone" />
         </Grid>
 
         <Grid item xs={12}>

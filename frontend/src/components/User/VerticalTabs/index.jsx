@@ -55,7 +55,7 @@ export default function VerticalTabs() {
     setDrawerOpen,
     setUser,
   } = useContext(CommonContext);
-  const labels = ['Edit Profile', 'Change Password', 'Sign Out'];
+  const labels = ['회원정보 수정', '비밀번호 변경', '로그아웃'];
   const handleChange = (event, newValue) => {
     setUserDialogIndex(newValue);
   };
@@ -75,7 +75,7 @@ export default function VerticalTabs() {
       token: '',
     });
     setUserDialogIndex(0);
-    alert('You are logged out.');
+    alert('로그아웃 되었습니다.');
     history.push('/');
   };
 
@@ -94,7 +94,7 @@ export default function VerticalTabs() {
         {labels.map((x, index) => {
           return (
             !fullScreen &&
-            (x === 'Sign Out' ? (
+            (x === '로그아웃' ? (
               <Tab
                 key={index}
                 label={x}
