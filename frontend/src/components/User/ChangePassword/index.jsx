@@ -84,27 +84,33 @@ const ContentDefaultComponent = props => {
 
 const MyInfoButtonGroupComponent = props => {
   let history = useHistory();
-  const { setUserDetailDialogOpen, user, serverUrl, setUser } = useContext(
-    CommonContext,
-  );
+  const {
+    setUserDetailDialogOpen,
+    user,
+    serverUrl,
+    setUser,
+    mainUrl,
+  } = useContext(CommonContext);
   const { inputValue } = useContext(ViewContext);
 
   const handleClose = () => {
     setUserDetailDialogOpen(false);
-    history.goBack();
+    if (window.location.href === `${mainUrl}auth`) {
+      history.goBack('/');
+    }
   };
 
   const onMyInfoSaveHandelr = async props => {
-    var before_pwd = inputValue['Before Password'];
-    var after_pwd = inputValue['New Password'];
-    var changePassword = inputValue['New Password Confirm'];
+    var before_pwd = inputValue['현재 비밀번호'];
+    var after_pwd = inputValue['새로운 비밀번호'];
+    var changePassword = inputValue['새로운 비밀번호 확인'];
 
     if (after_pwd !== changePassword) {
-      alert('Passwords that do not match between passwords.');
+      alert('변경하신 비밀번호가 일치하지 않습니다.');
       return;
     }
-    if (!after_pwd || after_pwd.lengh < 5) {
-      alert('Wrong password.');
+    if (!after_pwd || after_pwd.length < 5) {
+      alert('비밀번호는 5글자 이상으로 해주세요.');
       return;
     }
 
@@ -151,7 +157,7 @@ const MyInfoButtonGroupComponent = props => {
         history.push('/');
       })
       .catch(err => {
-        console.log('err', err.response.data.message);
+        alert(err.response.data.message);
       });
 
     // if (respone['status'] === 200) {
@@ -176,7 +182,7 @@ const MyInfoButtonGroupComponent = props => {
           onClick={handleClose}
           className="cancel-fab my-info-button-group-component-grid-fab1"
         >
-          CANCEL
+          취소
         </Fab>
 
         <Fab
@@ -186,7 +192,7 @@ const MyInfoButtonGroupComponent = props => {
           onClick={onMyInfoSaveHandelr}
           className="upload-fab my-info-button-group-component-grid-fab2"
         >
-          UPLOAD
+          변경
         </Fab>
       </Grid>
     </Wrapper>
@@ -204,20 +210,19 @@ const ChangePasswordComponent = params => {
           alignItems="center"
           spacing={2}
         >
-          <h2 className="section-title">Change Password</h2>
           <Grid
             item
             xs={12}
             className="change-password-component-grid-item"
           ></Grid>
           <Grid item xs={12}>
-            <InputComponent name={'Before Password'} />
+            <InputComponent name={'현재 비밀번호'} />
           </Grid>
           <Grid item xs={12}>
-            <InputComponent name={'New Password'} />
+            <InputComponent name={'새로운 비밀번호'} />
           </Grid>
           <Grid item xs={12}>
-            <InputComponent name={'New Password Confirm'} />
+            <InputComponent name={'새로운 비밀번호 확인'} />
           </Grid>
 
           <Grid item xs={12}>

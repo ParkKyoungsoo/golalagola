@@ -48,7 +48,7 @@ const MultiCarousel = () => {
               // autoPlayDirection="rtl"
               fadeOutAnimation={true}
               playButtonEnabled={false}
-              dotsDisabled={false}
+              dotsDisabled={true}
               buttonsDisabled={true}
             >
               {realtime.map((TmpData, index) => (
@@ -73,7 +73,7 @@ const MultiCarousel = () => {
                   // autoPlayDirection="rtl"
                   fadeOutAnimation={true}
                   playButtonEnabled={false}
-                  dotsDisabled={false}
+                  dotsDisabled={true}
                   buttonsDisabled={true}
                   // style={{ width: '100%', height: 'auto' }}
                 >
