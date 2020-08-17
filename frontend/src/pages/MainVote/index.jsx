@@ -311,7 +311,11 @@ const MainVote = props => {
                 variant="scrollable"
                 aria-label="full width tabs example"
                 className="big-indicator"
-                // style={{ margin: '1vh 0' }}
+                style={{
+                  border: '1px solid #f2f2f2',
+                  background: '#f2f2f2',
+                  borderRadius: '5%',
+                }}
               >
                 {categoryDatas.map((categoryData, index) => (
                   <Tab
@@ -538,6 +542,11 @@ const MainVote = props => {
                 >
                   {categoryDatas.map((categoryData, index) => (
                     <Tab
+                      style={{
+                        border: '1px solid #f2f2f2',
+                        background: '#f2f2f2',
+                        borderRadius: '5%',
+                      }}
                       key={index}
                       {...a11yProps(index)}
                       label={

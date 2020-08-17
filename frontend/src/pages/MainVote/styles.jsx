@@ -41,9 +41,9 @@ export const Wrapper = styled.div`
   & .tab-panel {
     // padding: 170px 0 20px 0;
   }
-  .mainvote-orderlist {
-    border: 1px solid black;
-  }
+  // .mainvote-orderlist {
+  //   border: 1px solid black;
+  // }
   .Centering {
     display: flex;
     align-items: center;
@@ -107,9 +107,9 @@ export const MobileWrapper = styled.div`
     & .tab-panel {
       // padding: 170px 0 20px 0;
     }
-    .mainvote-orderlist {
-      border: 1px solid black;
-    }
+    // .mainvote-orderlist {
+    //   border: 1px solid black;
+    // }
     .Centering {
       display: flex;
       // flex-wrap: wrap;

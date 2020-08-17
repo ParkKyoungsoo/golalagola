@@ -73,14 +73,20 @@ const NestedList = props => {
   return (
     <Wrapper>
       <List component="nav" className="sidebar__main">
-        <Grid>
+        <Grid
+          className="sidebar__logo_box"
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
           <img
-            src="https://i3b309.p.ssafy.io/images/골라라골라.png"
+            className="sidebar__logo"
+            src="https://i3b309.p.ssafy.io/images/폰트_화이트.png"
             alt="logo"
             style={{ width: '100%' }}
           />
         </Grid>
-        <h3 className="sidebar__logo">로고자리</h3>
         <Divider variant="middle" style={{ margin: '10px 20px 10px' }} />
         <ListItem
           button
