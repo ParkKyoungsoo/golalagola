@@ -113,44 +113,53 @@ const MainAdmin = props => {
     <Wrapper>
       <div className="admin_product__main">
         <Grid container>
-          <Grid item>
+          <Grid item xs={2}>
             <NestedList index={0} />
           </Grid>
-          <Grid item xs={10}>
-            <Paper className={classes.paper}>오늘의 날씨는~</Paper>
-            <CanvasJSChart options={options} />
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          {recommandProds.map((recommandDatas, index) => (
-            <Grid key={index} item xs={3} style={{ display: 'flex' }}>
-              <CanvasJSChart
-                options={{
-                  animationEnabled: true,
-                  theme: 'white',
-                  title: {
-                    text: `${categoryDatas[index + 1].cat_title}`,
-                  },
-                  axisY: {
-                    title: `${categoryDatas[index + 1].cat_title}`,
-                    scaleBreaks: {
-                      autoCalculate: true,
-                      type: 'wavy',
-                      lineColor: 'dark',
-                    },
-                  },
-                  data: [
-                    {
-                      type: 'column',
-                      indexLabel: '{y}',
-                      indexLabelFontColor: 'black',
-                      dataPoints: recommandDatas,
-                    },
-                  ],
-                }}
-              />
+          <Grid
+            item
+            xs={10}
+            style={{ display: 'flex', flexWrap: 'wrap', background: '#EFEFF5' }}
+          >
+            <Grid xs={12} style={{ padding: '5vh 3vw' }}>
+              <CanvasJSChart options={options} />
             </Grid>
-          ))}
+
+            <Grid xs={12} style={{ padding: '10vh 0' }}>
+              <h2 style={{ paddingLeft: '2vw' }}>카테고리별 재고 현황</h2>
+              <Grid style={{ display: 'flex', flexWrap: 'wrap' }}>
+                {recommandProds.map((recommandDatas, index) => (
+                  <Grid key={index} item xs={4} style={{ padding: '3vh 2vw' }}>
+                    <CanvasJSChart
+                      options={{
+                        animationEnabled: true,
+                        theme: 'white',
+                        title: {
+                          text: `${categoryDatas[index + 1].cat_title}`,
+                        },
+                        axisY: {
+                          title: `${categoryDatas[index + 1].cat_title}`,
+                          scaleBreaks: {
+                            autoCalculate: true,
+                            type: 'wavy',
+                            lineColor: 'dark',
+                          },
+                        },
+                        data: [
+                          {
+                            type: 'column',
+                            indexLabel: '{y}',
+                            indexLabelFontColor: 'black',
+                            dataPoints: recommandDatas,
+                          },
+                        ],
+                      }}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </div>
     </Wrapper>
