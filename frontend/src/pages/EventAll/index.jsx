@@ -1,20 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
   useMediaQuery,
   Divider,
-  Card,
-  Popover,
-  Typography,
-  Button,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Menu,
-  MenuItem,
-  Fab,
 } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
@@ -27,7 +20,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SendIcon from '@material-ui/icons/Send';
 import AddIcon from '@material-ui/icons/Add';
+import CheckIcon from '@material-ui/icons/Check';
 import { TiPlus } from 'react-icons/ti';
+
 const Plus = () => {
   return <TiPlus />;
 };
@@ -46,6 +41,7 @@ const EventAll = () => {
     setUserCoupon,
     mainUrl,
     myCouponDatas,
+    setMyCouponDatas,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
@@ -95,6 +91,23 @@ const EventAll = () => {
     }
 
     // get 요청으로 데이터 받아서 다시 랜더링하기
+    await Axios.get(
+      `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
+    ).then(function(res) {
+      // myCouponDatas 만들기
+      setMyCouponDatas(res.data);
+
+      // userCoupom, userEvent 만들기
+      const tmpCoupon = [];
+      const tmpEvent = [];
+      res.data.forEach(element => {
+        tmpCoupon.push(element.coupon_select);
+        tmpEvent.push(element.event_id);
+      });
+      setUserCoupon(tmpCoupon);
+      setUserEvent(tmpEvent);
+    });
+    setSelectedEvent({});
     setForceRender({});
 
     // myCoupon으로 이동할 것인지 물어보기
@@ -119,272 +132,424 @@ const EventAll = () => {
 
     if (!userEvent.includes(tmpData.event_id)) {
       return (
-        <>
-          {index % 2 === 0 ? (
-            <Divider style={{ margin: '0px 0 0px 0' }} />
-          ) : null}
-          {isMobile && index % 2 === 1 ? (
-            <Divider style={{ margin: '0px 0 0px 0' }} />
-          ) : null}
+        <Fragment key={tmpData.event_id}>
           <Grid
-            xs={12}
-            md={6}
-            style={{
-              display: 'inline-flex',
-              padding: '2vh 5vw ',
-            }}
+            className="eventall__item"
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
           >
-            <Card className="Card_align">
+            <Grid
+              item
+              xs={4}
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              onClick={() => choiceProduct(tmpData, 1)}
+              className={
+                selectedEvent[tmpData.event_id] ===
+                tmpData.event_item['1'].prod_id
+                  ? 'eventall__item--check_item'
+                  : null
+              }
+            >
               <Grid
-                xs={5}
-                // className="Event1"
+                className={
+                  selectedEvent[tmpData.event_id] ===
+                  tmpData.event_item['1'].prod_id
+                    ? 'eventall__check_box'
+                    : 'eventall__check_box--none'
+                }
               >
+                <CheckIcon className="eventall__check_icon" />
+              </Grid>
+              <Grid item xs={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
                   }`}
-                  style={
-                    selectedEvent[tmpData.event_id] ===
-                    tmpData.event_item['1'].prod_id
-                      ? checkedStyle
-                      : null
-                  }
-                  alt="image1"
-                  onClick={() => choiceProduct(tmpData, 1)}
+                  alt={`https://i3b309.p.ssafy.io/${
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_name
+                  }`}
                 />
-                <div
-                // style={{ textAlign: 'left' }}
-                >
-                  <span>
-                    {
-                      Object(productDatas[tmpData.event_item['1'].prod_id - 1])
-                        .prod_title
-                    }
-                  </span>
-                  <br />
-                  <span style={{ textDecoration: 'line-through' }}>
-                    {numberWithCommas(
-                      Object(productDatas[tmpData.event_item['1'].prod_id - 1])
-                        .prod_price,
-                    )}
-                    원 {'  '}
-                  </span>
-
-                  <span
-                    style={{
-                      color: 'red',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      border: '3px solid pink',
-                    }}
-                  >
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                direction="column"
+                justify="space-between"
+                alignItems="flex-end"
+              >
+                <div className="eventall__item--title">
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_title
+                  }
+                </div>
+                <div>
+                  <span className="eventall__item--sale_p">최대&nbsp;</span>
+                  <span className="eventall__item--sale">
                     {
                       Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                         .prod_sale
                     }
                     %
                   </span>
-                  <br />
-                  <span>최대 할인 가격</span>
+                </div>
+                <div>
+                  <span className="eventall__item--price_line">
+                    {numberWithCommas(
+                      Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                        .prod_price,
+                    )}
+                    원
+                  </span>
+                  <span className="eventall__item--price">
+                    &nbsp;
+                    {numberWithCommas(
+                      parseInt(
+                        Object(
+                          productDatas[tmpData.event_item['1'].prod_id - 1],
+                        ).prod_price *
+                          (100 -
+                            Object(
+                              productDatas[tmpData.event_item['1'].prod_id - 1],
+                            ).prod_sale) *
+                          0.01,
+                      ),
+                    )}
+                    원
+                  </span>
                 </div>
               </Grid>
+            </Grid>
 
-              <Grid xs={1} style={{ margin: 'auto' }}>
-                <p>VS</p>
-              </Grid>
+            <Grid item xs={1}>
+              <p className="eventall__item--vs">VS</p>
+            </Grid>
+
+            <Grid
+              item
+              xs={4}
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              onClick={() => choiceProduct(tmpData, 2)}
+              className={
+                selectedEvent[tmpData.event_id] ===
+                tmpData.event_item['2'].prod_id
+                  ? 'eventall__item--check_item'
+                  : null
+              }
+            >
               <Grid
-                xs={5}
-                // className="Event2"
+                className={
+                  selectedEvent[tmpData.event_id] ===
+                  tmpData.event_item['2'].prod_id
+                    ? 'eventall__check_box'
+                    : 'eventall__check_box--none'
+                }
               >
+                <CheckIcon className="eventall__check_icon" />
+              </Grid>
+              <Grid item xs={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
                   }`}
-                  style={
-                    selectedEvent[tmpData.event_id] ===
-                    tmpData.event_item['2'].prod_id
-                      ? checkedStyle
-                      : null
-                  }
-                  alt="image2"
-                  onClick={() => choiceProduct(tmpData, 2)}
+                  alt={`https://i3b309.p.ssafy.io/${
+                    Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                      .prod_name
+                  }`}
                 />
-                <div
-                // style={{ textAlign: 'left' }}
-                >
-                  <span>
-                    {
-                      Object(productDatas[tmpData.event_item['2'].prod_id - 1])
-                        .prod_title
-                    }
-                  </span>
-                  <br />
-                  <span style={{ textDecoration: 'line-through' }}>
-                    {numberWithCommas(
-                      Object(productDatas[tmpData.event_item['2'].prod_id - 1])
-                        .prod_price,
-                    )}
-                    원 {'  '}
-                  </span>
-
-                  <span
-                    style={{
-                      color: 'red',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      border: '3px solid pink',
-                    }}
-                  >
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                direction="column"
+                justify="space-between"
+                alignItems="flex-end"
+              >
+                <div className="eventall__item--title">
+                  {
+                    Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                      .prod_title
+                  }
+                </div>
+                <div>
+                  <span className="eventall__item--sale_p">최대&nbsp;</span>
+                  <span className="eventall__item--sale">
                     {
                       Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                         .prod_sale
                     }
                     %
                   </span>
-                  <br />
-                  <span>최대 할인 가격</span>
+                </div>
+                <div>
+                  <span className="eventall__item--price_line">
+                    {numberWithCommas(
+                      Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                        .prod_price,
+                    )}
+                    원
+                  </span>
+                  <span className="eventall__item--price">
+                    &nbsp;
+                    {numberWithCommas(
+                      parseInt(
+                        Object(
+                          productDatas[tmpData.event_item['2'].prod_id - 1],
+                        ).prod_price *
+                          (100 -
+                            Object(
+                              productDatas[tmpData.event_item['2'].prod_id - 1],
+                            ).prod_sale) *
+                          0.01,
+                      ),
+                    )}
+                    원
+                  </span>
                 </div>
               </Grid>
-            </Card>
+            </Grid>
+            <Grid item xs={12} md={1}>
+              <List>
+                <ListItem
+                  button
+                  onClick={
+                    user.status === 'login' ? submitCouponData : userNotLogin
+                  }
+                  className="eventall__button--column"
+                >
+                  <ListItemIcon className="eventall__button--icon">
+                    <SendIcon />
+                  </ListItemIcon>
+                  <span>쿠폰담기</span>
+                </ListItem>
+              </List>
+            </Grid>
           </Grid>
-        </>
+          <Divider style={{ margin: '0px 0 0px 0' }} />
+        </Fragment>
       );
     } else {
       return (
-        <>
-          {index % 2 === 0 ? (
-            <Divider style={{ margin: '0px 0 0px 0' }} />
-          ) : null}
-          {isMobile && index % 2 === 1 ? (
-            <Divider style={{ margin: '0px 0 0px 0' }} />
-          ) : null}
+        <Fragment key={tmpData.event_id}>
+          <Grid item xs={12} className="eventall__item--part_event">
+            <p className="eventall__item--part_mention">
+              이미 참여한 이벤트 입니다.
+            </p>
+          </Grid>
           <Grid
-            xs={12}
-            md={6}
-            style={{
-              display: 'inline-flex',
-              padding: '2vh 5vw ',
-            }}
+            className="eventall__item"
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
           >
-            <Card className="Card_align" style={{ opacity: '50%' }}>
+            <Grid
+              xs={4}
+              item
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              onClick={() => choiceProduct(tmpData, 1)}
+              className={
+                userCoupon.includes(tmpData.event_item['1'].prod_id)
+                  ? 'eventall__item--check_item'
+                  : null
+              }
+            >
               <Grid
-                xs={5}
-                // className="Event1"
+                className={
+                  userCoupon.includes(tmpData.event_item['1'].prod_id)
+                    ? 'eventall__check_box'
+                    : 'eventall__check_box--none'
+                }
               >
+                <CheckIcon className="eventall__check_icon" />
+              </Grid>
+              <Grid item xs={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
                   }`}
-                  style={
-                    userCoupon.includes(tmpData.event_item[1].prod_id)
-                      ? { border: '3px solid green' }
-                      : null
-                  }
-                  alt="image1"
-                  onClick={() => choiceProduct(tmpData, 1)}
+                  alt={`https://i3b309.p.ssafy.io/${
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_name
+                  }`}
                 />
-                <div
-                // style={{ textAlign: 'left' }}
-                >
-                  <span>
-                    {
-                      Object(productDatas[tmpData.event_item['1'].prod_id - 1])
-                        .prod_title
-                    }
-                  </span>
-                  <br />
-                  <span style={{ textDecoration: 'line-through' }}>
-                    {numberWithCommas(
-                      Object(productDatas[tmpData.event_item['1'].prod_id - 1])
-                        .prod_price,
-                    )}
-                    원 {'  '}
-                  </span>
-
-                  <span
-                    style={{
-                      color: 'red',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      border: '3px solid pink',
-                    }}
-                  >
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                direction="column"
+                justify="space-between"
+                alignItems="flex-end"
+              >
+                <div className="eventall__item--title">
+                  {
+                    Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                      .prod_title
+                  }
+                </div>
+                <div>
+                  <span className="eventall__item--sale_p">최대&nbsp;</span>
+                  <span className="eventall__item--sale">
                     {
                       Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                         .prod_sale
                     }
                     %
                   </span>
-                  <br />
-                  <span>최대 할인 가격</span>
+                </div>
+                <div>
+                  <span className="eventall__item--price_line">
+                    {numberWithCommas(
+                      Object(productDatas[tmpData.event_item['1'].prod_id - 1])
+                        .prod_price,
+                    )}
+                    원
+                  </span>
+                  <span className="eventall__item--price">
+                    &nbsp;
+                    {numberWithCommas(
+                      parseInt(
+                        Object(
+                          productDatas[tmpData.event_item['1'].prod_id - 1],
+                        ).prod_price *
+                          (100 -
+                            Object(
+                              productDatas[tmpData.event_item['1'].prod_id - 1],
+                            ).prod_sale) *
+                          0.01,
+                      ),
+                    )}
+                    원
+                  </span>
                 </div>
               </Grid>
-              <Grid xs={1} style={{ margin: 'auto' }}>
-                <p>VS</p>
-              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={1}>
+              <p className="eventall__item--vs">VS</p>
+            </Grid>
+
+            <Grid
+              item
+              xs={4}
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              onClick={() => choiceProduct(tmpData, 2)}
+              className={
+                userCoupon.includes(tmpData.event_item['2'].prod_id)
+                  ? 'eventall__item--check_item'
+                  : null
+              }
+            >
               <Grid
-                xs={5}
-                // className="Event2"
+                className={
+                  userCoupon.includes(tmpData.event_item['2'].prod_id)
+                    ? 'eventall__check_box'
+                    : 'eventall__check_box--none'
+                }
               >
+                <CheckIcon className="eventall__check_icon" />
+              </Grid>
+              <Grid item xs={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
                   }`}
-                  style={
-                    userCoupon.includes(tmpData.event_item[2].prod_id)
-                      ? { border: '3px solid green' }
-                      : null
-                  }
-                  alt="image2"
-                  onClick={() => choiceProduct(tmpData, 2)}
+                  alt={`https://i3b309.p.ssafy.io/${
+                    Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                      .prod_name
+                  }`}
                 />
-                <div
-                // style={{ textAlign: 'left' }}
-                >
-                  <span>
-                    {
-                      Object(productDatas[tmpData.event_item['2'].prod_id - 1])
-                        .prod_title
-                    }
-                  </span>
-                  <br />
-                  <span style={{ textDecoration: 'line-through' }}>
-                    {numberWithCommas(
-                      Object(productDatas[tmpData.event_item['2'].prod_id - 1])
-                        .prod_price,
-                    )}
-                    원 {'  '}
-                  </span>
-
-                  <span
-                    style={{
-                      color: 'red',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      border: '3px solid pink',
-                    }}
-                  >
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                direction="column"
+                justify="space-between"
+                alignItems="flex-end"
+              >
+                <div className="eventall__item--title">
+                  {
+                    Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                      .prod_title
+                  }
+                </div>
+                <div>
+                  <span className="eventall__item--sale_p">최대&nbsp;</span>
+                  <span className="eventall__item--sale">
                     {
                       Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                         .prod_sale
                     }
                     %
                   </span>
-                  <br />
-                  <span>최대 할인 가격</span>
+                </div>
+                <div>
+                  <span className="eventall__item--price_line">
+                    {numberWithCommas(
+                      Object(productDatas[tmpData.event_item['2'].prod_id - 1])
+                        .prod_price,
+                    )}
+                    원
+                  </span>
+                  <span className="eventall__item--price">
+                    &nbsp;
+                    {numberWithCommas(
+                      parseInt(
+                        Object(
+                          productDatas[tmpData.event_item['2'].prod_id - 1],
+                        ).prod_price *
+                          (100 -
+                            Object(
+                              productDatas[tmpData.event_item['2'].prod_id - 1],
+                            ).prod_sale) *
+                          0.01,
+                      ),
+                    )}
+                    원
+                  </span>
                 </div>
               </Grid>
-            </Card>
+            </Grid>
+            <Grid item xs={1}>
+              <List>
+                <ListItem className="eventall__button--column">
+                  <ListItemIcon className="eventall__button--icon">
+                    <SendIcon />
+                  </ListItemIcon>
+                  <span>쿠폰담기</span>
+                </ListItem>
+              </List>
+            </Grid>
           </Grid>
-        </>
+          <Divider style={{ margin: '0px 0 0px 0' }} />
+        </Fragment>
       );
     }
   }
@@ -430,20 +595,11 @@ const EventAll = () => {
 
   const NestedList = props => {
     // sidebar 스타일 정의
-    const classes = useStyles();
-
-    // *** 사이드 바 내에서 open 기능
-    const [open, setOpen] = React.useState(true);
-    const handleClick = () => {
-      setOpen(!open);
-    };
-    // ***
 
     return (
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
-        className={classes.root}
         style={
           isMobile
             ? {
@@ -455,20 +611,10 @@ const EventAll = () => {
       >
         <ListItem
           button
-          onClick={user.status === 'login' ? submitCouponData : userNotLogin}
-          className="sideBarColumn"
-        >
-          <ListItemIcon className="sideBarIcon">
-            <SendIcon />
-          </ListItemIcon>
-          <ListItemText primary="쿠폰담기" />
-        </ListItem>
-        <ListItem
-          button
-          className="sideBarColumn"
+          className="eventall__button--column"
           onClick={onClickRedirectPathHandler('mycoupon')}
         >
-          <ListItemIcon className="sideBarIcon">
+          <ListItemIcon className="eventall__button--icon">
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="쿠폰함" />
@@ -478,85 +624,39 @@ const EventAll = () => {
   };
   ///////////////////////////////////////////////////////////////////////
 
-  // console.log(currentEventDatas);
   return (
     <Wrapper>
       <Layout>
-        <Grid className="Centering">
-          <Grid
-            xs={12}
-            md={9}
-            style={{
-              position: 'sticky',
-              top: '5vh',
-              display: 'flex',
-              justifyContent: 'center',
-              backgroundColor: '#f7f2f2',
-              zIndex: '2',
-            }}
-          >
-            <h4>두 개의 상품중 마음에 드는 상품을 골라가세요</h4>
-          </Grid>
-        </Grid>
         <Grid style={{ display: 'flex', flexDirection: 'column' }}>
           {isMobile ? (
             <>
-              <Grid
-                style={{
-                  position: 'sticky',
-                  // top: '8.5vh',
-                  top: '90vh',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  backgroundColor: '#f7f2f2',
-                  zIndex: '2',
-                }}
-              >
+              <h4>배너가 들어갈 자리</h4>
+              <Grid>
                 <NestedList />
               </Grid>
-              <Grid
-                item
-                style={{
-                  textAlign: 'center',
-                  verticalAlign: 'middle',
-                  marginTop: '-8vh',
-                  paddingBottom: '15vh',
-                }}
-              >
+              <Grid>
                 {currentEventDatas.map((tmpData, index) =>
                   eventGridRender(index, tmpData),
                 )}
               </Grid>
             </>
           ) : (
-            <Grid className="Centering">
-              <Grid md={9}>
-                <Grid
-                  xs={2}
-                  style={{
-                    position: 'fixed',
-                    top: '10vh',
-                    right: '5vw',
-                    display: 'flex',
-                    // justifyContent: 'flex-end',
-                  }}
-                >
-                  <NestedList />
-                </Grid>
-                <Grid
-                  xs={12}
-                  style={{
-                    textAlign: 'center',
-                    verticalAlign: 'middle',
-                    // marginTop: '-10vh',
-                  }}
-                >
-                  {currentEventDatas.map((tmpData, index) =>
-                    eventGridRender(index, tmpData),
-                  )}
+            <>
+              <Grid className="eventall__layout--container" container>
+                <Grid item md={9} container>
+                  <h4>배너가 들어갈 자리</h4>
+
+                  <Grid item xs={2}>
+                    <NestedList className="eventall__layout--coupon_button" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    {currentEventDatas.map((tmpData, index) =>
+                      eventGridRender(index, tmpData),
+                    )}
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </>
           )}
         </Grid>
       </Layout>

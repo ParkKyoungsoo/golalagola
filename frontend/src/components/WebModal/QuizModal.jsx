@@ -14,7 +14,6 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
 import { CenterFocusStrong } from '@material-ui/icons';
-// ClickAwayListener
 
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
@@ -261,9 +260,12 @@ const Quiz = modalNum => {
 
   const modalHandler = () => {
     setSuccessModalTrigger(false);
-    setFailModalTrigger(failModalTrigger => false);
     setWebQuizDialogOpen(false);
     setItemDialogOpen(false);
+  };
+
+  const failModalHandler = () => {
+    setFailModalTrigger(failModalTrigger => false);
   };
 
   const buttonStyle = {
@@ -527,7 +529,7 @@ const Quiz = modalNum => {
               <SuccessModal />
             </Dialog>
           ) : (
-            <Dialog open={failModalTrigger} onClose={modalHandler}>
+            <Dialog open={failModalTrigger} onClose={failModalHandler}>
               <WebFailModal />
             </Dialog>
           )}

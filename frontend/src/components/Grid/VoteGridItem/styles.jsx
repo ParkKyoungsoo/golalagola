@@ -3,7 +3,27 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   flex-grow: 1;
-  .fontVerticalMiddle{
+  .mobilefontMedium {
+    font-size: 3vw;
+    font-weight: 500;
+  }
+  .mobilefontLarge {
+    font-size: 5vw;
+    font-weight: bold;
+  }
+  .fontMedium {
+    font-size: 1.5vw;
+    font-weight: 500;
+  }
+  .fontLarge {
+    font-size: 2vw;
+    font-weight: bold;
+  }
+  .fontCancelLine {
+    text-decoration:line-through;
+    opacity:50%;
+  }
+  .fontVerticalMiddle {
     margin: auto 0;
   }
   .btn-check {

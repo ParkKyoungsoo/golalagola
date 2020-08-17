@@ -20,6 +20,7 @@ import Wrapper from './styles';
 // import userData from './dump.json';
 
 const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+const regExp2 = /^\d{3}-\d{3,4}-\d{4}$/;
 
 const DialogTitleComponent = () => {
   return (
@@ -135,7 +136,7 @@ const SignInSection01 = () => {
           <TextField
             required
             id="outlined-required"
-            label="Email"
+            label="이메일"
             className="text-field"
             defaultValue={signInUserData.user_email}
             variant="outlined"
@@ -151,7 +152,7 @@ const SignInSection01 = () => {
           <TextField
             required
             id="outlined-password-input"
-            label="Password"
+            label="비밀번호"
             className="text-field"
             type="password"
             autoComplete="current-password"
@@ -175,7 +176,7 @@ const SignInSection01 = () => {
             onClick={onSignInHandler}
             className="grid-item-button"
           >
-            login
+            로그인
           </Button>
         </Grid>
         <Grid item xs={12} className="grid-item">
@@ -192,7 +193,7 @@ const SignInSection01 = () => {
 
             <Grid item xs={2}>
               <Typography align="center" className="grid-item-typography1">
-                or
+                또는
               </Typography>
             </Grid>
 
@@ -209,7 +210,7 @@ const SignInSection01 = () => {
               onClick={onClickHandler}
             >
               <Typography className="grid-item-typography3">
-                {'Forgot Password?'}
+                {'비밀번호 찾기'}
               </Typography>
             </IconButton>
           </Grid>
@@ -241,7 +242,7 @@ const SignInSection02 = () => {
             onClick={onClickHandler}
             className="grid2-item-button"
           >
-            {`Don't have an account?`}
+            {`회원가입`}
           </Button>
         </Grid>
       </Grid>
@@ -274,9 +275,7 @@ const SignInGroupComponent = () => {
 const SignUpSection01 = () => {
   return (
     <Wrapper>
-      <Typography align="center" className="sign-up1">
-        Sign up to see friends' photos and videos.
-      </Typography>
+      <Typography align="center" className="sign-up1"></Typography>
     </Wrapper>
   );
 };
@@ -328,16 +327,25 @@ const SignUpSection02 = () => {
       password_2 === '' ||
       user_phone === ''
     ) {
-      alert('You need both email and password and username.');
+      alert('회원정보를 모두 입력해주세요.');
       return;
     }
-    // if (password_1 == password_2) {
-    //   alert('비밀번호가 일치하지 않습니다.');
-    //   return;
-    // }
+    if (password_1 !== password_2) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+    if (!password_1 || password_1.length < 5) {
+      alert('비밀번호는 5글자 이상으로 해주세요.');
+      return;
+    }
 
     if (!regExp.test(user_email)) {
-      alert('The email format is invalid.');
+      alert('이메일 형식이 유효하지 않습니다.');
+      return;
+    }
+
+    if (!regExp2.test(user_phone)) {
+      alert('핸드폰 번호 형식이 유효하지 않습니다.');
       return;
     }
 
@@ -365,7 +373,9 @@ const SignUpSection02 = () => {
         setIsSignUp('SignIn');
         // alert(data.message);
       })
-      .catch(alert('이메일 인증 후 사용해주세요.'));
+      .catch(err => {
+        alert(err.response.data.message);
+      });
   };
 
   return (
@@ -382,11 +392,11 @@ const SignUpSection02 = () => {
           <TextField
             required
             id="outlined-required"
-            label="Email"
+            label="이메일"
             defaultValue={signUpUserData.user_email}
             className="text-field"
             variant="outlined"
-            placeholder=""
+            placeholder="test@test.com"
             fullWidth={true}
             onChange={OnChangeHandler('user_email')}
           />
@@ -395,11 +405,11 @@ const SignUpSection02 = () => {
           <TextField
             required
             id="outlined-required"
-            label="User Name"
+            label="이름"
             defaultValue={signUpUserData.user_name}
             className="text-field"
             variant="outlined"
-            placeholder=""
+            placeholder="이름"
             fullWidth={true}
             onChange={OnChangeHandler('user_name')}
           />
@@ -408,7 +418,7 @@ const SignUpSection02 = () => {
           <TextField
             required
             id="outlined-password-input"
-            label="Password"
+            label="비밀번호"
             className="textField"
             type="password"
             autoComplete="current-password"
@@ -423,13 +433,13 @@ const SignUpSection02 = () => {
           <TextField
             required
             id="outlined-password-input"
-            label="Password"
+            label="비밀번호 확인"
             className="textField"
             type="password"
             autoComplete="current-password"
             defaultValue={signUpUserData.password_2}
             variant="outlined"
-            placeholder="비밀번호"
+            placeholder="비밀번호 확인"
             fullWidth={true}
             onChange={OnChangeHandler('password_2')}
           />
@@ -438,13 +448,13 @@ const SignUpSection02 = () => {
           <TextField
             required
             id="outlined-password-input"
-            label="Phone Number"
+            label="핸드폰 번호"
             className="textField"
             type="text"
             autoComplete="current-password"
             defaultValue={signUpUserData.user_phone}
             variant="outlined"
-            placeholder="핸드폰 번호"
+            placeholder="010-0000-0000"
             fullWidth={true}
             onChange={OnChangeHandler('user_phone')}
           />
@@ -462,14 +472,14 @@ const SignUpSection02 = () => {
               fontWeight: 500,
             }}
           >
-            Sign up
+            회원가입
           </Button>
         </Grid>
         <Grid item xs={12} className="sign-up-grid-item4">
-          <Typography align="center" className="sign-up-grid-item4-typography">
-            By signing up, you agree to ssafy's terms, <b>data policy</b> and{' '}
-            <b>cookie policy.</b>
-          </Typography>
+          <Typography
+            align="center"
+            className="sign-up-grid-item4-typography"
+          ></Typography>
         </Grid>
       </Grid>
     </Wrapper>
@@ -497,7 +507,7 @@ const SignUpSection03 = () => {
               align="center"
               className="sign-up3-grid-item-typography"
             >
-              or
+              또는
             </Typography>
           </Grid>
 
@@ -529,7 +539,7 @@ const SignUpSection04 = () => {
         <Grid item xs={2} />
         <Grid item xs={5}>
           <Typography align="center" className="sign-up4-grid-item-typography">
-            {'Do you have an account?'}
+            {'계정이 있으세요?'}
           </Typography>
         </Grid>
         <Grid item xs={1}>
@@ -538,7 +548,7 @@ const SignUpSection04 = () => {
             onClick={onClickHandler}
             className="sign-up4-grid-item-button"
           >
-            {'login'}
+            {'로그인'}
           </Button>
         </Grid>
       </Grid>
@@ -587,7 +597,7 @@ const ForgotPwGroupComponent = () => {
   };
   const sendSearchWordHandler = async searchWord => {
     if (!regExp.test(searchWord)) {
-      alert('The email format is invalid.');
+      alert('이메일 형식이 유효하지 않습니다.');
       return;
     } else {
       let res = {
@@ -614,12 +624,8 @@ const ForgotPwGroupComponent = () => {
         spacing={1}
         className="forgot-pw"
       >
-        <h2>Having trouble signing in?</h2>
-        <h3>
-          Enter the user ID and the verification code will be sent to the
-          registered email.
-        </h3>
-        <input type="text" placeholder="User ID" ref={inputRef} />
+        <h3>등록하신 이메일을 입력해주세요.</h3>
+        <input type="text" placeholder="이메일" ref={inputRef} />
         <button
           type="button"
           className="btn-link"
@@ -627,28 +633,69 @@ const ForgotPwGroupComponent = () => {
             sendSearchWordHandler(inputRef.current.value);
           }}
         >
-          Send Login Link
+          인증번호 보내기
         </button>
-        <h4 className="divider">
-          <span>or</span>
-        </h4>
-        <h5
-          className="btn-to-sign-up"
-          onClick={() => {
-            onClickHandler(`SignUp`);
-          }}
-        >
-          Create new account
-        </h5>
-        <button
-          type="button"
-          className="btn-login"
-          onClick={() => {
-            onClickHandler(`SignIn`);
-          }}
-        >
-          Back to login
-        </button>
+
+        <Grid item xs={12} className="grid-item">
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={0}
+          >
+            <Grid item xs={5}>
+              <Divider />
+            </Grid>
+
+            <Grid item xs={2}>
+              <Typography align="center" className="grid-item-typography1">
+                또는
+              </Typography>
+            </Grid>
+
+            <Grid item xs={5}>
+              <Divider />
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Typography align="center" className="sign-up4-grid-item-typography">
+            {'계정이 없으세요?'}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            fullWidth={true}
+            onClick={() => {
+              onClickHandler(`SignUp`);
+            }}
+            className="sign-up4-grid-item-button"
+          >
+            {'회원가입'}
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+        className="grid2"
+      >
+        <Grid item xs={12}>
+          <Button
+            fullWidth={true}
+            onClick={() => {
+              onClickHandler(`SignIn`);
+            }}
+            className="grid2-item-button"
+          >
+            {`로그인`}
+          </Button>
+        </Grid>
       </Grid>
     </Wrapper>
   );
