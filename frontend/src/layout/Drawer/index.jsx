@@ -19,7 +19,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+
 import Wrapper from './styles';
 import store from 'store';
 
@@ -53,16 +53,8 @@ const DrawerHeaderGroup = () => {
 
   return (
     <Grid container direction="row" justify="space-between" alignItems="center">
-      <Grid item>
+      <Grid item onClick={handleDrawerClose}>
         {user.status ? (
-          // <Button
-          //   variant="contained"
-          //   color="primary"
-          //   className="up-cancel-fab"
-          //   onClick={onClickRedirectPathHandler('/CreateVote')}
-          // >
-          //   Create a Vote
-          // </Button>
           <Fragment>
             <Button
               variant="outlined"
@@ -126,7 +118,6 @@ const DrawerListGroup = () => {
 
     alert('로그아웃 하셨습니다..');
     window.location.href = '/';
-    // history.push('/');
   };
 
   const onClickRedirectPathHandler = name => () => {
@@ -209,27 +200,6 @@ const DrawerListGroup = () => {
         >
           <ListItemText primary={'이벤트'} disableTypography />
         </ListItem>
-        {/* <ListItem
-          button
-          key={'AboutMe'}
-          onClick={onClickRedirectPathHandler('/AboutMe')}
-        >
-          <ListItemText primary={'About Me'} disableTypography />
-        </ListItem>
-        <ListItem
-          button
-          key={'ContactUs'}
-          onClick={onClickRedirectPathHandler('/ContactUs')}
-        >
-          <ListItemText primary={'Contact Us'} disableTypography />
-        </ListItem>
-        <ListItem
-          button
-          key={'Terms'}
-          onClick={onClickRedirectPathHandler('/Terms')}
-        >
-          <ListItemText primary={'Terms'} disableTypography />
-        </ListItem> */}
       </List>
     </>
   );
