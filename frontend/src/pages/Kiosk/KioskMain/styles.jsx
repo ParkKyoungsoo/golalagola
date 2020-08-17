@@ -10,11 +10,11 @@ const Wrapper = styled.div`
     font-weight: bold;
   }
   .fontMedium {
-    font-size: 1.5vw;
+    font-size: 2vw;
     font-weight: 500;
   }
   .fontLarge {
-    font-size: 2vw;
+    font-size: 4vw;
     font-weight: bold;
   }
   .fontCancelLine {
