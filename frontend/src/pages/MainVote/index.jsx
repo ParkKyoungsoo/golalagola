@@ -173,7 +173,7 @@ const MainVote = props => {
           <MobileWrapper>
             {/* carousel, 실시간 순위 */}
             <Grid className="Centering">
-              <Grid className="Centering" style={{ height: '30vh' }}>
+              <Grid className="Centering" style={{ height: '15vh' }}>
                 <img
                   src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
@@ -184,8 +184,8 @@ const MainVote = props => {
             <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Grid
                 item
-                xs={6}
-                style={{ border: '2px solid black' }}
+                xs={7}
+                style={{ border: '0.5px solid black' }}
                 className="liveTimeBar "
               >
                 <Grid className="Centering">
@@ -284,7 +284,8 @@ const MainVote = props => {
               color="inherit"
               className="appbar"
               style={{
-                backgroundColor: '#f7f2f2',
+                backgroundColor: '#f2f2f2',
+                margin: '1.5vh 0',
               }}
             >
               <Grid container>
@@ -292,14 +293,14 @@ const MainVote = props => {
                   <ControlledCarousel />
                 </Grid>
               </Grid>
-              <Divider style={{ margin: '0px 0 0px 0' }} />
+              <Divider />
             </AppBar>
             <Grid
               style={{
                 position: 'sticky',
                 top: '8vh',
                 zIndex: '1',
-                backgroundColor: '#f7f2f2',
+                backgroundColor: '#f2f2f2',
               }}
             >
               <Tabs
@@ -310,11 +311,10 @@ const MainVote = props => {
                 variant="scrollable"
                 aria-label="full width tabs example"
                 className="big-indicator"
-                style={{ margin: '1vh 0' }}
+                // style={{ margin: '1vh 0' }}
               >
                 {categoryDatas.map((categoryData, index) => (
                   <Tab
-                    style={{ borderRadius: '20%' }}
                     key={index}
                     {...a11yProps(index)}
                     label={
@@ -359,7 +359,7 @@ const MainVote = props => {
                 item
                 md={9}
                 className="Centering"
-                style={{ height: '30vh' }}
+                style={{ height: '20vh' }}
               >
                 <img
                   src="https://i3b309.p.ssafy.io/images/골라라골라.png"
@@ -382,7 +382,7 @@ const MainVote = props => {
                 <Grid
                   item
                   xs={4}
-                  style={{ border: '2px solid black' }}
+                  style={{ border: '0.5px solid black' }}
                   className="liveTimeBar "
                 >
                   <Grid className="Centering">
@@ -484,7 +484,7 @@ const MainVote = props => {
               color="inherit"
               className="appbar"
               style={{
-                backgroundColor: '#f7f2f2',
+                backgroundColor: '#f2f2f2',
                 marginBottom: '10vh',
               }}
             >
@@ -538,7 +538,6 @@ const MainVote = props => {
                 >
                   {categoryDatas.map((categoryData, index) => (
                     <Tab
-                      style={{ borderRadius: '20%' }}
                       key={index}
                       {...a11yProps(index)}
                       label={

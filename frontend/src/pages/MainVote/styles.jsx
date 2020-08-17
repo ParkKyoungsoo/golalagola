@@ -30,16 +30,13 @@ export const Wrapper = styled.div`
     /* transition: all 0.4s; */
     &.appbar-shift {
       width: calc(100% -280px);
-      margin-left: 280px;
+      margin-left: 280pdx;
       /* transition: all 0.4s; */
     }
   }
   & .tab {
     padding: 0;
-    margin: 10px 5px;
-    border-radius: 5px;
-    // min-width: 120px;
-    // width: 200px;
+    margin: 0 5px;
   }
   & .tab-panel {
     // padding: 170px 0 20px 0;
@@ -103,7 +100,7 @@ export const MobileWrapper = styled.div`
     & .tab {
       padding: 0;
       margin: 0px 5px;
-      border-radius: 5%;
+
       // min-width: 120px;
       width: 120px;
     }
