@@ -148,6 +148,7 @@ const App = () => {
   const [dailySaleDatas, setDailySaleDatas] = useState([]);
   const [couponUseSales, setCouponUseSales] = useState([]);
   const [recommandProds, setRecommandProds] = useState([]);
+  const [realtime, setRealTime] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -333,13 +334,22 @@ const App = () => {
     );
   }
 
+  async function getRealTimes() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/coupon/realtime').then(
+      function(res) {
+        setRealTime(res.data);
+      },
+    );
+  }
+
   useEffect(() => {
     getProductDatas();
     getBuyDatas();
     getEventProducts();
-	getDailySaleDatas();
+    getDailySaleDatas();
     getCouponUseSales();
     getRecommandProds();
+    getRealTimes();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -428,12 +438,14 @@ const App = () => {
         setBuyDatas,
         vsData,
         setVSData,
-		dailySaleDatas,
+        dailySaleDatas,
         setDailySaleDatas,
         couponUseSales,
         setCouponUseSales,
         recommandProds,
         setRecommandProds,
+        realtime,
+        setRealTime,
       }}
     >
       <MuiThemeProvider theme={theme}>
