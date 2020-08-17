@@ -58,7 +58,6 @@ const Navbar = () => {
   //   // if (window.location.href === 'http://localhost:3000/KioskMains') {
   //   //   handleClose();
   //   // } else {
-  //   console.log('timeout!!');
   // window.location.href = `${mainUrl}/KioskMains`;
   //   // }
   // }, 60000);

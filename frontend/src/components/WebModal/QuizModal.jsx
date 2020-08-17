@@ -85,7 +85,7 @@ const SuccessModal = () => {
                 style={{
                   marginTop: '4vh',
                   fontWeight: '200',
-                  fontSize: '3vw',
+                  fontSize: '2vw',
                 }}
               >
                 축하드립니다. &nbsp;&nbsp;
@@ -95,7 +95,7 @@ const SuccessModal = () => {
                 item
                 style={{
                   marginTop: '4vh',
-                  fontSize: '3.4vw',
+                  fontSize: '3vw',
                   fontWeight: '700',
                 }}
               >
@@ -134,7 +134,7 @@ const SuccessModal = () => {
                       backgroundColor: '#ff3b47',
                     }}
                   >
-                    홈으로 가기 또는 지도
+                    Home
                   </Button>
                 </Grid>
               </Grid>
@@ -217,7 +217,7 @@ const SuccessModal = () => {
                       backgroundColor: '#ff3b47',
                     }}
                   >
-                    홈으로 가기 또는 지도
+                    Home
                   </Button>
                 </Grid>
               </Grid>
@@ -365,7 +365,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_o.png"
-                ></img>
+                />
               </Button>
               <Button
                 onClick={click(false)}
@@ -379,7 +379,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_x.png"
-                ></img>
+                />
               </Button>
             </Grid>
           </Grid>
@@ -390,15 +390,13 @@ const Quiz = modalNum => {
               modalNum={1}
               PaperProps={{
                 style: {
-                  height: '10vh',
+                  height: '75vh',
                   padding: '10px',
-                  width: '85vw',
+                  width: '68vw',
                   maxWidth: 'none',
                   overflowX: 'hidden',
                   overflowY: 'hidden',
                   position: 'inherit',
-                  width: '70%',
-                  height: '75%',
                   justifyContent: 'center',
                 },
               }}
@@ -513,15 +511,13 @@ const Quiz = modalNum => {
               modalNum={1}
               PaperProps={{
                 style: {
-                  height: '10vh',
+                  height: '75vh',
                   padding: '10px',
-                  width: '85vw',
+                  width: '68vw',
                   maxWidth: 'none',
                   overflowX: 'hidden',
                   overflowY: 'hidden',
                   position: 'inherit',
-                  width: '70%',
-                  height: '75%',
                   justifyContent: 'center',
                 },
               }}

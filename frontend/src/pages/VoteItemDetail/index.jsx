@@ -35,15 +35,13 @@ const QuizDialog = () => {
       aria-labelledby="max-width-dialog-title"
       PaperProps={{
         style: {
-          height: '10vh',
+          height: '75vh',
           padding: '10px',
-          width: '85vw',
+          width: '68vw',
           maxWidth: 'none',
           overflowX: 'hidden',
           overflowY: 'hidden',
           position: 'inherit',
-          width: '70%',
-          height: '75%',
           justifyContent: 'center',
         },
       }}
@@ -421,15 +419,13 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '75vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -728,15 +724,13 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '75vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -1020,15 +1014,13 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '75vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -1326,17 +1318,14 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '75vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
-                    alignItems: 'center',
                   },
                 }}
                 BackdropProps={{
