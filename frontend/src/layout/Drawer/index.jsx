@@ -69,7 +69,7 @@ const DrawerHeaderGroup = () => {
               className="up-cancel-fab"
               onClick={handleSignInDialogOpen}
             >
-              Sign Out
+              로그아웃
             </Button>
           </Fragment>
         ) : (
@@ -79,7 +79,7 @@ const DrawerHeaderGroup = () => {
               className="up-cancel-fab"
               onClick={handleSignInDialogOpen}
             >
-              Sign In
+              로그인
             </Button>
           </Fragment>
         )}
@@ -124,7 +124,7 @@ const DrawerListGroup = () => {
       token: '',
     });
 
-    alert('You are logged out.');
+    alert('로그아웃 하셨습니다..');
     window.location.href = '/';
     // history.push('/');
   };
@@ -138,23 +138,16 @@ const DrawerListGroup = () => {
   return (
     <>
       <List className="drawer-list-group-list">
-        {/* <ListItem
-          button
-          key={'Vote'}
-          onClick={onClickRedirectPathHandler('/MainVote')}
-        >
-          <ListItemText primary={'Vote'} disableTypography />
-        </ListItem> */}
         {user.status && (
           <Fragment>
             <ListItem
               button
-              key={'My Coupon'}
-              onClick={onClickRedirectPathHandler('/MyCoupon')}
+              key={'쿠폰함'}
+              onClick={onClickRedirectPathHandler('/mycoupon')}
             >
-              <ListItemText primary={'My Coupon'} disableTypography />
+              <ListItemText primary={'쿠폰함'} disableTypography />
             </ListItem>
-            <ListItem button key={'Me'} className="bg-unset">
+            <ListItem button key={'내정보'} className="bg-unset">
               <Accordion className="panel">
                 <AccordionSummary
                   className="panel-summary"
@@ -168,7 +161,7 @@ const DrawerListGroup = () => {
                     className="avatar"
                   />
                   <ListItemText
-                    primary={'Me'}
+                    primary={'내정보'}
                     disableTypography
                     className="list-item"
                   />
@@ -177,27 +170,27 @@ const DrawerListGroup = () => {
                   <List className="expansion-panel">
                     <ListItem
                       button
-                      key={'Edit Profile '}
+                      key={'회원정보 수정'}
                       onClick={onClickEditProfileOpenHandler}
                     >
                       <ListItemText
-                        primary={'Edit Profile'}
+                        primary={'회원정보 수정'}
                         disableTypography
                       />
                     </ListItem>
                     <ListItem
                       button
-                      key={'Change Password'}
+                      key={'비밀번호 수정'}
                       onClick={onClickChangePasswordOpenHandler}
                     >
                       <ListItemText
-                        primary={'Change Password'}
+                        primary={'비밀번호 수정'}
                         disableTypography
                       />
                     </ListItem>
-                    <ListItem button key={'Sign Out'}>
+                    <ListItem button key={'로그아웃'}>
                       <ListItemText
-                        primary={'Sign Out'}
+                        primary={'로그아웃'}
                         disableTypography
                         className="list-item"
                         onClick={onClickSignOutOpenHandler}
@@ -211,10 +204,10 @@ const DrawerListGroup = () => {
         )}
         <ListItem
           button
-          key={'EventAll'}
-          onClick={onClickRedirectPathHandler('/EventAll')}
+          key={'이벤트'}
+          onClick={onClickRedirectPathHandler('/eventall')}
         >
-          <ListItemText primary={'Event All'} disableTypography />
+          <ListItemText primary={'이벤트'} disableTypography />
         </ListItem>
         {/* <ListItem
           button

@@ -260,6 +260,7 @@ const ItemDetail = ({ match }) => {
                           {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
                           <hr />
                           <Grid
+                            item
                             xs={12}
                             style={{
                               justifyContent: 'space-between',
@@ -858,6 +859,7 @@ const ItemDetail = ({ match }) => {
                           {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
                           <hr />
                           <Grid
+                            item
                             xs={12}
                             style={{
                               justifyContent: 'space-between',
