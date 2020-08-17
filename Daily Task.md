@@ -262,8 +262,6 @@
 
 1. Front-end   메인화면 반응형
 
-   Back-end	
-
    
 
 #### 2020.08.10(월)
@@ -326,24 +324,69 @@
 2. Front-end   웹페이지 메인 CSS
 
    ​					 Admin 페이지 메인 CSS
+   
+   
 
 #### 2020.08.14(금)
 
 1. Scrum 미팅
 
-2. Front-end   웹페이지 메인 CSS
+2. UCC 스토리 짜기
+
+3. Front-end   웹페이지 메인 CSS
 
    ​					 Admin 페이지 메인 CSS
-
-   Back-end	
 
    
 
 #### 2020.08.15(토)
 
-1. UCC 장소 사전 답사 및 
+1. UCC 장소 사전 답사 및 소품 구매
 
-2. Front-end
+2. UCC 스토리 짜기
 
-   Back-end
+3. 로고 만들기
 
+4. Front-end  전반적인 CSS
+
+   ​					회의를 통한 웹페이지 디자인
+
+   ​					Favicon
+
+   
+
+#### 2020.08.16(일)
+
+1. Scrum 미팅
+
+2. UCC 촬영
+
+3. Front-end  Event Modal CSS
+
+   ​					관리자 페이지 Chart CSS
+
+   ​					My Coupon 페이지 CSS
+
+   ​					EventAll 페이지 기능 수정
+
+   ​					배너 제작
+
+   
+
+#### 2020.08.17(월)
+
+1. Scrum 미팅
+
+2. README 수정
+
+3. JIRA 수정
+
+4. Front-end  Kiosk Main 페이지 CSS
+
+   ​					관리자 페이지 차트 CSS
+
+   ​					User 페이지 CSS
+
+   
+
+   
