@@ -1,22 +1,39 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  .Centering {
+  .eventall__layout-container {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .Card_align {
+  .eventall__item--part_event {
+    position: absolute;
     display: flex;
-    // justify-content: flex-start;
-    // justify-content: flex-end;
-    // justify-content: center;
-    // justify-content: space-between;
-    // justify-content: space-around;
-    justify-content: space-evenly;
-    align-content: center;
-    // margin: 10px 0px;
+    background-color: gray;
+    width: 100%;
+    height: 25vh;
+    opacity: 70%;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    z-index: 3;
+  }
+
+  .eventall__item--part_mention {
+    color: white;
+    opacity: none;
+    font-size: 3vh;
+  }
+
+  .eventall__item {
+    // position: absolute;
+    height: 25vh;
+  }
+
+  .eventall__item--check_item {
+    border: 1px solid green;
   }
 
   .Event1 {

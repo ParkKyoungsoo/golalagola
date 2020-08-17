@@ -59,12 +59,12 @@ const AdminUser = () => {
       },
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         alert('삭제되었습니다.');
         // window.location.reload();
       })
       .catch(e => {
-        console.log('Error: ', e.response.data);
+        // console.log('Error: ', e.response.data);
       });
   };
 

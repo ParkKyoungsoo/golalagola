@@ -235,9 +235,17 @@ export default function StickyHeadTable() {
                 ) : (
                   <Grid>
                     <Grid container justify="center">
-                      추가 할인을 받을 수 있습니다.
+                      <img
+                        src="/images/myCouponImage.png"
+                        alt="이미지2"
+                        width="100%"
+                      ></img>
                     </Grid>
-                    <Grid>
+                    <Grid
+                      container
+                      justify="center"
+                      style={{ padding: '10px 0 10px 0' }}
+                    >
                       <Button onClick={QuizDialogOpen}>
                         간단한 퀴즈 풀고 추가 할인 받으러 가기
                       </Button>
