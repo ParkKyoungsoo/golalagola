@@ -115,36 +115,34 @@ export default function StickyHeadTable() {
       {isMobile ? (
         //////////////////////////////////////////// 모바일 화면 ////////////////////////////////
         <Grid container alignItems="center" justify="center">
-          <Grid item md={9}>
-            <Grid>
-              <Grid
-                style={{ padding: '20px 0 20px 0' }}
-                item
-                md={6}
-                container
-                alignItems="center"
-                justify="center"
-              >
-                <QRCode
-                  value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
-                />
-              </Grid>
-              <Grid container justify="center" alignItems="center">
-                {user.user_quiz ? (
-                  <Grid>이미 퀴즈 품</Grid>
-                ) : (
-                  <Grid style={{ padding: '10px 0 20px 0' }}>
-                    <Grid>
-                      <Button onClick={QuizDialogOpen}>
-                        간단한 퀴즈 풀고 추가 할인 받으러 가기
-                      </Button>
-                    </Grid>
+          <Grid item xs={12}>
+            <Grid
+              style={{
+                padding: '5vh 0',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <QRCode
+                value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+              />
+            </Grid>
+            <Grid container justify="center" alignItems="center">
+              {user.user_quiz ? (
+                <Grid>이미 퀴즈 품</Grid>
+              ) : (
+                <Grid style={{ padding: '10px 0 20px 0' }}>
+                  <Grid>
+                    <Button onClick={QuizDialogOpen}>
+                      간단한 퀴즈 풀고 추가 할인 받으러 가기
+                    </Button>
                   </Grid>
-                )}
-              </Grid>
+                </Grid>
+              )}
             </Grid>
             <Paper className={classes.root}>
               <Grid
+                container
                 style={{
                   display: 'flex',
                   backgroundColor: '#f2f2f2',
@@ -153,7 +151,7 @@ export default function StickyHeadTable() {
               >
                 <Grid
                   item
-                  md={6}
+                  xs={6}
                   container
                   justify="center"
                   alignItems="center"
@@ -162,7 +160,7 @@ export default function StickyHeadTable() {
                 </Grid>
                 <Grid
                   item
-                  md={6}
+                  xs={6}
                   container
                   justify="center"
                   alignItems="center"

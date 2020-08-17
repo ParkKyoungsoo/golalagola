@@ -114,7 +114,7 @@ const Header = props => {
               }}
               className="appbar"
             >
-              <Grid xs={4} className="navbarCentering">
+              <Grid item xs={4} className="navbarCentering">
                 <Grid
                   onClick={() => {
                     setDrawerOpen(!drawerOpen);
@@ -127,6 +127,7 @@ const Header = props => {
                 </Grid>
               </Grid>
               <Grid
+                item
                 xs={4}
                 className="navbarCentering"
                 onClick={() => {
@@ -138,12 +139,13 @@ const Header = props => {
                   onClick={onClickRedirectPathHandler('/mainvote')}
                   style={{
                     backgroundColor: '#f7f2f2',
+                    cursor: 'pointer',
                   }}
                 >
                   <span>Gola la Gola</span>
                 </Typography>
               </Grid>
-              <Grid xs={4} className="navbarCentering">
+              <Grid item xs={4} className="navbarCentering">
                 <Grid
                   onClick={() => {
                     setDrawerOpen(0);
@@ -173,7 +175,7 @@ const Header = props => {
               }}
               className="appbar"
             >
-              <Grid xs={4} className="navbarCentering">
+              <Grid item xs={4} className="navbarCentering">
                 <Typography
                   variant="h5"
                   // className="display-none"
@@ -183,14 +185,14 @@ const Header = props => {
                   Gola la Gola
                 </Typography>
               </Grid>
-              <Grid xs={4} className="navbarCentering">
+              <Grid item xs={4} className="navbarCentering">
                 {successSearchbarTrigger ? <SearchComponent /> : null}
                 <h4 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
                   <Search />
                 </h4>
               </Grid>
 
-              <Grid xs={4} className="navbarCentering">
+              <Grid item xs={4} className="navbarCentering">
                 <Grid className="navbarCentering" container>
                   <Button
                     variant="contained"

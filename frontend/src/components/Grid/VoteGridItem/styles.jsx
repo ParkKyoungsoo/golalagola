@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     font-weight: 500;
   }
   .mobilefontLarge {
-    font-size: 4vw;
+    font-size: 5vw;
     font-weight: bold;
   }
   .fontMedium {
