@@ -111,7 +111,7 @@ const EventModal = modalNum => {
             className="EM"
             container
             direction="row"
-            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
+            style={{ backgroundColor: '#f2f2f2', position: 'relative' }}
           >
             <Grid item xs={5}>
               <Box
@@ -133,7 +133,7 @@ const EventModal = modalNum => {
                   alt="nature"
                   style={{
                     display: 'flex',
-                    maxWidth: '15vw',
+                    maxWidth: '15v w',
                     borderRadius: '8px',
                     // maxHeight: '20vh',
                     marginTop: '2vh',
@@ -175,7 +175,11 @@ const EventModal = modalNum => {
           </Grid>
           <Grid className="inputCss" container direction="row">
             <Grid item item xs={5}>
-              <Grid container direction="column">
+              <Grid
+                container
+                direction="column"
+                style={{ alignItems: 'center' }}
+              >
                 <Grid item>
                   <input
                     className="butt"
@@ -202,23 +206,25 @@ const EventModal = modalNum => {
                   ></input>
                 </Grid>
                 <Grid item>
-                  <p>
-                    <h5 className="desCss">
-                      {
-                        Object(
-                          productDatas[
-                            currentEventDatas[eventNum].event_item['1']
-                              .prod_id - 1
-                          ],
-                        ).prod_title
-                      }
-                    </h5>
-                  </p>
+                  <h5 className="desCss">
+                    {
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['1'].prod_id -
+                            1
+                        ],
+                      ).prod_title
+                    }
+                  </h5>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={5}>
-              <Grid container direction="column">
+              <Grid
+                container
+                direction="column"
+                style={{ alignItems: 'center' }}
+              >
                 <Grid item>
                   <input
                     className="butt"
@@ -245,18 +251,16 @@ const EventModal = modalNum => {
                   ></input>
                 </Grid>
                 <Grid item>
-                  <p>
-                    <h5 className="desCss">
-                      {
-                        Object(
-                          productDatas[
-                            currentEventDatas[eventNum].event_item['2']
-                              .prod_id - 1
-                          ],
-                        ).prod_title
-                      }
-                    </h5>
-                  </p>
+                  <h5 className="desCss">
+                    {
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['2'].prod_id -
+                            1
+                        ],
+                      ).prod_title
+                    }
+                  </h5>
                 </Grid>
               </Grid>
             </Grid>
@@ -270,7 +274,7 @@ const EventModal = modalNum => {
               onClick={EventTrigger}
               disabled={selectedEventItem === undefined}
             >
-              Disable elevation
+              쿠폰 받기
             </Button>
           </Grid>
         </Wrapper>
@@ -592,7 +596,7 @@ const EventModal = modalNum => {
                 onClick={EventTrigger}
                 disabled={selectedEventItem === undefined}
                 style={{
-                  width: '15vw',
+                  width: '15v w',
                   height: '8vh',
                 }}
               >

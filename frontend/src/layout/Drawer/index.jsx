@@ -37,7 +37,6 @@ const DrawerHeaderGroup = () => {
   };
 
   const handleSignInDialogOpen = () => {
-    store.clear();
     setUser({
       user_no: 0,
       user_id: '',
@@ -49,7 +48,7 @@ const DrawerHeaderGroup = () => {
       token: '',
     });
 
-    history.push({ '/Auth': true });
+    history.push('/Auth');
   };
 
   return (

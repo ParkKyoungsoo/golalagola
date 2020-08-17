@@ -250,7 +250,7 @@ const ItemDetail = ({ match }) => {
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
-                              disabled={!(eventActivated && !userJoinedEvent)}
+                              // disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -549,7 +549,7 @@ const ItemDetail = ({ match }) => {
                                     ? click1
                                     : userNotLogin
                                 }
-                                disabled={!(eventActivated && !userJoinedEvent)}
+                                // disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
                               >
                                 쿠폰 받기
@@ -844,7 +844,7 @@ const ItemDetail = ({ match }) => {
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
-                              disabled={!(eventActivated && !userJoinedEvent)}
+                              // disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -1143,7 +1143,7 @@ const ItemDetail = ({ match }) => {
                                     ? click1
                                     : userNotLogin
                                 }
-                                disabled={!(eventActivated && !userJoinedEvent)}
+                                // disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
                               >
                                 쿠폰 받기
