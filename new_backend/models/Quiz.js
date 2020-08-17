@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+      quiz_desc: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

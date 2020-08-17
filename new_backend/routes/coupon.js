@@ -186,6 +186,15 @@ app.put("/", async function (req, res) {
     .catch((err) => res.status(404).send(err));
 });
 
+// 특정 유저의 쿠폰 삭제
+app.delete("/:input_id", async function (req, res) {
+  await db.Coupon.destroy({
+    where: { user_id: req.params.input_id },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => res.json(err));
+});
+
 // Coupon 삭제
 // app.delete("/", authAdminMiddleware);
 app.delete("/", async function (req, res) {
