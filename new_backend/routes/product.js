@@ -26,13 +26,13 @@ app.get("/recommandProd", async function (req, res) {
       if (obj[prodData[i].dataValues.prod_category]) {
         var objInsert = new Object();
         objInsert.label = prodData[i].dataValues.prod_name;
-        objInsert.y = prodData[i].dataValues.prod_price * amount;
+        objInsert.y = amount;
         obj[prodData[i].dataValues.prod_category].push(objInsert);
       } else {
         obj[prodData[i].dataValues.prod_category] = new Array();
         var objInsert = new Object();
         objInsert.label = prodData[i].dataValues.prod_name;
-        objInsert.y = prodData[i].dataValues.prod_price * amount;
+        objInsert.y = amount;
         obj[prodData[i].dataValues.prod_category].push(objInsert);
       }
     }
