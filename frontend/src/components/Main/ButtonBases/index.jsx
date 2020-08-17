@@ -29,6 +29,7 @@ const ButtonBases = props => {
           style={{
             backgroundImage: `url(${imgUrl})`,
             backgroundSize: 'cover',
+            borderRadius: '8%',
           }}
         />
         <span
@@ -37,8 +38,7 @@ const ButtonBases = props => {
           }
           // catergory 색깔 정하는 곳입니다... 만세
           style={{
-            backgroundColor: '#f7f2f2',
-            // opacity: '10%'
+            backgroundColor: '#f2f2f2',
           }}
         />
         <span className="image-button">
@@ -46,7 +46,6 @@ const ButtonBases = props => {
             component="span"
             variant="h6"
             className={isMobile ? 'mobile-image-title' : 'image-title'}
-            style={isMobile ? { fontSize: '13px' } : null}
           >
             {categoryData.cat_title}
           </Typography>

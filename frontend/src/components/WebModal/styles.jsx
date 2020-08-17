@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   }
 
   & .imgCss {
-    backgroundColor: #f7f2f2;
+    backgroundColor: #f2f2f2;
   }
 
   & .eventImg {
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    backgroundColor: #f7f2f2;
+    backgroundColor: #f2f2f2;
     position:relative;
   }
 

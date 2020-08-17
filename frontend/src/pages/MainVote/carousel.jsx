@@ -23,7 +23,7 @@ const ControlledCarousel = props => {
             activeIndex={index}
             onSelect={handleSelect}
             style={{
-              backgroundColor: '#f7f2f2',
+              backgroundColor: '#f2f2f2',
             }}
           >
             <Carousel.Item>
@@ -73,7 +73,7 @@ const ControlledCarousel = props => {
           activeIndex={index}
           onSelect={handleSelect}
           style={{
-            backgroundColor: '#f7f2f2',
+            backgroundColor: '#f2f2f2',
           }}
         >
           {/* 배너 */}

@@ -104,16 +104,9 @@ export default function VoteGridItem(props) {
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <h5
-                    style={{
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      width: '32vw',
-                    }}
-                  >
+                  <p className="mobilefontMedium doubleLine">
                     {itemData.prod_title}
-                  </h5>
+                  </p>
                   <Grid
                     style={{
                       display: 'flex',
@@ -155,16 +148,7 @@ export default function VoteGridItem(props) {
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <h5
-                    style={{
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      width: '14vw',
-                    }}
-                  >
-                    {itemData.prod_title}
-                  </h5>
+                  <p className="fontMedium doubleLine">{itemData.prod_title}</p>
                   <Grid
                     style={{
                       display: 'flex',
@@ -211,16 +195,9 @@ export default function VoteGridItem(props) {
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <h5
-                    style={{
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      width: '32vw',
-                    }}
-                  >
+                  <p className="mobilefontMedium doubleLine">
                     {itemData.prod_title}
-                  </h5>
+                  </p>
                   <Grid
                     style={{
                       display: 'flex',
@@ -254,25 +231,13 @@ export default function VoteGridItem(props) {
                   variant="square"
                   src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                   className={'large'}
-                  // imgProps={{
-                  //   className: sw ? 'img' : 'img deactivated',
-                  // }}
                   style={{
                     borderRadius: '5%',
                     cursor: 'pointer',
                   }}
                 />
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <h5
-                    style={{
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      width: '14vw',
-                    }}
-                  >
-                    {itemData.prod_title}
-                  </h5>
+                  <p className="fontMedium doubleLine">{itemData.prod_title}</p>
                   <Grid
                     style={{
                       display: 'flex',
