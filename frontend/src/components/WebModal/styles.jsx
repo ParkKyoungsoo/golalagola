@@ -14,8 +14,8 @@ const Wrapper = styled.div`
 
   & .eventImg {
     border-radius:5px;
-    max-width: 
-
+    max-width;
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(189,189,189,0.68);
   }
 
   & .EM {
@@ -33,7 +33,12 @@ const Wrapper = styled.div`
   }
 
   & .desCss {
+    width: 18vw;
     margin-top: 1vh;
+    font-size: 1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; 
   }
 
   & .textCss {
@@ -53,6 +58,16 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     position: buttom:
+  }
+
+  & .discount {
+    color: red;
+    justify-content: space-evenly;
+    margin-right: 1vw;
+  }
+
+  & .price {
+    text-decoration: line-through
   }
 
   & .quizCss{
