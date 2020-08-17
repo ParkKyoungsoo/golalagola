@@ -6,6 +6,7 @@ import { Grid, Divider, Paper } from '@material-ui/core';
 import MaterialTable from 'material-table';
 
 import Wrapper from './styles';
+import NestedList from './Layout/sidebar.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
