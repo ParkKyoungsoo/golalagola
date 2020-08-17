@@ -10,13 +10,13 @@ const Wrapper = styled.div`
     outline: 0;
   }
 
-  & .admin_product__main {
+  & .admin_chart__main {
     background-color: #efeff5;
     height: 100vh;
     width: 100vw;
   }
 
-  & .admin_product__content {
+  & .admin_chart__content {
     background-color: #efeff5;
     width: 84vw;
     height: 100%;
@@ -25,26 +25,24 @@ const Wrapper = styled.div`
     font-size: 14px;
   }
 
-  & .admin_product__header {
+  & .admin_chart__header {
     font-weight: 100;
   }
 
-  & .admin_product__divider {
+  & .admin_chart__divider {
     margin: 15px 10px 10px;
   }
 
-  & .admin_product__detail--grid {
-    padding: 20px;
-    // border-left: 2px solid #4d48fb;
-    box-shadow: inset 0px 7px 8px -10px rgba(0, 0, 0, 0.5),
-      inset 0px -7px 8px -10px rgba(0, 0, 0, 0.5);
+  & .admin_chart__chart_1 {
+    width: 100px;
+    margin-top: 100px;
   }
 
-  & .admin_product__detail--image_grid {
+  & .admin_chart__detail--image_grid {
     text-align: right;
   }
 
-  & .admin_product__detail--image {
+  & .admin_chart__detail--image {
     width: 20vw;
     margin-right: 30px;
   }
