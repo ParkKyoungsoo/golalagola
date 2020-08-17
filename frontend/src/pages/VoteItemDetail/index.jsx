@@ -1135,7 +1135,7 @@ const ItemDetail = ({ match }) => {
                                     ? QuizDialogOpen
                                     : userNotLogin
                                 }
-                                disabled={user.user_quiz}
+                                // disabled={user.user_quiz}
                                 style={{ marginLeft: '20px' }}
                               >
                                 퀴즈 풀기

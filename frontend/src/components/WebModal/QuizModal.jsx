@@ -156,14 +156,16 @@ const Quiz = modalNum => {
       setUserAns(userAns => false);
       setFailModalTrigger(failModalTrigger => true);
     }
-    // pp();
   };
 
   const modalHandler = () => {
     setSuccessModalTrigger(false);
-    setFailModalTrigger(failModalTrigger => false);
     setWebQuizDialogOpen(false);
     setItemDialogOpen(false);
+  };
+
+  const failModalHandler = () => {
+    setFailModalTrigger(failModalTrigger => false);
   };
 
   const buttonStyle = {
@@ -309,7 +311,7 @@ const Quiz = modalNum => {
           ) : (
             <Dialog
               open={failModalTrigger}
-              onClose={modalHandler}
+              onClose={failModalHandler}
               PaperProps={{
                 style: {
                   height: '10vh',
@@ -448,7 +450,7 @@ const Quiz = modalNum => {
               <SuccessModal />
             </Dialog>
           ) : (
-            <Dialog open={failModalTrigger} onClose={modalHandler}>
+            <Dialog open={failModalTrigger} onClose={failModalHandler}>
               <WebFailModal />
             </Dialog>
           )}
