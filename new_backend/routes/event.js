@@ -16,6 +16,16 @@ app.get("/eventProd", async function (req, res) {
     res.send(arr);
   });
 });
+app.get("/eventId", async function (req, res) {
+  let arr = [];
+  db.Event.findAll().then((data) => {
+    for (var i = 0; i < data.length; i++) {
+      arr.push(data[i].dataValues.event_id);
+    }
+    res.send(arr);
+  });
+});
+
 app.get("/", async function (req, res) {
   var resList = new Array();
 

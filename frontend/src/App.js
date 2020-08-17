@@ -32,8 +32,6 @@ import SearchResult from './pages/SearchResult';
 import EventAll from './pages/EventAll';
 import Admin from './pages/Admin/index';
 import AdminVS from './pages/Admin/VS/index';
-import AdminVSEstimate from './pages/Admin/VS/Estimate/estimate';
-import AdminVSRecommand from './pages/Admin/VS/Recommand/recommand';
 import AdminQuiz from './pages/Admin/Quiz/';
 import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
@@ -143,7 +141,10 @@ const App = () => {
   // 제품 수량 && 판매 현황 개수
   const [buyDatas, setBuyDatas] = useState([]);
   const [vsData, setVSData] = useState([]);
-  
+  const [dailySaleDatas, setDailySaleDatas] = useState([]);
+  const [couponUseSales, setCouponUseSales] = useState([]);
+  const [recommandProds, setRecommandProds] = useState([]);
+
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
@@ -256,7 +257,7 @@ const App = () => {
       setQuizDatas(res.data);
     });
   }
-  
+
   // 제품 수량 && 판매 현황 개수
   async function getBuyDatas() {
     Axios.get('http://localhost:5000/api/product/buy/').then(function(res) {
@@ -270,11 +271,56 @@ const App = () => {
       setVSData(res.data);
     });
   }
+  async function getDailySaleDatas() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/buy/dailySale').then(
+      function(res) {
+        const actualSale = [];
+        for (var key in res.data) {
+          var obj = new Object();
+          obj.x = new Date(key);
+          obj.y = res.data[key];
+          actualSale.push(obj);
+        }
+
+        setDailySaleDatas(actualSale);
+      },
+    );
+  }
+  async function getCouponUseSales() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/buy/couponUseSale').then(
+      function(res) {
+        const actualSale = [];
+        for (var key in res.data) {
+          var obj = new Object();
+          obj.x = new Date(key);
+          obj.y = res.data[key];
+          actualSale.push(obj);
+        }
+
+        setCouponUseSales(actualSale);
+      },
+    );
+  }
+  async function getRecommandProds() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/product/recommandProd').then(
+      function(res) {
+        var objArr = new Array();
+        for (var i = 1; i < 14; i++) {
+          objArr.push(res.data[i]);
+        }
+
+        setRecommandProds(objArr);
+      },
+    );
+  }
 
   useEffect(() => {
     getProductDatas();
-	getBuyDatas();
-	getEventProducts();
+    getBuyDatas();
+    getEventProducts();
+	getDailySaleDatas();
+    getCouponUseSales();
+    getRecommandProds();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -356,12 +402,18 @@ const App = () => {
         // admin/quiz에서 수정을 위해 사용되는 데이터 입니다.
         quizDatas,
         setQuizDatas,
-		
-		// 제품 수량 && 판매 현황 개수
+
+        // 제품 수량 && 판매 현황 개수
         buyDatas,
         setBuyDatas,
-		vsData,
+        vsData,
         setVSData,
+		dailySaleDatas,
+        setDailySaleDatas,
+        couponUseSales,
+        setCouponUseSales,
+        recommandProds,
+        setRecommandProds,
       }}
     >
       <MuiThemeProvider theme={theme}>
@@ -395,16 +447,6 @@ const App = () => {
 
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/vs" component={AdminVS} />
-            <Route
-              exact
-              path="/admin/vs/estimate"
-              component={AdminVSEstimate}
-            />
-            <Route
-              exact
-              path="/admin/vs/recommand"
-              component={AdminVSRecommand}
-            />
             <Route exact path="/admin/quiz" component={AdminQuiz} />
             <Route exact path="/admin/quiz/form" component={AdminQuizForm} />
 
