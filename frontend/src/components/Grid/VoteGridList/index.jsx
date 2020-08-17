@@ -111,6 +111,7 @@ const VoteGridList = props => {
               return (
                 <Grid
                   key={index}
+                  item
                   xs={6}
                   style={{
                     padding: '0 5vw',
@@ -133,7 +134,7 @@ const VoteGridList = props => {
           >
             {productDatas.map((itemData, index) => {
               return (
-                <Grid key={index} xs={3} style={{ padding: '1vh 1vw' }}>
+                <Grid key={index} item xs={3} style={{ padding: '1vh 1vw' }}>
                   <VoteGridItem
                     itemData={itemData}
                     index={index}
@@ -175,6 +176,7 @@ const VoteGridList = props => {
                 return (
                   <Grid
                     key={index}
+                    item
                     xs={6}
                     style={{
                       padding: ' 5vw',
@@ -201,7 +203,7 @@ const VoteGridList = props => {
             {gridItemDatas.map((itemData, index) => {
               if (itemData.prod_category === value + 1) {
                 return (
-                  <Grid key={index} xs={3}>
+                  <Grid key={index} item xs={3}>
                     <VoteGridItem
                       itemData={itemData}
                       index={index}

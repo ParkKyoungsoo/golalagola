@@ -121,11 +121,11 @@ const MainAdmin = props => {
             xs={10}
             style={{ display: 'flex', flexWrap: 'wrap', background: '#EFEFF5' }}
           >
-            <Grid xs={12} style={{ padding: '5vh 3vw' }}>
+            <Grid item xs={12} style={{ padding: '5vh 3vw' }}>
               <CanvasJSChart options={options} />
             </Grid>
 
-            <Grid xs={12} style={{ padding: '10vh 0' }}>
+            <Grid item xs={12} style={{ padding: '10vh 0' }}>
               <h2 style={{ paddingLeft: '2vw' }}>카테고리별 재고 현황</h2>
               <Grid style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {recommandProds.map((recommandDatas, index) => (
