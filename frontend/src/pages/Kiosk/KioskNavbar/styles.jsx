@@ -5,10 +5,10 @@ export const Wrapper = styled.div`
     // background-color: blue;
     display: flex;
     // justify-content: flex-start;
-    // justify-content: flex-end;
+    justify-content: flex-end;
     // justify-content: center;
     // justify-content: space-between;
-    justify-content: space-around;
+    // justify-content: space-around;
     // justify-content: space-evenly;
     padding: 20px 0px 20px 0px;
   }

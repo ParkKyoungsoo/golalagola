@@ -7,6 +7,8 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Badge from 'react-bootstrap/Badge';
 import { Link } from 'react-router-dom';
+import Wrapper from './styles';
+import { MdTouchApp } from 'react-icons/md';
 
 const MultiCarousel = () => {
   const { productDatas, setProductDatas } = useContext(CommonContext);
@@ -35,7 +37,7 @@ const MultiCarousel = () => {
   }
 
   return (
-    <>
+    <Wrapper>
       {isMobile ? (
         <Grid container>
           <Grid item xs={12}>
@@ -60,110 +62,110 @@ const MultiCarousel = () => {
           </Grid>
         </Grid>
       ) : (
-        <Link to={'/KioskQuiz/'}>
-          <AliceCarousel
-            responsive={responsive}
-            autoPlay={true}
-            autoPlayInterval={2000}
-            // autoPlayDirection="rtl"
-            fadeOutAnimation={true}
-            playButtonEnabled={false}
-            dotsDisabled={true}
-            buttonsDisabled={true}
-            // style={{ width: '100%', height: 'auto' }}
-          >
-            {productDatas.map((data, index) => (
-              <Grid
-                style={{
-                  padding: '0 10px',
-                  textDecoration: 'none',
-                  color: 'black',
-                }}
-              >
-                <div style={{ position: 'relative' }}>
-                  <h1>
-                    <Badge
-                      variant="warning"
-                      style={{
-                        position: 'absolute',
-                        transform: 'rotate(-10deg) translateY(10px)',
-                      }}
-                    >
-                      과다 재고 상품
-                    </Badge>
-                  </h1>
-                  <img
-                    src={`https://i3b309.p.ssafy.io/${data.prod_image}`}
-                    alt="Prod_image"
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      borderRadius: '5%',
-                    }}
-                  />
-                  <Grid style={{ padding: '10px 0 0 0' }}>
-                    <h5
-                      style={{
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        width: '32vw',
-                      }}
-                    >
-                      {data.prod_title}
-                    </h5>
-                    <Grid
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        color: 'red',
-                      }}
-                    >
-                      <p
+        <Grid>
+          <Grid style={{ height: '15vh', display: 'flex' }}>
+            <Grid container justify="center" alignItems="center">
+              <h1 style={{ color: '#999999' }}>
+                화면을 터치하고 할인행사에 참여해 보세요.
+              </h1>
+              <h1>
+                <MdTouchApp size={100} />
+              </h1>
+            </Grid>
+          </Grid>
+          <Link to={'/KioskQuiz/'}>
+            <AliceCarousel
+              responsive={responsive}
+              autoPlay={true}
+              autoPlayInterval={2000}
+              // autoPlayDirection="rtl"
+              fadeOutAnimation={true}
+              playButtonEnabled={false}
+              dotsDisabled={true}
+              buttonsDisabled={true}
+              // style={{ width: '100%', height: 'auto' }}
+            >
+              {productDatas.map((data, index) => (
+                <Grid
+                  key={index}
+                  style={{
+                    padding: '0 10px',
+                    textDecoration: 'none',
+                    color: 'black',
+                  }}
+                >
+                  <div style={{ position: 'relative' }}>
+                    <h1>
+                      <Badge
+                        variant="warning"
                         style={{
-                          fontSize: '1.5vw',
-                          fontWeight: '500',
-                          margin: 'auto 0',
+                          position: 'absolute',
+                          transform: 'rotate(-10deg) translateY(10px)',
                         }}
                       >
-                        최대
-                      </p>
-                      &nbsp;&nbsp;
-                      <p
+                        과다 재고 상품
+                      </Badge>
+                    </h1>
+                    <img
+                      src={`https://i3b309.p.ssafy.io/${data.prod_image}`}
+                      alt="Prod_image"
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        borderRadius: '5%',
+                      }}
+                    />
+                    <Grid style={{ padding: '10px 0 0 0' }}>
+                      <h5
                         style={{
-                          fontSize: '2vw',
-                          fontWeight: 'bold',
-                          margin: 'auto 0',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          width: '32vw',
                         }}
                       >
-                        {data.prod_sale}%
-                      </p>
+                        {data.prod_title}
+                      </h5>
+                      <Grid
+                        container
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'flex-end',
+                          color: 'red',
+                        }}
+                      >
+                        <p className="fontVerticalMiddle fontMedium">최대</p>
+                        &nbsp;&nbsp;
+                        <p className="fontVerticalMiddle fontLarge">
+                          {data.prod_sale}%
+                        </p>
+                      </Grid>
+                      <Grid
+                        style={{ display: 'flex', justifyContent: 'flex-end' }}
+                      >
+                        <p className="fontVerticalMiddle fontMedium fontCancelLine">
+                          {numberWithCommas(data.prod_price)}원
+                        </p>
+                        &nbsp;&nbsp;
+                        <p className="fontVerticalMiddle fontLarge">
+                          {numberWithCommas(
+                            parseInt(
+                              data.prod_price -
+                                data.prod_price * (data.prod_sale / 100),
+                            ),
+                          )}
+                          원
+                        </p>
+                      </Grid>
                     </Grid>
-                    <Grid
-                      style={{ display: 'flex', justifyContent: 'flex-end' }}
-                    >
-                      <p className="fontVerticalMiddle mobilefontMedium fontCancelLine">
-                        {numberWithCommas(data.prod_price)}원
-                      </p>
-                      &nbsp;&nbsp;
-                      <p className="fontVerticalMiddle mobilefontLarge">
-                        {numberWithCommas(
-                          parseInt(
-                            data.prod_price -
-                              data.prod_price * (data.prod_sale / 100),
-                          ),
-                        )}
-                        원
-                      </p>
-                    </Grid>
-                  </Grid>
-                </div>
-              </Grid>
-            ))}
-          </AliceCarousel>
-        </Link>
+                  </div>
+                </Grid>
+              ))}
+            </AliceCarousel>
+          </Link>
+        </Grid>
       )}
-    </>
+    </Wrapper>
   );
 };
 

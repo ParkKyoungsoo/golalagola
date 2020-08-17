@@ -101,14 +101,16 @@ const SignInSection01 = () => {
 
           setSignDialogOpen(false);
           setIsSignUp('SignIn');
+          if (res.data.isAdmin == true) {
+            history.push('/admin');
+          } else {
+            history.goBack();
+          }
         }
       })
       .catch(res => {
-        // alert(res.data.message);
-        console.log('실패');
+        alert(res.data.message);
       });
-
-    history.goBack();
   };
 
   useEffect(() => {

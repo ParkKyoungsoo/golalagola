@@ -33,14 +33,27 @@ const SaleItem = ({ match }) => {
     <>
       <KioskCSS>
         <Navbar />
-        <Grid container direction="row">
+
+        <Grid container direction="row" borderLeft="1px solid">
           <Grid
             item
             xs={6}
-            style={{ textAlign: 'center', verticalAlign: 'middle' }}
+            style={{
+              textAlign: 'center',
+              verticalAlign: 'middle',
+              borderRight: '1px solid',
+            }}
           >
-            <div style={{ fontSize: '70px' }}>정답 입니다!</div>
-            <br />
+            <div style={{ fontSize: '40px' }}>
+              <stron>정답 입니다!</stron>
+            </div>
+            <Grid>
+              <img
+                style={{ width: '70%' }}
+                src="https://i3b309.p.ssafy.io/images/쿠폰1.jpg"
+                alt=""
+              />
+            </Grid>
             <Grid>
               <span style={{ fontSize: '40px' }}>모든 상품</span>
               <br />
@@ -57,44 +70,13 @@ const SaleItem = ({ match }) => {
                 출력된 쿠폰을 결제하실 때 제시해주세요.
               </span>
             </Grid>
-            <br />
-            <Grid>
-              <img
-                style={{ width: '70%' }}
-                src="https://i3b309.p.ssafy.io/images/쿠폰1.jpg"
-                alt=""
-              />
-            </Grid>
           </Grid>
+
           <Grid
             item
             xs={6}
             style={{ textAlign: 'center', verticalAlign: 'middle' }}
           >
-            <Grid style={{ fontSize: '70px' }}>
-              <span>
-                <strong>최대</strong>
-              </span>
-              &nbsp;
-              <span style={{ color: 'red' }}>
-                <strong>98%</strong>
-              </span>
-              &nbsp;
-              <span>
-                <strong>할인</strong>
-              </span>
-            </Grid>
-            <br />
-            <Grid>
-              <span style={{ fontSize: '40px' }}>더 많은 할인을 원하시면</span>
-            </Grid>
-            <br />
-            <Grid>
-              <span style={{ fontSize: '40px' }}>
-                아래의 버튼을 눌러 주세요.
-              </span>
-            </Grid>
-            <br />
             <Grid>
               <img
                 onClick={click}
@@ -103,6 +85,25 @@ const SaleItem = ({ match }) => {
                 alt=""
               />
             </Grid>
+
+            <br />
+            <br />
+
+            <Grid>
+              <span style={{ fontSize: '30px' }}>더 많은 할인을 원하시면</span>
+            </Grid>
+
+            <Grid>
+              <span style={{ fontSize: '30px' }}>
+                아래의 버튼을 눌러 주세요.
+              </span>
+            </Grid>
+
+            <br />
+            <Button variant="warning" size="lg" onClick={click}>
+              추가 할인 받으러 가기
+            </Button>
+            <br />
           </Grid>
         </Grid>
         <Dialog open={QRModalTrigger} onClose={handleClose}>
