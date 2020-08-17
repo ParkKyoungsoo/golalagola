@@ -24,7 +24,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { da } from 'date-fns/esm/locale';
 
 import CanvasJSReact from '../asset/canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -62,7 +61,7 @@ const AdminProduct = () => {
     setCurrentProductDatas,
     productsTableData,
     setProductsTableData,
-	buyDatas,
+    buyDatas,
     setBuyDatas,
   } = useContext(CommonContext);
 
@@ -126,11 +125,39 @@ const AdminProduct = () => {
       .then(res => {
         console.log(res);
         alert('삭제되었습니다.');
-        // window.location.reload();
+        window.location.reload();
       })
       .catch(e => {
         console.log('Error: ', e.response.data);
+        alert(
+          '상품 정보가 삭제되지 않았습니다. 서비스 관리자에게 문의해 주세요.',
+        );
       });
+  };
+
+  // 차트 데이터
+  const options = rowData => {
+    return {
+      title: {
+        text: '판매 현황',
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: 'column',
+          dataPoints: [
+            {
+              label: '총 개수',
+              y: rowData.prod_amount,
+            },
+            {
+              label: '판매 개수',
+              y: buyDatas[`${rowData.prod_id}`],
+            },
+          ],
+        },
+      ],
+    };
   };
 
   return (
@@ -142,12 +169,12 @@ const AdminProduct = () => {
           </Grid>
           <Grid item>
             <Grid className="admin_product__content">
-              <h5 className="admin_product__header">Product Dashboard</h5>
+              <h5 className="admin_product__header">상품 목록</h5>
               <Divider variant="middle" className="admin_product__divider" />
               <MaterialTable
                 className="admin_product__table"
                 icons={tableIcons}
-                title="재고 목록"
+                title=""
                 columns={productsTableData.columns}
                 data={productsTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
@@ -159,30 +186,7 @@ const AdminProduct = () => {
                         xs={4}
                         className="admin_product__detail--image_grid"
                       >
-                        <CanvasJSChart
-                          options={{
-                            title: {
-                              text: '판매 현황',
-                            },
-                            data: [
-                              {
-                                // Change type to "doughnut", "line", "splineArea", etc.
-                                type: 'column',
-                                dataPoints: [
-                                  {
-                                    label: '총 개수',
-                                    y: rowData.prod_amount,
-                                  },
-                                  {
-                                    label: '판매 개수',
-                                    y: buyDatas[`${rowData.prod_id}`],
-                                  },
-                                ],
-                              },
-                            ],
-                          }}
-                          /* onRef={ref => this.chart = ref} */
-                        />
+                        <CanvasJSChart options={options(rowData)} />
                       </Grid>
                       <Grid
                         item
@@ -231,7 +235,7 @@ const AdminProduct = () => {
                       console.log(rowData);
                       if (
                         window.confirm(
-                          'You want to delete ' + rowData.prod_name,
+                          `${rowData.prod_name}를 삭제하시겠습니까?`,
                         )
                       ) {
                         deleteProductData(rowData.prod_id);

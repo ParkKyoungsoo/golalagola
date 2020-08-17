@@ -22,7 +22,7 @@ const Layout = props => {
         <Container
           open={drawerOpen}
           className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
-          maxWidth="xl"
+          // maxWidth="xl"
           onClick={() => {
             setDrawerOpen(0);
           }}
@@ -32,7 +32,7 @@ const Layout = props => {
         </Container>
       ) : (
         <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-          <Grid xs={12} md={10}>
+          <Grid xs={12}>
             <Container
               open={drawerOpen}
               className={

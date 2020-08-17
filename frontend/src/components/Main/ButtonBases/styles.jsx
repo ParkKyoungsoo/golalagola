@@ -52,13 +52,17 @@ const Wrapper = styled.div`
     position: relative;
     //   padding: 16px 32px 14px;
     line-height: 26px;
-    color: #f7f2f2;
+    // color: #f7f2f2;
+    color: black;
+    font-weight: bold;
   }
   .mobile-image-title {
     position: relative;
-    padding: 8px 16px 7px;
-    line-height: 26px;
-    color: #f7f2f2;
+    // padding: 8px 16px 7px;
+    // line-height: 26px;
+    // color: #f7f2f2;
+    color: black;
+    font-weight: bold;
   }
   .selected-tab {
     opacity: 1;
@@ -66,11 +70,11 @@ const Wrapper = styled.div`
   }
   .button-base {
     width: 100%;
-    height: 80px;
+    height: 5vh;
   }
   @media (max-width: 600px) {
     width: 100% !important;
-    height: 100px;
+    // height: 100px;
   }
 `;
 

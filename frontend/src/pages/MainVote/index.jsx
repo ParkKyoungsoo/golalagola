@@ -13,6 +13,9 @@ import {
   Paper,
   useMediaQuery,
   Dialog,
+  Menu,
+  MenuItem,
+  Button,
 } from '@material-ui/core';
 
 import Carousel from 'react-bootstrap/Carousel';
@@ -24,11 +27,9 @@ import { ViewContext } from '../../context/ViewContext';
 
 import ButtonBases from '../../components/Main/ButtonBases';
 import VoteGridList from '../../components/Grid/VoteGridList';
-import VoteGridTitle from '../../components/Grid/VoteGridTitle';
 
 import ControlledCarousel from './carousel';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 ///////////////////////////////////////////////
 // Vertical Carousel
 import {
@@ -91,7 +92,7 @@ const useOnChangeIndex = categoryDatas => {
 
   const onChangeIndexHandler = (event, newIndex) => {
     let deltaValue = 0;
-    console.log('clickclick');
+    // console.log('clickclick');
     // 현재 선택된 거 기준 오른쪽 클릭
     if (newIndex > appbarIndex && newIndex !== categoryDatas.length - 1) {
       deltaValue = 1;
@@ -151,6 +152,16 @@ const MainVote = props => {
   }, []);
   // console.log(history.length)
   // const RepresentativeItems = SelectItem()
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <ViewContext.Provider
       value={{
@@ -161,6 +172,112 @@ const MainVote = props => {
         {isMobile ? (
           <MobileWrapper>
             {/* carousel, 실시간 순위 */}
+            <Grid className="Centering">
+              <Grid className="Centering" style={{ height: '30vh' }}>
+                <img
+                  src="images/골라라골라.png"
+                  className="Centering"
+                  style={{ height: '100%' }}
+                />
+              </Grid>
+            </Grid>
+            <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Grid
+                xs={6}
+                style={{ border: '2px solid black' }}
+                className="liveTimeBar "
+              >
+                <Grid className="Centering">
+                  <p style={{ margin: 'auto' }}>실시간 순위</p>
+                </Grid>
+
+                <Grid className="Centering">
+                  <Grid>
+                    <CarouselProvider
+                      naturalSlideWidth={1000}
+                      naturalSlideHeight={300}
+                      totalSlides={7}
+                      orientation="vertical"
+                      interval={3000}
+                      isPlaying={true}
+                      infinite={true}
+                    >
+                      <Grid>
+                        <Slider>
+                          {realtime.map((data, index) =>
+                            index < 7 ? (
+                              <Grid>
+                                <Slide
+                                  key={index}
+                                  style={{
+                                    width: '100px',
+                                    height: '30px',
+                                  }}
+                                >
+                                  <p
+                                    onClick={onClickRedirectPathHandler(
+                                      data.prod_name,
+                                      data.event_prod,
+                                    )}
+                                    style={{
+                                      cursor: 'pointer',
+                                      whiteSpace: 'nowrap',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      lineHeight: '200%',
+                                    }}
+                                  >
+                                    {index + 1}. {data.prod_name}
+                                  </p>
+                                </Slide>
+                              </Grid>
+                            ) : null,
+                          )}
+                        </Slider>
+                      </Grid>
+                    </CarouselProvider>
+                  </Grid>
+                  <Grid>
+                    <p
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={handleClick}
+                      style={{ margin: 'auto' }}
+                    >
+                      <KeyboardArrowDownIcon />
+                    </p>
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      {realtime.map((data, index) =>
+                        index < 7 ? (
+                          <Grid>
+                            <MenuItem
+                              onClick={onClickRedirectPathHandler(
+                                data.prod_name,
+                                data.event_prod,
+                              )}
+                            >
+                              <span
+                                style={{
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                {index + 1}. {data.prod_name}
+                              </span>
+                            </MenuItem>
+                          </Grid>
+                        ) : null,
+                      )}
+                    </Menu>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
             <AppBar
               position="relative"
               color="inherit"
@@ -173,18 +290,98 @@ const MainVote = props => {
                 <Grid item xs={12}>
                   <ControlledCarousel />
                 </Grid>
+              </Grid>
+              <Divider style={{ margin: '0px 0 0px 0' }} />
+            </AppBar>
+            <Grid
+              style={{
+                position: 'sticky',
+                top: '8vh',
+                zIndex: '1',
+                backgroundColor: '#f7f2f2',
+              }}
+            >
+              <Tabs
+                value={appbarIndex + appbarIndexDelta}
+                onChange={onChangeIndexHandler}
+                indicatorColor="primary"
+                textColor="primary"
+                variant="scrollable"
+                aria-label="full width tabs example"
+                className="big-indicator"
+                style={{ margin: '1vh 0' }}
+              >
+                {categoryDatas.map((categoryData, index) => (
+                  <Tab
+                    style={{ borderRadius: '20%' }}
+                    key={index}
+                    {...a11yProps(index)}
+                    label={
+                      <ButtonBases
+                        categoryData={categoryData}
+                        isSelected={index === appbarIndex ? true : false}
+                        serverUrlBase={serverUrlBase}
+                        serverImgUrl={serverImgUrl}
+                        index={index}
+                      />
+                    }
+                    className="tab"
+                  ></Tab>
+                ))}
+              </Tabs>
+            </Grid>
+            {categoryDatas.map((categoryData, index) => (
+              <TabPanel
+                key={index}
+                value={appbarIndex}
+                index={index}
+                className="tab-pansel"
+              >
+                <VoteGridList
+                  categoryData={categoryData}
+                  value={appbarIndex - 1}
+                  index={index}
+                  itemType={'vote'}
+                />
+              </TabPanel>
+            ))}
+          </MobileWrapper>
+        ) : (
+          <Wrapper
+            onClick={() => {
+              setDrawerOpen(0);
+            }}
+          >
+            <Divider />
+            <Grid className="Centering">
+              <Grid md={9} className="Centering" style={{ height: '30vh' }}>
+                <img
+                  src="images/골라라골라.png"
+                  className="Centering"
+                  style={{ height: '100%' }}
+                />
+              </Grid>
+            </Grid>
+            {/* carousel, 실시간 순위 */}
+            <Grid className="Centering">
+              <Grid
+                md={9}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  alignContent: 'center',
+                }}
+              >
                 <Grid
-                  item
-                  // md={2}
-                  xs={12}
-                  style={{
-                    margin: '1vh 0 ',
-                  }}
+                  xs={4}
+                  style={{ border: '2px solid black' }}
+                  className="liveTimeBar "
                 >
-                  <Box className="liveTimeBar">
-                    <Grid>
-                      <h3>실시간 순위</h3>
-                    </Grid>
+                  <Grid className="Centering">
+                    <p style={{ margin: 'auto' }}>실시간 순위</p>
+                  </Grid>
+
+                  <Grid className="Centering">
                     <Grid>
                       <CarouselProvider
                         naturalSlideWidth={1000}
@@ -203,21 +400,25 @@ const MainVote = props => {
                                   <Slide
                                     key={index}
                                     style={{
-                                      width: '200px',
-                                      height: '50px',
+                                      width: '100px',
+                                      height: '30px',
                                     }}
                                   >
-                                    <h3
+                                    <p
                                       onClick={onClickRedirectPathHandler(
                                         data.prod_name,
                                         data.event_prod,
                                       )}
                                       style={{
                                         cursor: 'pointer',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        lineHeight: '200%',
                                       }}
                                     >
                                       {index + 1}. {data.prod_name}
-                                    </h3>
+                                    </p>
                                   </Slide>
                                 </Grid>
                               ) : null,
@@ -226,197 +427,145 @@ const MainVote = props => {
                         </Grid>
                       </CarouselProvider>
                     </Grid>
-                  </Box>
+                    <Grid>
+                      <p
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                        style={{ margin: 'auto' }}
+                      >
+                        <KeyboardArrowDownIcon />
+                      </p>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      >
+                        {realtime.map((data, index) =>
+                          index < 7 ? (
+                            <Grid>
+                              <MenuItem
+                                onClick={onClickRedirectPathHandler(
+                                  data.prod_name,
+                                  data.event_prod,
+                                )}
+                              >
+                                <span
+                                  style={{
+                                    cursor: 'pointer',
+                                  }}
+                                >
+                                  {index + 1}. {data.prod_name}
+                                </span>
+                              </MenuItem>
+                            </Grid>
+                          ) : null,
+                        )}
+                      </Menu>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
-              <Divider style={{ margin: '0px 0 0px 0' }} />
-              <Tabs
-                value={appbarIndex + appbarIndexDelta}
-                onChange={onChangeIndexHandler}
-                indicatorColor="primary"
-                textColor="primary"
-                variant="scrollable"
-                aria-label="full width tabs example"
-                className="big-indicator"
-                style={{ margin: '1vh 0' }}
-              >
-                {categoryDatas.map((categoryData, index) => (
-                  <Tab
-                    key={index}
-                    {...a11yProps(index)}
-                    label={
-                      <ButtonBases
-                        categoryData={categoryData}
-                        isSelected={index === appbarIndex ? true : false}
-                        serverUrlBase={serverUrlBase}
-                        serverImgUrl={serverImgUrl}
-                        index={index}
-                      />
-                    }
-                    className="tab"
-                  ></Tab>
-                ))}
-              </Tabs>
-              <Divider style={{ margin: '0px 0 0px 0' }} />
-            </AppBar>
-
-            {categoryDatas.map((categoryData, index) => (
-              <TabPanel
-                key={index}
-                value={appbarIndex}
-                index={index}
-                className="tab-panel"
-              >
-                <VoteGridList
-                  categoryData={categoryData}
-                  value={appbarIndex - 1}
-                  index={index}
-                  itemType={'vote'}
-                />
-              </TabPanel>
-            ))}
-          </MobileWrapper>
-        ) : (
-          <Wrapper
-            onClick={() => {
-              setDrawerOpen(0);
-            }}
-          >
-            <Divider />
-            <div className="KisokCentering">
-              <h1 className="KisokCentering" style={{ height: '15vh' }}>
-                Gola la Gola
-              </h1>
-            </div>
+            </Grid>
             <Divider />
 
-            {/* carousel, 실시간 순위 */}
             <AppBar
               position="relative"
               color="inherit"
               className="appbar"
               style={{
                 backgroundColor: '#f7f2f2',
+                marginBottom: '10vh',
               }}
             >
-              <Grid container>
-                <Grid item xs={12}>
-                  <ControlledCarousel />
-                </Grid>
+              <Grid className="Centering">
+                <Grid md={9} container>
+                  <Grid item xs={12}>
+                    <ControlledCarousel />
+                  </Grid>
 
-                <Grid
-                  item
-                  // md={2}
-                  xs={12}
-                  style={{
-                    margin: '1vh 0 ',
-                  }}
-                >
-                  <Box className="liveTimeBar">
-                    <Grid>
-                      <h2>실시간 순위</h2>
-                    </Grid>
-                    <Grid>
-                      <CarouselProvider
-                        naturalSlideWidth={1000}
-                        naturalSlideHeight={150}
-                        totalSlides={7}
-                        orientation="vertical"
-                        interval={3000}
-                        isPlaying={true}
-                        infinite={true}
-                      >
-                        <Grid>
-                          <Slider>
-                            {realtime.map((data, index) =>
-                              index < 7 ? (
-                                <Grid>
-                                  <Slide
-                                    key={index}
-                                    style={{
-                                      width: '300px',
-                                      height: '50px',
-                                    }}
-                                  >
-                                    <h2
-                                      onClick={onClickRedirectPathHandler(
-                                        data.prod_name,
-                                        data.event_prod,
-                                      )}
-                                      style={{
-                                        cursor: 'pointer',
-                                      }}
-                                    >
-                                      {index + 1}. {data.prod_name}
-                                    </h2>
-                                  </Slide>
-                                </Grid>
-                              ) : null,
-                            )}
-                          </Slider>
-                        </Grid>
-                        {/* <Grid>
-                          <ButtonBack>
-                            <p>
-                              <ExpandLessIcon />
-                            </p>
-                          </ButtonBack>
-                          <ButtonNext>
-                            <p>
-                              <ExpandMoreIcon />
-                            </p>
-                          </ButtonNext>
-                        </Grid> */}
-                      </CarouselProvider>
-                    </Grid>
-                  </Box>
+                  <Grid
+                    item
+                    // md={2}
+                    xs={12}
+                    className=""
+                    style={
+                      {
+                        // margin: '1vh 0 ',
+                      }
+                    }
+                  ></Grid>
                 </Grid>
               </Grid>
               <Divider style={{ margin: '0px 0 0px 0' }} />
-              <Tabs
-                value={appbarIndex + appbarIndexDelta}
-                onChange={onChangeIndexHandler}
-                indicatorColor="primary"
-                textColor="primary"
-                variant="scrollable"
-                aria-label="full width tabs example"
-                className="big-indicator"
-              >
-                {categoryDatas.map((categoryData, index) => (
-                  <Tab
-                    key={index}
-                    {...a11yProps(index)}
-                    label={
-                      <ButtonBases
-                        categoryData={categoryData}
-                        isSelected={index === appbarIndex ? true : false}
-                        serverUrlBase={serverUrlBase}
-                        serverImgUrl={serverImgUrl}
-                        index={index}
-                      />
-                    }
-                    className="tab"
-                  ></Tab>
-                ))}
-              </Tabs>
-              <Divider style={{ margin: '0px 0 0px 0' }} />
             </AppBar>
-
-            {categoryDatas.map((categoryData, index) => (
-              <TabPanel
-                key={index}
-                value={appbarIndex}
-                index={index}
-                className="tab-panel"
+            <Grid
+              className="Centering"
+              style={{
+                position: 'sticky',
+                top: '8vh',
+                zIndex: '1',
+              }}
+            >
+              <Grid
+                md={9}
+                style={{
+                  position: 'sticky',
+                  top: '8vh',
+                  zIndex: '1',
+                  backgroundColor: '#ffffff',
+                }}
               >
-                <VoteGridList
-                  categoryData={categoryData}
-                  value={appbarIndex - 1}
-                  index={index}
-                  itemType={'vote'}
-                />
-              </TabPanel>
-            ))}
+                <Tabs
+                  value={appbarIndex + appbarIndexDelta}
+                  onChange={onChangeIndexHandler}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="scrollable"
+                  aria-label="full width tabs example"
+                  className="big-indicator"
+                >
+                  {categoryDatas.map((categoryData, index) => (
+                    <Tab
+                      style={{ borderRadius: '20%' }}
+                      key={index}
+                      {...a11yProps(index)}
+                      label={
+                        <ButtonBases
+                          categoryData={categoryData}
+                          isSelected={index === appbarIndex ? true : false}
+                          serverUrlBase={serverUrlBase}
+                          serverImgUrl={serverImgUrl}
+                          index={index}
+                        />
+                      }
+                      className="tab"
+                    ></Tab>
+                  ))}
+                </Tabs>
+              </Grid>
+            </Grid>
+            <Grid className="Centering">
+              <Grid md={9}>
+                {categoryDatas.map((categoryData, index) => (
+                  <TabPanel
+                    key={index}
+                    value={appbarIndex}
+                    index={index}
+                    className="tab-panel"
+                  >
+                    <VoteGridList
+                      categoryData={categoryData}
+                      value={appbarIndex - 1}
+                      index={index}
+                      itemType={'vote'}
+                    />
+                  </TabPanel>
+                ))}
+              </Grid>
+            </Grid>
           </Wrapper>
         )}
       </Layout>

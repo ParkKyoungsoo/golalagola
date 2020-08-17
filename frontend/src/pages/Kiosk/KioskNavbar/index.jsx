@@ -69,7 +69,7 @@ const Navbar = () => {
       <Wrapper>
         <Grid>
           <Box className="Nav_bar">
-            <Link to={'/KioskMains/'}>
+            <Link to={'/kioskmains/'}>
               <h1>
                 <Home />
               </h1>

@@ -88,19 +88,25 @@ export default function VoteGridItem(props) {
     <Wrapper className="root" style={isMobile ? null : { margin: '10px' }}>
       {realtime.includes(itemData.prod_id) ? (
         <Grid container className="info-open-handler-grid">
-          <Grid className="effect">
-            <Grid className="img-box" onClick={click}>
-              <Avatar
-                variant="square"
-                src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
-                className={'large'}
-                // imgProps={{
-                //   className: sw ? 'img' : 'img deactivated',
-                // }}
-              />
-              {isMobile ? (
-                <>
+          {isMobile ? (
+            <Grid className="m_effect" style={{ zIndex: '0' }}>
+              <Grid className="img-box" onClick={click}>
+                <Avatar
+                  variant="square"
+                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  className={'large'}
+                  // imgProps={{
+                  //   className: sw ? 'img' : 'img deactivated',
+                  // }}
+                  style={{
+                    borderRadius: '5%',
+                  }}
+                />
+
+                <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
+                  <br />
+                  <span>최대</span>
                   <span
                     style={{
                       color: 'red',
@@ -109,69 +115,107 @@ export default function VoteGridItem(props) {
                       border: '3px solid pink',
                     }}
                   >
-                    {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
                   <br />
                   <span style={{ textDecoration: 'line-through' }}>
                     {numberWithCommas(originPrice)}원{'  '}
                   </span>
-
+                  <br />
                   <span style={{ fontWeight: 'bold' }}>
                     {numberWithCommas(quizSalePrice)}원
                   </span>
-                </>
-              ) : (
-                <>
-                  <span style={{ fontSize: '1.5vw' }}>
-                    {itemData.prod_title}
-                  </span>
-                  <span
-                    style={{
-                      color: 'red',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      border: '3px solid pink',
-                      fontSize: '1.5vw',
-                    }}
-                  >
-                    {'   '}
-                    {itemData.prod_sale}%{'   '}
-                  </span>
-                  <br />
-                  <span
-                    style={{
-                      textDecoration: 'line-through',
-                      fontSize: '1.5vw',
-                    }}
-                  >
-                    {numberWithCommas(originPrice)}원{'  '}
-                  </span>
-
-                  <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
-                    {numberWithCommas(quizSalePrice)}원
-                  </span>
-                </>
-              )}
-              {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
+          ) : (
+            <Grid className="effect" style={{ zIndex: '0' }}>
+              <Grid className="img-box" onClick={click}>
+                <Avatar
+                  variant="square"
+                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  className={'large'}
+                  // imgProps={{
+                  //   className: sw ? 'img' : 'img deactivated',
+                  // }}
+                  style={{
+                    borderRadius: '5%',
+                  }}
+                />
+
+                <Grid style={{ padding: '0 0 5vh 0' }}>
+                  <h5
+                    style={{
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      width: '14vw',
+                    }}
+                  >
+                    {itemData.prod_title}
+                  </h5>
+                  <Grid
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                    }}
+                  >
+                    <h5
+                      style={{
+                        margin: 'auto 0',
+                      }}
+                    >
+                      최대
+                    </h5>
+                    <h3
+                      style={{
+                        margin: ' auto 0',
+                      }}
+                    >
+                      {itemData.prod_sale}%
+                    </h3>
+                  </Grid>
+                  <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <span
+                      style={{
+                        textDecoration: 'line-through',
+                        opacity: '50%',
+                      }}
+                    >
+                      {numberWithCommas(originPrice)}원{'  '}
+                    </span>
+
+                    <span style={{ fontWeight: 'bold' }}>
+                      {numberWithCommas(quizSalePrice)}원
+                    </span>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
+          {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
         </Grid>
       ) : (
         <Grid container className="info-open-handler-grid">
-          <Grid>
-            <Grid className="img-box" onClick={click}>
-              <Avatar
-                variant="square"
-                src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
-                className={'large'}
-                // imgProps={{
-                //   className: sw ? 'img' : 'img deactivated',
-                // }}
-              />
-              {isMobile ? (
-                <>
+          {isMobile ? (
+            <Grid>
+              <Grid className="img-box" onClick={click}>
+                <Avatar
+                  variant="square"
+                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  className={'large'}
+                  // imgProps={{
+                  //   className: sw ? 'img' : 'img deactivated',
+                  // }}
+                  style={{
+                    borderRadius: '5%',
+                  }}
+                />
+
+                <Grid style={{ padding: '0 0 5vh 0' }}>
                   <span>{itemData.prod_title}</span>
+                  <br />
+                  <span>최대</span>
                   <span
                     style={{
                       color: 'red',
@@ -180,53 +224,86 @@ export default function VoteGridItem(props) {
                       border: '3px solid pink',
                     }}
                   >
-                    {'   '}
                     {itemData.prod_sale}%{'   '}
                   </span>
                   <br />
                   <span style={{ textDecoration: 'line-through' }}>
                     {numberWithCommas(originPrice)}원{'  '}
                   </span>
-
+                  <br />
                   <span style={{ fontWeight: 'bold' }}>
                     {numberWithCommas(quizSalePrice)}원
                   </span>
-                </>
-              ) : (
-                <>
-                  <span style={{ fontSize: '1.5vw' }}>
-                    {itemData.prod_title}
-                  </span>
-                  <span
-                    style={{
-                      color: 'red',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      border: '3px solid pink',
-                      fontSize: '1.5vw',
-                    }}
-                  >
-                    {'   '}
-                    {itemData.prod_sale}%{'   '}
-                  </span>
-                  <br />
-                  <span
-                    style={{
-                      textDecoration: 'line-through',
-                      fontSize: '1.5vw',
-                    }}
-                  >
-                    {numberWithCommas(originPrice)}원{'  '}
-                  </span>
-
-                  <span style={{ fontWeight: 'bold', fontSize: '1.5vw' }}>
-                    {numberWithCommas(quizSalePrice)}원
-                  </span>
-                </>
-              )}
-              {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
+          ) : (
+            <Grid>
+              <Grid className="img-box">
+                <Avatar
+                  onClick={click}
+                  variant="square"
+                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  className={'large'}
+                  // imgProps={{
+                  //   className: sw ? 'img' : 'img deactivated',
+                  // }}
+                  style={{
+                    borderRadius: '5%',
+                    cursor: 'pointer',
+                  }}
+                />
+                <Grid style={{ padding: '0 0 5vh 0' }}>
+                  <h5
+                    style={{
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      width: '14vw',
+                    }}
+                  >
+                    {itemData.prod_title}
+                  </h5>
+                  <Grid
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                    }}
+                  >
+                    <h5
+                      style={{
+                        margin: 'auto 0',
+                      }}
+                    >
+                      최대
+                    </h5>
+                    <h3
+                      style={{
+                        margin: ' auto 0',
+                      }}
+                    >
+                      {itemData.prod_sale}%
+                    </h3>
+                  </Grid>
+                  <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <span
+                      style={{
+                        textDecoration: 'line-through',
+                        opacity: '50%',
+                      }}
+                    >
+                      {numberWithCommas(originPrice)}원{'  '}
+                    </span>
+
+                    <span style={{ fontWeight: 'bold' }}>
+                      {numberWithCommas(quizSalePrice)}원
+                    </span>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
+          {/* <span className="date on">{displayEndTime(itemData.end_dt)}</span> */}
         </Grid>
       )}
     </Wrapper>

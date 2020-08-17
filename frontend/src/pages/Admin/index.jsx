@@ -1,6 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
+import { CommonContext } from '../../context/CommonContext';
+import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
+import { Grid, Divider, Paper } from '@material-ui/core';
+import MaterialTable from 'material-table';
 
-import AdminNav from './Layout/nav.jsx';
+import Wrapper from './styles';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -107,13 +112,11 @@ const MainAdmin = props => {
   };
 
   return (
-    <div>
-      <AdminNav></AdminNav>
-      <h1>관리자 페이지</h1>
-      <div classes={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={2}>
-            <Paper className={classes.paper}></Paper>
+    <Wrapper>
+      <div className="admin_product__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={0} />
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paper}>오늘의 날씨는~</Paper>
@@ -152,7 +155,7 @@ const MainAdmin = props => {
           ))}
         </Grid>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 export default MainAdmin;

@@ -35,6 +35,11 @@ const ButtonBases = props => {
           className={
             isSelected ? 'image-backdrop selected-tab' : 'image-backdrop'
           }
+          // catergory 색깔 정하는 곳입니다... 만세
+          style={{
+            backgroundColor: '#f7f2f2',
+            // opacity: '10%'
+          }}
         />
         <span className="image-button">
           <Typography

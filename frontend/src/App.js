@@ -44,7 +44,7 @@ import CategoryData from './pages/MainVote/dump.json';
 // VoteGridList에서 쓰고있던 상품들 입니다.
 
 // css
-// import './index.css';
+import './index.css';
 
 // const
 const defaultThumbnailImage = 'default_user.jpg';
@@ -118,11 +118,15 @@ const App = () => {
   // CouponModal 페이지에 선택된 아이템을 전달해 주기 위해 선언했습니다.
   const [selectedEventItem, setSelectedEventItem] = useState();
   // 메인 주소로 사용할 URL 입니다.
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 배포되면 바꿔야합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 아주 아주 아주 중요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [mainUrl, setMainUrl] = useState('http://localhost:3000');
+  const [mainUrl, setMainUrl] = useState('http://localhost:3000/');
 
   // 관리지 페이지 중 vs이벤트 CRUD를 위해 선언했습니다.
   const [currentEventDatas, setCurrentEventDatas] = useState([]);
+
+  //현재 진행중인 이벤트들의 ID만 받아온다
+  const [progressedEventDatas, setProgressedEventDatas] = useState([]);
 
   // 관리지 페이지 중 Quiz CRUD를 위해 선언했습니다.
   const [currentQuizDatas, setCurrentQuizDatas] = useState({});
@@ -171,8 +175,9 @@ const App = () => {
   const [quizzesTableData, setQuizzesTableData] = useState({
     columns: [
       { title: '퀴즈', field: 'quiz_question' },
-      { title: '정답', field: 'quiz_answer' },
       { title: '힌트', field: 'quiz_hint' },
+      { title: '설명', field: 'quiz_desc' },
+      { title: '정답', field: 'quiz_answer' },
       { title: '참여자 수', field: 'quiz_num' },
     ],
     data: [],
@@ -181,7 +186,7 @@ const App = () => {
   // admin product 페이지에서 사용하는 변수 입니다.
   const [usersTableData, setUsersTableData] = useState({
     columns: [
-      { title: 'ID', field: 'user_email' },
+      { title: '사용자 ID', field: 'user_email' },
       { title: '이름', field: 'user_name' },
       { title: '전화 번호', field: 'user_phone' },
       { title: '퀴즈 참여 여부', field: 'user_quiz' },
@@ -189,8 +194,11 @@ const App = () => {
     data: [],
   });
 
+  const [eventListener, setEventListener] = useState(1);
+
   // App.js 실행시 최초 1회만 받아옴 => useEffect 사용
   // 전체 데이터
+  // console.log(123123123123);
   async function getProductDatas() {
     await Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(
       res,
@@ -207,7 +215,7 @@ const App = () => {
   async function getEventDatas() {
     await Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
       setCurrentEventDatas(res.data);
-      getMyCouponDatas();
+      // getMyCouponDatas();
     });
   }
   // 카테고리 데이터
@@ -255,12 +263,15 @@ const App = () => {
       quizzesTableData.data = res.data;
       setQuizzesTableData(quizzesTableData);
       setQuizDatas(res.data);
+      getProgressedEventId();
     });
   }
 
   // 제품 수량 && 판매 현황 개수
   async function getBuyDatas() {
-    Axios.get('http://localhost:5000/api/product/buy/').then(function(res) {
+    Axios.get('https://i3b309.p.ssafy.io/api/buy/buyAmount').then(function(
+      res,
+    ) {
       setBuyDatas(res.data);
     });
   }
@@ -314,6 +325,14 @@ const App = () => {
     );
   }
 
+  async function getProgressedEventId() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/event/eventId').then(
+      function(res) {
+        setProgressedEventDatas(res.data);
+      },
+    );
+  }
+
   useEffect(() => {
     getProductDatas();
     getBuyDatas();
@@ -326,9 +345,10 @@ const App = () => {
     // getMyCouponDatas();
   }, []);
 
-  // useEffect(() => {
-  //   getEventDatas();
-  // }, []);
+  useEffect(() => {
+    console.log('execute eventListener');
+    getMyCouponDatas();
+  }, [eventListener]);
 
   return (
     <CommonContext.Provider

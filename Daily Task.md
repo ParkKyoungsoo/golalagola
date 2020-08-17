@@ -282,7 +282,7 @@
 
 
 
-2020.08.11(화)
+#### 2020.08.11(화)
 
 1. Scrum 미팅
 
@@ -301,3 +301,49 @@
    ​					사진 업로드
 
    ​	
+
+#### 2020.08.12(수)
+
+1. Scrum 미팅
+
+2. Front-end  Detail 페이지 쿠폰, 퀴즈 모달 CSS
+
+   ​					웹 메인 페이지 CSS
+   ​					Admin 페이지 Event
+
+   ​					웹 Event 페이지 기능 구현
+
+   ​					Admin 페이지 VS 차트
+
+   Back-end	비밀번호 바꾸면 토큰 재발급
+
+   
+
+#### 2020.08.13(목)
+
+1. Scrum 미팅
+
+2. Front-end   웹페이지 메인 CSS
+
+   ​					 Admin 페이지 메인 CSS
+
+#### 2020.08.14(금)
+
+1. Scrum 미팅
+
+2. Front-end   웹페이지 메인 CSS
+
+   ​					 Admin 페이지 메인 CSS
+
+   Back-end	
+
+   
+
+#### 2020.08.15(토)
+
+1. UCC 장소 사전 답사 및 
+
+2. Front-end
+
+   Back-end
+

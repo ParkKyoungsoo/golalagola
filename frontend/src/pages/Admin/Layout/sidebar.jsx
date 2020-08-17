@@ -5,6 +5,15 @@ import ListItem from '@material-ui/core/ListItem';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import TimelineIcon from '@material-ui/icons/Timeline';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import PieChartIcon from '@material-ui/icons/PieChart';
+import FolderSharedIcon from '@material-ui/icons/FolderShared';
+import EventIcon from '@material-ui/icons/Event';
+import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
@@ -39,7 +48,9 @@ const NestedList = props => {
     console.log(index);
     setCurrentOpen(index);
     setForceRender({});
-    if (index === 1) {
+    if (index === 0) {
+      history.push('/admin');
+    } else if (index === 1) {
       history.push('/admin/user');
     } else if (index === 2) {
       history.push('/admin/product');
@@ -67,11 +78,20 @@ const NestedList = props => {
         <ListItem
           button
           className="sidebar__item"
+          onClick={index => handleClick(0)}
+          style={currentOpen === 0 ? currentStyle : null}
+        >
+          <EqualizerIcon className="sidebar__icon" />
+          <p className="sidebar__p">판매 현황</p>
+        </ListItem>
+        <ListItem
+          button
+          className="sidebar__item"
           onClick={index => handleClick(1)}
           style={currentOpen === 1 ? currentStyle : null}
         >
-          <SendIcon fontSize="small" className="sidebar__icon" />
-          <p className="sidebar__p">User Dashboard</p>
+          <PersonIcon className="sidebar__icon" />
+          <p className="sidebar__p">사용자 관리</p>
         </ListItem>
         <ListItem
           button
@@ -79,8 +99,8 @@ const NestedList = props => {
           onClick={index => handleClick(2)}
           style={currentOpen === 2 ? currentStyle : null}
         >
-          <InboxIcon fontSize="small" className="sidebar__icon" />
-          <p className="sidebar__p">Product Dashboard</p>
+          <InboxIcon className="sidebar__icon" />
+          <p className="sidebar__p">상품 관리</p>
         </ListItem>
 
         <ListItem
@@ -89,8 +109,8 @@ const NestedList = props => {
           onClick={() => handleClick(3)}
           style={currentOpen === 3 ? currentStyle : null}
         >
-          <DraftsIcon fontSize="small" className="sidebar__icon" />
-          <p className="sidebar__p">Event Dashboard</p>
+          <EventIcon className="sidebar__icon" />
+          <p className="sidebar__p">이벤트 관리</p>
         </ListItem>
 
         <ListItem
@@ -99,10 +119,9 @@ const NestedList = props => {
           onClick={() => handleClick(4)}
           style={currentOpen === 4 ? currentStyle : null}
         >
-          <DraftsIcon fontSize="small" className="sidebar__icon" />
-          <p className="sidebar__p">Quiz Dashboard</p>
+          <DraftsIcon className="sidebar__icon" />
+          <p className="sidebar__p">퀴즈 관리</p>
         </ListItem>
-        <Divider variant="middle" />
         <Grid
           container
           direction="column"
@@ -128,7 +147,7 @@ const NestedList = props => {
           <div className="sidebar__admin_desc">싸피마트 (대전, 봉명동)</div>
           {/* <div className="sidebar__admin_item">Main Page</div> */}
           <button className="sidebar__logout_button">
-            &nbsp;&nbsp;Log out
+            &nbsp;&nbsp;로그아웃
             <ArrowForwardRoundedIcon
               fontSize="small"
               style={{ marginLeft: '5px' }}

@@ -1,32 +1,134 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Test from '../../pages/Kiosk/KioskQuiz/dump.json';
 import Wrapper from './styles';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useHistory } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
-import { Dialog, Grid, useMediaQuery } from '@material-ui/core';
+import { Dialog, Grid, useMediaQuery, Box } from '@material-ui/core';
 import Fail from '../../pages/Kiosk/KioskModal/KioskQuizFailModal';
 import { CommonContext } from '../../context/CommonContext';
 import { Carousel } from 'react-bootstrap';
 import MultiCarousel from './MultiCarousel';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
+// import MultiCarousel from './MultiCarousel';
+import ClearIcon from '@material-ui/icons/Clear';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import HelpIcon from '@material-ui/icons/Help';
+// ClickAwayListener
 
 const SuccessModal = () => {
-  const [moveToNext, setMoveToNext] = useState(false);
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     console.log('timeout!!');
-  //     setMoveToNext(true);
-  //   }, 1500);
-  // });
+  const { user, setUser } = useContext(CommonContext);
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
 
+  const userQuizState = {
+    user_quiz: true,
+  };
+
+  let history = useHistory();
+
+  // 유저가 가지고 있는 Quiz 상태 바꿔줘야함
+  const userUpdate = () => {
+    axios
+      .put(
+        `https://i3b309.p.ssafy.io/api/auth/solveQuiz/${user.user_id}`,
+        userQuizState,
+      )
+      .then(function(response) {
+        console.log(response);
+        setUser({
+          ...user,
+          user_quiz: true,
+        });
+      })
+      .catch(error => {});
+  };
+
+  const goToMyCoupon = () => {
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
+    // window.location.href = '/mycoupon';
+    history.push('/mycoupon');
+  };
+
+  const goToMain = () => {
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
+    history.push('/');
+  };
+
+  useEffect(userUpdate, []);
+  const Mobile = useMediaQuery('(max-width:920px)');
   return (
     <>
-      <h2> 정답입니다 ^^ </h2>
+      {Mobile ? (
+        <Grid container direction="column">
+          <Grid item style={{ fontSize: '2em', textAlign: 'center' }}>
+            축하드립니다 ~~~
+          </Grid>
+          <Grid item>
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                <Button
+                  onClick={goToMyCoupon}
+                  style={{ width: '100%', height: '100%' }}
+                >
+                  마이 쿠폰함 바로가기
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={goToMain}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'red',
+                  }}
+                >
+                  Home
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      ) : (
+        <Grid
+          container
+          direction="column"
+          style={{ width: '50vw', height: '20vh' }}
+        >
+          <Grid item style={{ fontSize: '2.3em', textAlign: 'center' }}>
+            정답입니다!
+          </Grid>
+          <Grid item style={{ height: '37%' }}>
+            <Button
+              onClick={goToMyCoupon}
+              style={{ width: '100%', height: '100%' }}
+            >
+              마이 쿠폰함 바로가기
+            </Button>
+          </Grid>
+          <Grid item style={{ height: '37%' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={goToMain}
+              style={{ width: '100%', height: '100%', backgroundColor: 'red' }}
+            >
+              Home
+            </Button>
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };
 
-const Quiz = () => {
-  const quizAns = Test.questions[0].correctAnswer; // 추후 데이터에서 가져올 문제의 정답.
+const Quiz = modalNum => {
   const [number, setNumber] = useState();
 
   const [userAns, setUserAns] = useState(3);
@@ -34,17 +136,13 @@ const Quiz = () => {
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
+  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+  const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
 
-  // const pp = () => {
-  //   const randomNumber = Math.random();
-  //   number = Math.floor(randomNumber * quizDatas.length);
-  //   console.log('in pp number', number);
-  // };
-
-  // const number = Math.random();
-  // const num = Math.floor(number * quizDatas.length);
+  let history = useHistory();
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -60,6 +158,8 @@ const Quiz = () => {
   const modalHandler = () => {
     setSuccessModalTrigger(false);
     setFailModalTrigger(failModalTrigger => false);
+    setWebQuizDialogOpen(false);
+    setItemDialogOpen(false);
   };
 
   const buttonStyle = {
@@ -74,59 +174,244 @@ const Quiz = () => {
 
   const isMobile = useMediaQuery('(max-width:920px)');
   // console.log('aaa', quizDatas.length);
+
+  // ClickAwayListener
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(prev => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-      <Wrapper>
-        <MultiCarousel />
-        <Grid className="quizCentering">
-          <h3
-            style={{
-              textAlign: 'center',
-              marginTop: '70px',
-              marginBottom: '10px',
-            }}
-          >
-            오늘의 퀴즈
-          </h3>
-        </Grid>
-        <Grid className="quizCentering">
-          <h2
-            style={{
-              textAlign: 'center',
-              marginTop: '10px',
-              marginBottom: '50px',
-            }}
-          >
-            {/* {console.log(quizDatas[1].quiz_question)} */}
-            {/* {console.log(randomNumber)} */}
-            {/* {console.log(number)} */}
-            {Object(quizDatas[number]).quiz_question}
-          </h2>
-        </Grid>
-        <Grid className="quizCentering">
-          <button
-            onClick={click(true)}
-            style={userAns === true ? buttonStyle : null}
-          >
-            <img src={Test.answers[0]} alt="quiz" />
-          </button>
-          <button
-            onClick={click(false)}
-            style={userAns === false ? buttonStyle : null}
-          >
-            <img src={Test.answers[1]} alt="quiz" />
-          </button>
-        </Grid>
-      </Wrapper>
-      {userAns ? (
-        <Dialog open={successModalTrigger} onClose={modalHandler}>
+      {isMobile ? (
+        <Wrapper>
+          <Grid container direction="column" xs={12}>
+            <Grid item className="quizCentering" style={{ fontSize: '1.2em' }}>
+              {/* <h4
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '3vh',
+                }}
+              > */}
+              <strong>오늘의 퀴즈</strong>
+              {/* </h4> */}
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '20px',
+                fontSize: 'x-large',
+              }}
+            >
+              {Object(quizDatas[number]).quiz_question}
+            </Grid>
+            <Grid
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '2vh',
+                fontSize: '1.5em',
+              }}
+            >
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Grid
+                  direction="column"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <NotListedLocationIcon
+                    onClick={handleClick}
+                    style={{ fontSize: '1.5em' }}
+                  />
+
+                  {open ? (
+                    <Grid>{Object(quizDatas[number]).quiz_hint}</Grid>
+                  ) : (
+                    '힌트'
+                  )}
+                </Grid>
+              </ClickAwayListener>
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{ justifyContent: 'space-evenly' }}
+            >
+              <Button
+                onClick={click(true)}
+                style={userAns === true ? buttonStyle : null}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
+              >
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                ></img>
+              </Button>
+              <Button
+                onClick={click(false)}
+                style={userAns === false ? buttonStyle : null}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
+              >
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                ></img>
+              </Button>
+            </Grid>
+          </Grid>
+          {userAns ? (
+            <Dialog
+              open={successModalTrigger}
+              onClose={modalHandler}
+              modalNum={1}
+              style={{ width: '100%', textAlign: 'center' }}
+            >
+              <SuccessModal />
+            </Dialog>
+          ) : (
+            <Dialog open={failModalTrigger} onClose={modalHandler}>
+              <Fail />
+            </Dialog>
+          )}
+        </Wrapper>
+      ) : (
+        <Wrapper>
+          <Grid container direction="column" xs={12}>
+            <Grid item className="quizCentering">
+              <h3
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '3vh',
+                }}
+              >
+                오늘의 퀴즈
+              </h3>
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '2vh',
+                fontSize: 'xx-large',
+              }}
+            >
+              {Object(quizDatas[number]).quiz_question}
+            </Grid>
+            <Grid
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                marginBottom: '50px',
+                fontSize: 'x-large',
+              }}
+            >
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Grid
+                  className
+                  direction="column"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Grid item>
+                    <HelpIcon
+                      onClick={handleClick}
+                      style={{ fontSize: '2.5em' }}
+                    />
+                  </Grid>
+                  <Grid item>
+                    {open ? (
+                      <Grid>{Object(quizDatas[number]).quiz_hint}</Grid>
+                    ) : (
+                      '힌트'
+                    )}
+                  </Grid>
+                </Grid>
+              </ClickAwayListener>
+            </Grid>
+            <Grid
+              item
+              className="quizCentering"
+              style={{ justifyContent: 'space-evenly' }}
+            >
+              <Button
+                onClick={click(true)}
+                style={userAns === true ? buttonStyle : null}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
+              >
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                ></img>
+              </Button>
+              <Button
+                onClick={click(false)}
+                style={userAns === false ? buttonStyle : null}
+                style={{ backgroundColor: '#FFFFFF', border: 'none' }}
+              >
+                <img
+                  style={{
+                    width: '15vw',
+                    height: 'auto',
+                    backgroundColor: '#FFFFFF',
+                  }}
+                  src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                ></img>
+              </Button>
+            </Grid>
+          </Grid>
+          {userAns ? (
+            <Dialog
+              open={successModalTrigger}
+              onClose={modalHandler}
+              modalNum={1}
+            >
+              <SuccessModal />
+            </Dialog>
+          ) : (
+            <Dialog open={failModalTrigger} onClose={modalHandler}>
+              <Fail />
+            </Dialog>
+          )}
+        </Wrapper>
+      )}
+      {/* {userAns ? (
+        <Dialog open={successModalTrigger} onClose={modalHandler} modalNum={1}>
           <SuccessModal />
         </Dialog>
       ) : (
         <Dialog open={failModalTrigger} onClose={modalHandler}>
           <Fail />
         </Dialog>
-      )}
+      )} */}
     </>
   );
 };

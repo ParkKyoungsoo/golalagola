@@ -41,7 +41,7 @@ const InputTitleComponent = () => {
   return (
     <Wrapper>
       <Grid style={{ display: 'flex' }}>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           {Object(productDatas[newEventData.event_prod_A - 1]).prod_image !==
           undefined ? (
             <img
@@ -51,14 +51,13 @@ const InputTitleComponent = () => {
               alt="productA.jpg"
               style={{ height: '100%', width: '100%' }}
             />
-          ) : (
-            <h1>상품 A</h1>
-          )}
+          ) : // <h2>상품 A 사진</h2>
+          null}
         </Grid>
         <Grid item xs={2} container justify="center" alignItems="center">
           <h1>VS</h1>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           {Object(productDatas[newEventData.event_prod_B - 1]).prod_image !==
           undefined ? (
             <img
@@ -68,9 +67,8 @@ const InputTitleComponent = () => {
               alt="productA.jpg"
               style={{ height: '100%', width: '100%' }}
             />
-          ) : (
-            <h1>상품 B</h1>
-          )}
+          ) : // <h2>상품 B 사진</h2>
+          null}
         </Grid>
       </Grid>
     </Wrapper>
@@ -135,9 +133,6 @@ const SubTitleGroupComponent = () => {
   };
   useEffect(() => {
     test();
-  }, [newEventData]);
-
-  useEffect(() => {
     test2();
   }, [newEventData]);
 
@@ -147,19 +142,19 @@ const SubTitleGroupComponent = () => {
         <Grid
           container
           direction="row"
-          justify="center"
+          justify="flex-start"
           alignItems="center"
           spacing={2}
         >
-          <Grid item xs={5}>
-            <h2>Select Item A</h2>
+          <Grid item xs={4}>
+            <h2>상품 A 선택</h2>
             <Divider
               variant="fullWidth"
               orientation="horizontal"
               className="sub-title-group-component-divider"
             />
             <FormControl className="form-control">
-              <InputLabel id="A-label">상품 A</InputLabel>
+              {/* <InputLabel id="A-label">상품 A</InputLabel> */}
               <Select
                 labelId="A-label"
                 value={productDatas.prod_id}
@@ -169,7 +164,7 @@ const SubTitleGroupComponent = () => {
                 required
               >
                 <MenuItem value={0} disabled>
-                  Select category
+                  카테고리
                 </MenuItem>
 
                 {filterADatas.map((data, index) => (
@@ -181,15 +176,15 @@ const SubTitleGroupComponent = () => {
             </FormControl>
           </Grid>
           <Grid item xs={2}></Grid>
-          <Grid item xs={5}>
-            <h2>Select Item B</h2>
+          <Grid item xs={4}>
+            <h2>상품 B 선택</h2>
             <Divider
               variant="fullWidth"
               orientation="horizontal"
               className="sub-title-group-component-divider"
             />
             <FormControl className="form-control">
-              <InputLabel id="B-label">상품 B</InputLabel>
+              {/* <InputLabel id="B-label">상품 B</InputLabel> */}
               <Select
                 labelId="B-label"
                 value={productDatas.prod_id}
@@ -260,7 +255,7 @@ const SelectCategoryComponent = () => {
           required
         >
           <MenuItem value={0} disabled>
-            Select category
+            카테고리 선택
           </MenuItem>
 
           {categoryDatas.map((data, index) => (

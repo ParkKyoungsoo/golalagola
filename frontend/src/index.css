@@ -1,18 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
 body,
 html {
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  /* font-family: 'Noto Sans KR', sans-serif; */
+  /* font-family: 'Black Han Sans', sans-serif; */
   -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  /* scrollbar-width: none;  */
+  /* Firefox */
+  font-family: 'Nanum Pen Script', cursive;
 }
 body::-webkit-scrollbar,
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
+  /*display: none; */ /* Chrome, Safari, Opera*/
+  /* font-family: 'Black Han Sans', sans-serif; */
 }
+
+/* LotteDream */
+@font-face {
+  font-family: 'LotteDream';
+  font-weight: 300;
+  /* font-style: small; */
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2')
+      format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff')
+      format('woff');
+}
+@font-face {
+  font-family: 'LotteDream';
+  font-weight: 500;
+  font-style: medium;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2')
+      format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff')
+      format('woff');
+}
+@font-face {
+  font-family: 'LotteDream';
+  font-weight: 700;
+  font-style: large;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2')
+      format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff')
+      format('woff');
+}
+
 * {
   margin: 0;
   padding: 0;
   list-style: none;
   text-decoration: none;
+  /* font-family: 'Noto Sans KR', sans-serif !important; */
+  font-family: 'LotteDream', sans-serif;
+  /* font-family:  */
+  font-weight: 300;
 }

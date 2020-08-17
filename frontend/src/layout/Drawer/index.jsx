@@ -21,6 +21,7 @@ import {
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Wrapper from './styles';
+import store from 'store';
 
 const DrawerHeaderGroup = () => {
   let history = useHistory();
@@ -36,6 +37,7 @@ const DrawerHeaderGroup = () => {
   };
 
   const handleSignInDialogOpen = () => {
+    store.clear();
     setUser({
       user_no: 0,
       user_id: '',
@@ -47,7 +49,7 @@ const DrawerHeaderGroup = () => {
       token: '',
     });
 
-    history.push('/Auth');
+    history.push({ '/Auth': true });
   };
 
   return (
@@ -110,6 +112,7 @@ const DrawerListGroup = () => {
   };
 
   const onClickSignOutOpenHandler = () => {
+    store.clear();
     setDrawerOpen(false);
     setUser({
       user_no: 0,
@@ -123,8 +126,8 @@ const DrawerListGroup = () => {
     });
 
     alert('You are logged out.');
-
-    history.push('/');
+    window.location.href = '/';
+    // history.push('/');
   };
 
   const onClickRedirectPathHandler = name => () => {

@@ -15,17 +15,16 @@ import {
   FormControlLabel,
   Radio,
   FormLabel,
+  Divider,
 } from '@material-ui/core';
 import Wrapper from './styles';
-import { useDropzone } from 'react-dropzone';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
+import NestedList from '../../Layout/sidebar.jsx';
 
 // import AdminNav from '../../Nav/index.jsx';
 
@@ -39,6 +38,10 @@ const AdminQuizForm = () => {
   });
   const [hint, setHint] = useState({
     value: currentQuizDatas.quiz_hint,
+    error: false,
+  });
+  const [desc, setDesc] = useState({
+    value: currentQuizDatas.quiz_desc,
     error: false,
   });
   const [answer, setAnswer] = useState(currentQuizDatas.quiz_answer);
@@ -61,9 +64,26 @@ const AdminQuizForm = () => {
     setForceRender({});
   };
 
+  const handleDescChange = event => {
+    if (event.target.value !== '') {
+      setDesc({ value: event.target.value, error: false });
+    } else {
+      setDesc({ value: event.target.value, error: true });
+    }
+    setForceRender({});
+  };
+
   const handleAnswerChange = event => {
     setAnswer(event.target.value);
   };
+
+  // 잘못된 경우에는 이전 페이지로 보내기
+  if (
+    currentQuizDatas.status === undefined ||
+    currentQuizDatas.status === null
+  ) {
+    window.location.href = '/admin/quiz';
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -72,16 +92,20 @@ const AdminQuizForm = () => {
         setTitle({ value: '', error: true });
       }
       if (hint.value === '') {
-        setTitle({ value: '', error: true });
+        setHint({ value: '', error: true });
+      }
+      if (desc.value === '') {
+        setDesc({ value: '', error: true });
       }
       setForceRender({});
-      alert('validation error');
+      alert('입력하지 않은 내용이 존재합니다.');
     } else {
       // status: create
       if (currentQuizDatas.status === 'create') {
         await Axios.post('https://i3b309.p.ssafy.io/api/quiz', {
           quiz_question: title.value,
           quiz_hint: hint.value,
+          quiz_desc: desc.value,
           quiz_answer: answer,
         })
           .then(response => {
@@ -90,13 +114,15 @@ const AdminQuizForm = () => {
           })
           .catch(e => {
             console.log('Error: ', e.response.data);
+            alert('퀴즈가 등록 되지 않았습니다. 다시 시도해주세요.');
           });
-      } else {
+      } else if (currentQuizDatas.status === 'update') {
         // status: create
         await Axios.put('https://i3b309.p.ssafy.io/api/quiz', {
           quiz_id: currentQuizDatas.quiz_id,
           quiz_question: title.value,
           quiz_hint: hint.value,
+          quiz_desc: desc.value,
           quiz_answer: answer,
         })
           .then(response => {
@@ -105,87 +131,126 @@ const AdminQuizForm = () => {
           })
           .catch(e => {
             console.log('Error: ', e.response.data);
+            alert('퀴즈 정보가 수정되지 않았습니다. 다시 시도해주세요.');
           });
       }
+      setCurrentQuizDatas([]);
       window.location.href = '/admin/quiz';
     }
   }
 
   return (
-    <div>
-      {/* <AdminNav /> */}
-      <Grid container justify="center" alignItems="flex-start" spacing={2}>
-        <Grid item xs={12}>
-          <p>그리드 9</p>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={2}
-          >
-            <FormControl
-              // className={classes.root}
-              noValidate
-            >
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={title.error ? true : false}
-                  id="standard-required"
-                  label="Quiz Title"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={title.value}
-                  onChange={handleTitleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  error={hint.error ? true : false}
-                  id="standard-required"
-                  label="Quiz Hint"
-                  type="text"
-                  multiline
-                  rowsMax={4}
-                  value={hint.value}
-                  onChange={handleHintChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup
-                  aria-label="answer"
-                  name="answer"
-                  value={hint.value}
-                  onChange={handleAnswerChange}
+    <Wrapper>
+      <div className="admin_quiz_form__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={4} />
+          </Grid>
+          <Grid item>
+            <Grid className="admin_quiz_form__content">
+              <h5 className="admin_quiz_form__header">퀴즈 등록</h5>
+              <Divider variant="middle" className="admin_quiz_form__divider" />
+              <Paper elevation={2} className="admin_quiz_form__paper">
+                <Grid
+                  container
+                  justify="center"
+                  alignItems="flex-start"
+                  spacing={2}
                 >
-                  <FormControlLabel
-                    value="true"
-                    control={<Radio />}
-                    label="ture"
-                  />
-                  <FormControlLabel
-                    value="false"
-                    control={<Radio />}
-                    label="false"
-                  />
-                </RadioGroup>
-              </Grid>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-              >
-                Primary
-              </Button>
-            </FormControl>
+                  <Grid item xs={12}>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
+                      spacing={2}
+                    >
+                      <FormControl
+                      // className={classes.root}
+                      >
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            className="admin_quiz_form__input"
+                            error={title.error ? true : false}
+                            id="standard-required"
+                            label="퀴즈 제목"
+                            type="text"
+                            multiline
+                            rowsMax={4}
+                            value={title.value}
+                            onChange={handleTitleChange}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            className="admin_quiz_form__input"
+                            error={hint.error ? true : false}
+                            id="standard-required"
+                            label="퀴즈 힌트"
+                            type="text"
+                            multiline
+                            rowsMax={4}
+                            value={hint.value}
+                            onChange={handleHintChange}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            className="admin_quiz_form__input"
+                            error={hint.error ? true : false}
+                            id="standard-required"
+                            label="퀴즈 설명"
+                            type="text"
+                            multiline
+                            rowsMax={4}
+                            value={desc.value}
+                            onChange={handleDescChange}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <FormLabel component="answer">정답</FormLabel>
+                          <RadioGroup
+                            className="admin_quiz_form__input"
+                            aria-label="answer"
+                            color="primary"
+                            name="answer"
+                            value={hint.value}
+                            onChange={handleAnswerChange}
+                          >
+                            <FormControlLabel
+                              value="true"
+                              color="primary"
+                              control={<Radio />}
+                              label="O"
+                            />
+                            <FormControlLabel
+                              value="false"
+                              color="primary"
+                              control={<Radio />}
+                              label="X"
+                            />
+                          </RadioGroup>
+                        </Grid>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleSubmit}
+                        >
+                          퀴즈 등록
+                        </Button>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    </Wrapper>
   );
 };
 

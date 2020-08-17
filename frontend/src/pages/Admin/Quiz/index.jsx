@@ -62,7 +62,8 @@ const AdminQuiz = () => {
   const createQuizData = () => {
     const QuizData = {
       quiz_question: '',
-      quiz_hint: '',
+      quiz_desc: '',
+      quiz_desc: '',
       quiz_answer: true,
       status: 'create',
     };
@@ -74,7 +75,8 @@ const AdminQuiz = () => {
     const QuizData = {
       quiz_id: rowData.quiz_id,
       quiz_question: rowData.quiz_question,
-      quiz_hint: rowData.quiz_question,
+      quiz_hint: rowData.quiz_hint,
+      quiz_desc: rowData.quiz_desc,
       quiz_answer: rowData.quiz_answer,
       status: 'update',
     };
@@ -94,6 +96,8 @@ const AdminQuiz = () => {
       })
       .catch(e => {
         console.log('Error: ', e.response.data);
+        alert('퀴즈가 삭제되지 않았습니다. 서비스 관리자에게 문의해 주세요.');
+        window.location.reload();
       });
   };
 
@@ -106,11 +110,11 @@ const AdminQuiz = () => {
           </Grid>
           <Grid item>
             <Grid className="admin_quiz__content">
-              <h5 className="admin_quiz__header">Quiz Dashboard</h5>
+              <h5 className="admin_quiz__header">퀴즈 목록</h5>
               <Divider variant="middle" className="admin_quiz__divider" />
               <MaterialTable
                 icons={tableIcons}
-                title="재고 목록"
+                title=""
                 columns={quizzesTableData.columns}
                 data={quizzesTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 8 }}
@@ -133,7 +137,7 @@ const AdminQuiz = () => {
                       console.log(rowData);
                       if (
                         window.confirm(
-                          'You want to delete ' + rowData.quiz_question,
+                          `"${rowData.quiz_question}" 퀴즈를 삭제하시겠습니까?`,
                         )
                       ) {
                         deleteQuizData(rowData.quiz_id);

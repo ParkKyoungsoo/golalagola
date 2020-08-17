@@ -1,16 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
-import { useHistory, Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
+import {
+  Grid,
+  Divider,
+  Paper,
+  Button,
+  ListItem,
+  ListItemText,
+  List,
+  Tooltip,
+} from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
-import AdminNav from '../Layout/nav.jsx';
+import Wrapper from './styles';
+
 import NestedList from '../Layout/sidebar.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-import axios from 'axios';
 
 import CanvasJSReact from '../asset/canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -21,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    margin: theme.spacing(2),
+    // margin: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -48,6 +58,7 @@ const AdminVS = props => {
       event_date: '',
       event_expire: '',
       event_category: '',
+      event_id: '',
     });
     history.push('/Admin/CreateEvent');
   };
@@ -61,6 +72,7 @@ const AdminVS = props => {
           event_date: '',
           event_expire: '',
           event_category: currentEventDatas[i].event_category,
+          event_id: eventId,
         });
       }
     }
@@ -68,12 +80,11 @@ const AdminVS = props => {
   };
 
   const eventDelete = eventId => e => {
-    axios
-      .delete(`https://i3b309.p.ssafy.io/api/event`, {
-        data: {
-          event_id: eventId,
-        },
-      })
+    Axios.delete(`https://i3b309.p.ssafy.io/api/event`, {
+      data: {
+        event_id: eventId,
+      },
+    })
       .then(function(res) {
         console.log('success', res);
         alert('삭제가 완료되었습니다.');
@@ -84,204 +95,318 @@ const AdminVS = props => {
       });
   };
 
-  return (
-    <div>
-      <div classes={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={2}>
-            <Paper className={classes.paper}>
-              <NestedList></NestedList>
-            </Paper>
-          </Grid>
-          <Grid item xs={9}>
-            <Grid style={{ display: 'flex' }}>
-              <Grid item xs={10} container alignItems="center" justify="center">
-                <h1>진행중인 이벤트</h1>
-              </Grid>
-              <Grid item xs={2} container alignItems="center" justify="center">
-                <Button onClick={moveCreatePage}>추가</Button>
-              </Grid>
-            </Grid>
-            {currentEventDatas.map((data, index) => (
-              <Paper
-                className={classes.paper}
-                elevation={5}
-                key={data.event_id}
-              >
-                <Grid container>
-                  <Grid
-                    className="KisokCentering"
-                    item
-                    xs={5}
-                    style={{ display: 'flex' }}
-                  >
-                    <img
-                      className="tmp"
-                      src={`https://i3b309.p.ssafy.io/${
-                        Object(productDatas[data.event_item['1'].prod_id - 1])
-                          .prod_image
-                      }`}
-                      alt="image1"
-                      style={{ height: '150px', width: '150px' }}
-                    />
-                    <Grid item xs={1}></Grid>
-                    <Grid>
-                      <Grid>
-                        상품명 :{' '}
-                        {
-                          Object(productDatas[data.event_item['1'].prod_id - 1])
-                            .prod_name
-                        }
-                      </Grid>
-                      <Grid>
-                        남은 개수 :{' '}
-                        {
-                          Object(productDatas[data.event_item['1'].prod_id - 1])
-                            .prod_amount
-                        }
-                      </Grid>
-                      <Grid>
-                        할인율 :{' '}
-                        {
-                          Object(productDatas[data.event_item['1'].prod_id - 1])
-                            .prod_sale
-                        }
-                        %
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <h1>VS</h1>
-                  </Grid>
-                  <Grid
-                    className="KisokCentering"
-                    item
-                    xs={5}
-                    style={{ display: 'flex' }}
-                  >
-                    <img
-                      className="tmp"
-                      src={`https://i3b309.p.ssafy.io/${
-                        Object(productDatas[data.event_item['2'].prod_id - 1])
-                          .prod_image
-                      }`}
-                      alt="image2"
-                      style={{ height: '150px', width: '150px' }}
-                    />
-                    <Grid item xs={1}></Grid>
-                    <Grid>
-                      <Grid>
-                        상품명 :{' '}
-                        {
-                          Object(productDatas[data.event_item['2'].prod_id - 1])
-                            .prod_name
-                        }
-                      </Grid>
-                      <Grid>
-                        남은 개수 :{' '}
-                        {
-                          Object(productDatas[data.event_item['2'].prod_id - 1])
-                            .prod_amount
-                        }
-                      </Grid>
-                      <Grid>
-                        할인율 :{' '}
-                        {
-                          Object(productDatas[data.event_item['2'].prod_id - 1])
-                            .prod_sale
-                        }
-                        %
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={1}
-                    container
-                    alignItems="center"
-                    justify="center"
-                  >
-                    <Grid>
-                      <Button
-                        variant="outline-secondary"
-                        onClick={eventUpdate(data.event_id)}
-                      >
-                        수정
-                      </Button>
-                    </Grid>
-                    <Grid>
-                      <Button
-                        variant="outline-danger"
-                        onClick={eventDelete(data.event_id)}
-                      >
-                        삭제
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <div>
-                  <CanvasJSChart
-                    options={{
-                      animationEnabled: true,
+  // 차트 데이터
+  const options = (data, index) => {
+    return {
+      animationEnabled: true,
 
-                      subtitles: [
-                        {
-                          text: Object(
-                            productDatas[
-                              vsData[index].event_item['3'].more_item - 1
-                            ],
-                          ).prod_name,
-                          verticalAlign: 'center',
-                          fontSize: 24,
-                          dockInsidePlotArea: true,
-                        },
-                      ],
-                      data: [
-                        {
-                          type: 'doughnut',
-                          showInLegend: true,
-                          indexLabel: '{name}: {y}',
-                          yValueFormatString: "#,###'%'",
-                          dataPoints: [
-                            {
-                              name: Object(
-                                productDatas[
-                                  vsData[index].event_item['1'].event_prod - 1
-                                ],
-                              ).prod_name,
-                              y:
-                                (vsData[index].event_item['1'].coupon_select /
-                                  (vsData[index].event_item['1'].coupon_select +
-                                    vsData[index].event_item['2']
-                                      .coupon_select)) *
-                                100,
-                            },
-                            {
-                              name: Object(
-                                productDatas[
-                                  vsData[index].event_item['2'].event_prod - 1
-                                ],
-                              ).prod_name,
-                              y:
-                                (vsData[index].event_item['2'].coupon_select /
-                                  (vsData[index].event_item['1'].coupon_select +
-                                    vsData[index].event_item['2']
-                                      .coupon_select)) *
-                                100,
-                            },
-                          ],
-                        },
-                      ],
-                    }}
-                    /* onRef={ref => this.chart = ref} */
-                  />
-                </div>
+      subtitles: [
+        {
+          // text: `${
+          //   Object(productDatas[data.event_item['1'].prod_id - 1]).prod_name
+          // } vs ${
+          //   Object(productDatas[data.event_item['2'].prod_id - 1]).prod_name
+          // }`,
+          text: 'VS',
+          verticalAlign: 'center',
+          fontSize: 16,
+          dockInsidePlotArea: true,
+        },
+      ],
+
+      data: [
+        {
+          type: 'doughnut',
+          // showInLegend: true,
+          startAngle: 90,
+          radius: '100%',
+          innerRadius: '75%',
+          // legendText: '{name}',
+          // indexLabel: '{y}',
+          // yValueFormatString: "#,###'%'",
+          // indexLabelPlacement: 'inside',
+          // indexLabelFontColor: 'white',
+          dataPoints: [
+            {
+              color: '#5646FF',
+              name: Object(
+                productDatas[vsData[index].event_item['1'].event_prod - 1],
+              ).prod_name,
+              y:
+                (vsData[index].event_item['1'].coupon_select /
+                  (vsData[index].event_item['1'].coupon_select +
+                    vsData[index].event_item['2'].coupon_select)) *
+                100,
+            },
+            {
+              color: '#FD636D',
+              name: Object(
+                productDatas[vsData[index].event_item['2'].event_prod - 1],
+              ).prod_name,
+              y:
+                (vsData[index].event_item['2'].coupon_select /
+                  (vsData[index].event_item['1'].coupon_select +
+                    vsData[index].event_item['2'].coupon_select)) *
+                100,
+            },
+          ],
+        },
+      ],
+    };
+  };
+
+  return (
+    <Wrapper>
+      <div className="admin_event__main">
+        <Grid container>
+          <Grid item>
+            <NestedList index={3} />
+          </Grid>
+          <Grid item>
+            <Grid className="admin_event__content">
+              <h5 className="admin_event__header">이벤트 목록</h5>
+              <Divider variant="middle" className="admin_event__divider" />
+              <Paper elevation={2}>
+                <List>
+                  <ListItem>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="space-between"
+                      alignItems="center"
+                    >
+                      <Grid item></Grid>
+                      <Grid item>
+                        <Tooltip title="Add">
+                          <Button onClick={moveCreatePage}>
+                            <AddBoxIcon style={{ color: 'gray' }} />
+                          </Button>
+                        </Tooltip>
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                  <ListItem>
+                    <Grid
+                      className="admin_event__table--title"
+                      container
+                      direction="row"
+                      justify="space-evenly"
+                      alignItems="center"
+                    >
+                      <Grid item xs={2}>
+                        A상품
+                      </Grid>
+                      <Grid item xs={2}>
+                        차트
+                      </Grid>
+                      <Grid item xs={2}>
+                        B상품
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                  <Divider className="admin_event__item--divider" />
+                  {currentEventDatas.map((data, index) => (
+                    <div>
+                      <ListItem
+                        className="admin_event__table"
+                        key={data.event_id}
+                      >
+                        <Grid
+                          item
+                          container
+                          direction="row"
+                          justify="space-around"
+                          alignItems="center"
+                        >
+                          <Grid
+                            item
+                            xs={10}
+                            container
+                            direction="row"
+                            justify="space-evenly"
+                            alignItems="center"
+                          >
+                            {/* A상품 */}
+                            <Grid item>
+                              {/* A상품 이미지 */}
+                              <img
+                                className="admin_event__item--image_A"
+                                src={`https://i3b309.p.ssafy.io/${
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_image
+                                }`}
+                                alt="image1"
+                              />
+                              <p className="admin_event__item--title">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_name
+                                }
+                              </p>
+                              <p className="admin_event__item--desc">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_amount
+                                }
+                                개{' / '}
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['1'].prod_id - 1
+                                    ],
+                                  ).prod_sale
+                                }
+                                %
+                              </p>
+                            </Grid>
+
+                            {/* 차트 */}
+                            <Grid
+                              item
+                              className="admin_event__item--chart_box"
+                              container
+                              direction="row"
+                              justify="space-evenly"
+                              alignItems="center"
+                            >
+                              <Grid>
+                                {/* A상품 %, 갯수 */}
+                                <p className="admin_event__item--percent_A">
+                                  {(
+                                    (vsData[index].event_item['1']
+                                      .coupon_select /
+                                      (vsData[index].event_item['1']
+                                        .coupon_select +
+                                        vsData[index].event_item['2']
+                                          .coupon_select)) *
+                                    100
+                                  ).toFixed(0)}
+                                  %
+                                </p>
+                                <p className="admin_event__item--amount">
+                                  {vsData[index].event_item['1'].coupon_select}
+                                  개
+                                </p>
+                              </Grid>
+                              <Grid>
+                                <div className="admin_event__item--chart">
+                                  <CanvasJSChart
+                                    // style={{ width: '200px', height: '200px' }}
+                                    options={options(data, index)}
+                                  />
+                                </div>
+                              </Grid>
+                              <Grid>
+                                {/* B상품 %, 갯수 */}
+                                <p className="admin_event__item--percent_B">
+                                  {(
+                                    (vsData[index].event_item['2']
+                                      .coupon_select /
+                                      (vsData[index].event_item['1']
+                                        .coupon_select +
+                                        vsData[index].event_item['2']
+                                          .coupon_select)) *
+                                    100
+                                  ).toFixed(0)}
+                                  %
+                                </p>
+                                <p className="admin_event__item--amount">
+                                  {vsData[index].event_item['2'].coupon_select}
+                                  개
+                                </p>
+                              </Grid>
+                            </Grid>
+
+                            {/* B상품 */}
+                            <Grid item>
+                              {/* B상품 이미지 */}
+                              <img
+                                className="admin_event__item--image_B"
+                                src={`https://i3b309.p.ssafy.io/${
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_image
+                                }`}
+                                alt="image2"
+                              />
+                              <p className="admin_event__item--title">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_name
+                                }
+                              </p>
+                              <p className="admin_event__item--desc">
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_amount
+                                }
+                                개{' / '}
+                                {
+                                  Object(
+                                    productDatas[
+                                      data.event_item['2'].prod_id - 1
+                                    ],
+                                  ).prod_sale
+                                }
+                                %
+                              </p>
+                            </Grid>
+                          </Grid>
+                          <Grid item xs={1}>
+                            <Grid
+                              item
+                              container
+                              // direction="column"
+                              alignItems="center"
+                              justify="space-evenly"
+                            >
+                              <Grid>
+                                <Button
+                                  variant="outline-secondary"
+                                  onClick={eventUpdate(data.event_id)}
+                                >
+                                  <EditIcon />
+                                </Button>
+                              </Grid>
+                              <Grid>
+                                <Button
+                                  variant="outline-danger"
+                                  onClick={eventDelete(data.event_id)}
+                                >
+                                  <DeleteOutlineIcon />
+                                </Button>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </ListItem>
+                      <Divider className="admin_event__item--divider" />
+                    </div>
+                  ))}
+                </List>
               </Paper>
-            ))}
+            </Grid>
           </Grid>
         </Grid>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 export default AdminVS;
