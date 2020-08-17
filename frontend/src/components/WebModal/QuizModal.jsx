@@ -66,7 +66,7 @@ const SuccessModal = () => {
       {Mobile ? (
         <Grid container direction="column">
           <Grid item style={{ fontSize: '2em', textAlign: 'center' }}>
-            축하드립니다 ~~~
+            정답입니다.
           </Grid>
           <Grid item>
             <Grid container direction="row">
@@ -284,7 +284,20 @@ const Quiz = modalNum => {
               open={successModalTrigger}
               onClose={modalHandler}
               modalNum={1}
-              style={{ width: '100%', textAlign: 'center' }}
+              PaperProps={{
+                style: {
+                  height: '10vh',
+                  padding: '10px',
+                  width: '90vw',
+                  maxWidth: 'none',
+                  overflowX: 'hidden',
+                  overflowY: 'auto',
+                  position: 'inherit',
+                  width: '80%',
+                  height: '80%',
+                  justifyContent: 'center',
+                },
+              }}
             >
               <SuccessModal />
             </Dialog>
@@ -393,25 +406,48 @@ const Quiz = modalNum => {
               open={successModalTrigger}
               onClose={modalHandler}
               modalNum={1}
+              PaperProps={{
+                style: {
+                  height: '10vh',
+                  padding: '10px',
+                  width: '90vw',
+                  maxWidth: 'none',
+                  overflowX: 'hidden',
+                  overflowY: 'auto',
+                  position: 'inherit',
+                  width: '80%',
+                  height: '80%',
+                  justifyContent: 'center',
+                },
+              }}
             >
               <SuccessModal />
             </Dialog>
           ) : (
-            <Dialog open={failModalTrigger} onClose={modalHandler}>
+            <Dialog
+              open={failModalTrigger}
+              onClose={modalHandler}
+              PaperProps={{
+                style: {
+                  height: '10vh',
+                  padding: '10px',
+                  width: '90vw',
+                  maxWidth: 'none',
+                  overflowX: 'hidden',
+                  overflowY: 'auto',
+                  position: 'inherit',
+                  width: '80%',
+                  height: '80%',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                },
+              }}
+            >
               <Fail />
             </Dialog>
           )}
         </Wrapper>
       )}
-      {/* {userAns ? (
-        <Dialog open={successModalTrigger} onClose={modalHandler} modalNum={1}>
-          <SuccessModal />
-        </Dialog>
-      ) : (
-        <Dialog open={failModalTrigger} onClose={modalHandler}>
-          <Fail />
-        </Dialog>
-      )} */}
     </>
   );
 };
