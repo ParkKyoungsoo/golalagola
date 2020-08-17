@@ -3,7 +3,16 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   flex-grow: 1;
+  .doubleLine {
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    
+  }
   .mobilefontMedium {
+    padding: 1vh 0 0 0;
     font-size: 3vw;
     font-weight: 500;
   }
@@ -12,6 +21,7 @@ const Wrapper = styled.div`
     font-weight: bold;
   }
   .fontMedium {
+    padding: 1vh 0 0 0;
     font-size: 1.5vw;
     font-weight: 500;
   }

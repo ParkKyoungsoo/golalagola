@@ -58,27 +58,24 @@ const Navbar = () => {
   //   // if (window.location.href === 'http://localhost:3000/KioskMains') {
   //   //   handleClose();
   //   // } else {
-  //   console.log('timeout!!');
   // window.location.href = `${mainUrl}/KioskMains`;
   //   // }
   // }, 60000);
+
+  const goToMain = () => {
+    window.location.href = '/kioskmains';
+  };
 
   return (
     <>
       {/* Navigation Bar */}
       <Wrapper>
         <Grid>
-          <Box className="Nav_bar">
-            <Link to={'/kioskmains/'}>
-              <h1>
-                <Home />
-              </h1>
-            </Link>
-            <h1 className="icon_pointer" onClick={openDialog}>
-              <Plus />
-            </h1>
-            <h1 className="icon_pointer" onClick={refreshPage}>
-              <Refresh />
+          <Box
+            style={{ justifyContent: 'flex-end', padding: '10px 0 0 20px ' }}
+          >
+            <h1 onClick={goToMain} style={{ color: 'blue' }}>
+              <Home />
             </h1>
           </Box>
         </Grid>

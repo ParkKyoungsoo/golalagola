@@ -10,7 +10,7 @@ app.get("/realtime", async (req, res) => {
   var eventProd = new Array(); // 이벤트 등록 상품 id
   var productName = new Array();
   var couponSelect = new Array(); // 사용자들이 이벤트 참여해서 클릭한(원하는) 상품의 개수
-
+  var productImg = new Array();
   // 이벤트 등록 상품 모두 가져오기
   db.Event.findAll()
     .then((eventData) => {
@@ -29,6 +29,7 @@ app.get("/realtime", async (req, res) => {
             for (var j = 0; j < productData.length; j++) {
               if (eventProd[i] == productData[j].dataValues.prod_id) {
                 productName.push(productData[j].dataValues.prod_name);
+                productImg.push(productData[j].dataValues.prod_image);
                 break;
               }
             }
@@ -56,6 +57,7 @@ app.get("/realtime", async (req, res) => {
                 obj.event_prod = eventProd[i];
                 obj.coupon_select = couponSelect[i];
                 obj.prod_name = productName[i];
+                obj.prod_image = productImg[i];
                 objList.push(obj);
               }
 

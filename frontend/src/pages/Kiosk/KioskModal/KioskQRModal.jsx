@@ -2,27 +2,29 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 // import Testimg from 'public/images/qr.jpg';
 import QRCode from 'react-qr-code';
-
+import Wrapper from './styles';
 const CouponsQR = () => {
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Grid style={{ display: 'flex', justifyContent: 'center' }}>
-          <QRCode value={`https://i3b309.p.ssafy.io`} />
-        </Grid>
-      </Grid>
-      <Grid>
-        <Grid>
-          <h1>이용방법!</h1>
+    <Wrapper>
+      <Grid container>
+        <Grid item xs={12} style={{ padding: '5vw' }}>
+          <Grid style={{ display: 'flex', justifyContent: 'center' }}>
+            <QRCode value={`https://i3b309.p.ssafy.io`} />
+          </Grid>
         </Grid>
         <Grid>
-          <h3>1. QR코드를 통해 골라라골라 사이트로 접속한다.</h3>
-          <h3>2. 회원가입을 한다!</h3>
-          <h3>3. 원하는 쿠폰을 담는다.</h3>
-          <h3>4. 결제할때 쿠폰함에 있는 QR코드를 보여준다.</h3>
+          <Grid className="sidepadding">
+            <h1>이용 안내</h1>
+          </Grid>
+          <Grid className="sidepadding">
+            <h4>1. QR 코드를 스캔합니다.</h4>
+            <h4>2. 로그인(회원가입) 진행 후 원하는 상품을 검색합니다.</h4>
+            <h4>3. 쿠폰받기 버튼을 클릭합니다.</h4>
+            <h4>4. Event 참여 후 쿠폰함의 QR 코드를 결제시 보여주세요.</h4>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </Wrapper>
   );
 };
 

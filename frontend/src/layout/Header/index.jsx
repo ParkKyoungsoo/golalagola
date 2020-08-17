@@ -100,20 +100,8 @@ const Header = props => {
     >
       <Wrapper>
         {isMobile ? (
-          <AppBar
-            style={{
-              alignItems: 'center',
-            }}
-            className="headerColor"
-          >
-            <Grid
-              container
-              style={{
-                height: '8vh',
-                justifyContent: 'center',
-              }}
-              className="appbar"
-            >
+          <AppBar className="headerColor navbarBoxShdow">
+            <Grid container className="appbar headerColor">
               <Grid item xs={4} className="navbarCentering">
                 <Grid
                   onClick={() => {
@@ -135,10 +123,10 @@ const Header = props => {
                 }}
               >
                 <Typography
-                  variant="h5"
+                  variant="p"
                   onClick={onClickRedirectPathHandler('/mainvote')}
                   style={{
-                    backgroundColor: '#f7f2f2',
+                    backgroundColor: '#f2f2f2',
                     cursor: 'pointer',
                   }}
                 >
@@ -161,13 +149,7 @@ const Header = props => {
             </Grid>
           </AppBar>
         ) : (
-          <AppBar
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            className="headerColor"
-          >
+          <AppBar className="headerColor navbarBoxShdow">
             <Grid
               container
               style={{
@@ -208,7 +190,7 @@ const Header = props => {
                       onClick={onClickRedirectPathHandler('mycoupon')}
                       className="header-button headerColor "
                     >
-                      <h6 style={{ margin: 'auto' }}>쿠폰</h6>
+                      <h6 style={{ margin: 'auto' }}>쿠폰함</h6>
                     </Button>
                   ) : null}
                   <Button
@@ -221,7 +203,7 @@ const Header = props => {
                         <User />
                       </h4>
                     ) : (
-                      <h6 style={{ margin: 'auto' }}>Sign in</h6>
+                      <h6 style={{ margin: 'auto' }}>로그인</h6>
                     )}
                   </Button>
                 </Grid>

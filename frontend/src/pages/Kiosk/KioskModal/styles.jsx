@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  .sidepadding {
+    padding: 1vh 2vw;
+  }
   & .KisokCentering {
     display: flex;
     flex-wrap: wrap;
@@ -10,10 +13,10 @@ const Wrapper = styled.div`
   }
 
   & .tmp {
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
     border-radius: 5%;
-    padding: 10px
+    padding: 10px;
   }
 `;
 

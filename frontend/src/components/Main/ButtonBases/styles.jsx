@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   .image {
     position: relative;
     height: 200px;
+
     &:hover,
     & .focus-visible {
       z-index: 1;
@@ -58,11 +59,10 @@ const Wrapper = styled.div`
   }
   .mobile-image-title {
     position: relative;
-    // padding: 8px 16px 7px;
-    // line-height: 26px;
-    // color: #f7f2f2;
+
     color: black;
     font-weight: bold;
+    font-size: 1em;
   }
   .selected-tab {
     opacity: 1;
