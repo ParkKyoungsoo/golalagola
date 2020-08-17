@@ -221,7 +221,7 @@ const Header = props => {
                         <User />
                       </h4>
                     ) : (
-                      <h6 style={{ margin: 'auto' }}>Sign in</h6>
+                      <h6 style={{ margin: 'auto' }}>로그인</h6>
                     )}
                   </Button>
                 </Grid>

@@ -281,7 +281,7 @@ app.put("/change_pwd", async (req, res) => {
         if (decoded.user_pwd !== req.body.before_pwd) {
           res
             .status(403)
-            .send({ message: "이전 패스워드가 일치하지 않습니다." });
+            .send({ message: "현재 패스워드가 일치하지 않습니다." });
         } else {
           db.User.update(
             {
