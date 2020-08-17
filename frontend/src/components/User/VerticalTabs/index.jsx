@@ -15,6 +15,7 @@ import {
   Tab,
 } from '@material-ui/core';
 import Wrapper from './styles';
+
 function TabPanel(props) {
   const { value, index, ...other } = props;
   return (

@@ -145,6 +145,10 @@ const App = () => {
   // 제품 수량 && 판매 현황 개수
   const [buyDatas, setBuyDatas] = useState([]);
   const [vsData, setVSData] = useState([]);
+  const [dailySaleDatas, setDailySaleDatas] = useState([]);
+  const [couponUseSales, setCouponUseSales] = useState([]);
+  const [recommandProds, setRecommandProds] = useState([]);
+  const [realtime, setRealTime] = useState([]);
 
   //
   const [newEventData, setNewEventData] = useState({
@@ -279,6 +283,48 @@ const App = () => {
       setVSData(res.data);
     });
   }
+  async function getDailySaleDatas() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/buy/dailySale').then(
+      function(res) {
+        const actualSale = [];
+        for (var key in res.data) {
+          var obj = new Object();
+          obj.x = new Date(key);
+          obj.y = res.data[key];
+          actualSale.push(obj);
+        }
+
+        setDailySaleDatas(actualSale);
+      },
+    );
+  }
+  async function getCouponUseSales() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/buy/couponUseSale').then(
+      function(res) {
+        const actualSale = [];
+        for (var key in res.data) {
+          var obj = new Object();
+          obj.x = new Date(key);
+          obj.y = res.data[key];
+          actualSale.push(obj);
+        }
+
+        setCouponUseSales(actualSale);
+      },
+    );
+  }
+  async function getRecommandProds() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/product/recommandProd').then(
+      function(res) {
+        var objArr = new Array();
+        for (var i = 1; i < 14; i++) {
+          objArr.push(res.data[i]);
+        }
+
+        setRecommandProds(objArr);
+      },
+    );
+  }
 
   async function getProgressedEventId() {
     await Axios.get('https://i3b309.p.ssafy.io/api/event/eventId').then(
@@ -288,10 +334,22 @@ const App = () => {
     );
   }
 
+  async function getRealTimes() {
+    await Axios.get('https://i3b309.p.ssafy.io/api/coupon/realtime').then(
+      function(res) {
+        setRealTime(res.data);
+      },
+    );
+  }
+
   useEffect(() => {
     getProductDatas();
     getBuyDatas();
     getEventProducts();
+    getDailySaleDatas();
+    getCouponUseSales();
+    getRecommandProds();
+    getRealTimes();
     // getEventDatas();
     // getCategoryDatas();
     // getMyCouponDatas();
@@ -380,10 +438,14 @@ const App = () => {
         setBuyDatas,
         vsData,
         setVSData,
-
-        // 이벤트 변화 감지
-        eventListener,
-        setEventListener,
+        dailySaleDatas,
+        setDailySaleDatas,
+        couponUseSales,
+        setCouponUseSales,
+        recommandProds,
+        setRecommandProds,
+        realtime,
+        setRealTime,
       }}
     >
       <MuiThemeProvider theme={theme}>

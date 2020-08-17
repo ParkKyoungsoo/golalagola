@@ -91,6 +91,10 @@ const EventModal = modalNum => {
 
   const isMobile = useMediaQuery('(max-width:920px)');
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   return (
     <>
       {isMobile ? (
@@ -107,7 +111,7 @@ const EventModal = modalNum => {
             className="EM"
             container
             direction="row"
-            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
+            style={{ backgroundColor: '#f2f2f2', position: 'relative' }}
           >
             <Grid item xs={5}>
               <Box
@@ -129,7 +133,7 @@ const EventModal = modalNum => {
                   alt="nature"
                   style={{
                     display: 'flex',
-                    maxWidth: '20vw',
+                    maxWidth: '15v w',
                     borderRadius: '8px',
                     // maxHeight: '20vh',
                     marginTop: '2vh',
@@ -147,7 +151,7 @@ const EventModal = modalNum => {
                 }}
               >
                 <img
-                  className="tmp"
+                  className="eventImg"
                   src={`https://i3b309.p.ssafy.io/${
                     Object(
                       productDatas[
@@ -158,7 +162,7 @@ const EventModal = modalNum => {
                   alt="people"
                   style={{
                     display: 'flex',
-                    maxWidth: '20vw',
+                    maxWidth: '15vw',
                     borderRadius: '8px',
                     // maxHeight: '20vh',
                     marginTop: '2vh',
@@ -171,7 +175,11 @@ const EventModal = modalNum => {
           </Grid>
           <Grid className="inputCss" container direction="row">
             <Grid item item xs={5}>
-              <Grid container direction="column">
+              <Grid
+                container
+                direction="column"
+                style={{ alignItems: 'center' }}
+              >
                 <Grid item>
                   <input
                     className="butt"
@@ -198,23 +206,25 @@ const EventModal = modalNum => {
                   ></input>
                 </Grid>
                 <Grid item>
-                  <p>
-                    <h5 className="desCss">
-                      {
-                        Object(
-                          productDatas[
-                            currentEventDatas[eventNum].event_item['1']
-                              .prod_id - 1
-                          ],
-                        ).prod_title
-                      }
-                    </h5>
-                  </p>
+                  <h5 className="desCss">
+                    {
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['1'].prod_id -
+                            1
+                        ],
+                      ).prod_title
+                    }
+                  </h5>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={5}>
-              <Grid container direction="column">
+              <Grid
+                container
+                direction="column"
+                style={{ alignItems: 'center' }}
+              >
                 <Grid item>
                   <input
                     className="butt"
@@ -241,18 +251,16 @@ const EventModal = modalNum => {
                   ></input>
                 </Grid>
                 <Grid item>
-                  <p>
-                    <h5 className="desCss">
-                      {
-                        Object(
-                          productDatas[
-                            currentEventDatas[eventNum].event_item['2']
-                              .prod_id - 1
-                          ],
-                        ).prod_title
-                      }
-                    </h5>
-                  </p>
+                  <h5 className="desCss">
+                    {
+                      Object(
+                        productDatas[
+                          currentEventDatas[eventNum].event_item['2'].prod_id -
+                            1
+                        ],
+                      ).prod_title
+                    }
+                  </h5>
                 </Grid>
               </Grid>
             </Grid>
@@ -266,20 +274,15 @@ const EventModal = modalNum => {
               onClick={EventTrigger}
               disabled={selectedEventItem === undefined}
             >
-              Disable elevation
+              쿠폰 받기
             </Button>
           </Grid>
-          {/* <Grid container>
-            <Grid item xs={12}>
-              <MultiCarousel />
-            </Grid>
-          </Grid> */}
         </Wrapper>
       ) : (
         <Wrapper>
           <Grid container>
             <Grid item xs={12}>
-              <h3 style={{ textAlign: 'center', marginBottom: '5vh' }}>
+              <h3 style={{ textAlign: 'center', marginBottom: '2vh' }}>
                 버튼을 눌러{' '}
                 <strong style={{ color: 'red', textAlign: 'center' }}>
                   할인
@@ -292,16 +295,15 @@ const EventModal = modalNum => {
             className="EM"
             container
             direction="row"
-            style={{ backgroundColor: '#f7f2f2', position: 'relative' }}
+            style={{ backgroundColor: '#f2f2f2', position: 'relative' }}
           >
             <Grid
-              className="imgCss"
+              // className="imgCss"
               item
               xs={5}
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                // backgroundColor: '#f7f2f2',
               }}
             >
               <Box
@@ -320,14 +322,20 @@ const EventModal = modalNum => {
                       ],
                     ).prod_image
                   }`}
-                  alt="nature"
+                  alt={
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['1'].prod_id - 1
+                      ],
+                    ).prod_title
+                  }
                   style={{
                     display: 'flex',
-                    maxWidth: '20vw',
+                    maxWidth: '15vw',
                     borderRadius: '8px',
-                    // maxHeight: '20vh',
                     marginTop: '2vh',
                     marginBottom: '2vh',
+                    marginRight: '10px',
                   }}
                 />
               </Box>
@@ -342,7 +350,8 @@ const EventModal = modalNum => {
                 // backgroundColor: '#f7f2f2',
               }}
             >
-              <Box
+              <Grid
+                className="imgDiv"
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
@@ -350,7 +359,7 @@ const EventModal = modalNum => {
                 }}
               >
                 <img
-                  className="tmp"
+                  className="eventImg"
                   src={`https://i3b309.p.ssafy.io/${
                     Object(
                       productDatas[
@@ -358,18 +367,23 @@ const EventModal = modalNum => {
                       ],
                     ).prod_image
                   }`}
-                  alt="people"
+                  alt={
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                      ],
+                    ).prod_title
+                  }
                   style={{
                     display: 'flex',
-                    // justifyContent: 'center',
-                    maxWidth: '20vw',
-                    // maxHeight: '20vh',
+                    maxWidth: '15vw',
                     marginTop: '2vh',
                     marginBottom: '2vh',
                     borderRadius: '8px',
+                    marginLeft: '10px',
                   }}
                 />
-              </Box>
+              </Grid>
             </Grid>
             <h3 style={{ position: 'absolute' }}>
               <strong>VS</strong>
@@ -377,7 +391,11 @@ const EventModal = modalNum => {
           </Grid>
           <Grid className="inputCss" container direction="row">
             <Grid item item xs={5}>
-              <Grid container direction="column">
+              <Grid
+                container
+                direction="column"
+                style={{ alignItems: 'center' }}
+              >
                 <Grid item>
                   <input
                     className="butt"
@@ -404,8 +422,6 @@ const EventModal = modalNum => {
                   ></input>
                 </Grid>
                 <Grid item className="desCss">
-                  {/* <p> */}
-                  {/* <h5 className="desCss"> */}
                   {
                     Object(
                       productDatas[
@@ -413,13 +429,67 @@ const EventModal = modalNum => {
                       ],
                     ).prod_title
                   }
-                  {/* </h5> */}
-                  {/* </p> */}
+                </Grid>
+                <Grid item>
+                  <Grid container style={{ justifyContent: 'space-evenly' }}>
+                    <Grid item className="discount">
+                      최대&nbsp;&nbsp;
+                      <strong>
+                        {
+                          Object(
+                            productDatas[
+                              currentEventDatas[eventNum].event_item['1']
+                                .prod_id - 1
+                            ],
+                          ).prod_sale
+                        }
+                      </strong>
+                      %
+                    </Grid>
+                    <Grid item>
+                      <span className="price">
+                        {numberWithCommas(
+                          Object(
+                            productDatas[
+                              currentEventDatas[eventNum].event_item['1']
+                                .prod_id - 1
+                            ],
+                          ).prod_price,
+                        )}
+                      </span>
+                      &nbsp;&nbsp;
+                      <span>
+                        <strong>
+                          {numberWithCommas(
+                            Object(
+                              productDatas[
+                                currentEventDatas[eventNum].event_item['1']
+                                  .prod_id - 1
+                              ],
+                            ).prod_price *
+                              (100 -
+                                Object(
+                                  productDatas[
+                                    currentEventDatas[eventNum].event_item['1']
+                                      .prod_id - 1
+                                  ],
+                                ).prod_sale) *
+                              0.01,
+                          )}
+                          원
+                        </strong>
+                      </span>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={5}>
-              <Grid container direction="column">
+              <Grid
+                container
+                direction="column"
+                style={{ alignItems: 'center' }}
+              >
                 <Grid item>
                   <input
                     className="butt"
@@ -445,19 +515,66 @@ const EventModal = modalNum => {
                     }
                   ></input>
                 </Grid>
+                <Grid item className="desCss">
+                  {
+                    Object(
+                      productDatas[
+                        currentEventDatas[eventNum].event_item['2'].prod_id - 1
+                      ],
+                    ).prod_title
+                  }
+                </Grid>
                 <Grid item>
-                  {/* <p> */}
-                  <h5 className="desCss">
-                    {
-                      Object(
-                        productDatas[
-                          currentEventDatas[eventNum].event_item['2'].prod_id -
-                            1
-                        ],
-                      ).prod_title
-                    }
-                  </h5>
-                  {/* </p> */}
+                  <Grid container style={{ justifyContent: 'space-evenly' }}>
+                    <Grid item className="discount">
+                      최대&nbsp;&nbsp;
+                      <strong>
+                        {
+                          Object(
+                            productDatas[
+                              currentEventDatas[eventNum].event_item['2']
+                                .prod_id - 1
+                            ],
+                          ).prod_sale
+                        }
+                      </strong>
+                      %
+                    </Grid>
+                    <Grid item>
+                      <span className="price">
+                        {numberWithCommas(
+                          Object(
+                            productDatas[
+                              currentEventDatas[eventNum].event_item['2']
+                                .prod_id - 1
+                            ],
+                          ).prod_price,
+                        )}
+                      </span>
+                      &nbsp;&nbsp;
+                      <span>
+                        <strong>
+                          {numberWithCommas(
+                            Object(
+                              productDatas[
+                                currentEventDatas[eventNum].event_item['2']
+                                  .prod_id - 1
+                              ],
+                            ).prod_price *
+                              (100 -
+                                Object(
+                                  productDatas[
+                                    currentEventDatas[eventNum].event_item['2']
+                                      .prod_id - 1
+                                  ],
+                                ).prod_sale) *
+                              0.01,
+                          )}
+                          원
+                        </strong>
+                      </span>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -479,19 +596,14 @@ const EventModal = modalNum => {
                 onClick={EventTrigger}
                 disabled={selectedEventItem === undefined}
                 style={{
-                  width: '20vw',
-                  height: '10vh',
+                  width: '15v w',
+                  height: '8vh',
                 }}
               >
-                Disable elevation
+                쿠폰 받기
               </Button>
             </Grid>
           </Grid>
-          {/* <Grid container>
-            <Grid item xs={12}>
-              <MultiCarousel />
-            </Grid>
-          </Grid> */}
         </Wrapper>
       )}
     </>
