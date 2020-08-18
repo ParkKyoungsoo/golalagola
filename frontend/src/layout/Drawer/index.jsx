@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CommonContext } from '../../context/CommonContext';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 import {
   Button,
   Grid,
@@ -137,6 +137,7 @@ const DrawerListGroup = () => {
               onClick={onClickRedirectPathHandler('/mycoupon')}
             >
               <ListItemText primary={'쿠폰함'} disableTypography />
+              <InboxIcon />
             </ListItem>
             <ListItem button key={'내정보'} className="bg-unset">
               <Accordion className="panel">

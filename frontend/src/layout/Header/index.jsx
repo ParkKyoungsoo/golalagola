@@ -19,7 +19,6 @@ import {
   useMediaQuery,
   Container,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 
 import Wrapper from './styles';
 import { FiUser } from 'react-icons/fi';
@@ -46,7 +45,7 @@ const MobileList = () => {
 const Header = props => {
   let history = useHistory();
   // const isTablet = useMediaQuery('(max-width:960px)');
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
 
   const {
     user,
@@ -109,9 +108,9 @@ const Header = props => {
                   }}
                   // className="menu-button"
                 >
-                  <h5>
+                  <p className="mobileFont">
                     <MobileList />
-                  </h5>
+                  </p>
                 </Grid>
               </Grid>
               <Grid
@@ -129,6 +128,7 @@ const Header = props => {
                     backgroundColor: '#f2f2f2',
                     cursor: 'pointer',
                   }}
+                  className="mobileFont"
                 >
                   <span>Gola la Gola</span>
                 </Typography>
@@ -141,9 +141,9 @@ const Header = props => {
                   style={{ display: 'flex' }}
                 >
                   {successSearchbarTrigger ? <SearchComponent /> : null}
-                  <h5 onClick={openSearchbar}>
+                  <p onClick={openSearchbar} className="mobileFont">
                     <Search />
-                  </h5>
+                  </p>
                 </Grid>
               </Grid>
             </Grid>

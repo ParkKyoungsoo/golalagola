@@ -4,6 +4,10 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 1300;
   height: 8vh;
+  .mobileFont {
+    font-size: 3.5vw;
+    margin: auto;
+  }
   .navbarBoxShdow {
     -webkit-box-shadow: 0px 0.5px 2px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0.5px 2px 0px rgba(0, 0, 0, 0.5);
@@ -16,14 +20,6 @@ const Wrapper = styled.div`
     background-color: #f2f2f2;
     color: black;
     height: 8vh;
-  }
-  .searchIcon {
-    display: flex;
-    flex-wrap: nowrap;
-    position: fixed;
-    right: 30px;
-    top: 0.8vh;
-    // background-color: #f7f2f2;
   }
 
   .display-none {

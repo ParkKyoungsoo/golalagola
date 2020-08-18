@@ -2,10 +2,16 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
+  .Centering {
+    display: flex;
+    justify-content: center;
+    align-items; center;
+  }
   .content {
     transition: all 0.3s ease;
     // padding-bottom: 287px;
     // min-height: 700px;
+    margin-bottom: 5vh;
   }
   .content-shift {
     transition: all 0.3s ease;
@@ -13,7 +19,7 @@ const Wrapper = styled.div`
     /* margin-left: 280px; */
   }
   .footer {
-    position: absolute;
+    // position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
@@ -21,9 +27,11 @@ const Wrapper = styled.div`
     background: #f2f3f4;
   }
   .container {
-    margin-bottom: 30px;
+    margin-bottom: 30px
+    // padding-bottom: 5vh;
+    // margin-bottom: 5vh;
   }
-  @media (max-width: 930px) {
+  @media (max-width: 960px) {
     // padding-bottom: 377px;
   }
 `;

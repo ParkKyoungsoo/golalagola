@@ -57,7 +57,7 @@ export default function VoteGridItem(props) {
   };
 
   let history = useHistory();
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   const click = () => {
     if (history.location.pathname.includes('searchresult')) {
       history.replace('');
@@ -124,6 +124,7 @@ export default function VoteGridItem(props) {
                     <p className="fontVerticalMiddle mobilefontMedium fontCancelLine">
                       {numberWithCommas(originPrice)}원
                     </p>
+                    {/* 띄어쓰기 */}
                     &nbsp;&nbsp;
                     <p className="fontVerticalMiddle mobilefontLarge">
                       {numberWithCommas(quizSalePrice)}원

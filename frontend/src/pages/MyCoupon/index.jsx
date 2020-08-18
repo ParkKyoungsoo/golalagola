@@ -109,7 +109,7 @@ export default function StickyHeadTable() {
     setWebQuizDialogOpen(true);
   };
 
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   return (
     <Layout>
       {isMobile ? (
