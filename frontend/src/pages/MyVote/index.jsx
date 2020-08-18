@@ -6,12 +6,9 @@ import { CommonContext } from '../../context/CommonContext';
 import { ViewContext } from '../../context/ViewContext';
 import { Grid, Avatar, Button, Badge, Dialog } from '@material-ui/core';
 import Wrapper from './styles';
-import CheckBox from '../../components/WebModal/CheckBox';
 import { Link } from 'react-router-dom';
 
-
 const MyVote = () => {
-
   let history = useHistory();
 
   const [isVoteEditable, setIsVoteEditable] = useState(true);
@@ -69,15 +66,15 @@ const MyVote = () => {
                 Edit
               </Button>
             ) : (
-                <Button
-                  variant="contained"
-                  fullWidth={true}
-                  color="primary"
-                  onClick={onSignDialogOpenHandler}
-                >
-                  Sign In
-                </Button>
-              )}
+              <Button
+                variant="contained"
+                fullWidth={true}
+                color="primary"
+                onClick={onSignDialogOpenHandler}
+              >
+                Sign In
+              </Button>
+            )}
           </Grid>
           <Grid item xs={4} sm={2} className="btn-right">
             <h2>&nbsp;</h2>

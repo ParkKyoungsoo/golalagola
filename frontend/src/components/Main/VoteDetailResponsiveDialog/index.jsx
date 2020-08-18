@@ -12,7 +12,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { Wrapper, Close, Date } from './styles';
 import Axios from 'axios';
 import Feed from '../../Feed/index';
-import CheckBoxButtonsGroup from './../CheckBoxButtonsGroup';
 import { CommonContext } from '../../../context/CommonContext';
 import { useHistory } from 'react-router-dom';
 
