@@ -12,7 +12,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  IconButton,
 } from '@material-ui/core';
 import {
   Accordion,

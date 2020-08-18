@@ -7,11 +7,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
-import { HowToVote } from '@material-ui/icons/';
-import ClearIcon from '@material-ui/icons/Clear';
 import { Wrapper, Close, Date } from './styles';
-import Axios from 'axios';
-import Feed from '../../Feed/index';
 import { CommonContext } from '../../../context/CommonContext';
 import { useHistory } from 'react-router-dom';
 

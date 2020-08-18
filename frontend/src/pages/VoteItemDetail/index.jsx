@@ -230,23 +230,27 @@ const ItemDetail = ({ match }) => {
                           </h5>
                           <div className="button">
                             <Button
-                              variant="primary"
+                              variant={user.user_quiz ? 'secondary' : 'primary'}
                               onClick={
                                 user.status === 'login'
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
-                              // disabled={user.user_quiz}
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
                             </Button>
                             <Button
-                              variant="primary"
+                              variant={
+                                !(eventActivated && !userJoinedEvent)
+                                  ? 'secondary'
+                                  : 'primary'
+                              }
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
-                              // disabled={!(eventActivated && !userJoinedEvent)}
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -525,13 +529,15 @@ const ItemDetail = ({ match }) => {
                             <br />
                             <Grid style={{ display: 'flex' }}>
                               <Button
-                                variant="primary"
+                                variant={
+                                  user.user_quiz ? 'secondary' : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? QuizDialogOpen
                                     : userNotLogin
                                 }
-                                // disabled={user.user_quiz}
+                                disabled={user.user_quiz}
                                 style={{ margin: '8px 0 0 20px' }}
                                 size="lg"
                                 block
@@ -540,13 +546,17 @@ const ItemDetail = ({ match }) => {
                               </Button>
 
                               <Button
-                                variant="primary"
+                                variant={
+                                  !(eventActivated && !userJoinedEvent)
+                                    ? 'secondary'
+                                    : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? click1
                                     : userNotLogin
                                 }
-                                // disabled={!(eventActivated && !userJoinedEvent)}
+                                disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
                                 size="lg"
                                 block
@@ -825,26 +835,30 @@ const ItemDetail = ({ match }) => {
                           </h5>
                           <div className="button">
                             <Button
-                              variant="primary"
+                              variant={user.user_quiz ? 'secondary' : 'primary'}
                               onClick={
                                 user.status === 'login'
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
-                              // disabled={user.user_quiz}
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
                             </Button>
                             <Button
-                              variant="primary"
+                              variant={
+                                !(eventActivated && !userJoinedEvent)
+                                  ? 'secondary'
+                                  : 'primary'
+                              }
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
-                              // disabled={!(eventActivated && !userJoinedEvent)}
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
-                              쿠폰 받기
+                              대상이 아닙니다.
                             </Button>
                           </div>
 
@@ -1120,32 +1134,38 @@ const ItemDetail = ({ match }) => {
                             <br />
                             <Grid style={{ display: 'flex' }}>
                               <Button
-                                variant="primary"
+                                variant={
+                                  user.user_quiz ? 'secondary' : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? QuizDialogOpen
                                     : userNotLogin
                                 }
-                                // disabled={user.user_quiz}
-                                style={{ marginLeft: '20px' }}
+                                disabled={user.user_quiz}
+                                style={{ margin: '8px 0 0 20px' }}
                                 size="lg"
                                 block
                               >
                                 퀴즈 풀기
                               </Button>
                               <Button
-                                variant="primary"
+                                variant={
+                                  !(eventActivated && !userJoinedEvent)
+                                    ? 'secondary'
+                                    : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? click1
                                     : userNotLogin
                                 }
-                                // disabled={!(eventActivated && !userJoinedEvent)}
+                                disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
                                 size="lg"
                                 block
                               >
-                                쿠폰 받기
+                                대상이 아닙니다.
                               </Button>
                             </Grid>
                             {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}

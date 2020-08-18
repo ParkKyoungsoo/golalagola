@@ -10,16 +10,12 @@ import {
   Box,
   Divider,
   Grid,
-  Paper,
   useMediaQuery,
-  Dialog,
   Menu,
   MenuItem,
-  Button,
 } from '@material-ui/core';
 
-import Carousel from 'react-bootstrap/Carousel';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
 import { CommonContext } from '../../context/CommonContext';
@@ -32,13 +28,7 @@ import ControlledCarousel from './carousel';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 ///////////////////////////////////////////////
 // Vertical Carousel
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const TabPanel = props => {
@@ -69,13 +59,10 @@ const a11yProps = index => {
 // hook
 
 const useGetCategoryDatas = url => {
-  const { serverUrl, user, setUser } = useContext(CommonContext);
   const [data, setData] = useState([]);
   const { categoryDatas, setCategoryDatas } = useContext(CommonContext);
 
   const getDatas = async () => {
-    let respone = [];
-
     setData(categoryDatas);
   };
 
@@ -115,17 +102,11 @@ const useOnChangeIndex = categoryDatas => {
 // main
 
 const MainVote = props => {
-  const { drawerOpen, serverUrlBase, serverImgUrl, setDrawerOpen } = useContext(
+  const { serverUrlBase, serverImgUrl, setDrawerOpen } = useContext(
     CommonContext,
   );
-  const { productDatas, setProductDatas } = useContext(CommonContext);
   const categoryDatas = useGetCategoryDatas('/category');
 
-  const [flag, setFlag] = useState(false);
-
-  const flagToggle = () => {
-    setFlag(flag => !flag);
-  };
   const [
     onChangeIndexHandler,
     appbarIndex,
@@ -178,6 +159,7 @@ const MainVote = props => {
                   src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
                   style={{ height: '100%' }}
+                  alt="메인로고"
                 />
               </Grid>
             </Grid>
@@ -256,7 +238,7 @@ const MainVote = props => {
                     >
                       {realtime.map((data, index) =>
                         index < 7 ? (
-                          <Grid>
+                          <Grid key={index}>
                             <MenuItem
                               onClick={onClickRedirectPathHandler(
                                 data.prod_name,
@@ -369,6 +351,7 @@ const MainVote = props => {
                   src="https://i3b309.p.ssafy.io/images/골라라골라.png"
                   className="Centering"
                   style={{ height: '100%' }}
+                  alt="메인로고"
                 />
               </Grid>
             </Grid>
@@ -408,9 +391,8 @@ const MainVote = props => {
                           <Slider>
                             {realtime.map((data, index) =>
                               index < 7 ? (
-                                <Grid>
+                                <Grid key={index}>
                                   <Slide
-                                    key={index}
                                     style={{
                                       width: '100px',
                                       height: '30px',
@@ -457,7 +439,7 @@ const MainVote = props => {
                       >
                         {realtime.map((data, index) =>
                           index < 7 ? (
-                            <Grid>
+                            <Grid key={index}>
                               <MenuItem
                                 onClick={onClickRedirectPathHandler(
                                   data.prod_name,

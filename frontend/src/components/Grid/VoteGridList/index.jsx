@@ -8,9 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
-import TuneIcon from '@material-ui/icons/Tune';
 import Wrapper from './styles';
-import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { CommonContext } from '../../../context/CommonContext';
 import { ViewContext } from '../../../context/ViewContext';
