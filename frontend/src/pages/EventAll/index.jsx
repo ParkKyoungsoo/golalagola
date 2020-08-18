@@ -153,10 +153,9 @@ const EventAll = () => {
               className={
                 selectedEvent[tmpData.event_id] ===
                 tmpData.event_item['1'].prod_id
-                  ? 'eventall__item--check_item'
-                  : null
+                  ? 'eventall__item--check_item eventitemHeight'
+                  : 'eventitemHeight'
               }
-              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -168,9 +167,9 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={5} className="Centering">
                 <img
-                  className="tmp"
+                  className={isMobile ? 'mobiletmp' : 'tmp'}
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
@@ -183,7 +182,8 @@ const EventAll = () => {
               </Grid>
               <Grid
                 item
-                xs={7}
+                xs={12}
+                md={7}
                 container
                 direction="column"
                 justify="space-between"
@@ -280,10 +280,9 @@ const EventAll = () => {
               className={
                 selectedEvent[tmpData.event_id] ===
                 tmpData.event_item['2'].prod_id
-                  ? 'eventall__item--check_item'
-                  : null
+                  ? 'eventall__item--check_item '
+                  : 'eventitemHeight'
               }
-              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -295,9 +294,9 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={5} className="Centering">
                 <img
-                  className="tmp"
+                  className={isMobile ? 'mobiletmp' : 'tmp'}
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
@@ -310,7 +309,8 @@ const EventAll = () => {
               </Grid>
               <Grid
                 item
-                xs={7}
+                xs={12}
+                md={7}
                 container
                 direction="column"
                 justify="space-between"
@@ -391,7 +391,7 @@ const EventAll = () => {
                 </div>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={1}>
+            <Grid item xs={1} md={2} className="Centering eventitemHeight">
               <List>
                 <ListItem
                   button
@@ -448,10 +448,9 @@ const EventAll = () => {
               onClick={() => choiceProduct(tmpData, 1)}
               className={
                 userCoupon.includes(tmpData.event_item['1'].prod_id)
-                  ? 'eventall__item--check_item'
-                  : null
+                  ? 'eventall__item--check_item eventitemHeight'
+                  : 'eventitemHeight'
               }
-              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -462,9 +461,9 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={5} className="Centering">
                 <img
-                  className="tmp"
+                  className={isMobile ? 'mobiletmp' : 'tmp'}
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
@@ -477,7 +476,8 @@ const EventAll = () => {
               </Grid>
               <Grid
                 item
-                xs={7}
+                xs={12}
+                md={7}
                 container
                 direction="column"
                 justify="space-between"
@@ -573,10 +573,9 @@ const EventAll = () => {
               onClick={() => choiceProduct(tmpData, 2)}
               className={
                 userCoupon.includes(tmpData.event_item['2'].prod_id)
-                  ? 'eventall__item--check_item'
-                  : null
+                  ? 'eventall__item--check_item eventitemHeight'
+                  : 'eventitemHeight'
               }
-              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -587,9 +586,9 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={5} className="Centering">
                 <img
-                  className="tmp"
+                  className={isMobile ? 'mobiletmp' : 'tmp'}
                   src={`https://i3b309.p.ssafy.io/${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
@@ -602,7 +601,8 @@ const EventAll = () => {
               </Grid>
               <Grid
                 item
-                xs={7}
+                xs={12}
+                md={7}
                 container
                 direction="column"
                 justify="space-between"
@@ -683,7 +683,7 @@ const EventAll = () => {
                 </div>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={1}>
+            <Grid item xs={1} md={2} className="Centering eventitemHeight">
               <List>
                 <ListItem
                   button
