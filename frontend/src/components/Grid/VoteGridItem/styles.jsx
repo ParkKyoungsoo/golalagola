@@ -9,7 +9,6 @@ const Wrapper = styled.div`
     -webkit-box-orient:vertical;
     overflow:hidden;
     text-overflow:ellipsis;
-    
   }
   .mobilefontMedium {
     padding: 1vh 0 0 0;
@@ -76,7 +75,7 @@ const Wrapper = styled.div`
     border: 1px solid #e1e1e1;
   }
   .img-box {
-    // cursor: pointer;
+    cursor: pointer;
     &:hover {
       & .date {
         &.on {

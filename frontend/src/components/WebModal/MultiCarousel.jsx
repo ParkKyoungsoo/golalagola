@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
 import { CommonContext } from '../../context/CommonContext';
@@ -8,9 +8,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import Carousel from 'react-bootstrap/Carousel';
 
 const MultiCarousel = () => {
-  const { productDatas, setProductDatas, realtime, setRealTime } = useContext(
-    CommonContext,
-  );
+  const { realtime } = useContext(CommonContext);
 
   const responsive = {
     0: {
@@ -35,7 +33,6 @@ const MultiCarousel = () => {
     },
   };
   const isMobile = useMediaQuery('(max-width:920px)');
-  const handleOnDragStart = e => e.preventDefault();
   return (
     <>
       {isMobile ? (
@@ -53,6 +50,7 @@ const MultiCarousel = () => {
             >
               {realtime.map((TmpData, index) => (
                 <img
+                  key={index}
                   src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
                   alt="Prod_image"
                   style={{ width: '100%', height: 'auto' }}
@@ -62,7 +60,7 @@ const MultiCarousel = () => {
           </Grid>
         </Grid>
       ) : (
-        <Carousel container>
+        <Carousel>
           <Carousel.Item>
             <Grid container>
               <Grid item xs={12}>
@@ -79,6 +77,7 @@ const MultiCarousel = () => {
                 >
                   {realtime.map((TmpData, index) => (
                     <img
+                      key={index}
                       src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
                       alt="Prod_image"
                       style={{ width: '100%', height: 'auto' }}

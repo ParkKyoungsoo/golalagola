@@ -765,7 +765,7 @@ const EventAll = () => {
             : { maxWidth: 100, zIndex: '2' }
         }
       >
-        <ListItem
+        {/* <ListItem
           button
           className="eventall__button--column"
           onClick={onClickRedirectPathHandler('mycoupon')}
@@ -774,7 +774,7 @@ const EventAll = () => {
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="쿠폰함" />
-        </ListItem>
+        </ListItem> */}
       </List>
     );
   };

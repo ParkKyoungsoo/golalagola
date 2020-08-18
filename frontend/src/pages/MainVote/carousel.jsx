@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Grid, useMediaQuery } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { CommonContext } from '../../context/CommonContext';
 import { Wrapper, MobileWrapper } from './styles';
@@ -12,6 +12,12 @@ const ControlledCarousel = props => {
   const isMobile = useMediaQuery('(max-width:960px)');
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
+  };
+
+  let history = useHistory();
+
+  const moveToEventPage = () => {
+    history.push('/eventall');
   };
 
   return (
@@ -34,6 +40,7 @@ const ControlledCarousel = props => {
                       className="mobiletmp"
                       src="https://i3b309.p.ssafy.io/images/배너1.jpg"
                       alt="image2"
+                      onClick={moveToEventPage}
                     />
                   </Grid>
                 </Grid>
@@ -60,6 +67,7 @@ const ControlledCarousel = props => {
                       className="mobiletmp"
                       src="https://i3b309.p.ssafy.io/images/배너3.jpg"
                       alt="image2"
+                      onClick={moveToEventPage}
                     />
                   </Grid>
                 </Grid>
@@ -69,7 +77,6 @@ const ControlledCarousel = props => {
         </MobileWrapper>
       ) : (
         <Carousel
-          container
           activeIndex={index}
           onSelect={handleSelect}
           style={{
@@ -86,6 +93,7 @@ const ControlledCarousel = props => {
                     className="tmp"
                     src="https://i3b309.p.ssafy.io/images/배너1.jpg"
                     alt="image2"
+                    onClick={moveToEventPage}
                   />
                 </Grid>
               </Grid>
@@ -112,6 +120,7 @@ const ControlledCarousel = props => {
                     className="tmp"
                     src="https://i3b309.p.ssafy.io/images/배너3.jpg"
                     alt="image2"
+                    onClick={moveToEventPage}
                   />
                 </Grid>
               </Grid>

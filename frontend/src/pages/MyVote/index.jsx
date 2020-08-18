@@ -4,9 +4,8 @@ import Layout from '../../layout/';
 import VoteGridList from '../../components/Grid/VoteGridList/';
 import { CommonContext } from '../../context/CommonContext';
 import { ViewContext } from '../../context/ViewContext';
-import { Grid, Avatar, Button, Badge, Dialog } from '@material-ui/core';
+import { Grid, Avatar, Button } from '@material-ui/core';
 import Wrapper from './styles';
-import { Link } from 'react-router-dom';
 
 const MyVote = () => {
   let history = useHistory();
