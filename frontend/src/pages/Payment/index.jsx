@@ -1,12 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import Axios from 'axios';
 
 const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
-  const readCouponHandler = event => {
+
+  const readCouponChangeHandler = event => {
+    console.log(event.target.value);
     setReadCoupon(event.target.value);
+    console.log('readCoupon', readCoupon);
   };
+
   const onPaymentHandler = async e => {
     Axios.put(readCoupon).then(res => {
       console.log('resresr', res.data);
@@ -14,16 +18,13 @@ const Payment = props => {
   };
   return (
     <div>
-      <TextField
-        required
-        className="admin_product_form__input"
-        id="standard-required"
-        label="상품 제목"
+      <input
+        style={{ height: '0px', border: '0px' }}
         type="text"
-        multiline
-        fullWidth={true}
-        onChange={readCouponHandler}
-      />
+        onChange={readCouponChangeHandler}
+        autoFocus
+      ></input>
+
       <Button
         variant="contained"
         // disabled={false}
