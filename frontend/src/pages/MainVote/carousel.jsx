@@ -69,7 +69,6 @@ const ControlledCarousel = props => {
         </MobileWrapper>
       ) : (
         <Carousel
-          container
           activeIndex={index}
           onSelect={handleSelect}
           style={{
