@@ -7,10 +7,7 @@ import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import ClearIcon from '@material-ui/icons/Clear';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
 import { CenterFocusStrong } from '@material-ui/icons';
@@ -390,7 +387,7 @@ const Quiz = modalNum => {
               modalNum={1}
               PaperProps={{
                 style: {
-                  height: '75vh',
+                  height: '80vh',
                   padding: '10px',
                   width: '68vw',
                   maxWidth: 'none',
@@ -511,7 +508,7 @@ const Quiz = modalNum => {
               modalNum={1}
               PaperProps={{
                 style: {
-                  height: '75vh',
+                  height: '80vh',
                   padding: '10px',
                   width: '68vw',
                   maxWidth: 'none',
