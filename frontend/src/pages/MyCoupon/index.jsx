@@ -124,7 +124,7 @@ export default function StickyHeadTable() {
               }}
             >
               <QRCode
-                value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+                value={`https://i3b309.p.ssafy.io/api/payment/${user.user_id}`}
               />
             </Grid>
             <Grid container justify="center" alignItems="center">
@@ -230,7 +230,7 @@ export default function StickyHeadTable() {
                 justify="center"
               >
                 <QRCode
-                  value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+                  value={`https://i3b309.p.ssafy.io/api/payment/${user.user_id}`}
                 />
               </Grid>
               <Grid container justify="center" alignItems="center">
