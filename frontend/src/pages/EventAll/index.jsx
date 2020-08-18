@@ -48,7 +48,7 @@ const EventAll = () => {
   const [selectedEvent, setSelectedEvent] = useState({});
 
   let history = useHistory();
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
@@ -125,10 +125,10 @@ const EventAll = () => {
   };
 
   function eventGridRender(index, tmpData) {
-    const checkedStyle = {
-      opacity: '0.5',
-      border: '2px solid black',
-    };
+    // const checkedStyle = {
+    //   opacity: '0.5',
+    //   border: '2px solid black',
+    // };
 
     if (!userEvent.includes(tmpData.event_id)) {
       return (
@@ -346,7 +346,15 @@ const EventAll = () => {
     } else {
       return (
         <Fragment key={tmpData.event_id}>
-          <Grid item xs={12} className="eventall__item--part_event">
+          <Grid
+            item
+            xs={12}
+            className={
+              isMobile
+                ? 'mobile_eventall__item--part_event'
+                : 'eventall__item--part_event'
+            }
+          >
             <p className="eventall__item--part_mention">
               이미 참여한 이벤트 입니다.
             </p>
@@ -446,7 +454,7 @@ const EventAll = () => {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} md={1}>
+            <Grid item md={1}>
               <p className="eventall__item--vs">VS</p>
             </Grid>
 
@@ -630,7 +638,10 @@ const EventAll = () => {
         <Grid style={{ display: 'flex', flexDirection: 'column' }}>
           {isMobile ? (
             <>
-              <h4>배너가 들어갈 자리</h4>
+              <img
+                src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                alt="이벤트 소개 이미지"
+              />
               <Grid>
                 <NestedList />
               </Grid>
@@ -644,12 +655,16 @@ const EventAll = () => {
             <>
               <Grid className="eventall__layout--container" container>
                 <Grid item md={9} container>
-                  <h4>배너가 들어갈 자리</h4>
-
                   <Grid item xs={2}>
                     <NestedList className="eventall__layout--coupon_button" />
                   </Grid>
                   <Grid item xs={12}>
+                    <Grid className="eventall__layout--container">
+                      <img
+                        src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                        alt="이벤트 소개 이미지"
+                      />
+                    </Grid>
                     {currentEventDatas.map((tmpData, index) =>
                       eventGridRender(index, tmpData),
                     )}

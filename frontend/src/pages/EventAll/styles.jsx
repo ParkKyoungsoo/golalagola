@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+
   .eventall__layout--container {
     display: flex;
     align-items: center;
@@ -10,11 +11,23 @@ const Wrapper = styled.div`
   .eventall__layout--coupon_button {
 
   }
-
+  .mobile_eventall__item--part_event {
+    position: absolute;
+    background-color: gray;
+    width: 100%;
+    height: 35vh;
+    opacity: 70%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    z-index: 3;
+  }
   .eventall__item--part_event {
     position: absolute;
     background-color: gray;
-    // width: 75%;
+    width: 75%;
     height: 35vh;
     opacity: 70%;
     display: flex;
