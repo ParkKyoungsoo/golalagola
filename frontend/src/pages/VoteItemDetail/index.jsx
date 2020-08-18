@@ -149,8 +149,10 @@ const ItemDetail = ({ match }) => {
   useEffect(checkEvent);
   useEffect(checkUser);
   useEffect(checkedUserHasCoupon);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const product_id = match.params.id - 1;
   const isMobile = useMediaQuery('(max-width:920px)');
 
   const userNotLogin = () => {

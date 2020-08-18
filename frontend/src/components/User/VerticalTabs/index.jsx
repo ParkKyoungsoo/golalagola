@@ -54,6 +54,7 @@ export default function VerticalTabs() {
     setUserDialogIndex,
     setDrawerOpen,
     setUser,
+    setMyCouponDatas,
   } = useContext(CommonContext);
   const labels = ['회원정보 수정', '비밀번호 변경', '로그아웃'];
   const handleChange = (event, newValue) => {
@@ -75,6 +76,7 @@ export default function VerticalTabs() {
       token: '',
     });
     setUserDialogIndex(0);
+    setMyCouponDatas([]);
     alert('로그아웃 되었습니다.');
     history.push('/');
   };
