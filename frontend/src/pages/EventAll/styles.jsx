@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-
+  .eventitemHeight {
+    height:35vh;
+  }
+  .Centering{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .eventall__layout--container {
     display: flex;
     align-items: center;
@@ -155,7 +162,13 @@ const Wrapper = styled.div`
     // justify-content: space-evenly;
     // background-color: green;
   }
-
+  .mobiletmp {
+    -webkit-user-drag: none;
+    width: 50%;
+    // height: 15vh;
+    border-radius: 0.5rem;
+    // margin: 0 1vw 0 1vw;
+  }
   .tmp {
     -webkit-user-drag: none;
     width: 100%;
