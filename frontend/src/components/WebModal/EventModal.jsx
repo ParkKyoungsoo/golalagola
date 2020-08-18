@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Grid, Button, useMediaQuery } from '@material-ui/core';
 import Wrapper from './styles';
-import CheckBox from '../WebModal/CheckBox';
 import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import Box from '@material-ui/core/Box';
@@ -45,17 +44,12 @@ const EventModal = modalNum => {
       event_id: currentEventDatas[eventNum].event_id,
       user_id: user.user_id,
     });
-
-    //   console.log('userSelect', userChoice);
   };
 
   async function setMyCouponUpdate() {
     axios
       .post('https://i3b309.p.ssafy.io/api/coupon/', userChoice)
       .then(function(response) {
-        console.log('axios', userChoice);
-        console.log(response);
-
         setUserChoice({
           coupon_select: '',
           coupon_use: '',
@@ -67,10 +61,7 @@ const EventModal = modalNum => {
         modalNum.setModalNum(2);
         setEventListener(eventListener => eventListener + 1);
       })
-      .catch(error => {
-        console.log('axios', userChoice);
-        console.log('error : ', error.response);
-      });
+      .catch(error => {});
   }
 
   // 다음 모달창을 띄워주고 selectedEventItem에 선택한 제품을 넣어주기 위한 함수
@@ -83,8 +74,6 @@ const EventModal = modalNum => {
       event_id: currentEventDatas[eventNum].event_id,
       user_id: user.user_id,
     });
-
-    // console.log('userSelect', userChoice);
 
     setMyCouponUpdate();
   };

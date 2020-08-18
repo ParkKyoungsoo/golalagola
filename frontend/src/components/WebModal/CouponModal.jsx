@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Grid, Divider, useMediaQuery, Button, Link } from '@material-ui/core';
+import { Grid, useMediaQuery, Button, Link } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import { CenterFocusStrong } from '@material-ui/icons';

@@ -35,7 +35,7 @@ const QuizDialog = () => {
       aria-labelledby="max-width-dialog-title"
       PaperProps={{
         style: {
-          height: '75vh',
+          height: '80vh',
           padding: '10px',
           width: '68vw',
           maxWidth: 'none',
@@ -419,7 +419,7 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '75vh',
+                    height: '80vh',
                     padding: '10px',
                     width: '68vw',
                     maxWidth: 'none',
@@ -724,7 +724,7 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '75vh',
+                    height: '80vh',
                     padding: '10px',
                     width: '68vw',
                     maxWidth: 'none',
@@ -1014,7 +1014,7 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '75vh',
+                    height: '80vh',
                     padding: '10px',
                     width: '68vw',
                     maxWidth: 'none',
@@ -1318,7 +1318,7 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '75vh',
+                    height: '80vh',
                     padding: '10px',
                     width: '68vw',
                     maxWidth: 'none',
