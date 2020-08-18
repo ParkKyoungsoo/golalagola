@@ -359,7 +359,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log('execute eventListener');
     getMyCouponDatas();
   }, [eventListener]);
 

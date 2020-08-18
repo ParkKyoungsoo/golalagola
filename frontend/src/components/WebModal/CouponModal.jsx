@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Grid, useMediaQuery } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
 import { CommonContext } from '../../context/CommonContext';
@@ -7,13 +7,7 @@ import { CenterFocusStrong } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 const CouponModal = modalNum => {
-  const { user, productDatas, setProductDatas } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
-  const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
-
-  const [couponPageItem, setCouponPageItem] = useState(
-    productDatas[selectedEventItem - 1],
-  );
+  const { user, setItemDialogOpen } = useContext(CommonContext);
 
   const isMobile = useMediaQuery('(max-width:920px)');
 
