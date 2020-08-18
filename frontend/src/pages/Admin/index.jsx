@@ -63,7 +63,7 @@ const MainAdmin = props => {
   };
 
   const options = {
-    width: '900',
+    width: '1500',
     height: '500',
     padding: 20,
     fontSize: 16,
@@ -127,22 +127,27 @@ const MainAdmin = props => {
               <h5 className="admin_chart__header">판매 현황 차트</h5>
               <Divider variant="middle" className="admin_chart__divider" />
               <Paper elevation={2}>
-                <Grid item className="admin_chart__chart_1">
-                  <h2>일별 매출 현황</h2>
-                  <Grid>
-                    <CanvasJSChart options={options} />
-                  </Grid>
+                <Grid>
+                  <CanvasJSChart options={options} />
                 </Grid>
-                <Divider className="admin_chart__divider" />
+              </Paper>
+              <br></br>
+              <br></br>
+              <h5 className="admin_chart__header">카테고리별 제고 현황</h5>
+              <Divider className="admin_chart__divider" />
+              <Paper elevation={2}>
                 <Grid>
                   <Grid>
-                    <h2 style={{ paddingLeft: '2vw' }}>카테고리별 재고 현황</h2>
-                    <Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      style={{ display: 'flex', flexWrap: 'wrap' }}
+                    >
                       {recommandProds.map((recommandDatas, index) => (
                         <Grid
                           key={index}
                           item
-                          xs={4}
+                          xs={6}
                           style={{ padding: '3vh 2vw' }}
                         >
                           <CanvasJSChart
@@ -153,7 +158,6 @@ const MainAdmin = props => {
                                 text: `${categoryDatas[index + 1].cat_title}`,
                               },
                               axisY: {
-                                title: `${categoryDatas[index + 1].cat_title}`,
                                 scaleBreaks: {
                                   autoCalculate: true,
                                   type: 'wavy',
@@ -178,37 +182,6 @@ const MainAdmin = props => {
               </Paper>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          {recommandProds.map((recommandDatas, index) => (
-            <Grid key={index} item xs={3} style={{ display: 'flex' }}>
-              <CanvasJSChart
-                options={{
-                  animationEnabled: true,
-                  theme: 'white',
-                  title: {
-                    text: `${categoryDatas[index + 1].cat_title}`,
-                  },
-                  axisY: {
-                    title: `${categoryDatas[index + 1].cat_title}`,
-                    scaleBreaks: {
-                      autoCalculate: true,
-                      type: 'wavy',
-                      lineColor: 'dark',
-                    },
-                  },
-                  data: [
-                    {
-                      type: 'column',
-                      indexLabel: '{y}',
-                      indexLabelFontColor: 'black',
-                      dataPoints: recommandDatas,
-                    },
-                  ],
-                }}
-              />
-            </Grid>
-          ))}
         </Grid>
       </div>
     </Wrapper>
