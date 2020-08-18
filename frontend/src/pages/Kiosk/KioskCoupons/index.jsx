@@ -79,7 +79,6 @@ const SaleItem = ({ match }) => {
           >
             <Grid>
               <img
-                onClick={click}
                 style={{ width: '80%' }}
                 src="https://i3b309.p.ssafy.io/images/이용안내.jpg"
                 alt=""

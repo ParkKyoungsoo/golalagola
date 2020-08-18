@@ -9,7 +9,6 @@ const Wrapper = styled.div`
     -webkit-box-orient:vertical;
     overflow:hidden;
     text-overflow:ellipsis;
-    
   }
   .mobilefontMedium {
     padding: 1vh 0 0 0;

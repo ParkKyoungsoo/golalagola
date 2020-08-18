@@ -450,6 +450,8 @@ const App = () => {
         setRealTime,
         number,
         setNumber,
+        eventListener,
+        setEventListener,
       }}
     >
       <MuiThemeProvider theme={theme}>

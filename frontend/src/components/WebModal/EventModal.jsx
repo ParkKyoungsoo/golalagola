@@ -18,7 +18,6 @@ const EventModal = modalNum => {
   const [tmpData, setTmpData] = useState();
 
   const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
-
   const { eventListener, setEventListener } = useContext(CommonContext);
 
   const [userChoice, setUserChoice] = useState({
@@ -49,12 +48,10 @@ const EventModal = modalNum => {
   };
 
   async function setMyCouponUpdate() {
+    console.log('userChoice', userChoice);
     axios
       .post('https://i3b309.p.ssafy.io/api/coupon/', userChoice)
       .then(function(response) {
-        console.log('axios', userChoice);
-        console.log(response);
-
         setUserChoice({
           coupon_select: '',
           coupon_use: '',
@@ -62,13 +59,13 @@ const EventModal = modalNum => {
           event_id: '',
           user_id: '',
         });
-
         modalNum.setModalNum(2);
         setEventListener(eventListener => eventListener + 1);
+        console.log('eventListener', eventListener);
       })
       .catch(error => {
         console.log('axios', userChoice);
-        console.log('error : ', error.response);
+        console.log('error : ', error);
       });
   }
 
@@ -82,9 +79,6 @@ const EventModal = modalNum => {
       event_id: currentEventDatas[eventNum].event_id,
       user_id: user.user_id,
     });
-
-    // console.log('userSelect', userChoice);
-
     setMyCouponUpdate();
   };
 
