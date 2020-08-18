@@ -9,7 +9,7 @@ const ControlledCarousel = props => {
   const [index, setIndex] = useState(0);
   const { productDatas, setProductDatas } = useContext(CommonContext);
   const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };

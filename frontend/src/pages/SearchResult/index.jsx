@@ -33,7 +33,7 @@ const Result = ({ match }) => {
       `voteitemdetail/${itemData.prod_name}/${itemData.prod_id}}`,
     );
   };
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   return (
     <Wrapper className="root">
       <Layout>

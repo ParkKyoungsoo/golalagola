@@ -64,7 +64,7 @@ const NestedList = props => {
   const currentStyle = {
     backgroundColor: '#3023d5',
     color: 'white',
-    'font-weight': '500',
+    fontWeight: '500',
     borderRight: '3px solid white',
   };
 
