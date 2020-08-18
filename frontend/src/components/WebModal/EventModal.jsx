@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Grid, Button, useMediaQuery } from '@material-ui/core';
 import Wrapper from './styles';
-import CheckBox from '../WebModal/CheckBox';
 import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import Box from '@material-ui/core/Box';

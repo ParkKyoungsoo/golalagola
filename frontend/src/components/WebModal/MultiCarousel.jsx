@@ -53,6 +53,7 @@ const MultiCarousel = () => {
             >
               {realtime.map((TmpData, index) => (
                 <img
+                  key={index}
                   src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
                   alt="Prod_image"
                   style={{ width: '100%', height: 'auto' }}
@@ -62,7 +63,7 @@ const MultiCarousel = () => {
           </Grid>
         </Grid>
       ) : (
-        <Carousel container>
+        <Carousel>
           <Carousel.Item>
             <Grid container>
               <Grid item xs={12}>
@@ -79,6 +80,7 @@ const MultiCarousel = () => {
                 >
                   {realtime.map((TmpData, index) => (
                     <img
+                      key={index}
                       src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
                       alt="Prod_image"
                       style={{ width: '100%', height: 'auto' }}

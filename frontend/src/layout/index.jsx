@@ -20,11 +20,10 @@ const Layout = props => {
       {!wannaHide && <Header maxWidth="lg" />}
       {isMobile ? (
         <Container
-          open={drawerOpen}
           className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
           // maxWidth="xl"
           onClick={() => {
-            setDrawerOpen(0);
+            setDrawerOpen(true);
           }}
           // maxWidth="lg"
         >
@@ -34,13 +33,12 @@ const Layout = props => {
         <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
           <Grid item xs={12}>
             <Container
-              open={drawerOpen}
               className={
                 drawerOpen ? 'content p-0' : 'content content-shift p-0'
               }
               maxWidth="xl"
               onClick={() => {
-                setDrawerOpen(0);
+                setDrawerOpen(true);
               }}
               // maxWidth="lg"
             >

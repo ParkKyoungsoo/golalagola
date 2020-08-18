@@ -14,14 +14,13 @@ import { CenterFocusStrong } from '@material-ui/icons';
 
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
-  const { quizDatas, setQuizDatas } = useContext(CommonContext);
-  const { eventNum, setEventNum } = useContext(CommonContext);
+  const { setWebQuizDialogOpen } = useContext(CommonContext);
+  const { setItemDialogOpen } = useContext(CommonContext);
+  const { quizDatas } = useContext(CommonContext);
   const userQuizState = {
     user_quiz: true,
   };
-  const { number, setNumber } = useContext(CommonContext);
+  const { number } = useContext(CommonContext);
 
   let history = useHistory();
 
@@ -66,6 +65,7 @@ const SuccessModal = () => {
             justifyContent: 'center',
             alignContent: 'center',
           }}
+          item
           xs={12}
         >
           <Grid
@@ -149,6 +149,7 @@ const SuccessModal = () => {
             justifyContent: 'center',
             alignContent: 'center',
           }}
+          item
           xs={12}
         >
           <Grid
@@ -235,15 +236,12 @@ const Quiz = modalNum => {
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { quizDatas, setQuizDatas } = useContext(CommonContext);
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+  const { quizDatas } = useContext(CommonContext);
+  const { setWebQuizDialogOpen } = useContext(CommonContext);
+  const { setItemDialogOpen } = useContext(CommonContext);
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
-
-  let history = useHistory();
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -269,12 +267,6 @@ const Quiz = modalNum => {
     border: '6px solid green',
   };
 
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
-
   const isMobile = useMediaQuery('(max-width:920px)');
 
   // ClickAwayListener
@@ -293,7 +285,7 @@ const Quiz = modalNum => {
     <>
       {isMobile ? (
         <Wrapper>
-          <Grid container direction="column" xs={12}>
+          <Grid container direction="column" item xs={12}>
             <Grid
               item
               className="quizCentering"
@@ -362,6 +354,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                  alt="O"
                 />
               </Button>
               <Button
@@ -376,6 +369,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                  alt="X"
                 />
               </Button>
             </Grid>
@@ -387,7 +381,7 @@ const Quiz = modalNum => {
               modalNum={1}
               PaperProps={{
                 style: {
-                  height: '75vh',
+                  height: '80vh',
                   padding: '10px',
                   width: '68vw',
                   maxWidth: 'none',
@@ -408,7 +402,7 @@ const Quiz = modalNum => {
         </Wrapper>
       ) : (
         <Wrapper>
-          <Grid container direction="column" xs={12}>
+          <Grid container direction="column" item xs={12}>
             <Grid
               item
               style={{
@@ -441,8 +435,6 @@ const Quiz = modalNum => {
             >
               <ClickAwayListener onClickAway={handleClickAway}>
                 <Grid
-                  className
-                  // direction="column"
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -483,6 +475,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                  alt="O"
                 ></img>
               </Button>
               <Button
@@ -497,6 +490,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                  alt="X"
                 ></img>
               </Button>
             </Grid>
@@ -505,10 +499,9 @@ const Quiz = modalNum => {
             <Dialog
               open={successModalTrigger}
               onClose={modalHandler}
-              modalNum={1}
               PaperProps={{
                 style: {
-                  height: '75vh',
+                  height: '80vh',
                   padding: '10px',
                   width: '68vw',
                   maxWidth: 'none',

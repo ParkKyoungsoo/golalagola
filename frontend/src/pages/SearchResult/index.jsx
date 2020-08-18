@@ -46,6 +46,7 @@ const Result = ({ match }) => {
         <Grid className="Centering">
           {items.length === 0 ? (
             <Grid
+              item
               md={9}
               style={{
                 display: 'flex',
@@ -97,6 +98,7 @@ const Result = ({ match }) => {
             </Grid>
           ) : (
             <Grid
+              item
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -109,11 +111,11 @@ const Result = ({ match }) => {
             </Grid>
           )}
         </Grid>
-        <Grid md={9} style={{ margin: 'auto' }}>
+        <Grid item md={9} style={{ margin: 'auto' }}>
           <Divider />
         </Grid>
         <Grid className="Centering">
-          <Grid md={9}>
+          <Grid item md={9}>
             <GridList
               className="grid-list"
               cols={Number.isInteger(nowCols) ? nowCols : 1}
