@@ -134,7 +134,9 @@ const EventAll = () => {
       return (
         <Fragment key={tmpData.event_id}>
           <Grid
-            className="eventall__item"
+            item
+            xs={12}
+            className={isMobile ? 'mobileEventall__item' : 'eventall__item'}
             container
             direction="row"
             justify="space-around"
@@ -154,6 +156,7 @@ const EventAll = () => {
                   ? 'eventall__item--check_item'
                   : null
               }
+              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -165,7 +168,7 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={12} md={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
@@ -186,15 +189,35 @@ const EventAll = () => {
                 justify="space-between"
                 alignItems="flex-end"
               >
-                <div className="eventall__item--title">
+                <div
+                  className={
+                    isMobile
+                      ? 'mobileEventall__item--title'
+                      : 'eventall__item--title'
+                  }
+                >
                   {
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_title
                   }
                 </div>
                 <div>
-                  <span className="eventall__item--sale_p">최대&nbsp;</span>
-                  <span className="eventall__item--sale">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale_p'
+                        : 'eventall__item--sale_p'
+                    }
+                  >
+                    최대&nbsp;
+                  </span>
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale'
+                        : 'eventall_item--sale'
+                    }
+                  >
                     {
                       Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                         .prod_sale
@@ -203,14 +226,26 @@ const EventAll = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="eventall__item--price_line">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price_line'
+                        : 'eventall__item--price_line'
+                    }
+                  >
                     {numberWithCommas(
                       Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                         .prod_price,
                     )}
                     원
                   </span>
-                  <span className="eventall__item--price">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price'
+                        : 'eventall__item--price'
+                    }
+                  >
                     &nbsp;
                     {numberWithCommas(
                       parseInt(
@@ -248,6 +283,7 @@ const EventAll = () => {
                   ? 'eventall__item--check_item'
                   : null
               }
+              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -259,7 +295,7 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={12} md={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
@@ -280,15 +316,35 @@ const EventAll = () => {
                 justify="space-between"
                 alignItems="flex-end"
               >
-                <div className="eventall__item--title">
+                <div
+                  className={
+                    isMobile
+                      ? 'mobileEventall__item--title'
+                      : 'eventall__item--title'
+                  }
+                >
                   {
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_title
                   }
                 </div>
                 <div>
-                  <span className="eventall__item--sale_p">최대&nbsp;</span>
-                  <span className="eventall__item--sale">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale_p'
+                        : 'eventall__item--sale_p'
+                    }
+                  >
+                    최대&nbsp;
+                  </span>
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale'
+                        : 'eventall_item--sale'
+                    }
+                  >
                     {
                       Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                         .prod_sale
@@ -297,14 +353,26 @@ const EventAll = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="eventall__item--price_line">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price_line'
+                        : 'eventall__item--price_line'
+                    }
+                  >
                     {numberWithCommas(
                       Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                         .prod_price,
                     )}
                     원
                   </span>
-                  <span className="eventall__item--price">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price'
+                        : 'eventall__item--price'
+                    }
+                  >
                     &nbsp;
                     {numberWithCommas(
                       parseInt(
@@ -330,7 +398,11 @@ const EventAll = () => {
                   onClick={
                     user.status === 'login' ? submitCouponData : userNotLogin
                   }
-                  className="eventall__button--column"
+                  className={
+                    isMobile
+                      ? 'mobileEventall__button--column'
+                      : 'eventall__button--column'
+                  }
                 >
                   <ListItemIcon className="eventall__button--icon">
                     <SendIcon />
@@ -360,7 +432,7 @@ const EventAll = () => {
             </p>
           </Grid>
           <Grid
-            className="eventall__item"
+            className={isMobile ? 'mobileEventall__item' : 'eventall__item'}
             container
             direction="row"
             justify="space-around"
@@ -379,6 +451,7 @@ const EventAll = () => {
                   ? 'eventall__item--check_item'
                   : null
               }
+              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -389,7 +462,7 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={12} md={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
@@ -410,15 +483,35 @@ const EventAll = () => {
                 justify="space-between"
                 alignItems="flex-end"
               >
-                <div className="eventall__item--title">
+                <div
+                  className={
+                    isMobile
+                      ? 'mobileEventall__item--title'
+                      : 'eventall__item--title'
+                  }
+                >
                   {
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_title
                   }
                 </div>
                 <div>
-                  <span className="eventall__item--sale_p">최대&nbsp;</span>
-                  <span className="eventall__item--sale">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale_p'
+                        : 'eventall__item--sale_p'
+                    }
+                  >
+                    최대&nbsp;
+                  </span>
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale'
+                        : 'eventall_item--sale'
+                    }
+                  >
                     {
                       Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                         .prod_sale
@@ -427,14 +520,26 @@ const EventAll = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="eventall__item--price_line">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price_line'
+                        : 'eventall__item--price_line'
+                    }
+                  >
                     {numberWithCommas(
                       Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                         .prod_price,
                     )}
                     원
                   </span>
-                  <span className="eventall__item--price">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price'
+                        : 'eventall__item--price'
+                    }
+                  >
                     &nbsp;
                     {numberWithCommas(
                       parseInt(
@@ -471,6 +576,7 @@ const EventAll = () => {
                   ? 'eventall__item--check_item'
                   : null
               }
+              style={{ height: '35vh' }}
             >
               <Grid
                 className={
@@ -481,7 +587,7 @@ const EventAll = () => {
               >
                 <CheckIcon className="eventall__check_icon" />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={12} md={5}>
                 <img
                   className="tmp"
                   src={`https://i3b309.p.ssafy.io/${
@@ -502,15 +608,35 @@ const EventAll = () => {
                 justify="space-between"
                 alignItems="flex-end"
               >
-                <div className="eventall__item--title">
+                <div
+                  className={
+                    isMobile
+                      ? 'mobileEventall__item--title'
+                      : 'eventall__item--title'
+                  }
+                >
                   {
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_title
                   }
                 </div>
                 <div>
-                  <span className="eventall__item--sale_p">최대&nbsp;</span>
-                  <span className="eventall__item--sale">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale_p'
+                        : 'eventall__item--sale_p'
+                    }
+                  >
+                    최대&nbsp;
+                  </span>
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--sale'
+                        : 'eventall_item--sale'
+                    }
+                  >
                     {
                       Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                         .prod_sale
@@ -519,14 +645,26 @@ const EventAll = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="eventall__item--price_line">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price_line'
+                        : 'eventall__item--price_line'
+                    }
+                  >
                     {numberWithCommas(
                       Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                         .prod_price,
                     )}
                     원
                   </span>
-                  <span className="eventall__item--price">
+                  <span
+                    className={
+                      isMobile
+                        ? 'mobileEventall__item--price'
+                        : 'eventall__item--price'
+                    }
+                  >
                     &nbsp;
                     {numberWithCommas(
                       parseInt(
@@ -545,9 +683,19 @@ const EventAll = () => {
                 </div>
               </Grid>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={12} md={1}>
               <List>
-                <ListItem className="eventall__button--column">
+                <ListItem
+                  button
+                  onClick={
+                    user.status === 'login' ? submitCouponData : userNotLogin
+                  }
+                  className={
+                    isMobile
+                      ? 'mobileEventall__button--column'
+                      : 'eventall__button--column'
+                  }
+                >
                   <ListItemIcon className="eventall__button--icon">
                     <SendIcon />
                   </ListItemIcon>
@@ -641,10 +789,11 @@ const EventAll = () => {
               <img
                 src="https://i3b309.p.ssafy.io/images/eventall.jpg"
                 alt="이벤트 소개 이미지"
+                // style={{ width: 'auto' }}
               />
-              <Grid>
+              {/* <Grid>
                 <NestedList />
-              </Grid>
+              </Grid> */}
               <Grid>
                 {currentEventDatas.map((tmpData, index) =>
                   eventGridRender(index, tmpData),
@@ -655,13 +804,13 @@ const EventAll = () => {
             <>
               <Grid className="eventall__layout--container" container>
                 <Grid item md={9} container>
-                  <Grid item xs={2}>
+                  {/* <Grid item xs={2}>
                     <NestedList className="eventall__layout--coupon_button" />
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12}>
                     <Grid className="eventall__layout--container">
                       <img
-                        src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                        src="https://i3b309.p.ssafy.io/images/배너3.jpg"
                         alt="이벤트 소개 이미지"
                       />
                     </Grid>

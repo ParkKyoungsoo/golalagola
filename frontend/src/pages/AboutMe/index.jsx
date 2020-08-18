@@ -8,9 +8,9 @@ const AboutMe = () => {
     <Layout>
       <Wrapper>
         <Grid className="about-me">
-          <h2>ABOUT ME</h2>
+          <h2>개발자들</h2>
           <Grid className="picture"></Grid>
-          <h3>Jeniffer LEE</h3>
+          <h3>김재경</h3>
           <Grid container justify="center" className="info">
             <Grid item className="phone">
               +82 10 0000 0000

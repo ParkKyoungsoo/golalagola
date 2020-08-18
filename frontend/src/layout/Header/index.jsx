@@ -181,7 +181,7 @@ const Header = props => {
                     onClick={onClickRedirectPathHandler('eventall')}
                     className="header-button headerColor "
                   >
-                    <h6 style={{ margin: 'auto' }}>이벤트</h6>
+                    <h6 style={{ margin: 'auto' }}>VS이벤트</h6>
                   </Button>
 
                   {user.status === 'login' ? (
