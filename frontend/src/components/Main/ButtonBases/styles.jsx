@@ -42,8 +42,10 @@ const Wrapper = styled.div`
     right: 0;
     top: 0;
     bottom: 0;
-    background: #000;
-    opacity: 0.4;
+    // background: #000;
+    // backgroundColor: #f2f2f2;
+    background-color: #e4d6cd;
+    opacity: 0.3;
     transition: all 0.2s ease;
     &:hover {
       background: none;
@@ -54,13 +56,13 @@ const Wrapper = styled.div`
     //   padding: 16px 32px 14px;
     line-height: 26px;
     // color: #f7f2f2;
-    color: black;
+    color: #1e1e1e;
     font-weight: bold;
   }
   .mobile-image-title {
     position: relative;
 
-    color: black;
+    color: #1e1e1e;
     font-weight: bold;
     font-size: 1em;
   }
