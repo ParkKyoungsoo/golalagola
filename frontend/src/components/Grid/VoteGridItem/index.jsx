@@ -135,21 +135,24 @@ export default function VoteGridItem(props) {
             </Grid>
           ) : (
             <Grid className="effect" style={{ zIndex: '0' }}>
-              <Grid className="img-box" onClick={click}>
+              <Grid className="img-box">
                 <Avatar
+                  onClick={click}
                   variant="square"
                   src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
                   className={'large'}
-                  // imgProps={{
-                  //   className: sw ? 'img' : 'img deactivated',
-                  // }}
                   style={{
                     borderRadius: '5%',
                   }}
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <p className="fontMedium doubleLine">{itemData.prod_title}</p>
+                  <p
+                    style={{ height: '10vh' }}
+                    className="fontMedium doubleLine"
+                  >
+                    {itemData.prod_title}
+                  </p>
                   <Grid
                     style={{
                       display: 'flex',
@@ -238,7 +241,12 @@ export default function VoteGridItem(props) {
                   }}
                 />
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <p className="fontMedium doubleLine">{itemData.prod_title}</p>
+                  <p
+                    style={{ height: '10vh' }}
+                    className="fontMedium doubleLine"
+                  >
+                    {itemData.prod_title}
+                  </p>
                   <Grid
                     style={{
                       display: 'flex',
@@ -252,6 +260,7 @@ export default function VoteGridItem(props) {
                       {itemData.prod_sale}%
                     </p>
                   </Grid>
+
                   <Grid style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <p className="fontVerticalMiddle fontMedium fontCancelLine">
                       {numberWithCommas(originPrice)}원

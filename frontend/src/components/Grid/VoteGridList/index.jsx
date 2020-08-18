@@ -150,18 +150,6 @@ const VoteGridList = props => {
   } else {
     return (
       <Wrapper className="root">
-        {/* Filter
-        <Grid container>
-          <Grid item className="vote-grid-list-grid-item">
-            <TuneIcon />
-          </Grid>
-          <Grid item>
-            <ImageGridFilter
-              filterItem={filterItem}
-              onChangeFilterItem={onChangeFilterItem}
-            />
-          </Grid>
-        </Grid> */}
         {isMobile ? (
           <GridList
             className="grid-list"
