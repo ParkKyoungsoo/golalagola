@@ -294,8 +294,8 @@ const MainVote = props => {
                 aria-label="full width tabs example"
                 className="big-indicator"
                 style={{
-                  border: '1px solid #f2f2f2',
-                  background: '#f2f2f2',
+                  border: '1px solid #e4d6cd',
+                  background: '#e4d6cd',
                   borderRadius: '5%',
                 }}
               >
@@ -525,9 +525,10 @@ const MainVote = props => {
                   {categoryDatas.map((categoryData, index) => (
                     <Tab
                       style={{
-                        border: '1px solid #f2f2f2',
-                        background: '#f2f2f2',
+                        border: '1px solid #e4d6cd',
+                        background: '#e4d6cd',
                         borderRadius: '5%',
+                        padding: '0 0.5vw',
                       }}
                       key={index}
                       {...a11yProps(index)}

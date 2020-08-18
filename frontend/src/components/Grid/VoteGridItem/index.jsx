@@ -104,7 +104,7 @@ export default function VoteGridItem(props) {
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <p className="mobilefontMedium doubleLine">
+                  <p className="mobilefontMedium doubleLine titleHeight">
                     {itemData.prod_title}
                   </p>
                   <Grid
@@ -147,10 +147,7 @@ export default function VoteGridItem(props) {
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <p
-                    style={{ height: '10vh' }}
-                    className="fontMedium doubleLine"
-                  >
+                  <p className="fontMedium doubleLine titleHeight">
                     {itemData.prod_title}
                   </p>
                   <Grid
@@ -199,7 +196,7 @@ export default function VoteGridItem(props) {
                 />
 
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <p className="mobilefontMedium doubleLine">
+                  <p className="mobilefontMedium doubleLine titleHeight">
                     {itemData.prod_title}
                   </p>
                   <Grid
@@ -241,10 +238,7 @@ export default function VoteGridItem(props) {
                   }}
                 />
                 <Grid style={{ padding: '0 0 5vh 0' }}>
-                  <p
-                    style={{ height: '10vh' }}
-                    className="fontMedium doubleLine"
-                  >
+                  <p className="fontMedium doubleLine titleHeight">
                     {itemData.prod_title}
                   </p>
                   <Grid

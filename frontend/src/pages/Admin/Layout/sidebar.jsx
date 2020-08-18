@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import {
+  Button,
+  List,
+  ListItem,
+  Divider,
+  Grid,
+  Avatar,
+} from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
@@ -14,13 +20,10 @@ import PieChartIcon from '@material-ui/icons/PieChart';
 import FolderSharedIcon from '@material-ui/icons/FolderShared';
 import EventIcon from '@material-ui/icons/Event';
 import PersonIcon from '@material-ui/icons/Person';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import Wrapper from './styles';
-
+import { CommonContext } from '../../../context/CommonContext';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -70,6 +73,22 @@ const NestedList = props => {
 
   const classes = useStyles();
 
+  const { setUser } = useContext(CommonContext);
+  const onClickSignOutOpenHandler = () => {
+    setUser({
+      user_no: 0,
+      user_id: '',
+      user_nm: '',
+      user_pwd: '',
+      user_img_url: '',
+      status: '',
+      web_site: '',
+      token: '',
+    });
+
+    alert('로그아웃 하셨습니다..');
+    window.location.href = '/';
+  };
   return (
     <Wrapper>
       <List component="nav" className="sidebar__main">
@@ -159,13 +178,16 @@ const NestedList = props => {
           <div className="sidebar__admin_title">Admin</div>
           <div className="sidebar__admin_desc">싸피마트 (대전, 봉명동)</div>
           {/* <div className="sidebar__admin_item">Main Page</div> */}
-          <button className="sidebar__logout_button">
+          <Button
+            onClick={onClickSignOutOpenHandler}
+            className="sidebar__logout_button"
+          >
             &nbsp;&nbsp;로그아웃
             <ArrowForwardRoundedIcon
               fontSize="small"
               style={{ marginLeft: '5px' }}
             />
-          </button>
+          </Button>
         </Grid>
       </List>
     </Wrapper>

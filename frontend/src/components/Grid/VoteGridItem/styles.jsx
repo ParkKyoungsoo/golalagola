@@ -3,6 +3,9 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   flex-grow: 1;
+  .titleHeight {
+    height: 10vh;
+  }
   .doubleLine {
     display:-webkit-box;
     -webkit-line-clamp:2;

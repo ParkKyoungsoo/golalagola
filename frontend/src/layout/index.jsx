@@ -23,7 +23,7 @@ const Layout = props => {
           className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
           // maxWidth="xl"
           onClick={() => {
-            setDrawerOpen(true);
+            setDrawerOpen(false);
           }}
           // maxWidth="lg"
         >
@@ -38,7 +38,7 @@ const Layout = props => {
               }
               maxWidth="xl"
               onClick={() => {
-                setDrawerOpen(true);
+                setDrawerOpen(false);
               }}
               // maxWidth="lg"
             >

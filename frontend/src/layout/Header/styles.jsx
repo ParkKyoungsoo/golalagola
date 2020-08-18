@@ -46,6 +46,13 @@ const Wrapper = styled.div`
     justify-content: center;
     height: 8vh;
   }
+  .navbarAround {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    height: 8vh;
+  }
 
   .navbarRight {
     display: flex;
