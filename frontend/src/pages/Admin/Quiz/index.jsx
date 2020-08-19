@@ -71,7 +71,6 @@ const AdminQuiz = () => {
     history.push('/admin/quiz/form');
   };
   const updateQuizData = rowData => {
-    // console.log('rowData', rowData);
     const QuizData = {
       quiz_id: rowData.quiz_id,
       quiz_question: rowData.quiz_question,
@@ -95,7 +94,6 @@ const AdminQuiz = () => {
         window.location.reload();
       })
       .catch(e => {
-        console.log('Error: ', e.response.data);
         alert('퀴즈가 삭제되지 않았습니다. 서비스 관리자에게 문의해 주세요.');
         window.location.reload();
       });
@@ -134,7 +132,6 @@ const AdminQuiz = () => {
                     icon: DeleteOutline,
                     tooltip: 'Delete Quiz',
                     onClick: (event, rowData) => {
-                      console.log(rowData);
                       if (
                         window.confirm(
                           `"${rowData.quiz_question}" 퀴즈를 삭제하시겠습니까?`,

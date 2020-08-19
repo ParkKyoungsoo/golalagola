@@ -22,13 +22,10 @@ const SearchComponent = () => {
       return;
     }
   };
-  const click = () => {
-    console.log(123);
-  };
+  const click = () => {};
 
   const onKeyPress = currentPathname => e => {
     if (e.key === 'Enter') {
-      console.log(e.target.value);
       // 만약에 서치에서 또 서치를 하면
       if (currentPathname.pathname.includes('searchresult')) {
         history.push(`${e.target.value}`);

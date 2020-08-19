@@ -10,7 +10,6 @@ const Payment = props => {
     setReadCoupon('');
     console.log(event.target.value);
     setReadCoupon(event.target.value);
-    console.log('readCoupon', readCoupon);
   };
 
   const onPaymentHandler = async e => {

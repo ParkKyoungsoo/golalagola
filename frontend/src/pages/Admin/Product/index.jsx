@@ -97,7 +97,6 @@ const AdminProduct = () => {
     history.push('/admin/product/form');
   };
   const updateProductData = rowData => {
-    // console.log('rowData', rowData);
     const productData = {
       prod_id: rowData.prod_id,
       prod_title: rowData.prod_title,
@@ -123,12 +122,10 @@ const AdminProduct = () => {
       },
     })
       .then(res => {
-        console.log(res);
         alert('삭제되었습니다.');
         window.location.reload();
       })
       .catch(e => {
-        console.log('Error: ', e.response.data);
         alert(
           '상품 정보가 삭제되지 않았습니다. 서비스 관리자에게 문의해 주세요.',
         );
@@ -232,7 +229,6 @@ const AdminProduct = () => {
                     icon: DeleteOutline,
                     tooltip: 'Delete Product',
                     onClick: (event, rowData) => {
-                      console.log(rowData);
                       if (
                         window.confirm(
                           `${rowData.prod_name}를 삭제하시겠습니까?`,

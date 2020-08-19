@@ -40,10 +40,6 @@ const MainAdmin = props => {
     categoryDatas,
     setCategoryData,
   } = useContext(CommonContext);
-  // console.log('dailySaleDatas', dailySaleDatas);
-  // console.log('couponUseSales', couponUseSales);
-  console.log('recommandProds', recommandProds);
-  console.log('categoryDatas', categoryDatas);
 
   const addSymbols = e => {
     var suffixes = ['', '천', '백만', '십억'];
