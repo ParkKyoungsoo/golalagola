@@ -42,8 +42,8 @@ const MainAdmin = props => {
   };
 
   const options = {
-    width: '1500',
-    height: '500',
+    width: '1150',
+    // height: '500',
     padding: 20,
     fontSize: 16,
     dataPointWidth: 20,
@@ -96,18 +96,22 @@ const MainAdmin = props => {
 
   return (
     <Wrapper>
-      <div className="admin_chart__main">
+      <Grid className="admin_chart__main">
         <Grid container>
-          <Grid item>
+          <Grid item xs={2}>
             <NestedList index={0} />
           </Grid>
-          <Grid item>
-            <Grid className="admin_chart__content">
+          <Grid item xs={10} container>
+            <Grid
+              className="admin_chart__content"
+              xs={12}
+              style={{ width: '5%' }}
+            >
               <h5 className="admin_chart__header">판매 현황 차트</h5>
               <Divider variant="middle" className="admin_chart__divider" />
               <Paper elevation={2}>
-                <Grid>
-                  <CanvasJSChart options={options} />
+                <Grid item xs={12}>
+                  <CanvasJSChart item xs={12} options={options} />
                 </Grid>
               </Paper>
               <br></br>
@@ -162,7 +166,7 @@ const MainAdmin = props => {
             </Grid>
           </Grid>
         </Grid>
-      </div>
+      </Grid>
     </Wrapper>
   );
 };
