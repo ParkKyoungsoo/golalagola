@@ -40,10 +40,8 @@ const SignInSection01 = () => {
   );
 
   const {
-    user,
     setUser,
     setSignDialogOpen,
-    serverUrl,
     setIsShowKeyborad,
     eventListener,
     setEventListener,
@@ -95,6 +93,7 @@ const SignInSection01 = () => {
             user_image: res.data.user_image,
             user_quiz: res.data.user_quiz,
             isAdmin: res.data.isAdmin,
+            quiz_useCoupon: res.data.quiz_useCoupon,
             status: 'login',
             web_site: '',
             token: res.data.token,
@@ -304,7 +303,6 @@ const SignUpSection02 = () => {
   const { signUpUserData, setSignUpUserData, setIsSignUp } = useContext(
     ViewContext,
   );
-  const { serverUrl } = useContext(CommonContext);
 
   const OnChangeHandler = name => e => {
     if (
@@ -723,10 +721,7 @@ const ForgotPwGroupComponent = () => {
 
 // RecoverPw
 const RecoverPwGroupComponent = () => {
-  const { serverUrl } = useContext(CommonContext);
-  const { recoverPwUserData, setRecoverPwUserData, setIsSignUp } = useContext(
-    ViewContext,
-  );
+  const { recoverPwUserData } = useContext(ViewContext);
   const emailRef = useRef('');
   const verificationCodeRef = useRef('');
   const newPasswordRef = useRef('');

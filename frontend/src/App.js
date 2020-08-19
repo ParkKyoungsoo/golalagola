@@ -93,6 +93,7 @@ const App = () => {
       status: '',
       web_site: '',
       token: '',
+      quiz_useCoupon: '',
     },
     'user',
   );
