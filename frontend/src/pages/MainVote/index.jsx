@@ -157,7 +157,7 @@ const MainVote = props => {
               <Grid className="Centering" style={{ height: '15vh' }}>
                 <img
                   // src="https://i3b309.p.ssafy.io/images/골라라골라.png"
-                  src={`${serverImgUrl}/골라라골라.png`}
+                  src={`${serverImgUrl}골라라골라.png`}
                   className="Centering"
                   style={{ height: '100%' }}
                   alt="메인로고"
@@ -355,7 +355,7 @@ const MainVote = props => {
               >
                 <img
                   // src="https://i3b309.p.ssafy.io/images/골라라골라.png"
-                  src={`${serverImgUrl}/골라라골라.png`}
+                  src={`${serverImgUrl}골라라골라.png`}
                   className="Centering"
                   style={{ height: '100%' }}
                   alt="메인로고"

@@ -141,7 +141,7 @@ const Quiz = () => {
                   backgroundColor: '#FFFFFF',
                 }}
                 // src="https://i3b309.p.ssafy.io/images/quiz_o.png"
-                src={`${serverImgUrl}/quiz_o.png`}
+                src={`${serverImgUrl}quiz_o.png`}
                 alt="O"
               ></img>
             </Button>
@@ -157,7 +157,7 @@ const Quiz = () => {
                   backgroundColor: '#FFFFFF',
                 }}
                 // src="https://i3b309.p.ssafy.io/images/quiz_x.png"
-                src={`${serverImgUrl}/quiz_x.png`}
+                src={`${serverImgUrl}quiz_x.png`}
                 alt="X"
               ></img>
             </Button>

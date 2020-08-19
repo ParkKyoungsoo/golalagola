@@ -357,7 +357,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src={`${serverImgUrl}/quiz_o.png`}
+                  src={`${serverImgUrl}quiz_o.png`}
                   alt="O"
                 />
               </Button>
@@ -372,7 +372,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src={`${serverImgUrl}/quiz_x.png`}
+                  src={`${serverImgUrl}quiz_x.png`}
                   alt="X"
                 />
               </Button>
@@ -478,7 +478,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src={`${serverImgUrl}/quiz_o.png`}
+                  src={`${serverImgUrl}quiz_o.png`}
                   alt="O"
                 ></img>
               </Button>
@@ -493,7 +493,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src={`${serverImgUrl}/quiz_x.png`}
+                  src={`${serverImgUrl}quiz_x.png`}
                   alt="X"
                 ></img>
               </Button>

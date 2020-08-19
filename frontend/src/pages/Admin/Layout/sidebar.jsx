@@ -99,7 +99,7 @@ const NestedList = props => {
           <img
             className="sidebar__logo"
             // src="https://i3b309.p.ssafy.io/images/폰트_화이트.png"
-            src={`${serverImgUrl}/폰트_화이트.png`}
+            src={`${serverImgUrl}폰트_화이트.png`}
             alt="logo"
             style={{ width: '100%', cursor: 'pointer' }}
             onClick={moveToMain}
@@ -171,7 +171,7 @@ const NestedList = props => {
             <Avatar
               alt="Remy Sharp"
               // src={`https://i3b309.p.ssafy.io/images/KakaoTalk_20200807_174132070.jpg`}
-              src={`${serverImgUrl}/KakaoTalk_20200807_174132070.jpg`}
+              src={`${serverImgUrl}KakaoTalk_20200807_174132070.jpg`}
               className={classes.large}
             />
           </div>

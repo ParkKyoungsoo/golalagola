@@ -703,7 +703,7 @@ const EventAll = () => {
             <>
               <img
                 // src="https://i3b309.p.ssafy.io/images/eventall.jpg"
-                src={`${serverImgUrl}/eventall.jpg`}
+                src={`${serverImgUrl}eventall.jpg`}
                 alt="이벤트 소개 이미지"
                 // style={{ width: 'auto' }}
               />
@@ -727,7 +727,7 @@ const EventAll = () => {
                     <Grid className="eventall__layout--container">
                       <img
                         // src="https://i3b309.p.ssafy.io/images/배너3.jpg"
-                        src={`${serverImgUrl}/배너3.jpg`}
+                        src={`${serverImgUrl}배너3.jpg`}
                         alt="이벤트 소개 이미지"
                       />
                     </Grid>

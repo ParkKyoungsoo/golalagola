@@ -51,7 +51,7 @@ const SaleItem = ({ match }) => {
               <img
                 style={{ width: '70%' }}
                 // src="https://i3b309.p.ssafy.io/images/쿠폰1.jpg"
-                src={`${serverImgUrl}/쿠폰1.jpg`}
+                src={`${serverImgUrl}쿠폰1.jpg`}
                 alt=""
               />
             </Grid>
@@ -82,7 +82,7 @@ const SaleItem = ({ match }) => {
               <img
                 style={{ width: '80%' }}
                 // src="https://i3b309.p.ssafy.io/images/이용안내.jpg"
-                src={`${serverImgUrl}/이용안내.jpg`}
+                src={`${serverImgUrl}이용안내.jpg`}
                 alt=""
               />
             </Grid>

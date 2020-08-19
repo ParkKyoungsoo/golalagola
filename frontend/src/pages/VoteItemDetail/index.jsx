@@ -183,7 +183,7 @@ const ItemDetail = ({ match }) => {
                       return (
                         <Card className="m_effect">
                           <img
-                            src={`${serverImgUrl}/${itemData.prod_image}`}
+                            src={`${serverImgUrl}${itemData.prod_image}`}
                             alt="test"
                             style={{
                               width: '100%',

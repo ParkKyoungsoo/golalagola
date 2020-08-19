@@ -37,7 +37,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src={`${serverImgUrl}/배너1.jpg`}
+                      src={`${serverImgUrl}배너1.jpg`}
                       alt="image2"
                       onClick={moveToEventPage}
                     />
@@ -51,7 +51,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src={`${serverImgUrl}/배너2.jpg`}
+                      src={`${serverImgUrl}배너2.jpg`}
                       alt="image2"
                     />
                   </Grid>
@@ -64,7 +64,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src={`${serverImgUrl}/배너3.jpg`}
+                      src={`${serverImgUrl}배너3.jpg`}
                       alt="image2"
                       onClick={moveToEventPage}
                     />
@@ -90,7 +90,7 @@ const ControlledCarousel = props => {
                 <Grid className="Centering ">
                   <img
                     className="tmp"
-                    rc={`${serverImgUrl}/배너1.jpg`}
+                    src={`${serverImgUrl}배너1.jpg`}
                     alt="image2"
                     onClick={moveToEventPage}
                   />
@@ -104,7 +104,7 @@ const ControlledCarousel = props => {
                 <Grid className="Centering ">
                   <img
                     className="tmp"
-                    rc={`${serverImgUrl}/배너2.jpg`}
+                    src={`${serverImgUrl}배너2.jpg`}
                     alt="image2"
                   />
                 </Grid>
@@ -117,7 +117,7 @@ const ControlledCarousel = props => {
                 <Grid className="Centering ">
                   <img
                     className="tmp"
-                    rc={`${serverImgUrl}/배너3.jpg`}
+                    src={`${serverImgUrl}배너3.jpg`}
                     alt="image2"
                     onClick={moveToEventPage}
                   />

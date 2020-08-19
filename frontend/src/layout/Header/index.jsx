@@ -42,6 +42,8 @@ const Header = props => {
     setUserDetailDialogOpen,
     setInfoDetailDialogOpen,
     setUser,
+    eventListener,
+    setEventListener,
   } = useContext(CommonContext);
 
   const handleSignInDialogOpen = () => {
@@ -59,6 +61,7 @@ const Header = props => {
     // }
     else {
       history.push(`/${name}`);
+      setEventListener(eventListener => eventListener + 1);
     }
   };
 

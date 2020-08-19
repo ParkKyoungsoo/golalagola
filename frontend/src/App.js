@@ -483,7 +483,7 @@ const App = () => {
               exact
               path="/mycoupon"
               component={MyCoupon}
-              authorizations={!user.user_id === ''}
+              authorizations={user.user_id !== ''}
             />
 
             {/* <Route exact path="/admin" component={Admin} /> */}
