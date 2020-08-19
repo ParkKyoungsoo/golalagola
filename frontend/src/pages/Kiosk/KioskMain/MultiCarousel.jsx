@@ -1,6 +1,4 @@
-import React, { useState, useContext } from 'react';
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
+import React, { useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
 import { Grid, useMediaQuery } from '@material-ui/core';
 import AliceCarousel from 'react-alice-carousel';
@@ -11,7 +9,7 @@ import Wrapper from './styles';
 import { MdTouchApp } from 'react-icons/md';
 
 const MultiCarousel = () => {
-  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { productDatas } = useContext(CommonContext);
 
   const responsive = {
     0: {
@@ -29,7 +27,6 @@ const MultiCarousel = () => {
     // },
   };
   const isMobile = useMediaQuery('(max-width:920px)');
-  const handleOnDragStart = e => e.preventDefault();
 
   // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
   function numberWithCommas(x) {

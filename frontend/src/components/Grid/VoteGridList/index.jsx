@@ -8,9 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
-import TuneIcon from '@material-ui/icons/Tune';
 import Wrapper from './styles';
-import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { CommonContext } from '../../../context/CommonContext';
 import { ViewContext } from '../../../context/ViewContext';
@@ -94,7 +92,7 @@ const VoteGridList = props => {
     itemType,
     itemValue,
   );
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   if (value === -1) {
     return (
       <Wrapper className="root">
@@ -150,18 +148,6 @@ const VoteGridList = props => {
   } else {
     return (
       <Wrapper className="root">
-        {/* Filter
-        <Grid container>
-          <Grid item className="vote-grid-list-grid-item">
-            <TuneIcon />
-          </Grid>
-          <Grid item>
-            <ImageGridFilter
-              filterItem={filterItem}
-              onChangeFilterItem={onChangeFilterItem}
-            />
-          </Grid>
-        </Grid> */}
         {isMobile ? (
           <GridList
             className="grid-list"

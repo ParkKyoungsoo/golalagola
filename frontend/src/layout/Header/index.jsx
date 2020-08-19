@@ -19,7 +19,6 @@ import {
   useMediaQuery,
   Container,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 
 import Wrapper from './styles';
 import { FiUser } from 'react-icons/fi';
@@ -46,7 +45,7 @@ const MobileList = () => {
 const Header = props => {
   let history = useHistory();
   // const isTablet = useMediaQuery('(max-width:960px)');
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
 
   const {
     user,
@@ -56,6 +55,7 @@ const Header = props => {
     setUserDetailDialogOpen,
     setInfoDetailDialogOpen,
     mainUrl,
+    setUser,
   } = useContext(CommonContext);
 
   const handleSignInDialogOpen = () => {
@@ -93,6 +93,21 @@ const Header = props => {
     setUserDetailDialogOpen(false);
   }, []);
 
+  const onClickSignOutOpenHandler = () => {
+    setUser({
+      user_no: 0,
+      user_id: '',
+      user_nm: '',
+      user_pwd: '',
+      user_img_url: '',
+      status: '',
+      web_site: '',
+      token: '',
+    });
+
+    alert('로그아웃 하셨습니다..');
+    window.location.href = '/';
+  };
   return (
     <Container
       // className="p-0 "
@@ -109,9 +124,9 @@ const Header = props => {
                   }}
                   // className="menu-button"
                 >
-                  <h5>
+                  <p className="mobileFont">
                     <MobileList />
-                  </h5>
+                  </p>
                 </Grid>
               </Grid>
               <Grid
@@ -129,6 +144,7 @@ const Header = props => {
                     backgroundColor: '#f2f2f2',
                     cursor: 'pointer',
                   }}
+                  className="mobileFont"
                 >
                   <span>Gola la Gola</span>
                 </Typography>
@@ -141,9 +157,9 @@ const Header = props => {
                   style={{ display: 'flex' }}
                 >
                   {successSearchbarTrigger ? <SearchComponent /> : null}
-                  <h5 onClick={openSearchbar}>
+                  <p onClick={openSearchbar} className="mobileFont">
                     <Search />
-                  </h5>
+                  </p>
                 </Grid>
               </Grid>
             </Grid>
@@ -167,47 +183,114 @@ const Header = props => {
                   Gola la Gola
                 </Typography>
               </Grid>
-              <Grid item xs={4} className="navbarCentering">
-                {successSearchbarTrigger ? <SearchComponent /> : null}
-                <h4 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
-                  <Search />
-                </h4>
-              </Grid>
+              {user.isAdmin === true ? (
+                <>
+                  <Grid item xs={2} className="navbarAround">
+                    {successSearchbarTrigger ? <SearchComponent /> : null}
+                    <h4 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
+                      <Search />
+                    </h4>
+                  </Grid>
+                  <Grid item xs={6} className="navbarCentering">
+                    <Grid className="navbarCentering" container>
+                      <Button
+                        onClick={onClickRedirectPathHandler('admin')}
+                        className="header-button headerColor "
+                      >
+                        <h6 style={{ margin: 'auto' }}>관리자</h6>
+                      </Button>
 
-              <Grid item xs={4} className="navbarCentering">
-                <Grid className="navbarCentering" container>
-                  <Button
-                    variant="contained"
-                    onClick={onClickRedirectPathHandler('eventall')}
-                    className="header-button headerColor "
-                  >
-                    <h6 style={{ margin: 'auto' }}>이벤트</h6>
-                  </Button>
+                      <Button
+                        onClick={onClickRedirectPathHandler('eventall')}
+                        className="header-button headerColor "
+                      >
+                        <h6 style={{ margin: 'auto' }}>VS이벤트</h6>
+                      </Button>
 
-                  {user.status === 'login' ? (
-                    <Button
-                      variant="contained"
-                      onClick={onClickRedirectPathHandler('mycoupon')}
-                      className="header-button headerColor "
-                    >
-                      <h6 style={{ margin: 'auto' }}>쿠폰함</h6>
-                    </Button>
-                  ) : null}
-                  <Button
-                    variant="contained"
-                    onClick={handleSignInDialogOpen}
-                    className=" header-button headerColor "
-                  >
-                    {user.status === 'login' ? (
-                      <h4>
-                        <User />
-                      </h4>
-                    ) : (
-                      <h6 style={{ margin: 'auto' }}>로그인</h6>
-                    )}
-                  </Button>
-                </Grid>
-              </Grid>
+                      {user.status === 'login' ? (
+                        <Button
+                          onClick={onClickRedirectPathHandler('mycoupon')}
+                          className="header-button headerColor "
+                        >
+                          <h6 style={{ margin: 'auto' }}>쿠폰함</h6>
+                        </Button>
+                      ) : null}
+                      {user.status === 'login' ? (
+                        <Button
+                          onClick={onClickSignOutOpenHandler}
+                          className="header-button headerColor "
+                        >
+                          <h6 style={{ margin: 'auto' }}>로그아웃</h6>
+                        </Button>
+                      ) : null}
+                      <Button
+                        onClick={handleSignInDialogOpen}
+                        className=" header-button headerColor "
+                      >
+                        {user.status === 'login' ? (
+                          <h4>
+                            <User />
+                          </h4>
+                        ) : (
+                          <h6 style={{ margin: 'auto' }}>로그인</h6>
+                        )}
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid item xs={3} className="navbarAround">
+                    {successSearchbarTrigger ? <SearchComponent /> : null}
+                    <h4 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
+                      <Search />
+                    </h4>
+                  </Grid>
+                  <Grid item xs={5} className="navbarCentering">
+                    <Grid className="navbarCentering" container>
+                      <Button
+                        variant="contained"
+                        onClick={onClickRedirectPathHandler('eventall')}
+                        className="header-button headerColor "
+                      >
+                        <h6 style={{ margin: 'auto' }}>VS이벤트</h6>
+                      </Button>
+
+                      {user.status === 'login' ? (
+                        <Button
+                          variant="contained"
+                          onClick={onClickRedirectPathHandler('mycoupon')}
+                          className="header-button headerColor "
+                        >
+                          <h6 style={{ margin: 'auto' }}>쿠폰함</h6>
+                        </Button>
+                      ) : null}
+                      {user.status === 'login' ? (
+                        <Button
+                          variant="contained"
+                          onClick={onClickSignOutOpenHandler}
+                          className="header-button headerColor "
+                        >
+                          <h6 style={{ margin: 'auto' }}>로그아웃</h6>
+                        </Button>
+                      ) : null}
+                      <Button
+                        variant="contained"
+                        onClick={handleSignInDialogOpen}
+                        className=" header-button headerColor "
+                      >
+                        {user.status === 'login' ? (
+                          <h4>
+                            <User />
+                          </h4>
+                        ) : (
+                          <h6 style={{ margin: 'auto' }}>로그인</h6>
+                        )}
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
             </Grid>
           </AppBar>
         )}

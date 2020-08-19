@@ -13,7 +13,7 @@ const ButtonBases = props => {
   } = props;
 
   const imgUrl = `${categoryData.cat_img_url}`;
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   return (
     <Wrapper>
       <div
@@ -29,22 +29,25 @@ const ButtonBases = props => {
           style={{
             backgroundImage: `url(${imgUrl})`,
             backgroundSize: 'cover',
-            borderRadius: '8%',
+            // borderRadius: '8%',
           }}
         />
         <span
           className={
+            // 카테고리 사진 색깔 opacity
             isSelected ? 'image-backdrop selected-tab' : 'image-backdrop'
           }
           // catergory 색깔 정하는 곳입니다... 만세
           style={{
-            backgroundColor: '#f2f2f2',
+            // backgroundColor: '#f2f2f2',
+            backgroundColor: '#e4d6cd',
           }}
         />
         <span className="image-button">
           <Typography
             component="span"
             variant="h6"
+            // title 색깔
             className={isMobile ? 'mobile-image-title' : 'image-title'}
           >
             {categoryData.cat_title}

@@ -3,13 +3,15 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   flex-grow: 1;
+  .titleHeight {
+    height: 10vh;
+  }
   .doubleLine {
     display:-webkit-box;
     -webkit-line-clamp:2;
     -webkit-box-orient:vertical;
     overflow:hidden;
     text-overflow:ellipsis;
-    
   }
   .mobilefontMedium {
     padding: 1vh 0 0 0;

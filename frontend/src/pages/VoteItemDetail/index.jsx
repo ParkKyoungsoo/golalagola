@@ -1,6 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react';
-import Badge from 'react-bootstrap/Badge';
-import { PriorityHighSharp, CodeSharp } from '@material-ui/icons';
+import React, { useState, useContext, useEffect } from 'react';
 import Layout from '../../layout/';
 import {
   Box,
@@ -11,9 +9,7 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Wrapper from './styles';
-import Axios from 'axios';
 import WebDeatilModal from '../../components/WebModal/ModalMain';
 import QuizModal from '../../components/WebModal/QuizModal';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -21,7 +17,6 @@ import { CommonContext } from '../../context/CommonContext';
 
 const QuizDialog = () => {
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const handleClose = () => {
     setWebQuizDialogOpen(false);
@@ -35,15 +30,13 @@ const QuizDialog = () => {
       aria-labelledby="max-width-dialog-title"
       PaperProps={{
         style: {
-          height: '10vh',
+          height: '80vh',
           padding: '10px',
-          width: '85vw',
+          width: '68vw',
           maxWidth: 'none',
           overflowX: 'hidden',
           overflowY: 'hidden',
           position: 'inherit',
-          width: '70%',
-          height: '75%',
           justifyContent: 'center',
         },
       }}
@@ -70,26 +63,27 @@ const QuizDialog = () => {
 };
 
 const ItemDetail = ({ match }) => {
-  const { user, productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+  const {
+    user,
+    productDatas,
+    currentEventDatas,
+    itemDialogOpen,
+    myCouponDatas,
+    setItemDialogOpen,
+    setEventNum,
+    setWebQuizDialogOpen,
+  } = useContext(CommonContext);
 
   const [eventActivated, setEventActivated] = useState(false);
   const [userJoinedEvent, setUserJoinedEvent] = useState(false);
   const [userHasCoupon, setUserHasCoupon] = useState(false);
 
-  const { eventNum, setEventNum } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
-  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
 
   // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
-  // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-
-  // console.log(testimg.items[0].prod_image);
 
   const click1 = () => {
     setItemDialogOpen(itemDialogOpen => true);
@@ -151,8 +145,10 @@ const ItemDetail = ({ match }) => {
   useEffect(checkEvent);
   useEffect(checkUser);
   useEffect(checkedUserHasCoupon);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const product_id = match.params.id - 1;
   const isMobile = useMediaQuery('(max-width:920px)');
 
   const userNotLogin = () => {
@@ -232,23 +228,27 @@ const ItemDetail = ({ match }) => {
                           </h5>
                           <div className="button">
                             <Button
-                              variant="primary"
+                              variant={user.user_quiz ? 'secondary' : 'primary'}
                               onClick={
                                 user.status === 'login'
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
-                              // disabled={user.user_quiz}
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
                             </Button>
                             <Button
-                              variant="primary"
+                              variant={
+                                !(eventActivated && !userJoinedEvent)
+                                  ? 'secondary'
+                                  : 'primary'
+                              }
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
-                              // disabled={!(eventActivated && !userJoinedEvent)}
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
                               쿠폰 받기
@@ -421,15 +421,13 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '80vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -529,13 +527,15 @@ const ItemDetail = ({ match }) => {
                             <br />
                             <Grid style={{ display: 'flex' }}>
                               <Button
-                                variant="primary"
+                                variant={
+                                  user.user_quiz ? 'secondary' : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? QuizDialogOpen
                                     : userNotLogin
                                 }
-                                // disabled={user.user_quiz}
+                                disabled={user.user_quiz}
                                 style={{ margin: '8px 0 0 20px' }}
                                 size="lg"
                                 block
@@ -544,13 +544,17 @@ const ItemDetail = ({ match }) => {
                               </Button>
 
                               <Button
-                                variant="primary"
+                                variant={
+                                  !(eventActivated && !userJoinedEvent)
+                                    ? 'secondary'
+                                    : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? click1
                                     : userNotLogin
                                 }
-                                // disabled={!(eventActivated && !userJoinedEvent)}
+                                disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
                                 size="lg"
                                 block
@@ -728,15 +732,13 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '80vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -831,26 +833,30 @@ const ItemDetail = ({ match }) => {
                           </h5>
                           <div className="button">
                             <Button
-                              variant="primary"
+                              variant={user.user_quiz ? 'secondary' : 'primary'}
                               onClick={
                                 user.status === 'login'
                                   ? QuizDialogOpen
                                   : userNotLogin
                               }
-                              // disabled={user.user_quiz}
+                              disabled={user.user_quiz}
                               style={{ marginLeft: '20px' }}
                             >
                               퀴즈 풀기
                             </Button>
                             <Button
-                              variant="primary"
+                              variant={
+                                !(eventActivated && !userJoinedEvent)
+                                  ? 'secondary'
+                                  : 'primary'
+                              }
                               onClick={
                                 user.status === 'login' ? click1 : userNotLogin
                               }
-                              // disabled={!(eventActivated && !userJoinedEvent)}
+                              disabled={!(eventActivated && !userJoinedEvent)}
                               style={{ marginLeft: '20px' }}
                             >
-                              쿠폰 받기
+                              대상이 아닙니다.
                             </Button>
                           </div>
 
@@ -1020,15 +1026,13 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '80vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
                   },
                 }}
@@ -1128,32 +1132,38 @@ const ItemDetail = ({ match }) => {
                             <br />
                             <Grid style={{ display: 'flex' }}>
                               <Button
-                                variant="primary"
+                                variant={
+                                  user.user_quiz ? 'secondary' : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? QuizDialogOpen
                                     : userNotLogin
                                 }
-                                // disabled={user.user_quiz}
-                                style={{ marginLeft: '20px' }}
+                                disabled={user.user_quiz}
+                                style={{ margin: '8px 0 0 20px' }}
                                 size="lg"
                                 block
                               >
                                 퀴즈 풀기
                               </Button>
                               <Button
-                                variant="primary"
+                                variant={
+                                  !(eventActivated && !userJoinedEvent)
+                                    ? 'secondary'
+                                    : 'primary'
+                                }
                                 onClick={
                                   user.status === 'login'
                                     ? click1
                                     : userNotLogin
                                 }
-                                // disabled={!(eventActivated && !userJoinedEvent)}
+                                disabled={!(eventActivated && !userJoinedEvent)}
                                 style={{ marginLeft: '20px' }}
                                 size="lg"
                                 block
                               >
-                                쿠폰 받기
+                                대상이 아닙니다.
                               </Button>
                             </Grid>
                             {/* 이벤트가 진행중인 상품일때만 이 버튼을 표시한다. */}
@@ -1326,17 +1336,14 @@ const ItemDetail = ({ match }) => {
                 aria-labelledby="max-width-dialog-title"
                 PaperProps={{
                   style: {
-                    height: '10vh',
+                    height: '80vh',
                     padding: '10px',
-                    width: '85vw',
+                    width: '68vw',
                     maxWidth: 'none',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
                     position: 'inherit',
-                    width: '70%',
-                    height: '75%',
                     justifyContent: 'center',
-                    alignItems: 'center',
                   },
                 }}
                 BackdropProps={{

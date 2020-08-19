@@ -17,12 +17,14 @@ const Wrapper = styled.div`
     padding: 10px 0 10px;
   }
 
-  & .sidebar__logo {
+  & .sidebar__logo_box {
     height: 60px;
-    background-color: #4d48fb;
-    color: white;
-    text-align: center;
-    padding: 15px;
+    padding-top: 15px;
+  }
+
+  & .sidebar__logo {
+    max-width: 50%;
+    height: auto;
   }
 
   & .sidebar__item {

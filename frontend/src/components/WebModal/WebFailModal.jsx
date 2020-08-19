@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { CenterFocusStrong } from '@material-ui/icons';
 
 const WebFail = () => {

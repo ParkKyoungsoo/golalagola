@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CommonContext } from '../../context/CommonContext';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 import {
   Button,
   Grid,
@@ -12,7 +12,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  IconButton,
 } from '@material-ui/core';
 import {
   Accordion,
@@ -137,6 +136,7 @@ const DrawerListGroup = () => {
               onClick={onClickRedirectPathHandler('/mycoupon')}
             >
               <ListItemText primary={'쿠폰함'} disableTypography />
+              <InboxIcon />
             </ListItem>
             <ListItem button key={'내정보'} className="bg-unset">
               <Accordion className="panel">
@@ -195,10 +195,10 @@ const DrawerListGroup = () => {
         )}
         <ListItem
           button
-          key={'이벤트'}
+          key={'VS이벤트'}
           onClick={onClickRedirectPathHandler('/eventall')}
         >
-          <ListItemText primary={'이벤트'} disableTypography />
+          <ListItemText primary={'VS이벤트'} disableTypography />
         </ListItem>
       </List>
     </>

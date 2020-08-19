@@ -1,17 +1,6 @@
-import React, { Component, useState, useContext, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useContext } from 'react';
 
-import {
-  GridList,
-  Grid,
-  Avatar,
-  MenuItem,
-  FormControl,
-  Select,
-  Typography,
-  useMediaQuery,
-  Divider,
-} from '@material-ui/core';
+import { GridList, Grid, useMediaQuery, Divider } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useNowCols } from '../../common/MediaQueryHooks';
 import Wrapper from './styles';
@@ -20,20 +9,10 @@ import { CommonContext } from '../../context/CommonContext';
 import VoteGridItem from '../../components/Grid/VoteGridItem';
 
 const Result = ({ match }) => {
-  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { productDatas } = useContext(CommonContext);
   const nowCols = useNowCols();
   const items = [];
-  const displayEndTime = dt => {
-    console.log('VoteGridItem -> dt', dt);
-    return '16:00:00';
-  };
-  let history = useHistory();
-  const onClick = itemData => {
-    history.replace(
-      `voteitemdetail/${itemData.prod_name}/${itemData.prod_id}}`,
-    );
-  };
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   return (
     <Wrapper className="root">
       <Layout>
@@ -46,6 +25,7 @@ const Result = ({ match }) => {
         <Grid className="Centering">
           {items.length === 0 ? (
             <Grid
+              item
               md={9}
               style={{
                 display: 'flex',
@@ -97,6 +77,7 @@ const Result = ({ match }) => {
             </Grid>
           ) : (
             <Grid
+              item
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -109,11 +90,11 @@ const Result = ({ match }) => {
             </Grid>
           )}
         </Grid>
-        <Grid md={9} style={{ margin: 'auto' }}>
+        <Grid item md={9} style={{ margin: 'auto' }}>
           <Divider />
         </Grid>
         <Grid className="Centering">
-          <Grid md={9}>
+          <Grid item md={9}>
             <GridList
               className="grid-list"
               cols={Number.isInteger(nowCols) ? nowCols : 1}

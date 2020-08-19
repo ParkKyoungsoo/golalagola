@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { Grid, Paper, Divider } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import CreateEventComponent from '../../components/Create/CreateEventComponent/index';
 
 import Wrapper from './styles';
@@ -11,23 +10,10 @@ import NestedList from '../Admin/Layout/sidebar';
 
 import axios from 'axios';
 import { CommonContext } from '../../context/CommonContext';
-import { useHistory, Link, Redirect } from 'react-router-dom';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    margin: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
+import { useHistory } from 'react-router-dom';
 
 const CreateVote = props => {
   let history = useHistory();
-
-  const classes = useStyles(); // Grid
 
   const { newEventData, setNewEventData } = useContext(CommonContext);
 
@@ -85,8 +71,6 @@ const CreateVote = props => {
       }
     }
   };
-
-  const [readyToUpload, setReadyToUpload] = useState(true);
 
   return (
     <Wrapper>

@@ -1,6 +1,4 @@
-import React, { useState, useContext } from 'react';
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
+import React, { useContext } from 'react';
 import { CommonContext } from '../../context/CommonContext';
 import { Grid, useMediaQuery } from '@material-ui/core';
 import AliceCarousel from 'react-alice-carousel';
@@ -8,34 +6,25 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import Carousel from 'react-bootstrap/Carousel';
 
 const MultiCarousel = () => {
-  const { productDatas, setProductDatas, realtime, setRealTime } = useContext(
-    CommonContext,
-  );
+  const { realtime } = useContext(CommonContext);
 
   const responsive = {
     0: {
-      // breakpoint: { max: 3000, min: 1024 },
       items: 5,
-      // slidesToSlide: 3, // optional, default to 1.
     },
     920: {
-      // breakpoint: { max: 1024, min: 920 },
       items: 5,
-      // slidesToSlide: 1, // optional, default to 1.
     },
     1024: {
       breakpoint: { max: 920, min: 0 },
       items: 6,
-      // slidesToSlide: 1, // optional, default to 1.
     },
     2000: {
       breakpoint: { max: 920, min: 0 },
       items: 4,
-      // slidesToSlide: 1, // optional, default to 1.
     },
   };
   const isMobile = useMediaQuery('(max-width:920px)');
-  const handleOnDragStart = e => e.preventDefault();
   return (
     <>
       {isMobile ? (

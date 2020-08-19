@@ -11,7 +11,6 @@ const SaleItem = ({ match }) => {
   const [QRModalTrigger, setQRModalTrigger] = useState(false);
 
   const click = () => {
-    console.log('click');
     setQRModalTrigger(QRModalTrigger => true);
   };
 
@@ -23,7 +22,6 @@ const SaleItem = ({ match }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log('timeout!!');
       setMyURL(true);
     }, 1000000);
   });
@@ -79,7 +77,6 @@ const SaleItem = ({ match }) => {
           >
             <Grid>
               <img
-                onClick={click}
                 style={{ width: '80%' }}
                 src="https://i3b309.p.ssafy.io/images/이용안내.jpg"
                 alt=""

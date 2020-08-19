@@ -20,27 +20,25 @@ const Layout = props => {
       {!wannaHide && <Header maxWidth="lg" />}
       {isMobile ? (
         <Container
-          open={drawerOpen}
           className={drawerOpen ? 'content p-0' : 'content content-shift p-0'}
           // maxWidth="xl"
           onClick={() => {
-            setDrawerOpen(0);
+            setDrawerOpen(false);
           }}
           // maxWidth="lg"
         >
           <div>{children}</div>
         </Container>
       ) : (
-        <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid container className="Centering">
           <Grid item xs={12}>
             <Container
-              open={drawerOpen}
               className={
-                drawerOpen ? 'content p-0' : 'content content-shift p-0'
+                drawerOpen ? ' content p-0' : ' content content-shift p-0'
               }
               maxWidth="xl"
               onClick={() => {
-                setDrawerOpen(0);
+                setDrawerOpen(false);
               }}
               // maxWidth="lg"
             >
@@ -49,7 +47,16 @@ const Layout = props => {
           </Grid>
         </Grid>
       )}
-      {/* <Grid className="footer">{!wannaHide && <Footer />}</Grid> */}
+      <Grid
+        className="Centering"
+        style={{
+          backgroundColor: '#f2f3f4',
+        }}
+      >
+        <Grid item xs={12} md={9} className="footer">
+          <Grid item>{!wannaHide && <Footer />}</Grid>
+        </Grid>
+      </Grid>
     </Wrapper>
   );
 };

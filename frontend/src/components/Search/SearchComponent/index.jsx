@@ -15,20 +15,17 @@ const Search = () => {
 const SearchComponent = () => {
   let history = useHistory();
   let location = useParams();
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
       return;
     }
   };
-  const click = () => {
-    console.log(123);
-  };
+  const click = () => {};
 
   const onKeyPress = currentPathname => e => {
     if (e.key === 'Enter') {
-      console.log(e.target.value);
       // 만약에 서치에서 또 서치를 하면
       if (currentPathname.pathname.includes('searchresult')) {
         history.push(`${e.target.value}`);
@@ -78,7 +75,7 @@ const SearchComponent = () => {
               // className="input2"
               style={{
                 height: '5vh',
-                // width: '100px',
+                width: '10vw',
               }}
             />
           </Grid>

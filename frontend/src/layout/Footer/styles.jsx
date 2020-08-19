@@ -6,16 +6,15 @@ const Wrapper = styled.div`
   background: #f2f3f4;
   & .footer {
     overflow: hidden;
-    max-width: 1280px;
+    // max-width: 1280px;
     width: 100%;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 40px 20px 20px 20px;
     word-break: keep-all;
     box-sizing: border-box;
     & .left-box {
       float: left;
       & .page {
-        padding-bottom: 20px;
         & li {
           display: inline-block;
           margin-right: 10px;
@@ -55,7 +54,7 @@ const Wrapper = styled.div`
           font-size: 16px;
           color: #242424;
         }
-        & h3 {
+        & h5 {
           padding-bottom: 10px;
           color: #3f51b5;
           text-decoration: underline;

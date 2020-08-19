@@ -1,18 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { Grid, Divider, useMediaQuery, Button, Link } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Grid, useMediaQuery } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import { CenterFocusStrong } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 const CouponModal = modalNum => {
-  const { user, productDatas, setProductDatas } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
-  const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
-
-  const [couponPageItem, setCouponPageItem] = useState(
-    productDatas[selectedEventItem - 1],
-  );
+  const { user, setItemDialogOpen } = useContext(CommonContext);
 
   const isMobile = useMediaQuery('(max-width:920px)');
 
@@ -36,6 +31,7 @@ const CouponModal = modalNum => {
     <>
       {isMobile ? (
         <Grid
+          item
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -66,8 +62,9 @@ const CouponModal = modalNum => {
                   fontWeight: '700',
                 }}
               >
-                퀴즈를 풀고 <strong style={{ color: 'red' }}>30%</strong> 추가
-                할인을 받아 보세요!
+                퀴즈를 풀고{' '}
+                <strong style={{ color: 'red', fontSize: '2.5vw' }}>30%</strong>{' '}
+                추가 할인을 받아 보세요!
               </Grid>
             </Grid>
 
@@ -82,14 +79,13 @@ const CouponModal = modalNum => {
               >
                 <Grid item>
                   {user.user_quiz ? (
-                    <Button variant="primary" disabled>
+                    <Button variant="secondary" disabled>
                       이미 퀴즈에 참여하였습니다.
                     </Button>
                   ) : (
                     <Button
-                      variant="contained"
+                      variant="primary"
                       onClick={() => modalNum.setModalNum(3)}
-                      color="primary"
                       disableElevation
                       style={{
                         width: '13vw',
@@ -106,8 +102,7 @@ const CouponModal = modalNum => {
                   <Button
                     onClick={onClickRedirect('/mainvote')}
                     style={{ width: '13vw', height: '7vh', fontSize: 'larger' }}
-                    variant="contained"
-                    color="secondary"
+                    variant="danger"
                   >
                     Home
                   </Button>
@@ -121,6 +116,7 @@ const CouponModal = modalNum => {
         </Grid>
       ) : (
         <Grid
+          item
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -155,8 +151,9 @@ const CouponModal = modalNum => {
                   fontWeight: '700',
                 }}
               >
-                퀴즈를 풀고 <strong style={{ color: 'red' }}>30%</strong> 추가
-                할인을 받아 보세요!
+                퀴즈를 풀고{' '}
+                <strong style={{ color: 'red', fontSize: '2.5vw' }}>30%</strong>{' '}
+                추가 할인을 받아 보세요!
               </Grid>
             </Grid>
 
@@ -171,14 +168,13 @@ const CouponModal = modalNum => {
               >
                 <Grid item>
                   {user.user_quiz ? (
-                    <Button variant="primary" disabled>
+                    <Button variant="secondary" disabled>
                       이미 퀴즈에 참여하였습니다.
                     </Button>
                   ) : (
                     <Button
-                      variant="contained"
+                      variant="primary"
                       onClick={() => modalNum.setModalNum(3)}
-                      color="primary"
                       disableElevation
                       style={{
                         width: '13vw',
@@ -195,8 +191,7 @@ const CouponModal = modalNum => {
                   <Button
                     onClick={onClickRedirect('/mainvote')}
                     style={{ width: '13vw', height: '7vh', fontSize: 'larger' }}
-                    variant="contained"
-                    color="secondary"
+                    variant="danger"
                   >
                     Home
                   </Button>

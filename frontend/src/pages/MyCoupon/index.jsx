@@ -109,7 +109,7 @@ export default function StickyHeadTable() {
     setWebQuizDialogOpen(true);
   };
 
-  const isMobile = useMediaQuery('(max-width:930px)');
+  const isMobile = useMediaQuery('(max-width:960px)');
   return (
     <Layout>
       {isMobile ? (
@@ -124,12 +124,18 @@ export default function StickyHeadTable() {
               }}
             >
               <QRCode
-                value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+                value={`https://i3b309.p.ssafy.io/api/payment/${user.user_id}`}
               />
             </Grid>
             <Grid container justify="center" alignItems="center">
               {user.user_quiz ? (
-                <Grid>이미 퀴즈 품</Grid>
+                <Grid container justify="center">
+                  <img
+                    src="/images/myCouponImage2.png"
+                    alt="이미지3"
+                    width="100%"
+                  ></img>
+                </Grid>
               ) : (
                 <Grid style={{ padding: '10px 0 20px 0' }}>
                   <Grid>
@@ -172,9 +178,9 @@ export default function StickyHeadTable() {
 
             <Grid style={{ padding: '0 0 100px 0' }}>
               {myCouponDatas.length !== 0 ? (
-                myCouponDatas.map(data => {
+                myCouponDatas.map((data, index) => {
                   return (
-                    <Paper className={classes.root}>
+                    <Paper className={classes.root} key={index}>
                       <Grid style={{ display: 'flex', height: '6vh' }}>
                         <Grid
                           item
@@ -224,12 +230,18 @@ export default function StickyHeadTable() {
                 justify="center"
               >
                 <QRCode
-                  value={`https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`}
+                  value={`https://i3b309.p.ssafy.io/api/payment/${user.user_id}`}
                 />
               </Grid>
               <Grid container justify="center" alignItems="center">
                 {user.user_quiz ? (
-                  <Grid>이미 퀴즈 품</Grid>
+                  <Grid container justify="center">
+                    <img
+                      src="/images/myCouponImage2.png"
+                      alt="이미지3"
+                      width="100%"
+                    ></img>
+                  </Grid>
                 ) : (
                   <Grid>
                     <Grid container justify="center">
@@ -283,9 +295,9 @@ export default function StickyHeadTable() {
 
             <Grid style={{ padding: '0 0 100px 0' }}>
               {myCouponDatas.length !== 0 ? (
-                myCouponDatas.map(data => {
+                myCouponDatas.map((data, index) => {
                   return (
-                    <Paper className={classes.root}>
+                    <Paper className={classes.root} key={index}>
                       <Grid style={{ display: 'flex', height: '6vh' }}>
                         <Grid
                           item

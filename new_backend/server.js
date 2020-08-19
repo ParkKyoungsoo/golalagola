@@ -58,6 +58,7 @@ app.use("/api/coupon", require(`${__dirname}/routes/coupon`));
 app.use("/api/product", require(`${__dirname}/routes/product`));
 app.use("/api/category", require(`${__dirname}/routes/category`));
 app.use("/api/buy", require(`${__dirname}/routes/buy`));
+app.use("/api/payment", require(`${__dirname}/routes/payment`));
 // app.use("/api/admin/product", require(`${__dirname}/routes/admin/product`));
 
 //----------------------------------

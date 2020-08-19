@@ -7,24 +7,20 @@ import { CommonContext } from '../../context/CommonContext';
 import MultiCarousel from './MultiCarousel';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import ClearIcon from '@material-ui/icons/Clear';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
 import { CenterFocusStrong } from '@material-ui/icons';
 
 const SuccessModal = () => {
   const { user, setUser } = useContext(CommonContext);
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
-  const { quizDatas, setQuizDatas } = useContext(CommonContext);
-  const { eventNum, setEventNum } = useContext(CommonContext);
+  const { setWebQuizDialogOpen } = useContext(CommonContext);
+  const { setItemDialogOpen } = useContext(CommonContext);
+  const { quizDatas } = useContext(CommonContext);
   const userQuizState = {
     user_quiz: true,
   };
-  const { number, setNumber } = useContext(CommonContext);
+  const { number } = useContext(CommonContext);
 
   let history = useHistory();
 
@@ -69,6 +65,7 @@ const SuccessModal = () => {
             justifyContent: 'center',
             alignContent: 'center',
           }}
+          item
           xs={12}
         >
           <Grid
@@ -85,7 +82,7 @@ const SuccessModal = () => {
                 style={{
                   marginTop: '4vh',
                   fontWeight: '200',
-                  fontSize: '3vw',
+                  fontSize: '2vw',
                 }}
               >
                 축하드립니다. &nbsp;&nbsp;
@@ -95,7 +92,7 @@ const SuccessModal = () => {
                 item
                 style={{
                   marginTop: '4vh',
-                  fontSize: '3.4vw',
+                  fontSize: '3vw',
                   fontWeight: '700',
                 }}
               >
@@ -134,7 +131,7 @@ const SuccessModal = () => {
                       backgroundColor: '#ff3b47',
                     }}
                   >
-                    홈으로 가기 또는 지도
+                    Home
                   </Button>
                 </Grid>
               </Grid>
@@ -152,6 +149,7 @@ const SuccessModal = () => {
             justifyContent: 'center',
             alignContent: 'center',
           }}
+          item
           xs={12}
         >
           <Grid
@@ -217,7 +215,7 @@ const SuccessModal = () => {
                       backgroundColor: '#ff3b47',
                     }}
                   >
-                    홈으로 가기 또는 지도
+                    Home
                   </Button>
                 </Grid>
               </Grid>
@@ -238,15 +236,12 @@ const Quiz = modalNum => {
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { quizDatas, setQuizDatas } = useContext(CommonContext);
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+  const { quizDatas } = useContext(CommonContext);
+  const { setWebQuizDialogOpen } = useContext(CommonContext);
+  const { setItemDialogOpen } = useContext(CommonContext);
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
-
-  let history = useHistory();
 
   const click = choiceAns => event => {
     if (choiceAns === quizAns) {
@@ -272,12 +267,6 @@ const Quiz = modalNum => {
     border: '6px solid green',
   };
 
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
-
   const isMobile = useMediaQuery('(max-width:920px)');
 
   // ClickAwayListener
@@ -296,7 +285,7 @@ const Quiz = modalNum => {
     <>
       {isMobile ? (
         <Wrapper>
-          <Grid container direction="column" xs={12}>
+          <Grid container direction="column" item xs={12}>
             <Grid
               item
               className="quizCentering"
@@ -365,7 +354,8 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_o.png"
-                ></img>
+                  alt="O"
+                />
               </Button>
               <Button
                 onClick={click(false)}
@@ -379,7 +369,8 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_x.png"
-                ></img>
+                  alt="X"
+                />
               </Button>
             </Grid>
           </Grid>
@@ -390,15 +381,13 @@ const Quiz = modalNum => {
               modalNum={1}
               PaperProps={{
                 style: {
-                  height: '10vh',
+                  height: '80vh',
                   padding: '10px',
-                  width: '85vw',
+                  width: '68vw',
                   maxWidth: 'none',
                   overflowX: 'hidden',
                   overflowY: 'hidden',
                   position: 'inherit',
-                  width: '70%',
-                  height: '75%',
                   justifyContent: 'center',
                 },
               }}
@@ -413,7 +402,7 @@ const Quiz = modalNum => {
         </Wrapper>
       ) : (
         <Wrapper>
-          <Grid container direction="column" xs={12}>
+          <Grid container direction="column" item xs={12}>
             <Grid
               item
               style={{
@@ -446,8 +435,6 @@ const Quiz = modalNum => {
             >
               <ClickAwayListener onClickAway={handleClickAway}>
                 <Grid
-                  className
-                  // direction="column"
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -488,6 +475,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                  alt="O"
                 ></img>
               </Button>
               <Button
@@ -502,6 +490,7 @@ const Quiz = modalNum => {
                     backgroundColor: '#FFFFFF',
                   }}
                   src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                  alt="X"
                 ></img>
               </Button>
             </Grid>
@@ -510,18 +499,15 @@ const Quiz = modalNum => {
             <Dialog
               open={successModalTrigger}
               onClose={modalHandler}
-              modalNum={1}
               PaperProps={{
                 style: {
-                  height: '10vh',
+                  height: '80vh',
                   padding: '10px',
-                  width: '85vw',
+                  width: '68vw',
                   maxWidth: 'none',
                   overflowX: 'hidden',
                   overflowY: 'hidden',
                   position: 'inherit',
-                  width: '70%',
-                  height: '75%',
                   justifyContent: 'center',
                 },
               }}
