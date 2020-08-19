@@ -152,11 +152,11 @@ const MyInfoButtonGroupComponent = props => {
         };
         setUser({ ...obj });
 
-        alert(res.data.message);
+        alert(res.data);
         history.push('/');
       })
       .catch(err => {
-        alert(err.response.data.message);
+        alert(err);
       });
 
     // if (respone['status'] === 200) {

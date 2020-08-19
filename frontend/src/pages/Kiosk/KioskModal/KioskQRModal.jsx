@@ -7,13 +7,13 @@ import Wrapper from './styles';
 import { MdClear } from 'react-icons/md';
 
 const CouponsQR = () => {
-  const { QRModalTrigger, setQRModalTrigger } = useContext(CommonContext);
+  const { setQRModalTrigger } = useContext(CommonContext);
   const QRModalHandler = () => {
     setQRModalTrigger(QRModalTrigger => false);
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       window.location.href = 'kioskmains';
       setQRModalTrigger(QRModalTrigger => false);
     }, 30000);

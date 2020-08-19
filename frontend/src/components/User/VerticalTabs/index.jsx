@@ -67,9 +67,10 @@ export default function VerticalTabs() {
   };
   const onClickSignOutOpenHandler = () => {
     console.log('user', user);
+    window.confirm('정말 탈퇴하시겠습니까?');
     axios({
       method: 'DELETE',
-      url: 'http://localhost:5000/api/auth/self',
+      url: 'https://i3b309.p.ssafy.io/api/auth/self',
       headers: {
         token: user.token,
         user_email: user.user_email,
@@ -96,12 +97,12 @@ export default function VerticalTabs() {
         });
         setUserDialogIndex(0);
         setMyCouponDatas([]);
-        setUserDetailDialogOpen(false);
         history.push('/');
       })
       .catch(err => {
         alert('회원 탈퇴에 실패하셨습니다.');
       });
+    setUserDetailDialogOpen(false);
 
     // alert('로그아웃 되었습니다.');
     // history.push('/');
