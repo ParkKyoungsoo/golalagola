@@ -131,7 +131,7 @@ const Wrapper = styled.div`
     // margin-right: 12px;
     font-weight: normal;
     box-shadow: none;
-    letter-spacing: 1px;
+    // letter-spacing: 1px;
     text-transform: none;
     opacity: 0.7;
     transition: all 0.2s;
