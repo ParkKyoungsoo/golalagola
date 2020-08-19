@@ -59,14 +59,25 @@ export default function VerticalTabs() {
     setUser,
     setMyCouponDatas,
     setUserDetailDialogOpen,
+    setUserDialogOpen,
   } = useContext(CommonContext);
   const labels = ['회원정보 수정', '비밀번호 변경', '회원 탈퇴'];
   const handleChange = (event, newValue) => {
     setUserDialogIndex(newValue);
   };
   const onClickSignOutOpenHandler = () => {
-    axios
-      .delete('https://i3b309.p.ssafy.io/api/auth/self', user.user_id)
+    console.log('user', user);
+    axios({
+      method: 'DELETE',
+      url: 'http://localhost:5000/api/auth/self',
+      headers: {
+        token: user.token,
+        user_email: user.user_email,
+      },
+      data: {
+        user_id: user.user_id,
+      },
+    })
       .then(res => {
         alert('삭제되었습니다.');
         setDrawerOpen(false);
@@ -86,10 +97,10 @@ export default function VerticalTabs() {
         setUserDialogIndex(0);
         setMyCouponDatas([]);
         setUserDetailDialogOpen(false);
-        window.location.href('/');
+        history.push('/');
       })
-      .catch(res => {
-        console.log(res);
+      .catch(err => {
+        alert('회원 탈퇴에 실패하셨습니다.');
       });
 
     // alert('로그아웃 되었습니다.');
