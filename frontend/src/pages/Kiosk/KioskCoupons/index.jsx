@@ -11,7 +11,6 @@ const SaleItem = ({ match }) => {
   const [QRModalTrigger, setQRModalTrigger] = useState(false);
 
   const click = () => {
-    console.log('click');
     setQRModalTrigger(QRModalTrigger => true);
   };
 
@@ -23,7 +22,6 @@ const SaleItem = ({ match }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log('timeout!!');
       setMyURL(true);
     }, 1000000);
   });

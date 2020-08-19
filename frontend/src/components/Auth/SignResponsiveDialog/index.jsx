@@ -25,7 +25,7 @@ const regExp2 = /^\d{3}-\d{3,4}-\d{4}$/;
 const DialogTitleComponent = () => {
   return (
     <Wrapper>
-      <h1 className="dialog-title-component">{'Logo'}</h1>
+      <h1 className="dialog-title-component">{'Gola la Gola'}</h1>
     </Wrapper>
   );
 };
@@ -102,6 +102,10 @@ const SignInSection01 = () => {
           setSignDialogOpen(false);
           setIsSignUp('SignIn');
           if (res.data.isAdmin == true) {
+            alert(
+              `${res.data.user_name} 관리자님 환영합니다.\n관리자 페이지로 이동합니다.`,
+            );
+
             history.push('/admin');
           } else {
             history.goBack();

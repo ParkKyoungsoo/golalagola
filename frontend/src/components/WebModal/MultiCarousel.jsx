@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
 import { CommonContext } from '../../context/CommonContext';
 import { Grid, useMediaQuery } from '@material-ui/core';
 import AliceCarousel from 'react-alice-carousel';
