@@ -58,13 +58,9 @@ const AdminUser = () => {
       },
     })
       .then(res => {
-        // console.log(res);
         alert('삭제되었습니다.');
-        // window.location.reload();
       })
-      .catch(e => {
-        // console.log('Error: ', e.response.data);
-      });
+      .catch(e => {});
   };
 
   return (
@@ -121,7 +117,6 @@ const AdminUser = () => {
                     icon: DeleteOutline,
                     tooltip: 'Delete Product',
                     onClick: (event, rowData) => {
-                      console.log(rowData);
                       if (
                         window.confirm(
                           'You want to delete ' + rowData.prod_name,
