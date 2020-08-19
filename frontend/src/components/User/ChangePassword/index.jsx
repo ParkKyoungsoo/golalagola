@@ -135,6 +135,7 @@ const MyInfoButtonGroupComponent = props => {
         user_id: user.user_id,
         user_email: user.user_email,
         isAdmin: user.isAdmin,
+        quiz_useCoupon: user.quiz_useCoupon,
       },
     })
       .then(res => {
@@ -146,6 +147,7 @@ const MyInfoButtonGroupComponent = props => {
           user_image: user.user_image,
           user_quiz: user.user_quiz,
           isAdmin: user.isAdmin,
+          quiz_useCoupon: user.quiz_useCoupon,
           status: 'login',
           web_site: '',
           token: res.data.token,

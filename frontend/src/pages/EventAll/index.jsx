@@ -200,7 +200,7 @@ const EventAll = () => {
                     className={
                       isMobile
                         ? 'mobileEventall__item--sale'
-                        : 'eventall_item--sale'
+                        : 'eventall__item--sale'
                     }
                   >
                     {
@@ -327,7 +327,7 @@ const EventAll = () => {
                     className={
                       isMobile
                         ? 'mobileEventall__item--sale'
-                        : 'eventall_item--sale'
+                        : 'eventall__item--sale'
                     }
                   >
                     {
@@ -494,7 +494,7 @@ const EventAll = () => {
                     className={
                       isMobile
                         ? 'mobileEventall__item--sale'
-                        : 'eventall_item--sale'
+                        : 'eventall__item--sale'
                     }
                   >
                     {
@@ -619,7 +619,7 @@ const EventAll = () => {
                     className={
                       isMobile
                         ? 'mobileEventall__item--sale'
-                        : 'eventall_item--sale'
+                        : 'eventall__item--sale'
                     }
                   >
                     {
