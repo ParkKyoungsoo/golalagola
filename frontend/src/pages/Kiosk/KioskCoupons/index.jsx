@@ -10,7 +10,7 @@ import { CommonContext } from '../../../context/CommonContext';
 
 const SaleItem = ({ match }) => {
   const { serverImgUrl } = useContext(CommonContext);
-  const [QRModalTrigger, setQRModalTrigger] = useState(false);
+  const { QRModalTrigger, setQRModalTrigger } = useContext(CommonContext);
 
   const click = () => {
     setQRModalTrigger(QRModalTrigger => true);
@@ -28,7 +28,6 @@ const SaleItem = ({ match }) => {
     }, 1000000);
   });
 
-  const { itemname } = match.params;
   return (
     <>
       <KioskCSS>

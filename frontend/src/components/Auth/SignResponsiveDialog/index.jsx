@@ -45,6 +45,8 @@ const SignInSection01 = () => {
     setSignDialogOpen,
     serverUrl,
     setIsShowKeyborad,
+    eventListener,
+    setEventListener,
   } = useContext(CommonContext);
 
   const OnChangeHandler = name => e => {
@@ -101,6 +103,7 @@ const SignInSection01 = () => {
 
           setSignDialogOpen(false);
           setIsSignUp('SignIn');
+          setEventListener(eventListener => eventListener + 1);
           if (res.data.isAdmin == true) {
             alert(
               `${res.data.user_name} 관리자님 환영합니다.\n관리자 페이지로 이동합니다.`,

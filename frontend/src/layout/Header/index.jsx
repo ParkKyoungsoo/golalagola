@@ -48,11 +48,12 @@ const Header = props => {
 
   const handleSignInDialogOpen = () => {
     history.push('/auth');
+    setEventListener(eventListener => eventListener + 1);
   };
 
   const onClickRedirectPathHandler = name => e => {
     window.scrollTo(0, 0);
-
+    setEventListener(eventListener => eventListener + 1);
     if (name === '/mainvote') {
       history.push('/');
     }
@@ -61,7 +62,6 @@ const Header = props => {
     // }
     else {
       history.push(`/${name}`);
-      setEventListener(eventListener => eventListener + 1);
     }
   };
 

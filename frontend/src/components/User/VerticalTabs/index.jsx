@@ -6,6 +6,8 @@ import MyInfo from './../MyInfo/';
 import ChangePassword from './../ChangePassword/';
 import { CommonContext } from '../../../context/CommonContext';
 
+import axios from 'axios';
+
 import {
   useMediaQuery,
   Button,
@@ -50,35 +52,48 @@ export default function VerticalTabs() {
   let history = useHistory();
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const {
+    user,
     userDialogIndex,
     setUserDialogIndex,
     setDrawerOpen,
     setUser,
     setMyCouponDatas,
+    setUserDetailDialogOpen,
   } = useContext(CommonContext);
-  const labels = ['회원정보 수정', '비밀번호 변경', '로그아웃'];
+  const labels = ['회원정보 수정', '비밀번호 변경', '회원 탈퇴'];
   const handleChange = (event, newValue) => {
     setUserDialogIndex(newValue);
   };
   const onClickSignOutOpenHandler = () => {
-    setDrawerOpen(false);
-    setUser({
-      user_id: 0,
-      user_email: '',
-      user_name: '',
-      user_phone: '',
-      user_pwd: '',
-      user_image: '',
-      user_quiz: '',
-      isAdmin: '',
-      status: '',
-      web_site: '',
-      token: '',
-    });
-    setUserDialogIndex(0);
-    setMyCouponDatas([]);
-    alert('로그아웃 되었습니다.');
-    history.push('/');
+    axios
+      .delete('https://i3b309.p.ssafy.io/api/auth/self', user.user_id)
+      .then(res => {
+        alert('삭제되었습니다.');
+        setDrawerOpen(false);
+        setUser({
+          user_id: 0,
+          user_email: '',
+          user_name: '',
+          user_phone: '',
+          user_pwd: '',
+          user_image: '',
+          user_quiz: '',
+          isAdmin: '',
+          status: '',
+          web_site: '',
+          token: '',
+        });
+        setUserDialogIndex(0);
+        setMyCouponDatas([]);
+        setUserDetailDialogOpen(false);
+        window.location.href('/');
+      })
+      .catch(res => {
+        console.log(res);
+      });
+
+    // alert('로그아웃 되었습니다.');
+    // history.push('/');
   };
 
   return (
@@ -96,7 +111,7 @@ export default function VerticalTabs() {
         {labels.map((x, index) => {
           return (
             !fullScreen &&
-            (x === '로그아웃' ? (
+            (x === '회원 탈퇴' ? (
               <Tab
                 key={index}
                 label={x}
