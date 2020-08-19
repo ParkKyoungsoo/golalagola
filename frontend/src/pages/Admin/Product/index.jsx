@@ -26,7 +26,6 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 import CanvasJSReact from '../asset/canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const tableIcons = {
@@ -170,7 +169,7 @@ const AdminProduct = () => {
                 title=""
                 columns={productsTableData.columns}
                 data={productsTableData.data}
-                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                options={{ actionsColumnIndex: -1, pageSize: 10 }}
                 detailPanel={rowData => {
                   return (
                     <Grid container className="admin_product__detail--grid">

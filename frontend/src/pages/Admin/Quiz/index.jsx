@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
@@ -50,19 +50,13 @@ const tableIcons = {
 };
 
 const AdminQuiz = () => {
-  const {
-    currentQuizDatas,
-    setCurrentQuizDatas,
-    quizzesTableData,
-    setQuizzesTableData,
-  } = useContext(CommonContext);
+  const { setCurrentQuizDatas, quizzesTableData } = useContext(CommonContext);
 
   let history = useHistory();
 
   const createQuizData = () => {
     const QuizData = {
       quiz_question: '',
-      quiz_desc: '',
       quiz_desc: '',
       quiz_answer: true,
       status: 'create',
@@ -115,7 +109,7 @@ const AdminQuiz = () => {
                 title=""
                 columns={quizzesTableData.columns}
                 data={quizzesTableData.data}
-                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                options={{ actionsColumnIndex: -1, pageSize: 10 }}
                 actions={[
                   {
                     icon: AddBox,

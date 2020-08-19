@@ -1,18 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
   Grid,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
   useMediaQuery,
-  Box,
   Dialog,
   DialogActions,
 } from '@material-ui/core';
@@ -21,15 +13,12 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Layout from '../../layout';
 import { CommonContext } from '../../context/CommonContext';
 import Button from 'react-bootstrap/Button';
-import { Wrapper, MobileWrapper } from './styles';
 
-import axios from 'axios';
 import QRCode from 'react-qr-code';
 import QuizModal from '../../components/WebModal/QuizModal';
 
 const QuizDialog = () => {
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const handleClose = () => {
     setWebQuizDialogOpen(false);
@@ -50,8 +39,6 @@ const QuizDialog = () => {
           overflowX: 'hidden',
           overflowY: 'auto',
           position: 'inherit',
-          width: '80%',
-          height: '80%',
           justifyContent: 'center',
         },
       }}
@@ -88,22 +75,12 @@ const useStyles = makeStyles({
 
 export default function StickyHeadTable() {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const { user } = useContext(CommonContext);
-  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const {
+    user,
+    myCouponDatas,
+    productDatas,
+    setWebQuizDialogOpen,
+  } = useContext(CommonContext);
 
   const QuizDialogOpen = () => {
     setWebQuizDialogOpen(true);

@@ -385,6 +385,7 @@ const SignUpSection02 = () => {
         setSignUpUserData(signUpUserData);
         setIsSignUp('SignIn');
         // alert(data.message);
+        alert('이메일 인증 후 사용해주세요.');
       })
       .catch(err => {
         alert(err.response.data.message);

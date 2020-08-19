@@ -54,7 +54,7 @@ const defaultThumbnailImage = 'default_user.jpg';
 const HOST = '192.168.0.82:3001';
 const serverUrl = `http://${HOST}/v1`;
 const serverUrlBase = `http://${HOST}`;
-const serverImgUrl = `https://i3b309.p.ssafy.io/images`;
+const serverImgUrl = `https://i3b309.p.ssafy.io/images/`;
 
 /// theme
 const theme = createMuiTheme({

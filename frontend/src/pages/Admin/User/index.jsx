@@ -80,7 +80,7 @@ const AdminUser = () => {
                 title=""
                 columns={usersTableData.columns}
                 data={usersTableData.data}
-                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                options={{ actionsColumnIndex: -1, pageSize: 10 }}
                 detailPanel={rowData => {
                   return (
                     <Grid container className="admin_user__detail--grid">

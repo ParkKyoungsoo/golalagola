@@ -1,14 +1,9 @@
-import React, { useState, useContext, useCallback, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { CommonContext } from '../../../../context/CommonContext';
 
 import {
   Paper,
   Grid,
-  Avatar,
-  Fab,
-  Input,
-  Select,
-  MenuItem,
   FormControl,
   Button,
   RadioGroup,
@@ -19,10 +14,6 @@ import {
 } from '@material-ui/core';
 import Wrapper from './styles';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-
-import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import NestedList from '../../Layout/sidebar.jsx';
 
