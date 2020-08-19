@@ -1,6 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react';
-import Badge from 'react-bootstrap/Badge';
-import { PriorityHighSharp, CodeSharp } from '@material-ui/icons';
+import React, { useState, useContext, useEffect } from 'react';
 import Layout from '../../layout/';
 import {
   Box,
@@ -11,9 +9,7 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Wrapper from './styles';
-import Axios from 'axios';
 import WebDeatilModal from '../../components/WebModal/ModalMain';
 import QuizModal from '../../components/WebModal/QuizModal';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -21,7 +17,6 @@ import { CommonContext } from '../../context/CommonContext';
 
 const QuizDialog = () => {
   const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-  const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const handleClose = () => {
     setWebQuizDialogOpen(false);
@@ -68,26 +63,27 @@ const QuizDialog = () => {
 };
 
 const ItemDetail = ({ match }) => {
-  const { user, productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const { itemDialogOpen, setItemDialogOpen } = useContext(CommonContext);
+  const {
+    user,
+    productDatas,
+    currentEventDatas,
+    itemDialogOpen,
+    myCouponDatas,
+    setItemDialogOpen,
+    setEventNum,
+    setWebQuizDialogOpen,
+  } = useContext(CommonContext);
 
   const [eventActivated, setEventActivated] = useState(false);
   const [userJoinedEvent, setUserJoinedEvent] = useState(false);
   const [userHasCoupon, setUserHasCoupon] = useState(false);
 
-  const { eventNum, setEventNum } = useContext(CommonContext);
   const fullScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
-  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
 
   // 1000 단위마다 , 찍어주는 함수입니다. (퍼옴)
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
-  // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
-  const { webQuizDialogOpen, setWebQuizDialogOpen } = useContext(CommonContext);
-
-  // console.log(testimg.items[0].prod_image);
 
   const click1 = () => {
     setItemDialogOpen(itemDialogOpen => true);

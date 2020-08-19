@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-
+  .eventitemHeight {
+    height:35vh;
+  }
+  .Centering{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .eventall__layout--container {
     display: flex;
     align-items: center;
@@ -38,15 +45,18 @@ const Wrapper = styled.div`
     z-index: 3;
   }
 
+  .mobileEventall__item {
+    height: 35vh;
+  }
+  .eventall__item {
+    height: 35vh;
+  }
   .eventall__item--part_mention {
     color: white;
     opacity: none;
     font-size: 3vh;
   }
 
-  .eventall__item {
-    height: 35vh;
-  }
 
   .eventall__item--vs {
     text-align: center;
@@ -54,6 +64,15 @@ const Wrapper = styled.div`
     font-size: 1.5rem;
   }
 
+  .mobileEventall__item--title {
+    font-weight: 400;
+    font-size: 0.5rem;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
   .eventall__item--title {
     font-weight: 400;
     font-size: 1rem;
@@ -64,23 +83,41 @@ const Wrapper = styled.div`
     text-overflow:ellipsis;
   }
 
+  .mobileEventall__item--sale {
+    color: red;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
   .eventall__item--sale {
     color: red;
     font-weight: 700;
     font-size: 1.5rem;
   }
 
+  .mobileEventall__item--sale_p {
+    color: red;
+    font-weight: 400;
+    font-size: 0.6rem;
+  }
   .eventall__item--sale_p {
     color: red;
     font-weight: 400;
     font-size: 1.2rem;
   }
 
+  .mobileEventall__item--price {
+    font-weight: 700;
+    font-size: 0.65rem;
+  }
   .eventall__item--price {
     font-weight: 700;
     font-size: 1.3rem;
   }
 
+  .mobileEventall__item--price_line {
+    text-decoration: line-through
+    font-size: 0.45rem;
+  }
   .eventall__item--price_line {
     text-decoration: line-through
     font-size: 0.9rem;
@@ -125,7 +162,13 @@ const Wrapper = styled.div`
     // justify-content: space-evenly;
     // background-color: green;
   }
-
+  .mobiletmp {
+    -webkit-user-drag: none;
+    width: 50%;
+    // height: 15vh;
+    border-radius: 0.5rem;
+    // margin: 0 1vw 0 1vw;
+  }
   .tmp {
     -webkit-user-drag: none;
     width: 100%;
@@ -134,6 +177,12 @@ const Wrapper = styled.div`
     // margin: 0 1vw 0 1vw;
   }
 
+  .mobileEventall__button--column {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    height: 3vh;
+  }
   .eventall__button--column {
     display: flex;
     flex-direction: column;

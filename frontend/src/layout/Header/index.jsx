@@ -55,6 +55,7 @@ const Header = props => {
     setUserDetailDialogOpen,
     setInfoDetailDialogOpen,
     mainUrl,
+    setUser,
   } = useContext(CommonContext);
 
   const handleSignInDialogOpen = () => {
@@ -92,6 +93,21 @@ const Header = props => {
     setUserDetailDialogOpen(false);
   }, []);
 
+  const onClickSignOutOpenHandler = () => {
+    setUser({
+      user_no: 0,
+      user_id: '',
+      user_nm: '',
+      user_pwd: '',
+      user_img_url: '',
+      status: '',
+      web_site: '',
+      token: '',
+    });
+
+    alert('로그아웃 하셨습니다..');
+    window.location.href = '/';
+  };
   return (
     <Container
       // className="p-0 "
@@ -167,21 +183,56 @@ const Header = props => {
                   Gola la Gola
                 </Typography>
               </Grid>
-              <Grid item xs={4} className="navbarCentering">
+              <Grid
+                item
+                xs={3}
+                className="navbarAround"
+                // style={{
+                //   dispaly: 'flex',
+                //   flexWrap: 'wrap',
+                //   justifyContent: 'center',
+                //   alignContent: 'center',
+                //   height: '8vh',
+                // }}
+              >
                 {successSearchbarTrigger ? <SearchComponent /> : null}
                 <h4 onClick={openSearchbar} style={{ cursor: 'pointer' }}>
                   <Search />
                 </h4>
               </Grid>
 
-              <Grid item xs={4} className="navbarCentering">
+              <Grid item xs={5} className="navbarCentering">
                 <Grid className="navbarCentering" container>
+                  {/* Header 에 Admin 페이지 넘기기 삽입 */}
+                  {/* {res.data.isAdmin == true ? (
+                    <Button>관리자페이지</Button>
+                  ) : (
+                    <>
+                      <Button
+                        variant="contained"
+                        onClick={onClickRedirectPathHandler('eventall')}
+                        className="header-button headerColor "
+                      >
+                        <h6 style={{ margin: 'auto' }}>VS이벤트</h6>
+                      </Button>
+
+                      {user.status === 'login' ? (
+                        <Button
+                          variant="contained"
+                          onClick={onClickRedirectPathHandler('mycoupon')}
+                          className="header-button headerColor "
+                        >
+                          <h6 style={{ margin: 'auto' }}>쿠폰함</h6>
+                        </Button>
+                      ) : null}
+                    </>
+                  )} */}
                   <Button
                     variant="contained"
                     onClick={onClickRedirectPathHandler('eventall')}
                     className="header-button headerColor "
                   >
-                    <h6 style={{ margin: 'auto' }}>이벤트</h6>
+                    <h6 style={{ margin: 'auto' }}>VS이벤트</h6>
                   </Button>
 
                   {user.status === 'login' ? (
@@ -191,6 +242,11 @@ const Header = props => {
                       className="header-button headerColor "
                     >
                       <h6 style={{ margin: 'auto' }}>쿠폰함</h6>
+                    </Button>
+                  ) : null}
+                  {user.status === 'login' ? (
+                    <Button onClick={onClickSignOutOpenHandler}>
+                      <h6 style={{ margin: 'auto' }}>로그아웃</h6>
                     </Button>
                   ) : null}
                   <Button

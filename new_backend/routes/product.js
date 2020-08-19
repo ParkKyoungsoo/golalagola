@@ -99,7 +99,6 @@ app.post("/", async (req, res) => {
 app.put("/", async function (req, res) {
   // const course = update.find((c) => c.id === parseInt(req.params.id));
   // if (!course) res.status(404).send(`ID was not found`);
-
   await db.Product.update(req.body, {
     where: { prod_id: req.body.prod_id },
   })

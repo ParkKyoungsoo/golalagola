@@ -3,6 +3,9 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   flex-grow: 1;
+  .titleHeight {
+    height: 10vh;
+  }
   .doubleLine {
     display:-webkit-box;
     -webkit-line-clamp:2;
@@ -75,7 +78,7 @@ const Wrapper = styled.div`
     border: 1px solid #e1e1e1;
   }
   .img-box {
-    // cursor: pointer;
+    cursor: pointer;
     &:hover {
       & .date {
         &.on {

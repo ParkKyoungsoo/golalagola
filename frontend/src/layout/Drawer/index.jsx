@@ -195,10 +195,10 @@ const DrawerListGroup = () => {
         )}
         <ListItem
           button
-          key={'이벤트'}
+          key={'VS이벤트'}
           onClick={onClickRedirectPathHandler('/eventall')}
         >
-          <ListItemText primary={'이벤트'} disableTypography />
+          <ListItemText primary={'VS이벤트'} disableTypography />
         </ListItem>
       </List>
     </>

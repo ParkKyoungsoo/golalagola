@@ -37,6 +37,7 @@ import AdminQuizForm from './pages/Admin/Quiz/Form';
 import AdminUser from './pages/Admin/User/';
 import AdminProduct from './pages/Admin/Product/';
 import AdminProductForm from './pages/Admin/Product/Form';
+import Payment from './pages/Payment/';
 
 //
 import CategoryData from './pages/MainVote/dump.json';
@@ -358,7 +359,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log('execute eventListener');
     getMyCouponDatas();
   }, [eventListener]);
 
@@ -496,6 +496,7 @@ const App = () => {
               component={AdminProductForm}
             />
             <Route exact path="/admin/createevent" component={CreateEvent} />
+			<Route exact path="/payment" component={Payment} />
 
             <Redirect to="/not-found" />
           </Switch>

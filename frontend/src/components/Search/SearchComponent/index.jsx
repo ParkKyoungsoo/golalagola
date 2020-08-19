@@ -78,7 +78,7 @@ const SearchComponent = () => {
               // className="input2"
               style={{
                 height: '5vh',
-                // width: '100px',
+                width: '10vw',
               }}
             />
           </Grid>
