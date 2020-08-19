@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
-import { Button, TextField, Grid } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Button, TextField, Grid, Dialog } from '@material-ui/core';
 import Axios from 'axios';
+
+const Tmp = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
+  });
+
+  return <h2>결제되었습니다.</h2>;
+};
 
 const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
   // console.log('readc', readCoupon);
+
+  const [tmpDialogHandler, setTmpDialogHandler] = useState(false);
 
   const readCouponChangeHandler = event => {
     setReadCoupon('');
@@ -16,11 +28,17 @@ const Payment = props => {
       .then(res => {
         console.log('resresr', res.data);
         setReadCoupon('');
+        setTmpDialogHandler(true);
       })
       .catch(setReadCoupon(''));
     setReadCoupon('');
+  };
+
+  const handler = () => {
+    setTmpDialogHandler(false);
     window.location.reload(false);
   };
+
   return (
     <Grid>
       <input
@@ -52,6 +70,9 @@ const Payment = props => {
           </Button>
         </Grid>
       </Grid>
+      <Dialog open={tmpDialogHandler} onClose={handler}>
+        <Tmp />
+      </Dialog>
     </Grid>
   );
 };

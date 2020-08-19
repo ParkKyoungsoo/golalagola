@@ -123,7 +123,7 @@ const SubTitleGroupComponent = () => {
   useEffect(() => {
     test();
     test2();
-  }, [newEventData]);
+  });
 
   return (
     <Wrapper>
