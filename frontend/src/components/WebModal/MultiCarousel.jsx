@@ -28,7 +28,7 @@ const MultiCarousel = () => {
   return (
     <>
       {isMobile ? (
-        <Grid container>
+        <Grid>
           <Grid item xs={12}>
             <AliceCarousel
               responsive={responsive}
@@ -42,6 +42,7 @@ const MultiCarousel = () => {
             >
               {realtime.map((TmpData, index) => (
                 <img
+                  key={index}
                   src={`${serverImgUrl}${TmpData.prod_image}`}
                   alt="Prod_image"
                   style={{ width: '100%', height: 'auto' }}
@@ -51,9 +52,9 @@ const MultiCarousel = () => {
           </Grid>
         </Grid>
       ) : (
-        <Carousel container>
+        <Carousel>
           <Carousel.Item>
-            <Grid container>
+            <Grid>
               <Grid item xs={12}>
                 <AliceCarousel
                   responsive={responsive}
@@ -68,6 +69,7 @@ const MultiCarousel = () => {
                 >
                   {realtime.map((TmpData, index) => (
                     <img
+                      key={index}
                       src={`${serverImgUrl}/${TmpData.prod_image}`}
                       alt="Prod_image"
                       style={{ width: '100%', height: 'auto' }}

@@ -66,7 +66,7 @@ const Quiz = () => {
     <>
       <Wrapper>
         <Navbar />
-        <Grid container direction="column" xs={12}>
+        <Grid container direction="column" item xs={12}>
           <Grid
             item
             style={{
@@ -99,8 +99,6 @@ const Quiz = () => {
           >
             <ClickAwayListener onClickAway={handleClickAway}>
               <Grid
-                className
-                // direction="column"
                 style={{
                   display: 'flex',
                   justifyContent: 'center',

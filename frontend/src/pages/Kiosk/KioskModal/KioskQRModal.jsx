@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { CommonContext } from '../../../context/CommonContext';
 import { Grid } from '@material-ui/core';
 // import Testimg from 'public/images/qr.jpg';
 import QRCode from 'react-qr-code';
 import Wrapper from './styles';
+import { MdClear } from 'react-icons/md';
+
 const CouponsQR = () => {
+  const { QRModalTrigger, setQRModalTrigger } = useContext(CommonContext);
+  const QRModalHandler = () => {
+    setQRModalTrigger(QRModalTrigger => false);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.location.href = 'kioskmains';
+      setQRModalTrigger(QRModalTrigger => false);
+    }, 30000);
+  });
+
   return (
     <Wrapper>
       <Grid container>
+        <Grid container style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <h1>
+            <MdClear onClick={QRModalHandler} style={{ cursor: 'pointer' }} />
+          </h1>
+        </Grid>
         <Grid item xs={12} style={{ padding: '5vw' }}>
           <Grid style={{ display: 'flex', justifyContent: 'center' }}>
             <QRCode value={`https://i3b309.p.ssafy.io`} />

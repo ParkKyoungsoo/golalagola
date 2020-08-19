@@ -155,6 +155,8 @@ const App = () => {
   const [recommandProds, setRecommandProds] = useState([]);
   const [realtime, setRealTime] = useState([]);
 
+  const [QRModalTrigger, setQRModalTrigger] = useState();
+
   //
   const [newEventData, setNewEventData] = useState({
     event_id: '',
@@ -454,6 +456,8 @@ const App = () => {
         setNumber,
         eventListener,
         setEventListener,
+        QRModalTrigger,
+        setQRModalTrigger,
       }}
     >
       <MuiThemeProvider theme={theme}>
@@ -498,7 +502,6 @@ const App = () => {
               component={AdminProductForm}
             /> */}
             {/* <Route exact path="/admin/createevent" component={CreateEvent} /> */}
-            {/* <Route exact path="/payment" component={Payment} /> */}
 
             {/* <Route exact path="/kioskmains" component={KioskMains} />
             <Route exact path="/kioskcoupons" component={KioskCoupons} />
@@ -580,12 +583,14 @@ const App = () => {
               component={CreateEvent}
               authorizations={user.isAdmin}
             />
-            <RestrictRoute
+
+            {/* <RestrictRoute
               exact
               path="payment"
               component={Payment}
               authorizations={user.isAdmin}
-            />
+            /> */}
+            <Route exact path="/payment" component={Payment} />
 
             <Redirect to="/not-found" />
           </Switch>

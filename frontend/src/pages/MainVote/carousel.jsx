@@ -93,6 +93,7 @@ const ControlledCarousel = props => {
                     src={`${serverImgUrl}배너1.jpg`}
                     alt="image2"
                     onClick={moveToEventPage}
+                    style={{ cursor: 'pointer' }}
                   />
                 </Grid>
               </Grid>
@@ -106,6 +107,7 @@ const ControlledCarousel = props => {
                     className="tmp"
                     src={`${serverImgUrl}배너2.jpg`}
                     alt="image2"
+                    style={{ cursor: 'pointer' }}
                   />
                 </Grid>
               </Grid>
@@ -120,6 +122,7 @@ const ControlledCarousel = props => {
                     src={`${serverImgUrl}배너3.jpg`}
                     alt="image2"
                     onClick={moveToEventPage}
+                    style={{ cursor: 'pointer' }}
                   />
                 </Grid>
               </Grid>
