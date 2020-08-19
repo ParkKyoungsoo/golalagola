@@ -115,7 +115,7 @@ const AdminQuiz = () => {
                 title=""
                 columns={quizzesTableData.columns}
                 data={quizzesTableData.data}
-                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                options={{ actionsColumnIndex: -1, pageSize: 10 }}
                 actions={[
                   {
                     icon: AddBox,

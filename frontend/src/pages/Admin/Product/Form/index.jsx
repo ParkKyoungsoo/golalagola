@@ -234,6 +234,7 @@ const AdminProductForm = () => {
       // formData 생성
       const formData = new FormData();
       formData.append('image', image);
+      formData.append('prod_id', currentProductDatas.prod_id);
 
       // status: create
       if (currentProductDatas.status === 'create') {
@@ -244,7 +245,7 @@ const AdminProductForm = () => {
           prod_price: price.value,
           prod_amount: amount.value,
           prod_expiration: expiration,
-          prod_image: `images/${imageName}`,
+          prod_image: `${imageName}`,
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
@@ -282,7 +283,7 @@ const AdminProductForm = () => {
           prod_price: price.value,
           prod_amount: amount.value,
           prod_expiration: expiration,
-          prod_image: `images/${imageName}`,
+          prod_image: `${imageName}`,
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,

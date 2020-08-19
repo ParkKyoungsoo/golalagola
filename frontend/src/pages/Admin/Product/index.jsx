@@ -174,7 +174,7 @@ const AdminProduct = () => {
                 title=""
                 columns={productsTableData.columns}
                 data={productsTableData.data}
-                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                options={{ actionsColumnIndex: -1, pageSize: 10 }}
                 detailPanel={rowData => {
                   return (
                     <Grid container className="admin_product__detail--grid">
@@ -192,7 +192,7 @@ const AdminProduct = () => {
                       >
                         <img
                           className="admin_product__detail--image"
-                          src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
+                          src={`https://i3b309.p.ssafy.io/images/${rowData.prod_image}`}
                           alt={`${rowData.prod_name} 이미지`}
                         />
                       </Grid>
