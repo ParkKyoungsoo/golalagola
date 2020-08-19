@@ -138,7 +138,6 @@ const MyInfoButtonGroupComponent = props => {
       },
     })
       .then(res => {
-        console.log('res', res.data);
         var obj = {
           user_id: user.user_id,
           user_email: user.user_email,
