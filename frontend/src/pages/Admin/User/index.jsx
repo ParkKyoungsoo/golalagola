@@ -1,6 +1,5 @@
-import React, { useState, forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
-import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { Grid, Divider } from '@material-ui/core';
 import MaterialTable from 'material-table';
@@ -50,7 +49,7 @@ const tableIcons = {
 };
 
 const AdminUser = () => {
-  const { usersTableData, setUsersTableData } = useContext(CommonContext);
+  const { usersTableData } = useContext(CommonContext);
 
   const deleteProductData = targetProdId => {
     Axios.delete('https://i3b309.p.ssafy.io/api/product', {
@@ -59,13 +58,9 @@ const AdminUser = () => {
       },
     })
       .then(res => {
-        // console.log(res);
         alert('삭제되었습니다.');
-        // window.location.reload();
       })
-      .catch(e => {
-        // console.log('Error: ', e.response.data);
-      });
+      .catch(e => {});
   };
 
   return (
@@ -122,7 +117,6 @@ const AdminUser = () => {
                     icon: DeleteOutline,
                     tooltip: 'Delete Product',
                     onClick: (event, rowData) => {
-                      console.log(rowData);
                       if (
                         window.confirm(
                           'You want to delete ' + rowData.prod_name,

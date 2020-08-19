@@ -195,7 +195,6 @@ export default function RadioButtonsGroup() {
   return (
     <Grid style={{ paddingTop: -4 }} container>
       {infoData.vote_data.map((x, index) => {
-        console.log(x);
         return (
           <Grid item md={6} xs={12}>
             <VoteViewComponent key={index} optionData={x} index={index} />

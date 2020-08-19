@@ -10,14 +10,7 @@ import {
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import TimelineIcon from '@material-ui/icons/Timeline';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import PieChartIcon from '@material-ui/icons/PieChart';
-import FolderSharedIcon from '@material-ui/icons/FolderShared';
 import EventIcon from '@material-ui/icons/Event';
 import PersonIcon from '@material-ui/icons/Person';
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
@@ -89,6 +82,11 @@ const NestedList = props => {
     alert('로그아웃 하셨습니다..');
     window.location.href = '/';
   };
+
+  const moveToMain = () => {
+    window.location.href = '/';
+  };
+
   return (
     <Wrapper>
       <List component="nav" className="sidebar__main">
@@ -103,7 +101,8 @@ const NestedList = props => {
             className="sidebar__logo"
             src="https://i3b309.p.ssafy.io/images/폰트_화이트.png"
             alt="logo"
-            style={{ width: '100%' }}
+            style={{ width: '100%', cursor: 'pointer' }}
+            onClick={moveToMain}
           />
         </Grid>
         <Divider variant="middle" style={{ margin: '10px 20px 10px' }} />

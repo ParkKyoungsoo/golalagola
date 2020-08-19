@@ -6,15 +6,11 @@ const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
 
   const readCouponChangeHandler = event => {
-    console.log(event.target.value);
     setReadCoupon(event.target.value);
-    console.log('readCoupon', readCoupon);
   };
 
   const onPaymentHandler = async e => {
-    Axios.put(readCoupon).then(res => {
-      console.log('resresr', res.data);
-    });
+    Axios.put(readCoupon).then(res => {});
   };
   return (
     <div>
