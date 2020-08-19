@@ -1,6 +1,5 @@
-import React, { useState, forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
-import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { Grid, Divider } from '@material-ui/core';
 import MaterialTable from 'material-table';
@@ -50,7 +49,7 @@ const tableIcons = {
 };
 
 const AdminUser = () => {
-  const { usersTableData, setUsersTableData } = useContext(CommonContext);
+  const { usersTableData } = useContext(CommonContext);
 
   const deleteProductData = targetProdId => {
     Axios.delete('https://i3b309.p.ssafy.io/api/product', {

@@ -10,14 +10,7 @@ import {
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import TimelineIcon from '@material-ui/icons/Timeline';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import PieChartIcon from '@material-ui/icons/PieChart';
-import FolderSharedIcon from '@material-ui/icons/FolderShared';
 import EventIcon from '@material-ui/icons/Event';
 import PersonIcon from '@material-ui/icons/Person';
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
