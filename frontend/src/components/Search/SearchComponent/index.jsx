@@ -1,28 +1,16 @@
-import React, { useContext, useState } from 'react';
-import Axios from 'axios';
+import React from 'react';
 
 import { Grid, TextField, useMediaQuery } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import Wrapper from './styles';
-import { useHistory, useParams } from 'react-router-dom';
-import { ViewContext } from '../../../context/ViewContext';
-import { CommonContext } from '../../../context/CommonContext';
-import { ContinuousColorLegend } from 'react-vis';
-import { BsSearch } from 'react-icons/bs';
-const Search = () => {
-  return <BsSearch />;
-};
+import { useHistory } from 'react-router-dom';
 const SearchComponent = () => {
   let history = useHistory();
-  let location = useParams();
   const isMobile = useMediaQuery('(max-width:960px)');
-  const { mainUrl } = useContext(CommonContext);
   const TopSearchCloseHandler = e => {
     if (e.target.type !== 'text') {
       return;
     }
   };
-  const click = () => {};
 
   const onKeyPress = currentPathname => e => {
     if (e.key === 'Enter') {

@@ -41,7 +41,6 @@ const NestedList = props => {
   const history = useHistory();
 
   const handleClick = index => {
-    console.log(index);
     setCurrentOpen(index);
     setForceRender({});
     if (index === 0) {
@@ -66,7 +65,7 @@ const NestedList = props => {
 
   const classes = useStyles();
 
-  const { setUser } = useContext(CommonContext);
+  const { setUser, serverImgUrl } = useContext(CommonContext);
   const onClickSignOutOpenHandler = () => {
     setUser({
       user_no: 0,
@@ -99,7 +98,8 @@ const NestedList = props => {
         >
           <img
             className="sidebar__logo"
-            src="https://i3b309.p.ssafy.io/images/폰트_화이트.png"
+            // src="https://i3b309.p.ssafy.io/images/폰트_화이트.png"
+            src={`${serverImgUrl}폰트_화이트.png`}
             alt="logo"
             style={{ width: '100%', cursor: 'pointer' }}
             onClick={moveToMain}
@@ -170,7 +170,8 @@ const NestedList = props => {
           <div className={classes.root}>
             <Avatar
               alt="Remy Sharp"
-              src={`https://i3b309.p.ssafy.io/images/KakaoTalk_20200807_174132070.jpg`}
+              // src={`https://i3b309.p.ssafy.io/images/KakaoTalk_20200807_174132070.jpg`}
+              src={`${serverImgUrl}KakaoTalk_20200807_174132070.jpg`}
               className={classes.large}
             />
           </div>

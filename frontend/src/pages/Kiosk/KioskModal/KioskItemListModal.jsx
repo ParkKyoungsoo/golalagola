@@ -7,8 +7,9 @@ const KioskItemModal = () => {
   const [index, setIndex] = useState(0);
   const [moveToNext, setMoveToNext] = useState(false);
 
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const { productDatas, currentEventDatas, serverImgUrl } = useContext(
+    CommonContext,
+  );
 
   return (
     <Wrapper>
@@ -18,7 +19,7 @@ const KioskItemModal = () => {
             <Grid className="KisokCentering" item xs={6}>
               <img
                 className="tmp"
-                src={`https://i3b309.p.ssafy.io/${
+                src={`${serverImgUrl}${
                   Object(productDatas[Data.event_item['1'].prod_id - 1])
                     .prod_image
                 }`}
@@ -28,7 +29,7 @@ const KioskItemModal = () => {
             <Grid className="KisokCentering" item xs={6}>
               <img
                 className="tmp"
-                src={`https://i3b309.p.ssafy.io/${
+                src={`${serverImgUrl}${
                   Object(productDatas[Data.event_item['2'].prod_id - 1])
                     .prod_image
                 }`}

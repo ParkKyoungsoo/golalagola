@@ -26,7 +26,7 @@ const Quiz = () => {
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
-  const { quizDatas, setQuizDatas } = useContext(CommonContext);
+  const { quizDatas, serverImgUrl } = useContext(CommonContext);
   const [number, setNumber] = useState();
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
@@ -140,7 +140,9 @@ const Quiz = () => {
                   height: 'auto',
                   backgroundColor: '#FFFFFF',
                 }}
-                src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                // src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                src={`${serverImgUrl}quiz_o.png`}
+                alt="O"
               ></img>
             </Button>
             <Button
@@ -154,7 +156,9 @@ const Quiz = () => {
                   height: 'auto',
                   backgroundColor: '#FFFFFF',
                 }}
-                src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                // src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                src={`${serverImgUrl}quiz_x.png`}
+                alt="X"
               ></img>
             </Button>
           </Grid>

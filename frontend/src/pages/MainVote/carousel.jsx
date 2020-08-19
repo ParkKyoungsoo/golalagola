@@ -7,8 +7,7 @@ import { CommonContext } from '../../context/CommonContext';
 import { Wrapper, MobileWrapper } from './styles';
 const ControlledCarousel = props => {
   const [index, setIndex] = useState(0);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const { serverImgUrl } = useContext(CommonContext);
   const isMobile = useMediaQuery('(max-width:960px)');
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -38,7 +37,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src="https://i3b309.p.ssafy.io/images/배너1.jpg"
+                      src={`${serverImgUrl}배너1.jpg`}
                       alt="image2"
                       onClick={moveToEventPage}
                     />
@@ -52,7 +51,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src="https://i3b309.p.ssafy.io/images/배너2.jpg"
+                      src={`${serverImgUrl}배너2.jpg`}
                       alt="image2"
                     />
                   </Grid>
@@ -65,7 +64,7 @@ const ControlledCarousel = props => {
                   <Grid className="Centering ">
                     <img
                       className="mobiletmp"
-                      src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                      src={`${serverImgUrl}배너3.jpg`}
                       alt="image2"
                       onClick={moveToEventPage}
                     />
@@ -91,7 +90,7 @@ const ControlledCarousel = props => {
                 <Grid className="Centering ">
                   <img
                     className="tmp"
-                    src="https://i3b309.p.ssafy.io/images/배너1.jpg"
+                    src={`${serverImgUrl}배너1.jpg`}
                     alt="image2"
                     onClick={moveToEventPage}
                   />
@@ -105,7 +104,7 @@ const ControlledCarousel = props => {
                 <Grid className="Centering ">
                   <img
                     className="tmp"
-                    src="https://i3b309.p.ssafy.io/images/배너2.jpg"
+                    src={`${serverImgUrl}배너2.jpg`}
                     alt="image2"
                   />
                 </Grid>
@@ -118,7 +117,7 @@ const ControlledCarousel = props => {
                 <Grid className="Centering ">
                   <img
                     className="tmp"
-                    src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                    src={`${serverImgUrl}배너3.jpg`}
                     alt="image2"
                     onClick={moveToEventPage}
                   />
