@@ -45,6 +45,8 @@ const SignInSection01 = () => {
     setSignDialogOpen,
     serverUrl,
     setIsShowKeyborad,
+    eventListener,
+    setEventListener,
   } = useContext(CommonContext);
 
   const OnChangeHandler = name => e => {
@@ -101,6 +103,7 @@ const SignInSection01 = () => {
 
           setSignDialogOpen(false);
           setIsSignUp('SignIn');
+          setEventListener(eventListener => eventListener + 1);
           if (res.data.isAdmin == true) {
             alert(
               `${res.data.user_name} 관리자님 환영합니다.\n관리자 페이지로 이동합니다.`,
@@ -126,6 +129,12 @@ const SignInSection01 = () => {
       setDisabled(true);
     }
   }, [signInUserData.user_email, signInUserData.user_pwd, user, setUser]);
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      onSignInHandler();
+    }
+  };
 
   return (
     <Wrapper>
@@ -169,6 +178,7 @@ const SignInSection01 = () => {
             onFocus={event => {
               setIsShowKeyborad(true);
             }}
+            onKeyDown={handleKeyDown}
           />
         </Grid>
         <Grid item xs={12} className="grid-item">
@@ -378,6 +388,7 @@ const SignUpSection02 = () => {
         setSignUpUserData(signUpUserData);
         setIsSignUp('SignIn');
         // alert(data.message);
+        alert('이메일 인증 후 사용해주세요.');
       })
       .catch(err => {
         alert(err.response.data.message);

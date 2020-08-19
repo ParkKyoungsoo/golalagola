@@ -234,6 +234,7 @@ const AdminProductForm = () => {
       // formData 생성
       const formData = new FormData();
       formData.append('image', image);
+      formData.append('prod_id', currentProductDatas.prod_id);
 
       // status: create
       if (currentProductDatas.status === 'create') {
@@ -244,7 +245,7 @@ const AdminProductForm = () => {
           prod_price: price.value,
           prod_amount: amount.value,
           prod_expiration: expiration,
-          prod_image: `images/${imageName}`,
+          prod_image: `${imageName}`,
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
@@ -260,16 +261,16 @@ const AdminProductForm = () => {
               },
             )
               .then(response => {
-                console.log('Response', response.data);
+                // console.log('Response', response.data);
                 alert('상품정보가 등록 되었습니다.');
               })
               .catch(e => {
-                console.log('Error: ', e);
+                // console.log('Error: ', e);
               });
-            console.log('Response', response.data);
+            // console.log('Response', response.data);
           })
           .catch(e => {
-            console.log('Error: ', e);
+            // console.log('Error: ', e);
           });
       } else if (currentProductDatas.status === 'update') {
         // status: update
@@ -282,7 +283,7 @@ const AdminProductForm = () => {
           prod_price: price.value,
           prod_amount: amount.value,
           prod_expiration: expiration,
-          prod_image: `images/${imageName}`,
+          prod_image: `${imageName}`,
           prod_desc: desc.value,
           prod_sale: sale.value,
           prod_weight: weight.value,
@@ -299,19 +300,19 @@ const AdminProductForm = () => {
                 },
               )
                 .then(response => {
-                  console.log('Response', response.data);
+                  // console.log('Response', response.data);
                   alert('상품정보가 수정 되었습니다.');
                 })
                 .catch(e => {
-                  console.log('Error: ', e);
+                  // console.log('Error: ', e);
                   alert('이미지가 수정되지 않았습니다. 다시 시도해주세요.');
                 });
             }
-            console.log('Response', response.data);
+            // console.log('Response', response.data);
             alert('상품정보가 수정 되었습니다.');
           })
           .catch(e => {
-            console.log('Error: ', e);
+            // console.log('Error: ', e);
             alert('상품 정보가 수정되지 않았습니다. 다시 시도해주세요.');
           });
       } else {
@@ -324,7 +325,7 @@ const AdminProductForm = () => {
 
   // ImageUproader
   const handleImageChange = e => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setImage(e.target.files[0]);
     setImageName(e.target.files[0].name);
     setUploadedImage(URL.createObjectURL(e.target.files[0]));

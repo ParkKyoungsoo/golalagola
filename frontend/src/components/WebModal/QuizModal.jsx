@@ -231,14 +231,18 @@ const SuccessModal = () => {
 };
 
 const Quiz = modalNum => {
-  const { number, setNumber } = useContext(CommonContext);
-
   const [userAns, setUserAns] = useState(3);
   const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
-  const { quizDatas } = useContext(CommonContext);
-  const { setWebQuizDialogOpen } = useContext(CommonContext);
-  const { setItemDialogOpen } = useContext(CommonContext);
+  const {
+    number,
+    serverImgUrl,
+    setNumber,
+    quizDatas,
+    setWebQuizDialogOpen,
+    setItemDialogOpen,
+  } = useContext(CommonContext);
+
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
   useEffect(() => setNumber(Math.floor(Math.random() * quizDatas.length)), []);
@@ -353,7 +357,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                  src={`${serverImgUrl}quiz_o.png`}
                   alt="O"
                 />
               </Button>
@@ -368,7 +372,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                  src={`${serverImgUrl}quiz_x.png`}
                   alt="X"
                 />
               </Button>
@@ -474,7 +478,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src="https://i3b309.p.ssafy.io/images/quiz_o.png"
+                  src={`${serverImgUrl}quiz_o.png`}
                   alt="O"
                 ></img>
               </Button>
@@ -489,7 +493,7 @@ const Quiz = modalNum => {
                     height: 'auto',
                     backgroundColor: '#FFFFFF',
                   }}
-                  src="https://i3b309.p.ssafy.io/images/quiz_x.png"
+                  src={`${serverImgUrl}quiz_x.png`}
                   alt="X"
                 ></img>
               </Button>

@@ -26,7 +26,6 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 import CanvasJSReact from '../asset/canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const tableIcons = {
@@ -55,14 +54,10 @@ const tableIcons = {
 
 const AdminProduct = () => {
   const {
-    productDatas,
-    setProductDatas,
-    currentProductDatas,
     setCurrentProductDatas,
     productsTableData,
-    setProductsTableData,
     buyDatas,
-    setBuyDatas,
+    serverImgUrl,
   } = useContext(CommonContext);
 
   const [categories, setCategories] = useState({});
@@ -174,7 +169,7 @@ const AdminProduct = () => {
                 title=""
                 columns={productsTableData.columns}
                 data={productsTableData.data}
-                options={{ actionsColumnIndex: -1, pageSize: 8 }}
+                options={{ actionsColumnIndex: -1, pageSize: 10 }}
                 detailPanel={rowData => {
                   return (
                     <Grid container className="admin_product__detail--grid">
@@ -192,7 +187,7 @@ const AdminProduct = () => {
                       >
                         <img
                           className="admin_product__detail--image"
-                          src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
+                          src={`${serverImgUrl}${rowData.prod_image}`}
                           alt={`${rowData.prod_name} 이미지`}
                         />
                       </Grid>

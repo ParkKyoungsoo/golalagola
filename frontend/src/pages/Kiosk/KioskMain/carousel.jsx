@@ -9,8 +9,9 @@ import { Divider } from '@material-ui/core';
 
 const ControlledCarousel = () => {
   const [index, setIndex] = useState(0);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
+  const { productDatas, currentEventDatas, serverImgUrl } = useContext(
+    CommonContext,
+  );
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -41,7 +42,7 @@ const ControlledCarousel = () => {
                   <Link to={'/KioskQuiz/'}>
                     <img
                       className="tmp"
-                      src={`https://i3b309.p.ssafy.io/${
+                      src={`${serverImgUrl}${
                         Object(productDatas[Data.event_item['1'].prod_id - 1])
                           .prod_image
                       }`}
@@ -105,7 +106,7 @@ const ControlledCarousel = () => {
                   <Link to={'/KioskQuiz/'}>
                     <img
                       className="tmp"
-                      src={`https://i3b309.p.ssafy.io/${
+                      src={`${serverImgUrl}${
                         Object(productDatas[Data.event_item['2'].prod_id - 1])
                           .prod_image
                       }`}

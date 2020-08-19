@@ -1,13 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import store from 'store';
-
+import { useHistory } from 'react-router-dom';
 import { CommonContext } from '../../context/CommonContext';
 import SignResponsiveDialog from '../../components/Auth/SignResponsiveDialog/';
 import UserResponsiveDialog from '../../components/User/UserResponsiveDialog/';
 import VoteDetailResponsiveDialog from '../../components/Main/VoteDetailResponsiveDialog/';
-import SearchVote from '../../pages/SearchVote/';
 import SearchComponent from '../../components/Search/SearchComponent';
 
 import {
@@ -15,26 +11,17 @@ import {
   Typography,
   AppBar,
   Button,
-  IconButton,
   useMediaQuery,
   Container,
 } from '@material-ui/core';
 
 import Wrapper from './styles';
 import { FiUser } from 'react-icons/fi';
-import { RiCoupon3Line } from 'react-icons/ri';
 import { BsList } from 'react-icons/bs';
-import { FiGift } from 'react-icons/fi';
 import { BsSearch } from 'react-icons/bs';
 
 const User = () => {
   return <FiUser />;
-};
-const Coupon = () => {
-  return <RiCoupon3Line />;
-};
-const Event = () => {
-  return <FiGift />;
 };
 const Search = () => {
   return <BsSearch />;
@@ -54,17 +41,19 @@ const Header = props => {
     setSignDialogOpen,
     setUserDetailDialogOpen,
     setInfoDetailDialogOpen,
-    mainUrl,
     setUser,
+    eventListener,
+    setEventListener,
   } = useContext(CommonContext);
 
   const handleSignInDialogOpen = () => {
     history.push('/auth');
+    setEventListener(eventListener => eventListener + 1);
   };
 
   const onClickRedirectPathHandler = name => e => {
     window.scrollTo(0, 0);
-
+    setEventListener(eventListener => eventListener + 1);
     if (name === '/mainvote') {
       history.push('/');
     }

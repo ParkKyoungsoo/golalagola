@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Grid,
   createMuiTheme,
@@ -10,17 +10,8 @@ import {
   InputLabel,
 } from '@material-ui/core';
 import Wrapper from './styles';
-import RadioButtonsGroup from './../RadioButtonsGroup/index';
-import StartDateTimePicker from '../StartDateTimePicker';
-import EndDateTimePicker from '../EndDateTimePicker';
 import { CommonContext } from '../../../context/CommonContext';
-import { ViewContext } from '../../../context/ViewContext';
-import { useDropzone } from 'react-dropzone';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-
-import categoryDats from './dump.json';
 
 const themeSubTitleGroupComponent = createMuiTheme({
   overrides: {
@@ -34,10 +25,9 @@ const themeSubTitleGroupComponent = createMuiTheme({
 });
 
 const InputTitleComponent = () => {
-  const { newEventData, setNewEventData } = useContext(CommonContext);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const [productImage, setProductImage] = useState();
-
+  const { newEventData, productDatas, serverImgUrl } = useContext(
+    CommonContext,
+  );
   return (
     <Wrapper>
       <Grid style={{ display: 'flex' }}>
@@ -45,7 +35,7 @@ const InputTitleComponent = () => {
           {Object(productDatas[newEventData.event_prod_A - 1]).prod_image !==
           undefined ? (
             <img
-              src={`https://i3b309.p.ssafy.io/${
+              src={`${serverImgUrl}${
                 Object(productDatas[newEventData.event_prod_A - 1]).prod_image
               }`}
               alt="productA.jpg"
@@ -61,7 +51,7 @@ const InputTitleComponent = () => {
           {Object(productDatas[newEventData.event_prod_B - 1]).prod_image !==
           undefined ? (
             <img
-              src={`https://i3b309.p.ssafy.io/${
+              src={`${serverImgUrl}${
                 Object(productDatas[newEventData.event_prod_B - 1]).prod_image
               }`}
               alt="productA.jpg"
@@ -76,10 +66,9 @@ const InputTitleComponent = () => {
 };
 
 const SubTitleGroupComponent = () => {
-  const { newEventData, setNewEventData } = useContext(CommonContext);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const [allEventItem, setAllEventItem] = useState([]);
+  const { newEventData, setNewEventData, productDatas } = useContext(
+    CommonContext,
+  );
 
   const [filterADatas, setFilterADatas] = useState([]);
   const [filterBDatas, setFilterBDatas] = useState([]);
@@ -211,26 +200,10 @@ const SubTitleGroupComponent = () => {
   );
 };
 
-const useGetCategoryDatas = url => {
-  const { serverUrl, user, setUser } = useContext(CommonContext);
-  const [data, setData] = useState([]);
-
-  const getDatas = async () => {
-    setData(categoryDats);
-  };
-
-  useEffect(() => {
-    getDatas();
-  }, []);
-
-  return data;
-};
-
 const SelectCategoryComponent = () => {
-  const { categoryDatas, setCategoryDatas } = useContext(CommonContext);
-  const { newEventData, setNewEventData } = useContext(CommonContext);
-
-  const [category, setCategory] = useState(newEventData.event_category);
+  const { categoryDatas, newEventData, setNewEventData } = useContext(
+    CommonContext,
+  );
 
   const handleChange = e => {
     setNewEventData({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   Grid,
@@ -7,47 +7,32 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
 } from '@material-ui/core';
 import { CommonContext } from '../../context/CommonContext';
 import Layout from '../../layout';
 import Wrapper from './styles';
 import Axios from 'axios';
 
-// sidebar 용 import
-import { makeStyles } from '@material-ui/core/styles';
-
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SendIcon from '@material-ui/icons/Send';
-import AddIcon from '@material-ui/icons/Add';
 import CheckIcon from '@material-ui/icons/Check';
-import { TiPlus } from 'react-icons/ti';
-
-const Plus = () => {
-  return <TiPlus />;
-};
 
 //EventAll
 const EventAll = () => {
   const {
     user,
     productDatas,
-    setProductDatas,
     currentEventDatas,
-    setCurrentEventDatas,
     userEvent,
     setUserEvent,
     userCoupon,
     setUserCoupon,
-    mainUrl,
-    myCouponDatas,
     setMyCouponDatas,
+    serverImgUrl,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
 
-  let history = useHistory();
   const isMobile = useMediaQuery('(max-width:960px)');
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -170,11 +155,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_name
                   }`}
@@ -297,11 +282,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_name
                   }`}
@@ -464,11 +449,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_name
                   }`}
@@ -589,11 +574,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_name
                   }`}
@@ -710,76 +695,6 @@ const EventAll = () => {
     }
   }
 
-  ///////////////////////////////////////////////////////////////////////
-  // SideBar
-  const useStyles = makeStyles(theme => ({
-    root: {
-      width: '100%',
-    },
-  }));
-  function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
-
-  const onClickRedirectPathHandler = name => e => {
-    window.scrollTo(0, 0);
-    if (user.status === 'login') {
-      if (name === '/mainvote') {
-        history.push('/');
-        // console.log(mainUrl);
-      } else {
-        history.push(`/${name}`);
-      }
-    } else {
-      alert('로그인 후 이용 가능 합니다.');
-      history.push('/auth');
-    }
-  };
-
-  /////////////////////////////////////////////////////////////
-
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  ////Mobile + 버튼///////////////////////////////////////////////////
-
-  const NestedList = props => {
-    // sidebar 스타일 정의
-
-    return (
-      <List
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        style={
-          isMobile
-            ? {
-                display: 'flex',
-                justifyContent: 'center',
-              }
-            : { maxWidth: 100, zIndex: '2' }
-        }
-      >
-        {/* <ListItem
-          button
-          className="eventall__button--column"
-          onClick={onClickRedirectPathHandler('mycoupon')}
-        >
-          <ListItemIcon className="eventall__button--icon">
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="쿠폰함" />
-        </ListItem> */}
-      </List>
-    );
-  };
-  ///////////////////////////////////////////////////////////////////////
-
   return (
     <Wrapper>
       <Layout>
@@ -787,7 +702,8 @@ const EventAll = () => {
           {isMobile ? (
             <>
               <img
-                src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                // src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                src={`${serverImgUrl}eventall.jpg`}
                 alt="이벤트 소개 이미지"
                 // style={{ width: 'auto' }}
               />
@@ -810,7 +726,8 @@ const EventAll = () => {
                   <Grid item xs={12}>
                     <Grid className="eventall__layout--container">
                       <img
-                        src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                        // src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                        src={`${serverImgUrl}배너3.jpg`}
                         alt="이벤트 소개 이미지"
                       />
                     </Grid>

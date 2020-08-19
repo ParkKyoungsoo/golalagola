@@ -130,14 +130,6 @@ const DrawerListGroup = () => {
       <List className="drawer-list-group-list">
         {user.status && (
           <Fragment>
-            <ListItem
-              button
-              key={'쿠폰함'}
-              onClick={onClickRedirectPathHandler('/mycoupon')}
-            >
-              <ListItemText primary={'쿠폰함'} disableTypography />
-              <InboxIcon />
-            </ListItem>
             <ListItem button key={'내정보'} className="bg-unset">
               <Accordion className="panel">
                 <AccordionSummary
@@ -190,6 +182,14 @@ const DrawerListGroup = () => {
                   </List>
                 </AccordionDetails>
               </Accordion>
+            </ListItem>
+            <ListItem
+              button
+              key={'쿠폰함'}
+              onClick={onClickRedirectPathHandler('/mycoupon')}
+            >
+              <ListItemText primary={'쿠폰함'} disableTypography />
+              <InboxIcon />
             </ListItem>
           </Fragment>
         )}
