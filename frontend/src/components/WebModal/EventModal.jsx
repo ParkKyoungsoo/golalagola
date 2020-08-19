@@ -8,16 +8,16 @@ import axios from 'axios';
 import { ContactlessOutlined } from '@material-ui/icons';
 
 const EventModal = modalNum => {
-  const { productDatas, setProductDatas } = useContext(CommonContext);
-  const { currentEventDatas, setCurrentEventDatas } = useContext(CommonContext);
-  const { user } = useContext(CommonContext);
-
-  const { eventNum, setEventNum } = useContext(CommonContext);
-  const { selectedEventItem, setSelectedEventItem } = useContext(CommonContext);
-  const [tmpData, setTmpData] = useState();
-
-  const { myCouponDatas, setMyCouponDatas } = useContext(CommonContext);
-  const { eventListener, setEventListener } = useContext(CommonContext);
+  const {
+    user,
+    eventNum,
+    serverImgUrl,
+    productDatas,
+    currentEventDatas,
+    selectedEventItem,
+    setSelectedEventItem,
+    setEventListener,
+  } = useContext(CommonContext);
 
   const [userChoice, setUserChoice] = useState({
     coupon_select: '',
@@ -114,7 +114,7 @@ const EventModal = modalNum => {
               >
                 <img
                   className="eventImg"
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(
                       productDatas[
                         currentEventDatas[eventNum].event_item['1'].prod_id - 1
@@ -159,7 +159,7 @@ const EventModal = modalNum => {
               >
                 <img
                   className="eventImg"
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(
                       productDatas[
                         currentEventDatas[eventNum].event_item['2'].prod_id - 1
@@ -453,7 +453,7 @@ const EventModal = modalNum => {
               >
                 <img
                   className="eventImg"
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(
                       productDatas[
                         currentEventDatas[eventNum].event_item['1'].prod_id - 1
@@ -498,7 +498,7 @@ const EventModal = modalNum => {
               >
                 <img
                   className="eventImg"
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(
                       productDatas[
                         currentEventDatas[eventNum].event_item['2'].prod_id - 1

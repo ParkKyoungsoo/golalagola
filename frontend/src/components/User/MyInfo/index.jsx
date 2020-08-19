@@ -56,7 +56,7 @@ const MyInfoUploadImageComponent = () => {
               src={
                 thumbnailImageData.img
                   ? thumbnailImageData.img
-                  : `https://i3b309.p.ssafy.io/images/${user.user_image}`
+                  : `${serverImgUrl}${user.user_image}`
               }
               className="cover-avatar"
             />

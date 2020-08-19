@@ -72,6 +72,7 @@ const ItemDetail = ({ match }) => {
     setItemDialogOpen,
     setEventNum,
     setWebQuizDialogOpen,
+    serverImgUrl,
   } = useContext(CommonContext);
 
   const [eventActivated, setEventActivated] = useState(false);
@@ -182,7 +183,7 @@ const ItemDetail = ({ match }) => {
                       return (
                         <Card className="m_effect">
                           <img
-                            src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                            src={`${serverImgUrl}/${itemData.prod_image}`}
                             alt="test"
                             style={{
                               width: '100%',
@@ -479,7 +480,7 @@ const ItemDetail = ({ match }) => {
                         return (
                           <Card className="effect" key={index}>
                             <img
-                              src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                              src={`${serverImgUrl}${itemData.prod_image}`}
                               // src={`../../${productDatas[match.params.id - 1].prod_image}`}
                               alt="test"
                               style={{
@@ -797,7 +798,7 @@ const ItemDetail = ({ match }) => {
                       return (
                         <Card key={index}>
                           <img
-                            src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                            src={`${serverImgUrl}${itemData.prod_image}`}
                             alt="test"
                             style={{
                               width: '100%',
@@ -1094,7 +1095,7 @@ const ItemDetail = ({ match }) => {
                         return (
                           <Card key={index}>
                             <img
-                              src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                              src={`${serverImgUrl}${itemData.prod_image}`}
                               // src={`../../${productDatas[match.params.id - 1].prod_image}`}
                               alt="test"
                               style={{

@@ -49,7 +49,7 @@ const tableIcons = {
 };
 
 const AdminUser = () => {
-  const { usersTableData } = useContext(CommonContext);
+  const { usersTableData, serverImgUrl } = useContext(CommonContext);
 
   const deleteProductData = targetProdId => {
     Axios.delete('https://i3b309.p.ssafy.io/api/product', {
@@ -91,7 +91,7 @@ const AdminUser = () => {
                       >
                         <img
                           className="admin_user__detail--image"
-                          src={`https://i3b309.p.ssafy.io/${rowData.prod_image}`}
+                          src={`${serverImgUrl}${rowData.prod_image}`}
                           alt={`${rowData.prod_name} 이미지`}
                         />
                       </Grid>

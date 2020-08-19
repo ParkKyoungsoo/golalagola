@@ -34,8 +34,9 @@ const themeSubTitleGroupComponent = createMuiTheme({
 });
 
 const InputTitleComponent = () => {
-  const { newEventData, setNewEventData } = useContext(CommonContext);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
+  const { newEventData, productDatas, serverImgUrl } = useContext(
+    CommonContext,
+  );
   const [productImage, setProductImage] = useState();
 
   return (
@@ -45,7 +46,7 @@ const InputTitleComponent = () => {
           {Object(productDatas[newEventData.event_prod_A - 1]).prod_image !==
           undefined ? (
             <img
-              src={`https://i3b309.p.ssafy.io/${
+              src={`${serverImgUrl}${
                 Object(productDatas[newEventData.event_prod_A - 1]).prod_image
               }`}
               alt="productA.jpg"
@@ -61,7 +62,7 @@ const InputTitleComponent = () => {
           {Object(productDatas[newEventData.event_prod_B - 1]).prod_image !==
           undefined ? (
             <img
-              src={`https://i3b309.p.ssafy.io/${
+              src={`${serverImgUrl}${
                 Object(productDatas[newEventData.event_prod_B - 1]).prod_image
               }`}
               alt="productA.jpg"

@@ -6,7 +6,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import Carousel from 'react-bootstrap/Carousel';
 
 const MultiCarousel = () => {
-  const { realtime } = useContext(CommonContext);
+  const { realtime, serverImgUrl } = useContext(CommonContext);
 
   const responsive = {
     0: {
@@ -42,7 +42,7 @@ const MultiCarousel = () => {
             >
               {realtime.map((TmpData, index) => (
                 <img
-                  src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
+                  src={`${serverImgUrl}${TmpData.prod_image}`}
                   alt="Prod_image"
                   style={{ width: '100%', height: 'auto' }}
                 />
@@ -68,7 +68,7 @@ const MultiCarousel = () => {
                 >
                   {realtime.map((TmpData, index) => (
                     <img
-                      src={`https://i3b309.p.ssafy.io/${TmpData.prod_image}`}
+                      src={`${serverImgUrl}/${TmpData.prod_image}`}
                       alt="Prod_image"
                       style={{ width: '100%', height: 'auto' }}
                     />

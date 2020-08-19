@@ -41,6 +41,7 @@ const AdminVS = props => {
     currentEventDatas,
     productDatas,
     setNewEventData,
+    serverImgUrl,
   } = useContext(CommonContext);
 
   let history = useHistory();
@@ -222,7 +223,7 @@ const AdminVS = props => {
                               {/* A상품 이미지 */}
                               <img
                                 className="admin_event__item--image_A"
-                                src={`https://i3b309.p.ssafy.io/${
+                                src={`${serverImgUrl}${
                                   Object(
                                     productDatas[
                                       data.event_item['1'].prod_id - 1
@@ -322,7 +323,7 @@ const AdminVS = props => {
                               {/* B상품 이미지 */}
                               <img
                                 className="admin_event__item--image_B"
-                                src={`https://i3b309.p.ssafy.io/${
+                                src={`${serverImgUrl}${
                                   Object(
                                     productDatas[
                                       data.event_item['2'].prod_id - 1

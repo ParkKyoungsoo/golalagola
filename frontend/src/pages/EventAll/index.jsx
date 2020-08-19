@@ -32,16 +32,13 @@ const EventAll = () => {
   const {
     user,
     productDatas,
-    setProductDatas,
     currentEventDatas,
-    setCurrentEventDatas,
     userEvent,
     setUserEvent,
     userCoupon,
     setUserCoupon,
-    mainUrl,
-    myCouponDatas,
     setMyCouponDatas,
+    serverImgUrl,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
@@ -170,11 +167,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_name
                   }`}
@@ -297,11 +294,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_name
                   }`}
@@ -464,11 +461,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['1'].prod_id - 1])
                       .prod_name
                   }`}
@@ -589,11 +586,11 @@ const EventAll = () => {
               <Grid item xs={12} md={5} className="Centering">
                 <img
                   className={isMobile ? 'mobiletmp' : 'tmp'}
-                  src={`https://i3b309.p.ssafy.io/${
+                  src={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_image
                   }`}
-                  alt={`https://i3b309.p.ssafy.io/${
+                  alt={`${serverImgUrl}${
                     Object(productDatas[tmpData.event_item['2'].prod_id - 1])
                       .prod_name
                   }`}
@@ -787,7 +784,8 @@ const EventAll = () => {
           {isMobile ? (
             <>
               <img
-                src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                // src="https://i3b309.p.ssafy.io/images/eventall.jpg"
+                src={`${serverImgUrl}/eventall.jpg`}
                 alt="이벤트 소개 이미지"
                 // style={{ width: 'auto' }}
               />
@@ -810,7 +808,8 @@ const EventAll = () => {
                   <Grid item xs={12}>
                     <Grid className="eventall__layout--container">
                       <img
-                        src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                        // src="https://i3b309.p.ssafy.io/images/배너3.jpg"
+                        src={`${serverImgUrl}/배너3.jpg`}
                         alt="이벤트 소개 이미지"
                       />
                     </Grid>

@@ -93,7 +93,7 @@ export default function VoteGridItem(props) {
               <Grid className="img-box" onClick={click}>
                 <Avatar
                   variant="square"
-                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  src={`${serverImgUrl}${itemData.prod_image}`}
                   className={'large'}
                   // imgProps={{
                   //   className: sw ? 'img' : 'img deactivated',
@@ -139,7 +139,7 @@ export default function VoteGridItem(props) {
                 <Avatar
                   onClick={click}
                   variant="square"
-                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  src={`${serverImgUrl}${itemData.prod_image}`}
                   className={'large'}
                   style={{
                     borderRadius: '5%',
@@ -185,7 +185,7 @@ export default function VoteGridItem(props) {
               <Grid className="img-box" onClick={click}>
                 <Avatar
                   variant="square"
-                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  src={`${serverImgUrl}${itemData.prod_image}`}
                   className={'large'}
                   // imgProps={{
                   //   className: sw ? 'img' : 'img deactivated',
@@ -230,7 +230,7 @@ export default function VoteGridItem(props) {
                 <Avatar
                   onClick={click}
                   variant="square"
-                  src={`https://i3b309.p.ssafy.io/${itemData.prod_image}`}
+                  src={`${serverImgUrl}${itemData.prod_image}`}
                   className={'large'}
                   style={{
                     borderRadius: '5%',

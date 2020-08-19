@@ -9,7 +9,7 @@ import Wrapper from './styles';
 import { MdTouchApp } from 'react-icons/md';
 
 const MultiCarousel = () => {
-  const { productDatas } = useContext(CommonContext);
+  const { productDatas, serverImgUrl } = useContext(CommonContext);
 
   const responsive = {
     0: {
@@ -104,7 +104,7 @@ const MultiCarousel = () => {
                       </Badge>
                     </h1>
                     <img
-                      src={`https://i3b309.p.ssafy.io/${data.prod_image}`}
+                      src={`${serverImgUrl}/${data.prod_image}`}
                       alt="Prod_image"
                       style={{
                         width: '100%',

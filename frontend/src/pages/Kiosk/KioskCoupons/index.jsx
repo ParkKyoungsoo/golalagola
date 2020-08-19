@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Grid, Box, Dialog, Modal } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
@@ -6,8 +6,10 @@ import KioskCSS from './styles';
 import { Redirect, RedirectProps } from 'react-router';
 import Navbar from '../KioskNavbar';
 import CouponsQR from '../KioskModal/KioskQRModal';
+import { CommonContext } from '../../../context/CommonContext';
 
 const SaleItem = ({ match }) => {
+  const { serverImgUrl } = useContext(CommonContext);
   const [QRModalTrigger, setQRModalTrigger] = useState(false);
 
   const click = () => {
@@ -48,7 +50,8 @@ const SaleItem = ({ match }) => {
             <Grid>
               <img
                 style={{ width: '70%' }}
-                src="https://i3b309.p.ssafy.io/images/쿠폰1.jpg"
+                // src="https://i3b309.p.ssafy.io/images/쿠폰1.jpg"
+                src={`${serverImgUrl}/쿠폰1.jpg`}
                 alt=""
               />
             </Grid>
@@ -78,7 +81,8 @@ const SaleItem = ({ match }) => {
             <Grid>
               <img
                 style={{ width: '80%' }}
-                src="https://i3b309.p.ssafy.io/images/이용안내.jpg"
+                // src="https://i3b309.p.ssafy.io/images/이용안내.jpg"
+                src={`${serverImgUrl}/이용안내.jpg`}
                 alt=""
               />
             </Grid>
