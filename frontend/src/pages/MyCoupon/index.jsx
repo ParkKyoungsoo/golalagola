@@ -123,6 +123,37 @@ export default function StickyHeadTable() {
                 </Grid>
               )}
             </Grid>
+            <Paper className={classes.root} style={{ margin: '20px 0' }}>
+              <Grid
+                container
+                style={{
+                  display: 'flex',
+                  height: '6vh',
+                }}
+              >
+                <Grid
+                  item
+                  xs={6}
+                  container
+                  justify="center"
+                  alignItems="center"
+                  style={{ backgroundColor: '#f2f2f2' }}
+                >
+                  퀴즈 할인 쿠폰 사용 여부
+                </Grid>
+                <Grid
+                  item
+                  xs={6}
+                  container
+                  justify="center"
+                  alignItems="center"
+                >
+                  {user.quiz_useCoupon
+                    ? '이미 쿠폰을 사용하셨습니다.'
+                    : '사용 가능'}
+                </Grid>
+              </Grid>
+            </Paper>
             <Paper className={classes.root}>
               <Grid
                 container
@@ -134,7 +165,7 @@ export default function StickyHeadTable() {
               >
                 <Grid
                   item
-                  xs={6}
+                  xs={5}
                   container
                   justify="center"
                   alignItems="center"
@@ -143,12 +174,21 @@ export default function StickyHeadTable() {
                 </Grid>
                 <Grid
                   item
-                  xs={6}
+                  xs={5}
                   container
                   justify="center"
                   alignItems="center"
                 >
                   발급 일자
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  container
+                  justify="center"
+                  alignItems="center"
+                >
+                  사용 여부
                 </Grid>
               </Grid>
             </Paper>
@@ -161,7 +201,7 @@ export default function StickyHeadTable() {
                       <Grid style={{ display: 'flex', height: '6vh' }}>
                         <Grid
                           item
-                          md={6}
+                          md={5}
                           container
                           justify="center"
                           alignItems="center"
@@ -173,12 +213,21 @@ export default function StickyHeadTable() {
                         </Grid>
                         <Grid
                           item
-                          md={6}
+                          md={5}
                           container
                           justify="center"
                           alignItems="center"
                         >
                           {data.coupon_date}
+                        </Grid>
+                        <Grid
+                          item
+                          md={2}
+                          container
+                          justify="center"
+                          alignItems="center"
+                        >
+                          {data.coupon_use ? '사용 불가' : '사용 가능'}
                         </Grid>
                       </Grid>
                     </Paper>
@@ -241,6 +290,37 @@ export default function StickyHeadTable() {
                 )}
               </Grid>
             </Grid>
+            <Paper className={classes.root} style={{ margin: '20px 0' }}>
+              <Grid
+                container
+                style={{
+                  display: 'flex',
+                  height: '6vh',
+                }}
+              >
+                <Grid
+                  item
+                  xs={6}
+                  container
+                  justify="center"
+                  alignItems="center"
+                  style={{ backgroundColor: '#f2f2f2' }}
+                >
+                  퀴즈 할인 쿠폰 사용 여부
+                </Grid>
+                <Grid
+                  item
+                  xs={6}
+                  container
+                  justify="center"
+                  alignItems="center"
+                >
+                  {user.quiz_useCoupon
+                    ? '이미 쿠폰을 사용하셨습니다.'
+                    : '사용 가능'}
+                </Grid>
+              </Grid>
+            </Paper>
             <Paper className={classes.root}>
               <Grid
                 style={{
@@ -251,7 +331,7 @@ export default function StickyHeadTable() {
               >
                 <Grid
                   item
-                  md={6}
+                  md={5}
                   container
                   justify="center"
                   alignItems="center"
@@ -260,12 +340,21 @@ export default function StickyHeadTable() {
                 </Grid>
                 <Grid
                   item
-                  md={6}
+                  md={5}
                   container
                   justify="center"
                   alignItems="center"
                 >
                   발급 일자
+                </Grid>
+                <Grid
+                  item
+                  md={2}
+                  container
+                  justify="center"
+                  alignItems="center"
+                >
+                  사용 여부
                 </Grid>
               </Grid>
             </Paper>
@@ -278,7 +367,7 @@ export default function StickyHeadTable() {
                       <Grid style={{ display: 'flex', height: '6vh' }}>
                         <Grid
                           item
-                          md={6}
+                          md={5}
                           container
                           justify="center"
                           alignItems="center"
@@ -290,12 +379,21 @@ export default function StickyHeadTable() {
                         </Grid>
                         <Grid
                           item
-                          md={6}
+                          md={5}
                           container
                           justify="center"
                           alignItems="center"
                         >
                           {data.coupon_date}
+                        </Grid>
+                        <Grid
+                          item
+                          md={2}
+                          container
+                          justify="center"
+                          alignItems="center"
+                        >
+                          {data.coupon_use ? '사용 불가' : '사용 가능'}
                         </Grid>
                       </Grid>
                     </Paper>

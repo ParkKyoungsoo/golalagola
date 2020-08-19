@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, TextField, Grid, Dialog } from '@material-ui/core';
+import { CommonContext } from '../../context/CommonContext';
 import Axios from 'axios';
 
 const Tmp = () => {
@@ -14,6 +15,7 @@ const Tmp = () => {
 
 const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
+  const { user, eventListener, setEventListener } = useContext(CommonContext);
   // console.log('readc', readCoupon);
 
   const [tmpDialogHandler, setTmpDialogHandler] = useState(false);
@@ -24,11 +26,19 @@ const Payment = props => {
   };
 
   const onPaymentHandler = async e => {
+    // if (user.user_quiz && !user.quiz_useCoupon) {
+    //   Axios.put(readCoupon).then(res => {
+    //     console.log('resresr', res.data);
+    //     setEventListener(eventListener => eventListener + 1);
+    //   });
+    // }
+
     Axios.put(readCoupon)
       .then(res => {
         console.log('resresr', res.data);
         setReadCoupon('');
         setTmpDialogHandler(true);
+        setEventListener(eventListener => eventListener + 1);
       })
       .catch(setReadCoupon(''));
     setReadCoupon('');
