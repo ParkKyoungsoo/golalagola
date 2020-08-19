@@ -84,8 +84,12 @@ const Result = ({ match }) => {
                 textAlign: 'center',
               }}
             >
-              <Grid>
-                <p>'{match.params.searchValue}' 검색 결과</p>
+              <Grid
+                style={{
+                  padding: '5vh',
+                }}
+              >
+                <h4>'{match.params.searchValue}' 의 검색 결과입니다.</h4>
               </Grid>
             </Grid>
           )}
@@ -103,18 +107,32 @@ const Result = ({ match }) => {
               {/* {console.log('length', items.length)} */}
 
               {items.map((itemData, index) => {
-                return (
-                  <Grid
-                    key={index}
-                    style={isMobile ? { padding: '5vh 5vw' } : null}
-                  >
-                    <VoteGridItem
-                      // onClick={onClick(itemData)}
-                      itemData={itemData}
-                      index={index}
-                    />
-                  </Grid>
-                );
+                if (isMobile) {
+                  return (
+                    <Grid
+                      key={index}
+                      style={isMobile ? { padding: '5vh 5vw' } : null}
+                      item
+                      xs={6}
+                      style={{
+                        padding: ' 5vw',
+                      }}
+                    >
+                      <VoteGridItem itemData={itemData} index={index} />
+                    </Grid>
+                  );
+                } else {
+                  return (
+                    <Grid
+                      key={index}
+                      style={isMobile ? { padding: '5vh 5vw' } : null}
+                      item
+                      xs={3}
+                    >
+                      <VoteGridItem itemData={itemData} index={index} />
+                    </Grid>
+                  );
+                }
               })}
             </GridList>
           </Grid>
