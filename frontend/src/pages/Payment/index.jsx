@@ -12,18 +12,19 @@ const Payment = props => {
   };
 
   const onPaymentHandler = async e => {
-    Axios.get(readCoupon)
+    Axios.put(readCoupon)
       .then(res => {
         console.log('resresr', res.data);
         setReadCoupon('');
       })
       .catch(setReadCoupon(''));
     setReadCoupon('');
+    window.location.reload(false);
   };
   return (
     <Grid>
       <input
-        // style={{ height: '0px', border: '0px' }}
+        style={{ height: '0px', border: '0px' }}
         type="text"
         value={readCoupon}
         onChange={readCouponChangeHandler}
