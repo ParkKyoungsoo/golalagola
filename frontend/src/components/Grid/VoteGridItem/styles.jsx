@@ -37,6 +37,7 @@ const Wrapper = styled.div`
   }
   .fontVerticalMiddle {
     margin: auto 0;
+    padding : 0;
   }
   .btn-check {
     position: absolute;
@@ -140,7 +141,7 @@ const Wrapper = styled.div`
   .info-open-handler-grid-item-typography2 {
     font-size: 11px;
     font-weight: 700;
-    padding: 0 10px 0 2px;
+    // padding: 0 10px 0 2px;
     color: #696969;
   }
   .info-open-handler-grid-item-typography3 {
