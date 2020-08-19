@@ -227,6 +227,15 @@ const Header = props => {
                       ) : null}
                     </>
                   )} */}
+                  {user.isAdmin === true ? (
+                    <Button
+                      variant="contained"
+                      onClick={onClickRedirectPathHandler('admin')}
+                      className="header-button headerColor "
+                    >
+                      <h6 style={{ margin: 'auto' }}>관리자</h6>
+                    </Button>
+                  ) : null}
                   <Button
                     variant="contained"
                     onClick={onClickRedirectPathHandler('eventall')}

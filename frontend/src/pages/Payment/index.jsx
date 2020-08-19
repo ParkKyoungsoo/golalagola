@@ -4,22 +4,29 @@ import Axios from 'axios';
 
 const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
+  console.log('readc', readCoupon);
 
   const readCouponChangeHandler = event => {
+    setReadCoupon('');
     console.log(event.target.value);
     setReadCoupon(event.target.value);
     console.log('readCoupon', readCoupon);
   };
 
   const onPaymentHandler = async e => {
-    Axios.put(readCoupon).then(res => {
-      console.log('resresr', res.data);
-    });
+    console.log('sss', readCoupon);
+    setReadCoupon('');
+    Axios.put(readCoupon)
+      .then(res => {
+        console.log('resresr', res.data);
+        setReadCoupon('');
+      })
+      .catch(setReadCoupon(''));
   };
   return (
     <div>
       <input
-        style={{ height: '0px', border: '0px' }}
+        // style={{ height: '0px', border: '0px' }}
         type="text"
         onChange={readCouponChangeHandler}
         autoFocus
