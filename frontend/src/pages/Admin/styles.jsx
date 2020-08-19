@@ -13,15 +13,15 @@ const Wrapper = styled.div`
   & .admin_chart__main {
     background-color: #efeff5;
     height: 100vh;
-    width: 100vw;
+    // width: 100vw;
   }
 
   & .admin_chart__content {
     background-color: #efeff5;
-    width: 84vw;
+    // width: 84vw;
     height: 100%;
     padding: 41px 3vw 0 3vw;
-    margin-left: 16vw;
+    // margin-left: 16vw;
     font-size: 14px;
   }
 
