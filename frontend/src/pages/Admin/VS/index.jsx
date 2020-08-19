@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import { CommonContext } from '../../../context/CommonContext';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
@@ -8,7 +8,6 @@ import {
   Paper,
   Button,
   ListItem,
-  ListItemText,
   List,
   Tooltip,
 } from '@material-ui/core';
@@ -23,7 +22,6 @@ import NestedList from '../Layout/sidebar.jsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CanvasJSReact from '../asset/canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const useStyles = makeStyles(theme => ({
@@ -38,15 +36,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AdminVS = props => {
-  const classes = useStyles(); // Grid
-
-  const { newEventData, setNewEventData } = useContext(CommonContext);
-  const { productDatas, setProductDatas } = useContext(CommonContext);
   const {
-    currentEventDatas,
-    setCurrentEventDatas,
     vsData,
-    setVSData,
+    currentEventDatas,
+    productDatas,
+    setNewEventData,
   } = useContext(CommonContext);
 
   let history = useHistory();
@@ -206,11 +200,8 @@ const AdminVS = props => {
                   </ListItem>
                   <Divider className="admin_event__item--divider" />
                   {currentEventDatas.map((data, index) => (
-                    <div>
-                      <ListItem
-                        className="admin_event__table"
-                        key={data.event_id}
-                      >
+                    <div key={index}>
+                      <ListItem className="admin_event__table">
                         <Grid
                           item
                           container
@@ -378,18 +369,12 @@ const AdminVS = props => {
                               justify="space-evenly"
                             >
                               <Grid>
-                                <Button
-                                  variant="outline-secondary"
-                                  onClick={eventUpdate(data.event_id)}
-                                >
+                                <Button onClick={eventUpdate(data.event_id)}>
                                   <EditIcon />
                                 </Button>
                               </Grid>
                               <Grid>
-                                <Button
-                                  variant="outline-danger"
-                                  onClick={eventDelete(data.event_id)}
-                                >
+                                <Button onClick={eventDelete(data.event_id)}>
                                   <DeleteOutlineIcon />
                                 </Button>
                               </Grid>

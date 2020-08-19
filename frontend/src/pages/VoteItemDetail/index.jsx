@@ -192,6 +192,8 @@ const ItemDetail = ({ match }) => {
                           />
                         </Card>
                       );
+                    } else {
+                      return null;
                     }
                   })}
                 </Grid>
@@ -200,7 +202,7 @@ const ItemDetail = ({ match }) => {
                     if (
                       productDatas[match.params.id - 1].prod_id ===
                       itemData.prod_id
-                    )
+                    ) {
                       return (
                         <Grid className="info">
                           <br />
@@ -411,6 +413,9 @@ const ItemDetail = ({ match }) => {
                           </Box>
                         </Grid>
                       );
+                    } else {
+                      return null;
+                    }
                   })}
                 </Grid>
               </Grid>
@@ -485,6 +490,8 @@ const ItemDetail = ({ match }) => {
                             />
                           </Card>
                         );
+                      } else {
+                        return null;
                       }
                     })}
                   </Grid>
@@ -496,7 +503,7 @@ const ItemDetail = ({ match }) => {
                       if (
                         productDatas[match.params.id - 1].prod_id ===
                         itemData.prod_id
-                      )
+                      ) {
                         return (
                           <Grid key={index}>
                             <br />
@@ -721,6 +728,9 @@ const ItemDetail = ({ match }) => {
                             </Box>
                           </Grid>
                         );
+                      } else {
+                        return null;
+                      }
                     })}
                   </Grid>
                 </Grid>
@@ -797,6 +807,8 @@ const ItemDetail = ({ match }) => {
                           />
                         </Card>
                       );
+                    } else {
+                      return null;
                     }
                   })}
                 </Grid>
@@ -805,7 +817,7 @@ const ItemDetail = ({ match }) => {
                     if (
                       productDatas[match.params.id - 1].prod_id ===
                       itemData.prod_id
-                    )
+                    ) {
                       return (
                         <Grid className="info" key={index}>
                           <br />
@@ -1016,6 +1028,9 @@ const ItemDetail = ({ match }) => {
                           </Box>
                         </Grid>
                       );
+                    } else {
+                      return null;
+                    }
                   })}
                 </Grid>
               </Grid>
@@ -1090,6 +1105,8 @@ const ItemDetail = ({ match }) => {
                             />
                           </Card>
                         );
+                      } else {
+                        return null;
                       }
                     })}
                   </Grid>
@@ -1101,7 +1118,7 @@ const ItemDetail = ({ match }) => {
                       if (
                         productDatas[match.params.id - 1].prod_id ===
                         itemData.prod_id
-                      )
+                      ) {
                         return (
                           <Grid key={index}>
                             <br />
@@ -1325,6 +1342,9 @@ const ItemDetail = ({ match }) => {
                             </Box>
                           </Grid>
                         );
+                      } else {
+                        return null;
+                      }
                     })}
                   </Grid>
                 </Grid>

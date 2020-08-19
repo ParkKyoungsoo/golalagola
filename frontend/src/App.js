@@ -6,6 +6,8 @@ import Axios from 'axios';
 // ui
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+import RestrictRoute from './components/Auth/RestrictRoute';
+
 // react bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -461,16 +463,9 @@ const App = () => {
             <Route exact path="/mainvote" component={MainVote} />
             <Route exact path="/auth" component={Auth} />
             <Route exact path="/terms" component={Terms} />
-            <Route exact path="/myvote" component={MyVote} />
             <Route exact path="/aboutme" component={AboutMe} />
             <Route exact path="/contactus" component={ContactUs} />
-            <Route exact path="/searchvote" component={SearchVote} />
             <Route exact path="/not-found" component={NotFound} />
-            <Route exact path="/createevent" component={CreateEvent} />
-            <Route exact path="/kioskmains" component={KioskMains} />
-            <Route exact path="/kioskcoupons" component={KioskCoupons} />
-            <Route exact path="/kioskquiz" component={KioskQuiz} />
-            <Route exact path="/mycoupon" component={MyCoupon} />
             <Route exact path="/eventall" component={EventAll} />
             <Route
               exact
@@ -483,20 +478,114 @@ const App = () => {
               component={SearchResult}
             />
 
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/admin/vs" component={AdminVS} />
-            <Route exact path="/admin/quiz" component={AdminQuiz} />
-            <Route exact path="/admin/quiz/form" component={AdminQuizForm} />
+            {/* <Route exact path="/mycoupon" component={MyCoupon} /> */}
+            <RestrictRoute
+              exact
+              path="/mycoupon"
+              component={MyCoupon}
+              authorizations={!user.user_id === ''}
+            />
 
-            <Route exact path="/admin/user" component={AdminUser} />
-            <Route exact path="/admin/product" component={AdminProduct} />
-            <Route
+            {/* <Route exact path="/admin" component={Admin} /> */}
+            {/* <Route exact path="/admin/vs" component={AdminVS} /> */}
+            {/* <Route exact path="/admin/quiz" component={AdminQuiz} /> */}
+            {/* <Route exact path="/admin/quiz/form" component={AdminQuizForm} /> */}
+            {/* <Route exact path="/admin/user" component={AdminUser} /> */}
+            {/* <Route exact path="/admin/product" component={AdminProduct} /> */}
+            {/* <Route
               exact
               path="/admin/product/form"
               component={AdminProductForm}
+            /> */}
+            {/* <Route exact path="/admin/createevent" component={CreateEvent} /> */}
+            {/* <Route exact path="/payment" component={Payment} /> */}
+
+            {/* <Route exact path="/kioskmains" component={KioskMains} />
+            <Route exact path="/kioskcoupons" component={KioskCoupons} />
+            <Route exact path="/kioskquiz" component={KioskQuiz} />
+            <Route exact path="/createevent" component={CreateEvent} /> */}
+
+            <RestrictRoute
+              exact
+              path="/kioskmains"
+              component={KioskMains}
+              authorizations={user.isAdmin}
             />
-            <Route exact path="/admin/createevent" component={CreateEvent} />
-			<Route exact path="/payment" component={Payment} />
+            <RestrictRoute
+              exact
+              path="/kioskcoupons"
+              component={KioskCoupons}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/kioskquiz"
+              component={KioskQuiz}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/createevent"
+              component={CreateEvent}
+              authorizations={user.isAdmin}
+            />
+
+            <RestrictRoute
+              exact
+              path="/admin"
+              component={Admin}
+              authorizations={user.isAdmin}
+            />
+
+            <RestrictRoute
+              exact
+              path="/admin/vs"
+              component={AdminVS}
+              authorizations={user.isAdmin}
+            />
+
+            <RestrictRoute
+              exact
+              path="/admin/quiz"
+              component={AdminQuiz}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/admin/quiz/form"
+              component={AdminQuizForm}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/admin/user"
+              component={AdminUser}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/admin/product"
+              component={AdminProduct}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/admin/product/form"
+              component={AdminProductForm}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="/admin/createevent"
+              component={CreateEvent}
+              authorizations={user.isAdmin}
+            />
+            <RestrictRoute
+              exact
+              path="payment"
+              component={Payment}
+              authorizations={user.isAdmin}
+            />
 
             <Redirect to="/not-found" />
           </Switch>

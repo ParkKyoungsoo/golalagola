@@ -1,9 +1,6 @@
-import React, { useState, forwardRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import { CommonContext } from '../../context/CommonContext';
-import { useHistory } from 'react-router-dom';
-import Axios from 'axios';
 import { Grid, Divider, Paper } from '@material-ui/core';
-import MaterialTable from 'material-table';
 
 import Wrapper from './styles';
 import NestedList from './Layout/sidebar.jsx';
@@ -11,7 +8,6 @@ import NestedList from './Layout/sidebar.jsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CanvasJSReact from './asset/canvasjs.react';
-import { NotificationPhoneBluetoothSpeaker } from 'material-ui/svg-icons';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -32,13 +28,9 @@ const MainAdmin = props => {
 
   const {
     dailySaleDatas,
-    setDailySaleDatas,
     couponUseSales,
-    setCouponUseSales,
     recommandProds,
-    setRecommandProds,
     categoryDatas,
-    setCategoryData,
   } = useContext(CommonContext);
 
   const addSymbols = e => {
@@ -47,15 +39,6 @@ const MainAdmin = props => {
     if (order > suffixes.length - 1) order = suffixes.length - 1;
     var suffix = suffixes[order];
     return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
-  };
-
-  const toggleDataSeries = e => {
-    if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    this.chart.render();
   };
 
   const options = {

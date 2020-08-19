@@ -41,7 +41,6 @@ const NestedList = props => {
   const history = useHistory();
 
   const handleClick = index => {
-    console.log(index);
     setCurrentOpen(index);
     setForceRender({});
     if (index === 0) {

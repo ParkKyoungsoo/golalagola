@@ -123,6 +123,12 @@ const SignInSection01 = () => {
     }
   }, [signInUserData.user_email, signInUserData.user_pwd, user, setUser]);
 
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      onSignInHandler();
+    }
+  };
+
   return (
     <Wrapper>
       <Grid
@@ -165,6 +171,7 @@ const SignInSection01 = () => {
             onFocus={event => {
               setIsShowKeyborad(true);
             }}
+            onKeyDown={handleKeyDown}
           />
         </Grid>
         <Grid item xs={12} className="grid-item">
