@@ -82,6 +82,11 @@ const NestedList = props => {
     alert('로그아웃 하셨습니다..');
     window.location.href = '/';
   };
+
+  const moveToMain = () => {
+    window.location.href = '/';
+  };
+
   return (
     <Wrapper>
       <List component="nav" className="sidebar__main">
@@ -96,7 +101,8 @@ const NestedList = props => {
             className="sidebar__logo"
             src="https://i3b309.p.ssafy.io/images/폰트_화이트.png"
             alt="logo"
-            style={{ width: '100%' }}
+            style={{ width: '100%', cursor: 'pointer' }}
+            onClick={moveToMain}
           />
         </Grid>
         <Divider variant="middle" style={{ margin: '10px 20px 10px' }} />
