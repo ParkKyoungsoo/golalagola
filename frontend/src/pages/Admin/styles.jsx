@@ -33,9 +33,16 @@ const Wrapper = styled.div`
     margin: 15px 10px 10px;
   }
 
+  & .admin_chart__chart_box {
+    overflow: hidden;
+  }
+
   & .admin_chart__chart_1 {
-    width: 100px;
-    margin-top: 100px;
+    transform: translateY(20px);
+  }
+
+  & .admin_chart__chart_2 {
+    transform: translateY(50px);
   }
 
   & .admin_chart__detail--image_grid {

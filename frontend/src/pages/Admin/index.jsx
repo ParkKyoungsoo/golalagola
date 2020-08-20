@@ -42,11 +42,12 @@ const MainAdmin = props => {
   };
 
   const options = {
-    width: '1150',
-    // height: '500',
+    width: '1050',
+    height: '500',
     padding: 20,
     fontSize: 16,
-    dataPointWidth: 20,
+    dataPointWidth: 40,
+    theme: 'light2',
     backgroundColor: '#ffffff',
     fontFamily: 'Noto sans KR',
     animationEnabled: true,
@@ -105,58 +106,74 @@ const MainAdmin = props => {
             <Grid
               className="admin_chart__content"
               xs={12}
-              style={{ width: '5%' }}
+              // style={{ width: '5%' }}
             >
               <h5 className="admin_chart__header">판매 현황 차트</h5>
               <Divider variant="middle" className="admin_chart__divider" />
-              <Paper elevation={2}>
-                <Grid item xs={12}>
-                  <CanvasJSChart item xs={12} options={options} />
+              <Paper elevation={2} style={{ padding: '30px 0' }}>
+                <Grid item xs={12} className="admin_chart__chart_box">
+                  <div className="admin_chart__chart_1">
+                    <CanvasJSChart item xs={12} options={options} />
+                  </div>
                 </Grid>
               </Paper>
               <br></br>
               <br></br>
               <h5 className="admin_chart__header">카테고리별 제고 현황</h5>
               <Divider className="admin_chart__divider" />
-              <Paper elevation={2}>
+              <Paper elevation={2} style={{ padding: '20px 0' }}>
                 <Grid>
                   <Grid>
                     <Grid
                       item
                       xs={12}
-                      style={{ display: 'flex', flexWrap: 'wrap' }}
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                      }}
                     >
                       {recommandProds.map((recommandDatas, index) => (
                         <Grid
                           key={index}
                           item
                           xs={6}
-                          style={{ padding: '3vh 2vw' }}
+                          style={{ padding: '3vh 2vw', marginBottom: '60px' }}
+                          className="admin_chart__chart_box"
                         >
-                          <CanvasJSChart
-                            options={{
-                              animationEnabled: true,
-                              theme: 'white',
-                              title: {
-                                text: `${categoryDatas[index + 1].cat_title}`,
-                              },
-                              axisY: {
-                                scaleBreaks: {
-                                  autoCalculate: true,
-                                  type: 'wavy',
-                                  lineColor: 'dark',
+                          <div className="admin_chart__chart_2">
+                            <CanvasJSChart
+                              options={{
+                                width: '500',
+                                height: '400',
+                                animationEnabled: true,
+                                dataPointWidth: 40,
+                                theme: 'light2',
+                                title: {
+                                  text: `${categoryDatas[index + 1].cat_title}`,
                                 },
-                              },
-                              data: [
-                                {
-                                  type: 'column',
-                                  indexLabel: '{y}',
-                                  indexLabelFontColor: 'black',
-                                  dataPoints: recommandDatas,
+                                axisY: {
+                                  margin: 30,
+
+                                  scaleBreaks: {
+                                    autoCalculate: true,
+                                    type: 'wavy',
+                                    lineColor: 'dark',
+                                  },
                                 },
-                              ],
-                            }}
-                          />
+                                axisX: {
+                                  margin: 30,
+                                },
+                                data: [
+                                  {
+                                    type: 'column',
+                                    indexLabel: '{y}',
+                                    indexLabelFontColor: 'black',
+                                    dataPoints: recommandDatas,
+                                  },
+                                ],
+                              }}
+                            />
+                          </div>
                         </Grid>
                       ))}
                     </Grid>
