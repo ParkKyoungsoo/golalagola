@@ -377,16 +377,43 @@
 
 1. Scrum 미팅
 
-2. README 수정
+2. JIRA 수정
 
-3. JIRA 수정
+3. Front-end  Kiosk Main 페이지 CSS
 
-4. Front-end  Kiosk Main 페이지 CSS
+               ​					관리자 페이지 차트 CSS
 
-   ​					관리자 페이지 차트 CSS
+               ​					User 페이지 CSS
+               
+               
 
-   ​					User 페이지 CSS
+#### 2020.08.18(화)
 
-   
+1. Scrum 미팅
 
-   
+2. UCC 촬영 및 편집
+
+3. Frontend   Debug
+
+               ​					전반적인 CSS 수정
+
+               
+
+#### 2020.08.19(수)
+
+1. Scrum 미팅
+2. UCC 촬영 및 편집
+3. Frontend   Debug
+
+4. 라즈베리 파이를 이용한 간이 결제페이지 제작
+
+
+
+#### 2020.08.20(목)
+
+1. Scrum 미팅
+2. UCC 촬영 및 편집
+3. Frontend   Debug					
+
+4. 최종 발표 ppt 제작
+
