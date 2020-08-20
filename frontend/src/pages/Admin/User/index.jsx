@@ -52,13 +52,14 @@ const AdminUser = () => {
   const { usersTableData, serverImgUrl } = useContext(CommonContext);
 
   const deleteProductData = targetProdId => {
-    Axios.delete('https://i3b309.p.ssafy.io/api/product', {
+    Axios.delete('https://i3b309.p.ssafy.io/api/auth', {
       data: {
-        prod_id: targetProdId,
+        user_id: targetProdId,
       },
     })
       .then(res => {
         alert('삭제되었습니다.');
+        window.location.reload(false);
       })
       .catch(e => {});
   };
@@ -81,37 +82,37 @@ const AdminUser = () => {
                 columns={usersTableData.columns}
                 data={usersTableData.data}
                 options={{ actionsColumnIndex: -1, pageSize: 10 }}
-                detailPanel={rowData => {
-                  return (
-                    <Grid container className="admin_user__detail--grid">
-                      <Grid
-                        item
-                        xs={6}
-                        className="admin_user__detail--image_grid"
-                      >
-                        <img
-                          className="admin_user__detail--image"
-                          src={`${serverImgUrl}${rowData.prod_image}`}
-                          alt={`${rowData.prod_name} 이미지`}
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Divider />
-                        <h3 className="">상품: {rowData.prod_name}</h3>
-                        <h5>{rowData.prod_title}</h5>
-                        <p>품목: {rowData.prod_category}</p>
-                        <p>상품 설명: {rowData.prod_desc}</p>
-                        <Divider />
-                        <p>판매 가격: {rowData.prod_price}원</p>
-                        <p>남은 수량: {rowData.prod_amount}개</p>
-                        <p>유통 기한: {rowData.prod_expiration}</p>
-                        <p>할인율: {rowData.prod_sale}%</p>
-                        <p>무게: {rowData.prod_weight}g</p>
-                        <Divider />
-                      </Grid>
-                    </Grid>
-                  );
-                }}
+                // detailPanel={rowData => {
+                //   return (
+                //     <Grid container className="admin_user__detail--grid">
+                //       <Grid
+                //         item
+                //         xs={6}
+                //         className="admin_user__detail--image_grid"
+                //       >
+                //         <img
+                //           className="admin_user__detail--image"
+                //           src={`${serverImgUrl}${rowData.user_image}`}
+                //           alt={`${rowData.user_name} 이미지`}
+                //         />
+                //       </Grid>
+                //       <Grid item xs={6}>
+                //         <Divider />
+                //         <h3 className="">상품: {rowData.prod_name}</h3>
+                //         <h5>{rowData.prod_title}</h5>
+                //         <p>품목: {rowData.prod_category}</p>
+                //         <p>상품 설명: {rowData.prod_desc}</p>
+                //         <Divider />
+                //         <p>판매 가격: {rowData.prod_price}원</p>
+                //         <p>남은 수량: {rowData.prod_amount}개</p>
+                //         <p>유통 기한: {rowData.prod_expiration}</p>
+                //         <p>할인율: {rowData.prod_sale}%</p>
+                //         <p>무게: {rowData.prod_weight}g</p>
+                //         <Divider />
+                //       </Grid>
+                //     </Grid>
+                //   );
+                // }}
                 actions={[
                   rowData => ({
                     icon: DeleteOutline,
@@ -119,10 +120,10 @@ const AdminUser = () => {
                     onClick: (event, rowData) => {
                       if (
                         window.confirm(
-                          'You want to delete ' + rowData.prod_name,
+                          'You want to delete ' + rowData.user_name,
                         )
                       ) {
-                        deleteProductData(rowData.prod_id);
+                        deleteProductData(rowData.user_id);
                       }
                     },
                   }),
