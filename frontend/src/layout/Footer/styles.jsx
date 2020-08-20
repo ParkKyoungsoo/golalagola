@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 227px;
   background: #f2f3f4;
   & .footer {
     overflow: hidden;

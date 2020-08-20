@@ -87,6 +87,7 @@ export default function StickyHeadTable() {
   };
 
   const isMobile = useMediaQuery('(max-width:960px)');
+
   return (
     <Layout>
       {isMobile ? (
@@ -101,6 +102,14 @@ export default function StickyHeadTable() {
               }}
             >
               <QRCode value={`${user.user_id}`} />
+            </Grid>
+            <Grid
+              style={{ fontSize: '2vh' }}
+              container
+              justify="center"
+              alignItems="center"
+            >
+              결제시 QR코드를 제시해주세요.
             </Grid>
             <Grid container justify="center" alignItems="center">
               {user.user_quiz ? (
@@ -223,6 +232,9 @@ export default function StickyHeadTable() {
                 justify="center"
               >
                 <QRCode value={`${user.user_id}`} />
+                <Grid style={{ fontSize: '1.5vh', padding: '10px 0 0 0' }}>
+                  결제시 QR코드를 제시해주세요.
+                </Grid>
               </Grid>
               <Grid container justify="center" alignItems="center">
                 {user.user_quiz ? (

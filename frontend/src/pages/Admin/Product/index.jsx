@@ -202,7 +202,6 @@ const AdminProduct = () => {
                         <p>남은 수량: {rowData.prod_amount}개</p>
                         <p>유통 기한: {rowData.prod_expiration}</p>
                         <p>할인율: {rowData.prod_sale}%</p>
-                        <p>무게: {rowData.prod_weight}g</p>
                         <Divider />
                       </Grid>
                     </Grid>

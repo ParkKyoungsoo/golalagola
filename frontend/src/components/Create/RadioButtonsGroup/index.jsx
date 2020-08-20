@@ -180,7 +180,7 @@ const ImageComponent = props => {
   const { data, setData } = useContext(ViewContext);
 
   const onDrop = useCallback(acceptedFiles => {
-    console.log('PPAP: Basic -> acceptedFiles', acceptedFiles);
+    // console.log('PPAP: Basic -> acceptedFiles', acceptedFiles);
   }, []);
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone(onDrop);

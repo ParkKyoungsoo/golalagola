@@ -100,11 +100,9 @@ const AdminQuizForm = () => {
           quiz_answer: answer,
         })
           .then(response => {
-            console.log('Response', response.data);
             alert('퀴즈가 등록 되었습니다.');
           })
           .catch(e => {
-            console.log('Error: ', e.response.data);
             alert('퀴즈가 등록 되지 않았습니다. 다시 시도해주세요.');
           });
       } else if (currentQuizDatas.status === 'update') {
@@ -117,11 +115,9 @@ const AdminQuizForm = () => {
           quiz_answer: answer,
         })
           .then(response => {
-            console.log('Response', response.data);
             alert('퀴즈가 수정 되었습니다.');
           })
           .catch(e => {
-            console.log('Error: ', e.response.data);
             alert('퀴즈 정보가 수정되지 않았습니다. 다시 시도해주세요.');
           });
       }

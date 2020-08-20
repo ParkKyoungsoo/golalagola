@@ -26,7 +26,7 @@ const MyInfoUploadImageComponent = () => {
   const { thumbnailImageData, setThumbnailImageData } = useContext(ViewContext);
 
   const onDrop = useCallback(acceptedFiles => {
-    console.log('Basic -> acceptedFiles', acceptedFiles);
+    // console.log('Basic -> acceptedFiles', acceptedFiles);
   }, []);
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone(onDrop);
@@ -92,7 +92,6 @@ const MyInfoInputComponent = props => {
 
   const OnChangeHandler = e => {
     setInputValue({ ...inputValue, [keyValue]: e.target.value });
-    console.log('inputValue', inputValue);
   };
 
   return (

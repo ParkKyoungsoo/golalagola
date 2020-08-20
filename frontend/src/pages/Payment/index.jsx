@@ -32,14 +32,14 @@ const Payment = props => {
     var quizCoupon = 'https://i3b309.p.ssafy.io/api/payment/quiz/' + readCoupon;
     if (user.user_quiz && !user.quiz_useCoupon) {
       Axios.put(quizCoupon).then(res => {
-        console.log('resresr', res.data);
+        // console.log('resresr', res.data);
         setEventListener(eventListener => eventListener + 1);
       });
     }
 
     Axios.put(vsCoupon)
       .then(res => {
-        console.log('resresr', res.data);
+        // console.log('resresr', res.data);
         setReadCoupon('');
         setTmpDialogHandler(true);
         setEventListener(eventListener => eventListener + 1);

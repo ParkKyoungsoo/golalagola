@@ -65,47 +65,49 @@ export default function VerticalTabs() {
     setUserDialogIndex(newValue);
   };
   const onClickSignOutOpenHandler = () => {
-    console.log('user', user);
-    window.confirm('정말 탈퇴하시겠습니까?');
-    axios({
-      method: 'DELETE',
-      url: 'https://i3b309.p.ssafy.io/api/auth/self',
-      headers: {
-        token: user.token,
-        user_email: user.user_email,
-      },
-      data: {
-        user_id: user.user_id,
-      },
-    })
-      .then(res => {
-        alert('삭제되었습니다.');
-        setDrawerOpen(false);
-        setUser({
-          user_id: 0,
-          user_email: '',
-          user_name: '',
-          user_phone: '',
-          user_pwd: '',
-          user_image: '',
-          user_quiz: '',
-          isAdmin: '',
-          status: '',
-          web_site: '',
-          token: '',
-          quiz_useCoupon: '',
-        });
-        setUserDialogIndex(0);
-        setMyCouponDatas([]);
-        history.push('/');
-      })
-      .catch(err => {
-        alert('회원 탈퇴에 실패하셨습니다.');
-      });
-    setUserDetailDialogOpen(false);
+    // console.log('user', user);
+    let flag = window.confirm('정말 탈퇴하시겠습니까?');
 
-    // alert('로그아웃 되었습니다.');
-    // history.push('/');
+    if (flag) {
+      axios({
+        method: 'DELETE',
+        url: 'https://i3b309.p.ssafy.io/api/auth/self',
+        headers: {
+          token: user.token,
+          user_email: user.user_email,
+        },
+        data: {
+          user_id: user.user_id,
+        },
+      })
+        .then(res => {
+          alert('삭제되었습니다.');
+          setDrawerOpen(false);
+          setUser({
+            user_id: 0,
+            user_email: '',
+            user_name: '',
+            user_phone: '',
+            user_pwd: '',
+            user_image: '',
+            user_quiz: '',
+            isAdmin: '',
+            status: '',
+            web_site: '',
+            token: '',
+            quiz_useCoupon: '',
+          });
+          setUserDialogIndex(0);
+          setMyCouponDatas([]);
+        })
+        .catch(err => {
+          alert('회원 탈퇴에 실패하셨습니다.');
+        });
+    } else {
+      alert('취소하였습니다.');
+    }
+    setUserDetailDialogOpen(false);
+    history.push('/');
   };
 
   return (

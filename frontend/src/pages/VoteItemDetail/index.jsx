@@ -219,10 +219,6 @@ const ItemDetail = ({ match }) => {
                               )}
                             </span>
                             <span className="m_unit">원</span>
-                            <h5>
-                              (총 용량 :{' '}
-                              {productDatas[match.params.id - 1].prod_weight})
-                            </h5>
                           </div>
 
                           <br />
@@ -523,10 +519,6 @@ const ItemDetail = ({ match }) => {
                               )}
                             </span>
                             <span className="unit1">원</span>
-                            <h5>
-                              (총 용량 :{' '}
-                              {productDatas[match.params.id - 1].prod_weight})
-                            </h5>{' '}
                             <br />
                             <br />
                             <h5 className="select">
@@ -834,10 +826,6 @@ const ItemDetail = ({ match }) => {
                               )}
                             </span>
                             <span className="m_unit">원</span>
-                            <h5>
-                              (총 용량 :{' '}
-                              {productDatas[match.params.id - 1].prod_weight})
-                            </h5>
                           </div>
 
                           <br />
@@ -917,7 +905,10 @@ const ItemDetail = ({ match }) => {
                               alignItems: 'center',
                             }}
                           >
-                            <span className="w_DCT">
+                            <span
+                              className="w_DCT"
+                              style={{ textDecorationLine: 'line-through' }}
+                            >
                               <input
                                 type="checkBox"
                                 className="quizChecked"
@@ -928,29 +919,8 @@ const ItemDetail = ({ match }) => {
                                 }
                               />
                               {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
-                              &nbsp; 이벤트 참여 적용 할인(
-                              {productDatas[match.params.id - 1].prod_sale - 30}
-                              %)
-                            </span>{' '}
-                            {!(eventActivated && !userJoinedEvent) &&
-                            userHasCoupon ? (
-                              <span className="w_DCP">
-                                -
-                                {numberWithCommas(
-                                  parseInt(
-                                    productDatas[match.params.id - 1]
-                                      .prod_price *
-                                      ((productDatas[match.params.id - 1]
-                                        .prod_sale -
-                                        30) /
-                                        100),
-                                  ),
-                                )}
-                                원
-                              </span>
-                            ) : (
-                              <span className="w_DCP">미적용</span>
-                            )}
+                              &nbsp; vs이벤트 중이 아닙니다.
+                            </span>
                           </Grid>
                           <hr />
                           <Grid
@@ -1138,10 +1108,6 @@ const ItemDetail = ({ match }) => {
                               )}
                             </span>
                             <span className="unit1">원</span>
-                            <h5>
-                              (총 용량 :{' '}
-                              {productDatas[match.params.id - 1].prod_weight})
-                            </h5>{' '}
                             <br />
                             <br />
                             <h5 className="select">
@@ -1229,7 +1195,10 @@ const ItemDetail = ({ match }) => {
                                 alignItems: 'center',
                               }}
                             >
-                              <span className="w_DCT">
+                              <span
+                                className="w_DCT"
+                                style={{ textDecorationLine: 'line-through' }}
+                              >
                                 <input
                                   type="checkBox"
                                   className="quizChecked"
@@ -1240,30 +1209,8 @@ const ItemDetail = ({ match }) => {
                                   }
                                 />
                                 {/* 이 텍스트 부분이 Grid 혹은 div 태그 안에 감싸졌으면 좋겠음. */}
-                                &nbsp; 이벤트 참여 적용 할인(
-                                {productDatas[match.params.id - 1].prod_sale -
-                                  30}
-                                %)
-                              </span>{' '}
-                              {!(eventActivated && !userJoinedEvent) &&
-                              userHasCoupon ? (
-                                <span className="w_DCP">
-                                  -
-                                  {numberWithCommas(
-                                    parseInt(
-                                      productDatas[match.params.id - 1]
-                                        .prod_price *
-                                        ((productDatas[match.params.id - 1]
-                                          .prod_sale -
-                                          30) /
-                                          100),
-                                    ),
-                                  )}
-                                  원
-                                </span>
-                              ) : (
-                                <span className="w_DCP">미적용</span>
-                              )}
+                                &nbsp; vs이벤트 중이 아닙니다.
+                              </span>
                             </Grid>
                             <hr />
                             <Grid

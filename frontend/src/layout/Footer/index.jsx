@@ -53,9 +53,35 @@ const Footer = () => {
         <Grid item sm={12} md={4} className="right-box">
           <Grid className="text-box">
             <h2>문의 연락</h2>
-            <h5>help@golalagolasurrpot.com</h5>
+            <h5>gusangbuck@gmail.com</h5>
             <h4>고객 지원 팀에 문의 바랍니다.</h4>
           </Grid>
+        </Grid>
+        <Grid
+          style={{ border: '1px solid black', padding: '15px 0 0 0' }}
+          item
+          xs={12}
+          container
+          justify="center"
+          alignItems="center"
+        >
+          <h3>
+            해당 홈페이지는 비영리 목적으로 제작되었으며, 모든 내용들은 허구임을
+            밝힙니다.
+          </h3>
+          <p>
+            배너 관련 이미지들은 미리캔버스를 참조하였으며, 모든 저작권은
+            미리캔버스에 있습니다.{' '}
+            <a href="https://miricanvas.zendesk.com/hc/ko/articles/360040600891">
+              https://miricanvas.zendesk.com/hc/ko/articles/360040600891"
+            </a>
+            <br />
+            상품 관련 내용과 이미지들은 SSG.COM을 참조하였으며, 모든 저작권은
+            SSG.COM에 있습니다.{' '}
+            <a href="https://member.ssg.com/policies/terms.ssg#ag_24">
+              https://member.ssg.com/policies/terms.ssg#ag_24
+            </a>
+          </p>
         </Grid>
       </Grid>
     </Wrapper>
