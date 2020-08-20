@@ -187,7 +187,6 @@ const App = () => {
       { title: '힌트', field: 'quiz_hint' },
       { title: '설명', field: 'quiz_desc' },
       { title: '정답', field: 'quiz_answer' },
-      { title: '참여자 수', field: 'quiz_num' },
     ],
     data: [],
   });

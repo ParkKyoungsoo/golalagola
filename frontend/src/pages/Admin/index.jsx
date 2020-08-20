@@ -105,6 +105,7 @@ const MainAdmin = props => {
           <Grid item xs={10} container>
             <Grid
               className="admin_chart__content"
+              item
               xs={12}
               // style={{ width: '5%' }}
             >
