@@ -68,7 +68,7 @@ Tech 안성호
 
 ### 페르소나
 
-- 굳이 따지면 질보다 가격이 더 중요하다 (적당 수준 이상의 질 보장)
+- 질보다 가격이 더 중요하다 (적당 수준 이상의 질 보장)	
 
   대학생, 20& 30대 사회 초년생
 
@@ -83,6 +83,8 @@ Tech 안성호
 
 
 ## 기술구조
+
+![image](https://user-images.githubusercontent.com/44697835/90759664-b34cd300-e31b-11ea-9598-b977309eb135.png)
 
 
 
@@ -105,3 +107,19 @@ Tech 안성호
 * asset
 
   > Project Images
+
+
+
+### License
+
+> Copyright by Gola la Gola Co., Ltd. All rights reserved.
+>
+> ### 해당 홈페이지는 비영리 목적으로 제작되었으며, 모든 내용들은 허구임을 밝힙니다.
+>
+> 배너 관련 이미지들은 미리캔버스를 참조하였으며, 모든 저작권은 미리캔버스에 있습니다. 
+>
+> https://miricanvas.zendesk.com/hc/ko/articles/360040600891"
+>
+> 상품 관련 내용과 이미지들은 SSG.COM을 참조하였으며, 모든 저작권은 SSG.COM에 있습니다.
+>
+>  https://member.ssg.com/policies/terms.ssg#ag_24
