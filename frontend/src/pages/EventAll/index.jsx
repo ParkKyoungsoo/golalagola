@@ -33,6 +33,8 @@ const EventAll = () => {
   const [forceRender, setForceRender] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
 
+  let flag = false;
+
   const isMobile = useMediaQuery('(max-width:960px)');
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -58,47 +60,57 @@ const EventAll = () => {
 
   // 쿠폰 데이터를 보내고 다시 받아오는 요청
   const submitCouponData = async () => {
-    // data 가공해서 post 요청 보내기,
-    console.log(selectedEvent);
     for (let event_id in selectedEvent) {
-      console.log(event_id, selectedEvent[event_id]);
       if (selectedEvent[event_id] !== null) {
-        await Axios.post('https://i3b309.p.ssafy.io/api/coupon/', {
-          user_id: user.user_id,
-          event_id: event_id,
-          coupon_select: selectedEvent[event_id],
-          coupon_date: new Date(),
-          coupon_use: false,
-        })
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
+        flag = true;
       }
     }
 
-    // get 요청으로 데이터 받아서 다시 랜더링하기
-    await Axios.get(
-      `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
-    ).then(function(res) {
-      // myCouponDatas 만들기
-      setMyCouponDatas(res.data);
+    if (flag) {
+      // data 가공해서 post 요청 보내기,
+      for (let event_id in selectedEvent) {
+        if (selectedEvent[event_id] !== null) {
+          await Axios.post('https://i3b309.p.ssafy.io/api/coupon/', {
+            user_id: user.user_id,
+            event_id: event_id,
+            coupon_select: selectedEvent[event_id],
+            coupon_date: new Date(),
+            coupon_use: false,
+          })
+            .then()
+            .catch();
+        }
+      }
 
-      // userCoupom, userEvent 만들기
-      const tmpCoupon = [];
-      const tmpEvent = [];
-      res.data.forEach(element => {
-        tmpCoupon.push(element.coupon_select);
-        tmpEvent.push(element.event_id);
+      // get 요청으로 데이터 받아서 다시 랜더링하기
+      await Axios.get(
+        `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
+      ).then(function(res) {
+        // myCouponDatas 만들기
+        setMyCouponDatas(res.data);
+
+        // userCoupom, userEvent 만들기
+        const tmpCoupon = [];
+        const tmpEvent = [];
+        res.data.forEach(element => {
+          tmpCoupon.push(element.coupon_select);
+          tmpEvent.push(element.event_id);
+        });
+        setUserCoupon(tmpCoupon);
+        setUserEvent(tmpEvent);
       });
-      setUserCoupon(tmpCoupon);
-      setUserEvent(tmpEvent);
-    });
-    setSelectedEvent({});
-    setForceRender({});
+      setSelectedEvent({});
+      setForceRender({});
 
-    // myCoupon으로 이동할 것인지 물어보기
-    const confirmMessage = window.confirm('마이쿠폰으로 이동하시겠습니까?');
-    if (confirmMessage) {
-      window.location.href = '/mycoupon';
+      // myCoupon으로 이동할 것인지 물어보기
+      const confirmMessage = window.confirm(
+        '쿠폰을 담았습니다. 마이쿠폰함으로 이동하시겠습니까?',
+      );
+      if (confirmMessage) {
+        window.location.href = '/mycoupon';
+      }
+    } else {
+      alert('하나 이상의 상품을 골라주세요.');
     }
   };
 

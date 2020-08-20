@@ -21,7 +21,6 @@ const DialogActionsComponet = () => {
     axios
       .post('https://i3b309.p.ssafy.io/api/event/insert', newEventData)
       .then(function(response) {
-        console.log(response);
         setNewEventData({
           event_id: '',
           event_prod_A: '',
@@ -32,7 +31,7 @@ const DialogActionsComponet = () => {
         });
       })
       .catch(error => {
-        console.log('error : ', error.response);
+        // console.log('error : ', error.response);
       });
   };
 

@@ -127,7 +127,7 @@ const Header = props => {
                 }}
               >
                 <Typography
-                  variant="p"
+                  variant="primary"
                   onClick={onClickRedirectPathHandler('/mainvote')}
                   style={{
                     backgroundColor: '#f2f2f2',

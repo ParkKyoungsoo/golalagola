@@ -28,6 +28,7 @@ const InputTitleComponent = () => {
   const { newEventData, productDatas, serverImgUrl } = useContext(
     CommonContext,
   );
+
   return (
     <Wrapper>
       <Grid style={{ display: 'flex' }}>
@@ -123,7 +124,7 @@ const SubTitleGroupComponent = () => {
   useEffect(() => {
     test();
     test2();
-  });
+  }, [newEventData]);
 
   return (
     <Wrapper>
@@ -143,7 +144,7 @@ const SubTitleGroupComponent = () => {
               className="sub-title-group-component-divider"
             />
             <FormControl className="form-control">
-              {/* <InputLabel id="A-label">상품 A</InputLabel> */}
+              <InputLabel id="A-label">상품 A</InputLabel>
               <Select
                 labelId="A-label"
                 value={productDatas.prod_id}
@@ -173,7 +174,7 @@ const SubTitleGroupComponent = () => {
               className="sub-title-group-component-divider"
             />
             <FormControl className="form-control">
-              {/* <InputLabel id="B-label">상품 B</InputLabel> */}
+              <InputLabel id="B-label">상품 B</InputLabel>
               <Select
                 labelId="B-label"
                 value={productDatas.prod_id}

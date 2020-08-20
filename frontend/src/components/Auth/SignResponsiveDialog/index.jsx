@@ -745,7 +745,7 @@ const RecoverPwGroupComponent = () => {
           .update(pwd)
           .digest('hex');
       } catch (error) {
-        console.log('PPAP: signInHandler -> error', error);
+        // console.log('PPAP: signInHandler -> error', error);
       }
 
       alert('Not implemented yet.');

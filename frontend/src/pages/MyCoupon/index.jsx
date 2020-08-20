@@ -87,6 +87,7 @@ export default function StickyHeadTable() {
   };
 
   const isMobile = useMediaQuery('(max-width:960px)');
+
   return (
     <Layout>
       {isMobile ? (
@@ -100,9 +101,15 @@ export default function StickyHeadTable() {
                 justifyContent: 'center',
               }}
             >
-              <QRCode
-                value={`https://i3b309.p.ssafy.io/api/payment/${user.user_id}`}
-              />
+              <QRCode value={`${user.user_id}`} />
+            </Grid>
+            <Grid
+              style={{ fontSize: '2vh' }}
+              container
+              justify="center"
+              alignItems="center"
+            >
+              결제시 QR코드를 제시해주세요.
             </Grid>
             <Grid container justify="center" alignItems="center">
               {user.user_quiz ? (
@@ -123,37 +130,6 @@ export default function StickyHeadTable() {
                 </Grid>
               )}
             </Grid>
-            <Paper className={classes.root} style={{ margin: '20px 0' }}>
-              <Grid
-                container
-                style={{
-                  display: 'flex',
-                  height: '6vh',
-                }}
-              >
-                <Grid
-                  item
-                  xs={6}
-                  container
-                  justify="center"
-                  alignItems="center"
-                  style={{ backgroundColor: '#f2f2f2' }}
-                >
-                  퀴즈 할인 쿠폰 사용 여부
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  container
-                  justify="center"
-                  alignItems="center"
-                >
-                  {user.quiz_useCoupon
-                    ? '이미 쿠폰을 사용하셨습니다.'
-                    : '사용 가능'}
-                </Grid>
-              </Grid>
-            </Paper>
             <Paper className={classes.root}>
               <Grid
                 container
@@ -255,9 +231,10 @@ export default function StickyHeadTable() {
                 alignItems="center"
                 justify="center"
               >
-                <QRCode
-                  value={`https://i3b309.p.ssafy.io/api/payment/${user.user_id}`}
-                />
+                <QRCode value={`${user.user_id}`} />
+                <Grid style={{ fontSize: '1.5vh', padding: '10px 0 0 0' }}>
+                  결제시 QR코드를 제시해주세요.
+                </Grid>
               </Grid>
               <Grid container justify="center" alignItems="center">
                 {user.user_quiz ? (
@@ -290,37 +267,6 @@ export default function StickyHeadTable() {
                 )}
               </Grid>
             </Grid>
-            <Paper className={classes.root} style={{ margin: '20px 0' }}>
-              <Grid
-                container
-                style={{
-                  display: 'flex',
-                  height: '6vh',
-                }}
-              >
-                <Grid
-                  item
-                  xs={6}
-                  container
-                  justify="center"
-                  alignItems="center"
-                  style={{ backgroundColor: '#f2f2f2' }}
-                >
-                  퀴즈 할인 쿠폰 사용 여부
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  container
-                  justify="center"
-                  alignItems="center"
-                >
-                  {user.quiz_useCoupon
-                    ? '이미 쿠폰을 사용하셨습니다.'
-                    : '사용 가능'}
-                </Grid>
-              </Grid>
-            </Paper>
             <Paper className={classes.root}>
               <Grid
                 style={{

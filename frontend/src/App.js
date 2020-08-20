@@ -109,6 +109,7 @@ const App = () => {
 
   // 웹상에서 퀴즈모달을 띄우기 위해 선언했습니다.
   const [webQuizDialogOpen, setWebQuizDialogOpen] = useState(false);
+  const [failModalTrigger, setFailModalTrigger] = useState(false);
 
   // 이 상품들을 commonContext에 넣어줬습니다.
   // 다른페이지에서 상품을 빼서 쓰고싶으면 이 이름으로 선언을 해줘야 합니다(ex. VoteGridList 참고)
@@ -187,7 +188,6 @@ const App = () => {
       { title: '힌트', field: 'quiz_hint' },
       { title: '설명', field: 'quiz_desc' },
       { title: '정답', field: 'quiz_answer' },
-      { title: '참여자 수', field: 'quiz_num' },
     ],
     data: [],
   });
@@ -459,6 +459,9 @@ const App = () => {
         setEventListener,
         QRModalTrigger,
         setQRModalTrigger,
+
+        failModalTrigger,
+        setFailModalTrigger,
       }}
     >
       <MuiThemeProvider theme={theme}>

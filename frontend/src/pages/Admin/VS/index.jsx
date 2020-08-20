@@ -81,13 +81,10 @@ const AdminVS = props => {
       },
     })
       .then(function(res) {
-        console.log('success', res);
         alert('삭제가 완료되었습니다.');
         window.location.reload();
       })
-      .catch(function(res) {
-        console.log('error', res);
-      });
+      .catch(function(res) {});
   };
 
   // 차트 데이터

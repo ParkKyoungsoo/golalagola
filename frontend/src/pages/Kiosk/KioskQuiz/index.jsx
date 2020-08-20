@@ -1,14 +1,28 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Test from './dump.json';
 import Wrapper from './style';
 import { Route, Link } from 'react-router-dom';
 import { Redirect, RedirectProps } from 'react-router';
 import { Dialog, Grid, Button } from '@material-ui/core';
-import Fail from '../KioskModal/KioskQuizFailModal';
 import Navbar from '../KioskNavbar';
 import { CommonContext } from '../../../context/CommonContext';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import HelpIcon from '@material-ui/icons/Help';
+
+const Fail = () => {
+  const { setFailModalTrigger } = useContext(CommonContext);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFailModalTrigger(false);
+    }, 1200);
+  });
+
+  return (
+    <>
+      <h2> 틀렸어요ㅠㅠㅠ 다시해보세요.</h2>
+    </>
+  );
+};
 
 const KioskQuizSuccessModal = () => {
   const [moveToNext, setMoveToNext] = useState(false);
@@ -24,9 +38,13 @@ const KioskQuizSuccessModal = () => {
 
 const Quiz = () => {
   const [userAns, setUserAns] = useState(3);
-  const [failModalTrigger, setFailModalTrigger] = useState(false);
   const [successModalTrigger, setSuccessModalTrigger] = useState(false);
-  const { quizDatas, serverImgUrl } = useContext(CommonContext);
+  const {
+    failModalTrigger,
+    setFailModalTrigger,
+    quizDatas,
+    serverImgUrl,
+  } = useContext(CommonContext);
   const [number, setNumber] = useState();
   const quizAns = Object(quizDatas[number]).quiz_answer;
 
@@ -59,6 +77,8 @@ const Quiz = () => {
   const handleClickAway = () => {
     setOpen(false);
   };
+
+  let hint = open ? Object(quizDatas[number]).quiz_hint : '힌트';
 
   // const randomNumber = Math.random();
   // const num = Math.floor(randomNumber * quizDatas.length);
@@ -105,20 +125,18 @@ const Quiz = () => {
                   alignItems: 'center',
                 }}
               >
-                <Grid item>
-                  <HelpIcon
-                    onClick={handleClick}
-                    style={{ fontSize: '1.5em' }}
-                  />
+                <Grid item onClick={handleClick}>
+                  <HelpIcon style={{ fontSize: '1.5em' }} />
                   &nbsp;
+                  {hint}
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   {open ? (
                     <Grid>{Object(quizDatas[number]).quiz_hint}</Grid>
                   ) : (
                     '힌트'
                   )}
-                </Grid>
+                </Grid> */}
               </Grid>
             </ClickAwayListener>
           </Grid>

@@ -164,7 +164,6 @@ const ResponsiveDialogSign = () => {
   };
 
   const displayEndTime = dt => {
-    console.log('VoteGridItem -> dt', dt);
     return '14:00:00';
   };
 

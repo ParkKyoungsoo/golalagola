@@ -15,7 +15,9 @@ const Tmp = () => {
 
 const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
-  const { user, eventListener, setEventListener } = useContext(CommonContext);
+  const { user, eventListener, setEventListener, serverUrl } = useContext(
+    CommonContext,
+  );
   // console.log('readc', readCoupon);
 
   const [tmpDialogHandler, setTmpDialogHandler] = useState(false);
@@ -26,16 +28,18 @@ const Payment = props => {
   };
 
   const onPaymentHandler = async e => {
-    // if (user.user_quiz && !user.quiz_useCoupon) {
-    //   Axios.put(readCoupon).then(res => {
-    //     console.log('resresr', res.data);
-    //     setEventListener(eventListener => eventListener + 1);
-    //   });
-    // }
+    var vsCoupon = 'https://i3b309.p.ssafy.io/api/payment/vs/' + readCoupon;
+    var quizCoupon = 'https://i3b309.p.ssafy.io/api/payment/quiz/' + readCoupon;
+    if (user.user_quiz && !user.quiz_useCoupon) {
+      Axios.put(quizCoupon).then(res => {
+        // console.log('resresr', res.data);
+        setEventListener(eventListener => eventListener + 1);
+      });
+    }
 
-    Axios.put(readCoupon)
+    Axios.put(vsCoupon)
       .then(res => {
-        console.log('resresr', res.data);
+        // console.log('resresr', res.data);
         setReadCoupon('');
         setTmpDialogHandler(true);
         setEventListener(eventListener => eventListener + 1);

@@ -154,11 +154,11 @@ const MyInfoButtonGroupComponent = props => {
         };
         setUser({ ...obj });
 
-        alert(res.data);
+        alert('비밀번호가 변경되었습니다.');
         history.push('/');
       })
       .catch(err => {
-        alert(err);
+        alert('비밀번호가 변경되지 않았습니다.');
       });
 
     // if (respone['status'] === 200) {
