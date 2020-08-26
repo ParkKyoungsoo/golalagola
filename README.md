@@ -84,7 +84,8 @@ Tech 안성호
 
 ## 기술구조
 
-![image](https://user-images.githubusercontent.com/44697835/90759664-b34cd300-e31b-11ea-9598-b977309eb135.png)
+![image](https://user-images.githubusercontent.com/44697835/91255493-dbb35200-e79f-11ea-9180-a6dd1d5011bc.png)
+
 
 
 
