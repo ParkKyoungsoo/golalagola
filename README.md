@@ -91,7 +91,7 @@ Tech 안성호
 
 ## ERD 구성
 
-![Gola la Gola ERD](asset/Gola la Gola ERD.png)
+![KakaoTalk_20200827_112738139](https://user-images.githubusercontent.com/44697835/91381643-da972900-e862-11ea-9500-649a7dd179de.png)
 
 
 
