@@ -7,7 +7,7 @@ import Wrapper from './styles';
 import { MdClear } from 'react-icons/md';
 
 const CouponsQR = () => {
-  const { setQRModalTrigger } = useContext(CommonContext);
+  const { setQRModalTrigger, mainUrl } = useContext(CommonContext);
   const QRModalHandler = () => {
     setQRModalTrigger(QRModalTrigger => false);
   };
@@ -29,7 +29,7 @@ const CouponsQR = () => {
         </Grid>
         <Grid item xs={12} style={{ padding: '5vw' }}>
           <Grid style={{ display: 'flex', justifyContent: 'center' }}>
-            <QRCode value={`https://i3b309.p.ssafy.io`} />
+            <QRCode value={`${mainUrl}`} />
           </Grid>
         </Grid>
         <Grid>

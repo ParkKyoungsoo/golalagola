@@ -36,6 +36,7 @@ export default function VoteGridItem(props) {
     setInfoData,
     setInfoDetailDialogOpen,
     setUser,
+    mainUrl,
   } = useContext(CommonContext);
 
   const infoOpenHandler = async event => {
@@ -80,7 +81,7 @@ export default function VoteGridItem(props) {
   const [realtime, setRealTime] = useState([]);
 
   useEffect(() => {
-    Axios.get('https://i3b309.p.ssafy.io/api/event/eventProd').then(res => {
+    Axios.get(`${mainUrl}api/event/eventProd`).then(res => {
       setRealTime(res.data);
     });
   }, []);

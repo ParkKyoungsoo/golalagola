@@ -15,11 +15,11 @@ import axios from 'axios';
 const DialogActionsComponet = () => {
   let history = useHistory();
 
-  const { newEventData, setNewEventData } = useContext(CommonContext);
+  const { newEventData, setNewEventData, mainUrl } = useContext(CommonContext);
 
   const createEvent = () => {
     axios
-      .post('https://i3b309.p.ssafy.io/api/event/insert', newEventData)
+      .post(`${mainUrl}api/event/insert`, newEventData)
       .then(function(response) {
         setNewEventData({
           event_id: '',

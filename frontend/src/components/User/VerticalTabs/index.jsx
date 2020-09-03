@@ -59,6 +59,7 @@ export default function VerticalTabs() {
     setUser,
     setMyCouponDatas,
     setUserDetailDialogOpen,
+    mainUrl,
   } = useContext(CommonContext);
   const labels = ['회원정보 수정', '비밀번호 변경', '회원 탈퇴'];
   const handleChange = (event, newValue) => {
@@ -71,7 +72,7 @@ export default function VerticalTabs() {
     if (flag) {
       axios({
         method: 'DELETE',
-        url: 'https://i3b309.p.ssafy.io/api/auth/self',
+        url: `${mainUrl}api/auth/self`,
         headers: {
           token: user.token,
           user_email: user.user_email,

@@ -42,6 +42,7 @@ const AdminVS = props => {
     productDatas,
     setNewEventData,
     serverImgUrl,
+    mainUrl,
   } = useContext(CommonContext);
 
   let history = useHistory();
@@ -75,7 +76,7 @@ const AdminVS = props => {
   };
 
   const eventDelete = eventId => e => {
-    Axios.delete(`https://i3b309.p.ssafy.io/api/event`, {
+    Axios.delete(`${mainUrl}api/event`, {
       data: {
         event_id: eventId,
       },

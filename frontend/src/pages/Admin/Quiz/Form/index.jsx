@@ -21,7 +21,9 @@ import NestedList from '../../Layout/sidebar.jsx';
 
 const AdminQuizForm = () => {
   const [forceRender, setForceRender] = useState({});
-  const { currentQuizDatas, setCurrentQuizDatas } = useContext(CommonContext);
+  const { currentQuizDatas, setCurrentQuizDatas, mainUrl } = useContext(
+    CommonContext,
+  );
 
   const [title, setTitle] = useState({
     value: currentQuizDatas.quiz_question,
@@ -93,7 +95,7 @@ const AdminQuizForm = () => {
     } else {
       // status: create
       if (currentQuizDatas.status === 'create') {
-        await Axios.post('https://i3b309.p.ssafy.io/api/quiz', {
+        await Axios.post(`${mainUrl}api/quiz`, {
           quiz_question: title.value,
           quiz_hint: hint.value,
           quiz_desc: desc.value,
@@ -107,7 +109,7 @@ const AdminQuizForm = () => {
           });
       } else if (currentQuizDatas.status === 'update') {
         // status: create
-        await Axios.put('https://i3b309.p.ssafy.io/api/quiz', {
+        await Axios.put(`${mainUrl}api/quiz`, {
           quiz_id: currentQuizDatas.quiz_id,
           quiz_question: title.value,
           quiz_hint: hint.value,

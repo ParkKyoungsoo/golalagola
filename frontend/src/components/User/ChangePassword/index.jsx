@@ -125,7 +125,7 @@ const MyInfoButtonGroupComponent = props => {
 
     Axios({
       method: 'PUT',
-      url: 'https://i3b309.p.ssafy.io/api/auth/change_pwd',
+      url: `${mainUrl}api/auth/change_pwd`,
       headers: {
         token: user.token,
       },

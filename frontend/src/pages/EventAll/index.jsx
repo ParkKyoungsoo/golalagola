@@ -28,6 +28,7 @@ const EventAll = () => {
     setUserCoupon,
     setMyCouponDatas,
     serverImgUrl,
+    mainUrl,
   } = useContext(CommonContext);
 
   const [forceRender, setForceRender] = useState({});
@@ -70,7 +71,7 @@ const EventAll = () => {
       // data 가공해서 post 요청 보내기,
       for (let event_id in selectedEvent) {
         if (selectedEvent[event_id] !== null) {
-          await Axios.post('https://i3b309.p.ssafy.io/api/coupon/', {
+          await Axios.post(`${mainUrl}api/coupon/`, {
             user_id: user.user_id,
             event_id: event_id,
             coupon_select: selectedEvent[event_id],
@@ -83,9 +84,9 @@ const EventAll = () => {
       }
 
       // get 요청으로 데이터 받아서 다시 랜더링하기
-      await Axios.get(
-        `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
-      ).then(function(res) {
+      await Axios.get(`${mainUrl}api/coupon/${user.user_id}`).then(function(
+        res,
+      ) {
         // myCouponDatas 만들기
         setMyCouponDatas(res.data);
 

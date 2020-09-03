@@ -15,9 +15,13 @@ const Tmp = () => {
 
 const Payment = props => {
   const [readCoupon, setReadCoupon] = useState('');
-  const { user, eventListener, setEventListener, serverUrl } = useContext(
-    CommonContext,
-  );
+  const {
+    user,
+    eventListener,
+    setEventListener,
+    serverUrl,
+    mainUrl,
+  } = useContext(CommonContext);
   // console.log('readc', readCoupon);
 
   const [tmpDialogHandler, setTmpDialogHandler] = useState(false);
@@ -28,8 +32,8 @@ const Payment = props => {
   };
 
   const onPaymentHandler = async e => {
-    var vsCoupon = 'https://i3b309.p.ssafy.io/api/payment/vs/' + readCoupon;
-    var quizCoupon = 'https://i3b309.p.ssafy.io/api/payment/quiz/' + readCoupon;
+    var vsCoupon = `${mainUrl}api/payment/vs/` + readCoupon;
+    var quizCoupon = `${mainUrl}api/payment/quiz/` + readCoupon;
     if (user.user_quiz && !user.quiz_useCoupon) {
       Axios.put(quizCoupon).then(res => {
         // console.log('resresr', res.data);

@@ -152,7 +152,7 @@ const MyInfoButtonGroupComponent = props => {
 
     Axios({
       method: 'PUT',
-      url: 'https://i3b309.p.ssafy.io/api/auth/update',
+      url: `${mainUrl}api/auth/update`,
       headers: {
         token: user.token,
         user_email: inputValue.user_email,
@@ -165,15 +165,11 @@ const MyInfoButtonGroupComponent = props => {
     })
       .then(async res => {
         if (thumbnailImageData.file != '') {
-          await Axios.post(
-            'https://i3b309.p.ssafy.io/api/auth/imageupload',
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
+          await Axios.post(`${mainUrl}api/auth/imageupload`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
             },
-          ).then(response => {
+          }).then(response => {
             var obj = {
               user_id: user.user_id,
               user_email: inputValue.user_email,

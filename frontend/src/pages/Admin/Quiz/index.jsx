@@ -50,7 +50,9 @@ const tableIcons = {
 };
 
 const AdminQuiz = () => {
-  const { setCurrentQuizDatas, quizzesTableData } = useContext(CommonContext);
+  const { setCurrentQuizDatas, quizzesTableData, mainUrl } = useContext(
+    CommonContext,
+  );
 
   let history = useHistory();
 
@@ -78,7 +80,7 @@ const AdminQuiz = () => {
   };
 
   const deleteQuizData = targetQuizId => {
-    Axios.delete('https://i3b309.p.ssafy.io/api/quiz', {
+    Axios.delete(`${mainUrl}api/quiz`, {
       data: {
         quiz_id: targetQuizId,
       },

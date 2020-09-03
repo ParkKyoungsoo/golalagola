@@ -209,9 +209,7 @@ const App = () => {
   // 전체 데이터
   // console.log(123123123123);
   async function getProductDatas() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/product').then(function(
-      res,
-    ) {
+    await Axios.get(`${mainUrl}api/product`).then(function(res) {
       setProductDatas(res.data);
       setSortedDatas(res.data);
       productsTableData.data = res.data;
@@ -222,7 +220,7 @@ const App = () => {
   // 이벤트(VS) 데이터
   // 사용되는 곳: Web (캐로젤, 이벤트 페이지), 관리자 (이벤트 CRUD 페이지),Kiosk (캐로젤, 전체 보여주기)
   async function getEventDatas() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/event').then(function(res) {
+    await Axios.get(`${mainUrl}api/event`).then(function(res) {
       setCurrentEventDatas(res.data);
       // getMyCouponDatas();
     });
@@ -237,9 +235,9 @@ const App = () => {
   // 쿠폰 데이터
   async function getMyCouponDatas() {
     if (user.user_id) {
-      await Axios.get(
-        `https://i3b309.p.ssafy.io/api/coupon/${user.user_id}`,
-      ).then(function(res) {
+      await Axios.get(`${mainUrl}api/coupon/${user.user_id}`).then(function(
+        res,
+      ) {
         // myCouponDatas 만들기
         setMyCouponDatas(res.data);
 
@@ -259,7 +257,7 @@ const App = () => {
 
   // 유저 데이터
   async function getUserDatas() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/auth/').then(function(res) {
+    await Axios.get(`${mainUrl}api/auth/`).then(function(res) {
       usersTableData.data = res.data;
       setUsersTableData(usersTableData);
     });
@@ -268,7 +266,7 @@ const App = () => {
 
   // 퀴즈 데이터
   async function getQuizDatas() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/quiz').then(function(res) {
+    await Axios.get(`${mainUrl}api/quiz`).then(function(res) {
       quizzesTableData.data = res.data;
       setQuizzesTableData(quizzesTableData);
       setQuizDatas(res.data);
@@ -278,76 +276,62 @@ const App = () => {
 
   // 제품 수량 && 판매 현황 개수
   async function getBuyDatas() {
-    Axios.get('https://i3b309.p.ssafy.io/api/buy/buyAmount').then(function(
-      res,
-    ) {
+    Axios.get(`${mainUrl}api/buy/buyAmount`).then(function(res) {
       setBuyDatas(res.data);
     });
   }
   async function getEventProducts() {
-    Axios.get('https://i3b309.p.ssafy.io/api/coupon/estimation').then(function(
-      res,
-    ) {
+    Axios.get(`${mainUrl}api/coupon/estimation`).then(function(res) {
       setVSData(res.data);
     });
   }
   async function getDailySaleDatas() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/buy/dailySale').then(
-      function(res) {
-        const actualSale = [];
-        for (var key in res.data) {
-          var obj = new Object();
-          obj.x = new Date(key);
-          obj.y = res.data[key];
-          actualSale.push(obj);
-        }
+    await Axios.get(`${mainUrl}api/buy/dailySale`).then(function(res) {
+      const actualSale = [];
+      for (var key in res.data) {
+        var obj = new Object();
+        obj.x = new Date(key);
+        obj.y = res.data[key];
+        actualSale.push(obj);
+      }
 
-        setDailySaleDatas(actualSale);
-      },
-    );
+      setDailySaleDatas(actualSale);
+    });
   }
   async function getCouponUseSales() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/buy/couponUseSale').then(
-      function(res) {
-        const actualSale = [];
-        for (var key in res.data) {
-          var obj = new Object();
-          obj.x = new Date(key);
-          obj.y = res.data[key];
-          actualSale.push(obj);
-        }
+    await Axios.get(`${mainUrl}api/buy/couponUseSale`).then(function(res) {
+      const actualSale = [];
+      for (var key in res.data) {
+        var obj = new Object();
+        obj.x = new Date(key);
+        obj.y = res.data[key];
+        actualSale.push(obj);
+      }
 
-        setCouponUseSales(actualSale);
-      },
-    );
+      setCouponUseSales(actualSale);
+    });
   }
   async function getRecommandProds() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/product/recommandProd').then(
-      function(res) {
-        var objArr = new Array();
-        for (var i = 1; i < 14; i++) {
-          objArr.push(res.data[i]);
-        }
+    await Axios.get(`${mainUrl}api/product/recommandProd`).then(function(res) {
+      var objArr = new Array();
+      for (var i = 1; i < 14; i++) {
+        objArr.push(res.data[i]);
+      }
 
-        setRecommandProds(objArr);
-      },
-    );
+      setRecommandProds(objArr);
+    });
   }
 
   async function getProgressedEventId() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/event/eventId').then(
-      function(res) {
-        setProgressedEventDatas(res.data);
-      },
-    );
+    await Axios.get(`${mainUrl}api/event/eventId`).then(function(res) {
+      setProgressedEventDatas(res.data);
+    });
   }
 
   async function getRealTimes() {
-    await Axios.get('https://i3b309.p.ssafy.io/api/coupon/realtime').then(
-      function(res) {
-        setRealTime(res.data);
-      },
-    );
+    await Axios.get(`${mainUrl}api/coupon/realtime`).then(function(res) {
+      setRealTime(res.data);
+    });
   }
 
   useEffect(() => {

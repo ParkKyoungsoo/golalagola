@@ -102,7 +102,7 @@ const useOnChangeIndex = categoryDatas => {
 // main
 
 const MainVote = props => {
-  const { serverUrlBase, serverImgUrl, setDrawerOpen } = useContext(
+  const { serverUrlBase, serverImgUrl, setDrawerOpen, mainUrl } = useContext(
     CommonContext,
   );
   const categoryDatas = useGetCategoryDatas('/category');
@@ -127,9 +127,9 @@ const MainVote = props => {
     history.push(`/voteitemdetail/${name}/${id}`);
   };
   useEffect(() => {
-    Axios.get(
-      'https://i3b309.p.ssafy.io/api/coupon/realtime',
-    ).then(({ data }) => setRealTime(data));
+    Axios.get(`${mainUrl}api/coupon/realtime`).then(({ data }) =>
+      setRealTime(data),
+    );
   }, []);
   // console.log(history.length)
   // const RepresentativeItems = SelectItem()
