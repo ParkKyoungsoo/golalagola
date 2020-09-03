@@ -67,7 +67,7 @@ const InputTitleComponent = () => {
 };
 
 const SubTitleGroupComponent = () => {
-  const { newEventData, setNewEventData, productDatas } = useContext(
+  const { newEventData, setNewEventData, productDatas, mainUrl } = useContext(
     CommonContext,
   );
 
@@ -78,11 +78,9 @@ const SubTitleGroupComponent = () => {
 
   useEffect(() => {
     async function fetchData() {
-      await axios
-        .get(`https://i3b309.p.ssafy.io/api/event/eventProd`)
-        .then(res => {
-          setProgressedItem(res.data);
-        });
+      await axios.get(`${mainUrl}api/event/eventProd`).then(res => {
+        setProgressedItem(res.data);
+      });
     }
     fetchData();
   }, []);

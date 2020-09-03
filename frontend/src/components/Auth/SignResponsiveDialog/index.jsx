@@ -45,6 +45,7 @@ const SignInSection01 = () => {
     setIsShowKeyborad,
     eventListener,
     setEventListener,
+    mainUrl,
   } = useContext(CommonContext);
 
   const OnChangeHandler = name => e => {
@@ -78,7 +79,7 @@ const SignInSection01 = () => {
     signInUserData.status = '';
 
     // 여기서 입력받은 유저데이터를 DB에 넘기면 될듯(...userData)
-    Axios.post('https://i3b309.p.ssafy.io/api/auth/signin', signInUserData)
+    Axios.post(`${mainUrl}api/auth/signin`, signInUserData)
       .then(res => {
         if (res.data.check_email === 0) {
           alert('이메일 인증 후 사용해주세요.');
@@ -303,6 +304,7 @@ const SignUpSection02 = () => {
   const { signUpUserData, setSignUpUserData, setIsSignUp } = useContext(
     ViewContext,
   );
+  const { mainUrl } = useContext(CommonContext);
 
   const OnChangeHandler = name => e => {
     if (
@@ -384,7 +386,7 @@ const SignUpSection02 = () => {
     //   user_name: '',
     //   user_pwd: '',
     // });
-    Axios.post('https://i3b309.p.ssafy.io/api/auth/signup', signUpUserData)
+    Axios.post(`${mainUrl}api/auth/signup`, signUpUserData)
       .then(data => {
         setSignUpUserData(signUpUserData);
         setIsSignUp('SignIn');
@@ -604,7 +606,7 @@ const SignUpGroupComponent = () => {
 
 // ForgotPw
 const ForgotPwGroupComponent = () => {
-  const { serverUrl } = useContext(CommonContext);
+  const { serverUrl, mainUrl } = useContext(CommonContext);
   const { recoverPwUserData, setRecoverPwUserData } = useContext(ViewContext);
   const { setIsSignUp } = useContext(ViewContext);
 
@@ -621,11 +623,9 @@ const ForgotPwGroupComponent = () => {
       let res = {
         user_email: searchWord,
       };
-      Axios.post('https://i3b309.p.ssafy.io/api/auth/find_pwd', res).then(
-        res => {
-          alert(res.data.message);
-        },
-      );
+      Axios.post(`${mainUrl}api/auth/find_pwd`, res).then(res => {
+        alert(res.data.message);
+      });
 
       // setRecoverPwUserData({ ...recoverPwUserData, email: searchWord });
       // alert('Authentication code has been sent to you by email');

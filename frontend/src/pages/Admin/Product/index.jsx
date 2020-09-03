@@ -58,12 +58,13 @@ const AdminProduct = () => {
     productsTableData,
     buyDatas,
     serverImgUrl,
+    mainUrl,
   } = useContext(CommonContext);
 
   const [categories, setCategories] = useState({});
   var obj = categories;
   let index = 1;
-  Axios.get('https://i3b309.p.ssafy.io/api/category/').then((req, res) => {
+  Axios.get(`${mainUrl}api/category/`).then((req, res) => {
     for (var i = 0; i < req.data.length; i++) {
       obj[index] = req.data[i].cat_title;
       index += 1;
@@ -111,7 +112,7 @@ const AdminProduct = () => {
   };
 
   const deleteProductData = targetProdId => {
-    Axios.delete('https://i3b309.p.ssafy.io/api/product', {
+    Axios.delete(`${mainUrl}api/product`, {
       data: {
         prod_id: targetProdId,
       },

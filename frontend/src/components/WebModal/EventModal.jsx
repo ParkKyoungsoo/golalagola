@@ -17,6 +17,7 @@ const EventModal = modalNum => {
     selectedEventItem,
     setSelectedEventItem,
     setEventListener,
+    mainUrl,
   } = useContext(CommonContext);
 
   const [userChoice, setUserChoice] = useState({
@@ -46,7 +47,7 @@ const EventModal = modalNum => {
 
   async function setMyCouponUpdate() {
     axios
-      .post('https://i3b309.p.ssafy.io/api/coupon/', userChoice)
+      .post(`${mainUrl}api/coupon/`, userChoice)
       .then(function(response) {
         setUserChoice({
           coupon_select: '',

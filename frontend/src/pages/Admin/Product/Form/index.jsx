@@ -28,7 +28,7 @@ import Axios from 'axios';
 
 const AdminProductForm = () => {
   const [forceRender, setForceRender] = useState({});
-  const { currentProductDatas, setCurrentProductDatas } = useContext(
+  const { currentProductDatas, setCurrentProductDatas, mainUrl } = useContext(
     CommonContext,
   );
 
@@ -68,7 +68,7 @@ const AdminProductForm = () => {
   const [image, setImage] = useState('');
   const [imageName, setImageName] = useState(currentProductDatas.prod_image);
   const [uploadedImage, setUploadedImage] = useState(
-    `https://i3b309.p.ssafy.io/${currentProductDatas.prod_image}`,
+    `${mainUrl}${currentProductDatas.prod_image}`,
   );
 
   const handleTitleChange = event => {
@@ -238,7 +238,7 @@ const AdminProductForm = () => {
 
       // status: create
       if (currentProductDatas.status === 'create') {
-        Axios.post('https://i3b309.p.ssafy.io/api/product/', {
+        Axios.post(`${mainUrl}api/product/`, {
           prod_title: title.value,
           prod_name: name.value,
           prod_category: category.value,
@@ -251,15 +251,11 @@ const AdminProductForm = () => {
           prod_weight: weight.value,
         })
           .then(async response => {
-            Axios.post(
-              'https://i3b309.p.ssafy.io/api/product/imageUpload',
-              formData,
-              {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
+            Axios.post(`${mainUrl}api/product/imageUpload`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
               },
-            )
+            })
               .then(response => {
                 // console.log('Response', response.data);
                 alert('상품정보가 등록 되었습니다.');
@@ -275,7 +271,7 @@ const AdminProductForm = () => {
       } else if (currentProductDatas.status === 'update') {
         // status: update
 
-        Axios.put('https://i3b309.p.ssafy.io/api/product', {
+        Axios.put(`${mainUrl}api/product`, {
           prod_id: currentProductDatas.prod_id,
           prod_title: title.value,
           prod_name: name.value,
@@ -290,15 +286,11 @@ const AdminProductForm = () => {
         })
           .then(async response => {
             if (image !== '') {
-              Axios.post(
-                'https://i3b309.p.ssafy.io/api/product/imageUpload',
-                formData,
-                {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
+              Axios.post(`${mainUrl}api/product/imageUpload`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
                 },
-              )
+              })
                 .then(response => {
                   // console.log('Response', response.data);
                   alert('상품정보가 수정 되었습니다.');

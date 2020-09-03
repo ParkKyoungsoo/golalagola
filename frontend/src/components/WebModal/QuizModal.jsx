@@ -20,17 +20,14 @@ const SuccessModal = () => {
   const userQuizState = {
     user_quiz: true,
   };
-  const { number } = useContext(CommonContext);
+  const { number, mainUrl } = useContext(CommonContext);
 
   let history = useHistory();
 
   // 유저가 가지고 있는 Quiz 상태 바꿔줘야함
   const userUpdate = () => {
     axios
-      .put(
-        `https://i3b309.p.ssafy.io/api/auth/solveQuiz/${user.user_id}`,
-        userQuizState,
-      )
+      .put(`${mainUrl}api/auth/solveQuiz/${user.user_id}`, userQuizState)
       .then(function(response) {
         setUser({
           ...user,

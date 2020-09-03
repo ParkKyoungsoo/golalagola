@@ -49,10 +49,10 @@ const tableIcons = {
 };
 
 const AdminUser = () => {
-  const { usersTableData, serverImgUrl } = useContext(CommonContext);
+  const { usersTableData, serverImgUrl, mainUrl } = useContext(CommonContext);
 
   const deleteProductData = targetProdId => {
-    Axios.delete('https://i3b309.p.ssafy.io/api/auth', {
+    Axios.delete(`${mainUrl}api/auth`, {
       data: {
         user_id: targetProdId,
       },

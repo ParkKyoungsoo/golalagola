@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 const CreateVote = props => {
   let history = useHistory();
 
-  const { newEventData, setNewEventData } = useContext(CommonContext);
+  const { newEventData, setNewEventData, mainUrl } = useContext(CommonContext);
 
   const createEvent = () => {
     if (newEventData.event_category === '') {
@@ -27,7 +27,7 @@ const CreateVote = props => {
     } else {
       if (newEventData.event_id === undefined) {
         axios
-          .post('https://i3b309.p.ssafy.io/api/event/', newEventData)
+          .post(`${mainUrl}api/event/`, newEventData)
           .then(function(response) {
             setNewEventData({
               event_prod_A: '',
@@ -46,7 +46,7 @@ const CreateVote = props => {
           });
       } else {
         axios
-          .put('https://i3b309.p.ssafy.io/api/event/', newEventData)
+          .put(`${mainUrl}api/event/`, newEventData)
           .then(function(response) {
             setNewEventData({
               event_prod_A: '',
